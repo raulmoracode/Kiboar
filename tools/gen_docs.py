@@ -110,21 +110,6 @@ def cell(value):
 HOME_START = "{/* generated:start */}"
 HOME_END = "{/* generated:end */}"
 
-STAT_LABELS = (
-    ("Symbols", "Símbolos"),
-    ("Footprints", "Footprints"),
-    ("Libraries", "Librerías"),
-    ("3D models", "Modelos 3D"),
-)
-
-
-def model_count():
-    paths = glob.glob(os.path.join(ROOT, "3dmodels", "*.3dshapes", "**", "*"), recursive=True)
-    return len(
-        [path for path in paths if os.path.splitext(path)[1].lower() in (".step", ".stp", ".wrl")]
-    )
-
-
 def plural(count, noun):
     return f"{count} {noun}" if count == 1 else f"{count} {noun}s"
 
@@ -210,23 +195,10 @@ def family_card(library, count, prefix):
     )
 
 
-def home_block(symbols, library_counts, spanish):
-    """Stat strip and the libraries grouped by what they are for."""
-    counts = (len(symbols), sum(library_counts.values()), len(library_counts), model_count())
+def home_block(library_counts, spanish):
+    """The footprint libraries, grouped by what they are for."""
+    lines = []
     prefix = "/es" if spanish else ""
-
-    lines = [
-        '<div class="not-prose mt-12 flex flex-wrap items-baseline gap-x-8 gap-y-3 border-t pt-6">',
-    ]
-    for (english, translated), count in zip(STAT_LABELS, counts):
-        label = translated if spanish else english
-        lines.append(
-            f'  <span class="text-xs uppercase tracking-wider text-fd-muted-foreground">'
-            f'<strong class="mr-2 text-xl font-semibold tracking-tight text-fd-foreground">{count}</strong>'
-            f"{label}</span>"
-        )
-    lines.append("</div>")
-
     placed = set()
     groups = []
     for (english, translated), members in FAMILY_GROUPS:
@@ -253,13 +225,13 @@ def home_block(symbols, library_counts, spanish):
     return "\n".join(lines)
 
 
-def home_page(name, symbols, library_counts, spanish):
+def home_page(name, library_counts, spanish):
     """Rewrite the generated block of a home page, keeping the prose around it."""
     path = os.path.join(DOCS, name)
     text = open(path, encoding="utf-8").read()
     head, rest = text.split(HOME_START, 1)
     _, tail = rest.split(HOME_END, 1)
-    block = home_block(symbols, library_counts, spanish)
+    block = home_block(library_counts, spanish)
     return head + HOME_START + "\n" + block + "\n" + HOME_END + tail
 
 
@@ -477,8 +449,8 @@ def generated_files():
         library: len(glob.glob(os.path.join(ROOT, "footprints", library + ".pretty", "*.kicad_mod")))
         for library in libraries
     }
-    files["index.mdx"] = home_page("index.mdx", symbols, library_counts, False)
-    files["index.es.mdx"] = home_page("index.es.mdx", symbols, library_counts, True)
+    files["index.mdx"] = home_page("index.mdx", library_counts, False)
+    files["index.es.mdx"] = home_page("index.es.mdx", library_counts, True)
     files["libraries/meta.json"] = meta("Libraries", library_pages)
     files["libraries/meta.es.json"] = meta("Librerías", library_pages)
     files["meta.json"] = meta("Documentation", ["index", "install", "usage", "symbols", "libraries", "contributing", "licensing"])

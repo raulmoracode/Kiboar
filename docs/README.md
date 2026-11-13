@@ -31,8 +31,8 @@ docs cannot silently miss a component.
 
 The two home pages (`content/docs/index.mdx` and `index.es.mdx`) are hand-written
 except for the block between the `{/* generated:start */}` and
-`{/* generated:end */}` markers: the counts and the family groups are
-generated, so they follow the library.
+`{/* generated:end */}` markers: the family groups are generated, so they
+follow the library.
 
 ## Footprint previews
 
