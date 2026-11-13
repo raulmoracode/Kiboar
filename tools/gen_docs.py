@@ -147,7 +147,61 @@ def footprint_rows(path):
     }
 
 
+# Libraries rendered as component cards instead of a table. Start with the
+# small ones; a 1071-row library would need pagination before it can use cards.
+CARD_LIBRARIES = {"Kiboar_USB-C"}
+
+
+def library_cards(library, footprints, spanish):
+    title = "Footprints" if not spanish else "Footprints"
+    lines = [
+        "---",
+        f'title: "{library}"',
+        f'description: "{LIBRARY_TEXT.get(library, ("", ""))[1 if spanish else 0]}"',
+        "---",
+        "",
+        LIBRARY_TEXT.get(library, ("", ""))[1 if spanish else 0],
+        "",
+        f"**{len(footprints)} {title.lower()}.**",
+        "",
+        '<div class="not-prose my-6 grid gap-6 lg:grid-cols-2">',
+    ]
+    for row in footprints:
+        name = row["name"]
+        link = f"../components/{library}/{quote(name)}"
+        info = (
+            ("Pads", cell(row["pads"])),
+            ("Attr", f'<code>{cell(row["attr"])}</code>'),
+            ("Courtyard", row["courtyard"]),
+            ("Modelo 3D", f'<code>{cell(row["model"])}</code>') if spanish else ("3D model", f'<code>{cell(row["model"])}</code>'),
+            ("Descripción", cell(row["description"]) or "—") if spanish else ("Description", cell(row["description"]) or "—"),
+        )
+        lines += [
+            '  <article class="rounded-xl border bg-fd-card p-4">',
+            f'    <h2 class="text-lg font-semibold"><a class="hover:underline" href="{link}">{cell(name)}</a></h2>',
+            '    <div class="mt-4 grid gap-4 sm:grid-cols-2">',
+            f'      <img loading="lazy" src="/footprints/{library}/{quote(name)}.svg" alt="{cell(name)} footprint" class="w-full rounded-lg border bg-white p-2" />',
+        ]
+        if row["models"]:
+            for uri in row["models"]:
+                rel = uri.split("/", 1)[1]
+                raw = f"https://raw.githubusercontent.com/raulmoracode/Kiboar/main/3dmodels/{quote(rel)}"
+                lines.append(f'      <kiboar-model compact url="{raw}"></kiboar-model>')
+        else:
+            lines.append(
+                '      <div class="flex h-56 items-center justify-center rounded-lg border text-sm text-fd-muted-foreground">No 3D model</div>'
+            )
+        lines += ['    </div>', '    <dl class="mt-4 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 text-sm">']
+        for label, value in info:
+            lines.append(f'      <dt class="text-fd-muted-foreground">{label}</dt><dd>{value}</dd>')
+        lines += ["    </dl>", "  </article>"]
+    lines += ["</div>", ""]
+    return "\n".join(lines)
+
+
 def library_page(library, footprints, spanish):
+    if library in CARD_LIBRARIES:
+        return library_cards(library, footprints, spanish)
     en_text, es_text = LIBRARY_TEXT.get(library, ("", ""))
     title = library.replace("Kiboar_", "Kiboar ")
     text = es_text if spanish else en_text
