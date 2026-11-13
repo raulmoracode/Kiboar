@@ -1,0 +1,39 @@
+{
+  "$schema": "https://go.kicad.org/pcm/schemas/v2",
+  "name": "Kiboar",
+  "description": "Keyboard components for KiCad: switches, keycaps, controller boards, connectors, displays and more.",
+  "description_full": "Kiboar is a keyboard-component library for KiCad 10: 146 symbols, 1332 footprints and the 3D models that go with them, split into 23 footprint libraries.\n\nThe bulk of the content is original work under the MIT licence. Parts of the CAD data come from other projects and keep their own licences: the switch, hotswap, cutout and stabilizer models are from the Keyswitch KiCad Library (MIT or CC BY-SA 4.0), ten symbols are SnapEDA imports (CC BY-SA 4.0 with the Design Exception), and the ScottoKeebs models and three footprints are CC BY-NC-SA 4.0, which forbids commercial use. See the NOTICE file in the source repository for the per-origin list, the evidence and the required attribution before you redistribute the collection or use it commercially.",
+  "identifier": "com.github.raulmoracode.kiboar",
+  "type": "library",
+  "author": {
+    "name": "Raúl Mora",
+    "contact": {
+      "web": "https://github.com/raulmoracode"
+    }
+  },
+  "maintainer": {
+    "name": "Raúl Mora",
+    "contact": {
+      "web": "https://github.com/raulmoracode"
+    }
+  },
+  "license": "MIT AND CC-BY-SA-4.0 AND CC-BY-NC-SA-4.0",
+  "resources": {
+    "homepage": "https://github.com/raulmoracode/Kiboar",
+    "repository": "https://github.com/raulmoracode/Kiboar"
+  },
+  "tags": [
+    "keyboard",
+    "keyswitch",
+    "footprint",
+    "symbol",
+    "model3d"
+  ],
+  "versions": [
+    {
+      "version": "1.0.0",
+      "status": "stable",
+      "kicad_version": "10.0"
+    }
+  ]
+}

@@ -12,3 +12,6 @@ _autosave-*
 # Python bytecode
 __pycache__/
 *.pyc
+
+# PCM build output
+dist/

@@ -1,0 +1,3 @@
+(sym_lib_table
+	(lib (name "Kiboar")(type "KiCad")(uri "${KIBOAR_ROOT}/symbols/Kiboar.kicad_sym")(options "")(descr "Kiboar keyboard components"))
+)
