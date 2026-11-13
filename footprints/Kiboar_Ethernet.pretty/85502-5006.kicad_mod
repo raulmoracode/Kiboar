@@ -1,7 +1,7 @@
 (footprint "85502-5006"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(descr "85502-5006")
 	(tags "Connector")
@@ -26,18 +26,6 @@
 			(font
 				(size 1.27 1.27)
 				(thickness 0.254)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "d6c87e19-6090-4aa3-9721-d7c4302ebab8")
-		(effects
-			(font
-				(size 1.27 1.27)
-				(thickness 0.15)
 			)
 		)
 	)
@@ -66,6 +54,7 @@
 		)
 	)
 	(attr smd)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_line
 		(start 0 -18.1)
 		(end 14.31 -18.1)
@@ -109,39 +98,40 @@
 	(pad "1" smd rect
 		(at 5.25 -18.205)
 		(size 0.76 6.35)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "a2a1fed9-82b2-4cb5-b0ef-664da5c979fa")
 	)
 	(pad "2" smd rect
 		(at 6.52 -18.205)
 		(size 0.76 6.35)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "7c2cbac2-459d-403b-8129-de69eb9490d1")
 	)
 	(pad "3" smd rect
 		(at 7.79 -18.205)
 		(size 0.76 6.35)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "ee1f083b-14af-4dd1-abdd-2f7e015e37c0")
 	)
 	(pad "4" smd rect
 		(at 9.06 -18.205)
 		(size 0.76 6.35)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "e0181579-2794-467e-a00f-cb2ea8b67087")
 	)
 	(pad "5" smd rect
 		(at 0.095 -7.88 90)
 		(size 2.8 5.15)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "fcb55182-3cc2-43a0-aec0-87f28b4037ed")
 	)
 	(pad "6" smd rect
 		(at 14.215 -7.88 90)
 		(size 2.8 5.15)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "53dffd76-b70e-4ce0-bd88-6aaab0569a1c")
 	)
+	(embedded_fonts no)
 	(model "${KIBOAR_3DMODELS}/Kiboar_Ethernet.3dshapes/85502-5005.step"
 		(offset
 			(xyz 7.15999974 18.03000042 5.99999991)

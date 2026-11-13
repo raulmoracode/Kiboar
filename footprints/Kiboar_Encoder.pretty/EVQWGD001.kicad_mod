@@ -1,7 +1,7 @@
 (footprint "EVQWGD001"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(property "Reference" "REF**"
 		(at 0 0 180)
@@ -21,18 +21,6 @@
 		(effects
 			(font
 				(size 1 1)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "2907e6e8-fed1-436c-b455-17e458e51585")
-		(effects
-			(font
-				(size 1.27 1.27)
 				(thickness 0.15)
 			)
 		)
@@ -62,6 +50,7 @@
 		)
 	)
 	(attr through_hole)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_line
 		(start -8.5 -6.5)
 		(end -8.5 -4.5)
@@ -243,7 +232,7 @@
 			(width 0.12)
 			(type default)
 		)
-		(fill none)
+		(fill no)
 		(layer "F.CrtYd")
 		(uuid "6ed33b78-46b7-4c0d-b4db-d00b126e0fe8")
 	)
@@ -302,6 +291,7 @@
 		(remove_unused_layers no)
 		(uuid "47f19168-7558-4381-a600-7b7e27e3c7a2")
 	)
+	(embedded_fonts no)
 	(model "${KIBOAR_3DMODELS}/Kiboar_Encoder.3dshapes/EVQWGD001.step"
 		(offset
 			(xyz 8.3 -7 -3.5)

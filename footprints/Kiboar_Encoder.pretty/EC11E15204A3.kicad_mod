@@ -1,7 +1,7 @@
 (footprint "EC11E15204A3"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(descr "EC11E15204A3-2")
 	(tags "Integrated Circuit")
@@ -25,18 +25,6 @@
 			(font
 				(size 1.27 1.27)
 				(thickness 0.254)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "0c18131d-952e-40c8-b04d-84325483e4de")
-		(effects
-			(font
-				(size 1.27 1.27)
-				(thickness 0.15)
 			)
 		)
 	)
@@ -65,6 +53,7 @@
 		)
 	)
 	(attr through_hole)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_line
 		(start -6.354 -16.325)
 		(end 11.354 -16.325)
@@ -212,6 +201,7 @@
 		(remove_unused_layers no)
 		(uuid "e485c306-fb7b-4d28-9546-9e39d6914145")
 	)
+	(embedded_fonts no)
 	(model "${KIBOAR_3DMODELS}/Kiboar_Encoder.3dshapes/EC11E15204A3.stp"
 		(offset
 			(xyz 2.5 7.5 0.21)

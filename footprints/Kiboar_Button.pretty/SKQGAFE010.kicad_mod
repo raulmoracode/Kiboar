@@ -1,7 +1,7 @@
 (footprint "SKQGAFE010"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(property "Reference" "REF**"
 		(at 0.5 0 0)
@@ -22,18 +22,6 @@
 		(effects
 			(font
 				(size 0.641101 0.641101)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "afdd34fa-8220-47c9-9691-69d5d802c8f8")
-		(effects
-			(font
-				(size 1.27 1.27)
 				(thickness 0.15)
 			)
 		)
@@ -63,6 +51,7 @@
 		)
 	)
 	(attr smd)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_line
 		(start -4.25 -2.65)
 		(end -2 -2.65)
@@ -270,41 +259,39 @@
 			(width 0.3)
 			(type solid)
 		)
-		(fill none)
+		(fill no)
 		(layer "F.Fab")
 		(uuid "a7e6715a-a458-441f-88ce-90b59cefd7e2")
 	)
 	(pad "1" smd rect
 		(at -3.1 -1.85)
 		(size 1.8 1.1)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(solder_mask_margin 0.102)
 		(uuid "ee5a5cc4-bfb5-42bc-b074-cc95d5f2ae57")
 	)
 	(pad "2" smd rect
 		(at 3.1 -1.85)
 		(size 1.8 1.1)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(solder_mask_margin 0.102)
 		(uuid "1b97c223-9bba-4510-b21d-8ef304dfb4f3")
 	)
 	(pad "3" smd rect
 		(at -3.1 1.85)
 		(size 1.8 1.1)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(solder_mask_margin 0.102)
 		(uuid "da4b93da-5ddf-4cd0-b7cd-52ec4ac4a01d")
 	)
 	(pad "4" smd rect
 		(at 3.1 1.85)
 		(size 1.8 1.1)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(solder_mask_margin 0.102)
 		(uuid "c2ee9ade-ab55-43fe-9679-004c84c9d064")
 	)
 	(zone
-		(net 0)
-		(net_name "")
 		(layer "F.Cu")
 		(uuid "421708b2-4e03-4a0b-a571-1ca3712e7eea")
 		(hatch full 0.508)
@@ -312,7 +299,6 @@
 			(clearance 0)
 		)
 		(min_thickness 0.001)
-		(filled_areas_thickness no)
 		(keepout
 			(tracks not_allowed)
 			(vias not_allowed)
@@ -320,9 +306,14 @@
 			(copperpour not_allowed)
 			(footprints allowed)
 		)
+		(placement
+			(enabled no)
+			(sheetname "")
+		)
 		(fill
 			(thermal_gap 0.508)
 			(thermal_bridge_width 0.508)
+			(island_removal_mode 0)
 		)
 		(polygon
 			(pts
@@ -331,8 +322,6 @@
 		)
 	)
 	(zone
-		(net 0)
-		(net_name "")
 		(layer "F.Cu")
 		(uuid "37635ea7-f67b-4b49-8051-d3b9e6e66456")
 		(hatch full 0.508)
@@ -340,7 +329,6 @@
 			(clearance 0)
 		)
 		(min_thickness 0.001)
-		(filled_areas_thickness no)
 		(keepout
 			(tracks not_allowed)
 			(vias not_allowed)
@@ -348,9 +336,14 @@
 			(copperpour not_allowed)
 			(footprints allowed)
 		)
+		(placement
+			(enabled no)
+			(sheetname "")
+		)
 		(fill
 			(thermal_gap 0.508)
 			(thermal_bridge_width 0.508)
+			(island_removal_mode 0)
 		)
 		(polygon
 			(pts
@@ -358,6 +351,7 @@
 			)
 		)
 	)
+	(embedded_fonts no)
 	(model "${KIBOAR_3DMODELS}/Kiboar_Button.3dshapes/SKQGAFE010.stp"
 		(offset
 			(xyz 0 0 0)

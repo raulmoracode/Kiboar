@@ -1,7 +1,7 @@
 (footprint "MLLC_1"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(descr "RCE5C2A220J0A2H03B")
 	(tags "Capacitor")
@@ -26,18 +26,6 @@
 			(font
 				(size 1.27 1.27)
 				(thickness 0.254)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "9a590f45-4865-4111-b3f6-dcd3714fa72b")
-		(effects
-			(font
-				(size 1.27 1.27)
-				(thickness 0.15)
 			)
 		)
 	)
@@ -66,6 +54,7 @@
 		)
 	)
 	(attr through_hole)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_line
 		(start -1.6 -2.25)
 		(end 4.1 -2.25)
@@ -173,6 +162,7 @@
 		(remove_unused_layers no)
 		(uuid "db19953e-4586-4d17-a1e8-84abc92a5d00")
 	)
+	(embedded_fonts no)
 	(model "${KIBOAR_3DMODELS}/Kiboar_Placeholder.3dshapes/MLCC_1.stp"
 		(offset
 			(xyz 1.249999981 0 3.99999994)

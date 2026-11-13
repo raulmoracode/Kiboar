@@ -1,7 +1,7 @@
 (footprint "WS2812B-MINI"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(property "Reference" "LED1"
 		(at 0 0 180)
@@ -22,18 +22,6 @@
 		(effects
 			(font
 				(size 0.6 0.6)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "bbebef90-5292-4706-9644-9104c84d4467")
-		(effects
-			(font
-				(size 1.27 1.27)
 				(thickness 0.15)
 			)
 		)
@@ -75,6 +63,7 @@
 		)
 	)
 	(attr smd)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_poly
 		(pts
 			(xy 2.9 1.45) (xy 2.392 1.45) (xy 2.9 0.942)
@@ -83,7 +72,7 @@
 			(width 0.12)
 			(type solid)
 		)
-		(fill solid)
+		(fill yes)
 		(layer "F.SilkS")
 		(uuid "b2de1057-44b4-4b1a-b3d7-c19d3cd25553")
 	)
@@ -130,27 +119,28 @@
 	(pad "1" smd rect
 		(at -1.465 -0.89 90)
 		(size 0.9 1.15)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "4e944601-14c5-4478-a9d6-8d2ad19dcc43")
 	)
 	(pad "2" smd rect
 		(at -1.465 0.89 90)
 		(size 0.9 1.15)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "d7fccf28-3bfa-4b51-bf91-5d4755a0686e")
 	)
 	(pad "3" smd rect
 		(at 1.465 0.89 90)
 		(size 0.9 1.15)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "01106a52-6b7d-40fd-b165-c927be1f6a1d")
 	)
 	(pad "4" smd rect
 		(at 1.465 -0.89 90)
 		(size 0.9 1.15)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "9fb044e3-00d4-4901-9cd7-c364c152358f")
 	)
+	(embedded_fonts no)
 	(model "${KIBOAR_3DMODELS}/Kiboar_Led.3dshapes/WS2812B-MINI.step"
 		(offset
 			(xyz 0 0 -0.06)

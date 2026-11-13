@@ -1,7 +1,7 @@
 (footprint "COM08184"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(descr "COM-08184-5")
 	(tags "Switch")
@@ -26,18 +26,6 @@
 			(font
 				(size 1.27 1.27)
 				(thickness 0.254)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "4e6a06c0-2df5-4ac6-b3c5-f420236abef0")
-		(effects
-			(font
-				(size 1.27 1.27)
-				(thickness 0.15)
 			)
 		)
 	)
@@ -66,6 +54,7 @@
 		)
 	)
 	(attr through_hole)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_line
 		(start -7.2 -6.9)
 		(end 7.2 -6.9)
@@ -174,33 +163,34 @@
 	(pad "1" smd rect
 		(at -2.5 3.8 90)
 		(size 1.8 1.9)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "38db3d4e-af6d-4c4a-bdf5-3de6de59020f")
 	)
 	(pad "2" smd rect
 		(at 2.5 3.8 90)
 		(size 1.8 1.9)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "a91f91d8-7b86-4237-811f-399f32b1ec8c")
 	)
 	(pad "MP1" smd rect
 		(at -5.4 -0.95 90)
 		(size 1.5 1.6)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "6449e365-40c9-49d3-b093-45d835ebe522")
 	)
 	(pad "MP2" smd rect
 		(at 5.4 -0.95 90)
 		(size 1.5 1.6)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "8d3dc997-292a-450c-b8ad-a00d234c1109")
 	)
 	(pad "T1" smd rect
 		(at 0 3.8 90)
 		(size 1.8 1.9)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "51bae968-a737-4121-8349-04bc74bdad4b")
 	)
+	(embedded_fonts no)
 	(model "${KIBOAR_3DMODELS}/Kiboar_Encoder.3dshapes/COM08184.STEP"
 		(offset
 			(xyz -6 -4 0)

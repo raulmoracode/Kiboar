@@ -14,6 +14,10 @@ Welcome to the **Kiboar**! This project provides a comprehensive collection of c
 - 📆 **Ready-to-Use Symbols**: Pre-made schematic symbols for quick integration into your projects.
 - 💡 **Modular Design**: Easy to customize and expand according to your specific needs.
 
+## Requirements
+
+- **KiCad 10 or newer.** The symbols and footprints are stored in the KiCad 10 file format, which KiCad 8 and 9 cannot open.
+
 ## Installation
 
 1. **Clone the Repository**:

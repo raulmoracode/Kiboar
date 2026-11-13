@@ -1,7 +1,7 @@
 (footprint "COM-09032"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(property "Reference" "REF**"
 		(at 0 -0.5 0)
@@ -23,18 +23,6 @@
 		(effects
 			(font
 				(size 1 1)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "39c2d80a-ea10-436e-be75-5245d7edb1d0")
-		(effects
-			(font
-				(size 1.27 1.27)
 				(thickness 0.15)
 			)
 		)
@@ -64,6 +52,7 @@
 		)
 	)
 	(attr through_hole)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_text user "${REFERENCE}"
 		(at 0 2.5 0)
 		(unlocked yes)
@@ -80,28 +69,28 @@
 		(at -7.62 -6.67)
 		(size 1.897 1.897)
 		(drill 1.397)
-		(layers "F&B.Cu" "*.Mask")
+		(layers "*.Cu" "*.Mask")
 		(uuid "d39d813e-3e64-490c-ba5c-a64bb5ad6bd0")
 	)
 	(pad "" np_thru_hole circle
 		(at -7.62 6.67)
 		(size 1.897 1.897)
 		(drill 1.397)
-		(layers "F&B.Cu" "*.Mask")
+		(layers "*.Cu" "*.Mask")
 		(uuid "ea6fde00-59dc-4a79-a647-7e38199fae0e")
 	)
 	(pad "" np_thru_hole circle
 		(at 7.62 -6.67)
 		(size 1.897 1.897)
 		(drill 1.397)
-		(layers "F&B.Cu" "*.Mask")
+		(layers "*.Cu" "*.Mask")
 		(uuid "399fc36a-ed5d-44b5-82f7-c6f83d9acc14")
 	)
 	(pad "" np_thru_hole circle
 		(at 7.62 6.67)
 		(size 1.897 1.897)
 		(drill 1.397)
-		(layers "F&B.Cu" "*.Mask")
+		(layers "*.Cu" "*.Mask")
 		(uuid "9aedbb9e-8340-4899-b813-05b23382a36b")
 	)
 	(pad "B1A" thru_hole circle
@@ -184,6 +173,7 @@
 		(remove_unused_layers no)
 		(uuid "128e34ce-eee7-477d-b905-a493e98db783")
 	)
+	(embedded_fonts no)
 	(model "${KIBOAR_3DMODELS}/Kiboar_Joystick.3dshapes/COM-09032.STEP"
 		(offset
 			(xyz 0 0.5 0)

@@ -1,44 +1,169 @@
-(footprint "CAD_MX_3.00u" (version 20221018) (generator pcbnew)
-  (layer "F.Cu")
-  (descr "MX keyswitch plate cutout 3.00u")
-  (tags "MX Keyboard Keyswitch Switch Plate Cutout Keycap 3.00u")
-  (attr through_hole)
-  (fp_text reference "REF**" (at 0 -8) (layer "F.SilkS") hide
-      (effects (font (size 1 1) (thickness 0.15)))
-    (tstamp f828767a-b8a1-48fd-a3ca-cb0cf8ce6154)
-  )
-  (fp_text value "CAD_MX_3.00u" (at 0 8) (layer "F.Fab")
-      (effects (font (size 1 1) (thickness 0.15)))
-    (tstamp 657e0920-d676-417e-b9ad-ccd3aeff6e01)
-  )
-  (fp_text user "${REFERENCE}" (at 0 0) (layer "F.Fab")
-      (effects (font (size 1 1) (thickness 0.15)))
-    (tstamp ad1bacfc-0db1-45ea-a0cc-4c605fdabe8c)
-  )
-  (fp_line (start -28.575 -9.525) (end -28.575 9.525)
-    (stroke (width 0.1) (type solid)) (layer "Dwgs.User") (tstamp 6b7bb6b2-8de7-4419-8397-554882c80c2d))
-  (fp_line (start -28.575 9.525) (end 28.575 9.525)
-    (stroke (width 0.1) (type solid)) (layer "Dwgs.User") (tstamp bd644124-fa24-4e70-80f5-00a3cbaf91ec))
-  (fp_line (start 28.575 -9.525) (end -28.575 -9.525)
-    (stroke (width 0.1) (type solid)) (layer "Dwgs.User") (tstamp 3eaa1c54-decb-4d7f-9104-871a7f83d67a))
-  (fp_line (start 28.575 9.525) (end 28.575 -9.525)
-    (stroke (width 0.1) (type solid)) (layer "Dwgs.User") (tstamp 11326849-31b7-4589-adda-dc8b80dc8c3f))
-  (fp_line (start -7 -7) (end -7 7)
-    (stroke (width 0.1) (type solid)) (layer "Edge.Cuts") (tstamp b75e67e4-c032-440d-a96f-40a9992ffc57))
-  (fp_line (start -7 7) (end 7 7)
-    (stroke (width 0.1) (type solid)) (layer "Edge.Cuts") (tstamp f3702d79-922f-420a-81da-027067c30673))
-  (fp_line (start 7 -7) (end -7 -7)
-    (stroke (width 0.1) (type solid)) (layer "Edge.Cuts") (tstamp 9fc9ccb8-ea87-4384-926a-44d603b27d02))
-  (fp_line (start 7 7) (end 7 -7)
-    (stroke (width 0.1) (type solid)) (layer "Edge.Cuts") (tstamp 642d1230-6e5a-4b4d-8e7e-2bd5604d65ce))
-  (model "${SCOTTOKEEBS_KICAD}/3dmodels/ScottoKeebs_CAD.3dshapes/MX_CAD.step"
-    (offset (xyz 0 0 -5.1))
-    (scale (xyz 1 1 1))
-    (rotate (xyz 0 0 0))
-  )
-  (model "${SCOTTOKEEBS_KICAD}/3dmodels/ScottoKeebs_CAD.3dshapes/MX_3.00u_CAD.step"
-    (offset (xyz 0 0 11.9))
-    (scale (xyz 1 1 1))
-    (rotate (xyz 0 180 0))
-  )
+(footprint "CAD_MX_3.00u"
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(layer "F.Cu")
+	(descr "MX keyswitch plate cutout 3.00u")
+	(tags "MX Keyboard Keyswitch Switch Plate Cutout Keycap 3.00u")
+	(property "Reference" "REF**"
+		(at 0 -8 0)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "f828767a-b8a1-48fd-a3ca-cb0cf8ce6154")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "CAD_MX_3.00u"
+		(at 0 8 0)
+		(layer "F.Fab")
+		(uuid "657e0920-d676-417e-b9ad-ccd3aeff6e01")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "909ed66e-ade5-4b17-83d3-a24d10eb16e8")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "e9771b36-fa7e-4ed9-be25-9accc622c11d")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(attr through_hole)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_line
+		(start -28.575 -9.525)
+		(end -28.575 9.525)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "Dwgs.User")
+		(uuid "6b7bb6b2-8de7-4419-8397-554882c80c2d")
+	)
+	(fp_line
+		(start -28.575 9.525)
+		(end 28.575 9.525)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "Dwgs.User")
+		(uuid "bd644124-fa24-4e70-80f5-00a3cbaf91ec")
+	)
+	(fp_line
+		(start 28.575 -9.525)
+		(end -28.575 -9.525)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "Dwgs.User")
+		(uuid "3eaa1c54-decb-4d7f-9104-871a7f83d67a")
+	)
+	(fp_line
+		(start 28.575 9.525)
+		(end 28.575 -9.525)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "Dwgs.User")
+		(uuid "11326849-31b7-4589-adda-dc8b80dc8c3f")
+	)
+	(fp_line
+		(start -7 -7)
+		(end -7 7)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "Edge.Cuts")
+		(uuid "b75e67e4-c032-440d-a96f-40a9992ffc57")
+	)
+	(fp_line
+		(start -7 7)
+		(end 7 7)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "Edge.Cuts")
+		(uuid "f3702d79-922f-420a-81da-027067c30673")
+	)
+	(fp_line
+		(start 7 -7)
+		(end -7 -7)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "Edge.Cuts")
+		(uuid "9fc9ccb8-ea87-4384-926a-44d603b27d02")
+	)
+	(fp_line
+		(start 7 7)
+		(end 7 -7)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "Edge.Cuts")
+		(uuid "642d1230-6e5a-4b4d-8e7e-2bd5604d65ce")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(uuid "ad1bacfc-0db1-45ea-a0cc-4c605fdabe8c")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(embedded_fonts no)
+	(model "${KIBOAR_3DMODELS}/Kiboar_MechSwitch.3dshapes/Kimora_CAD.3dshapes/MX_CAD.step"
+		(offset
+			(xyz 0 0 -5.1)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+	(model "${KIBOAR_3DMODELS}/Kiboar_MechSwitch.3dshapes/Kimora_CAD.3dshapes/MX_3.00u_CAD.step"
+		(offset
+			(xyz 0 0 11.9)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 180 0)
+		)
+	)
 )

@@ -1,7 +1,7 @@
 (footprint "434123025816"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(descr "<b>WS-TASV</b><br>J-Bend SMT Tact Switch 6.0x3.8 mm,2 pins")
 	(property "Reference" "REF**"
@@ -23,18 +23,6 @@
 		(effects
 			(font
 				(size 0.8 0.8)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "f8dadd4e-5989-4353-8535-2c56bba61d96")
-		(effects
-			(font
-				(size 1.27 1.27)
 				(thickness 0.15)
 			)
 		)
@@ -64,6 +52,7 @@
 		)
 	)
 	(attr smd)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_poly
 		(pts
 			(xy -4.05 -2.25) (xy 4.05 -2.25) (xy 4.05 2.25) (xy -4.05 2.25)
@@ -72,7 +61,7 @@
 			(width 0.1)
 			(type solid)
 		)
-		(fill solid)
+		(fill yes)
 		(layer "F.CrtYd")
 		(uuid "e330e2a9-88ac-492b-a7fd-4acec698ed62")
 	)
@@ -119,17 +108,18 @@
 	(pad "1" smd rect
 		(at -3.175 0)
 		(size 1.35 1.4)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(solder_mask_margin 0.102)
 		(uuid "1738eb04-f1d6-494a-889f-fe6c5578814a")
 	)
 	(pad "2" smd rect
 		(at 3.175 0)
 		(size 1.35 1.4)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(solder_mask_margin 0.102)
 		(uuid "7acd3b4e-1f7d-4a2d-9bd9-071524e52b9d")
 	)
+	(embedded_fonts no)
 	(model "${KIBOAR_3DMODELS}/Kiboar_Button.3dshapes/434123025816.step"
 		(offset
 			(xyz 0 0 0)

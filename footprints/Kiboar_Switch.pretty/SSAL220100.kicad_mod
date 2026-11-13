@@ -1,7 +1,7 @@
 (footprint "SSAL220100"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(property "Reference" "Ref**"
 		(at 0 2.5 0)
@@ -19,18 +19,6 @@
 		(at 0 2.5 0)
 		(layer "F.Fab")
 		(uuid "0b687679-42f0-4eb4-9050-7c13a4058984")
-		(effects
-			(font
-				(size 1.27 1.27)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "0db3d558-e667-4aab-b12c-b807d660c950")
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -62,10 +50,11 @@
 			)
 		)
 	)
+	(duplicate_pad_numbers_are_jumpers no)
 	(pad "0" smd rect
 		(at -4.1501 0.775)
 		(size 1.2 0.9)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(solder_mask_margin 0.0508)
 		(thermal_bridge_angle 0)
 		(uuid "d2ceb8a6-b0ed-48bc-b98d-bc78c12e7548")
@@ -73,7 +62,7 @@
 	(pad "0" smd rect
 		(at 4.1501 0.775)
 		(size 1.2 0.9)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(solder_mask_margin 0.0508)
 		(thermal_bridge_angle 0)
 		(uuid "f084c028-a301-47b3-b0aa-f4ace150988a")
@@ -81,7 +70,7 @@
 	(pad "1" smd rect
 		(at -1.7 -0.775)
 		(size 0.8 1.1)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(solder_mask_margin 0.0508)
 		(thermal_bridge_angle 0)
 		(uuid "cbcc34da-58d4-439e-a1d1-df1415febf7a")
@@ -89,7 +78,7 @@
 	(pad "2" smd rect
 		(at 0 -0.775)
 		(size 1.2 1.1)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(solder_mask_margin 0.0508)
 		(thermal_bridge_angle 0)
 		(uuid "5f442816-09fb-4335-8e6a-621e0a32e77b")
@@ -97,11 +86,12 @@
 	(pad "3" smd rect
 		(at 1.7 -0.775)
 		(size 0.8 1.1)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(solder_mask_margin 0.0508)
 		(thermal_bridge_angle 0)
 		(uuid "59566b50-9cdd-4aa8-a35a-dc2a9f9d6ec8")
 	)
+	(embedded_fonts no)
 	(model "${KIBOAR_3DMODELS}/Kiboar_Switch.3dshapes/SSAL220100.step"
 		(offset
 			(xyz 0 -0.7 0)

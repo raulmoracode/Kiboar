@@ -1,7 +1,7 @@
 (footprint "Encoder_EC11_MX_Combo"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(descr "MX keyswitch PCB Mount Keycap 1.00u")
 	(tags "MX Keyboard Keyswitch Switch PCB Cutout Keycap 1.00u")
@@ -26,18 +26,6 @@
 			(font
 				(size 1 1)
 				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(unlocked yes)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "f88bebb0-3c5a-47bd-adc4-20eae7ecfa01")
-		(effects
-			(font
-				(size 1.27 1.27)
 			)
 		)
 	)
@@ -66,6 +54,7 @@
 		)
 	)
 	(attr through_hole)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_line
 		(start -9.525 -9.525)
 		(end -9.525 9.525)
@@ -203,7 +192,7 @@
 			(width 0.12)
 			(type solid)
 		)
-		(fill none)
+		(fill no)
 		(layer "F.Fab")
 		(uuid "353daee2-af02-4237-b4d5-ba17732acaf6")
 	)
@@ -313,7 +302,8 @@
 		(remove_unused_layers no)
 		(uuid "06fb3de3-e0c6-473d-9a28-1037ced45e64")
 	)
-	(model "${SCOTTOKEEBS_KICAD}/3dmodels/ScottoKeebs_Scotto.3dshapes/EC11.step"
+	(embedded_fonts no)
+	(model "${KIBOAR_3DMODELS}/Kiboar_Scotto.3dshapes/EC11.step"
 		(offset
 			(xyz 0 0 0)
 		)

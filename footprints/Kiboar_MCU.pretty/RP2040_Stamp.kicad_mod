@@ -1,7 +1,7 @@
 (footprint "RP2040_Stamp"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(property "Reference" "REF**"
 		(at 0 0 0)
@@ -24,18 +24,6 @@
 		(effects
 			(font
 				(size 1 1)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "2369b98f-3121-413f-b246-4cb8b7bb91ec")
-		(effects
-			(font
-				(size 1.27 1.27)
 				(thickness 0.15)
 			)
 		)
@@ -65,6 +53,7 @@
 		)
 	)
 	(attr through_hole)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_line
 		(start -12.6 -10)
 		(end -12.6 -11.1)
@@ -243,7 +232,7 @@
 			(width 0.05)
 			(type solid)
 		)
-		(fill none)
+		(fill no)
 		(layer "F.CrtYd")
 		(uuid "7b264598-bcff-4f4b-a53f-264ed1d425cd")
 	)
@@ -288,11 +277,11 @@
 		(layer "F.Fab")
 		(uuid "bd92fa25-b6dd-4db7-bbdd-e5d9439b864a")
 	)
-	(fp_text user "G"
-		(at 11.4 -11.2 0)
+	(fp_text user "10"
+		(at -11.4 11.2 0)
 		(unlocked yes)
 		(layer "F.SilkS")
-		(uuid "2aa67ffd-8855-4057-85cc-e46d0b1d997f")
+		(uuid "5cc3fa75-2868-490e-ab07-a2aa26f28ee8")
 		(effects
 			(font
 				(size 0.9 0.9)
@@ -300,11 +289,11 @@
 			)
 		)
 	)
-	(fp_text user "10"
-		(at -11.4 11.2 0)
+	(fp_text user "0"
+		(at -11.2 -11.2 0)
 		(unlocked yes)
 		(layer "F.SilkS")
-		(uuid "5cc3fa75-2868-490e-ab07-a2aa26f28ee8")
+		(uuid "ebdd4436-4639-44c4-a36d-877699176507")
 		(effects
 			(font
 				(size 0.9 0.9)
@@ -324,11 +313,11 @@
 			)
 		)
 	)
-	(fp_text user "0"
-		(at -11.2 -11.2 0)
+	(fp_text user "G"
+		(at 11.4 -11.2 0)
 		(unlocked yes)
 		(layer "F.SilkS")
-		(uuid "ebdd4436-4639-44c4-a36d-877699176507")
+		(uuid "2aa67ffd-8855-4057-85cc-e46d0b1d997f")
 		(effects
 			(font
 				(size 0.9 0.9)
@@ -351,7 +340,7 @@
 	(pad "1" smd rect
 		(at -11.65 -9)
 		(size 2.8 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "c2f3c0dc-d8b2-4f10-b8eb-b8f1eda3e137")
 	)
 	(pad "1" thru_hole circle
@@ -365,7 +354,7 @@
 	(pad "2" smd rect
 		(at -11.65 -7)
 		(size 2.8 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "4ba413a9-0e6a-4d07-affd-51bd34a4332b")
 	)
 	(pad "2" thru_hole oval
@@ -379,7 +368,7 @@
 	(pad "3" smd rect
 		(at -11.65 -5)
 		(size 2.8 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "e26080e5-d71d-42cd-9e36-551915da94ab")
 	)
 	(pad "3" thru_hole oval
@@ -393,7 +382,7 @@
 	(pad "4" smd rect
 		(at -11.65 -3)
 		(size 2.8 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "7047f5a6-c033-4a78-816a-f594226a0be6")
 	)
 	(pad "4" thru_hole oval
@@ -407,7 +396,7 @@
 	(pad "5" smd rect
 		(at -11.65 -1)
 		(size 2.8 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "79961ab2-1d67-43a9-91bf-e9a6caa68936")
 	)
 	(pad "5" thru_hole oval
@@ -421,7 +410,7 @@
 	(pad "6" smd rect
 		(at -11.65 1)
 		(size 2.8 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "cae33a99-9166-49dd-b58c-2fa5ce82fd6c")
 	)
 	(pad "6" thru_hole oval
@@ -435,7 +424,7 @@
 	(pad "7" smd rect
 		(at -11.65 3)
 		(size 2.8 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "3bdfa1c7-4de7-4e69-b19b-a666ab8e4a9d")
 	)
 	(pad "7" thru_hole oval
@@ -449,7 +438,7 @@
 	(pad "8" smd rect
 		(at -11.65 5)
 		(size 2.8 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "95963a15-a4c4-4ae0-b89a-c90bb8053b3c")
 	)
 	(pad "8" thru_hole oval
@@ -463,7 +452,7 @@
 	(pad "9" smd rect
 		(at -11.65 7)
 		(size 2.8 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "f506cd5c-ea1f-484b-99d9-276119bd6e2c")
 	)
 	(pad "9" thru_hole oval
@@ -477,7 +466,7 @@
 	(pad "10" smd rect
 		(at -11.65 9)
 		(size 2.8 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "82cc1e55-4703-4747-aaf2-2da4e8321c26")
 	)
 	(pad "10" thru_hole oval
@@ -499,7 +488,7 @@
 	(pad "11" smd rect
 		(at -9 11.65 270)
 		(size 2.8 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "0e697874-90fb-404d-9ee2-a7f68c8e4a38")
 	)
 	(pad "12" thru_hole oval
@@ -513,7 +502,7 @@
 	(pad "12" smd rect
 		(at -7 11.65 270)
 		(size 2.8 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "27250d7d-4e0f-4b62-bbe3-e2f2014bc1b9")
 	)
 	(pad "13" thru_hole oval
@@ -527,7 +516,7 @@
 	(pad "13" smd rect
 		(at -5 11.65 270)
 		(size 2.8 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "4ec6ee94-4200-4e9d-9309-06bc4bdc3eb7")
 	)
 	(pad "14" thru_hole oval
@@ -541,7 +530,7 @@
 	(pad "14" smd rect
 		(at -3 11.65 270)
 		(size 2.8 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "fd451607-2b1a-460a-9005-e939b7760ca6")
 	)
 	(pad "15" thru_hole oval
@@ -555,7 +544,7 @@
 	(pad "15" smd rect
 		(at -1 11.65 270)
 		(size 2.8 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "ae871d11-bf4d-47c1-9308-0d0761c35f0a")
 	)
 	(pad "16" thru_hole oval
@@ -569,7 +558,7 @@
 	(pad "16" smd rect
 		(at 1 11.65 270)
 		(size 2.8 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "32db7f9b-c470-47d0-b195-a78367234780")
 	)
 	(pad "17" thru_hole oval
@@ -583,7 +572,7 @@
 	(pad "17" smd rect
 		(at 3 11.65 270)
 		(size 2.8 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "2fb1a482-a9a7-4146-9a56-783ff622b83a")
 	)
 	(pad "18" thru_hole oval
@@ -597,7 +586,7 @@
 	(pad "18" smd rect
 		(at 5 11.65 270)
 		(size 2.8 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "93baf125-f6bc-4f58-8be4-f7fe254f72e4")
 	)
 	(pad "19" thru_hole oval
@@ -611,7 +600,7 @@
 	(pad "19" smd rect
 		(at 7 11.65 270)
 		(size 2.8 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "467b5894-9048-48fd-9dcd-66c203f22a37")
 	)
 	(pad "20" thru_hole oval
@@ -625,7 +614,7 @@
 	(pad "20" smd rect
 		(at 9 11.65 270)
 		(size 2.8 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "0ba0c348-8b90-48df-97a6-dfa832ee8f6b")
 	)
 	(pad "21" thru_hole oval
@@ -639,7 +628,7 @@
 	(pad "21" smd rect
 		(at 11.65 9)
 		(size 2.8 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "4bb9589e-164d-4793-b936-4612cced3676")
 	)
 	(pad "22" thru_hole oval
@@ -653,7 +642,7 @@
 	(pad "22" smd rect
 		(at 11.65 7)
 		(size 2.8 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "88543cd8-ea9f-4319-ab97-d7bf60d79938")
 	)
 	(pad "23" thru_hole oval
@@ -667,7 +656,7 @@
 	(pad "23" smd rect
 		(at 11.65 5)
 		(size 2.8 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "920e452f-a9c0-4349-b92c-ee8c60d73b5b")
 	)
 	(pad "24" thru_hole oval
@@ -681,7 +670,7 @@
 	(pad "24" smd rect
 		(at 11.65 3)
 		(size 2.8 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "3e7e75b9-399d-440d-953c-ce3f9b4ae600")
 	)
 	(pad "25" thru_hole oval
@@ -695,7 +684,7 @@
 	(pad "25" smd rect
 		(at 11.65 1)
 		(size 2.8 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "aac1e0b0-2929-4caa-9b73-34c95f0379d4")
 	)
 	(pad "26" thru_hole oval
@@ -709,7 +698,7 @@
 	(pad "26" smd rect
 		(at 11.65 -1)
 		(size 2.8 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "81b2671b-c65c-4652-a68e-2c6b6afc8af3")
 	)
 	(pad "27" thru_hole oval
@@ -723,7 +712,7 @@
 	(pad "27" smd rect
 		(at 11.65 -3)
 		(size 2.8 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "9b476dcf-8c82-450e-87b3-4c1554288052")
 	)
 	(pad "28" thru_hole oval
@@ -737,7 +726,7 @@
 	(pad "28" smd rect
 		(at 11.65 -5)
 		(size 2.8 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "6abf395b-97f5-4e04-8eef-c58a2630d980")
 	)
 	(pad "29" thru_hole oval
@@ -751,7 +740,7 @@
 	(pad "29" smd rect
 		(at 11.65 -7)
 		(size 2.8 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "cdb25f26-31d9-4065-8e34-139e39a21276")
 	)
 	(pad "30" thru_hole oval
@@ -765,13 +754,13 @@
 	(pad "30" smd rect
 		(at 11.65 -9)
 		(size 2.8 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "b06edc59-2938-4cf0-9a07-c6f5e423f3b2")
 	)
 	(pad "31" smd rect
 		(at 9 -11.65 270)
 		(size 2.8 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "8e7a372a-ca33-44bf-99a4-dee69464e554")
 	)
 	(pad "31" thru_hole oval
@@ -785,7 +774,7 @@
 	(pad "32" smd rect
 		(at 7 -11.65 270)
 		(size 2.8 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "d9024bf9-276a-48ff-b5df-13feb4bc9a9d")
 	)
 	(pad "32" thru_hole oval
@@ -799,7 +788,7 @@
 	(pad "33" smd rect
 		(at 5 -11.65 270)
 		(size 2.8 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "96322b3b-0043-441e-b0f7-1c3a4cfb1bd1")
 	)
 	(pad "33" thru_hole oval
@@ -813,7 +802,7 @@
 	(pad "34" smd rect
 		(at 3 -11.65 270)
 		(size 2.8 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "fb2fe13e-6ba7-4f13-8582-8d0ae5be1d9d")
 	)
 	(pad "34" thru_hole oval
@@ -827,7 +816,7 @@
 	(pad "35" smd rect
 		(at 1 -11.65 270)
 		(size 2.8 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "07f31b0a-6f97-43ce-861e-9a405faa7594")
 	)
 	(pad "35" thru_hole oval
@@ -841,7 +830,7 @@
 	(pad "36" smd rect
 		(at -1 -11.65 270)
 		(size 2.8 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "69814cec-d9da-434f-b751-02086f68a336")
 	)
 	(pad "36" thru_hole oval
@@ -855,7 +844,7 @@
 	(pad "37" smd rect
 		(at -3 -11.65 270)
 		(size 2.8 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "3d614599-2f0c-4b1d-8639-c411f3ef4482")
 	)
 	(pad "37" thru_hole oval
@@ -869,7 +858,7 @@
 	(pad "38" smd rect
 		(at -5 -11.65 270)
 		(size 2.8 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "8a676448-c5a2-4f7d-9b4e-e13130234943")
 	)
 	(pad "38" thru_hole oval
@@ -883,7 +872,7 @@
 	(pad "39" smd rect
 		(at -7 -11.65 270)
 		(size 2.8 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "aaeaa1d8-d020-434f-9682-8f44d4e1dd90")
 	)
 	(pad "39" thru_hole oval
@@ -897,7 +886,7 @@
 	(pad "40" smd rect
 		(at -9 -11.65 270)
 		(size 2.8 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "467952d0-0a9a-4a65-8d78-310209b0206d")
 	)
 	(pad "40" thru_hole oval
@@ -908,6 +897,7 @@
 		(remove_unused_layers no)
 		(uuid "dab46582-d741-4ceb-a320-b50dd5243d25")
 	)
+	(embedded_fonts no)
 	(model "${KIBOAR_3DMODELS}/Kiboar_MCU.3dshapes/RP2040_Stamp.step"
 		(offset
 			(xyz 0 0 0)

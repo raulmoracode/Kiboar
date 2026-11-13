@@ -1,7 +1,7 @@
 (footprint "ESP32-C3-Super-Mini-Pins"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(property "Reference" "REF**"
 		(at 0 -0.5 0)
@@ -24,19 +24,6 @@
 		(effects
 			(font
 				(size 0.6 0.6)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(unlocked yes)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "40b45d4a-2a7a-49cd-90d7-573248bb9561")
-		(effects
-			(font
-				(size 1.27 1.27)
 				(thickness 0.15)
 			)
 		)
@@ -68,6 +55,7 @@
 		)
 	)
 	(attr through_hole)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_rect
 		(start -8.9 -8.75)
 		(end 8.9 13.5)
@@ -75,7 +63,7 @@
 			(width 0.1)
 			(type default)
 		)
-		(fill none)
+		(fill no)
 		(layer "F.SilkS")
 		(uuid "665a8e5b-bd98-4612-8c7c-0faa5e5f8799")
 	)
@@ -88,7 +76,7 @@
 			(width 0.05)
 			(type solid)
 		)
-		(fill none)
+		(fill no)
 		(layer "F.CrtYd")
 		(uuid "9f789794-3d7a-4284-8708-9296030ab872")
 	)
@@ -107,6 +95,7 @@
 	(fp_text_box "ESP32-C3\nSuper Mini"
 		(start -4.875 6.75)
 		(end 4.875 9.75)
+		(margins 0.75 0.75 0.75 0.75)
 		(layer "F.SilkS")
 		(uuid "8b1e02d1-2cef-4b35-ad9b-e702799dc5c0")
 		(effects
@@ -121,6 +110,7 @@
 			(width 0)
 			(type solid)
 		)
+		(knockout no)
 	)
 	(pad "0" thru_hole circle
 		(at 7.62 10.16)
@@ -250,6 +240,7 @@
 		(remove_unused_layers no)
 		(uuid "05a748d9-20a4-4d83-b810-2021f3c7e176")
 	)
+	(embedded_fonts no)
 	(model "${KIBOAR_3DMODELS}/Kiboar_MCU.3dshapes/ESP32-C3-SuperMini.step"
 		(offset
 			(xyz 0 -2.3 2.5)

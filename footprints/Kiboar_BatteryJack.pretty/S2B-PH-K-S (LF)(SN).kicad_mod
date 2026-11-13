@@ -1,7 +1,7 @@
 (footprint "S2B-PH-K-S (LF)(SN)"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(property "Reference" "REF**"
 		(at 0 2.5 0)
@@ -23,18 +23,6 @@
 			(font
 				(size 0.48 0.48)
 				(thickness 0.12)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "f07886cc-6e2d-4093-8035-ca0783e99ff6")
-		(effects
-			(font
-				(size 1.27 1.27)
-				(thickness 0.15)
 			)
 		)
 	)
@@ -63,6 +51,7 @@
 		)
 	)
 	(attr through_hole)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_line
 		(start -1.5 1.5)
 		(end -0.5 1.5)
@@ -221,6 +210,7 @@
 		(solder_mask_margin 0.102)
 		(uuid "4b350cec-4fa1-42af-96d5-19f74b399dd6")
 	)
+	(embedded_fonts no)
 	(model "${KIBOAR_3DMODELS}/Kiboar_BatteryJack.3dshapes/S2B-PH-K-S (LF)(SN).step"
 		(offset
 			(xyz 0 1.25 0)

@@ -1,7 +1,7 @@
 (footprint "1058 Keystone"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(property "Reference" "REF**"
 		(at 0 -5.5 0)
@@ -22,18 +22,6 @@
 		(effects
 			(font
 				(size 1 1)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "5b84f7ba-974d-4682-bb1b-4f61b65bbb8f")
-		(effects
-			(font
-				(size 1.27 1.27)
 				(thickness 0.15)
 			)
 		)
@@ -63,6 +51,7 @@
 		)
 	)
 	(attr smd)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_line
 		(start -12 -0.5)
 		(end -12 0.5)
@@ -543,24 +532,25 @@
 			(width 0.01)
 			(type solid)
 		)
-		(fill solid)
+		(fill yes)
 		(layer "F.Fab")
 		(uuid "3801473b-9ef9-474d-8d9c-08d1d6e9e5aa")
 	)
 	(pad "N" smd rect
 		(at 14.68 0)
 		(size 2.54 3.51)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(solder_mask_margin 0.102)
 		(uuid "a5442c7e-c11b-445d-9621-6d7dfeedb1d2")
 	)
 	(pad "P" smd rect
 		(at -14.68 0)
 		(size 2.54 3.51)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(solder_mask_margin 0.102)
 		(uuid "759762e8-de43-44e6-b410-b59564f793f6")
 	)
+	(embedded_fonts no)
 	(model "${KIBOAR_3DMODELS}/Kiboar_BatteryHolder.3dshapes/1058.step"
 		(offset
 			(xyz -0.25 0 3)

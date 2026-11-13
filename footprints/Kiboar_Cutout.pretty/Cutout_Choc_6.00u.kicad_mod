@@ -1,33 +1,128 @@
-(footprint "Cutout_Choc_6.00u" (version 20221018) (generator pcbnew)
-  (layer "F.Cu")
-  (descr "Choc keyswitch V1 CPG1350 V1 Keycap 6.00u")
-  (tags "Choc Keyswitch Switch CPG1350 V1 Cutout Keycap 6.00u")
-  (attr through_hole)
-  (fp_text reference "REF**" (at 0 -9) (layer "F.SilkS")
-      (effects (font (size 1 1) (thickness 0.15)))
-    (tstamp f1f2899e-1e2b-4a37-a48e-bf6a14ca0a17)
-  )
-  (fp_text value "Choc_V1_6.00u" (at 0 9) (layer "F.Fab")
-      (effects (font (size 1 1) (thickness 0.15)))
-    (tstamp 4cbd9367-d433-47f9-8452-614bace7f105)
-  )
-  (fp_text user "${REFERENCE}" (at 0 0) (layer "F.Fab")
-      (effects (font (size 1 1) (thickness 0.15)))
-    (tstamp 731fe015-cd14-4831-8466-f14c8ce20af6)
-  )
-  (fp_line (start -54 -8.5) (end -54 8.5)
-    (stroke (width 0.1) (type solid)) (layer "Dwgs.User") (tstamp c0c285a4-9ef0-4559-8780-cdeda30442ff))
-  (fp_line (start -54 8.5) (end 54 8.5)
-    (stroke (width 0.1) (type solid)) (layer "Dwgs.User") (tstamp 66545d4f-3462-4344-b2f1-c295496e1f6d))
-  (fp_line (start 54 -8.5) (end -54 -8.5)
-    (stroke (width 0.1) (type solid)) (layer "Dwgs.User") (tstamp cf75e69e-5194-4a41-b048-52e9ec3d33ed))
-  (fp_line (start 54 8.5) (end 54 -8.5)
-    (stroke (width 0.1) (type solid)) (layer "Dwgs.User") (tstamp b6a02c77-b2ca-446b-9559-8c26b13fa2ea))
-  (fp_rect (start -7 -7) (end 7 7)
-    (stroke (width 0.05) (type default)) (fill none) (layer "Edge.Cuts") (tstamp 3b5faa12-d49a-4cf0-adee-e75b50e96ccc))
-  (model "${SCOTTOKEEBS_KICAD}/3dmodels/ScottoKeebs_Cutout.3dshapes/Choc_Cutout.step"
-    (offset (xyz 0 0 -2.3))
-    (scale (xyz 1 1 1))
-    (rotate (xyz 0 0 0))
-  )
+(footprint "Cutout_Choc_6.00u"
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(layer "F.Cu")
+	(descr "Choc keyswitch V1 CPG1350 V1 Keycap 6.00u")
+	(tags "Choc Keyswitch Switch CPG1350 V1 Cutout Keycap 6.00u")
+	(property "Reference" "REF**"
+		(at 0 -9 0)
+		(layer "F.SilkS")
+		(uuid "f1f2899e-1e2b-4a37-a48e-bf6a14ca0a17")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "Choc_V1_6.00u"
+		(at 0 9 0)
+		(layer "F.Fab")
+		(uuid "4cbd9367-d433-47f9-8452-614bace7f105")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "26e67912-992d-41f0-827d-d8ea8fe1f497")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "496668e7-7952-4015-8393-712e50b091cb")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(attr through_hole)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_line
+		(start -54 -8.5)
+		(end -54 8.5)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "Dwgs.User")
+		(uuid "c0c285a4-9ef0-4559-8780-cdeda30442ff")
+	)
+	(fp_line
+		(start -54 8.5)
+		(end 54 8.5)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "Dwgs.User")
+		(uuid "66545d4f-3462-4344-b2f1-c295496e1f6d")
+	)
+	(fp_line
+		(start 54 -8.5)
+		(end -54 -8.5)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "Dwgs.User")
+		(uuid "cf75e69e-5194-4a41-b048-52e9ec3d33ed")
+	)
+	(fp_line
+		(start 54 8.5)
+		(end 54 -8.5)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "Dwgs.User")
+		(uuid "b6a02c77-b2ca-446b-9559-8c26b13fa2ea")
+	)
+	(fp_rect
+		(start -7 -7)
+		(end 7 7)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(fill no)
+		(layer "Edge.Cuts")
+		(uuid "3b5faa12-d49a-4cf0-adee-e75b50e96ccc")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(uuid "731fe015-cd14-4831-8466-f14c8ce20af6")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(embedded_fonts no)
+	(model "${KIBOAR_3DMODELS}/Kiboar_Cutout.3dshapes/Choc_Cutout.step"
+		(offset
+			(xyz 0 0 -2.3)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
 )

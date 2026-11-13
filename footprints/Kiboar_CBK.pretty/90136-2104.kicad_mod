@@ -1,7 +1,7 @@
 (footprint "90136-2104"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(descr "90136-2104")
 	(tags "Connector")
@@ -26,18 +26,6 @@
 			(font
 				(size 1.27 1.27)
 				(thickness 0.254)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "21f51998-f745-4ef3-96c6-f1c17518ddc5")
-		(effects
-			(font
-				(size 1.27 1.27)
-				(thickness 0.15)
 			)
 		)
 	)
@@ -66,6 +54,7 @@
 		)
 	)
 	(attr through_hole)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_line
 		(start -11.015 -10.95)
 		(end 3.195 -10.95)
@@ -189,6 +178,7 @@
 		(remove_unused_layers no)
 		(uuid "ae22c46b-2673-49d1-ae78-c84f9621e29b")
 	)
+	(embedded_fonts no)
 	(model "${KIBOAR_3DMODELS}/Kiboar_CBK.3dshapes/90136-2104.step"
 		(offset
 			(xyz -3.829999866 5.110000057 3.609999841)

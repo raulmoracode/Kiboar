@@ -1,7 +1,7 @@
 (footprint "Capacitor_Disc_D3.0mm_W1.6mm_P2.50mm"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(descr "C, Disc series, Radial, pin pitch=2.50mm, , diameter*width=3.0*1.6mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 	(tags "C Disc series Radial pin pitch 2.50mm  diameter 3.0mm width 1.6mm Capacitor")
@@ -25,18 +25,6 @@
 		(effects
 			(font
 				(size 1 1)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "694e4e1b-d446-4954-b35e-a389f927ba22")
-		(effects
-			(font
-				(size 1.27 1.27)
 				(thickness 0.15)
 			)
 		)
@@ -66,6 +54,7 @@
 		)
 	)
 	(attr through_hole)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_line
 		(start -1.05 -1.05)
 		(end -1.05 1.05)
@@ -173,6 +162,7 @@
 		(remove_unused_layers no)
 		(uuid "28d96c4f-c6c9-403d-a4b6-dd529b420561")
 	)
+	(embedded_fonts no)
 	(model "${KIBOAR_3DMODELS}/Kiboar_Placeholder.3dshapes/Capacitor_Disc_D3.0mm_W1.6mm_P2.50mm.step"
 		(offset
 			(xyz 0 0 0)

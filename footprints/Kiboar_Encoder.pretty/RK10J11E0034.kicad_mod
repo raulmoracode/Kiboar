@@ -1,7 +1,7 @@
 (footprint "RK10J11E0034"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(property "Reference" "REF**"
 		(at -7.62 7.62 0)
@@ -25,18 +25,6 @@
 		(effects
 			(font
 				(size 1 1)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "f12728be-5f6b-4d8a-a340-39886612d3d7")
-		(effects
-			(font
-				(size 1.27 1.27)
 				(thickness 0.15)
 			)
 		)
@@ -66,6 +54,7 @@
 		)
 	)
 	(attr through_hole)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_rect
 		(start -6 0)
 		(end 5.35 7.5)
@@ -73,7 +62,7 @@
 			(width 0.1)
 			(type default)
 		)
-		(fill none)
+		(fill no)
 		(layer "F.CrtYd")
 		(uuid "940c48aa-7d06-41cd-a529-f010c04823f2")
 	)
@@ -84,7 +73,7 @@
 			(width 0.1)
 			(type default)
 		)
-		(fill none)
+		(fill no)
 		(layer "F.CrtYd")
 		(uuid "e2b2fd8b-e831-45bd-aafa-c8773fa00710")
 	)
@@ -95,7 +84,7 @@
 			(width 0.1)
 			(type default)
 		)
-		(fill none)
+		(fill no)
 		(layer "F.CrtYd")
 		(uuid "b6821563-8d76-41e3-9c2d-ae082eedf8ee")
 	)
@@ -157,6 +146,7 @@
 		(remove_unused_layers no)
 		(uuid "3d9e710a-830d-47f9-8941-b58062e8d9a4")
 	)
+	(embedded_fonts no)
 	(model "${KIBOAR_3DMODELS}/Kiboar_Encoder.3dshapes/RK10J11E0034.step"
 		(offset
 			(xyz 0 0 0)

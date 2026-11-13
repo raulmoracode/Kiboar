@@ -1,7 +1,7 @@
 (footprint "PJ-320A"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(property "Reference" "REF**"
 		(at 0 14.2 0)
@@ -21,18 +21,6 @@
 		(effects
 			(font
 				(size 1 1)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "0c90d339-e755-4071-b7df-931e578b52d1")
-		(effects
-			(font
-				(size 1.27 1.27)
 				(thickness 0.15)
 			)
 		)
@@ -62,6 +50,7 @@
 		)
 	)
 	(attr through_hole)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_line
 		(start -3.05 0)
 		(end -3.05 12.1)
@@ -152,10 +141,10 @@
 		(layer "F.SilkS")
 		(uuid "3991ec73-c0fc-4bc9-8f82-7df536704a0a")
 	)
-	(fp_text user "Sleeve"
-		(at 0.25 11.4 0)
+	(fp_text user "Ring2"
+		(at 0 3.25 0)
 		(layer "F.Fab")
-		(uuid "6eaee1ff-f724-47e7-b72f-8fd28baa6e43")
+		(uuid "701b662e-e203-49ee-8840-c71ff0ed0713")
 		(effects
 			(font
 				(size 0.7 0.7)
@@ -163,10 +152,10 @@
 			)
 		)
 	)
-	(fp_text user "Ring2"
-		(at 0 3.25 0)
+	(fp_text user "Ring1"
+		(at 0 6.25 0)
 		(layer "F.Fab")
-		(uuid "701b662e-e203-49ee-8840-c71ff0ed0713")
+		(uuid "eb045083-a5e9-4324-9548-0d05ff914701")
 		(effects
 			(font
 				(size 0.7 0.7)
@@ -185,10 +174,10 @@
 			)
 		)
 	)
-	(fp_text user "Ring1"
-		(at 0 6.25 0)
+	(fp_text user "Sleeve"
+		(at 0.25 11.4 0)
 		(layer "F.Fab")
-		(uuid "eb045083-a5e9-4324-9548-0d05ff914701")
+		(uuid "6eaee1ff-f724-47e7-b72f-8fd28baa6e43")
 		(effects
 			(font
 				(size 0.7 0.7)
@@ -242,6 +231,7 @@
 		(remove_unused_layers no)
 		(uuid "d964d0fd-e6dc-42da-bde6-9259ffc67798")
 	)
+	(embedded_fonts no)
 	(model "${KIBOAR_3DMODELS}/Kiboar_TRRS.3dshapes/PJ-320A.step"
 		(offset
 			(xyz 0 0 0)

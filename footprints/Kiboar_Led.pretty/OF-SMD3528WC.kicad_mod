@@ -1,7 +1,7 @@
 (footprint "OF-SMD3528WC"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(descr "3528W, 3528 Light Emitting Diodes (LED) ROHS")
 	(tags "3528 Light Emitting Diodes (LED) ROHS, Optoelectronics, Light Emitting Diodes (LED)")
@@ -24,18 +24,6 @@
 		(effects
 			(font
 				(size 1 1)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "948a100b-790b-4598-80fb-5d8ca6e2958b")
-		(effects
-			(font
-				(size 1.27 1.27)
 				(thickness 0.15)
 			)
 		)
@@ -65,6 +53,7 @@
 		)
 	)
 	(attr through_hole)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_poly
 		(pts
 			(xy 3.508 2.25) (xy 3 2.25) (xy 3.508 1.742)
@@ -73,7 +62,7 @@
 			(width 0.12)
 			(type solid)
 		)
-		(fill solid)
+		(fill yes)
 		(layer "F.SilkS")
 		(uuid "1be0f73b-1a77-4e1b-98eb-d827b706c358")
 	)
@@ -91,15 +80,16 @@
 	(pad "1" smd rect
 		(at 1.592405 -0.000025 180)
 		(size 1.785014 3.024003)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "868fac8e-1946-431f-a641-c74d4a256e9f")
 	)
 	(pad "2" smd rect
 		(at -1.592507 -0.000025 180)
 		(size 1.785014 3.024003)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "fd3f1ce3-c554-44b1-9d06-2a5dc1a25205")
 	)
+	(embedded_fonts no)
 	(model "${KIBOAR_3DMODELS}/Kiboar_Led.3dshapes/OF-SMD3528WC.STEP"
 		(offset
 			(xyz 0 0 0)

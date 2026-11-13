@@ -1,7 +1,7 @@
 (footprint "SKHHCWA010"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(descr "SKHHCWA010")
 	(tags "Switch")
@@ -26,18 +26,6 @@
 			(font
 				(size 1.27 1.27)
 				(thickness 0.254)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "b948a00b-db36-44f8-a62c-6b1a72b0ceef")
-		(effects
-			(font
-				(size 1.27 1.27)
-				(thickness 0.15)
 			)
 		)
 	)
@@ -66,6 +54,7 @@
 		)
 	)
 	(attr through_hole)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_line
 		(start -1.9 -1.9)
 		(end 8.4 -1.9)
@@ -189,6 +178,7 @@
 		(remove_unused_layers no)
 		(uuid "5d75cbd1-cf1a-466c-afa1-1b80e0cda0d3")
 	)
+	(embedded_fonts no)
 	(model "${KIBOAR_3DMODELS}/Kiboar_Joystick.3dshapes/SKHHCWA010.STEP"
 		(offset
 			(xyz 3.2 -2.2 0)
