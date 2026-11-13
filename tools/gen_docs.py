@@ -153,16 +153,10 @@ CARD_LIBRARIES = {"Kiboar_USB-C"}
 
 
 def library_cards(library, footprints, spanish):
-    title = "Footprints" if not spanish else "Footprints"
     lines = [
         "---",
         f'title: "{library}"',
-        f'description: "{LIBRARY_TEXT.get(library, ("", ""))[1 if spanish else 0]}"',
         "---",
-        "",
-        LIBRARY_TEXT.get(library, ("", ""))[1 if spanish else 0],
-        "",
-        f"**{len(footprints)} {title.lower()}.**",
         "",
         '<div class="not-prose my-6 flex flex-col gap-6">',
     ]
