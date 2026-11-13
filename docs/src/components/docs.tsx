@@ -9,17 +9,18 @@ export interface DocsProps extends ProviderProps {
   tree: SerializedPageTree;
   title: string;
   description?: string;
+  hideTitle?: boolean;
   toc: TOCItemType[];
 }
 
-export function Docs({ tree, title, description, toc, children, ...props }: DocsProps) {
+export function Docs({ tree, title, description, hideTitle, toc, children, ...props }: DocsProps) {
   const data = useFumadocsLoader({ tree });
 
   return (
     <Provider {...props}>
       <DocsLayout {...baseOptions(props.lang)} tree={data.tree}>
         <DocsPage toc={toc}>
-          <DocsTitle>{title}</DocsTitle>
+          {hideTitle ? <h1 className="sr-only">{title}</h1> : <DocsTitle>{title}</DocsTitle>}
           <DocsDescription>{description}</DocsDescription>
           {children}
         </DocsPage>

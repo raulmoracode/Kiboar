@@ -39,6 +39,7 @@ const provider = { lang, pathname: Astro.url.pathname, params: Astro.params };
     tree={pageTree}
     title={page.data.title}
     description={page.data.description}
+    hideTitle={page.slugs.length === 0}
     toc={toc}
   >
     <Content {...provider} />
