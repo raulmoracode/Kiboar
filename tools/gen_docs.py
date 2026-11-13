@@ -164,7 +164,7 @@ def library_cards(library, footprints, spanish):
         "",
         f"**{len(footprints)} {title.lower()}.**",
         "",
-        '<div class="not-prose my-6 grid gap-6 lg:grid-cols-2">',
+        '<div class="not-prose my-6 flex flex-col gap-6">',
     ]
     for row in footprints:
         name = row["name"]
