@@ -1042,6 +1042,17 @@
 			(justify mirror)
 		)
 	)
+	(fp_rect
+		(start -18.05 -9.15)
+		(end 15.5 9.15)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "e0dacc20-dc41-4c01-836b-d69efc551c62")
+	)
 	(pad "1" thru_hole rect
 		(at -13.97 7.62)
 		(size 1.7526 1.7526)

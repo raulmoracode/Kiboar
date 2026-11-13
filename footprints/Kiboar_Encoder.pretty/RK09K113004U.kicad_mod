@@ -74,6 +74,17 @@
 			)
 		)
 	)
+	(fp_rect
+		(start -6.75 -5.4)
+		(end 6.75 4.6)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "c39e4aa1-d157-4df2-98ee-58baa4af3eb6")
+	)
 	(pad "1" thru_hole circle
 		(at -2.5 3.5)
 		(size 1.7 1.7)

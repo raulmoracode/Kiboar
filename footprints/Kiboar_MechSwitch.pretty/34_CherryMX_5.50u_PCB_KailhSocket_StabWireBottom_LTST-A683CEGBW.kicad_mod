@@ -49,7 +49,7 @@
 			)
 		)
 	)
-	(attr through_hole)
+	(attr smd)
 	(duplicate_pad_numbers_are_jumpers no)
 	(fp_line
 		(start -7 -7)
@@ -230,6 +230,17 @@
 		)
 		(layer "F.Fab")
 		(uuid "dd0cc75e-f126-4d65-96e2-90e916023149")
+	)
+	(fp_rect
+		(start -45.15 -8.8)
+		(end 45.15 10.5)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "1ff5887d-80ae-41ec-bed1-ec8165fa31aa")
 	)
 	(pad "" np_thru_hole circle
 		(at -42.8625 -7)

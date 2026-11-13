@@ -49,6 +49,7 @@
 			)
 		)
 	)
+	(attr through_hole)
 	(duplicate_pad_numbers_are_jumpers no)
 	(fp_line
 		(start -9.095 -6.144)
@@ -373,6 +374,17 @@
 			)
 			(justify left top)
 		)
+	)
+	(fp_rect
+		(start -12.1 -6.4)
+		(end 17.1 12.4)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "0e12cad3-165a-4d60-9efb-ed71387ae5c5")
 	)
 	(pad "1" thru_hole oval
 		(at -7.6979 -4.7469)

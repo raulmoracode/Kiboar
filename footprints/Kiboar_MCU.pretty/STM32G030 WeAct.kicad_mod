@@ -49,6 +49,7 @@
 			)
 		)
 	)
+	(attr through_hole)
 	(duplicate_pad_numbers_are_jumpers no)
 	(fp_poly
 		(pts
@@ -5977,6 +5978,17 @@
 		(fill no)
 		(layer "B.SilkS")
 		(uuid "da66aa3a-5c68-4134-a928-77a93b05b2df")
+	)
+	(fp_rect
+		(start -9.35 -13.15)
+		(end 9.1 12.9)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "dab3fb8c-b7c5-4ee9-82a0-e750233d673e")
 	)
 	(pad "" np_thru_hole circle
 		(at -7.62 -11.43)

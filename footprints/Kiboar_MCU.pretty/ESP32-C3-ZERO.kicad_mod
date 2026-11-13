@@ -73,6 +73,7 @@
 			)
 		)
 	)
+	(attr smd)
 	(duplicate_pad_numbers_are_jumpers no)
 	(fp_line
 		(start -9 -11.75)
@@ -391,6 +392,17 @@
 			)
 			(justify left top)
 		)
+	)
+	(fp_rect
+		(start -10.25 -12)
+		(end 10.25 12)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "25b4c13a-6975-4ba8-a058-b646fdc26725")
 	)
 	(pad "1" smd rect
 		(at 9 -10.16)

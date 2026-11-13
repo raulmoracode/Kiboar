@@ -8,3 +8,7 @@ desktop.ini
 *.kicad_prl
 *-backups/
 _autosave-*
+
+# Python bytecode
+__pycache__/
+*.pyc

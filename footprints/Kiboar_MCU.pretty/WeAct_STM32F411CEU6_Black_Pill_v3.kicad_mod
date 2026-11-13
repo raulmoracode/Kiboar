@@ -104,6 +104,17 @@
 			)
 		)
 	)
+	(fp_rect
+		(start -10.65 -26.7)
+		(end 10.65 26.7)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "68df7ab1-2c48-4b84-be20-294375b83185")
+	)
 	(pad "1" thru_hole rect
 		(at -7.62 -24.13)
 		(size 1.6 1.6)

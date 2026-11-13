@@ -231,6 +231,17 @@
 		(layer "F.Fab")
 		(uuid "a14feb60-19fc-48fc-b878-d57ca200cf61")
 	)
+	(fp_rect
+		(start -68.95 -10.5)
+		(end 68.95 8.8)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "61d2e8ef-52f2-431f-9b4c-ba0c1919bfcf")
+	)
 	(pad "" np_thru_hole circle
 		(at -66.675 -8.24)
 		(size 4 4)

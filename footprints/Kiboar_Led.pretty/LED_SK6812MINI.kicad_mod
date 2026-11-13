@@ -58,7 +58,7 @@
 			(justify mirror)
 		)
 	)
-	(attr through_hole)
+	(attr smd)
 	(duplicate_pad_numbers_are_jumpers no)
 	(fp_poly
 		(pts
@@ -111,6 +111,17 @@
 		)
 		(layer "Edge.Cuts")
 		(uuid "e8a11234-7dc8-400d-8a8e-67da93d6faba")
+	)
+	(fp_rect
+		(start -3.65 -1.75)
+		(end 3.65 2.55)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "af9cb0fa-07a2-4d38-bc81-cabe3f7314cc")
 	)
 	(pad "1" smd roundrect
 		(at 2.7 -0.75)
