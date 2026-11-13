@@ -162,13 +162,6 @@ def library_cards(library, footprints, spanish):
     ]
     for row in footprints:
         name = row["name"]
-        info = (
-            ("Pads", cell(row["pads"])),
-            ("Attr", f'<code>{cell(row["attr"])}</code>'),
-            ("Courtyard", row["courtyard"]),
-            ("Modelo 3D", f'<code>{cell(row["model"])}</code>') if spanish else ("3D model", f'<code>{cell(row["model"])}</code>'),
-            ("Descripción", cell(row["description"]) or "—") if spanish else ("Description", cell(row["description"]) or "—"),
-        )
         lines += [
             '  <article class="rounded-xl border bg-fd-card p-4">',
             f'    <h2 class="text-lg font-semibold">{cell(name)}</h2>',
@@ -184,10 +177,29 @@ def library_cards(library, footprints, spanish):
             lines.append(
                 '      <div class="flex h-56 items-center justify-center rounded-lg border text-sm text-fd-muted-foreground">No 3D model</div>'
             )
-        lines += ['    </div>', '    <dl class="mt-4 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 text-sm">']
-        for label, value in info:
-            lines.append(f'      <dt class="text-fd-muted-foreground">{label}</dt><dd>{value}</dd>')
-        lines += ["    </dl>", "  </article>"]
+        headers = (
+            ("Pads", "Attr", "Courtyard", "Modelo 3D", "Descripción")
+            if spanish
+            else ("Pads", "Attr", "Courtyard", "3D model", "Description")
+        )
+        values = (
+            cell(row["pads"]),
+            f'<code>{cell(row["attr"])}</code>',
+            row["courtyard"],
+            f'<code>{cell(row["model"])}</code>',
+            cell(row["description"]) or "—",
+        )
+        lines += [
+            "    </div>",
+            '    <table class="mt-4 w-full border-collapse text-left text-sm">',
+            "      <thead><tr>",
+        ]
+        for header in headers:
+            lines.append(f'        <th class="border-b px-2 py-1 font-medium text-fd-muted-foreground">{header}</th>')
+        lines += ["      </tr></thead>", "      <tbody><tr>"]
+        for value in values:
+            lines.append(f'        <td class="border-b px-2 py-1">{value}</td>')
+        lines += ["      </tr></tbody>", "    </table>", "  </article>"]
     lines += ["</div>", ""]
     return "\n".join(lines)
 
