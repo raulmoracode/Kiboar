@@ -1,0 +1,10 @@
+# OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# KiCad local state and backups
+*.bak
+*.kicad_prl
+*-backups/
+_autosave-*

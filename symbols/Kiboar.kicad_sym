@@ -46408,7 +46408,7 @@
 				(justify left top)
 			)
 		)
-		(property "Footprint" "Kiboar_Pinheader:610106249121"
+		(property "Footprint" "Kiboar_PinHeader:610106249121"
 			(at 16.51 -94.92 0)
 			(effects
 				(font

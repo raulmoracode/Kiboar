@@ -313,7 +313,7 @@
 		(remove_unused_layers no)
 		(uuid "06fb3de3-e0c6-473d-9a28-1037ced45e64")
 	)
-	(model "${SCOTTOKEEBS_KICAD}/3dmodels/ScottoKeebs_Scotto.3dshapes/EC11.step"
+	(model "${KIBOAR_3DMODELS}/Kiboar_Scotto.3dshapes/EC11.step"
 		(offset
 			(xyz 0 0 0)
 		)
