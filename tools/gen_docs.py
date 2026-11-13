@@ -129,8 +129,21 @@ def plural(count, noun):
     return f"{count} {noun}" if count == 1 else f"{count} {noun}s"
 
 
+PREVIEW_OVERRIDES = {
+    "Kiboar_MechSwitch": "1_CherryMX_1.00u",
+    "Kiboar_CAD": "CAD_MX_1.00u",
+    "Kiboar_Cutout": "Cutout_MX_1.00u",
+}
+
+
 def library_preview(library):
     """Preview that shows the most geometry without dragging a huge SVG along."""
+    preferred = PREVIEW_OVERRIDES.get(library)
+    if preferred:
+        path = os.path.join(ROOT, "docs", "public", "footprints", library, preferred + ".svg")
+        if os.path.exists(path):
+            return f"/footprints/{library}/{quote(preferred)}.svg"
+
     assets = [
         path
         for path in glob.glob(os.path.join(ROOT, "docs", "public", "footprints", library, "*.svg"))
@@ -143,43 +156,98 @@ def library_preview(library):
     return f"/footprints/{library}/{quote(name)}.svg"
 
 
+FAMILY_GROUPS = (
+    (
+        ("Switches and keycaps", "Interruptores y teclas"),
+        ("Kiboar_MechSwitch", "Kiboar_CAD", "Kiboar_Switch", "Kiboar_Cutout"),
+    ),
+    (
+        ("Electronics", "Electrónica"),
+        ("Kiboar_MCU", "Kiboar_Display", "Kiboar_Led", "Kiboar_Buzzer", "Kiboar_Dip"),
+    ),
+    (
+        ("Connectors and power", "Conectores y energía"),
+        (
+            "Kiboar_USB-C",
+            "Kiboar_TRRS",
+            "Kiboar_BatteryHolder",
+            "Kiboar_BatteryJack",
+            "Kiboar_Ethernet",
+            "Kiboar_CBK",
+            "Kiboar_PinHeader",
+            "Kiboar_OtherConnectors",
+        ),
+    ),
+    (
+        ("Board and controls", "Placa y controles"),
+        (
+            "Kiboar_Button",
+            "Kiboar_Encoder",
+            "Kiboar_Joystick",
+            "Kiboar_MountingHole",
+            "Kiboar_Miscellaneous",
+            "Kiboar_Placeholder",
+        ),
+    ),
+)
+
+
+def family_card(library, count, prefix):
+    label = library[len("Kiboar_") :] if library.startswith("Kiboar_") else library
+    preview = library_preview(library)
+    image = (
+        f'<img loading="lazy" src="{preview}" alt="" class="max-h-full max-w-full dark:invert" />'
+        if preview
+        else ""
+    )
+    return (
+        f'  <a class="group flex flex-col rounded-xl border bg-fd-card p-3 no-underline transition hover:border-fd-primary/60"'
+        f' href="{prefix}/docs/libraries/{library}">'
+        f'<span class="flex h-24 items-center justify-center rounded-lg bg-white p-2 dark:bg-transparent">{image}</span>'
+        f'<span class="mt-3 text-sm font-medium text-fd-foreground">{label}</span>'
+        f'<span class="text-xs text-fd-muted-foreground">{plural(count, "footprint")}</span>'
+        "</a>"
+    )
+
+
 def home_block(symbols, library_counts, spanish):
-    """Stat tiles and one card per footprint library, for the home page."""
+    """Stat strip and the libraries grouped by what they are for."""
     counts = (len(symbols), sum(library_counts.values()), len(library_counts), model_count())
     prefix = "/es" if spanish else ""
 
-    lines = ['<div class="not-prose my-6 grid grid-cols-2 gap-3 sm:grid-cols-4">']
+    lines = ['<div class="not-prose mt-10 flex flex-wrap items-baseline gap-x-8 gap-y-2">']
     for (english, translated), count in zip(STAT_LABELS, counts):
         label = translated if spanish else english
         lines.append(
-            '  <div class="rounded-xl border bg-fd-card p-4">'
-            f'<p class="text-3xl font-semibold tracking-tight text-fd-foreground">{count}</p>'
-            f'<p class="mt-1 text-xs uppercase tracking-wide text-fd-muted-foreground">{label}</p>'
-            "</div>"
-        )
-    lines += [
-        "</div>",
-        "",
-        '<div class="not-prose my-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">',
-    ]
-
-    for library in sorted(library_counts):
-        label = library[len("Kiboar_") :] if library.startswith("Kiboar_") else library
-        preview = library_preview(library)
-        image = (
-            f'<img loading="lazy" src="{preview}" alt="" class="max-h-full max-w-full dark:invert" />'
-            if preview
-            else ""
-        )
-        lines.append(
-            f'  <a class="group flex flex-col rounded-xl border bg-fd-card p-3 no-underline transition hover:border-fd-primary/60"'
-            f' href="{prefix}/docs/libraries/{library}">'
-            f'<span class="flex h-24 items-center justify-center rounded-lg bg-white p-2 dark:bg-transparent">{image}</span>'
-            f'<span class="mt-3 text-sm font-medium text-fd-foreground">{label}</span>'
-            f'<span class="text-xs text-fd-muted-foreground">{plural(library_counts[library], "footprint")}</span>'
-            "</a>"
+            f'  <span class="text-sm text-fd-muted-foreground">'
+            f'<strong class="mr-1.5 text-2xl font-semibold tracking-tight text-fd-foreground">{count}</strong> '
+            f"{label}</span>"
         )
     lines.append("</div>")
+
+    placed = set()
+    groups = []
+    for (english, translated), members in FAMILY_GROUPS:
+        present = [library for library in members if library in library_counts]
+        placed.update(present)
+        if present:
+            groups.append(((english, translated), present))
+
+    leftover = sorted(set(library_counts) - placed)
+    if leftover:
+        groups.append((("More", "Más"), leftover))
+
+    for (english, translated), members in groups:
+        heading = translated if spanish else english
+        lines += [
+            "",
+            f'<h2 class="not-prose mt-10 mb-3 text-xs font-semibold uppercase tracking-wider text-fd-muted-foreground">{heading}</h2>',
+            '<div class="not-prose grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">',
+        ]
+        for library in members:
+            lines.append(family_card(library, library_counts[library], prefix))
+        lines.append("</div>")
+
     return "\n".join(lines)
 
 
