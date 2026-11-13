@@ -66,5 +66,5 @@ Vercel project settings:
 | Output Directory | `dist` |
 | Domain | `kiboar.raulmoracode.com` |
 
-No `base` path is used: the landing is `/` and the docs are `/docs` and
-`/es/docs` by route. `vercel.json` pins the build settings.
+No `base` path is used: the docs are `/docs` and `/es/docs` by route, and
+there is no page at `/`. `vercel.json` pins the build settings.
