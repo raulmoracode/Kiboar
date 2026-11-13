@@ -1,0 +1,137 @@
+# NOTICE
+
+Kiboar, copyright (c) 2025 Raúl Mora.
+
+`LICENSE` (MIT) covers the original work in this repository: the symbols,
+footprints and models designed here, the scripts under `tools/`, and the
+documentation.
+
+It does not cover third-party CAD data collected from other projects. Those
+files keep the licence of their source, listed below. This is a provenance
+record built from evidence inside the files and from the upstream licences
+cited; it is not legal advice.
+
+## Third-party origins
+
+### ScottoKeebs — CC BY-NC-SA 4.0, non-commercial
+
+Files:
+
+- `3dmodels/Kiboar_MechSwitch.3dshapes/Kimora_CAD.3dshapes/*_CAD.step` —
+  the sixteen keycap/plate models sized `MX_1.00u` … `MX_10.00u` and
+  `Choc_1.00u` … `Choc_1.75u`.
+- `3dmodels/Kiboar_MCU.3dshapes/Nice_Nano_V2.step`,
+  `Nice_Nano_V2_Flipped.step`, `RP2040_Pro_Micro.step`,
+  `RP2040_Pro_Micro_Flipped.step`, `RP2040_Zero.step`,
+  `RP2040_Zero_Flipped.step`, `RP2040_Zero_Flipped_Socketed.step`.
+- `3dmodels/Kiboar_Components.3dshapes/Button_MJTP1243.step`,
+  `Button_MJTP1250.step`, `USB_C_HRO_TYPE-C-31-M-14.step`.
+- `3dmodels/Kiboar_Scotto.3dshapes/Standoff.step`.
+- `footprints/Kiboar_Encoder.pretty/Encoder_EC11_MX_Combo.kicad_mod`,
+  `footprints/Kiboar_MountingHole.pretty/Standoff_M2x6mm.kicad_mod` and
+  `Standoff_M2x8mm.kicad_mod`.
+
+Evidence: the STEP `FILE_NAME` header names `jscotto` as author in every model
+listed above, and the three footprints refer to the Scotto libraries. Commit
+`77e730d` replaced `${SCOTTOKEEBS_KICAD}` references with these vendored files.
+
+Source: <https://github.com/joe-scotto/scottokeebs> (`Extras/ScottoKicad`).
+Licence: the repository's `LICENSE.md` is CC BY-NC-SA 4.0. The ScottoKicad
+README says to refer to each library and that "most are Creative Commons
+CC-BY-SA 4.0", so the per-file licence is not uniform; the conservative reading
+applied here is CC BY-NC-SA 4.0.
+
+**Verdict: not MIT-compatible.** The licence forbids commercial use and requires
+ShareAlike on derivative library files. These files cannot be used in a
+commercial product, or distributed under MIT, without permission from the
+author.
+
+### SnapEDA / SnapMagic — CC BY-SA 4.0 with Design Exception 1.0
+
+Files: the ten symbols that carry a `SnapEDA_Link` property.
+
+- `Button_EVPBB2A9B000`
+- `Button_TL3315NF160QG`
+- `CBK_L717HDE15PD1CH4F`
+- `Ethernet_6339191-5`
+- `PinHeader_61000621121`
+- `PinHeader_61001021121`
+- `PinHeader_61300621021`
+- `PinHeader_61300621121`
+- `PinHeader_61301021021`
+- `PinHeader_61301021121`
+
+Source: <https://www.snapeda.com/about/FAQ/> and
+<https://www.snapeda.com/about/terms/>.
+
+**Verdict: not MIT-compatible.** The Design Exception lets the files be used
+inside a board design, and the board conveyed under any licence, but the files
+themselves stay CC BY-SA 4.0: attribution to SnapEDA and the original author is
+required, and redistribution is capped at ten Design Files per location without
+written permission. This repository is exactly at that cap; an eleventh imported
+file needs permission.
+
+### Keyswitch KiCad Library — MIT OR CC BY-SA 4.0
+
+Files: the switch, hotswap and stabilizer models under
+`3dmodels/Kiboar_MechSwitch.3dshapes/` (except the Scotto `*_CAD.step` set
+above), `3dmodels/Kiboar_Cutout.3dshapes/` and
+`3dmodels/Kiboar_Stabilizer.3dshapes/`, plus the footprints under
+`footprints/Kiboar_MechSwitch.pretty/`, `footprints/Kiboar_Cutout.pretty/` and
+`footprints/Kiboar_Stabilizer.pretty/` where present.
+
+Evidence: these files are byte-identical to files in the upstream library —
+verified with SHA-256 for `Choc_V1`, `MX_PCB`, `MX_Plate`, `Hotswap_MX`,
+`Stabilizer_MX_2.00u` and `Stabilizer_MX_6.25u` — and the STEP headers name
+`kicad StepUp` with paths under `Switch_Keyboard_*`.
+
+Source: <https://github.com/kiswitch/keyswitch-kicad-library>.
+Licence: dual MIT / CC BY-SA 4.0 (`LICENSE-MIT` and `LICENSE-CC-BY-SA`).
+
+**Verdict: MIT-compatible** when attributed. Use the MIT option.
+
+### KiCad official libraries — CC BY-SA 4.0 with exception
+
+Not redistributed. Kiboar references the user's installed KiCad models through
+`${KICAD10_3DMODEL_DIR}`, and no file in this repository has been identified as
+a KiCad library file. The KiCad exception does not apply to redistributing
+library collections, so any footprint later copied from KiCad would have to be
+treated as CC BY-SA 4.0.
+
+Source: <https://www.kicad.org/libraries/license/>.
+
+### Manufacturer CAD
+
+Many models and footprints name a component vendor (Alps, Würth, Molex, TE
+Connectivity, Kailh, E-Switch…). These come from the manufacturer's CAD
+downloads. Vendor terms commonly allow the model to be used in a design but do
+not grant redistribution as a library. They were not verified vendor by vendor;
+treat them as "used by permission for design work" until each vendor's terms
+are checked.
+
+## Files with no recorded provenance
+
+For most of the remaining models the `FILE_NAME` author field holds a CAD tool
+name (`Author`, `SwSTEP 2.0`, `kicad StepUp`, `ST-DEVELOPER …`, `Unknown`), so
+the origin cannot be established from the repository. Symbols without a
+`SnapEDA_Link` and footprints without an in-file reference are in the same
+position.
+
+Those files are listed as **unknown**, not assumed MIT-clean. They cannot be
+relicensed until their source is known.
+
+## Consequences
+
+- This repository is a **mixed-licence collection**. `LICENSE` (MIT) describes
+  the original work only.
+- The ScottoKeebs content under CC BY-NC-SA 4.0 **blocks commercial
+  distribution** of the collection as it stands.
+- Before a v1.0.0 release: replace the Scotto models and footprints with
+  original work or obtain permission; keep the SnapEDA and kiswitch attributions
+  with the files; decide what to do with the unknown-provenance set.
+
+## Reporting
+
+If you own content in this repository and want it removed or credited
+differently, please open an issue at
+<https://github.com/raulmoracode/Kiboar/issues>.
