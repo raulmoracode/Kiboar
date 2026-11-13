@@ -167,14 +167,14 @@ def home_block(symbols, library_counts, spanish):
         label = library[len("Kiboar_") :] if library.startswith("Kiboar_") else library
         preview = library_preview(library)
         image = (
-            f'<img loading="lazy" src="{preview}" alt="" class="max-h-full max-w-full" />'
+            f'<img loading="lazy" src="{preview}" alt="" class="max-h-full max-w-full dark:invert" />'
             if preview
             else ""
         )
         lines.append(
             f'  <a class="group flex flex-col rounded-xl border bg-fd-card p-3 no-underline transition hover:border-fd-primary/60"'
             f' href="{prefix}/docs/libraries/{library}">'
-            f'<span class="flex h-24 items-center justify-center rounded-lg bg-white p-2">{image}</span>'
+            f'<span class="flex h-24 items-center justify-center rounded-lg bg-white p-2 dark:bg-transparent">{image}</span>'
             f'<span class="mt-3 text-sm font-medium text-fd-foreground">{label}</span>'
             f'<span class="text-xs text-fd-muted-foreground">{plural(library_counts[library], "footprint")}</span>'
             "</a>"
