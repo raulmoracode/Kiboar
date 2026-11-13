@@ -29,6 +29,11 @@ python3 tools/gen_docs.py --check  # fail when they are stale
 The generator lists every footprint of every library and every symbol, so the
 docs cannot silently miss a component.
 
+The two home pages (`content/docs/index.mdx` and `index.es.mdx`) are hand-written
+except for the block between the `{/* generated:start */}` and
+`{/* generated:end */}` markers: the stat tiles and the family grid are
+generated, so their counts and previews follow the library.
+
 ## Footprint previews
 
 Each component card shows the footprint as an SVG (F.Cu, F.SilkS, F.CrtYd,

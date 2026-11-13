@@ -107,6 +107,92 @@ def cell(value):
     return " ".join(text.split())
 
 
+HOME_START = "{/* generated:start */}"
+HOME_END = "{/* generated:end */}"
+
+STAT_LABELS = (
+    ("Symbols", "Símbolos"),
+    ("Footprints", "Footprints"),
+    ("Libraries", "Librerías"),
+    ("3D models", "Modelos 3D"),
+)
+
+
+def model_count():
+    paths = glob.glob(os.path.join(ROOT, "3dmodels", "*.3dshapes", "**", "*"), recursive=True)
+    return len(
+        [path for path in paths if os.path.splitext(path)[1].lower() in (".step", ".stp", ".wrl")]
+    )
+
+
+def plural(count, noun):
+    return f"{count} {noun}" if count == 1 else f"{count} {noun}s"
+
+
+def library_preview(library):
+    """Preview that shows the most geometry without dragging a huge SVG along."""
+    assets = [
+        path
+        for path in glob.glob(os.path.join(ROOT, "docs", "public", "footprints", library, "*.svg"))
+        if os.path.getsize(path) <= 30_000
+    ]
+    if not assets:
+        return None
+    best = max(assets, key=os.path.getsize)
+    name = os.path.basename(best)[: -len(".svg")]
+    return f"/footprints/{library}/{quote(name)}.svg"
+
+
+def home_block(symbols, library_counts, spanish):
+    """Stat tiles and one card per footprint library, for the home page."""
+    counts = (len(symbols), sum(library_counts.values()), len(library_counts), model_count())
+    prefix = "/es" if spanish else ""
+
+    lines = ['<div class="not-prose my-6 grid grid-cols-2 gap-3 sm:grid-cols-4">']
+    for (english, translated), count in zip(STAT_LABELS, counts):
+        label = translated if spanish else english
+        lines.append(
+            '  <div class="rounded-xl border bg-fd-card p-4">'
+            f'<p class="text-3xl font-semibold tracking-tight text-fd-foreground">{count}</p>'
+            f'<p class="mt-1 text-xs uppercase tracking-wide text-fd-muted-foreground">{label}</p>'
+            "</div>"
+        )
+    lines += [
+        "</div>",
+        "",
+        '<div class="not-prose my-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">',
+    ]
+
+    for library in sorted(library_counts):
+        label = library[len("Kiboar_") :] if library.startswith("Kiboar_") else library
+        preview = library_preview(library)
+        image = (
+            f'<img loading="lazy" src="{preview}" alt="" class="max-h-full max-w-full" />'
+            if preview
+            else ""
+        )
+        lines.append(
+            f'  <a class="group flex flex-col rounded-xl border bg-fd-card p-3 no-underline transition hover:border-fd-primary/60"'
+            f' href="{prefix}/docs/libraries/{library}">'
+            f'<span class="flex h-24 items-center justify-center rounded-lg bg-white p-2">{image}</span>'
+            f'<span class="mt-3 text-sm font-medium text-fd-foreground">{label}</span>'
+            f'<span class="text-xs text-fd-muted-foreground">{plural(library_counts[library], "footprint")}</span>'
+            "</a>"
+        )
+    lines.append("</div>")
+    return "\n".join(lines)
+
+
+def home_page(name, symbols, library_counts, spanish):
+    """Rewrite the generated block of a home page, keeping the prose around it."""
+    path = os.path.join(DOCS, name)
+    text = open(path, encoding="utf-8").read()
+    head, rest = text.split(HOME_START, 1)
+    _, tail = rest.split(HOME_END, 1)
+    block = home_block(symbols, library_counts, spanish)
+    return head + HOME_START + "\n" + block + "\n" + HOME_END + tail
+
+
 def property_value(block, name):
     for prop in sexpr.children(block, "property"):
         if len(prop) > 2 and sexpr.unquote(prop[1]) == name:
@@ -305,7 +391,6 @@ def generated_files():
 
     files["symbols.mdx"] = symbols_page(symbols, False)
     files["symbols.es.mdx"] = symbols_page(symbols, True)
-
     library_pages = []
     for library in libraries:
         footprints = [
@@ -322,6 +407,8 @@ def generated_files():
         library: len(glob.glob(os.path.join(ROOT, "footprints", library + ".pretty", "*.kicad_mod")))
         for library in libraries
     }
+    files["index.mdx"] = home_page("index.mdx", symbols, library_counts, False)
+    files["index.es.mdx"] = home_page("index.es.mdx", symbols, library_counts, True)
     files["libraries/meta.json"] = meta("Libraries", library_pages)
     files["libraries/meta.es.json"] = meta("Librerías", library_pages)
     files["meta.json"] = meta("Documentation", ["index", "install", "usage", "symbols", "libraries", "contributing", "licensing"])
