@@ -1,67 +1,78 @@
-name: "Component Request"
-description: "Request a new component to be added to the library"
-title: "[Component Request] - "
-labels: ["new component"]
-assignees: ["SampleAssignee"]
-
+name: Component request
+description: Ask for a component to be added to the library
+title: "feat: "
+labels: ["type:feat"]
 body:
-  - type: input
-    id: brand
+  - type: markdown
     attributes:
-      label: "Brand"
-      description: "Select the brand of the component"
+      value: |
+        A request is much easier to act on with a manufacturer part number and
+        a datasheet. If you can also supply a footprint, symbol or 3D model,
+        say so below.
+
+  - type: input
+    id: manufacturer
+    attributes:
+      label: Manufacturer
+      placeholder: "Alps Alpine"
     validations:
       required: true
 
   - type: input
-    id: component_type
+    id: mpn
     attributes:
-      label: "Component type"
-      description: "Type of your component"
+      label: Manufacturer part number
+      placeholder: "SKTHBAE010"
     validations:
       required: true
 
   - type: input
-    id: model_name
+    id: kind
     attributes:
-      label: "Model Name"
-      description: "Model Name of the component"
-      placeholder: "e.g., LM358"
+      label: Component type
+      description: Switch, encoder, connector, controller board, LED, other
+      placeholder: "Tactile switch"
     validations:
       required: true
 
   - type: input
-    id: purchase_link
+    id: datasheet
     attributes:
-      label: "Purchase link"
-      description: "Purchase link of the component from (Digi-Key, Mouser, etc.)"
-      placeholder: "https://www.digikey.com/example"
+      label: Datasheet URL
+      placeholder: "https://www.alpsalpine.com/e/products/detail/SKTHBAE010/"
     validations:
       required: true
 
   - type: input
-    id: pdf_link
+    id: purchase
     attributes:
-      label: "PDF link"
-      description: "Datasheet PDF link of the component"
-      placeholder: "https://www.mouser.com/example.pdf"
+      label: Purchase link
+      description: A distributor page with stock, for verification
+      placeholder: "https://www.mouser.com/ProductDetail/..."
     validations:
       required: false
 
   - type: input
-    id: 3d_link
+    id: model
     attributes:
-      label: "3D model link"
-      description: "3D model file link of the component"
-      placeholder: "https://www.example.com/3dmodel"
+      label: 3D model link
+      description: STEP or WRL from the manufacturer, if one exists
+      placeholder: "https://www.alpsalpine.com/..."
     validations:
       required: false
 
   - type: textarea
     id: reason
     attributes:
-      label: "Why do you want to add this component?"
-      description: "Explain why this component should be included"
-      placeholder: "This component is commonly used in keyboards"
+      label: Why should this be in Kiboar?
+      description: What it is used for on a keyboard and what it replaces
     validations:
       required: true
+
+  - type: textarea
+    id: offer
+    attributes:
+      label: Can you contribute the files?
+      description: Footprint, symbol, 3D model or the dimensions from the datasheet
+    validations:
+      required: false

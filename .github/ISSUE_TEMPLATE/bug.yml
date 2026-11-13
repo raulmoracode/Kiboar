@@ -1,60 +1,72 @@
-name: "Bug Report"
-description: "Report a bug in the project"
-title: "[BUG] - "
-labels: ["bug"]
-assignees: ["SampleAssignee"]
-
+name: Bug report
+description: Report a problem with a symbol, footprint, 3D model or the tools
+title: "fix: "
+labels: ["type:fix"]
 body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a problem. Please check the
+        existing issues first; if one already describes it, add your details
+        there instead.
+
   - type: input
-    id: summary
+    id: kicad_version
     attributes:
-      label: "Summary"
-      description: "Briefly summarize the bug"
-      placeholder: "The application crashes when clicking the save button"
-    validations:
-      required: true
-
-  - type: textarea
-    id: steps_to_reproduce
-    attributes:
-      label: "Steps to reproduce"
-      description: "Provide a step-by-step guide to reproduce the bug"
-      placeholder: "1. Go to settings\n2. Click on save\n3. The app crashes"
-    validations:
-      required: true
-
-  - type: textarea
-    id: expected_behavior
-    attributes:
-      label: "Expected behavior"
-      description: "What should happen instead?"
-      placeholder: "The app should save the settings without crashing"
-    validations:
-      required: true
-
-  - type: textarea
-    id: actual_behavior
-    attributes:
-      label: "Actual behavior"
-      description: "Describe what actually happens"
-      placeholder: "The app crashes with a fatal error message"
+      label: KiCad version
+      description: Help → About KiCad → Copy version information
+      placeholder: "10.0.8"
     validations:
       required: true
 
   - type: input
-    id: environment
+    id: system
     attributes:
-      label: "Environment"
-      description: "Provide details about the environment where the bug occurs"
-      placeholder: "OS: Windows 10, Browser: Chrome 112, App version: 1.0.0"
+      label: Operating system
+      placeholder: "macOS 15.6, Windows 11, Ubuntu 24.04"
+    validations:
+      required: true
+
+  - type: input
+    id: item
+    attributes:
+      label: Library and item
+      description: The footprint or symbol name as it appears in the library
+      placeholder: "Kiboar_MechSwitch / EG1215AA, or SWITCH_EG1215AA"
     validations:
       required: true
 
   - type: textarea
-    id: additional_context
+    id: steps
     attributes:
-      label: "Additional context"
-      description: "Add any other relevant information, logs, or screenshots"
-      placeholder: "Error logs from the console, network requests, etc."
+      label: Steps to reproduce
+      description: What you did, in order
+      placeholder: |
+        1. Open the PCB editor with a board using Kiboar
+        2. Place Kiboar_MechSwitch:EG1215AA
+        3. Run the design rules checker
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: What actually happens
+      description: Include the exact DRC or ERC message when there is one
+    validations:
+      required: true
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Screenshots or files
+      description: Drag in images, a minimal board or the text of a log
     validations:
       required: false
