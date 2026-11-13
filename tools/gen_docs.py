@@ -215,12 +215,14 @@ def home_block(symbols, library_counts, spanish):
     counts = (len(symbols), sum(library_counts.values()), len(library_counts), model_count())
     prefix = "/es" if spanish else ""
 
-    lines = ['<div class="not-prose mt-10 flex flex-wrap items-baseline gap-x-8 gap-y-2">']
+    lines = [
+        '<div class="not-prose mt-12 flex flex-wrap items-baseline gap-x-8 gap-y-3 border-t pt-6">',
+    ]
     for (english, translated), count in zip(STAT_LABELS, counts):
         label = translated if spanish else english
         lines.append(
-            f'  <span class="text-sm text-fd-muted-foreground">'
-            f'<strong class="mr-1.5 text-2xl font-semibold tracking-tight text-fd-foreground">{count}</strong> '
+            f'  <span class="text-xs uppercase tracking-wider text-fd-muted-foreground">'
+            f'<strong class="mr-2 text-xl font-semibold tracking-tight text-fd-foreground">{count}</strong>'
             f"{label}</span>"
         )
     lines.append("</div>")
