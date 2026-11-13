@@ -1,0 +1,66 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: Lint library
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check library rules
+        run: python3 tools/lint.py
+
+  kicad:
+    name: KiCad 10 format and render
+    runs-on: ubuntu-latest
+    container:
+      image: kicad/kicad:10.0.8
+      options: --user root
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: KiCad version
+        run: kicad-cli version
+
+      - name: Library is saved in the current format
+        run: |
+          work=$(mktemp -d)
+          cp -R footprints "$work/"
+          cp symbols/Kiboar.kicad_sym "$work/symbols.kicad_sym"
+
+          kicad-cli sym upgrade "$work/symbols.kicad_sym"
+          for library in "$work"/footprints/*.pretty; do
+            kicad-cli fp upgrade "$library"
+          done
+
+          status=0
+          diff -r footprints "$work/footprints" || status=1
+          cmp -s symbols/Kiboar.kicad_sym "$work/symbols.kicad_sym" || status=1
+          if [ "$status" -ne 0 ]; then
+            echo "::error::KiCad would upgrade the library; commit the upgraded files"
+            exit 1
+          fi
+
+      - name: Render a sample footprint and symbol
+        run: |
+          mkdir -p artifacts
+          kicad-cli fp export svg -o artifacts footprints/Kiboar_Switch.pretty --fp EG1215AA
+          kicad-cli sym export svg -o artifacts symbols/Kiboar.kicad_sym --symbol SWITCH_EG1215AA
+
+      - name: Upload the sample SVGs
+        uses: actions/upload-artifact@v4
+        with:
+          name: sample-svg
+          path: artifacts/
+          if-no-files-found: error

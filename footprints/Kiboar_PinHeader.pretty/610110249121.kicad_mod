@@ -221,7 +221,7 @@
 		(uuid "dbdd70a9-85df-4c9b-808a-b4abeed64d86")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_Pinheader.3dshapes/610110249121.stp"
+	(model "${KIBOAR_3DMODELS}/Kiboar_PinHeader.3dshapes/610110249121.stp"
 		(offset
 			(xyz 0 1.42 2.5)
 		)
