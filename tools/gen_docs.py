@@ -162,7 +162,6 @@ def library_cards(library, footprints, spanish):
     ]
     for row in footprints:
         name = row["name"]
-        link = f"../components/{library}/{quote(name)}"
         info = (
             ("Pads", cell(row["pads"])),
             ("Attr", f'<code>{cell(row["attr"])}</code>'),
@@ -172,7 +171,7 @@ def library_cards(library, footprints, spanish):
         )
         lines += [
             '  <article class="rounded-xl border bg-fd-card p-4">',
-            f'    <h2 class="text-lg font-semibold"><a class="hover:underline" href="{link}">{cell(name)}</a></h2>',
+            f'    <h2 class="text-lg font-semibold">{cell(name)}</h2>',
             '    <div class="mt-4 grid gap-4 sm:grid-cols-2">',
             f'      <img loading="lazy" src="/footprints/{library}/{quote(name)}.svg" alt="{cell(name)} footprint" class="w-full rounded-lg border bg-white p-2" />',
         ]
@@ -213,9 +212,8 @@ def library_page(library, footprints, spanish):
         "| --- | --- | --- | --- | --- | --- |",
     ]
     for row in footprints:
-        link = f"../components/{library}/{quote(row['name'])}"
         lines.append(
-            f"| [`{cell(row['name'])}`]({link}) | {cell(row['pads'])} | `{cell(row['attr'])}` | {row['courtyard']} | "
+            f"| `{cell(row['name'])}` | {cell(row['pads'])} | `{cell(row['attr'])}` | {row['courtyard']} | "
             f"`{cell(row['model'])}` | {cell(row['description'])} |"
         )
     return "\n".join(lines) + "\n"
@@ -276,59 +274,6 @@ def symbols_page(symbols, spanish):
                 f"| `{cell(symbol['name'])}` | `{cell(symbol['reference'])}` | {cell(symbol['manufacturer'])} | "
                 f"`{cell(symbol['mpn']) or '—'}` | {cell(symbol['description'])} | {datasheet} | `{cell(footprint)}` |"
             )
-    return "\n".join(lines) + "\n"
-
-
-def component_page(library, row, spanish):
-    name = row["name"]
-    title = name
-    description = (
-        f"Footprint de {library}." if spanish else f"Footprint in {library}."
-    )
-    back = f"../../libraries/{library}"
-    back_text = "← Volver a " + library if spanish else "← Back to " + library
-    labels = (
-        ("Pads", "Attr", "Courtyard", "Modelos 3D", "Descripción", "Footprint (2D)", "Modelo 3D")
-        if spanish
-        else ("Pads", "Attr", "Courtyard", "3D models", "Description", "Footprint (2D)", "3D model")
-    )
-    lines = [
-        "---",
-        f'title: "{name}"',
-        f'description: "{description}"',
-        "---",
-        "",
-        f'<div class="not-prose my-6 grid gap-6 md:grid-cols-2">',
-        "  <figure>",
-        f'    <img src="/footprints/{library}/{quote(name)}.svg" alt="{name} footprint" class="w-full rounded-lg border bg-white p-4" />',
-        f'    <figcaption class="mt-2 text-sm text-fd-muted-foreground">{labels[5]}</figcaption>',
-        "  </figure>",
-        "  <figure>",
-    ]
-    if row["models"]:
-        for uri in row["models"]:
-            rel = uri.split("/", 1)[1]
-            raw = f"https://raw.githubusercontent.com/raulmoracode/Kiboar/main/3dmodels/{quote(rel)}"
-            lines.append(f'    <kiboar-model url="{raw}"></kiboar-model>')
-        lines.append(
-            f'    <figcaption class="mt-2 text-sm text-fd-muted-foreground">{labels[6]}: {cell(row["model"])}</figcaption>'
-        )
-    else:
-        lines.append(
-            f'    <div class="flex h-80 items-center justify-center rounded-lg border text-sm text-fd-muted-foreground">No 3D model</div>'
-        )
-    lines += [
-        "  </figure>",
-        "</div>",
-        "",
-        f"| {labels[0]} | {labels[1]} | {labels[2]} | {labels[3]} |",
-        "| --- | --- | --- | --- |",
-        f"| {cell(row['pads'])} | `{cell(row['attr'])}` | {row['courtyard']} | `{cell(row['model'])}` |",
-        "",
-        f"**{labels[4]}:** {cell(row['description']) or '—'}",
-        "",
-        f"[{back_text}]({back})",
-    ]
     return "\n".join(lines) + "\n"
 
 
@@ -393,19 +338,10 @@ def generated_files():
     }
     files["libraries/index.mdx"] = libraries_index(libraries, library_counts, False)
     files["libraries/index.es.mdx"] = libraries_index(libraries, library_counts, True)
-    for library in libraries:
-        for path in sorted(
-            glob.glob(os.path.join(ROOT, "footprints", library + ".pretty", "*.kicad_mod"))
-        ):
-            row = footprint_rows(path)
-            files[f"components/{library}/{row['name']}.mdx"] = component_page(library, row, False)
-            files[f"components/{library}/{row['name']}.es.mdx"] = component_page(library, row, True)
-    files["components/meta.json"] = meta("Components", [])
-    files["components/meta.es.json"] = meta("Componentes", [])
     files["libraries/meta.json"] = meta("Libraries", ["index", *library_pages])
     files["libraries/meta.es.json"] = meta("Librerías", ["index", *library_pages])
-    files["meta.json"] = meta("Documentation", ["index", "install", "usage", "symbols", "libraries", "!components", "contributing", "licensing"])
-    files["meta.es.json"] = meta("Documentación", ["index", "install", "usage", "symbols", "libraries", "!components", "contributing", "licensing"])
+    files["meta.json"] = meta("Documentation", ["index", "install", "usage", "symbols", "libraries", "contributing", "licensing"])
+    files["meta.es.json"] = meta("Documentación", ["index", "install", "usage", "symbols", "libraries", "contributing", "licensing"])
     return files
 
 
@@ -427,13 +363,12 @@ def main():
                     handle.write(content)
 
     missing = []
-    for name in files:
-        if not name.startswith("components/") or not name.endswith(".mdx") or name.endswith(".es.mdx"):
-            continue
-        library, component = name[len("components/") : -len(".mdx")].split("/", 1)
-        asset = os.path.join(ROOT, "docs", "public", "footprints", library, component + ".svg")
+    for path in glob.glob(os.path.join(ROOT, "footprints", "*.pretty", "*.kicad_mod")):
+        library = os.path.basename(os.path.dirname(path))[: -len(".pretty")]
+        name = os.path.basename(path)[: -len(".kicad_mod")]
+        asset = os.path.join(ROOT, "docs", "public", "footprints", library, name + ".svg")
         if not os.path.exists(asset):
-            missing.append(f"missing asset: docs/public/footprints/{library}/{component}.svg")
+            missing.append(f"missing asset: docs/public/footprints/{library}/{name}.svg")
 
     if args.check:
         for name in stale:

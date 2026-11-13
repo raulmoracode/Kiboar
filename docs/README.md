@@ -31,7 +31,7 @@ docs cannot silently miss a component.
 
 ## Footprint previews
 
-Each component page shows the footprint as an SVG (F.Cu, F.SilkS, F.CrtYd,
+Each component card shows the footprint as an SVG (F.Cu, F.SilkS, F.CrtYd,
 F.Fab) and the STEP model in an interactive viewer. The SVGs are committed
 under `public/footprints/`; regenerate them after changing a footprint:
 
