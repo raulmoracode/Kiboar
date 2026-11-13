@@ -2213,7 +2213,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "JST PH battery connector S2B-PH-K-S (LF)(SN)"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2335,7 +2335,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "JST PH battery connector S2B-PH-SM4-TB(LF)(SN)"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2505,7 +2505,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "JST PH battery connector pins"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2644,7 +2644,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Tactile switch 434123025816"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2818,7 +2818,7 @@
 				(justify bottom)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://omronfs.omron.com/en_US/ecb/products/pdf/en-b3u.pdf"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2829,7 +2829,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Tactile switch B3U-1000P"
 			(at -0.762 7.366 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3002,7 +3002,7 @@
 				(justify left top)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Tactile switch B3U-3000P-B"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3220,7 +3220,7 @@
 				(justify left top)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Tactile switch EVP-AEDB2A"
 			(at -10.16 14.986 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3488,7 +3488,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Tactile switch EVP-AKE31A"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4059,7 +4059,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Tactile switch EVQ-9P701P"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4314,7 +4314,7 @@
 				(justify left top)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Tactile switch EVQ-PUA02K"
 			(at 14.986 12.7 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4568,7 +4568,7 @@
 				(justify left top)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Tactile switch PTS647SM38SMTR2LFS"
 			(at -10.16 1.27 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4823,7 +4823,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Tactile switch PTS820J25KSMTRLFS"
 			(at -12.7 2.54 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5242,7 +5242,7 @@
 				(justify left top)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Tactile switch SKHHAKA010"
 			(at -6.096 11.684 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5484,7 +5484,7 @@
 				(justify left top)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Tactile switch SKHHLNA010"
 			(at -9.398 11.938 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5739,7 +5739,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Tactile switch SKHLAAA010"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5922,7 +5922,7 @@
 				(justify left top)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Tactile switch SKHLLCA010"
 			(at 1.016 11.43 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6154,7 +6154,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Tactile switch SKQGAFE010"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6410,7 +6410,7 @@
 				(justify left top)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Tactile switch SKQYABE010"
 			(at -11.43 1.27 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6628,7 +6628,7 @@
 				(justify left top)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Tactile switch SKRKAEE020"
 			(at -7.62 14.732 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6822,7 +6822,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Tactile switch SKRPADE010"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7055,7 +7055,7 @@
 				(justify left top)
 			)
 		)
-		(property "Datasheet" "https://componentsearchengine.com/Datasheets/1/SKTHAHE010.pdf"
+		(property "Datasheet" "https://tech.alpsalpine.com/cms.media/product_spec_skthbae010_en_f1b9e32850.pdf"
 			(at 16.51 -194.92 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7067,7 +7067,7 @@
 				(justify left top)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Tactile switch SKTHBAE010"
 			(at -10.16 1.27 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7614,7 +7614,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Tactile switch TL3336AF160Q"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12598,7 +12598,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "OLED display module 128x32"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12771,7 +12771,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "OLED display module 128x64"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12941,7 +12941,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "nice!view e-paper display module"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -13133,7 +13133,7 @@
 				(justify left top)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Rotary encoder EC10E1260507"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -13381,7 +13381,7 @@
 				(justify left top)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Rotary encoder EC11E15204A3"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -13909,7 +13909,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "5-way encoder EVQWGD001"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -14421,7 +14421,7 @@
 				(justify left top)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Rotary encoder RK0971114D0B"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -14665,7 +14665,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Potentiometer RK09K113004U"
 			(at 2.54 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -14911,7 +14911,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Potentiometer RK10J11E0034"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -15508,7 +15508,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Slide potentiometer SLLB510100"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -18275,7 +18275,7 @@
 				(justify bottom)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=6339191&DocType=Customer%20Drawing&DocLang=English&DocFormat=pdf&PartCntxt=6339191-5"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -19212,7 +19212,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Adafruit 2765 thumbstick module"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -19442,7 +19442,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Joystick module COM-09032"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -19735,7 +19735,7 @@
 				(justify left top)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Joystick module COM-10063"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -20057,7 +20057,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Joystick module FJ08K-S"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -20301,7 +20301,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Joystick module MU-AS90R"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -20689,7 +20689,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Joystick module SKHCBEA010"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -20940,7 +20940,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Joystick module SKHHCWA010"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -21195,7 +21195,7 @@
 				(justify left top)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Joystick module TL3301TF100QG"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -21421,7 +21421,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "SMD LED OF-SMD3528WC"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -21919,7 +21919,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Addressable RGB LED SK6812MINI-E"
 			(at 13.97 -2.54 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -22183,7 +22183,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Addressable RGB LED SK6812MINI-EA"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -22436,7 +22436,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Addressable RGB LED SK6812SMINI"
 			(at 2.286 -7.62 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -22703,7 +22703,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Through-hole LED"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -23176,7 +23176,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Addressable RGB LED WS2812B-MINI"
 			(at -15.24 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -23440,7 +23440,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Microcontroller ATMEGA328P-PU"
 			(at -22.86 34.29 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -24054,7 +24054,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Microcontroller ATMEGA32A-AU"
 			(at -3.048 1.524 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -24955,7 +24955,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Microcontroller ATMEGA32A-PU"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -25795,7 +25795,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Microcontroller ATMega32U4-AU"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -26708,7 +26708,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Adafruit KB2040 board"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -27275,7 +27275,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Arduino Pro Micro board"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -27803,7 +27803,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "ESP32-C3-Zero board"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -28246,7 +28246,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "ESP32-S2 Mini V1.0.0 V2 board"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -28909,7 +28909,7 @@
 				)
 			)
 		)
-		(property "Description" "Symbol for an Elite-C"
+		(property "Description" "Elite-C board"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -29549,7 +29549,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "ESP32-C3 Super Mini pinout board"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -29938,7 +29938,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "nice!nano v2 board"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -30520,7 +30520,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Pimoroni PGA2040 PTH board"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -31491,7 +31491,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Waveshare RP2040-LCD-0.96 board"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -32381,7 +32381,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Waveshare RP2040-Plus board"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -33199,7 +33199,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Waveshare RP2040-Tiny board"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -33722,7 +33722,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Waveshare RP2040-Zero board"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -38390,7 +38390,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "RP2040 Pro Micro board"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -39046,7 +39046,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "RP2040 Stamp board"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -39890,7 +39890,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "RP2040 Zero board"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -40402,7 +40402,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Raspberry Pi Pico board"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -41274,7 +41274,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Microcontroller STM32F072CBT6"
 			(at 41.402 10.922 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -42247,7 +42247,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "WeAct STM32F411 Black Pill V3.0 board"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -43157,7 +43157,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Seeed XIAO RP2040 board"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -43507,7 +43507,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Waveshare ESP32-S3-Nano board"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -44134,7 +44134,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "WeAct STM32G431CBU6 board"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -45107,7 +45107,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "WeAct CH552T board"
 			(at 1.905 0.635 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -45554,7 +45554,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Connector PRT-14417"
 			(at 3.81 -3.81 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -45834,7 +45834,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Pimoroni PIM452 module"
 			(at 1.27 -1.27 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -46033,7 +46033,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Pimoroni trackball module (PIMORONI 447)"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -52026,7 +52026,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Slide switch EG1215AA"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -52241,7 +52241,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Slide switch JS102011SAQN"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -52429,7 +52429,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Slide switch MSK12C02"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -52808,7 +52808,7 @@
 				(justify left top)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Slide switch SSAJ120100"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -53052,7 +53052,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Slide switch SSAL220100"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -53247,7 +53247,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Slide switch SSSS213100"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -53453,7 +53453,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Slide switch SSSS811101"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -53740,7 +53740,7 @@
 				(justify left top)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "TRRS jack PJ-320A"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -53946,7 +53946,7 @@
 				(justify left top)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "TRRS jack PJ-320D"
 			(at -10.922 0.254 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -54696,7 +54696,7 @@
 				(justify left top)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "USB-C receptacle 216990-0001"
 			(at -16.51 10.16 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -55238,7 +55238,7 @@
 				(justify left top)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "USB-C receptacle 216990-0002"
 			(at -16.51 10.16 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -55758,7 +55758,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "USB-C receptacle 217179-0001"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -56142,7 +56142,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "USB-C receptacle HRO TYPE-C-31-M-14"
 			(at 0 5.08 90)
 			(show_name no)
 			(do_not_autoplace no)
