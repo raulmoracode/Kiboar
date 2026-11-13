@@ -1,16 +1,12 @@
 ---
-title: Kiboar
+title: Inicio
 description: Componentes de teclado para KiCad 10.
 ---
 
-Kiboar es una librería de componentes para teclados mecánicos en **KiCad 10**:
-146 símbolos, 1332 footprints en 23 librerías y modelos 3D para la mayoría.
-
-## Empieza aquí
-
-- [Instalar con el Plugin and Content Manager](/es/docs/install/pcm)
-- [Instalar desde un clon](/es/docs/install/clone)
-- [Ver todas las librerías](/es/docs/libraries)
+Kiboar es una librería de componentes para teclados mecánicos en **KiCad 10**.
+Reúne las piezas que necesita un teclado —interruptores, microcontroladores,
+conectores, pantallas— en una sola librería de símbolos, una librería de
+footprints por familia y un modelo STEP para casi todas las piezas.
 
 ## Qué contiene
 
@@ -21,5 +17,35 @@ Kiboar es una librería de componentes para teclados mecánicos en **KiCad 10**:
 | Librerías de footprints | 23 |
 | Modelos 3D | 204 |
 
-Cada footprint de una pieza lleva courtyard, así que el comprobador de reglas
-de KiCad avisa de las piezas solapadas antes de enviar la placa a fabricar.
+- **Interruptores** — footprints MX y Choc, y variantes solo CAD para placas.
+- **MCUs** — placas Pro Micro, Elite-C, nice!nano, RP2040, STM32, ESP32, Pico y
+  XIAO, con sus tiras de pines.
+- **Conectores** — USB-C, TRRS, portapilas y conectores de pila, Ethernet,
+  tiras de pines.
+- **El resto** — encoders, pantallas OLED, zumbadores, LEDs, pulsadores,
+  interruptores DIP, joysticks, taladros de montaje y recortes de placa.
+
+## Cómo está organizado
+
+| Ruta | Contenido |
+| --- | --- |
+| `symbols/Kiboar.kicad_sym` | Una librería de símbolos, un prefijo de referencia por familia (`SW`, `U`, `J`, `D`, `BT`, `DS`). |
+| `footprints/Kiboar_<family>.pretty` | Una librería de footprints por familia. |
+| `3dmodels/Kiboar_<family>.3dshapes` | Modelos STEP, referenciados como `${KIBOAR_3DMODELS}/Kiboar_<family>.3dshapes/<name>.step`. |
+
+Cada footprint de una pieza lleva courtyard, y su `attr` coincide con sus pads,
+así que el comprobador de reglas de KiCad avisa de las piezas solapadas antes de
+enviar la placa a fabricar.
+
+## Empieza aquí
+
+- [Instalar con el Plugin and Content Manager](/es/docs/install/pcm)
+- [Instalar desde un clon](/es/docs/install/clone)
+- [Ver todas las librerías](/es/docs/libraries)
+- [Ver todos los símbolos](/es/docs/symbols)
+
+## Licencia
+
+La colección tiene licencia mixta: el trabajo original es MIT, y algunos modelos
+y footprints de terceros son CC BY-SA o CC BY-NC-SA. Lee
+[Licencia](/es/docs/licensing) y `NOTICE` antes de redistribuir.

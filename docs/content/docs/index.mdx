@@ -1,16 +1,12 @@
 ---
-title: Kiboar
+title: Home
 description: Keyboard components for KiCad 10.
 ---
 
-Kiboar is a component library for mechanical keyboards in **KiCad 10**: 146
-symbols, 1332 footprints in 23 libraries, and 3D models for most of them.
-
-## Start here
-
-- [Install with the Plugin and Content Manager](/docs/install/pcm)
-- [Install from a clone](/docs/install/clone)
-- [Browse the libraries](/docs/libraries)
+Kiboar is a component library for mechanical keyboards in **KiCad 10**. It puts
+the parts a keyboard needs — switches, microcontrollers, connectors, displays —
+in one symbol library, one footprint library per family, and a STEP model for
+almost every part.
 
 ## What is inside
 
@@ -21,5 +17,34 @@ symbols, 1332 footprints in 23 libraries, and 3D models for most of them.
 | Footprint libraries | 23 |
 | 3D models | 204 |
 
-Every placed-part footprint carries a courtyard, so KiCad's design rules checker
-reports overlapping parts before you send the board out.
+- **Switches** — MX and Choc footprints, plus CAD-only variants for plates.
+- **MCUs** — Pro Micro, Elite-C, nice!nano, RP2040, STM32, ESP32, Pico and
+  XIAO boards, with their pin headers.
+- **Connectors** — USB-C, TRRS, battery holders and jacks, Ethernet, pin headers.
+- **The rest** — encoders, OLED displays, buzzers, LEDs, buttons, DIP switches,
+  joysticks, mounting holes and board cutouts.
+
+## How it is organised
+
+| Path | Contents |
+| --- | --- |
+| `symbols/Kiboar.kicad_sym` | One symbol library, one reference prefix per family (`SW`, `U`, `J`, `D`, `BT`, `DS`). |
+| `footprints/Kiboar_<family>.pretty` | One footprint library per family. |
+| `3dmodels/Kiboar_<family>.3dshapes` | STEP models, referenced as `${KIBOAR_3DMODELS}/Kiboar_<family>.3dshapes/<name>.step`. |
+
+Every placed-part footprint carries a courtyard, and its `attr` matches its pads,
+so KiCad's design rules checker flags overlapping parts before you order the
+board.
+
+## Start here
+
+- [Install with the Plugin and Content Manager](/docs/install/pcm)
+- [Install from a clone](/docs/install/clone)
+- [Browse the libraries](/docs/libraries)
+- [Browse the symbols](/docs/symbols)
+
+## Licence
+
+The collection is mixed-licence: original work is MIT, and some third-party
+models and footprints are CC BY-SA or CC BY-NC-SA. Read
+[Licensing](/docs/licensing) and `NOTICE` before redistributing.
