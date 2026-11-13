@@ -52316,7 +52316,7 @@
 				(justify left top)
 			)
 		)
-		(property "Footprint" "RCE5C2A220J0A2H03B"
+		(property "Footprint" "Kiboar_Placeholder:MLLC_1"
 			(at 8.89 -96.19 0)
 			(show_name no)
 			(do_not_autoplace no)

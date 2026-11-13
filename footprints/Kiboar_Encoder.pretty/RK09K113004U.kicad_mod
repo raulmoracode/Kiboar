@@ -115,7 +115,7 @@
 		(uuid "fd2dbc19-340f-4f3e-8b31-a1b7c2e32b28")
 	)
 	(embedded_fonts no)
-	(model "${EASYEDA2KICAD}/easyeda2kicad.3dshapes/RES-TH_RK09K113004U.wrl"
+	(model "${KIBOAR_3DMODELS}/Kiboar_Encoder.3dshapes/RK09K113004U.step"
 		(offset
 			(xyz 0 2.4 0)
 		)

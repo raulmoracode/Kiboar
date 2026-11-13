@@ -147,7 +147,7 @@
 		)
 	)
 	(embedded_fonts no)
-	(model "${KIPRJMOD}/EASYEDA_MODELS/LED-SMD_4P-L3.7-W3.5-SK6812SMINI-001.step"
+	(model "${KIBOAR_3DMODELS}/Kiboar_Led.3dshapes/SK6812SMINI.step"
 		(offset
 			(xyz -0 0.0001 0)
 		)

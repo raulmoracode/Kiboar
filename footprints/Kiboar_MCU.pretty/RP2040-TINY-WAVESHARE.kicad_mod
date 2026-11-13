@@ -569,9 +569,9 @@
 		(uuid "d65a7f59-d8ad-4a66-b771-d3cad5573059")
 	)
 	(embedded_fonts no)
-	(model "${KIPRJMOD}/EASYEDA_MODELS/ImageToStl.com_rp2040-tiny v1.1.step"
+	(model "${KIBOAR_3DMODELS}/Kiboar_MCU.3dshapes/RP2040-Tiny.step"
 		(offset
-			(xyz -0 -0 0)
+			(xyz -9.0045 -11.7545 0)
 		)
 		(scale
 			(xyz 1 1 1)
