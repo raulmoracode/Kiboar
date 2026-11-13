@@ -1,0 +1,26 @@
+---
+title: Contributing
+description: How to add a component.
+---
+
+The long form is in [`CONTRIBUTING.md`](https://github.com/raulmoracode/Kiboar/blob/main/CONTRIBUTING.md).
+The short version:
+
+1. Open or reuse an issue, then create a branch `fix/<issue>-<slug>` or
+   `feat/<issue>-<slug>`.
+2. Add the footprint to the matching `Kiboar_*.pretty` library, with a courtyard
+   and an `(attr ...)` that matches the pads.
+3. Add the symbol with `Manufacturer`, `MPN`, `ki_keywords` and a
+   `ki_fp_filters` that matches the footprint.
+4. Run the checks:
+
+```bash
+python3 tools/lint.py
+python3 tools/gen_courtyard.py --check
+python3 tools/normalize_symbols.py --check
+python3 tools/model_inventory.py --check
+```
+
+5. Open a pull request with the command output, not a claim.
+
+New CAD data needs its origin and licence recorded in `NOTICE`.

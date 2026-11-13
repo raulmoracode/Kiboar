@@ -1,0 +1,31 @@
+---
+title: Usage
+description: From the schematic to the board.
+---
+
+## 1. Place the symbols
+
+Add the matrix symbols from the `Kiboar` symbol library. `Placeholder_Keyswitch`
+is the generic switch; `SWITCH_*`, `Button_*` and `Encoder_*` are the real
+parts.
+
+## 2. Assign the footprints
+
+Each symbol carries a default footprint. For a soldered board that is a
+`Kiboar_Switch` or `Kiboar_Button` footprint; for a hotswap board it is a
+`Kiboar_MechSwitch` footprint with the socket pads.
+
+## 3. Check the courtyards
+
+Every placed-part footprint has a courtyard. Run **Tools → Design Rules Checker**
+and read the courtyard overlap errors before you send the board out.
+
+## 4. Look at it in 3D
+
+With the clone, `KIBOAR_3DMODELS` must resolve. With the PCM package, the model
+paths are already rewritten to the installed location.
+
+## Finding a part
+
+- [All symbols](/docs/symbols)
+- [All libraries](/docs/libraries)

@@ -1,0 +1,32 @@
+---
+title: Uso
+description: Del esquemático a la placa.
+---
+
+## 1. Coloca los símbolos
+
+Añade los símbolos de la matriz desde la librería `Kiboar`.
+`Placeholder_Keyswitch` es el interruptor genérico; `SWITCH_*`, `Button_*` y
+`Encoder_*` son las piezas reales.
+
+## 2. Asigna los footprints
+
+Cada símbolo lleva un footprint por defecto. Para una placa soldada es un
+footprint `Kiboar_Switch` o `Kiboar_Button`; para una placa hotswap es un
+footprint `Kiboar_MechSwitch` con los pads del zócalo.
+
+## 3. Revisa los courtyards
+
+Cada footprint de una pieza lleva courtyard. Ejecuta **Herramientas →
+Comprobador de reglas de diseño** y lee los errores de solape de courtyard antes
+de enviar la placa.
+
+## 4. Míralo en 3D
+
+Con el clon, `KIBOAR_3DMODELS` tiene que resolver. Con el paquete PCM, las rutas
+de los modelos ya están reescritas a la ubicación instalada.
+
+## Encontrar una pieza
+
+- [Todos los símbolos](/es/docs/symbols)
+- [Todas las librerías](/es/docs/libraries)

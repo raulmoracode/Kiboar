@@ -1,0 +1,47 @@
+---
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
+import Layout from '@/layouts/Layout.astro';
+import { i18n } from '@/lib/i18n';
+
+export const prerender = true;
+
+export const getStaticPaths = (() => {
+  return i18n.languages.map((lang) => ({
+    params: { lang: lang === i18n.defaultLanguage ? undefined : lang },
+    props: { lang },
+  }));
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { lang } = Astro.props;
+const spanish = lang === 'es';
+const docs = spanish ? '/es/docs' : '/docs';
+---
+
+<Layout
+  lang={lang}
+  title="Kiboar"
+  description={spanish ? 'Librería de componentes de teclado para KiCad 10.' : 'Keyboard component library for KiCad 10.'}
+>
+  <main class="flex flex-1 flex-col items-center justify-center px-6 text-center">
+    <p class="text-sm font-medium uppercase tracking-widest text-fd-muted-foreground">KiCad 10</p>
+    <h1 class="mt-4 text-5xl font-bold">Kiboar</h1>
+    <p class="mt-4 max-w-xl text-lg text-fd-muted-foreground">
+      {spanish
+        ? '146 símbolos, 1332 footprints y modelos 3D para construir teclados mecánicos.'
+        : '146 symbols, 1332 footprints and 3D models for building mechanical keyboards.'}
+    </p>
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+      <a class="rounded-full bg-fd-primary px-6 py-3 text-sm font-medium text-fd-primary-foreground" href={docs}>
+        {spanish ? 'Abrir la documentación' : 'Open the documentation'}
+      </a>
+      <a class="rounded-full border px-6 py-3 text-sm font-medium" href="https://github.com/raulmoracode/Kiboar">
+        GitHub
+      </a>
+      <a class="rounded-full border px-6 py-3 text-sm font-medium" href={lang === 'es' ? '/' : '/es'}>
+        {lang === 'es' ? 'English' : 'Español'}
+      </a>
+    </div>
+  </main>
+</Layout>

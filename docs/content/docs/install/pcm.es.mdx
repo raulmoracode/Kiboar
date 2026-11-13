@@ -1,0 +1,38 @@
+---
+title: Plugin and Content Manager
+description: Instalar Kiboar desde un paquete PCM.
+---
+
+Kiboar se distribuye como paquete de librería: un ZIP que el Plugin and Content
+Manager (PCM) instala en `${KICAD10_3RD_PARTY}` y registra en tus tablas
+globales.
+
+## Generar el ZIP
+
+```bash
+python3 tools/build_pcm.py
+```
+
+La compilación por defecto usa el prefijo de apodo de KiCad (`PCM_`). Si has
+borrado **Preferencias → Paquetes y actualizaciones → Prefijo de apodo de
+librería**, genera la otra variante:
+
+```bash
+python3 tools/build_pcm.py --no-prefix
+```
+
+## Instalar
+
+1. Abre **Herramientas → Plugin and Content Manager → Install from File…**.
+2. Elige `dist/Kiboar-1.0.0.zip` (o `-no-prefix.zip`).
+3. Aplica los cambios pendientes.
+
+El paquete reescribe las rutas de los modelos a
+`${KICAD10_3RD_PARTY}/3dmodels/com_github_raulmoracode_kiboar/`, así que el
+visor 3D funciona sin configurar ninguna variable.
+
+## Todavía no está en el repositorio oficial
+
+El paquete no aparece en el repositorio del PCM. Hasta que lo esté, usa
+**Install from File** con un ZIP generado desde este repositorio, o la vía del
+clon.
