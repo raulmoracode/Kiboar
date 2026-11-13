@@ -289,32 +289,6 @@ def symbols_page(symbols, spanish):
     return "\n".join(lines) + "\n"
 
 
-def libraries_index(libraries, counts, spanish):
-    title = "Libraries" if not spanish else "Librerías"
-    intro = (
-        "The 23 footprint libraries and what each one contains. Every footprint "
-        "of every library is listed in its page."
-        if not spanish
-        else "Las 23 librerías de footprints y qué contiene cada una. Todos los "
-        "footprints de cada librería aparecen en su página."
-    )
-    lines = [
-        "---",
-        f'title: "{title}"',
-        f'description: "{intro}"',
-        "---",
-        "",
-        intro,
-        "",
-        "| Library | Footprints | Contents |" if not spanish else "| Librería | Footprints | Contenido |",
-        "| --- | ---: | --- |",
-    ]
-    for library in libraries:
-        description = LIBRARY_TEXT.get(library, ("", ""))[1 if spanish else 0]
-        lines.append(f"| `{cell(library)}` | {counts[library]} | {cell(description)} |")
-    return "\n".join(lines) + "\n"
-
-
 def meta(title, pages):
     import json
 
@@ -348,10 +322,8 @@ def generated_files():
         library: len(glob.glob(os.path.join(ROOT, "footprints", library + ".pretty", "*.kicad_mod")))
         for library in libraries
     }
-    files["libraries/index.mdx"] = libraries_index(libraries, library_counts, False)
-    files["libraries/index.es.mdx"] = libraries_index(libraries, library_counts, True)
-    files["libraries/meta.json"] = meta("Libraries", ["index", *library_pages])
-    files["libraries/meta.es.json"] = meta("Librerías", ["index", *library_pages])
+    files["libraries/meta.json"] = meta("Libraries", library_pages)
+    files["libraries/meta.es.json"] = meta("Librerías", library_pages)
     files["meta.json"] = meta("Documentation", ["index", "install", "usage", "symbols", "libraries", "contributing", "licensing"])
     files["meta.es.json"] = meta("Documentación", ["index", "install", "usage", "symbols", "libraries", "contributing", "licensing"])
     return files

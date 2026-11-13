@@ -1,7 +1,6 @@
 {
   "title": "Libraries",
   "pages": [
-    "index",
     "Kiboar_BatteryHolder",
     "Kiboar_BatteryJack",
     "Kiboar_Button",
