@@ -50,7 +50,19 @@
 			)
 		)
 	)
+	(attr smd)
 	(duplicate_pad_numbers_are_jumpers no)
+	(fp_rect
+		(start -5.05 -1.6)
+		(end 5.05 1.5)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "23d93ea7-11ba-42a6-bd06-70daf76a688b")
+	)
 	(pad "0" smd rect
 		(at -4.1501 0.775)
 		(size 1.2 0.9)

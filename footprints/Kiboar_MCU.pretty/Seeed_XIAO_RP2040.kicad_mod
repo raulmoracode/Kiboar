@@ -78,6 +78,17 @@
 		(layer "Dwgs.User")
 		(uuid "da27c870-b593-4b10-b9df-3aee53ab4459")
 	)
+	(fp_rect
+		(start -9.7 -8.9)
+		(end 9.75 8.9)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "a93899cd-5f41-474e-96cf-de949a92e968")
+	)
 	(pad "1" smd roundrect
 		(at -8.065 -7.62)
 		(size 2.75 2)

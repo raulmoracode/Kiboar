@@ -74,6 +74,7 @@
 			)
 		)
 	)
+	(attr smd)
 	(duplicate_pad_numbers_are_jumpers no)
 	(fp_poly
 		(pts
@@ -86,6 +87,17 @@
 		(fill yes)
 		(layer "F.SilkS")
 		(uuid "259dd476-230d-4479-ba85-c033b2b17b06")
+	)
+	(fp_rect
+		(start -2.5 -1.65)
+		(end 3.25 2.25)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "99b7980f-fa5b-4548-9067-4f3fa0c46af6")
 	)
 	(pad "1" smd rect
 		(at 1.4501 0.7499)

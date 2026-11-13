@@ -74,6 +74,7 @@
 			)
 		)
 	)
+	(attr smd)
 	(duplicate_pad_numbers_are_jumpers no)
 	(fp_circle
 		(center 0 -3.2)
@@ -96,6 +97,17 @@
 		(fill no)
 		(layer "Dwgs.User")
 		(uuid "8fa6a196-fd90-427e-8e40-b10f4da5adc8")
+	)
+	(fp_rect
+		(start -6.65 -4.1)
+		(end 6.65 3.55)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "759d0152-c686-4fb6-99fa-6d4e49b6e5ca")
 	)
 	(pad "" np_thru_hole circle
 		(at 0 -3.2)

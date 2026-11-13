@@ -63,6 +63,17 @@
 		(layer "F.SilkS")
 		(uuid "ef996fb1-a92d-45e5-8f2e-76f425cb8d12")
 	)
+	(fp_rect
+		(start -5.45 -1.55)
+		(end 5.45 1.65)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "a64fb6b7-d206-4c63-b44a-193c7b7a1b50")
+	)
 	(pad "1" thru_hole rect
 		(at -3.81 0 90)
 		(size 1.7 1.7)

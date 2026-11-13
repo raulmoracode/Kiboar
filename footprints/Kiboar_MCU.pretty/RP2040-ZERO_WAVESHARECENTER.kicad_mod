@@ -49,6 +49,7 @@
 			)
 		)
 	)
+	(attr smd)
 	(duplicate_pad_numbers_are_jumpers no)
 	(fp_line
 		(start -8.976 7.6851)
@@ -503,6 +504,17 @@
 		)
 		(layer "F.SilkS")
 		(uuid "b24329df-dd18-493f-a91d-c97928eb09f6")
+	)
+	(fp_rect
+		(start -10.8 -1.25)
+		(end 10.8 25.15)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "02ac4538-e0d1-4e6f-a87f-59e7a2a46478")
 	)
 	(pad "0" smd oval
 		(at 8.509 1.524 90)

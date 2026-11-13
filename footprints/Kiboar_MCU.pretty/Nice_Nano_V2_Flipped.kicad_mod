@@ -932,6 +932,17 @@
 			(justify right mirror)
 		)
 	)
+	(fp_rect
+		(start -9.4 -18.35)
+		(end 9.4 15.5)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "04e24453-c449-41bc-adba-fe202a21681b")
+	)
 	(pad "1" thru_hole circle
 		(at 7.62 -13.97 90)
 		(size 1.7526 1.7526)

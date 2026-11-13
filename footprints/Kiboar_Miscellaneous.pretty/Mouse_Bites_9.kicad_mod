@@ -57,6 +57,17 @@
 	)
 	(attr through_hole)
 	(duplicate_pad_numbers_are_jumpers no)
+	(fp_rect
+		(start -0.8 -7.2)
+		(end 0.8 7.2)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "9c6de4ac-9ad8-45b7-b66b-11c03e7f1d39")
+	)
 	(pad "" np_thru_hole circle
 		(at 0 -6.4)
 		(size 1.1 1.1)

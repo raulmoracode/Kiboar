@@ -74,6 +74,7 @@
 			)
 		)
 	)
+	(attr through_hole)
 	(duplicate_pad_numbers_are_jumpers no)
 	(fp_circle
 		(center -2.5032 1.6485)
@@ -118,6 +119,17 @@
 		(fill no)
 		(layer "User.5")
 		(uuid "e329c256-2c1b-428a-86aa-701b4f38e000")
+	)
+	(fp_rect
+		(start -3.55 -2.7)
+		(end 3.55 2.7)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "758f0e26-c796-4942-a411-8c8eb33e6285")
 	)
 	(pad "1" thru_hole oval
 		(at -2.5032 1.6485 270)

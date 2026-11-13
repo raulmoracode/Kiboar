@@ -65,7 +65,7 @@
 			(type default)
 		)
 		(fill no)
-		(layer "B.CrtYd")
+		(layer "F.CrtYd")
 		(uuid "8185a53e-2a85-4443-9147-c06a1ca147a0")
 	)
 	(pad "" np_thru_hole circle
