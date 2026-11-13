@@ -1,7 +1,7 @@
 (footprint "6116075-4"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(descr "6116075-4-3")
 	(tags "Connector")
@@ -26,18 +26,6 @@
 			(font
 				(size 1.27 1.27)
 				(thickness 0.254)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "d169ea03-ec1a-4604-9311-b0f38904698f")
-		(effects
-			(font
-				(size 1.27 1.27)
-				(thickness 0.15)
 			)
 		)
 	)
@@ -66,6 +54,7 @@
 		)
 	)
 	(attr through_hole)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_line
 		(start -13.948 -9.01)
 		(end 6.788 -9.01)
@@ -283,6 +272,7 @@
 		(remove_unused_layers no)
 		(uuid "ccdbf918-a968-477e-9eff-c8ad0a3589f8")
 	)
+	(embedded_fonts no)
 	(model "${KIBOAR_3DMODELS}/Kiboar_Ethernet.3dshapes/6116075-4.step"
 		(offset
 			(xyz -3.56999988 -7.519999868 0.2199999955)

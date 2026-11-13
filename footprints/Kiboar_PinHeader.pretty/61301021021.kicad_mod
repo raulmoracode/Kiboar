@@ -1,7 +1,7 @@
 (footprint "61301021021"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(descr "<B>WR-PHD </B><BR> 2.54 mm THT Angled Dual Pin Header, 10 Pins")
 	(property "Reference" "REF**"
@@ -23,18 +23,6 @@
 		(effects
 			(font
 				(size 0.64 0.64)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "f98d2da2-7fb3-462f-8ce8-3886643f3aed")
-		(effects
-			(font
-				(size 1.27 1.27)
 				(thickness 0.15)
 			)
 		)
@@ -64,6 +52,7 @@
 		)
 	)
 	(attr through_hole)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_poly
 		(pts
 			(xy 6.65 2.97) (xy -6.65 2.97) (xy -6.65 -2.86) (xy 6.65 -2.86)
@@ -72,7 +61,7 @@
 			(width 0.1)
 			(type solid)
 		)
-		(fill solid)
+		(fill yes)
 		(layer "F.CrtYd")
 		(uuid "b5956b75-72ae-49c3-85b0-028126278f40")
 	)
@@ -166,6 +155,7 @@
 		(solder_mask_margin 0.102)
 		(uuid "3f6fb73c-08d1-4e85-8cf1-f1e848af82a4")
 	)
+	(embedded_fonts no)
 	(model "${KIBOAR_3DMODELS}/Kiboar_Pinheader.3dshapes/61301021021.step"
 		(offset
 			(xyz 0 4.05 2.5)

@@ -1,7 +1,7 @@
 (footprint "SKRPADE010"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(tags "SKRPADE010 ")
 	(property "Reference" "REF**"
@@ -25,18 +25,6 @@
 		(effects
 			(font
 				(size 1 1)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "b28f73a8-a757-4323-acf9-192c7a72e480")
-		(effects
-			(font
-				(size 1.27 1.27)
 				(thickness 0.15)
 			)
 		)
@@ -66,6 +54,7 @@
 		)
 	)
 	(attr smd)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_line
 		(start -2.8497 -1.8542)
 		(end -2.8497 1.8542)
@@ -161,27 +150,28 @@
 	(pad "1" smd rect
 		(at -2.075 -1.074999)
 		(size 1.0414 0.6604)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "d085232e-c428-4259-af36-b0c99e0fb4e9")
 	)
 	(pad "2" smd rect
 		(at -2.075 1.074999)
 		(size 1.0414 0.6604)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "b9967083-8be9-4f1a-a4d3-ab7aba6c21ed")
 	)
 	(pad "3" smd rect
 		(at 2.075 -1.074999)
 		(size 1.0414 0.6604)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "3112432b-9c6d-4d86-b01b-c9f3caefe686")
 	)
 	(pad "4" smd rect
 		(at 2.075 1.074999)
 		(size 1.0414 0.6604)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "4e6b9641-c735-4882-b4c7-2822149dc929")
 	)
+	(embedded_fonts no)
 	(model "${KIBOAR_3DMODELS}/Kiboar_Button.3dshapes/SKRPADE010.stp"
 		(offset
 			(xyz 0 0 0)

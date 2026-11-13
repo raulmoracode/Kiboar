@@ -1,7 +1,7 @@
 (footprint "ATMEGA32A-PU"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(descr "40P6")
 	(tags "Integrated Circuit")
@@ -26,18 +26,6 @@
 			(font
 				(size 1.27 1.27)
 				(thickness 0.254)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "9fd1e451-d633-4bd4-ae9e-74dd571ea0e2")
-		(effects
-			(font
-				(size 1.27 1.27)
-				(thickness 0.15)
 			)
 		)
 	)
@@ -66,6 +54,7 @@
 		)
 	)
 	(attr through_hole)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_circle
 		(center -8 -25.75)
 		(end -8 -25.55)
@@ -73,7 +62,7 @@
 			(width 0.4)
 			(type solid)
 		)
-		(fill none)
+		(fill no)
 		(layer "F.SilkS")
 		(uuid "329a5b17-cd2d-474c-9593-469bb325a01a")
 	)
@@ -498,6 +487,7 @@
 		(remove_unused_layers no)
 		(uuid "b93e408c-1047-4df9-8870-fa79c54a9764")
 	)
+	(embedded_fonts no)
 	(model "${KIBOAR_3DMODELS}/Kiboar_MCU.3dshapes/ATMEGA32A-PU.stp"
 		(offset
 			(xyz 0 0 4)

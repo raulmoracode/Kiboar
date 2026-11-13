@@ -1,7 +1,7 @@
 (footprint "SK6812MINI-E"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(descr "Reverse mount Neopixel LED. Footprint is designed for through-board, emitting out of the placement side, with the copper on the opposite side. https://cdn-shop.adafruit.com/product-files/4960/4960_SK6812MINI-E_REV02_EN.pdf")
 	(property "Reference" "REF**"
@@ -29,18 +29,6 @@
 			(justify mirror)
 		)
 	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "fa94072b-2ac9-4146-a4b8-b4549eed57d7")
-		(effects
-			(font
-				(size 1.27 1.27)
-				(thickness 0.15)
-			)
-		)
-	)
 	(property "Datasheet" ""
 		(at 0 0 0)
 		(layer "F.Fab")
@@ -66,6 +54,7 @@
 		)
 	)
 	(attr smd)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_poly
 		(pts
 			(xy 4.008 1.5) (xy 3.5 1.5) (xy 4.008 0.992)
@@ -74,7 +63,7 @@
 			(width 0.12)
 			(type solid)
 		)
-		(fill solid)
+		(fill yes)
 		(layer "B.SilkS")
 		(uuid "3dd09005-efc3-4959-9b6e-81f1f570c50c")
 	)
@@ -239,7 +228,7 @@
 			(width 0.1)
 			(type solid)
 		)
-		(fill none)
+		(fill no)
 		(layer "F.Fab")
 		(uuid "486fd73e-cb74-4acf-8240-39a321a719e5")
 	)
@@ -250,7 +239,7 @@
 			(width 0.1)
 			(type solid)
 		)
-		(fill none)
+		(fill no)
 		(layer "F.Fab")
 		(uuid "3d09d4c2-4259-4227-ab30-834bf35b4c82")
 	)
@@ -261,7 +250,7 @@
 			(width 0.1)
 			(type solid)
 		)
-		(fill none)
+		(fill no)
 		(layer "F.Fab")
 		(uuid "698f15cf-c81d-4243-ac71-bbfa710ada93")
 	)
@@ -280,31 +269,32 @@
 	(pad "1" smd roundrect
 		(at -2.65 -0.8)
 		(size 1.5 0.82)
-		(layers "B.Cu" "B.Paste" "B.Mask")
+		(layers "B.Cu" "B.Mask" "B.Paste")
 		(roundrect_rratio 0.25)
 		(uuid "854e96a6-dd7b-4fcd-88e7-a4a7695e9e4b")
 	)
 	(pad "2" smd roundrect
 		(at -2.65 0.8)
 		(size 1.5 0.82)
-		(layers "B.Cu" "B.Paste" "B.Mask")
+		(layers "B.Cu" "B.Mask" "B.Paste")
 		(roundrect_rratio 0.25)
 		(uuid "9e469416-82ed-40fc-9bea-49e17974923e")
 	)
 	(pad "3" smd roundrect
 		(at 2.65 0.8)
 		(size 1.5 0.82)
-		(layers "B.Cu" "B.Paste" "B.Mask")
+		(layers "B.Cu" "B.Mask" "B.Paste")
 		(roundrect_rratio 0.25)
 		(uuid "096af522-0aef-4e10-9c7c-b20cd5c733a4")
 	)
 	(pad "4" smd roundrect
 		(at 2.65 -0.8)
 		(size 1.5 0.82)
-		(layers "B.Cu" "B.Paste" "B.Mask")
+		(layers "B.Cu" "B.Mask" "B.Paste")
 		(roundrect_rratio 0.25)
 		(uuid "ef24b2e6-0cc9-4dfb-8e76-1472ccc70a5f")
 	)
+	(embedded_fonts no)
 	(model "${KIBOAR_3DMODELS}/Kiboar_Led.3dshapes/SK6812MINI-E.step"
 		(offset
 			(xyz 0 5.1 0)

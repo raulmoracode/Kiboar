@@ -1,7 +1,7 @@
 (footprint "2466 Keystone"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(property "Reference" "REF**"
 		(at 0 0 0)
@@ -22,18 +22,6 @@
 		(effects
 			(font
 				(size 1 1)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "124a7c58-eb93-4909-859b-16dfb4fbb8e2")
-		(effects
-			(font
-				(size 1.27 1.27)
 				(thickness 0.15)
 			)
 		)
@@ -63,6 +51,7 @@
 		)
 	)
 	(attr through_hole)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_line
 		(start -19.5 0)
 		(end -20.5 0)
@@ -221,6 +210,7 @@
 		(solder_mask_margin 0.102)
 		(uuid "c0e201cf-6654-4833-88b2-0350bc442aa8")
 	)
+	(embedded_fonts no)
 	(model "${KIBOAR_3DMODELS}/Kiboar_BatteryHolder.3dshapes/2466.step"
 		(offset
 			(xyz 0.23 -2.3 10)

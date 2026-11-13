@@ -1,7 +1,7 @@
 (footprint "SKHHLNA010"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(descr "SKHHLNA010")
 	(tags "Switch")
@@ -26,18 +26,6 @@
 			(font
 				(size 1.27 1.27)
 				(thickness 0.254)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "83213670-28a3-4c32-b904-e660955c233c")
-		(effects
-			(font
-				(size 1.27 1.27)
-				(thickness 0.15)
 			)
 		)
 	)
@@ -66,6 +54,7 @@
 		)
 	)
 	(attr through_hole)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_line
 		(start -3.225 -5)
 		(end 7.725 -5)
@@ -279,6 +268,7 @@
 		(remove_unused_layers no)
 		(uuid "8eb894fe-f38b-40db-98e4-16f89ff7a4a4")
 	)
+	(embedded_fonts no)
 	(model "${KIBOAR_3DMODELS}/Kiboar_Button.3dshapes/SKHHLNA010.stp"
 		(offset
 			(xyz 2.25 -0.5 0)

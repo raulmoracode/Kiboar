@@ -1,7 +1,7 @@
 (footprint "RK09D1130C3C"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(descr "RK09D1130C3C")
 	(tags "Variable Resistor")
@@ -26,18 +26,6 @@
 			(font
 				(size 1.27 1.27)
 				(thickness 0.254)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "4b23a8b5-1dbc-4624-9cb9-e34b9a642aa7")
-		(effects
-			(font
-				(size 1.27 1.27)
-				(thickness 0.15)
 			)
 		)
 	)
@@ -66,6 +54,7 @@
 		)
 	)
 	(attr through_hole)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_line
 		(start -3.8 -12.8)
 		(end 8.8 -12.8)
@@ -227,6 +216,7 @@
 		(remove_unused_layers no)
 		(uuid "739ddecc-4a48-49d8-8098-4a89dfe9db40")
 	)
+	(embedded_fonts no)
 	(model "${KIBOAR_3DMODELS}/Kiboar_Encoder.3dshapes/RK09D1130C3C.step"
 		(offset
 			(xyz 2.5 7 6.2)

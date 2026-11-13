@@ -1,7 +1,7 @@
 (footprint "610110249121"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(descr "610110249121-1")
 	(tags "Connector")
@@ -26,18 +26,6 @@
 			(font
 				(size 1.27 1.27)
 				(thickness 0.254)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "fd67a2f2-5516-4bf2-a16d-74c5fefe0e11")
-		(effects
-			(font
-				(size 1.27 1.27)
-				(thickness 0.15)
 			)
 		)
 	)
@@ -66,6 +54,7 @@
 		)
 	)
 	(attr through_hole)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_line
 		(start -7.35 -3.5)
 		(end 7.35 -3.5)
@@ -174,63 +163,64 @@
 	(pad "1" smd rect
 		(at -5.08 3.01)
 		(size 1 2.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "f5e5cf34-991b-41d5-9ec1-8758c6f0f861")
 	)
 	(pad "2" smd rect
 		(at -5.08 6.71)
 		(size 1 2.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "0f802abd-5d7d-4c85-b681-e22f2610f62b")
 	)
 	(pad "3" smd rect
 		(at -2.54 3.01)
 		(size 1 2.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "f44b124b-a67e-4586-a471-c6b6ea3bb4ad")
 	)
 	(pad "4" smd rect
 		(at -2.54 6.71)
 		(size 1 2.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "5a13d97e-0caf-427e-9fb3-a144b26687f2")
 	)
 	(pad "5" smd rect
 		(at 0 3.01)
 		(size 1 2.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "f02007ab-0a33-4285-92da-3d043c4c069b")
 	)
 	(pad "6" smd rect
 		(at 0 6.71)
 		(size 1 2.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "12a094e3-2761-431f-9814-7741d58cddeb")
 	)
 	(pad "7" smd rect
 		(at 2.54 3.01)
 		(size 1 2.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "44cd6609-5fcd-4ce7-afd7-bb56f06861c7")
 	)
 	(pad "8" smd rect
 		(at 2.54 6.71)
 		(size 1 2.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "e935897c-2c29-4a11-88d2-6fa292e2b1d9")
 	)
 	(pad "9" smd rect
 		(at 5.08 3.01)
 		(size 1 2.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "ae61ad4e-3592-45f4-9a8a-f9f454bf1693")
 	)
 	(pad "10" smd rect
 		(at 5.08 6.71)
 		(size 1 2.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "dbdd70a9-85df-4c9b-808a-b4abeed64d86")
 	)
+	(embedded_fonts no)
 	(model "${KIBOAR_3DMODELS}/Kiboar_Pinheader.3dshapes/610110249121.stp"
 		(offset
 			(xyz 0 1.42 2.5)

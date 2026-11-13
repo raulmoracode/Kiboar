@@ -1,7 +1,7 @@
 (footprint "SSSS811101"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(property "Reference" "REF**"
 		(at 0.5 0 0)
@@ -22,18 +22,6 @@
 		(effects
 			(font
 				(size 1 1)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "0ef1984e-665b-4e37-8958-73dd0dc8ca4c")
-		(effects
-			(font
-				(size 1.27 1.27)
 				(thickness 0.15)
 			)
 		)
@@ -63,6 +51,7 @@
 		)
 	)
 	(attr smd)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_line
 		(start -4.4 -2.75)
 		(end -4.4 3.05)
@@ -200,7 +189,7 @@
 			(width 0.2)
 			(type solid)
 		)
-		(fill none)
+		(fill no)
 		(layer "F.Fab")
 		(uuid "1be94f89-7666-43d0-94a1-c6e301c55c69")
 	)
@@ -221,52 +210,53 @@
 	(pad "1" smd rect
 		(at -2.25 -1.75)
 		(size 0.7 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(solder_mask_margin 0.102)
 		(uuid "88a23fd5-dd40-4ae9-a636-abf24c0a351d")
 	)
 	(pad "2" smd rect
 		(at 0.75 -1.75)
 		(size 0.7 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(solder_mask_margin 0.102)
 		(uuid "c9bbd27e-6968-457f-98e5-c6afcced3ccc")
 	)
 	(pad "3" smd rect
 		(at 2.25 -1.75)
 		(size 0.7 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(solder_mask_margin 0.102)
 		(uuid "493f8986-a7ee-4d4b-b4aa-ea2d6191d40b")
 	)
 	(pad "SH1" smd rect
 		(at -3.65 -1.1)
 		(size 1 0.8)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(solder_mask_margin 0.102)
 		(uuid "bce7d618-a5ac-4de3-82f0-85863e09e24a")
 	)
 	(pad "SH2" smd rect
 		(at 3.65 -1.1)
 		(size 1 0.8)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(solder_mask_margin 0.102)
 		(uuid "624a87df-ea0b-45e7-8286-4b61a6bca33f")
 	)
 	(pad "SH3" smd rect
 		(at -3.65 1.1)
 		(size 1 0.8)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(solder_mask_margin 0.102)
 		(uuid "5e263788-2e88-4c52-b10b-8efd2dbcb645")
 	)
 	(pad "SH4" smd rect
 		(at 3.65 1.1)
 		(size 1 0.8)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(solder_mask_margin 0.102)
 		(uuid "1c0caca3-848c-4df5-b4a5-6a683dba7351")
 	)
+	(embedded_fonts no)
 	(model "${KIBOAR_3DMODELS}/Kiboar_Switch.3dshapes/SSSS811101.step"
 		(offset
 			(xyz 0 0 0)

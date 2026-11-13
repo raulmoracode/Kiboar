@@ -1,7 +1,7 @@
 (footprint "Seeed_XIAO_RP2040"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(property "Reference" "REF**"
 		(at 0 0 0)
@@ -24,19 +24,6 @@
 		(effects
 			(font
 				(size 1 1)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 90)
-		(unlocked yes)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "49dca5f1-172e-4b31-9fa1-f11b85cfdcdb")
-		(effects
-			(font
-				(size 1.27 1.27)
 				(thickness 0.15)
 			)
 		)
@@ -68,6 +55,7 @@
 		)
 	)
 	(attr through_hole)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_rect
 		(start -8.89 -10.5)
 		(end 8.89 10.5)
@@ -75,7 +63,7 @@
 			(width 0.12)
 			(type solid)
 		)
-		(fill none)
+		(fill no)
 		(layer "Dwgs.User")
 		(uuid "2848380e-1aa8-4183-a0a3-cfc0c941bc60")
 	)
@@ -86,14 +74,14 @@
 			(width 0.12)
 			(type solid)
 		)
-		(fill none)
+		(fill no)
 		(layer "Dwgs.User")
 		(uuid "da27c870-b593-4b10-b9df-3aee53ab4459")
 	)
 	(pad "1" smd roundrect
 		(at -8.065 -7.62)
 		(size 2.75 2)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(roundrect_rratio 0.25)
 		(uuid "99e30fa7-728c-4750-9d34-b5f6cd9e3354")
 	)
@@ -108,7 +96,7 @@
 	(pad "2" smd roundrect
 		(at -8.065 -5.08)
 		(size 2.75 2)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(roundrect_rratio 0.25)
 		(uuid "dbf7f623-182a-41fa-b527-f73aa4a6236b")
 	)
@@ -123,7 +111,7 @@
 	(pad "3" smd roundrect
 		(at -8.065 -2.54)
 		(size 2.75 2)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(roundrect_rratio 0.25)
 		(uuid "3846a1ec-404e-4542-a0e9-30bfe7cc356b")
 	)
@@ -138,7 +126,7 @@
 	(pad "4" smd roundrect
 		(at -8.065 0)
 		(size 2.75 2)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(roundrect_rratio 0.25)
 		(uuid "2d5a91b0-782d-4e93-b892-0ef0319195d0")
 	)
@@ -153,7 +141,7 @@
 	(pad "5" smd roundrect
 		(at -8.065 2.54)
 		(size 2.75 2)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(roundrect_rratio 0.25)
 		(uuid "42d7fa12-5592-4f0f-ac84-c3599fa2fc99")
 	)
@@ -168,7 +156,7 @@
 	(pad "6" smd roundrect
 		(at -8.065 5.08)
 		(size 2.75 2)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(roundrect_rratio 0.25)
 		(uuid "9df217d6-f8ff-4dd3-8212-b8c2f4f45d7f")
 	)
@@ -183,7 +171,7 @@
 	(pad "7" smd roundrect
 		(at -8.065 7.62)
 		(size 2.75 2)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(roundrect_rratio 0.25)
 		(uuid "78a95a3c-3f69-49b2-b93f-42d2cb37d55a")
 	)
@@ -206,7 +194,7 @@
 	(pad "8" smd roundrect
 		(at 8.1 7.62)
 		(size 2.75 2)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(roundrect_rratio 0.25)
 		(uuid "26879183-f19c-4bea-ae3d-eae1f21bc8f7")
 	)
@@ -221,7 +209,7 @@
 	(pad "9" smd roundrect
 		(at 8.1 5.08)
 		(size 2.75 2)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(roundrect_rratio 0.25)
 		(uuid "0e7e5d34-52fd-4180-8ade-dfcc9477a32f")
 	)
@@ -236,7 +224,7 @@
 	(pad "10" smd roundrect
 		(at 8.1 2.54)
 		(size 2.75 2)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(roundrect_rratio 0.25)
 		(uuid "edb4aa61-bcb7-4acb-93ca-aaa40d7e6e44")
 	)
@@ -251,7 +239,7 @@
 	(pad "11" smd roundrect
 		(at 8.1 0)
 		(size 2.75 2)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(roundrect_rratio 0.25)
 		(uuid "24359498-0b72-4cf1-b4d8-be36727c4b96")
 	)
@@ -266,7 +254,7 @@
 	(pad "12" smd roundrect
 		(at 8.1 -2.54)
 		(size 2.75 2)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(roundrect_rratio 0.25)
 		(uuid "989ce17a-7822-4ade-bfbe-7c16ea459b07")
 	)
@@ -281,7 +269,7 @@
 	(pad "13" smd roundrect
 		(at 8.1 -5.08)
 		(size 2.75 2)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(roundrect_rratio 0.25)
 		(uuid "62eff137-25b1-4b3e-93b3-d876551998eb")
 	)
@@ -296,10 +284,11 @@
 	(pad "14" smd roundrect
 		(at 8.1 -7.62)
 		(size 2.75 2)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(roundrect_rratio 0.25)
 		(uuid "6e81fa0a-b162-41f5-bcbb-ca9ce6f8984d")
 	)
+	(embedded_fonts no)
 	(model "${KIBOAR_3DMODELS}/Kiboar_MCU.3dshapes/Seeed_XIAO_RP2040.step"
 		(offset
 			(xyz 0 0 0)

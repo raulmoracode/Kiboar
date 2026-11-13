@@ -1,7 +1,7 @@
 (footprint "PJ-320D"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(property "Reference" "REF**"
 		(at 0 14.2 0)
@@ -21,18 +21,6 @@
 		(effects
 			(font
 				(size 1 1)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "3ac24fbe-7fd1-4700-a917-9123f27e1051")
-		(effects
-			(font
-				(size 1.27 1.27)
 				(thickness 0.15)
 			)
 		)
@@ -62,6 +50,7 @@
 		)
 	)
 	(attr through_hole)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_line
 		(start -3.05 0)
 		(end -3.05 12.1)
@@ -149,27 +138,28 @@
 	(pad "1" smd rect
 		(at -3.5 11.62)
 		(size 2.5 1.3)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "a9538b92-3dee-43d6-b72a-c46a008e55ff")
 	)
 	(pad "2" smd rect
 		(at 3.25 10.2)
 		(size 2.5 1.2)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "d0df5577-9d43-45e9-b791-e7873910d0ce")
 	)
 	(pad "3" smd rect
 		(at 3.25 6.2)
 		(size 2.5 1.2)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "ddab52f6-eef6-4a2c-860c-00bff42cabc8")
 	)
 	(pad "4" smd rect
 		(at 3.25 3.2)
 		(size 2.5 1.2)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "57f7fd13-4970-4956-834e-e0c128e9ef12")
 	)
+	(embedded_fonts no)
 	(model "${KIBOAR_3DMODELS}/Kiboar_TRRS.3dshapes/PJ-320D.step"
 		(offset
 			(xyz 0 0 0)

@@ -1,7 +1,7 @@
 (footprint "Hub_4_Port"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(property "Reference" "REF**"
 		(at 0.342 16.583949 0)
@@ -22,19 +22,6 @@
 		(layer "F.Fab")
 		(hide yes)
 		(uuid "ca23dab5-ff50-494d-b28a-a87e8da9d9bf")
-		(effects
-			(font
-				(size 1 1)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0.342 17.083949 0)
-		(unlocked yes)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "0d9cfc92-bdbb-4345-b236-23a5da315106")
 		(effects
 			(font
 				(size 1 1)
@@ -69,6 +56,7 @@
 		)
 	)
 	(attr through_hole)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_line
 		(start -10.16 12.703949)
 		(end -10.16 -12.696051)
@@ -383,4 +371,5 @@
 		(thermal_bridge_angle 0)
 		(uuid "ceac856b-165b-48b4-842a-1c0dbd4393da")
 	)
+	(embedded_fonts no)
 )

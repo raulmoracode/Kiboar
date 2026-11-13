@@ -1,7 +1,7 @@
 (footprint "EG1215AA"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(descr "EG1215AA-1")
 	(tags "Switch")
@@ -26,18 +26,6 @@
 			(font
 				(size 1.27 1.27)
 				(thickness 0.254)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "57a8ecd1-d9cf-475d-9fa0-1c2f78e29c87")
-		(effects
-			(font
-				(size 1.27 1.27)
-				(thickness 0.15)
 			)
 		)
 	)
@@ -66,6 +54,7 @@
 		)
 	)
 	(attr through_hole)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_line
 		(start 3.35 -0.2)
 		(end 3.35 0.2)
@@ -264,45 +253,46 @@
 	(pad "1" smd rect
 		(at -2.25 -1.75)
 		(size 0.7 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "2f9bae42-8a25-488f-9dac-3d891494dcd1")
 	)
 	(pad "2" smd rect
 		(at 0.75 -1.75)
 		(size 0.7 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "be49753a-99a5-4cdc-b5ed-17adfb46f83e")
 	)
 	(pad "3" smd rect
 		(at 2.25 -1.75)
 		(size 0.7 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "13fe9c41-3da5-4c50-b89d-fe3914e597de")
 	)
 	(pad "MP1" smd rect
 		(at -3.65 -1 90)
 		(size 0.8 1)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "bcee555d-0bd4-48cf-81a6-498f93d5f805")
 	)
 	(pad "MP2" smd rect
 		(at 3.65 -1 90)
 		(size 0.8 1)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "42052428-180c-4246-9930-be7ad0ae2ddb")
 	)
 	(pad "MP3" smd rect
 		(at -3.65 1 90)
 		(size 0.8 1)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "64022977-a558-4d58-b961-dff33af253ba")
 	)
 	(pad "MP4" smd rect
 		(at 3.65 1 90)
 		(size 0.8 1)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "4f6bdb88-0c80-4ab8-b048-3fb24a901c1b")
 	)
+	(embedded_fonts no)
 	(model "${KIBOAR_3DMODELS}/Kiboar_Switch.3dshapes/EG1215AA.STEP"
 		(offset
 			(xyz 0 0 1.4)

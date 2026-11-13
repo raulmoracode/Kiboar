@@ -1,7 +1,7 @@
 (footprint "PRT-14417"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(property "Reference" "REF**"
 		(at -0.5 -0.5 0)
@@ -22,18 +22,6 @@
 		(effects
 			(font
 				(size 1 1)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "d5abb455-d2d8-4ddd-985d-806852f38fd5")
-		(effects
-			(font
-				(size 1.27 1.27)
 				(thickness 0.15)
 			)
 		)
@@ -63,6 +51,7 @@
 		)
 	)
 	(attr smd)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_line
 		(start 2.12 -2.125)
 		(end 3 -2.125)
@@ -160,52 +149,53 @@
 			(width 0.2)
 			(type solid)
 		)
-		(fill none)
+		(fill no)
 		(layer "F.Fab")
 		(uuid "d722cdfc-f636-48ba-ab81-70896cd551db")
 	)
 	(pad "1" smd rect
 		(at -1.5 -2.45)
 		(size 0.6 1.55)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(solder_mask_margin 0.102)
 		(uuid "46a37238-df13-4b8f-afc0-7337390cde9c")
 	)
 	(pad "2" smd rect
 		(at -0.5 -2.45)
 		(size 0.6 1.55)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(solder_mask_margin 0.102)
 		(uuid "afdd0a33-4aa7-43bb-96a9-552d1e6c6a21")
 	)
 	(pad "3" smd rect
 		(at 0.5 -2.45)
 		(size 0.6 1.55)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(solder_mask_margin 0.102)
 		(uuid "06ae00e0-f6f5-4644-9165-7ae037c5adac")
 	)
 	(pad "4" smd rect
 		(at 1.5 -2.45)
 		(size 0.6 1.55)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(solder_mask_margin 0.102)
 		(uuid "b1102743-f089-48b5-aac7-318ae3a61498")
 	)
 	(pad "S1" smd rect
 		(at -2.8 1.425)
 		(size 1.2 1.8)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(solder_mask_margin 0.102)
 		(uuid "1815db87-3643-4a27-b08f-fa7ea08a92d6")
 	)
 	(pad "S2" smd rect
 		(at 2.8 1.425)
 		(size 1.2 1.8)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(solder_mask_margin 0.102)
 		(uuid "a5f19e67-d7da-4334-a460-3cffcecc32bb")
 	)
+	(embedded_fonts no)
 	(model "${KIBOAR_3DMODELS}/Kiboar_OtherConnectors.3dshapes/PRT-14417.step"
 		(offset
 			(xyz 0 2 -0.3)

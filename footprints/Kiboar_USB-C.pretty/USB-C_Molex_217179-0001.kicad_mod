@@ -1,7 +1,7 @@
 (footprint "USB-C_Molex_217179-0001"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(property "Reference" "REF**"
 		(at 0.25 -5.25 0)
@@ -23,18 +23,6 @@
 		(effects
 			(font
 				(size 1 1)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "9af4cc86-7dd3-4489-a986-0ed1765bd2eb")
-		(effects
-			(font
-				(size 1.27 1.27)
 				(thickness 0.15)
 			)
 		)
@@ -64,6 +52,7 @@
 		)
 	)
 	(attr through_hole)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_line
 		(start -5 -4.25)
 		(end 5 -4.25)
@@ -158,97 +147,97 @@
 	(pad "A1" smd rect
 		(at -3.2 -3.171)
 		(size 0.6 1.24)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "2147c429-438b-4aed-b82d-d3bb6367ce9e")
 	)
 	(pad "A4" smd rect
 		(at -2.4 -3.171)
 		(size 0.6 1.24)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "cca0b089-bb4f-41be-8d6b-5cb9db442d03")
 	)
 	(pad "A5" smd rect
 		(at -1.25 -3.171)
 		(size 0.3 1.24)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "80cf2faf-f823-4f33-a6cb-759b496605a7")
 	)
 	(pad "A6" smd rect
 		(at -0.25 -3.171)
 		(size 0.3 1.24)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "f146e988-9cde-4f6c-9256-39bdcf923210")
 	)
 	(pad "A7" smd rect
 		(at 0.25 -3.171)
 		(size 0.3 1.24)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "ad69174b-ba8d-480a-813a-f0f3aceb98d3")
 	)
 	(pad "A8" smd rect
 		(at 1.25 -3.171)
 		(size 0.3 1.24)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "b9e2f27c-5433-450b-a7ae-8de2a754c991")
 	)
 	(pad "A9" smd rect
 		(at 2.4 -3.171)
 		(size 0.6 1.24)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "2b748a97-59ea-44e3-8305-3493dbdd8d5c")
 	)
 	(pad "A12" smd rect
 		(at 3.2 -3.171)
 		(size 0.6 1.24)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "4215c54e-f980-4040-ab16-0e302bb06700")
 	)
 	(pad "B1" smd rect
 		(at 3.2 -3.171)
 		(size 0.6 1.24)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "5280e212-abbf-4022-a472-c4248cfd8442")
 	)
 	(pad "B4" smd rect
 		(at 2.4 -3.171)
 		(size 0.6 1.24)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "82412603-43c8-4835-be88-18feb59757b2")
 	)
 	(pad "B5" smd rect
 		(at 1.75 -3.171)
 		(size 0.3 1.24)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "ff1a1a10-9965-48d4-bdc9-4521c7ecc908")
 	)
 	(pad "B6" smd rect
 		(at 0.75 -3.171)
 		(size 0.3 1.24)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "70795d05-cfe5-46a1-af4b-ff49fed75167")
 	)
 	(pad "B7" smd rect
 		(at -0.75 -3.171)
 		(size 0.3 1.24)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "df9bb065-c5df-4a5c-87fb-e5f377b6ecf6")
 	)
 	(pad "B8" smd rect
 		(at -1.75 -3.171)
 		(size 0.3 1.24)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "95065979-1b76-4739-aaa5-18cd34208fa0")
 	)
 	(pad "B9" smd rect
 		(at -2.4 -3.171)
 		(size 0.6 1.24)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "49092345-031d-46ab-b051-f81b9f510e7c")
 	)
 	(pad "B12" smd rect
 		(at -3.2 -3.171)
 		(size 0.6 1.24)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "498857aa-a20a-4a6a-9c23-86b3b5cb54c8")
 	)
 	(pad "S1" thru_hole oval
@@ -283,6 +272,7 @@
 		(remove_unused_layers no)
 		(uuid "e33d8f04-e696-4207-9449-3bf6c2ac8ef9")
 	)
+	(embedded_fonts no)
 	(model "${KIBOAR_3DMODELS}/Kiboar_USB-C.3dshapes/MOLEX_217179-0001.stp"
 		(offset
 			(xyz 0 0 1.5)

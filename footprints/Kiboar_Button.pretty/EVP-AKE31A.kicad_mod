@@ -1,7 +1,7 @@
 (footprint "EVP-AKE31A"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(tags "EVP-AKE31A ")
 	(property "Reference" "REF**"
@@ -25,18 +25,6 @@
 		(effects
 			(font
 				(size 1 1)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "868acdab-cc14-4a2c-b687-dac40def8c00")
-		(effects
-			(font
-				(size 1.27 1.27)
 				(thickness 0.15)
 			)
 		)
@@ -66,6 +54,7 @@
 		)
 	)
 	(attr smd)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_poly
 		(pts
 			(xy -1.16205 -1.3335) (xy -2.30505 -1.3335) (xy -2.30505 -0.6731) (xy -1.16205 -0.6731)
@@ -74,7 +63,7 @@
 			(width 0)
 			(type solid)
 		)
-		(fill solid)
+		(fill yes)
 		(layer "F.Cu")
 		(uuid "f6c38a39-fcc0-4aae-8b7f-c5291803e098")
 	)
@@ -86,7 +75,7 @@
 			(width 0)
 			(type solid)
 		)
-		(fill solid)
+		(fill yes)
 		(layer "F.Cu")
 		(uuid "82f783ef-5d45-48fc-9ac3-aee427ea165e")
 	)
@@ -98,31 +87,7 @@
 			(width 0)
 			(type solid)
 		)
-		(fill solid)
-		(layer "F.Paste")
-		(uuid "00541f9e-81fd-4674-9fbd-9c803894eb41")
-	)
-	(fp_poly
-		(pts
-			(xy 2.30505 -1.3335) (xy 1.16205 -1.3335) (xy 1.16205 -0.6731) (xy 2.30505 -0.6731)
-		)
-		(stroke
-			(width 0)
-			(type solid)
-		)
-		(fill solid)
-		(layer "F.Paste")
-		(uuid "d98cd1ce-24a9-4a95-a6a1-042e548113bf")
-	)
-	(fp_poly
-		(pts
-			(xy -1.16205 -1.3335) (xy -2.30505 -1.3335) (xy -2.30505 -0.6731) (xy -1.16205 -0.6731)
-		)
-		(stroke
-			(width 0)
-			(type solid)
-		)
-		(fill solid)
+		(fill yes)
 		(layer "F.Mask")
 		(uuid "71e75311-5e34-40cb-8fb9-33f553f28dd6")
 	)
@@ -134,9 +99,33 @@
 			(width 0)
 			(type solid)
 		)
-		(fill solid)
+		(fill yes)
 		(layer "F.Mask")
 		(uuid "6829bb89-2d4e-42a1-a270-e7d2e9cd5362")
+	)
+	(fp_poly
+		(pts
+			(xy -1.16205 -1.3335) (xy -2.30505 -1.3335) (xy -2.30505 -0.6731) (xy -1.16205 -0.6731)
+		)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill yes)
+		(layer "F.Paste")
+		(uuid "00541f9e-81fd-4674-9fbd-9c803894eb41")
+	)
+	(fp_poly
+		(pts
+			(xy 2.30505 -1.3335) (xy 1.16205 -1.3335) (xy 1.16205 -0.6731) (xy 2.30505 -0.6731)
+		)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill yes)
+		(layer "F.Paste")
+		(uuid "d98cd1ce-24a9-4a95-a6a1-042e548113bf")
 	)
 	(fp_line
 		(start -2.55905 -1.5875)
@@ -429,18 +418,6 @@
 			)
 		)
 	)
-	(fp_text user "${REFERENCE}"
-		(at 0 0.97155 0)
-		(unlocked yes)
-		(layer "F.Fab")
-		(uuid "e476f320-9f7d-43ca-896e-5207bdb2696a")
-		(effects
-			(font
-				(size 1 1)
-				(thickness 0.15)
-			)
-		)
-	)
 	(fp_text user "*"
 		(at -3.940175 0.97155 0)
 		(unlocked yes)
@@ -453,16 +430,28 @@
 			)
 		)
 	)
+	(fp_text user "${REFERENCE}"
+		(at 0 0.97155 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "e476f320-9f7d-43ca-896e-5207bdb2696a")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
 	(pad "1" smd rect
 		(at -1.400175 0.97155)
 		(size 0.7112 1.0922)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "c4c0947e-6180-456f-a870-a3b4562e5361")
 	)
 	(pad "2" smd rect
 		(at 1.400175 0.97155)
 		(size 0.7112 1.0922)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "3cb35db6-e7f2-4d57-bbb8-2af4f3a4e3e0")
 	)
 	(pad "3" thru_hole rect
@@ -484,9 +473,10 @@
 	(pad "5" smd rect
 		(at 0 1.12395)
 		(size 1.397 1.0922)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "c3886890-5b46-488d-8bbe-dabff8da1779")
 	)
+	(embedded_fonts no)
 	(model "${KIBOAR_3DMODELS}/Kiboar_Button.3dshapes/EVP-AKE31A.STEP"
 		(offset
 			(xyz 0 -0.8 0.8)

@@ -1,7 +1,7 @@
 (footprint "COM-10063"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(descr "COM-10063-1")
 	(tags "Switch")
@@ -25,18 +25,6 @@
 			(font
 				(size 1.27 1.27)
 				(thickness 0.254)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "95ee0326-b1c7-43a6-8f0a-3e4b03e45665")
-		(effects
-			(font
-				(size 1.27 1.27)
-				(thickness 0.15)
 			)
 		)
 	)
@@ -65,6 +53,7 @@
 		)
 	)
 	(attr through_hole)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_line
 		(start -5.25 -6.05)
 		(end 5.25 -6.05)
@@ -166,51 +155,52 @@
 	(pad "1" smd rect
 		(at -3.325 -1.4 90)
 		(size 1.1 1.85)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "ac29b282-1d11-42f4-86fc-60e97d2fb96b")
 	)
 	(pad "2" smd rect
 		(at -3.325 0 90)
 		(size 1.1 1.85)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "be614a43-f8cf-4fc8-b2c6-bde0b4f99490")
 	)
 	(pad "3" smd rect
 		(at -3.325 1.4 90)
 		(size 1.1 1.85)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "95b8ea92-0ce3-4e64-bbce-c54eee26bcca")
 	)
 	(pad "4" smd rect
 		(at 3.325 -1.4 90)
 		(size 1.1 1.85)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "69621108-c1d3-4c1f-aabd-fda930ff0d76")
 	)
 	(pad "5" smd rect
 		(at 3.325 0 90)
 		(size 1.1 1.85)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "5aa2e678-2a45-4e89-bd1f-498d7e6321fa")
 	)
 	(pad "6" smd rect
 		(at 3.325 1.4 90)
 		(size 1.1 1.85)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "76eac253-e3a4-4867-b1de-eabfa8a1933c")
 	)
 	(pad "MP1" smd rect
 		(at 0 4.1 90)
 		(size 1.9 2)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "f770e30d-589f-4bea-a01e-46e653c80688")
 	)
 	(pad "MP2" smd rect
 		(at 0 -4.1 90)
 		(size 1.9 2)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "c3d5521e-bedf-4f1f-a634-af0ea7900c9e")
 	)
+	(embedded_fonts no)
 	(model "${KIBOAR_3DMODELS}/Kiboar_Joystick.3dshapes/COM-10063.stp"
 		(offset
 			(xyz 0 0 2)

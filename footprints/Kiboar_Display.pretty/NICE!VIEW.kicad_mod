@@ -1,7 +1,7 @@
 (footprint "NICE!VIEW"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(property "Reference" "Ref**"
 		(at -0.07 0.54 0)
@@ -19,18 +19,6 @@
 		(at 0.13 0.54 0)
 		(layer "F.Fab")
 		(uuid "a1a8e08a-db90-4a47-95c0-18008becd455")
-		(effects
-			(font
-				(size 1.27 1.27)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "18656d32-f5ba-4fcd-9d81-a12c6292ba7f")
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -62,6 +50,7 @@
 			)
 		)
 	)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_rect
 		(start -1.39 -6.41)
 		(end 1.399 6.582)
@@ -69,7 +58,7 @@
 			(width 0.15)
 			(type default)
 		)
-		(fill none)
+		(fill no)
 		(layer "F.SilkS")
 		(uuid "7e02b826-4e4b-40a6-8394-c16af984ff24")
 	)
@@ -123,6 +112,7 @@
 		(thermal_bridge_angle 0)
 		(uuid "efdee08f-0893-42a0-a6cd-8bace3385c9f")
 	)
+	(embedded_fonts no)
 	(model "${KIBOAR_3DMODELS}/Kiboar_Display.3dshapes/Nice_View.step"
 		(offset
 			(xyz -1.25 7 3.5)
