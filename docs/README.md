@@ -29,6 +29,27 @@ python3 tools/gen_docs.py --check  # fail when they are stale
 The generator lists every footprint of every library and every symbol, so the
 docs cannot silently miss a component.
 
+## Footprint previews
+
+Each component page shows the footprint as an SVG (F.Cu, F.SilkS, F.CrtYd,
+F.Fab) and the STEP model in an interactive viewer. The SVGs are committed
+under `public/footprints/`; regenerate them after changing a footprint:
+
+```bash
+mkdir -p /tmp/fp
+for lib in footprints/*.pretty; do
+  name=$(basename "$lib" .pretty)
+  kicad-cli fp export svg -o "/tmp/fp/$name" --layers F.Cu,F.SilkS,F.CrtYd,F.Fab --black-and-white "$lib"
+done
+npx svgo -r -f /tmp/fp -o docs/public/footprints --multipass
+python3 tools/gen_docs.py
+```
+
+The viewer downloads the STEP from
+`raw.githubusercontent.com/raulmoracode/Kiboar/main/3dmodels/…` when it scrolls
+into view, so the models are not duplicated into the site. Components without a
+model show the footprint and a "No 3D model" box.
+
 ## Deploy
 
 Vercel project settings:

@@ -22,5 +22,8 @@ const { lang, title, description } = Astro.props;
   </head>
   <body class="flex flex-col min-h-screen">
     <slot />
+    <script>
+      import '@/scripts/model-viewer';
+    </script>
   </body>
 </html>
