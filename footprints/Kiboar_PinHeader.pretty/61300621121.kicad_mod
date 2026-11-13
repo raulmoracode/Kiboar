@@ -160,7 +160,7 @@
 		(uuid "20643a6c-6165-4206-9ef8-c42e7d011443")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_Pinheader.3dshapes/61300621121.step"
+	(model "${KIBOAR_3DMODELS}/Kiboar_PinHeader.3dshapes/61300621121.step"
 		(offset
 			(xyz 0 -1.3 1.2)
 		)

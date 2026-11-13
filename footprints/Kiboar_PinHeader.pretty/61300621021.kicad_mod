@@ -120,7 +120,7 @@
 		(uuid "2d1466f0-1cda-4334-b7d5-a526ec29213d")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_Pinheader.3dshapes/61300621021.stp"
+	(model "${KIBOAR_3DMODELS}/Kiboar_PinHeader.3dshapes/61300621021.stp"
 		(offset
 			(xyz 0 8 2.5)
 		)
