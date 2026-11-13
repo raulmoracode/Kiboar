@@ -6,9 +6,20 @@ A PCM library archive has a fixed shape: ``metadata.json`` at the root and
 The repository root also holds the README, the tools and this script, so the
 archive is staged instead of zipping the working tree.
 
-    python3 tools/build_pcm.py                 # dist/Kiboar-<version>.zip
-    python3 tools/build_pcm.py --check         # validate, write nothing
-    python3 tools/build_pcm.py --check --schema  # also validate the JSON schema
+PCM installs the content under ``${KICAD10_3RD_PARTY}/<type>/<package id>/`` and
+prefixes library nicknames with ``PCM_`` by default (Preferences -> Packages
+and Updates -> Library nickname prefix). Both break the links stored in the
+files, so the archive is built from rewritten copies:
+
+- symbol ``Footprint`` properties get the nickname prefix;
+- footprint ``${KIBOAR_3DMODELS}`` paths become the installed 3D model path.
+
+The files in the repository keep the clone-friendly paths. Build the matching
+variant for the user's setting:
+
+    python3 tools/build_pcm.py                 # PCM_ prefix (KiCad default)
+    python3 tools/build_pcm.py --no-prefix     # prefix cleared in Preferences
+    python3 tools/build_pcm.py --check [--schema]
 """
 
 import argparse
@@ -27,6 +38,8 @@ CONTENT = ("symbols", "footprints", "3dmodels")
 ICON = os.path.join(ROOT, "pcm", "resources", "icon.png")
 TABLES = os.path.join(ROOT, "lib-table-files")
 FIXED_TIME = (1980, 1, 1, 0, 0, 0)
+MODEL_VAR = "${KIBOAR_3DMODELS}/"
+FOOTPRINT_PROPERTY = re.compile(r'(\(property "Footprint" ")([^":]+):')
 
 
 def load_metadata():
@@ -34,17 +47,42 @@ def load_metadata():
         return json.load(handle)
 
 
-def package_files():
-    """Yield (archive name, path on disk) for everything the archive holds."""
+def install_path(metadata):
+    """Where PCM puts the package inside the user's third-party folder."""
+    identifier = metadata["identifier"].replace(".", "_")
+    return "${KICAD10_3RD_PARTY}", identifier
+
+
+def package_files(metadata, prefix):
+    """Yield (archive name, path or bytes) for everything the archive holds.
+
+    Symbols and footprints are rewritten for the installed layout; everything
+    else is copied as-is and streamed from disk.
+    """
     yield "metadata.json", METADATA
     if os.path.exists(ICON):
         yield "resources/icon.png", ICON
+
+    root, identifier = install_path(metadata)
+    model_base = f"{root}/3dmodels/{identifier}/"
     for directory in CONTENT:
         base = os.path.join(ROOT, directory)
         for current, _, files in os.walk(base):
             for name in sorted(files):
                 path = os.path.join(current, name)
-                yield os.path.relpath(path, ROOT), path
+                archive = os.path.relpath(path, ROOT)
+                if path.endswith(".kicad_mod"):
+                    with open(path, encoding="utf-8") as handle:
+                        text = handle.read()
+                    yield archive, text.replace(MODEL_VAR, model_base).encode("utf-8")
+                elif path.endswith(".kicad_sym"):
+                    with open(path, encoding="utf-8") as handle:
+                        text = handle.read()
+                    yield archive, FOOTPRINT_PROPERTY.sub(
+                        lambda match: match.group(1) + prefix + match.group(2) + ":", text
+                    ).encode("utf-8")
+                else:
+                    yield archive, path
 
 
 def check(metadata, schema=False):
@@ -96,7 +134,7 @@ def check(metadata, schema=False):
             text = handle.read()
         for uri in model.findall(text):
             seen += 1
-            if not uri.startswith("${KIBOAR_3DMODELS}/"):
+            if not uri.startswith(MODEL_VAR):
                 continue
             target = os.path.join(ROOT, "3dmodels", uri.split("/", 1)[1])
             if not os.path.exists(target):
@@ -124,26 +162,41 @@ def check(metadata, schema=False):
     return problems
 
 
-def build(metadata, output):
-    files = sorted(package_files())
-    total = sum(os.path.getsize(path) for _, path in files)
+def build(metadata, output, prefix):
+    files = sorted(package_files(metadata, prefix))
+    total = sum(
+        len(data) if isinstance(data, bytes) else os.path.getsize(data)
+        for _, data in files
+    )
     os.makedirs(os.path.dirname(output) or ".", exist_ok=True)
     with zipfile.ZipFile(output, "w", zipfile.ZIP_DEFLATED, compresslevel=6) as archive:
-        for name, path in files:
+        for name, data in files:
             info = zipfile.ZipInfo(name, date_time=FIXED_TIME)
             info.external_attr = 0o644 << 16
             info.compress_type = zipfile.ZIP_DEFLATED
-            with open(path, "rb") as source, archive.open(info, "w") as target:
-                shutil.copyfileobj(source, target, 1 << 20)
-    digest = hashlib.sha256(open(output, "rb").read()).hexdigest()
-    return len(files), total, os.path.getsize(output), digest
+            with archive.open(info, "w") as target:
+                if isinstance(data, bytes):
+                    target.write(data)
+                else:
+                    with open(data, "rb") as source:
+                        shutil.copyfileobj(source, target, 1 << 20)
+    digest = hashlib.sha256()
+    with open(output, "rb") as handle:
+        for chunk in iter(lambda: handle.read(1 << 20), b""):
+            digest.update(chunk)
+    return len(files), total, os.path.getsize(output), digest.hexdigest()
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--check", action="store_true", help="validate without writing")
     parser.add_argument("--schema", action="store_true", help="also validate against the PCM JSON schema")
-    parser.add_argument("--output", help="archive path (default dist/Kiboar-<version>.zip)")
+    parser.add_argument(
+        "--no-prefix",
+        action="store_true",
+        help="build for a user who cleared the library nickname prefix",
+    )
+    parser.add_argument("--output", help="archive path (default dist/Kiboar-<version>[-no-prefix].zip)")
     args = parser.parse_args()
 
     metadata = load_metadata()
@@ -158,9 +211,12 @@ def main():
         return 0
 
     version = metadata["versions"][0]["version"]
-    output = args.output or os.path.join(ROOT, "dist", f"Kiboar-{version}.zip")
-    count, install_size, download_size, digest = build(metadata, output)
+    prefix = "" if args.no_prefix else "PCM_"
+    suffix = "-no-prefix" if args.no_prefix else ""
+    output = args.output or os.path.join(ROOT, "dist", f"Kiboar-{version}{suffix}.zip")
+    count, install_size, download_size, digest = build(metadata, output, prefix)
     print(f"{count} files -> {output}")
+    print(f"symbol footprint prefix {prefix or '(none)'}")
     print(f"install_size  {install_size}")
     print(f"download_size {download_size}")
     print(f"download_sha256 {digest}")
