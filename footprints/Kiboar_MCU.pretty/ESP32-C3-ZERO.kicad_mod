@@ -537,15 +537,4 @@
 		(uuid "7f6a84a8-7f17-41b7-8462-490985dc949d")
 	)
 	(embedded_fonts no)
-	(model "${KIPRJMOD}/EASYEDA_MODELS/ESP32-C3-Zero_1.step"
-		(offset
-			(xyz -0 0.75 0)
-		)
-		(scale
-			(xyz 1 1 1)
-		)
-		(rotate
-			(xyz -0 -0 0)
-		)
-	)
 )
