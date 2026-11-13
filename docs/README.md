@@ -50,6 +50,10 @@ The viewer downloads the STEP from
 into view, so the models are not duplicated into the site. Components without a
 model show the footprint and a "No 3D model" box.
 
+The viewer bundles `three` (MIT) and `occt-import-js` (LGPL-2.1). They are
+documentation-site dependencies, not part of the KiCad library that ships to
+users.
+
 ## Deploy
 
 Vercel project settings:
