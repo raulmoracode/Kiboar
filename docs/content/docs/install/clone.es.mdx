@@ -1,0 +1,32 @@
+---
+title: Clonar el repositorio
+description: Instalar Kiboar desde un clon de git.
+---
+
+La vía del clon te da las fuentes, las herramientas y la documentación. Necesita
+dos variables de ruta y dos tablas de librerías.
+
+```bash
+git clone https://github.com/raulmoracode/Kiboar.git
+```
+
+## Rutas
+
+En **Preferencias → Configurar rutas**, añade:
+
+| Variable | Valor |
+| --- | --- |
+| `KIBOAR_ROOT` | el directorio del clon |
+| `KIBOAR_3DMODELS` | `$KIBOAR_ROOT/3dmodels` |
+
+`KIBOAR_ROOT` lo usan las tablas de librerías. Cada footprint referencia
+`${KIBOAR_3DMODELS}` para su modelo 3D.
+
+## Tablas de librerías
+
+En **Preferencias → Gestionar librerías de símbolos → Librerías globales**,
+añade `lib-table-files/sym-lib-table`. En **Gestionar librerías de footprints**,
+añade `lib-table-files/fp-lib-table`.
+
+Los dos ficheros usan `${KIBOAR_ROOT}`. Para un solo proyecto, cópialos dentro
+del directorio del proyecto en vez de usar las tablas globales.

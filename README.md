@@ -14,6 +14,8 @@ Kiboar is a component library for building mechanical keyboards with **KiCad
 most of them — switches, keycap and plate outlines, controller boards, encoders,
 connectors, displays, LEDs and the small parts around them.
 
+📖 **Documentation:** <https://kiboar.raulmoracode.com/docs> — English and Spanish.
+
 ## Requirements
 
 **KiCad 10.0 or newer.** The files use the KiCad 10 format and KiCad 8/9 cannot

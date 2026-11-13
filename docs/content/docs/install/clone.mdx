@@ -1,0 +1,32 @@
+---
+title: Clone
+description: Install Kiboar from a git clone.
+---
+
+The clone route gives you the sources, the tools and the docs. It needs two
+path variables and two library tables.
+
+```bash
+git clone https://github.com/raulmoracode/Kiboar.git
+```
+
+## Paths
+
+In **Preferences → Configure Paths**, add:
+
+| Variable | Value |
+| --- | --- |
+| `KIBOAR_ROOT` | the clone directory |
+| `KIBOAR_3DMODELS` | `$KIBOAR_ROOT/3dmodels` |
+
+`KIBOAR_ROOT` is used by the library tables. Every footprint references
+`${KIBOAR_3DMODELS}` for its 3D model.
+
+## Library tables
+
+In **Preferences → Manage Symbol Libraries → Global Libraries**, append
+`lib-table-files/sym-lib-table`. In **Manage Footprint Libraries**, append
+`lib-table-files/fp-lib-table`.
+
+Both files reference `${KIBOAR_ROOT}`. For a single project, copy them into the
+project directory instead of using the global tables.

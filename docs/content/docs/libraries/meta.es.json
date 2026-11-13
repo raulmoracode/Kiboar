@@ -1,0 +1,28 @@
+{
+  "title": "Librer\u00edas",
+  "pages": [
+    "Kiboar_BatteryHolder",
+    "Kiboar_BatteryJack",
+    "Kiboar_Button",
+    "Kiboar_Buzzer",
+    "Kiboar_CAD",
+    "Kiboar_CBK",
+    "Kiboar_Cutout",
+    "Kiboar_Dip",
+    "Kiboar_Display",
+    "Kiboar_Encoder",
+    "Kiboar_Ethernet",
+    "Kiboar_Joystick",
+    "Kiboar_Led",
+    "Kiboar_MCU",
+    "Kiboar_MechSwitch",
+    "Kiboar_Miscellaneous",
+    "Kiboar_MountingHole",
+    "Kiboar_OtherConnectors",
+    "Kiboar_PinHeader",
+    "Kiboar_Placeholder",
+    "Kiboar_Switch",
+    "Kiboar_TRRS",
+    "Kiboar_USB-C"
+  ]
+}

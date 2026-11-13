@@ -1,0 +1,37 @@
+{
+  "name": "kiboar-docs",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "astro build",
+    "dev": "astro dev",
+    "preview": "astro preview",
+    "start": "astro dev",
+    "types:check": "astro sync && tsc --noEmit",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/react": "^7.1.7",
+    "@fumadocs/astro": "0.3.0",
+    "astro": "^7.4.10",
+    "fumadocs-core": "16.19.0",
+    "fumadocs-ui": "npm:@fumadocs/base-ui@16.19.0",
+    "occt-import-js": "^0.0.23",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "three": "^0.187.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.5",
+    "@types/mdx": "^2.0.14",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@types/three": "^0.187.0",
+    "tailwindcss": "^4.3.5",
+    "typescript": "^7.0.2"
+  },
+  "engines": {
+    "node": ">=22.23.4"
+  }
+}
