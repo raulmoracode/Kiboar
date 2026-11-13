@@ -25,6 +25,11 @@ First release, targeting **KiCad 10**.
 - GitHub Actions: a lint job and a KiCad 10 job that checks the file format and
   renders a sample footprint and symbol to SVG.
 - `NOTICE` with the third-party origins, their licences and the affected files.
+- `AGENTS.md` with the repository rules an AI agent must follow, and
+  `CONTRIBUTING.md` with the human version.
+- `3dmodels/README.md` and `tools/model_inventory.py`: the models that no
+  footprint references are kept and listed instead of silently shipping.
+- `symbols/CONTENT-REPORT.md`: the datasheet status of every symbol.
 
 ### Changed
 
@@ -36,6 +41,9 @@ First release, targeting **KiCad 10**.
   and the linked footprint.
 - Duplicate 3D models were collapsed to one copy each, and 16 references point
   at the surviving file.
+- The README now documents the 23 libraries, both install paths and the
+  licensing position; the issue forms match the project instead of the old
+  template.
 
 ### Fixed
 
@@ -45,12 +53,18 @@ First release, targeting **KiCad 10**.
   `Kiboar_Pinheader.3dshapes` → `Kiboar_PinHeader.3dshapes`.
 - A model reference to `SLLB510100.STEP` where the file is `SLLB510100.step`,
   which only resolved on case-insensitive filesystems.
+- `SKTHBAE010` pointed at the datasheet of `SKTHAHE010`, a different part.
 
 ### Known gaps
 
-- 57 symbols have no `Description` and 86 have no `Datasheet`; resolving them
-  needs a source per part (tracked separately).
-- 32 model files are not referenced by any footprint (tracked separately).
+- 85 symbols have no `Datasheet`; 35 of the 61 existing URLs were verified, 24
+  are blocked by bot protection and 2 are dead. Resolving the rest needs a
+  distributor API key or a manual source per part.
+- The 87 descriptions that were empty are filled from the symbol family and
+  part name, not from a datasheet; they are marked as derived in
+  `symbols/CONTENT-REPORT.md`.
+- 31 model files are not referenced by any footprint; they are kept as source
+  material and listed in `3dmodels/README.md`.
 - **Licensing:** the collection is mixed. The switch, hotswap, cutout and
   stabilizer models are MIT / CC BY-SA 4.0, ten symbols are CC BY-SA 4.0
   SnapEDA imports, and the ScottoKeebs models and three footprints are
