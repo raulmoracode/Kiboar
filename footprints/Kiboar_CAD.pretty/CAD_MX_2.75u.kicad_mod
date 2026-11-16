@@ -154,7 +154,7 @@
 			(xyz 0 0 0)
 		)
 	)
-	(model "${KIBOAR_3DMODELS}/Kiboar_MechSwitch.3dshapes/Kimora_CAD.3dshapes/MX_2.75u_CAD.step"
+	(model "${KIBOAR_3DMODELS}/Kiboar_CAD.3dshapes/MX_2.75u_CAD.step"
 		(offset
 			(xyz 0 0 11.9)
 		)
