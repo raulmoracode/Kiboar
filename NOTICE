@@ -17,7 +17,7 @@ cited; it is not legal advice.
 
 Files:
 
-- `3dmodels/Kiboar_MechSwitch.3dshapes/Kimora_CAD.3dshapes/*_CAD.step` —
+- `3dmodels/Kiboar_CAD.3dshapes/*_CAD.step` —
   the sixteen keycap/plate models sized `MX_1.00u` … `MX_10.00u` and
   `Choc_1.00u` … `Choc_1.75u`.
 - `3dmodels/Kiboar_MCU.3dshapes/Nice_Nano_V2.step`,
