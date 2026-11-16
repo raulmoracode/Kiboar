@@ -1,11 +1,11 @@
 {
   "title": "Documentaci\u00f3n",
   "pages": [
+    "---Primeros pasos---",
     "index",
     "install",
-    "usage",
-    "symbols",
     "libraries",
+    "---Proyecto---",
     "contributing",
     "licensing"
   ]

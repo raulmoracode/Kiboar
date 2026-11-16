@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import 'fumadocs-ui/css/generated/spacious.css';
 @import 'fumadocs-ui/css/neutral.css';
 @import 'fumadocs-ui/css/preset.css';
 
@@ -9,6 +10,38 @@ html {
 html > body[data-scroll-locked] {
   margin-right: 0px !important;
   --removed-body-scroll-bar-size: 0px !important;
+}
+
+/* Sidebar section separators ("Getting started", "Project"): larger than the
+   page items so the two sections read as headings. */
+#nd-sidebar p:has(> .fd-page-tree-item-name),
+#nd-sidebar-mobile p:has(> .fd-page-tree-item-name) {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-fd-foreground);
+}
+
+/* Home family labels are real headings so they reach the TOC; keep the compact
+   uppercase label look instead of the prose heading style. */
+.kiboar-home h2 {
+  margin: 2.5rem 0 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.05em;
+  color: var(--color-fd-muted-foreground);
+  scroll-margin-top: 6rem;
+}
+
+/* Library pages list one card per component; their Markdown headings are the
+   card titles, so keep them compact instead of the prose heading size. */
+.kiboar-library h2 {
+  margin: 2rem 0 0.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+  scroll-margin-top: 5rem;
 }
 
 kiboar-model {

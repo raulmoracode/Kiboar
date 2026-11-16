@@ -31,8 +31,8 @@ First release, targeting **KiCad 10**.
   footprint references are kept and listed instead of silently shipping.
 - `symbols/CONTENT-REPORT.md`: the datasheet status of every symbol.
 - Documentation site (Astro 7 + Fumadocs) in `docs/`, English at `/docs` and
-  Spanish at `/es/docs`, with generated pages for all 23 libraries, all 146
-  symbols and a page per footprint with its SVG and an interactive 3D viewer.
+  Spanish at `/es/docs`, with generated pages for all 23 libraries, their
+  footprint SVGs and an interactive 3D viewer.
 
 ### Changed
 

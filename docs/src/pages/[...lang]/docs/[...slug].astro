@@ -29,6 +29,9 @@ const { lang, page } = Astro.props;
 const { body: Content, toc } = await page.data.load();
 const pageTree = await source.serializePageTree(source.getPageTree(lang));
 const provider = { lang, pathname: Astro.url.pathname, params: Astro.params };
+const isLibraryPage = page.slugs[0] === 'libraries';
+const pageClass =
+  page.slugs.length === 0 ? 'kiboar-home' : isLibraryPage ? 'kiboar-library' : undefined;
 ---
 
 <Layout lang={lang} title={page.data.title} description={page.data.description}>
@@ -39,7 +42,10 @@ const provider = { lang, pathname: Astro.url.pathname, params: Astro.params };
     tree={pageTree}
     title={page.data.title}
     description={page.data.description}
-    hideTitle={page.slugs.length === 0}
+    hideTitle={page.slugs.length === 0 || isLibraryPage}
+    hideDescription={page.slugs[0] === 'libraries'}
+    full={page.slugs.length === 0 || page.slugs[0] === 'libraries'}
+    className={pageClass}
     toc={toc}
   >
     <Content {...provider} />

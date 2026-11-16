@@ -1,0 +1,13 @@
+{
+  "title": "Conectores y energ\u00eda",
+  "pages": [
+    "Kiboar_BatteryHolder",
+    "Kiboar_BatteryJack",
+    "Kiboar_CBK",
+    "Kiboar_Ethernet",
+    "Kiboar_OtherConnectors",
+    "Kiboar_PinHeader",
+    "Kiboar_TRRS",
+    "Kiboar_USB-C"
+  ]
+}

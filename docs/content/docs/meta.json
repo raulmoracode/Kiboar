@@ -1,11 +1,11 @@
 {
   "title": "Documentation",
   "pages": [
+    "---Getting started---",
     "index",
     "install",
-    "usage",
-    "symbols",
     "libraries",
+    "---Project---",
     "contributing",
     "licensing"
   ]

@@ -1,7 +1,17 @@
 import wasmUrl from 'occt-import-js/dist/occt-import-js.wasm?url';
 
+const MESSAGE_STYLE = `p{margin:0;display:flex;align-items:center;justify-content:center;height:100%;padding:0 1rem;text-align:center;font-size:.875rem;line-height:1.25rem;color:var(--color-fd-muted-foreground,#737373)}`;
+
+/**
+ * The viewer renders inside a shadow root: writing to the light DOM would
+ * change the HTML React hydrates and break the island (TOC included).
+ */
+function shadow(host: HTMLElement) {
+  return host.shadowRoot ?? host.attachShadow({ mode: 'open' });
+}
+
 function message(host: HTMLElement, text: string) {
-  host.innerHTML = `<p class="flex h-full items-center justify-center px-4 text-center text-sm text-fd-muted-foreground">${text}</p>`;
+  shadow(host).innerHTML = `<style>${MESSAGE_STYLE}</style><p>${text}</p>`;
 }
 
 class KiboarModel extends HTMLElement {
@@ -100,9 +110,8 @@ class KiboarModel extends HTMLElement {
 
       const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      this.replaceChildren(renderer.domElement);
-      renderer.domElement.style.width = '100%';
-      renderer.domElement.style.height = '100%';
+      shadow(this).replaceChildren(renderer.domElement);
+      renderer.domElement.style.width = '100%';      renderer.domElement.style.height = '100%';
       renderer.domElement.style.display = 'block';
 
       const controls = new OrbitControls(camera, renderer.domElement);

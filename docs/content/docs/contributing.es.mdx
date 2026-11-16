@@ -6,13 +6,30 @@ description: Cómo añadir un componente.
 La versión larga está en [`CONTRIBUTING.md`](https://github.com/raulmoracode/Kiboar/blob/main/CONTRIBUTING.md).
 La corta:
 
-1. Abre o reutiliza una issue y crea una rama `fix/<issue>-<slug>` o
-   `feat/<issue>-<slug>`.
-2. Añade el footprint a la librería `Kiboar_*.pretty` que corresponda, con
-   courtyard y un `(attr ...)` que coincida con los pads.
-3. Añade el símbolo con `Manufacturer`, `MPN`, `ki_keywords` y un
-   `ki_fp_filters` que coincida con el footprint.
-4. Ejecuta las comprobaciones:
+## Flujo de trabajo
+
+<Steps>
+<Step>
+
+Abre o reutiliza una issue y crea una rama `fix/<issue>-<slug>` o
+`feat/<issue>-<slug>`.
+
+</Step>
+<Step>
+
+Añade el footprint a la librería `Kiboar_*.pretty` que corresponda, con
+courtyard y un `(attr ...)` que coincida con los pads.
+
+</Step>
+<Step>
+
+Añade el símbolo con `Manufacturer`, `MPN`, `ki_keywords` y un
+`ki_fp_filters` que coincida con el footprint.
+
+</Step>
+<Step>
+
+Ejecuta las comprobaciones:
 
 ```bash
 python3 tools/lint.py
@@ -21,6 +38,14 @@ python3 tools/normalize_symbols.py --check
 python3 tools/model_inventory.py --check
 ```
 
-5. Abre un pull request con la salida de los comandos, no con una afirmación.
+</Step>
+<Step>
 
+Abre un pull request con la salida de los comandos, no con una afirmación.
+
+</Step>
+</Steps>
+
+<Callout type="info">
 Los datos CAD nuevos necesitan su origen y licencia en `NOTICE`.
+</Callout>

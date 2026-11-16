@@ -2,9 +2,7 @@
 """Generate the component pages of the documentation site.
 
 Every footprint is listed in the page of its library, with pads, mount type,
-courtyard and 3D model, and every symbol is listed with its reference,
-manufacturer, MPN, datasheet and linked footprint. Nothing in the library is
-left out of the docs.
+courtyard and 3D model. Nothing in the library is left out of the docs.
 
     python3 tools/gen_docs.py            # write the pages
     python3 tools/gen_docs.py --check    # fail when a page is stale
@@ -177,45 +175,84 @@ FAMILY_GROUPS = (
 )
 
 
+# Families rendered as a collapsible sidebar folder. A folder is a real
+# directory, so its pages move below it and their URL follows.
+FAMILY_FOLDERS = {
+    "Switches and keycaps": "switches-and-keycaps",
+    "Electronics": "electronics",
+    "Connectors and power": "connectors-and-power",
+    "Board and controls": "board-and-controls",
+}
+
+LIBRARY_FOLDERS = {
+    library: folder
+    for (english, _), members in FAMILY_GROUPS
+    if (folder := FAMILY_FOLDERS.get(english))
+    for library in members
+}
+
+
+def library_route(library):
+    """Path of a library page below ``libraries``, folder included."""
+    folder = LIBRARY_FOLDERS.get(library)
+    return f"libraries/{folder}/{library}" if folder else f"libraries/{library}"
+
+
+def folder_titles(folder):
+    for (english, translated), _ in FAMILY_GROUPS:
+        if FAMILY_FOLDERS.get(english) == folder:
+            return english, translated
+    raise KeyError(folder)
+
+
+def library_label(library):
+    """Page and sidebar name: the family part of the library, without Kiboar_."""
+    return library[len("Kiboar_") :] if library.startswith("Kiboar_") else library
+
+
 def family_card(library, count, prefix):
-    label = library[len("Kiboar_") :] if library.startswith("Kiboar_") else library
+    label = library_label(library)
+    count_text = plural(count, "footprint")
     preview = library_preview(library)
-    image = (
-        f'<img loading="lazy" src="{preview}" alt="" class="max-h-full max-w-full dark:invert" />'
-        if preview
-        else ""
-    )
+    icon = ""
+    if preview:
+        icon = (
+            ' icon={<span className="flex h-20 w-28 items-center justify-center">'
+            f'<img loading="lazy" src="{preview}" alt="" className="max-h-full max-w-full object-contain dark:invert" />'
+            "</span>}"
+        )
     return (
-        f'  <a class="group flex flex-col rounded-xl border bg-fd-card p-3 no-underline transition hover:border-fd-primary/60"'
-        f' href="{prefix}/docs/libraries/{library}">'
-        f'<span class="flex h-24 items-center justify-center rounded-lg bg-white p-2 dark:bg-transparent">{image}</span>'
-        f'<span class="mt-3 text-sm font-medium text-fd-foreground">{label}</span>'
-        f'<span class="text-xs text-fd-muted-foreground">{plural(count, "footprint")}</span>'
-        "</a>"
+        f'  <Card title="{label}" description="{count_text}"'
+        f' href="{prefix}/docs/{library_route(library)}"{icon} />'
     )
+
+
+def family_groups(library_counts):
+    """The libraries split by what they are for, leftovers under More."""
+    placed = set()
+    groups = []
+    for labels, members in FAMILY_GROUPS:
+        present = [library for library in members if library in library_counts]
+        placed.update(present)
+        if present:
+            groups.append((labels, present))
+
+    leftover = sorted(set(library_counts) - placed)
+    if leftover:
+        groups.append((("More", "Más"), leftover))
+    return groups
 
 
 def home_block(library_counts, spanish):
     """The footprint libraries, grouped by what they are for."""
     lines = []
     prefix = "/es" if spanish else ""
-    placed = set()
-    groups = []
-    for (english, translated), members in FAMILY_GROUPS:
-        present = [library for library in members if library in library_counts]
-        placed.update(present)
-        if present:
-            groups.append(((english, translated), present))
-
-    leftover = sorted(set(library_counts) - placed)
-    if leftover:
-        groups.append((("More", "Más"), leftover))
-
-    for (english, translated), members in groups:
+    for (english, translated), members in family_groups(library_counts):
         heading = translated if spanish else english
         lines += [
             "",
-            f'<h2 class="not-prose mt-10 mb-3 text-xs font-semibold uppercase tracking-wider text-fd-muted-foreground">{heading}</h2>',
+            f"## {heading}",
+            "",
             '<div class="not-prose grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">',
         ]
         for library in members:
@@ -233,13 +270,6 @@ def home_page(name, library_counts, spanish):
     _, tail = rest.split(HOME_END, 1)
     block = home_block(library_counts, spanish)
     return head + HOME_START + "\n" + block + "\n" + HOME_END + tail
-
-
-def property_value(block, name):
-    for prop in sexpr.children(block, "property"):
-        if len(prop) > 2 and sexpr.unquote(prop[1]) == name:
-            return sexpr.unquote(prop[2])
-    return ""
 
 
 def footprint_rows(path):
@@ -275,35 +305,38 @@ def footprint_rows(path):
     }
 
 
-# Libraries rendered as component cards instead of a table. Start with the
-# small ones; a 1071-row library would need pagination before it can use cards.
-CARD_LIBRARIES = {"Kiboar_USB-C"}
-
-
 def library_cards(library, footprints, spanish):
+    en_text, es_text = LIBRARY_TEXT.get(library, ("", ""))
+    text = es_text if spanish else en_text
     lines = [
         "---",
-        f'title: "{library}"',
+        f'title: "{library_label(library)}"',
+    ]
+    if text:
+        lines.append(f'description: "{text}"')
+    lines += [
         "---",
         "",
-        '<div class="not-prose my-6 flex flex-col gap-6">',
     ]
     for row in footprints:
         name = row["name"]
         lines += [
-            '  <article class="rounded-xl border bg-fd-card p-4">',
-            f'    <h2 class="text-lg font-semibold">{cell(name)}</h2>',
-            '    <div class="mt-4 grid gap-4 sm:grid-cols-2">',
-            f'      <img loading="lazy" src="/footprints/{library}/{quote(name)}.svg" alt="{cell(name)} footprint" class="w-full rounded-lg border bg-white p-2" />',
+            f"## {cell(name)}",
+            "",
+            '<article class="not-prose my-4 rounded-xl border bg-fd-card p-4">',
+            '  <div class="grid gap-4 sm:grid-cols-2">',
+            f'    <img loading="lazy" src="/footprints/{library}/{quote(name)}.svg" alt="{cell(name)} footprint" class="w-full rounded-lg border bg-white p-2" />',
         ]
         if row["models"]:
+            lines.append('    <div class="grid content-start gap-4">')
             for uri in row["models"]:
                 rel = uri.split("/", 1)[1]
                 raw = f"https://raw.githubusercontent.com/raulmoracode/Kiboar/main/3dmodels/{quote(rel)}"
                 lines.append(f'      <kiboar-model compact url="{raw}"></kiboar-model>')
+            lines.append("    </div>")
         else:
             lines.append(
-                '      <div class="flex h-56 items-center justify-center rounded-lg border text-sm text-fd-muted-foreground">No 3D model</div>'
+                '    <div class="flex h-56 items-center justify-center rounded-lg border text-sm text-fd-muted-foreground">No 3D model</div>'
             )
         headers = (
             ("Pads", "Attr", "Courtyard", "Modelo 3D", "Descripción")
@@ -318,8 +351,9 @@ def library_cards(library, footprints, spanish):
             cell(row["description"]) or "—",
         )
         lines += [
-            "    </div>",
-            '    <table class="mt-4 w-full border-collapse text-left text-sm">',
+            "  </div>",
+            '  <div class="mt-4 overflow-x-auto">',
+            '    <table class="w-full min-w-[36rem] border-collapse text-left text-sm">',
             "      <thead><tr>",
         ]
         for header in headers:
@@ -327,94 +361,8 @@ def library_cards(library, footprints, spanish):
         lines += ["      </tr></thead>", "      <tbody><tr>"]
         for value in values:
             lines.append(f'        <td class="border-b px-2 py-1">{value}</td>')
-        lines += ["      </tr></tbody>", "    </table>", "  </article>"]
-    lines += ["</div>", ""]
+        lines += ["      </tr></tbody>", "    </table>", "  </div>", "</article>", ""]
     return "\n".join(lines)
-
-
-def library_page(library, footprints, spanish):
-    if library in CARD_LIBRARIES:
-        return library_cards(library, footprints, spanish)
-    en_text, es_text = LIBRARY_TEXT.get(library, ("", ""))
-    title = library.replace("Kiboar_", "Kiboar ")
-    text = es_text if spanish else en_text
-    lines = [
-        "---",
-        f'title: "{library}"',
-        f'description: "{text}"',
-        "---",
-        "",
-        text,
-        "",
-        f"**{len(footprints)} footprints.**",
-        "",
-        "| Footprint | Pads | Attr | Courtyard | 3D model | Description |",
-        "| --- | --- | --- | --- | --- | --- |",
-    ]
-    for row in footprints:
-        lines.append(
-            f"| `{cell(row['name'])}` | {cell(row['pads'])} | `{cell(row['attr'])}` | {row['courtyard']} | "
-            f"`{cell(row['model'])}` | {cell(row['description'])} |"
-        )
-    return "\n".join(lines) + "\n"
-
-
-def symbol_rows():
-    with open(os.path.join(ROOT, "symbols", "Kiboar.kicad_sym"), encoding="utf-8") as handle:
-        tree = sexpr.parse(handle.read())
-    symbols = []
-    for block in tree[1:]:
-        if not (isinstance(block, list) and block and block[0] == "symbol"):
-            continue
-        name = sexpr.unquote(block[1])
-        symbols.append(
-            {
-                "name": name,
-                "family": name.split("_", 1)[0],
-                "reference": property_value(block, "Reference"),
-                "manufacturer": property_value(block, "Manufacturer"),
-                "mpn": property_value(block, "MPN"),
-                "description": property_value(block, "Description"),
-                "datasheet": property_value(block, "Datasheet"),
-                "footprint": property_value(block, "Footprint"),
-            }
-        )
-    return symbols
-
-
-def symbols_page(symbols, spanish):
-    intro = (
-        "Todos los símbolos de la librería, agrupados por familia. El enlace de "
-        "datasheet solo aparece cuando la URL existe."
-        if spanish
-        else "Every symbol in the library, grouped by family. The datasheet link "
-        "only appears when the URL exists."
-    )
-    lines = [
-        "---",
-        'title: "Symbols"' if not spanish else 'title: "Símbolos"',
-        'description: "Todos los símbolos de Kiboar."' if spanish else 'description: "Every Kiboar symbol."',
-        "---",
-        "",
-        intro,
-        "",
-        f"**{len(symbols)} symbols.**",
-    ]
-    families = {}
-    for symbol in symbols:
-        families.setdefault(symbol["family"], []).append(symbol)
-    for family in sorted(families):
-        lines += ["", f"## {family}", "", "| Symbol | Ref | Manufacturer | MPN | Description | Datasheet | Footprint |", "| --- | --- | --- | --- | --- | --- | --- |"]
-        for symbol in sorted(families[family], key=lambda item: item["name"]):
-            datasheet = (
-                f"[PDF]({symbol['datasheet']})" if symbol["datasheet"] else "—"
-            )
-            footprint = symbol["footprint"] or "—"
-            lines.append(
-                f"| `{cell(symbol['name'])}` | `{cell(symbol['reference'])}` | {cell(symbol['manufacturer'])} | "
-                f"`{cell(symbol['mpn']) or '—'}` | {cell(symbol['description'])} | {datasheet} | `{cell(footprint)}` |"
-            )
-    return "\n".join(lines) + "\n"
 
 
 def meta(title, pages):
@@ -423,17 +371,25 @@ def meta(title, pages):
     return json.dumps({"title": title, "pages": pages}, indent=2) + "\n"
 
 
+def library_meta(library_counts, spanish):
+    """The Libraries folder: a collapsible folder per family, or a separator."""
+    pages = []
+    for (english, translated), members in family_groups(library_counts):
+        folder = FAMILY_FOLDERS.get(english)
+        if folder:
+            pages.append(folder)
+        else:
+            pages.append(f"---{translated if spanish else english}---")
+            pages.extend(members)
+    return meta("Librerías" if spanish else "Libraries", pages)
+
+
 def generated_files():
     files = {}
     libraries = sorted(
         os.path.basename(path)[: -len(".pretty")]
         for path in glob.glob(os.path.join(ROOT, "footprints", "*.pretty"))
     )
-    symbols = symbol_rows()
-
-    files["symbols.mdx"] = symbols_page(symbols, False)
-    files["symbols.es.mdx"] = symbols_page(symbols, True)
-    library_pages = []
     for library in libraries:
         footprints = [
             footprint_rows(path)
@@ -441,9 +397,9 @@ def generated_files():
                 glob.glob(os.path.join(ROOT, "footprints", library + ".pretty", "*.kicad_mod"))
             )
         ]
-        files[f"libraries/{library}.mdx"] = library_page(library, footprints, False)
-        files[f"libraries/{library}.es.mdx"] = library_page(library, footprints, True)
-        library_pages.append(library)
+        route = library_route(library)
+        files[f"{route}.mdx"] = library_cards(library, footprints, False)
+        files[f"{route}.es.mdx"] = library_cards(library, footprints, True)
 
     library_counts = {
         library: len(glob.glob(os.path.join(ROOT, "footprints", library + ".pretty", "*.kicad_mod")))
@@ -451,10 +407,39 @@ def generated_files():
     }
     files["index.mdx"] = home_page("index.mdx", library_counts, False)
     files["index.es.mdx"] = home_page("index.es.mdx", library_counts, True)
-    files["libraries/meta.json"] = meta("Libraries", library_pages)
-    files["libraries/meta.es.json"] = meta("Librerías", library_pages)
-    files["meta.json"] = meta("Documentation", ["index", "install", "usage", "symbols", "libraries", "contributing", "licensing"])
-    files["meta.es.json"] = meta("Documentación", ["index", "install", "usage", "symbols", "libraries", "contributing", "licensing"])
+    files["libraries/meta.json"] = library_meta(library_counts, False)
+    files["libraries/meta.es.json"] = library_meta(library_counts, True)
+    for folder in FAMILY_FOLDERS.values():
+        english, translated = folder_titles(folder)
+        members = [library for library in libraries if LIBRARY_FOLDERS.get(library) == folder]
+        files[f"libraries/{folder}/meta.json"] = meta(english, members)
+        files[f"libraries/{folder}/meta.es.json"] = meta(translated, members)
+    # Fumadocs renders "---Name---" as a titled separator. It labels a group of
+    # pages that cannot share a folder, because Home is the root index at /docs.
+    files["meta.json"] = meta(
+        "Documentation",
+        [
+            "---Getting started---",
+            "index",
+            "install",
+            "libraries",
+            "---Project---",
+            "contributing",
+            "licensing",
+        ],
+    )
+    files["meta.es.json"] = meta(
+        "Documentación",
+        [
+            "---Primeros pasos---",
+            "index",
+            "install",
+            "libraries",
+            "---Proyecto---",
+            "contributing",
+            "licensing",
+        ],
+    )
     return files
 
 

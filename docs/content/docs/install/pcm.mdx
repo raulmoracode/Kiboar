@@ -22,15 +22,29 @@ python3 tools/build_pcm.py --no-prefix
 
 ## Install
 
-1. Open **Tools → Plugin and Content Manager → Install from File…**.
-2. Choose `dist/Kiboar-1.0.0.zip` (or `-no-prefix.zip`).
-3. Apply the pending changes.
+<Steps>
+<Step>
+
+Open **Tools → Plugin and Content Manager → Install from File…**.
+
+</Step>
+<Step>
+
+Choose `dist/Kiboar-1.0.0.zip` (or `-no-prefix.zip`).
+
+</Step>
+<Step>
+
+Apply the pending changes.
+
+</Step>
+</Steps>
 
 The package rewrites the model paths to
 `${KICAD10_3RD_PARTY}/3dmodels/com_github_raulmoracode_kiboar/`, so the 3D
 viewer works without setting any variable.
 
-## Not in the official repository yet
-
+<Callout type="warn" title="Not in the official repository yet">
 The package is not listed in the PCM repository. Until it is, use **Install from
 File** with a ZIP built from this repository, or the clone route.
+</Callout>
