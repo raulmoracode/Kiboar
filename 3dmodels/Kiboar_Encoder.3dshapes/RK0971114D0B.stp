@@ -4,8 +4,8 @@ FILE_DESCRIPTION (( 'STEP AP214' ),
     '1' );
 FILE_NAME ('rk0971114d0b.STEP',
     '2023-12-06T18:23:30',
-    ( '' ),
-    ( '' ),
+    ('Raul Mora'),
+    ('Kiboar'),
     'SwSTEP 2.0',
     'SolidWorks 2023',
     '' );

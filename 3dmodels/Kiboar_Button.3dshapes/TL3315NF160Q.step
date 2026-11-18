@@ -1,7 +1,7 @@
 ISO-10303-21;
 HEADER;
 FILE_DESCRIPTION( ( '' ), ' ' );
-FILE_NAME( '/vol/tmp/translate-7462708494147154879/59cf98681aa3f50cc58828b5.step', '2017-09-30T13:13:12', ( '' ), ( '' ), ' ', ' ', ' ' );
+FILE_NAME( '/vol/tmp/translate-7462708494147154879/59cf98681aa3f50cc58828b5.step', '2017-09-30T13:13:12', ('Raul Mora'), ('Kiboar'), ' ', ' ', ' ' );
 FILE_SCHEMA( ( 'AUTOMOTIVE_DESIGN { 1 0 10303 214 1 1 1 1 }' ) );
 ENDSEC;
 DATA;

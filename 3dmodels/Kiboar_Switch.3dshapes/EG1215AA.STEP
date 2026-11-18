@@ -4,8 +4,8 @@ FILE_DESCRIPTION (( 'STEP AP214' ),
     '1' );
 FILE_NAME ('EG1215AA.STEP',
     '2019-02-16T01:48:01',
-    ( '' ),
-    ( '' ),
+    ('Raul Mora'),
+    ('Kiboar'),
     'SwSTEP 2.0',
     'SolidWorks 2017',
     '' );

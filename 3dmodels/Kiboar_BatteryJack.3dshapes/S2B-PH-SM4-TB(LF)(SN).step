@@ -4,8 +4,8 @@ FILE_DESCRIPTION (( 'STEP AP214' ),
     '1' );
 FILE_NAME ('S2B-PH-SM4-TB(LF)(SN).STEP',
     '2018-11-06T09:01:19',
-    ( '' ),
-    ( '' ),
+    ('Raul Mora'),
+    ('Kiboar'),
     'SwSTEP 2.0',
     'SolidWorks 2017',
     '' );

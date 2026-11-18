@@ -9,6 +9,7 @@ silently undo them:
 - symbol metadata is normalized (names, references, manufacturer fields);
 - every symbol footprint link resolves, case included;
 - every 3D model path is a known variable and resolves, case included;
+- every original model and symbol carries the author and MIT stamp;
 - library directories follow the ``Kiboar_*`` naming and do not collide by case.
 
     python3 tools/lint.py
@@ -23,6 +24,7 @@ import sys
 import gen_courtyard
 import kicad_sexpr as sexpr
 import normalize_symbols
+import provenance
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MODEL_VARIABLES = ("${KIBOAR_3DMODELS}/", "${KICAD10_3DMODEL_DIR}/")
@@ -149,6 +151,7 @@ def main():
     check_libraries(problems)
     check_footprints(problems)
     check_symbols(problems)
+    problems.extend(provenance.check())
 
     for problem in problems[: args.limit]:
         print(problem)

@@ -3,7 +3,7 @@ HEADER;
 FILE_DESCRIPTION(('FreeCAD Model'),'2;1');
 FILE_NAME(
 '/Users/danny/syncproj/kicad-libs/footprints/Keebio-Parts.pretty/3dmodel
-s/SK6812MINI-E v1.step','2020-05-27T14:55:22',('Author'),(''),
+s/SK6812MINI-E v1.step','2020-05-27T14:55:22',('Raul Mora'),('Kiboar'),
   'Open CASCADE STEP processor 7.3','FreeCAD','Unknown');
 FILE_SCHEMA(('AUTOMOTIVE_DESIGN { 1 0 10303 214 1 1 1 1 }'));
 ENDSEC;

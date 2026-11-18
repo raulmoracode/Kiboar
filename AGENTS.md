@@ -70,8 +70,13 @@ If any byte changes, the source was not current: commit the upgraded files.
 ### Licensing
 
 - `NOTICE` is authoritative. The collection is **mixed-licence**: original work
-  is MIT; kiswitch models are MIT / CC BY-SA; ten SnapEDA symbols are CC BY-SA;
-  the ScottoKeebs models are **CC BY-NC-SA**.
+  is MIT; kiswitch models are MIT / CC BY-SA; ten SnapEDA symbols and five
+  Component Search Engine symbols are CC BY-SA; the ScottoKeebs models are
+  **CC BY-NC-SA**; one fuse model is **CC BY-ND**.
+- Original models and symbols carry their authorship in the file, written by
+  `tools/provenance.py`. The tool's `EXTERNAL_MODELS` and `EXTERNAL_SYMBOLS`
+  are the machine-readable half of `NOTICE`: add a file there before you add
+  third-party CAD, or the stamp will claim it.
 - Do not relicense third-party files, do not remove or weaken `NOTICE`, and do
   not add new non-commercial content.
 - New CAD data needs its origin and licence recorded in `NOTICE`, or must be
@@ -96,6 +101,7 @@ python3 tools/lint.py                    # every rule in one place
 python3 tools/gen_courtyard.py --check   # courtyards
 python3 tools/normalize_symbols.py --check
 python3 tools/model_inventory.py --check
+python3 tools/provenance.py --check      # authorship stamps (also inside lint)
 ```
 
 For a PCM or docs change, also:

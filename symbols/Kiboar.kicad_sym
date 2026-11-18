@@ -78,6 +78,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "BatteryHolder_1016_Keystone_0_0"
 			(polyline
 				(pts
@@ -290,6 +312,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "BatteryHolder_1020_Keystone_0_0"
 			(polyline
 				(pts
@@ -492,6 +536,28 @@
 			)
 		)
 		(property "ki_keywords" "battery holder"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -716,6 +782,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "BatteryHolder_103_Keystone_0_0"
 			(polyline
 				(pts
@@ -918,6 +1006,28 @@
 			)
 		)
 		(property "ki_keywords" "battery holder"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1140,6 +1250,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "BatteryHolder_1065_Keystone_0_0"
 			(polyline
 				(pts
@@ -1342,6 +1474,28 @@
 			)
 		)
 		(property "ki_keywords" "battery holder"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1564,6 +1718,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "BatteryHolder_2466_Keystone_0_0"
 			(polyline
 				(pts
@@ -1766,6 +1942,28 @@
 			)
 		)
 		(property "ki_keywords" "battery holder"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1995,6 +2193,28 @@
 			)
 		)
 		(property "ki_keywords" "battery holder"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2236,6 +2456,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "BatteryJack_JST_S2B-PH-K-S_(LF)(SN)_0_0"
 			(rectangle
 				(start -5.08 -5.08)
@@ -2358,6 +2600,28 @@
 			)
 		)
 		(property "ki_fp_filters" "S2B-PH-SM4-TB(LF)(SN)"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2538,6 +2802,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "BatteryJack_Pins_0_0"
 			(rectangle
 				(start -6.35 3.81)
@@ -2667,6 +2953,28 @@
 			)
 		)
 		(property "ki_fp_filters" "434123025816"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2853,6 +3161,28 @@
 			)
 		)
 		(property "ki_fp_filters" "B3U-1000P"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3335,6 +3665,28 @@
 				(justify left top)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "Button_EVP-AEDB2A_1_1"
 			(rectangle
 				(start -7.62 5.08)
@@ -3511,6 +3863,28 @@
 			)
 		)
 		(property "ki_fp_filters" "EVP-AKE31A"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4092,6 +4466,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "Button_EVQ-9P701P_0_0"
 			(polyline
 				(pts
@@ -4429,6 +4825,28 @@
 				(justify left top)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "Button_EVQ-PUA02K_1_1"
 			(rectangle
 				(start 5.08 2.54)
@@ -4683,6 +5101,28 @@
 				(justify left top)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "Button_PTS647SM38SMTR2LFS_1_1"
 			(rectangle
 				(start -5.08 3.81)
@@ -4846,6 +5286,28 @@
 			)
 		)
 		(property "ki_fp_filters" "PTS820 J25K SMTR LFS_CNK"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5345,6 +5807,28 @@
 				(justify left top)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "Button_SKHHAKA010_1_1"
 			(rectangle
 				(start -5.08 3.81)
@@ -5599,6 +6083,28 @@
 				(justify left top)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "Button_SKHHLNA010_1_1"
 			(rectangle
 				(start -5.08 3.81)
@@ -5762,6 +6268,28 @@
 			)
 		)
 		(property "ki_fp_filters" "SW_SKHLACA010_ALPS"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6187,6 +6715,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "Button_SKQGAFE010_0_0"
 			(polyline
 				(pts
@@ -6525,6 +7075,28 @@
 				(justify left top)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "Button_SKQYABE010_1_1"
 			(rectangle
 				(start -6.35 3.81)
@@ -6719,6 +7291,28 @@
 				(justify left top)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "Button_SKRKAEE020_1_1"
 			(rectangle
 				(start -5.08 3.81)
@@ -6845,6 +7439,28 @@
 			)
 		)
 		(property "ki_fp_filters" "SKRPADE010"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7156,6 +7772,28 @@
 					(size 1.27 1.27)
 				)
 				(justify left top)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(symbol "Button_SKTHBAE010_1_1"
@@ -7647,6 +8285,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "Button_TL3336AF160Q_0_0"
 			(polyline
 				(pts
@@ -7899,6 +8559,28 @@
 					(size 1.27 1.27)
 				)
 				(justify left top)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(symbol "CBK_2301843-2_1_1"
@@ -8281,6 +8963,28 @@
 				(justify left top)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "CBK_2311765-1_1_1"
 			(rectangle
 				(start 5.08 7.62)
@@ -8661,6 +9365,28 @@
 				(justify left top)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "CBK_5212044-1_1_1"
 			(rectangle
 				(start 5.08 2.54)
@@ -8969,6 +9695,28 @@
 				(justify left top)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "CBK_5749181-1_1_1"
 			(rectangle
 				(start 5.08 2.54)
@@ -9251,6 +9999,28 @@
 					(size 1.27 1.27)
 				)
 				(justify left top)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(symbol "CBK_90130-3308_1_1"
@@ -9553,6 +10323,28 @@
 					(size 1.27 1.27)
 				)
 				(justify left top)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(symbol "CBK_90130-3310_1_1"
@@ -9915,6 +10707,28 @@
 					(size 1.27 1.27)
 				)
 				(justify left top)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(symbol "CBK_90130-3312_1_1"
@@ -10289,6 +11103,28 @@
 					(size 1.27 1.27)
 				)
 				(justify left top)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(symbol "CBK_90130-3314_1_1"
@@ -10699,6 +11535,28 @@
 					(size 1.27 1.27)
 				)
 				(justify left top)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(symbol "CBK_90136-2104_1_1"
@@ -11622,6 +12480,28 @@
 				(justify left top)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "CBK_L77HDE15SD1CH4F_1_1"
 			(rectangle
 				(start 5.08 2.54)
@@ -12086,6 +12966,28 @@
 				(justify left top)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "Dip_418121270804_1_1"
 			(rectangle
 				(start 5.08 2.54)
@@ -12388,6 +13290,28 @@
 				(justify left top)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "Dip_418127270904_1_1"
 			(rectangle
 				(start 5.08 2.54)
@@ -12631,6 +13555,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "Display_OLED_128x32_0_1"
 			(rectangle
 				(start 0 5.08)
@@ -12804,6 +13750,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "Display_OLED_128x64_0_1"
 			(rectangle
 				(start -11.43 0)
@@ -12964,6 +13932,28 @@
 			)
 		)
 		(property "ki_fp_filters" "NICE!VIEW"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -13224,6 +14214,28 @@
 				(justify left top)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "Encoder_EC10E1260507_1_1"
 			(rectangle
 				(start 5.08 2.54)
@@ -13470,6 +14482,28 @@
 					(size 1.27 1.27)
 				)
 				(justify left top)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(symbol "Encoder_EC11E15204A3_1_1"
@@ -13932,6 +14966,28 @@
 			)
 		)
 		(property "ki_fp_filters" "EVQWGD001"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -14512,6 +15568,28 @@
 				(justify left top)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "Encoder_RK0971114D0B_1_1"
 			(rectangle
 				(start 5.08 2.54)
@@ -14688,6 +15766,28 @@
 			)
 		)
 		(property "ki_fp_filters" "RK09K113004U"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -14934,6 +16034,28 @@
 			)
 		)
 		(property "ki_fp_filters" "RK10J11E0034"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -15265,6 +16387,28 @@
 				(justify left top)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "Encoder_SLLB120200_1_1"
 			(rectangle
 				(start 5.08 12.7)
@@ -15531,6 +16675,28 @@
 			)
 		)
 		(property "ki_fp_filters" "SLLB510100"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -16000,6 +17166,28 @@
 				(justify left top)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "Ethernet_1-1734795-1_1_1"
 			(rectangle
 				(start 5.08 2.54)
@@ -16434,6 +17622,28 @@
 				(justify left top)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "Ethernet_1734795-1_1_1"
 			(rectangle
 				(start 5.08 2.54)
@@ -16830,6 +18040,28 @@
 					(size 1.27 1.27)
 				)
 				(justify left top)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(symbol "Ethernet_2041411-1_1_1"
@@ -18037,6 +19269,28 @@
 				(justify left top)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "Ethernet_6339160-1_1_1"
 			(rectangle
 				(start 5.08 2.54)
@@ -18847,6 +20101,28 @@
 				(justify left top)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "Ethernet_85502-5005_1_1"
 			(rectangle
 				(start 5.08 2.54)
@@ -19077,6 +20353,28 @@
 				(justify left top)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "Ethernet_95501-2441_1_1"
 			(rectangle
 				(start 5.08 2.54)
@@ -19235,6 +20533,28 @@
 			)
 		)
 		(property "ki_fp_filters" "2765"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -19454,6 +20774,28 @@
 			)
 		)
 		(property "ki_keywords" "joystick switch"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -19850,6 +21192,28 @@
 				(justify left top)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "JOYSTICK_COM-10063_1_1"
 			(rectangle
 				(start 5.08 10.16)
@@ -20080,6 +21444,28 @@
 			)
 		)
 		(property "ki_fp_filters" "FJ08K-S"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -20324,6 +21710,28 @@
 			)
 		)
 		(property "ki_fp_filters" "MUAS90R"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -20722,6 +22130,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "JOYSTICK_SKHCBEA010_0_0"
 			(polyline
 				(pts
@@ -20963,6 +22393,28 @@
 			)
 		)
 		(property "ki_fp_filters" "SKHHCWA010"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -21286,6 +22738,28 @@
 				(justify left top)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "JOYSTICK_TL3301TF100QG_1_1"
 			(rectangle
 				(start 5.08 2.54)
@@ -21444,6 +22918,28 @@
 			)
 		)
 		(property "ki_fp_filters" "OF-SMD3528WC"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -21678,6 +23174,28 @@
 			)
 		)
 		(property "ki_fp_filters" "LED*SK6812MINI*PLCC*3.5x3.5mm*P1.75mm*"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -21952,6 +23470,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "LED_SK6812MINI-E_0_0"
 			(text "RGB"
 				(at 2.286 -4.191 0)
@@ -22195,6 +23735,28 @@
 			)
 		)
 		(property "ki_keywords" "led"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -22469,6 +24031,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "LED_SK6812SMINI_0_0"
 			(text "RGB"
 				(at 2.286 -4.191 0)
@@ -22725,6 +24309,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "LED_THT_LED_0_0"
 			(polyline
 				(pts
@@ -22935,6 +24541,28 @@
 			)
 		)
 		(property "ki_fp_filters" "LED*WS2812*PLCC*5.0x5.0mm*P3.2mm*"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -23209,6 +24837,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "LED_WS2812B-MINI_0_0"
 			(text "RGB"
 				(at 2.286 -4.191 0)
@@ -23463,6 +25113,28 @@
 			)
 		)
 		(property "ki_fp_filters" "ATMEGA328P-PU"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -24077,6 +25749,28 @@
 			)
 		)
 		(property "ki_fp_filters" "ATMEGA32A-AU"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -24988,6 +26682,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "MCU_ATMEGA32A-PU_0_0"
 			(circle
 				(center -8.89 25.908)
@@ -25818,6 +27534,28 @@
 			)
 		)
 		(property "ki_fp_filters" "ATMEGA32U4-AU"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -26741,6 +28479,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "MCU_Adafruit_KB2040_1_1"
 			(rectangle
 				(start -10.16 16.51)
@@ -27308,6 +29068,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "MCU_Arduino_Pro_Micro_1_1"
 			(rectangle
 				(start -10.16 16.51)
@@ -27836,6 +29618,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "MCU_ESP32-C3-Zero_0_0"
 			(rectangle
 				(start -5.08 15.24)
@@ -28258,6 +30062,28 @@
 			)
 		)
 		(property "ki_keywords" "microcontroller module board"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -28942,6 +30768,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "MCU_Elite-C_0_0"
 			(pin bidirectional line
 				(at -12.7 13.97 0)
@@ -29582,6 +31430,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "MCU_Esp32-C3-Super-Mini-Pins_0_0"
 			(pin unspecified line
 				(at -10.16 10.16 0)
@@ -29961,6 +31831,28 @@
 			)
 		)
 		(property "ki_fp_filters" "Nice_Nano_V2"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -30532,6 +32424,28 @@
 			)
 		)
 		(property "ki_keywords" "microcontroller module board"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -31513,6 +33427,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "MCU_RP2040-LCD-0.96_Waveshare_0_0"
 			(polyline
 				(pts
@@ -32403,6 +34339,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "MCU_RP2040-PLUS-WAVESHARE_0_0"
 			(circle
 				(center -10.16 25.4)
@@ -33232,6 +35190,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "MCU_RP2040-TINY_WITH_3D_MODEL_WAVESHARE_0_0"
 			(rectangle
 				(start -5.08 12.7)
@@ -33745,6 +35725,28 @@
 			)
 		)
 		(property "ki_fp_filters" "RP2040-ZERO_WAVESHARECENTER"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -38423,6 +40425,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "MCU_RP2040_Pro_Micro_0_1"
 			(rectangle
 				(start -13.97 16.51)
@@ -39069,6 +41093,28 @@
 			)
 		)
 		(property "ki_fp_filters" "RP2xxx_Stamp"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -39923,6 +41969,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "MCU_RP2040_Zero_0_1"
 			(rectangle
 				(start -10.16 11.43)
@@ -40425,6 +42493,28 @@
 			)
 		)
 		(property "ki_fp_filters" "Raspberry_Pi_Pico"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -41297,6 +43387,28 @@
 			)
 		)
 		(property "ki_fp_filters" "STM32F072CBT6"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -42280,6 +44392,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "MCU_STM32F411CEU6_BLACK_PILL_V3.0_0_0"
 			(text "STM32F411CEU6"
 				(at 14.7003 -8.89 900)
@@ -43190,6 +45324,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "MCU_Seeed_XIAO_RP2040_0_1"
 			(rectangle
 				(start -16.51 10.16)
@@ -43519,6 +45675,28 @@
 			)
 		)
 		(property "ki_keywords" "microcontroller module board"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -44157,6 +46335,28 @@
 			)
 		)
 		(property "ki_fp_filters" "WeAct-STM32G431CBU6"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -45129,6 +47329,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "MCU_WeAct_CH552T_0_1"
 			(rectangle
 				(start -11.43 20.32)
@@ -45587,6 +47809,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "OtherConnector_PRT-14417_0_0"
 			(polyline
 				(pts
@@ -45856,6 +48100,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "PIM452_0_0"
 			(text "PIM452"
 				(at -6.35 6.35 0)
@@ -46045,6 +48311,28 @@
 			)
 		)
 		(property "ki_keywords" "microcontroller module board"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -47343,6 +49631,28 @@
 				(justify left top)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "PinHeader_610106249121_1_1"
 			(rectangle
 				(start 5.08 2.54)
@@ -47607,6 +49917,28 @@
 					(size 1.27 1.27)
 				)
 				(justify left top)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(symbol "PinHeader_610110249121_1_1"
@@ -50410,6 +52742,28 @@
 				(justify left top)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "Placeholder_MLLC_1_1"
 			(polyline
 				(pts
@@ -50576,6 +52930,28 @@
 			)
 		)
 		(property "ki_fp_filters" "Crystal*"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -50796,6 +53172,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "Placeholder_Diode_0_1"
 			(polyline
 				(pts
@@ -50961,6 +53359,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "Placeholder_Fuse_0_1"
 			(polyline
 				(pts
@@ -51094,6 +53514,28 @@
 			)
 		)
 		(property "ki_keywords" "switch normally-open pushbutton push-button"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -51302,6 +53744,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "Placeholder_LED_0_1"
 			(polyline
 				(pts
@@ -51488,6 +53952,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "Placeholder_Mounting_Hole_0_1"
 			(circle
 				(center 0 0)
@@ -51581,6 +54067,28 @@
 			)
 		)
 		(property "ki_fp_filters" "*polyfuse* *PTC*"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -51755,6 +54263,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "Placeholder_Resistor_0_1"
 			(rectangle
 				(start 2.54 -1.016)
@@ -51876,6 +54406,28 @@
 			)
 		)
 		(property "ki_keywords" "switch normally-open pushbutton push-button"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -52049,6 +54601,28 @@
 			)
 		)
 		(property "ki_fp_filters" "EG1215AA"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -52274,6 +54848,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "SWITCH_JS102011SAQN_0_0"
 			(circle
 				(center -1.778 2.54)
@@ -52452,6 +55048,28 @@
 			)
 		)
 		(property "ki_fp_filters" "MSK12C02"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -52899,6 +55517,28 @@
 				(justify left top)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "SWITCH_SSAJ120100_1_1"
 			(rectangle
 				(start 5.08 2.54)
@@ -53129,6 +55769,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "SWITCH_SSAL220100_0_0"
 			(polyline
 				(pts
@@ -53270,6 +55932,28 @@
 			)
 		)
 		(property "ki_fp_filters" "SSSS213100"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -53476,6 +56160,28 @@
 			)
 		)
 		(property "ki_fp_filters" "SSSS811101"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -53807,6 +56513,28 @@
 				(justify left top)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "TRRS_PJ-320A_1_1"
 			(rectangle
 				(start 5.08 2.54)
@@ -54011,6 +56739,28 @@
 					(size 1.27 1.27)
 				)
 				(justify left top)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(symbol "TRRS_PJ-320D_1_1"
@@ -54267,6 +57017,28 @@
 				(justify left top)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "TRRS_SJ-43514_1_1"
 			(rectangle
 				(start 5.08 2.54)
@@ -54519,6 +57291,28 @@
 					(size 1.27 1.27)
 				)
 				(justify left top)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(symbol "TRRS_SJ-43514-SMT-TR_1_1"
@@ -54809,6 +57603,28 @@
 					(size 1.27 1.27)
 				)
 				(justify left top)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(symbol "USB-C_216990-0001_1_1"
@@ -55329,6 +58145,28 @@
 				(justify left top)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "USB-C_216990-0002_1_1"
 			(rectangle
 				(start -11.43 12.7)
@@ -55791,6 +58629,28 @@
 				)
 			)
 		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(symbol "USB-C_217179-0001_0_0"
 			(rectangle
 				(start -12.7 -17.78)
@@ -56165,6 +59025,28 @@
 			)
 		)
 		(property "ki_fp_filters" "USB_C_HRO_TYPE-C-31-M-14"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Author" "Raul Mora"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "License" "MIT"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)

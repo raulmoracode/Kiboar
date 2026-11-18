@@ -1,8 +1,7 @@
 ISO-10303-21;
 HEADER;
 FILE_DESCRIPTION(('Open CASCADE Model'),'2;1');
-FILE_NAME('Open CASCADE Shape Model','2023-06-30T11:24:57',('Author'),(
-    'Open CASCADE'),'Open CASCADE STEP processor 6.5','Open CASCADE 6.5'
+FILE_NAME('Open CASCADE Shape Model','2023-06-30T11:24:57',('Raul Mora'),('Kiboar'),'Open CASCADE STEP processor 6.5','Open CASCADE 6.5'
   ,'Unknown');
 FILE_SCHEMA(('AUTOMOTIVE_DESIGN { 1 0 10303 214 1 1 1 1 }'));
 ENDSEC;

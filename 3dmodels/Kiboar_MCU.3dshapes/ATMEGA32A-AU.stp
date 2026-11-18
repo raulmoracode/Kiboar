@@ -1,8 +1,8 @@
 ISO-10303-21;
 HEADER;
 FILE_DESCRIPTION(('FreeCAD Model'),'2;1');
-FILE_NAME('/var/www/3D/0T/4595.4.1.stp','2020-09-30T08:18:50',('Author')
-  ,(''),'Open CASCADE STEP processor 6.9','FreeCAD','Unknown');
+FILE_NAME('/var/www/3D/0T/4595.4.1.stp','2020-09-30T08:18:50',('Raul Mora')
+  ,('Kiboar'),'Open CASCADE STEP processor 6.9','FreeCAD','Unknown');
 FILE_SCHEMA(('AUTOMOTIVE_DESIGN { 1 0 10303 214 1 1 1 1 }'));
 ENDSEC;
 DATA;

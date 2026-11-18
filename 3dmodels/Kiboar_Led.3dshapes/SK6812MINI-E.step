@@ -11,8 +11,8 @@ FILE_DESCRIPTION(
 FILE_NAME(
 /* name */ 'LED_SK6812MINI-E.step',
 /* time_stamp */ '2024-07-13T17:10:55+02:00',
-/* author */ (''),
-/* organization */ (''),
+('Raul Mora'),
+('Kiboar'),
 /* preprocessor_version */ 'ST-DEVELOPER v20',
 /* originating_system */ 'Autodesk Translation Framework v13.14.0.145',
 

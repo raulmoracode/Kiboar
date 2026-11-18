@@ -2,7 +2,7 @@ ISO-10303-21;
 HEADER;
 FILE_DESCRIPTION(('FreeCAD Model'),'2;1');
 FILE_NAME('C:/Users/paul/Downloads/RDE5C1H330J0M1H03A.STEP',
-  '2022-01-31T08:49:20',('Author'),(''),
+  '2022-01-31T08:49:20',('Raul Mora'),('Kiboar'),
   'Open CASCADE STEP processor 6.8','FreeCAD','Unknown');
 FILE_SCHEMA(('AUTOMOTIVE_DESIGN_CC2 { 1 2 10303 214 -1 1 5 4 }'));
 ENDSEC;
