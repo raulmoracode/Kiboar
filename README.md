@@ -10,7 +10,7 @@
 # Kiboar
 
 Kiboar is a component library for building mechanical keyboards with **KiCad
-10**: 146 symbols, 1332 footprints in 23 footprint libraries, and 3D models for
+10**: 146 symbols, 1329 footprints in 23 footprint libraries, and 3D models for
 most of them — switches, keycap and plate outlines, controller boards, encoders,
 connectors, displays, LEDs and the small parts around them.
 
@@ -122,8 +122,8 @@ Kiboar is a **mixed-licence collection**:
 
 Two consequences matter before you use the library commercially:
 
-- the ScottoKeebs models and three footprints are **CC BY-NC-SA 4.0**, which
-  forbids commercial use;
+- the ScottoKeebs models are **CC BY-NC-SA 4.0**, which forbids commercial
+  use;
 - ten symbols are SnapEDA imports under **CC BY-SA 4.0** with the Design
   Exception, so they need attribution when the files themselves are
   redistributed.
