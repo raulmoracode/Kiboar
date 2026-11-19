@@ -23,10 +23,12 @@ as organization, and the symbols carry two hidden properties, `Author` and
 `--check`, so a missing stamp, or a stamp on a file listed as third-party,
 fails the build.
 
-Counts at the time of writing: 114 models and 131 symbols carry the stamp;
-84 of the 198 models and 15 of the 146 symbols are third-party, and are listed
-below. The stamp is not a blanket claim: it is the exact complement of this
-file.
+Counts at the time of writing: 114 models and 131 symbols carry the stamp.
+Another 11 models come from the Keyswitch KiCad Library and are used under its
+MIT option: they are MIT, and they carry no stamp because the authorship is not
+the library author's. The remaining 73 of the 198 models and 15 of the 146
+symbols are third-party under a non-MIT licence, and are listed below. The stamp
+is not a blanket claim: it marks original work only.
 
 The STEP header is an ASCII field, so the author is spelled `Raul Mora` there.
 `LICENSE` and this file keep the accented legal name.
@@ -86,25 +88,32 @@ required, and redistribution is capped at ten Design Files per location without
 written permission. This repository is exactly at that cap; an eleventh imported
 file needs permission.
 
-### Keyswitch KiCad Library — MIT OR CC BY-SA 4.0
+### Keyswitch KiCad Library — MIT, elected
 
-Files: the switch, hotswap and stabilizer models under
-`3dmodels/Kiboar_MechSwitch.3dshapes/`, `3dmodels/Kiboar_Cutout.3dshapes/` and
-`3dmodels/Kiboar_Stabilizer.3dshapes/`, plus some of the footprints under
-`footprints/Kiboar_MechSwitch.pretty/`, `footprints/Kiboar_Cutout.pretty/` and
-`footprints/Kiboar_Stabilizer.pretty/`. The repository does not record which
-footprints, so the whole library is credited rather than a guessed subset.
+Files: the eleven models under `3dmodels/Kiboar_MechSwitch.3dshapes/`,
+`3dmodels/Kiboar_Cutout.3dshapes/` and `3dmodels/Kiboar_Stabilizer.3dshapes/`,
+plus some of the footprints under `footprints/Kiboar_MechSwitch.pretty/`,
+`footprints/Kiboar_Cutout.pretty/` and `footprints/Kiboar_Stabilizer.pretty/`.
+The repository does not record which footprints, so the whole library is
+credited rather than a guessed subset.
 
-Evidence: all eleven of these models are byte-identical to files in the
-upstream library, verified with SHA-256, and the STEP headers name
-`kicad StepUp` with paths under `Switch_Keyboard_*`. The upstream repository
-ships exactly eleven STEP models, so the match is complete rather than
-sampled.
+Evidence: all eleven models are byte-identical to files in the upstream
+library, verified with SHA-256, and the STEP headers name `kicad StepUp` with
+paths under `Switch_Keyboard_*`. The upstream repository ships exactly eleven
+STEP models, so the match is complete rather than sampled.
 
-Source: <https://github.com/kiswitch/keyswitch-kicad-library>.
-Licence: dual MIT / CC BY-SA 4.0 (`LICENSE-MIT` and `LICENSE-CC-BY-SA`).
+Source: <https://github.com/kiswitch/keyswitch-kicad-library>. The upstream
+README states: "The library is dual licensed under MIT and CC-BY-SA 4.0".
 
-**Verdict: MIT-compatible** when attributed. Use the MIT option.
+Licence: this repository **elects the MIT option** for the files above. The MIT
+copyright notice and permission notice are reproduced verbatim in
+[`LICENSE-kiswitch`](LICENSE-kiswitch): copyright (c) 2019-2022
+keyswitch-kicad-library contributors. The files stay byte-identical to upstream;
+only the licence choice is ours.
+
+**Verdict: MIT.** The origin is still recorded, and `tools/provenance.py` keeps
+the eleven models in `MIT_MODELS` so that no author stamp is written over
+someone else's work.
 
 ### KiCad official libraries — CC BY-SA 4.0 with exception
 
@@ -225,6 +234,8 @@ library.
   models and symbols say so in the file.
 - The ScottoKeebs content under CC BY-NC-SA 4.0 **blocks commercial
   distribution** of the collection as it stands.
+- The Keyswitch KiCad Library models are **MIT** under the option elected here;
+  `LICENSE-kiswitch` carries their copyright and permission notice.
 - No file in the collection is under a NoDerivatives licence: the one that was,
   `Fuse_PPTC1.stp`, has been removed.
 - Before a v1.0.0 release: replace the Scotto models with original work or

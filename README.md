@@ -123,8 +123,10 @@ Kiboar is a **mixed-licence collection**:
 The split is not a guess. 114 of the 198 models and 131 of the 146 symbols are
 original work, and say so in the file: the STEP `FILE_NAME` header names the
 author and `Kiboar`, and the symbols carry hidden `Author` and `License`
-properties. `tools/lint.py` fails when a stamp is missing. The rest is 84
-models and 15 symbols, each listed in `NOTICE`.
+properties. `tools/lint.py` fails when a stamp is missing. A further 11 models
+come from the Keyswitch KiCad Library under its MIT option and carry no stamp,
+because they are not this author's work. The rest is 73 models and 15 symbols,
+each listed in `NOTICE`.
 
 Two consequences matter before you use the library commercially:
 
@@ -135,13 +137,14 @@ Two consequences matter before you use the library commercially:
   attribution when the files themselves are redistributed.
 
 The switch, hotswap, cutout and stabilizer models come from the Keyswitch KiCad
-Library, which is dual-licensed **MIT / CC BY-SA 4.0**, and can be used under
-the MIT option.
+Library, which is dual-licensed **MIT / CC BY-SA 4.0**. This repository uses
+them under the MIT option; [`LICENSE-kiswitch`](LICENSE-kiswitch) carries the
+copyright and permission notice.
 
 ## Credits
 
 - [Keyswitch KiCad Library](https://github.com/kiswitch/keyswitch-kicad-library)
-  (perigoso, obra, rrotter, Lotier) — MIT / CC BY-SA 4.0
+  (perigoso, obra, rrotter, Lotier) — used under the MIT option
 - [ScottoKeebs / ScottoKicad](https://github.com/joe-scotto/scottokeebs) — CC BY-NC-SA 4.0
 - [SnapEDA / SnapMagic](https://www.snapeda.com) — CC BY-SA 4.0 with Design Exception 1.0
 - [marbastlib](https://github.com/ebastler/marbastlib), [keyswitches.pretty](https://github.com/daprice/keyswitches.pretty)
