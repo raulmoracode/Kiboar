@@ -8,16 +8,7 @@ FILE_DESCRIPTION(
 /* description */ (''),
 /* implementation_level */ '2;1');
 
-FILE_NAME(
-/* name */ 
-'C:\\Users\\master\\Documents\\GitHub\\qmk_hardware\\components\\kailh
-_socket_mx.stp',
-/* time_stamp */ '2018-03-31T23:20:14+02:00',
-/* author */ ('master'),
-/* organization */ (''),
-/* preprocessor_version */ 'ST-DEVELOPER v16.13',
-/* originating_system */ 'Autodesk Inventor 2018',
-/* authorisation */ '');
+FILE_NAME('KailhSocket.stp', '2018-03-31T23:20:14+02:00', ('Raul Mora'), ('Kiboar'), 'ST-DEVELOPER v16.13', 'Autodesk Inventor 2018', '');
 
 FILE_SCHEMA (('CONFIG_CONTROL_DESIGN'));
 ENDSEC;

@@ -1,7 +1,7 @@
 ISO-10303-21;
 HEADER;
 FILE_DESCRIPTION( ( 'Unknown' ), '1' );
-FILE_NAME( 'I:/User_Groups_Only/17_EMC_Product_&_Development/Article_Master/eiCan/Switch/SwDITV/Master_Data/01_CAD_drawing/1_Drawing/418127xxx/4181272709xx_RueyShen/4181272709xx/Construction_Data/4181272709xx/418127270904/418127270904.stp', 'Unknown', ( 'Unknown' ), ( 'Unknown' ), 'PSStep 17.0.49', 'Unknown', '  ' );
+FILE_NAME('418127270904.stp', 'Unknown', ('Raul Mora'), ('Kiboar'), 'PSStep 17.0.49', 'Unknown', '  ');
 FILE_SCHEMA( ( 'AUTOMOTIVE_DESIGN { 1 0 10303 214 1 1 1 1 }' ) );
 ENDSEC;
 DATA;

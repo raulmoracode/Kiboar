@@ -8,14 +8,7 @@ FILE_DESCRIPTION(
 /* description */ (''),
 /* implementation_level */ '2;1');
 
-FILE_NAME(
-/* name */ 'C:/Users/drew/Documents/GitHub/hb44/3D/nice!view.step',
-/* time_stamp */ '2022-10-10T02:07:41-05:00',
-/* author */ (''),
-/* organization */ (''),
-/* preprocessor_version */ 'ST-DEVELOPER v19',
-/* originating_system */ 'Autodesk Translation Framework v11.7.0.108',
-/* authorisation */ '');
+FILE_NAME('Nice_View.step', '2022-10-10T02:07:41-05:00', ('Raul Mora'), ('Kiboar'), 'ST-DEVELOPER v19', 'Autodesk Translation Framework v11.7.0.108', '');
 
 FILE_SCHEMA (('AUTOMOTIVE_DESIGN { 1 0 10303 214 3 1 1 }'));
 ENDSEC;

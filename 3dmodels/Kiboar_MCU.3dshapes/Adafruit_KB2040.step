@@ -8,17 +8,7 @@ FILE_DESCRIPTION(
 /* description */ (''),
 /* implementation_level */ '2;1');
 
-FILE_NAME(
-/* name */ 
-'/Users/purplemac/Dropbox/3D/Products/KB2040/CAD/Adafruit KB2040 v2.st
-ep',
-/* time_stamp */ '2021-12-06T15:46:22-05:00',
-/* author */ (''),
-/* organization */ (''),
-/* preprocessor_version */ 'ST-DEVELOPER v18.1',
-/* originating_system */ 'Autodesk Translation Framework v10.10.0.1391',
-
-/* authorisation */ '');
+FILE_NAME('Adafruit_KB2040.step', '2021-12-06T15:46:22-05:00', ('Raul Mora'), ('Kiboar'), 'ST-DEVELOPER v18.1', 'Autodesk Translation Framework v10.10.0.1391', '');
 
 FILE_SCHEMA (('AUTOMOTIVE_DESIGN { 1 0 10303 214 3 1 1 }'));
 ENDSEC;
