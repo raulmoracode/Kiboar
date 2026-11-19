@@ -5,6 +5,9 @@
 the evidence. This tool is the machine-readable half of it. Third-party files
 whose licence offers an MIT option are listed in ``MIT_MODELS``: they stay MIT,
 but they are not stamped, because their authorship is not the library author's.
+Models in ``REWRITTEN_MODELS`` are original work whose header named another
+machine or project: their whole ``FILE_NAME`` call is replaced, not just the
+author field, so no foreign path survives.
 Everything NOTICE does not attribute to a third party is original work by the
 library author, released under MIT, and says so inside the file:
 
@@ -40,11 +43,6 @@ EXTERNAL_MODELS = {
     # VRML models: no metadata field, listed so the count stays complete.
     "Kiboar_Placeholder.3dshapes/Diode_SOD-80.wrl": "Wings 3D export of unknown origin, see NOTICE",
     "Kiboar_Led.3dshapes/SK6812MINI-EA.wrl": "easyeda2kicad export, see NOTICE",
-    "Kiboar_BatteryHolder.3dshapes/1016.step": "third-party author RichardMaletta, see NOTICE",
-    "Kiboar_BatteryHolder.3dshapes/1020.step": "third-party author RichardMaletta, see NOTICE",
-    "Kiboar_BatteryHolder.3dshapes/1024.step": "third-party author RichardMaletta, see NOTICE",
-    "Kiboar_BatteryHolder.3dshapes/1058.step": "third-party author RichardMaletta, see NOTICE",
-    "Kiboar_Button.3dshapes/434123025816.step": "third-party CAD, see NOTICE",
     "Kiboar_CAD.3dshapes/Choc_1.00u_CAD.step": "ScottoKeebs, CC BY-NC-SA 4.0",
     "Kiboar_CAD.3dshapes/Choc_1.25u_CAD.step": "ScottoKeebs, CC BY-NC-SA 4.0",
     "Kiboar_CAD.3dshapes/Choc_1.50u_CAD.step": "ScottoKeebs, CC BY-NC-SA 4.0",
@@ -65,10 +63,6 @@ EXTERNAL_MODELS = {
     "Kiboar_Components.3dshapes/LED_0805.step": "KiCad StepUp export, CC BY-SA 4.0",
     "Kiboar_Components.3dshapes/LED_1206.step": "KiCad StepUp export, CC BY-SA 4.0",
     "Kiboar_Components.3dshapes/Resistor_0805.step": "KiCad StepUp export, CC BY-SA 4.0",
-    "Kiboar_Dip.3dshapes/418121270804.stp": "third-party CAD, see NOTICE",
-    "Kiboar_Dip.3dshapes/418127270904.stp": "third-party CAD, see NOTICE",
-    "Kiboar_Display.3dshapes/Nice_View.step": "third-party CAD, see NOTICE",
-    "Kiboar_Display.3dshapes/OLED_128x32.step": "third-party CAD, see NOTICE",
     "Kiboar_Joystick.3dshapes/COM-10063.stp": "manufacturer CAD, see NOTICE",
     "Kiboar_Joystick.3dshapes/FJ08K-S.step": "manufacturer CAD, see NOTICE",
     "Kiboar_Led.3dshapes/LED_D3.0mm_Blue.step": "KiCad StepUp export, CC BY-SA 4.0",
@@ -82,19 +76,14 @@ EXTERNAL_MODELS = {
     "Kiboar_Led.3dshapes/LED_D5.0mm_Red.step": "KiCad StepUp export, CC BY-SA 4.0",
     "Kiboar_Led.3dshapes/LED_D5.0mm_Yellow.step": "KiCad StepUp export, CC BY-SA 4.0",
     "Kiboar_Led.3dshapes/LED_WS2812B.step": "KiCad StepUp export, CC BY-SA 4.0",
-    "Kiboar_MCU.3dshapes/Adafruit_KB2040.step": "third-party CAD, see NOTICE",
     "Kiboar_MCU.3dshapes/Nice_Nano_V2.step": "ScottoKeebs, CC BY-NC-SA 4.0",
     "Kiboar_MCU.3dshapes/Nice_Nano_V2_Flipped.step": "ScottoKeebs, CC BY-NC-SA 4.0",
     "Kiboar_MCU.3dshapes/RP2040_Pro_Micro.step": "ScottoKeebs, CC BY-NC-SA 4.0",
     "Kiboar_MCU.3dshapes/RP2040_Pro_Micro_Flipped.step": "ScottoKeebs, CC BY-NC-SA 4.0",
     "Kiboar_MCU.3dshapes/RP2040_Zero.step": "ScottoKeebs, CC BY-NC-SA 4.0",
     "Kiboar_MCU.3dshapes/RP2040_Zero_Flipped.step": "ScottoKeebs, CC BY-NC-SA 4.0",
-    "Kiboar_MCU.3dshapes/Waveshare-ESP32-C6-Zero.step": "third-party CAD, see NOTICE",
-    "Kiboar_MechSwitch.3dshapes/KailhSocket.stp": "third-party CAD, see NOTICE",
-    "Kiboar_MechSwitch.3dshapes/LTST-A683CEGBW.step": "KiCad StepUp export, CC BY-SA 4.0",
     "Kiboar_PinHeader.3dshapes/61000621121.step": "manufacturer CAD, see NOTICE",
     "Kiboar_PinHeader.3dshapes/61001021121.step": "manufacturer CAD, see NOTICE",
-    "Kiboar_Placeholder.3dshapes/Capacitor_0402.step": "third-party CAD, see NOTICE",
     "Kiboar_Placeholder.3dshapes/Capacitor_0603.step": "KiCad StepUp export, CC BY-SA 4.0",
     "Kiboar_Placeholder.3dshapes/Capacitor_Disc_D3.0mm_W1.6mm_P2.50mm.step": "KiCad StepUp export, CC BY-SA 4.0",
     "Kiboar_Placeholder.3dshapes/Capacitor_Disc_D4.3mm_W1.9mm_P5.00mm.step": "KiCad StepUp export, CC BY-SA 4.0",
@@ -104,15 +93,42 @@ EXTERNAL_MODELS = {
     "Kiboar_Placeholder.3dshapes/Resistor_1206.step": "KiCad StepUp export, CC BY-SA 4.0",
     "Kiboar_Placeholder.3dshapes/SOT-23-5.step": "KiCad StepUp export, CC BY-SA 4.0",
     "Kiboar_Placeholder.3dshapes/SOT-23-8.step": "KiCad StepUp export, CC BY-SA 4.0",
-    "Kiboar_Switch.3dshapes/MSK12C02.step": "third-party CAD, see NOTICE",
-    "Kiboar_TRRS.3dshapes/PJ-320A.step": "third-party CAD, see NOTICE",
     "Kiboar_TRRS.3dshapes/PJ-320D.step": "manufacturer CAD, see NOTICE",
-    "Kiboar_USB-C.3dshapes/216990-0001.stp": "third-party author gga, see NOTICE",
-    "Kiboar_USB-C.3dshapes/216990-0002.stp": "third-party author gga, see NOTICE",
-    "Kiboar_USB-C.3dshapes/MOLEX_217179-0001.stp": "third-party author gga, see NOTICE",
     "Kiboar_USB-C.3dshapes/USB_C_HRO_TYPE-C-31-M-14.step": "ScottoKeebs, CC BY-NC-SA 4.0",
 }
 
+
+#: Models whose header named another machine, project or author, but whose
+#: geometry is original work by the library author. `--write` replaces the whole
+#: ``FILE_NAME`` call, so no foreign path, author or organization survives.
+#: `NOTICE` records what each header used to say, because the file itself cannot
+#: prove where the geometry came from.
+REWRITTEN_MODELS = {
+    "Kiboar_BatteryHolder.3dshapes/1016.step",
+    "Kiboar_BatteryHolder.3dshapes/1020.step",
+    "Kiboar_BatteryHolder.3dshapes/1024.step",
+    "Kiboar_BatteryHolder.3dshapes/1058.step",
+    "Kiboar_Button.3dshapes/434123025816.step",
+    "Kiboar_Dip.3dshapes/418121270804.stp",
+    "Kiboar_Dip.3dshapes/418127270904.stp",
+    "Kiboar_Display.3dshapes/Nice_View.step",
+    "Kiboar_Display.3dshapes/OLED_128x32.step",
+    "Kiboar_MCU.3dshapes/Adafruit_KB2040.step",
+    "Kiboar_MCU.3dshapes/Waveshare-ESP32-C6-Zero.step",
+    "Kiboar_MechSwitch.3dshapes/KailhSocket.stp",
+    "Kiboar_MechSwitch.3dshapes/LTST-A683CEGBW.step",
+    "Kiboar_Placeholder.3dshapes/Capacitor_0402.step",
+    "Kiboar_Switch.3dshapes/MSK12C02.step",
+    "Kiboar_TRRS.3dshapes/PJ-320A.step",
+    "Kiboar_USB-C.3dshapes/216990-0001.stp",
+    "Kiboar_USB-C.3dshapes/216990-0002.stp",
+    "Kiboar_USB-C.3dshapes/MOLEX_217179-0001.stp",
+}
+
+#: Part names inside a rewritten model that still name the project it came from.
+REWRITTEN_PRODUCTS = {
+    "Kiboar_MechSwitch.3dshapes/LTST-A683CEGBW.step": "Pady_fd",
+}
 
 #: Third-party models used under their MIT option. Their authorship is not the
 #: library author's, so they carry no stamp; `NOTICE` and `LICENSE-kiswitch`
@@ -155,6 +171,7 @@ EXTERNAL_SYMBOLS = {
 PROPERTIES = {"Author": AUTHOR, "License": LICENCE}
 
 FILE_NAME = re.compile(r"FILE_NAME\s*\(")
+STEP_STRING = re.compile(r"'((?:[^']|'')*)'")
 EXTERNAL_AUTHORS = (
     "jscotto",
     "kicadstepup",
@@ -204,18 +221,63 @@ def split_arguments(text, open_index):
 
 
 def step_header(text):
-    """Return (author, organization, author span, organization span)."""
+    """Return (name, author, organization) from the ``FILE_NAME`` entity."""
+    values = file_name_values(text)
+    return values[0], values[2], values[3]
+
+
+def file_name_values(text):
+    """Return the seven string values of the ``FILE_NAME`` entity.
+
+    The values are read with the comments stripped, because the Autodesk
+    exports label every argument with a ``/* name */`` style comment.
+    """
+    _, spans = file_name_spans(text)
+    return [step_string(text[start:end]) for start, end in spans]
+
+
+def file_name_spans(text):
+    """Return the ``FILE_NAME`` match and the spans of its arguments."""
     match = FILE_NAME.search(text)
     if not match:
         raise ValueError("no FILE_NAME entity")
-    args = split_arguments(text, match.end() - 1)
-    if len(args) < 4:
-        raise ValueError("FILE_NAME has fewer than four arguments")
+    spans = split_arguments(text, match.end() - 1)
+    if len(spans) < 7:
+        raise ValueError("FILE_NAME has fewer than seven arguments")
+    return match, spans
 
-    def value(span):
-        return text[span[0] : span[1]].strip().strip("()").strip("'")
 
-    return value(args[2]), value(args[3]), trim(text, args[2]), trim(text, args[3])
+def step_string(argument):
+    """Return the first quoted value of an argument, with ``''`` unescaped."""
+    match = STEP_STRING.search(argument)
+    return match.group(1).replace("''", "'") if match else ""
+
+
+def quote(value):
+    return "'" + value.replace("'", "''") + "'"
+
+
+def rewritten_file_name(values, name):
+    """Return the canonical ``FILE_NAME`` call of a claimed model.
+
+    Only the file name, the author and the organization change. The timestamp,
+    the preprocessor and the originating system stay: they describe the
+    software that wrote the file, not the person who drew the geometry.
+    """
+    values = list(values[:7])
+    values[0] = name
+    values[2] = AUTHOR
+    values[3] = ORGANIZATION
+    fields = [
+        quote(values[0]),
+        quote(values[1]),
+        f"({quote(values[2])})",
+        f"({quote(values[3])})",
+        quote(values[4]),
+        quote(values[5]),
+        quote(values[6]),
+    ]
+    return "FILE_NAME(" + ", ".join(fields) + ")"
 
 
 def trim(text, span):
@@ -225,24 +287,44 @@ def trim(text, span):
     return start + (len(inner) - len(inner.lstrip())), end - (len(inner) - len(inner.rstrip()))
 
 
-def stamp_model(path):
+def stamp_model(path, relative):
     with open(path, "rb") as handle:
         text = handle.read().decode("latin-1")
-    author, organization, author_span, organization_span = step_header(text)
-    if (author, organization) == (AUTHOR, ORGANIZATION):
-        return False
-    if author and author != AUTHOR and looks_external(author, organization):
-        raise SystemExit(
-            f"{os.path.relpath(path, ROOT)}: header names {author!r}; "
-            "add it to EXTERNAL_MODELS instead of stamping it"
+    match, spans = file_name_spans(text)
+    values = [step_string(text[start:end]) for start, end in spans]
+
+    if relative in REWRITTEN_MODELS:
+        replaced = (
+            text[: match.start()]
+            + rewritten_file_name(values, os.path.basename(path))
+            + text[spans[-1][1] + 1 :]
         )
-    replaced = (
-        text[: author_span[0]]
-        + f"('{AUTHOR}')"
-        + text[author_span[1] : organization_span[0]]
-        + f"('{ORGANIZATION}')"
-        + text[organization_span[1] :]
-    )
+        product = REWRITTEN_PRODUCTS.get(relative)
+        if product:
+            stem = os.path.splitext(os.path.basename(path))[0]
+            replaced = replaced.replace(f"'{product}'", f"'{stem}'")
+        if replaced == text:
+            return False
+    else:
+        author, organization = values[2], values[3]
+        if (author, organization) == (AUTHOR, ORGANIZATION):
+            return False
+        if author and author != AUTHOR and looks_external(author, organization):
+            raise SystemExit(
+                f"{os.path.relpath(path, ROOT)}: header names {author!r}; "
+                "add it to EXTERNAL_MODELS instead of stamping it"
+            )
+        author_span, organization_span = trim(text, spans[2]), trim(text, spans[3])
+        replaced = (
+            text[: author_span[0]]
+            + f"('{AUTHOR}')"
+            + text[author_span[1] : organization_span[0]]
+            + f"('{ORGANIZATION}')"
+            + text[organization_span[1] :]
+        )
+        if replaced == text:
+            return False
+
     with open(path, "wb") as handle:
         handle.write(replaced.encode("latin-1"))
     return True
@@ -311,7 +393,7 @@ def check():
         with open(path, "rb") as handle:
             text = handle.read(4000).decode("latin-1")
         try:
-            author, organization, _, _ = step_header(text)
+            name, author, organization = step_header(text)
         except ValueError as error:
             problems.append(f"3dmodels/{relative}: {error}")
             continue
@@ -320,10 +402,23 @@ def check():
                 f"3dmodels/{relative}: author is {author!r} / {organization!r}, "
                 f"expected {AUTHOR!r} / {ORGANIZATION!r}"
             )
+        if relative in REWRITTEN_MODELS and name != os.path.basename(path):
+            problems.append(
+                f"3dmodels/{relative}: file name is {name!r}, "
+                f"expected {os.path.basename(path)!r}"
+            )
+        product = REWRITTEN_PRODUCTS.get(relative)
+        if product and f"'{product}'" in text:
+            problems.append(f"3dmodels/{relative}: still names the project {product!r}")
     for table, reason in ((EXTERNAL_MODELS, "third party"), (MIT_MODELS, "third-party MIT")):
         for relative in table:
             if not os.path.isfile(os.path.join(MODELS, relative)):
                 problems.append(f"3dmodels/{relative}: listed as {reason} but missing")
+    for relative in REWRITTEN_MODELS:
+        if not os.path.isfile(os.path.join(MODELS, relative)):
+            problems.append(f"3dmodels/{relative}: listed as rewritten but missing")
+        elif relative in EXTERNAL_MODELS:
+            problems.append(f"3dmodels/{relative}: listed as rewritten and as third party")
 
     with open(SYMBOL_LIBRARY, encoding="utf-8") as handle:
         library = handle.read()
@@ -364,7 +459,7 @@ def main():
     for relative, path in model_paths():
         if relative in EXTERNAL_MODELS or relative in MIT_MODELS:
             continue
-        if stamp_model(path):
+        if stamp_model(path, relative):
             stamped += 1
     with open(SYMBOL_LIBRARY, encoding="utf-8") as handle:
         library = handle.read()

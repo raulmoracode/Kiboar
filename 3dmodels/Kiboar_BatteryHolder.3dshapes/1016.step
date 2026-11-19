@@ -2,13 +2,7 @@ ISO-10303-21;
 HEADER;
 FILE_DESCRIPTION (( 'STEP AP214' ),
     '1' );
-FILE_NAME ('1016.STEP',
-    '2013-06-14T19:54:32',
-    ( 'Richard Maletta' ),
-    ( '' ),
-    'SwSTEP 2.0',
-    'SolidWorks 2009',
-    '' );
+FILE_NAME('1016.step', '2013-06-14T19:54:32', ('Raul Mora'), ('Kiboar'), 'SwSTEP 2.0', 'SolidWorks 2009', '');
 FILE_SCHEMA (( 'AUTOMOTIVE_DESIGN' ));
 ENDSEC;
 

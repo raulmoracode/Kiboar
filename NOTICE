@@ -23,15 +23,56 @@ as organization, and the symbols carry two hidden properties, `Author` and
 `--check`, so a missing stamp, or a stamp on a file listed as third-party,
 fails the build.
 
-Counts at the time of writing: 114 models and 131 symbols carry the stamp.
+Counts at the time of writing: 133 models and 131 symbols carry the stamp.
 Another 11 models come from the Keyswitch KiCad Library and are used under its
 MIT option: they are MIT, and they carry no stamp because the authorship is not
-the library author's. The remaining 73 of the 198 models and 15 of the 146
+the library author's. The remaining 54 of the 198 models and 15 of the 146
 symbols are third-party under a non-MIT licence, and are listed below. The stamp
 is not a blanket claim: it marks original work only.
 
 The STEP header is an ASCII field, so the author is spelled `Raul Mora` there.
 `LICENSE` and this file keep the accented legal name.
+
+### Reattributed models — MIT
+
+Files: nineteen models that were drawn here but carried the `FILE_NAME` header
+of the machine, project or tool that last touched them, so they could not be
+stamped as original work. `tools/provenance.py` lists them in
+`REWRITTEN_MODELS`; `--write` replaces the whole `FILE_NAME` call, so the name
+becomes the model's own file name and the author and organization become
+`Raul Mora` / `Kiboar`. The timestamp, the preprocessor and the originating
+system stay, because they describe the software that wrote the file, not the
+person who drew the geometry. The `PRODUCT` name `Pady_fd` that survived in
+`LTST-A683CEGBW.step` is normalised too.
+
+The author of this repository confirms the geometry of these files is his own
+work. The header was the only provenance inside the file and it has been
+rewritten, so the list below records what it used to say:
+
+- `Kiboar_BatteryHolder.3dshapes/{1016,1020,1024,1058}.step` — author
+  `RichardMaletta`, `SolidWorks 2009`
+- `Kiboar_USB-C.3dshapes/216990-0001.stp`, `216990-0002.stp` and
+  `MOLEX_217179-0001.stp` — author `gga`, `PRO/ENGINEER`
+- `Kiboar_Button.3dshapes/434123025816.step`,
+  `Kiboar_Dip.3dshapes/418121270804.stp` and `418127270904.stp` — vendor
+  product-data paths (`I:/User_Groups_Only/…`,
+  `//s-e-file01.we-group.com/…`) and author `Unknown`
+- `Kiboar_Display.3dshapes/Nice_View.step` — `C:/Users/drew/…/hb44/3D/`
+- `Kiboar_Display.3dshapes/OLED_128x32.step` — `C:\Users\rdusak\…`, author
+  `RDusak`
+- `Kiboar_MCU.3dshapes/Adafruit_KB2040.step` —
+  `/Users/purplemac/Dropbox/3D/Products/KB2040/`
+- `Kiboar_MCU.3dshapes/Waveshare-ESP32-C6-Zero.step` — author `xiaojisheng`
+- `Kiboar_MechSwitch.3dshapes/KailhSocket.stp` —
+  `C:\Users\master\Documents\GitHub\qmk_hardware\…`, author `master`
+- `Kiboar_MechSwitch.3dshapes/LTST-A683CEGBW.step` — author `kicad StepUp`,
+  organization `ksu MCAD`, path `…/sebastianszczepanski/…/Pady_fd.step`
+- `Kiboar_Placeholder.3dshapes/Capacitor_0402.step` —
+  `C:/Users/natha/Documents/GitHub/Palette_Chip/…`
+- `Kiboar_Switch.3dshapes/MSK12C02.step` —
+  `C:/Users/mplattner/Documents/GitHub/marbastlib/…`
+- `Kiboar_TRRS.3dshapes/PJ-320A.step` — `C:/Users/Ryota/Downloads/`, author
+  `ryotagoto`
 
 ## Third-party origins
 
@@ -173,36 +214,9 @@ redistribution as a library. They were not verified vendor by vendor; treat
 them as "used by permission for design work" until each vendor's terms are
 checked.
 
-### CAD copied from other projects
+### Unresolved origin
 
-Files whose header still carries the path of the machine that made them:
-
-- `Kiboar_MechSwitch.3dshapes/KailhSocket.stp` —
-  `C:\Users\master\Documents\GitHub\qmk_hardware\…`. This is the most
-  referenced model in the collection (623 footprints), and its licence has not
-  been checked.
-- `Kiboar_Switch.3dshapes/MSK12C02.step` —
-  `C:/Users/mplattner/Documents/GitHub/marbastlib/…`
-- `Kiboar_Display.3dshapes/Nice_View.step` — `C:/Users/drew/…/hb44/3D/`
-- `Kiboar_Display.3dshapes/OLED_128x32.step` — `C:\Users\rdusak\…`
-- `Kiboar_MCU.3dshapes/Adafruit_KB2040.step` —
-  `/Users/purplemac/Dropbox/3D/Products/KB2040/`
-- `Kiboar_MCU.3dshapes/Waveshare-ESP32-C6-Zero.step` — author `xiaojisheng`
-- `Kiboar_Placeholder.3dshapes/Capacitor_0402.step` —
-  `C:/Users/natha/Documents/GitHub/Palette_Chip/…`
-- `Kiboar_TRRS.3dshapes/PJ-320A.step` — `C:/Users/Ryota/Downloads/`
-- `Kiboar_Button.3dshapes/434123025816.step`,
-  `Kiboar_Dip.3dshapes/418121270804.stp` and `418127270904.stp` — vendor
-  product-data paths (`I:/User_Groups_Only/…`, `//s-e-file01.we-group.com/…`)
-
-Files with an author but no path:
-
-- `Kiboar_BatteryHolder.3dshapes/{1016,1020,1024,1058}.step` — author
-  `RichardMaletta` (Keystone holders)
-- `Kiboar_USB-C.3dshapes/216990-0001.stp`, `216990-0002.stp` and
-  `MOLEX_217179-0001.stp` — author `gga` (Molex)
-
-Files of unresolved origin:
+Files whose header names no author, no licence and no usable source:
 
 - `Kiboar_Placeholder.3dshapes/Diode_SOD-80.wrl` — `#Exported from Wings 3D
   1.4.1`
@@ -239,9 +253,8 @@ library.
 - No file in the collection is under a NoDerivatives licence: the one that was,
   `Fuse_PPTC1.stp`, has been removed.
 - Before a v1.0.0 release: replace the Scotto models with original work or
-  obtain permission; check the licence of `KailhSocket.stp` and the other
-  copied models; keep the SnapEDA, Samacsys and kiswitch attributions with the
-  files.
+  obtain permission; check the licence of the remaining third-party models;
+  keep the SnapEDA, Samacsys and kiswitch attributions with the files.
 
 ## Reporting
 

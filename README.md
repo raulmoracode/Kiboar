@@ -120,12 +120,12 @@ Kiboar is a **mixed-licence collection**:
 - CAD data collected from other projects keeps its own licence. [`NOTICE`](NOTICE)
   lists every verified origin, the affected files and the evidence.
 
-The split is not a guess. 114 of the 198 models and 131 of the 146 symbols are
+The split is not a guess. 133 of the 198 models and 131 of the 146 symbols are
 original work, and say so in the file: the STEP `FILE_NAME` header names the
 author and `Kiboar`, and the symbols carry hidden `Author` and `License`
 properties. `tools/lint.py` fails when a stamp is missing. A further 11 models
 come from the Keyswitch KiCad Library under its MIT option and carry no stamp,
-because they are not this author's work. The rest is 73 models and 15 symbols,
+because they are not this author's work. The rest is 54 models and 15 symbols,
 each listed in `NOTICE`.
 
 Two consequences matter before you use the library commercially:

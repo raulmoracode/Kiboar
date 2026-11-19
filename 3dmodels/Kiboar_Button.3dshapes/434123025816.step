@@ -1,7 +1,7 @@
 ISO-10303-21;
 HEADER;
 FILE_DESCRIPTION( ( 'Unknown' ), '1' );
-FILE_NAME( 'I:/User_Groups_Only/17_EMC_Product_&_Development/Article_Master/Switch/SwTact/Master_Data/01_CAD_drawing/1_Drawing/4341x30258xx/Released_data/4341x30258xx.stp', 'Unknown', ( 'Unknown' ), ( 'Unknown' ), 'XStep 1.0', 'Unknown', '  ' );
+FILE_NAME('434123025816.step', 'Unknown', ('Raul Mora'), ('Kiboar'), 'XStep 1.0', 'Unknown', '  ');
 FILE_SCHEMA( ( 'automotive_design' ) );
 ENDSEC;
 DATA;

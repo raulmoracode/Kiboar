@@ -8,17 +8,7 @@ FILE_DESCRIPTION(
 /* description */ (''),
 /* implementation_level */ '2;1');
 
-FILE_NAME(
-/* name */ 
-'C:/Users/mplattner/Documents/GitHub/marbastlib/3d/Switch_MSK12C02.ste
-p',
-/* time_stamp */ '2021-10-20T21:26:03+02:00',
-/* author */ (''),
-/* organization */ (''),
-/* preprocessor_version */ 'ST-DEVELOPER v18.1',
-/* originating_system */ 'Autodesk Translation Framework v10.10.0.1391',
-
-/* authorisation */ '');
+FILE_NAME('MSK12C02.step', '2021-10-20T21:26:03+02:00', ('Raul Mora'), ('Kiboar'), 'ST-DEVELOPER v18.1', 'Autodesk Translation Framework v10.10.0.1391', '');
 
 FILE_SCHEMA (('AUTOMOTIVE_DESIGN { 1 0 10303 214 3 1 1 }'));
 ENDSEC;
