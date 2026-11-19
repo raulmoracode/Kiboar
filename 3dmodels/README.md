@@ -25,26 +25,21 @@ and it leaves this list. If a maintainer decides a part will not be supported,
 remove the file in a dedicated change with its own issue.
 
 <!-- inventory:start -->
-**22 files, 35.5 MB** are not referenced by any footprint.
+**17 files, 24.5 MB** are not referenced by any footprint.
 
 | File | Size |
 | --- | ---: |
 | `Kiboar_Components.3dshapes/Battery_Holder_2032.step` | 158 KB |
-| `Kiboar_Components.3dshapes/Button_MJTP1243.step` | 90 KB |
-| `Kiboar_Components.3dshapes/Button_MJTP1250.step` | 90 KB |
 | `Kiboar_Components.3dshapes/LED_0805.step` | 76 KB |
 | `Kiboar_Components.3dshapes/LED_1206.step` | 75 KB |
 | `Kiboar_Components.3dshapes/Resistor_0805.step` | 76 KB |
 | `Kiboar_Components.3dshapes/TRRS_PJ-320B.step` | 3.4 MB |
 | `Kiboar_MCU.3dshapes/Elite-C.STEP` | 122 KB |
 | `Kiboar_MCU.3dshapes/Liatris.step` | 2.0 MB |
-| `Kiboar_MCU.3dshapes/RP2040_Zero_Flipped_Socketed.step` | 9.6 MB |
 | `Kiboar_MechSwitch.3dshapes/Choc_V1.step` | 1.1 MB |
 | `Kiboar_MechSwitch.3dshapes/Hotswap_MX.step` | 2.5 MB |
 | `Kiboar_MechSwitch.3dshapes/MX_Plate.step` | 2.6 MB |
 | `Kiboar_MechSwitch.3dshapes/PG151101S11.step` | 498 KB |
-| `Kiboar_Scotto.3dshapes/EC11.step` | 1.3 MB |
-| `Kiboar_Scotto.3dshapes/Standoff.step` | 7 KB |
 | `Kiboar_Stabilizer.3dshapes/Stabilizer_MX_2.00u.step` | 2.0 MB |
 | `Kiboar_Stabilizer.3dshapes/Stabilizer_MX_3.00u.step` | 2.0 MB |
 | `Kiboar_Stabilizer.3dshapes/Stabilizer_MX_6.00u.step` | 2.0 MB |
