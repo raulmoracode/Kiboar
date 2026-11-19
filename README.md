@@ -120,17 +120,16 @@ Kiboar is a **mixed-licence collection**:
 - CAD data collected from other projects keeps its own licence. [`NOTICE`](NOTICE)
   lists every verified origin, the affected files and the evidence.
 
-The split is not a guess. 114 of the 199 models and 131 of the 146 symbols are
+The split is not a guess. 114 of the 198 models and 131 of the 146 symbols are
 original work, and say so in the file: the STEP `FILE_NAME` header names the
 author and `Kiboar`, and the symbols carry hidden `Author` and `License`
-properties. `tools/lint.py` fails when a stamp is missing. The rest is 85
+properties. `tools/lint.py` fails when a stamp is missing. The rest is 84
 models and 15 symbols, each listed in `NOTICE`.
 
-Three consequences matter before you use the library commercially:
+Two consequences matter before you use the library commercially:
 
 - the ScottoKeebs models are **CC BY-NC-SA 4.0**, which forbids commercial
   use;
-- `Fuse_PPTC1.stp` is **CC BY-ND 4.0**, which forbids derivative works;
 - ten symbols are SnapEDA imports and five are Component Search Engine imports,
   both under **CC BY-SA 4.0** with the Design Exception, so they need
   attribution when the files themselves are redistributed.

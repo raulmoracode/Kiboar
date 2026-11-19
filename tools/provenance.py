@@ -103,7 +103,6 @@ EXTERNAL_MODELS = {
     "Kiboar_Placeholder.3dshapes/Capacitor_Disc_D4.3mm_W1.9mm_P5.00mm.step": "KiCad StepUp export, CC BY-SA 4.0",
     "Kiboar_Placeholder.3dshapes/Diode_DO-35.step": "KiCad StepUp export, CC BY-SA 4.0",
     "Kiboar_Placeholder.3dshapes/Diode_SOD-123.step": "KiCad StepUp export, CC BY-SA 4.0",
-    "Kiboar_Placeholder.3dshapes/Fuse_PPTC1.stp": "manufacturer CAD, see NOTICE",
     "Kiboar_Placeholder.3dshapes/Resistor_0805.step": "KiCad StepUp export, CC BY-SA 4.0",
     "Kiboar_Placeholder.3dshapes/Resistor_1206.step": "KiCad StepUp export, CC BY-SA 4.0",
     "Kiboar_Placeholder.3dshapes/SOT-23-5.step": "KiCad StepUp export, CC BY-SA 4.0",

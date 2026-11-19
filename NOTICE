@@ -24,7 +24,7 @@ as organization, and the symbols carry two hidden properties, `Author` and
 fails the build.
 
 Counts at the time of writing: 114 models and 131 symbols carry the stamp;
-85 of the 199 models and 15 of the 146 symbols are third-party, and are listed
+84 of the 198 models and 15 of the 146 symbols are third-party, and are listed
 below. The stamp is not a blanket claim: it is the exact complement of this
 file.
 
@@ -144,12 +144,15 @@ relicensed, so the twenty-four copied or derived models cannot be called MIT.
 Files: the models whose `FILE_NAME` field is a part number instead of a
 design: `Kiboar_PinHeader.3dshapes/61000621121.step` and
 `61001021121.step` (Molex), `Kiboar_Joystick.3dshapes/COM-10063.stp`
-(SparkFun), `FJ08K-S.step` (Same Sky), `Kiboar_TRRS.3dshapes/PJ-320D.step`
-(Same Sky) and `Kiboar_Placeholder.3dshapes/Fuse_PPTC1.stp`.
+(SparkFun), `FJ08K-S.step` (Same Sky) and
+`Kiboar_TRRS.3dshapes/PJ-320D.step` (Same Sky).
 
-`Fuse_PPTC1.stp` is the one to look at first: its header declares
-`LicenseCCBY-ND4.0` from `CADENAS`, and **CC BY-ND forbids derivative works**,
-so it cannot sit in an MIT collection at all.
+A sixth model, `Kiboar_Placeholder.3dshapes/Fuse_PPTC1.stp`, declared
+`LicenseCCBY-ND4.0` from `CADENAS` in its header. **CC BY-ND forbids derivative
+works**, so it could not stay in an MIT collection: the file and its `(model)`
+reference have been removed. The `Fuse_PPTC1` footprint keeps its pads,
+courtyard and fab outline and is shipped without a 3D model until an original
+one replaces it.
 
 Many footprints and symbols also name a component vendor (Alps, Würth, Molex,
 TE Connectivity, Kailh, E-Switch…) in their `Datasheet` or description. A
@@ -222,8 +225,8 @@ library.
   models and symbols say so in the file.
 - The ScottoKeebs content under CC BY-NC-SA 4.0 **blocks commercial
   distribution** of the collection as it stands.
-- `Fuse_PPTC1.stp` is **CC BY-ND 4.0**, which forbids derivative works; it is
-  the only file in the collection under a NoDerivatives licence.
+- No file in the collection is under a NoDerivatives licence: the one that was,
+  `Fuse_PPTC1.stp`, has been removed.
 - Before a v1.0.0 release: replace the Scotto models with original work or
   obtain permission; check the licence of `KailhSocket.stp` and the other
   copied models; keep the SnapEDA, Samacsys and kiswitch attributions with the
