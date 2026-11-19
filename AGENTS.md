@@ -72,7 +72,7 @@ If any byte changes, the source was not current: commit the upgraded files.
 - `NOTICE` is authoritative. The collection is **mixed-licence**: original work
   is MIT; kiswitch models are MIT / CC BY-SA; ten SnapEDA symbols and five
   Component Search Engine symbols are CC BY-SA; the ScottoKeebs models are
-  **CC BY-NC-SA**; one fuse model is **CC BY-ND**.
+  **CC BY-NC-SA**.
 - Original models and symbols carry their authorship in the file, written by
   `tools/provenance.py`. The tool's `EXTERNAL_MODELS` and `EXTERNAL_SYMBOLS`
   are the machine-readable half of `NOTICE`: add a file there before you add

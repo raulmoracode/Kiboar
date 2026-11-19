@@ -152,15 +152,4 @@
 		(uuid "a74652f3-b58f-40b9-90f0-c37c1613d55c")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_Placeholder.3dshapes/Fuse_PPTC1.stp"
-		(offset
-			(xyz 2.55 -0.55 5.95)
-		)
-		(scale
-			(xyz 1 1 1)
-		)
-		(rotate
-			(xyz -90 0 0)
-		)
-	)
 )
