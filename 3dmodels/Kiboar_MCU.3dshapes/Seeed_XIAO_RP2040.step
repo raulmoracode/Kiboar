@@ -11,8 +11,8 @@ FILE_DESCRIPTION(
 FILE_NAME(
 /* name */ 'Seeed Studio XIAO RP2040 v26.step',
 /* time_stamp */ '2023-10-23T18:19:38+03:00',
-/* author */ (''),
-/* organization */ (''),
+('Raul Mora'),
+('Kiboar'),
 /* preprocessor_version */ 'ST-DEVELOPER v19.2',
 /* originating_system */ 'Autodesk Translation Framework v12.6.0.85',
 /* authorisation */ '');

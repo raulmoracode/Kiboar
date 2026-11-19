@@ -11,8 +11,8 @@ FILE_DESCRIPTION(
 FILE_NAME(
 /* name */ 'rp2040_stamp.step',
 /* time_stamp */ '2024-08-11T23:03:37+02:00',
-/* author */ (''),
-/* organization */ (''),
+('Raul Mora'),
+('Kiboar'),
 /* preprocessor_version */ 'ST-DEVELOPER v20',
 /* originating_system */ 'Autodesk Translation Framework v13.14.0.145',
 

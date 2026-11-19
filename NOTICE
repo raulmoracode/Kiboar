@@ -11,6 +11,26 @@ files keep the licence of their source, listed below. This is a provenance
 record built from evidence inside the files and from the upstream licences
 cited; it is not legal advice.
 
+## Original work — MIT
+
+Files: the models and symbols that no third-party heading below names, the
+footprints that are not from the Keyswitch library, the scripts under `tools/`,
+the documentation and the PCM metadata.
+
+Evidence: the STEP `FILE_NAME` header names `Raul Mora` as author and `Kiboar`
+as organization, and the symbols carry two hidden properties, `Author` and
+`License`. `tools/provenance.py` writes both and `tools/lint.py` runs its
+`--check`, so a missing stamp, or a stamp on a file listed as third-party,
+fails the build.
+
+Counts at the time of writing: 114 models and 131 symbols carry the stamp;
+90 of the 204 models and 15 of the 146 symbols are third-party, and are listed
+below. The stamp is not a blanket claim: it is the exact complement of this
+file.
+
+The STEP header is an ASCII field, so the author is spelled `Raul Mora` there.
+`LICENSE` and this file keep the accented legal name.
+
 ## Third-party origins
 
 ### ScottoKeebs — CC BY-NC-SA 4.0, non-commercial
@@ -25,7 +45,8 @@ Files:
   `RP2040_Pro_Micro_Flipped.step`, `RP2040_Zero.step`,
   `RP2040_Zero_Flipped.step`, `RP2040_Zero_Flipped_Socketed.step`.
 - `3dmodels/Kiboar_Components.3dshapes/Button_MJTP1243.step`,
-  `Button_MJTP1250.step`, `USB_C_HRO_TYPE-C-31-M-14.step`.
+  `Button_MJTP1250.step` and
+  `3dmodels/Kiboar_USB-C.3dshapes/USB_C_HRO_TYPE-C-31-M-14.step`.
 - `3dmodels/Kiboar_Scotto.3dshapes/Standoff.step`.
 
 Evidence: the STEP `FILE_NAME` header names `jscotto` as author in every model
@@ -71,16 +92,17 @@ file needs permission.
 ### Keyswitch KiCad Library — MIT OR CC BY-SA 4.0
 
 Files: the switch, hotswap and stabilizer models under
-`3dmodels/Kiboar_MechSwitch.3dshapes/` (except the Scotto `*_CAD.step` set
-above), `3dmodels/Kiboar_Cutout.3dshapes/` and
-`3dmodels/Kiboar_Stabilizer.3dshapes/`, plus the footprints under
+`3dmodels/Kiboar_MechSwitch.3dshapes/`, `3dmodels/Kiboar_Cutout.3dshapes/` and
+`3dmodels/Kiboar_Stabilizer.3dshapes/`, plus some of the footprints under
 `footprints/Kiboar_MechSwitch.pretty/`, `footprints/Kiboar_Cutout.pretty/` and
-`footprints/Kiboar_Stabilizer.pretty/` where present.
+`footprints/Kiboar_Stabilizer.pretty/`. The repository does not record which
+footprints, so the whole library is credited rather than a guessed subset.
 
-Evidence: these files are byte-identical to files in the upstream library —
-verified with SHA-256 for `Choc_V1`, `MX_PCB`, `MX_Plate`, `Hotswap_MX`,
-`Stabilizer_MX_2.00u` and `Stabilizer_MX_6.25u` — and the STEP headers name
-`kicad StepUp` with paths under `Switch_Keyboard_*`.
+Evidence: all eleven of these models are byte-identical to files in the
+upstream library, verified with SHA-256, and the STEP headers name
+`kicad StepUp` with paths under `Switch_Keyboard_*`. The upstream repository
+ships exactly eleven STEP models, so the match is complete rather than
+sampled.
 
 Source: <https://github.com/kiswitch/keyswitch-kicad-library>.
 Licence: dual MIT / CC BY-SA 4.0 (`LICENSE-MIT` and `LICENSE-CC-BY-SA`).
@@ -89,43 +111,128 @@ Licence: dual MIT / CC BY-SA 4.0 (`LICENSE-MIT` and `LICENSE-CC-BY-SA`).
 
 ### KiCad official libraries — CC BY-SA 4.0 with exception
 
-Not redistributed. Kiboar references the user's installed KiCad models through
-`${KICAD10_3DMODEL_DIR}`, and no file in this repository has been identified as
-a KiCad library file. The KiCad exception does not apply to redistributing
-library collections, so any footprint later copied from KiCad would have to be
-treated as CC BY-SA 4.0.
+Files: twenty-four models come from the KiCad 10.0.8 library. Twenty-one are
+byte-identical, verified with SHA-256 against the installed library:
 
-Source: <https://www.kicad.org/libraries/license/>.
+- `3dmodels/Kiboar_Components.3dshapes/Battery_Holder_2032.step`,
+  `LED_0805.step`, `LED_1206.step` and `Resistor_0805.step`
+- `3dmodels/Kiboar_Led.3dshapes/LED_D3.0mm_{Blue,Clear,Green,Red,Yellow}.step`,
+  `LED_D5.0mm_{Blue,Clear,Green,Red,Yellow}.step` and `LED_WS2812B.step`
+- `3dmodels/Kiboar_Placeholder.3dshapes/Capacitor_0603.step`,
+  `Capacitor_Disc_D3.0mm_W1.6mm_P2.50mm.step`,
+  `Capacitor_Disc_D4.3mm_W1.9mm_P5.00mm.step`, `Diode_DO-35.step`,
+  `Resistor_0805.step` and `Resistor_1206.step`
+
+Three more — `3dmodels/Kiboar_Placeholder.3dshapes/Diode_SOD-123.step`,
+`SOT-23-5.step` and `SOT-23-8.step` — carry the `kicad StepUp` copyright and
+the CC BY-SA 4.0 notice in their own header. They are not byte-identical, so
+they were re-exported or edited, but they are derived work and keep the same
+licence.
+
+`Kiboar_Components.3dshapes/Resistor_0805.step` is byte-for-byte the KiCad
+`LED_0805_2012Metric.step`: the file has LED geometry under a resistor name.
+The footprint does not reference it, and it is scheduled for replacement with
+the other KiCad copies.
+
+Footprints are different: none of the 1329 is byte-identical to the KiCad 10.0.8
+library. The five that share a name with a KiCad footprint (`SOT-23-5`,
+`SOT-23-6`, `SOT-23-8` and two mounting holes) have different content.
+
+Source: <https://www.kicad.org/libraries/license/>. The KiCad exception lets the
+files be used inside a design; it does not let the files themselves be
+relicensed, so the twenty-four copied or derived models cannot be called MIT.
 
 ### Manufacturer CAD
 
-Many models and footprints name a component vendor (Alps, Würth, Molex, TE
-Connectivity, Kailh, E-Switch…). These come from the manufacturer's CAD
-downloads. Vendor terms commonly allow the model to be used in a design but do
-not grant redistribution as a library. They were not verified vendor by vendor;
-treat them as "used by permission for design work" until each vendor's terms
-are checked.
+Files: the models whose `FILE_NAME` field is a part number instead of a
+design: `Kiboar_PinHeader.3dshapes/61000621121.step` and
+`61001021121.step` (Molex), `Kiboar_Joystick.3dshapes/COM-10063.stp`
+(SparkFun), `FJ08K-S.step` (Same Sky), `Kiboar_TRRS.3dshapes/PJ-320D.step`
+(Same Sky) and `Kiboar_Placeholder.3dshapes/Fuse_PPTC1.stp`.
 
-## Files with no recorded provenance
+`Fuse_PPTC1.stp` is the one to look at first: its header declares
+`LicenseCCBY-ND4.0` from `CADENAS`, and **CC BY-ND forbids derivative works**,
+so it cannot sit in an MIT collection at all.
 
-For most of the remaining models the `FILE_NAME` author field holds a CAD tool
-name (`Author`, `SwSTEP 2.0`, `kicad StepUp`, `ST-DEVELOPER …`, `Unknown`), so
-the origin cannot be established from the repository. Symbols without a
-`SnapEDA_Link` and footprints without an in-file reference are in the same
-position.
+Many footprints and symbols also name a component vendor (Alps, Würth, Molex,
+TE Connectivity, Kailh, E-Switch…) in their `Datasheet` or description. A
+symbol drawn from a vendor datasheet is original work: the datasheet is the
+reference, not the CAD.
 
-Those files are listed as **unknown**, not assumed MIT-clean. They cannot be
-relicensed until their source is known.
+Vendor terms commonly allow the model to be used in a design but do not grant
+redistribution as a library. They were not verified vendor by vendor; treat
+them as "used by permission for design work" until each vendor's terms are
+checked.
+
+### CAD copied from other projects
+
+Files whose header still carries the path of the machine that made them:
+
+- `Kiboar_MechSwitch.3dshapes/KailhSocket.stp` —
+  `C:\Users\master\Documents\GitHub\qmk_hardware\…`. This is the most
+  referenced model in the collection (623 footprints), and its licence has not
+  been checked.
+- `Kiboar_Switch.3dshapes/MSK12C02.step` —
+  `C:/Users/mplattner/Documents/GitHub/marbastlib/…`
+- `Kiboar_Display.3dshapes/Nice_View.step` — `C:/Users/drew/…/hb44/3D/`
+- `Kiboar_Display.3dshapes/OLED_128x32.step` — `C:\Users\rdusak\…`
+- `Kiboar_MCU.3dshapes/Adafruit_KB2040.step` —
+  `/Users/purplemac/Dropbox/3D/Products/KB2040/`
+- `Kiboar_MCU.3dshapes/Waveshare-ESP32-C6-Zero.step` — author `xiaojisheng`
+- `Kiboar_Placeholder.3dshapes/Capacitor_0402.step` —
+  `C:/Users/natha/Documents/GitHub/Palette_Chip/…`
+- `Kiboar_TRRS.3dshapes/PJ-320A.step` — `C:/Users/Ryota/Downloads/`
+- `Kiboar_Button.3dshapes/434123025816.step`,
+  `Kiboar_Dip.3dshapes/418121270804.stp` and `418127270904.stp` — vendor
+  product-data paths (`I:/User_Groups_Only/…`, `//s-e-file01.we-group.com/…`)
+
+Files with an author but no path:
+
+- `Kiboar_BatteryHolder.3dshapes/{1016,1020,1024,1058}.step` — author
+  `RichardMaletta` (Keystone holders)
+- `Kiboar_USB-C.3dshapes/216990-0001.stp`, `216990-0002.stp` and
+  `MOLEX_217179-0001.stp` — author `gga` (Molex)
+
+Files of unresolved origin:
+
+- `Kiboar_Scotto.3dshapes/EC11.step` — SolidWorks 2019 export with a non-ASCII
+  file name; not from ScottoKeebs, despite the folder
+- `Kiboar_Placeholder.3dshapes/Diode_SOD-80.wrl` — `#Exported from Wings 3D
+  1.4.1`
+- `Kiboar_Led.3dshapes/SK6812MINI-EA.wrl` — `generated by
+  easyeda2kicad.py`, so it comes from an EasyEDA part
+
+### Imported symbols
+
+Files: fifteen, in two batches.
+
+The ten SnapEDA imports above, plus five from Component Search Engine
+(Samacsys), which carry no property and are visible only through their
+datasheet URL:
+
+- `Button_B3U-3000P-B`
+- `Button_SKHLLCA010`
+- `Encoder_EC12E2440301`
+- `Ethernet_43860-0025`
+- `Ethernet_6116075-4`
+
+**Verdict: not MIT-compatible.** Both services keep the CAD under their own
+terms; the Design Exception covers using a file in a board, not relicensing the
+library.
 
 ## Consequences
 
 - This repository is a **mixed-licence collection**. `LICENSE` (MIT) describes
-  the original work only.
+  the original work only. Everything outside the lists above is MIT, and the
+  models and symbols say so in the file.
 - The ScottoKeebs content under CC BY-NC-SA 4.0 **blocks commercial
   distribution** of the collection as it stands.
+- `Fuse_PPTC1.stp` is **CC BY-ND 4.0**, which forbids derivative works; it is
+  the only file in the collection under a NoDerivatives licence.
 - Before a v1.0.0 release: replace the Scotto models with original work or
-  obtain permission; keep the SnapEDA and kiswitch attributions
-  with the files; decide what to do with the unknown-provenance set.
+  obtain permission; check the licence of `KailhSocket.stp` and the other
+  copied models; keep the SnapEDA, Samacsys and kiswitch attributions with the
+  files.
 
 ## Reporting
 

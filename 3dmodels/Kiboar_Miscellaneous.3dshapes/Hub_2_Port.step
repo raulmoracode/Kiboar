@@ -11,8 +11,8 @@ FILE_DESCRIPTION(
 FILE_NAME(
 /* name */ 'PCB Component.step',
 /* time_stamp */ '2024-10-15T11:42:17-04:00',
-/* author */ (''),
-/* organization */ (''),
+('Raul Mora'),
+('Kiboar'),
 /* preprocessor_version */ 'ST-DEVELOPER v20',
 /* originating_system */ 'Autodesk Translation Framework v13.20.0.188',
 

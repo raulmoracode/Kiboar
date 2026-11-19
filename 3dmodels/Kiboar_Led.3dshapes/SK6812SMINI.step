@@ -4,8 +4,8 @@ FILE_DESCRIPTION (( 'STEP AP214' ),
     '1' );
 FILE_NAME ('LED-SMD_4P-L3.7-W3.5-SK6812SMINI-001.STEP',
     '2023-11-08T13:08:26',
-    ( '' ),
-    ( '' ),
+    ('Raul Mora'),
+    ('Kiboar'),
     'SwSTEP 2.0',
     'SolidWorks 2020',
     '' );

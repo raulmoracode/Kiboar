@@ -1,0 +1,376 @@
+#!/usr/bin/env python3
+"""Stamp the authorship and the licence into the CAD files.
+
+`NOTICE` is the authority for provenance: it names every third-party origin and
+the evidence. This tool is the machine-readable half of it. Everything NOTICE
+does not attribute to a third party is original work by the library author,
+released under MIT, and says so inside the file:
+
+- STEP models carry it in the ``FILE_NAME`` header, author and organization;
+- KiCad symbols carry it in two hidden properties, ``Author`` and ``License``.
+
+The STEP header is an ASCII field, so the author is spelled ``Raul Mora``
+there; `LICENSE` and `NOTICE` keep the accented legal name. Models that are not
+STEP (the two VRML files) have no metadata field and are covered by `NOTICE`.
+
+    python3 tools/provenance.py --check    # fail when a stamp is missing or wrong
+    python3 tools/provenance.py --write    # stamp every original file
+"""
+
+import argparse
+import glob
+import os
+import re
+import sys
+
+import normalize_symbols
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MODELS = os.path.join(ROOT, "3dmodels")
+SYMBOL_LIBRARY = os.path.join(ROOT, "symbols", "Kiboar.kicad_sym")
+
+AUTHOR = "Raul Mora"
+ORGANIZATION = "Kiboar"
+LICENCE = "MIT"
+
+#: Every model that is not original work, with the reason `NOTICE` records.
+EXTERNAL_MODELS = {
+    # VRML models: no metadata field, listed so the count stays complete.
+    "Kiboar_Placeholder.3dshapes/Diode_SOD-80.wrl": "Wings 3D export of unknown origin, see NOTICE",
+    "Kiboar_Led.3dshapes/SK6812MINI-EA.wrl": "easyeda2kicad export, see NOTICE",
+    "Kiboar_BatteryHolder.3dshapes/1016.step": "third-party author RichardMaletta, see NOTICE",
+    "Kiboar_BatteryHolder.3dshapes/1020.step": "third-party author RichardMaletta, see NOTICE",
+    "Kiboar_BatteryHolder.3dshapes/1024.step": "third-party author RichardMaletta, see NOTICE",
+    "Kiboar_BatteryHolder.3dshapes/1058.step": "third-party author RichardMaletta, see NOTICE",
+    "Kiboar_Button.3dshapes/434123025816.step": "third-party CAD, see NOTICE",
+    "Kiboar_CAD.3dshapes/Choc_1.00u_CAD.step": "ScottoKeebs, CC BY-NC-SA 4.0",
+    "Kiboar_CAD.3dshapes/Choc_1.25u_CAD.step": "ScottoKeebs, CC BY-NC-SA 4.0",
+    "Kiboar_CAD.3dshapes/Choc_1.50u_CAD.step": "ScottoKeebs, CC BY-NC-SA 4.0",
+    "Kiboar_CAD.3dshapes/Choc_1.75u_CAD.step": "ScottoKeebs, CC BY-NC-SA 4.0",
+    "Kiboar_CAD.3dshapes/MX_1.00u_CAD.step": "ScottoKeebs, CC BY-NC-SA 4.0",
+    "Kiboar_CAD.3dshapes/MX_1.25u_CAD.step": "ScottoKeebs, CC BY-NC-SA 4.0",
+    "Kiboar_CAD.3dshapes/MX_1.50u_CAD.step": "ScottoKeebs, CC BY-NC-SA 4.0",
+    "Kiboar_CAD.3dshapes/MX_1.75u_CAD.step": "ScottoKeebs, CC BY-NC-SA 4.0",
+    "Kiboar_CAD.3dshapes/MX_10.00u_CAD.step": "ScottoKeebs, CC BY-NC-SA 4.0",
+    "Kiboar_CAD.3dshapes/MX_2.00u_CAD.step": "ScottoKeebs, CC BY-NC-SA 4.0",
+    "Kiboar_CAD.3dshapes/MX_2.25u_CAD.step": "ScottoKeebs, CC BY-NC-SA 4.0",
+    "Kiboar_CAD.3dshapes/MX_2.50u_CAD.step": "ScottoKeebs, CC BY-NC-SA 4.0",
+    "Kiboar_CAD.3dshapes/MX_2.75u_CAD.step": "ScottoKeebs, CC BY-NC-SA 4.0",
+    "Kiboar_CAD.3dshapes/MX_3.00u_CAD.step": "ScottoKeebs, CC BY-NC-SA 4.0",
+    "Kiboar_CAD.3dshapes/MX_6.25u_CAD.step": "ScottoKeebs, CC BY-NC-SA 4.0",
+    "Kiboar_CAD.3dshapes/MX_7.00u_CAD.step": "ScottoKeebs, CC BY-NC-SA 4.0",
+    "Kiboar_Components.3dshapes/Battery_Holder_2032.step": "KiCad StepUp export, CC BY-SA 4.0",
+    "Kiboar_Components.3dshapes/Button_MJTP1243.step": "ScottoKeebs, CC BY-NC-SA 4.0",
+    "Kiboar_Components.3dshapes/Button_MJTP1250.step": "ScottoKeebs, CC BY-NC-SA 4.0",
+    "Kiboar_Components.3dshapes/LED_0805.step": "KiCad StepUp export, CC BY-SA 4.0",
+    "Kiboar_Components.3dshapes/LED_1206.step": "KiCad StepUp export, CC BY-SA 4.0",
+    "Kiboar_Components.3dshapes/Resistor_0805.step": "KiCad StepUp export, CC BY-SA 4.0",
+    "Kiboar_Cutout.3dshapes/Choc_Cutout.step": "KiCad StepUp export, CC BY-SA 4.0",
+    "Kiboar_Cutout.3dshapes/MX_Cutout.step": "KiCad StepUp export, CC BY-SA 4.0",
+    "Kiboar_Dip.3dshapes/418121270804.stp": "third-party CAD, see NOTICE",
+    "Kiboar_Dip.3dshapes/418127270904.stp": "third-party CAD, see NOTICE",
+    "Kiboar_Display.3dshapes/Nice_View.step": "third-party CAD, see NOTICE",
+    "Kiboar_Display.3dshapes/OLED_128x32.step": "third-party CAD, see NOTICE",
+    "Kiboar_Joystick.3dshapes/COM-10063.stp": "manufacturer CAD, see NOTICE",
+    "Kiboar_Joystick.3dshapes/FJ08K-S.step": "manufacturer CAD, see NOTICE",
+    "Kiboar_Led.3dshapes/LED_D3.0mm_Blue.step": "KiCad StepUp export, CC BY-SA 4.0",
+    "Kiboar_Led.3dshapes/LED_D3.0mm_Clear.step": "KiCad StepUp export, CC BY-SA 4.0",
+    "Kiboar_Led.3dshapes/LED_D3.0mm_Green.step": "KiCad StepUp export, CC BY-SA 4.0",
+    "Kiboar_Led.3dshapes/LED_D3.0mm_Red.step": "KiCad StepUp export, CC BY-SA 4.0",
+    "Kiboar_Led.3dshapes/LED_D3.0mm_Yellow.step": "KiCad StepUp export, CC BY-SA 4.0",
+    "Kiboar_Led.3dshapes/LED_D5.0mm_Blue.step": "KiCad StepUp export, CC BY-SA 4.0",
+    "Kiboar_Led.3dshapes/LED_D5.0mm_Clear.step": "KiCad StepUp export, CC BY-SA 4.0",
+    "Kiboar_Led.3dshapes/LED_D5.0mm_Green.step": "KiCad StepUp export, CC BY-SA 4.0",
+    "Kiboar_Led.3dshapes/LED_D5.0mm_Red.step": "KiCad StepUp export, CC BY-SA 4.0",
+    "Kiboar_Led.3dshapes/LED_D5.0mm_Yellow.step": "KiCad StepUp export, CC BY-SA 4.0",
+    "Kiboar_Led.3dshapes/LED_WS2812B.step": "KiCad StepUp export, CC BY-SA 4.0",
+    "Kiboar_MCU.3dshapes/Adafruit_KB2040.step": "third-party CAD, see NOTICE",
+    "Kiboar_MCU.3dshapes/Nice_Nano_V2.step": "ScottoKeebs, CC BY-NC-SA 4.0",
+    "Kiboar_MCU.3dshapes/Nice_Nano_V2_Flipped.step": "ScottoKeebs, CC BY-NC-SA 4.0",
+    "Kiboar_MCU.3dshapes/RP2040_Pro_Micro.step": "ScottoKeebs, CC BY-NC-SA 4.0",
+    "Kiboar_MCU.3dshapes/RP2040_Pro_Micro_Flipped.step": "ScottoKeebs, CC BY-NC-SA 4.0",
+    "Kiboar_MCU.3dshapes/RP2040_Zero.step": "ScottoKeebs, CC BY-NC-SA 4.0",
+    "Kiboar_MCU.3dshapes/RP2040_Zero_Flipped.step": "ScottoKeebs, CC BY-NC-SA 4.0",
+    "Kiboar_MCU.3dshapes/RP2040_Zero_Flipped_Socketed.step": "ScottoKeebs, CC BY-NC-SA 4.0",
+    "Kiboar_MCU.3dshapes/Waveshare-ESP32-C6-Zero.step": "third-party CAD, see NOTICE",
+    "Kiboar_MechSwitch.3dshapes/Choc_V1.step": "KiCad StepUp export, CC BY-SA 4.0",
+    "Kiboar_MechSwitch.3dshapes/Hotswap_MX.step": "KiCad StepUp export, CC BY-SA 4.0",
+    "Kiboar_MechSwitch.3dshapes/KailhSocket.stp": "third-party CAD, see NOTICE",
+    "Kiboar_MechSwitch.3dshapes/LTST-A683CEGBW.step": "KiCad StepUp export, CC BY-SA 4.0",
+    "Kiboar_MechSwitch.3dshapes/MX_Plate.step": "KiCad StepUp export, CC BY-SA 4.0",
+    "Kiboar_PinHeader.3dshapes/61000621121.step": "manufacturer CAD, see NOTICE",
+    "Kiboar_PinHeader.3dshapes/61001021121.step": "manufacturer CAD, see NOTICE",
+    "Kiboar_Placeholder.3dshapes/Capacitor_0402.step": "third-party CAD, see NOTICE",
+    "Kiboar_Placeholder.3dshapes/Capacitor_0603.step": "KiCad StepUp export, CC BY-SA 4.0",
+    "Kiboar_Placeholder.3dshapes/Capacitor_Disc_D3.0mm_W1.6mm_P2.50mm.step": "KiCad StepUp export, CC BY-SA 4.0",
+    "Kiboar_Placeholder.3dshapes/Capacitor_Disc_D4.3mm_W1.9mm_P5.00mm.step": "KiCad StepUp export, CC BY-SA 4.0",
+    "Kiboar_Placeholder.3dshapes/Diode_DO-35.step": "KiCad StepUp export, CC BY-SA 4.0",
+    "Kiboar_Placeholder.3dshapes/Diode_SOD-123.step": "KiCad StepUp export, CC BY-SA 4.0",
+    "Kiboar_Placeholder.3dshapes/Fuse_PPTC1.stp": "manufacturer CAD, see NOTICE",
+    "Kiboar_Placeholder.3dshapes/Resistor_0805.step": "KiCad StepUp export, CC BY-SA 4.0",
+    "Kiboar_Placeholder.3dshapes/Resistor_1206.step": "KiCad StepUp export, CC BY-SA 4.0",
+    "Kiboar_Placeholder.3dshapes/SOT-23-5.step": "KiCad StepUp export, CC BY-SA 4.0",
+    "Kiboar_Placeholder.3dshapes/SOT-23-8.step": "KiCad StepUp export, CC BY-SA 4.0",
+    "Kiboar_Scotto.3dshapes/EC11.step": "downloaded model of unknown origin, see NOTICE",
+    "Kiboar_Scotto.3dshapes/Standoff.step": "ScottoKeebs, CC BY-NC-SA 4.0",
+    "Kiboar_Stabilizer.3dshapes/Stabilizer_MX_2.00u.step": "KiCad StepUp export, CC BY-SA 4.0",
+    "Kiboar_Stabilizer.3dshapes/Stabilizer_MX_3.00u.step": "KiCad StepUp export, CC BY-SA 4.0",
+    "Kiboar_Stabilizer.3dshapes/Stabilizer_MX_6.00u.step": "KiCad StepUp export, CC BY-SA 4.0",
+    "Kiboar_Stabilizer.3dshapes/Stabilizer_MX_6.25u.step": "KiCad StepUp export, CC BY-SA 4.0",
+    "Kiboar_Stabilizer.3dshapes/Stabilizer_MX_7.00u.step": "KiCad StepUp export, CC BY-SA 4.0",
+    "Kiboar_Stabilizer.3dshapes/Stabilizer_MX_8.00u.step": "KiCad StepUp export, CC BY-SA 4.0",
+    "Kiboar_Switch.3dshapes/MSK12C02.step": "third-party CAD, see NOTICE",
+    "Kiboar_TRRS.3dshapes/PJ-320A.step": "third-party CAD, see NOTICE",
+    "Kiboar_TRRS.3dshapes/PJ-320D.step": "manufacturer CAD, see NOTICE",
+    "Kiboar_USB-C.3dshapes/216990-0001.stp": "third-party author gga, see NOTICE",
+    "Kiboar_USB-C.3dshapes/216990-0002.stp": "third-party author gga, see NOTICE",
+    "Kiboar_USB-C.3dshapes/MOLEX_217179-0001.stp": "third-party author gga, see NOTICE",
+    "Kiboar_USB-C.3dshapes/USB_C_HRO_TYPE-C-31-M-14.step": "ScottoKeebs, CC BY-NC-SA 4.0",
+}
+
+#: Symbols imported as CAD from a third party. The rest are drawn here.
+EXTERNAL_SYMBOLS = {
+    # SnapEDA imports, CC BY-SA 4.0 with the Design Exception.
+    "Button_EVPBB2A9B000",
+    "Button_TL3315NF160QG",
+    "CBK_L717HDE15PD1CH4F",
+    "Ethernet_6339191-5",
+    "PinHeader_61000621121",
+    "PinHeader_61001021121",
+    "PinHeader_61300621021",
+    "PinHeader_61300621121",
+    "PinHeader_61301021021",
+    "PinHeader_61301021121",
+    # Component Search Engine (Samacsys) imports.
+    "Button_B3U-3000P-B",
+    "Button_SKHLLCA010",
+    "Encoder_EC12E2440301",
+    "Ethernet_43860-0025",
+    "Ethernet_6116075-4",
+}
+
+PROPERTIES = {"Author": AUTHOR, "License": LICENCE}
+
+FILE_NAME = re.compile(r"FILE_NAME\s*\(")
+EXTERNAL_AUTHORS = (
+    "jscotto",
+    "kicadstepup",
+    "ksumcad",
+    "richardmaletta",
+    "gga",
+    "xiaojisheng",
+    "ryotagoto",
+)
+
+
+def model_paths():
+    for path in sorted(glob.glob(os.path.join(MODELS, "*", "*"))):
+        if path.lower().endswith((".step", ".stp")):
+            yield os.path.relpath(path, MODELS), path
+
+
+def symbol_names(text):
+    return [match.group(1) for match in normalize_symbols.SYMBOL_HEAD.finditer(text)]
+
+
+def split_arguments(text, open_index):
+    """Return the (start, end) span of every top-level argument of a call."""
+    spans = []
+    depth = 0
+    start = open_index + 1
+    quoted = False
+    for index in range(open_index, len(text)):
+        char = text[index]
+        if quoted:
+            if char == "'":
+                quoted = False
+            continue
+        if char == "'":
+            quoted = True
+        elif char in "([":
+            depth += 1
+        elif char in ")]":
+            depth -= 1
+            if depth == 0:
+                spans.append((start, index))
+                return spans
+        elif char == "," and depth == 1:
+            spans.append((start, index))
+            start = index + 1
+    raise ValueError("unterminated argument list")
+
+
+def step_header(text):
+    """Return (author, organization, author span, organization span)."""
+    match = FILE_NAME.search(text)
+    if not match:
+        raise ValueError("no FILE_NAME entity")
+    args = split_arguments(text, match.end() - 1)
+    if len(args) < 4:
+        raise ValueError("FILE_NAME has fewer than four arguments")
+
+    def value(span):
+        return text[span[0] : span[1]].strip().strip("()").strip("'")
+
+    return value(args[2]), value(args[3]), trim(text, args[2]), trim(text, args[3])
+
+
+def trim(text, span):
+    """Drop the whitespace around an argument so a rewrite keeps the layout."""
+    start, end = span
+    inner = text[start:end]
+    return start + (len(inner) - len(inner.lstrip())), end - (len(inner) - len(inner.rstrip()))
+
+
+def stamp_model(path):
+    with open(path, "rb") as handle:
+        text = handle.read().decode("latin-1")
+    author, organization, author_span, organization_span = step_header(text)
+    if (author, organization) == (AUTHOR, ORGANIZATION):
+        return False
+    if author and author != AUTHOR and looks_external(author, organization):
+        raise SystemExit(
+            f"{os.path.relpath(path, ROOT)}: header names {author!r}; "
+            "add it to EXTERNAL_MODELS instead of stamping it"
+        )
+    replaced = (
+        text[: author_span[0]]
+        + f"('{AUTHOR}')"
+        + text[author_span[1] : organization_span[0]]
+        + f"('{ORGANIZATION}')"
+        + text[organization_span[1] :]
+    )
+    with open(path, "wb") as handle:
+        handle.write(replaced.encode("latin-1"))
+    return True
+
+
+def looks_external(author, organization):
+    haystack = f"{author} {organization}".lower()
+    return any(name in haystack for name in EXTERNAL_AUTHORS)
+
+
+def stamp_symbols(text):
+    """Return the library text with the author properties in every own symbol."""
+    heads = list(normalize_symbols.SYMBOL_HEAD.finditer(text))
+    if not heads:
+        raise ValueError("no symbols found")
+    out = []
+    cursor = 0
+    changed = []
+    for index, match in enumerate(heads):
+        out.append(text[cursor : match.start()])
+        end = heads[index + 1].start() if index + 1 < len(heads) else len(text)
+        block = text[match.start() : end]
+        if match.group(1) not in EXTERNAL_SYMBOLS:
+            block, edited = stamp_symbol(match.group(1), block)
+            if edited:
+                changed.append(match.group(1))
+        out.append(block)
+        cursor = end
+    out.append(text[cursor:])
+    return "".join(out), changed
+
+
+def stamp_symbol(name, block):
+    properties = list(normalize_symbols.property_blocks(block))
+    if not properties:
+        raise ValueError(f"{name!r} has no properties")
+    by_name = {prop[0]: prop for prop in properties}
+    edits = []
+    missing = []
+    for key, value in PROPERTIES.items():
+        if key in by_name:
+            _, current, start, end = by_name[key]
+            if current != value:
+                edits.append((start, end, normalize_symbols.replace_value(block, start, end, value)))
+        else:
+            missing.append(key)
+    if missing:
+        text = "".join(
+            normalize_symbols.PROPERTY_TEMPLATE.format(
+                name=key, value=normalize_symbols.quote(PROPERTIES[key])
+            )
+            for key in missing
+        )
+        anchor = properties[-1][3]
+        edits.append((anchor, anchor, text))
+    for start, end, replacement in sorted(edits, key=lambda edit: edit[0], reverse=True):
+        block = block[:start] + replacement + block[end:]
+    return block, bool(edits)
+
+
+def check():
+    problems = []
+    for relative, path in model_paths():
+        if relative in EXTERNAL_MODELS:
+            continue
+        with open(path, "rb") as handle:
+            text = handle.read(4000).decode("latin-1")
+        try:
+            author, organization, _, _ = step_header(text)
+        except ValueError as error:
+            problems.append(f"3dmodels/{relative}: {error}")
+            continue
+        if (author, organization) != (AUTHOR, ORGANIZATION):
+            problems.append(
+                f"3dmodels/{relative}: author is {author!r} / {organization!r}, "
+                f"expected {AUTHOR!r} / {ORGANIZATION!r}"
+            )
+    for relative in EXTERNAL_MODELS:
+        if not os.path.isfile(os.path.join(MODELS, relative)):
+            problems.append(f"3dmodels/{relative}: listed as third party but missing")
+
+    with open(SYMBOL_LIBRARY, encoding="utf-8") as handle:
+        library = handle.read()
+    for match in normalize_symbols.SYMBOL_HEAD.finditer(library):
+        name = match.group(1)
+        end = library.find("\n\t(symbol ", match.end())
+        block = library[match.start() : end if end > 0 else len(library)]
+        properties = {prop[0]: prop[1] for prop in normalize_symbols.property_blocks(block)}
+        if name in EXTERNAL_SYMBOLS:
+            if "Author" in properties:
+                problems.append(f"symbols/{name}: imported symbol carries the author stamp")
+            continue
+        for key, value in PROPERTIES.items():
+            if properties.get(key) != value:
+                problems.append(f"symbols/{name}: {key} is {properties.get(key)!r}, expected {value!r}")
+    for name in EXTERNAL_SYMBOLS:
+        if name not in symbol_names(library):
+            problems.append(f"symbols/{name}: listed as imported but missing")
+    return problems
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument("--write", action="store_true", help="stamp the original files")
+    parser.add_argument("--check", action="store_true", help="report missing or wrong stamps")
+    args = parser.parse_args()
+    if not (args.write or args.check):
+        parser.error("choose --write or --check")
+
+    if args.check:
+        problems = check()
+        for problem in problems:
+            print(problem)
+        print(f"{len(problems)} problems")
+        return 1 if problems else 0
+
+    stamped = 0
+    for relative, path in model_paths():
+        if relative in EXTERNAL_MODELS:
+            continue
+        if stamp_model(path):
+            stamped += 1
+    with open(SYMBOL_LIBRARY, encoding="utf-8") as handle:
+        library = handle.read()
+    library, changed = stamp_symbols(library)
+    if changed:
+        with open(SYMBOL_LIBRARY, "w", encoding="utf-8") as handle:
+            handle.write(library)
+    print(f"stamped {stamped} models and {len(changed)} symbols")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
