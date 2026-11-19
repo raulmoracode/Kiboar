@@ -25,14 +25,10 @@ and it leaves this list. If a maintainer decides a part will not be supported,
 remove the file in a dedicated change with its own issue.
 
 <!-- inventory:start -->
-**17 files, 24.5 MB** are not referenced by any footprint.
+**13 files, 24.1 MB** are not referenced by any footprint.
 
 | File | Size |
 | --- | ---: |
-| `Kiboar_Components.3dshapes/Battery_Holder_2032.step` | 158 KB |
-| `Kiboar_Components.3dshapes/LED_0805.step` | 76 KB |
-| `Kiboar_Components.3dshapes/LED_1206.step` | 75 KB |
-| `Kiboar_Components.3dshapes/Resistor_0805.step` | 76 KB |
 | `Kiboar_Components.3dshapes/TRRS_PJ-320B.step` | 3.4 MB |
 | `Kiboar_MCU.3dshapes/Elite-C.STEP` | 122 KB |
 | `Kiboar_MCU.3dshapes/Liatris.step` | 2.0 MB |

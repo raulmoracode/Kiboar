@@ -1307,15 +1307,4 @@
 		(uuid "1a714af3-a637-4b07-aecd-41655b4d1cec")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_MCU.3dshapes/RP2040_Pro_Micro_Flipped.step"
-		(offset
-			(xyz 0 1.25 2.5)
-		)
-		(scale
-			(xyz 1 1 1)
-		)
-		(rotate
-			(xyz 0 0 0)
-		)
-	)
 )

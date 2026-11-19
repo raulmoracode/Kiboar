@@ -170,15 +170,4 @@
 		(uuid "42296086-f911-4303-80eb-d95b96bbb4ba")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_Joystick.3dshapes/FJ08K-S.step"
-		(offset
-			(xyz 0 0 0)
-		)
-		(scale
-			(xyz 1 1 1)
-		)
-		(rotate
-			(xyz 0 0 90)
-		)
-	)
 )

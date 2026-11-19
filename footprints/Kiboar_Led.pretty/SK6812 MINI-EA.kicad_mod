@@ -133,15 +133,4 @@
 		(uuid "717d66d4-bbdc-4bf8-920d-9d043a904346")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_Led.3dshapes/SK6812MINI-EA.wrl"
-		(offset
-			(xyz 0 0 0.6)
-		)
-		(scale
-			(xyz 1 1 1)
-		)
-		(rotate
-			(xyz 0 0 0)
-		)
-	)
 )

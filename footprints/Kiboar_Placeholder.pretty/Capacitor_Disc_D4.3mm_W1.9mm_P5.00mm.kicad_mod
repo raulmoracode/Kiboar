@@ -162,15 +162,4 @@
 		(uuid "1cc52c78-b55f-4dbd-b54e-423a3b2c51b1")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_Placeholder.3dshapes/Capacitor_Disc_D4.3mm_W1.9mm_P5.00mm.step"
-		(offset
-			(xyz 0 0 0)
-		)
-		(scale
-			(xyz 1 1 1)
-		)
-		(rotate
-			(xyz 0 0 0)
-		)
-	)
 )

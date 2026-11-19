@@ -174,15 +174,4 @@
 		(uuid "ab137455-787e-40dc-8ccf-232f332bbbcb")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_Placeholder.3dshapes/Diode_DO-35.step"
-		(offset
-			(xyz 0 0 -0.2)
-		)
-		(scale
-			(xyz 1 1 1)
-		)
-		(rotate
-			(xyz 0 0 0)
-		)
-	)
 )
