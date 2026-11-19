@@ -2,9 +2,11 @@
 """Stamp the authorship and the licence into the CAD files.
 
 `NOTICE` is the authority for provenance: it names every third-party origin and
-the evidence. This tool is the machine-readable half of it. Everything NOTICE
-does not attribute to a third party is original work by the library author,
-released under MIT, and says so inside the file:
+the evidence. This tool is the machine-readable half of it. Third-party files
+whose licence offers an MIT option are listed in ``MIT_MODELS``: they stay MIT,
+but they are not stamped, because their authorship is not the library author's.
+Everything NOTICE does not attribute to a third party is original work by the
+library author, released under MIT, and says so inside the file:
 
 - STEP models carry it in the ``FILE_NAME`` header, author and organization;
 - KiCad symbols carry it in two hidden properties, ``Author`` and ``License``.
@@ -63,8 +65,6 @@ EXTERNAL_MODELS = {
     "Kiboar_Components.3dshapes/LED_0805.step": "KiCad StepUp export, CC BY-SA 4.0",
     "Kiboar_Components.3dshapes/LED_1206.step": "KiCad StepUp export, CC BY-SA 4.0",
     "Kiboar_Components.3dshapes/Resistor_0805.step": "KiCad StepUp export, CC BY-SA 4.0",
-    "Kiboar_Cutout.3dshapes/Choc_Cutout.step": "KiCad StepUp export, CC BY-SA 4.0",
-    "Kiboar_Cutout.3dshapes/MX_Cutout.step": "KiCad StepUp export, CC BY-SA 4.0",
     "Kiboar_Dip.3dshapes/418121270804.stp": "third-party CAD, see NOTICE",
     "Kiboar_Dip.3dshapes/418127270904.stp": "third-party CAD, see NOTICE",
     "Kiboar_Display.3dshapes/Nice_View.step": "third-party CAD, see NOTICE",
@@ -90,11 +90,8 @@ EXTERNAL_MODELS = {
     "Kiboar_MCU.3dshapes/RP2040_Zero.step": "ScottoKeebs, CC BY-NC-SA 4.0",
     "Kiboar_MCU.3dshapes/RP2040_Zero_Flipped.step": "ScottoKeebs, CC BY-NC-SA 4.0",
     "Kiboar_MCU.3dshapes/Waveshare-ESP32-C6-Zero.step": "third-party CAD, see NOTICE",
-    "Kiboar_MechSwitch.3dshapes/Choc_V1.step": "KiCad StepUp export, CC BY-SA 4.0",
-    "Kiboar_MechSwitch.3dshapes/Hotswap_MX.step": "KiCad StepUp export, CC BY-SA 4.0",
     "Kiboar_MechSwitch.3dshapes/KailhSocket.stp": "third-party CAD, see NOTICE",
     "Kiboar_MechSwitch.3dshapes/LTST-A683CEGBW.step": "KiCad StepUp export, CC BY-SA 4.0",
-    "Kiboar_MechSwitch.3dshapes/MX_Plate.step": "KiCad StepUp export, CC BY-SA 4.0",
     "Kiboar_PinHeader.3dshapes/61000621121.step": "manufacturer CAD, see NOTICE",
     "Kiboar_PinHeader.3dshapes/61001021121.step": "manufacturer CAD, see NOTICE",
     "Kiboar_Placeholder.3dshapes/Capacitor_0402.step": "third-party CAD, see NOTICE",
@@ -107,12 +104,6 @@ EXTERNAL_MODELS = {
     "Kiboar_Placeholder.3dshapes/Resistor_1206.step": "KiCad StepUp export, CC BY-SA 4.0",
     "Kiboar_Placeholder.3dshapes/SOT-23-5.step": "KiCad StepUp export, CC BY-SA 4.0",
     "Kiboar_Placeholder.3dshapes/SOT-23-8.step": "KiCad StepUp export, CC BY-SA 4.0",
-    "Kiboar_Stabilizer.3dshapes/Stabilizer_MX_2.00u.step": "KiCad StepUp export, CC BY-SA 4.0",
-    "Kiboar_Stabilizer.3dshapes/Stabilizer_MX_3.00u.step": "KiCad StepUp export, CC BY-SA 4.0",
-    "Kiboar_Stabilizer.3dshapes/Stabilizer_MX_6.00u.step": "KiCad StepUp export, CC BY-SA 4.0",
-    "Kiboar_Stabilizer.3dshapes/Stabilizer_MX_6.25u.step": "KiCad StepUp export, CC BY-SA 4.0",
-    "Kiboar_Stabilizer.3dshapes/Stabilizer_MX_7.00u.step": "KiCad StepUp export, CC BY-SA 4.0",
-    "Kiboar_Stabilizer.3dshapes/Stabilizer_MX_8.00u.step": "KiCad StepUp export, CC BY-SA 4.0",
     "Kiboar_Switch.3dshapes/MSK12C02.step": "third-party CAD, see NOTICE",
     "Kiboar_TRRS.3dshapes/PJ-320A.step": "third-party CAD, see NOTICE",
     "Kiboar_TRRS.3dshapes/PJ-320D.step": "manufacturer CAD, see NOTICE",
@@ -120,6 +111,24 @@ EXTERNAL_MODELS = {
     "Kiboar_USB-C.3dshapes/216990-0002.stp": "third-party author gga, see NOTICE",
     "Kiboar_USB-C.3dshapes/MOLEX_217179-0001.stp": "third-party author gga, see NOTICE",
     "Kiboar_USB-C.3dshapes/USB_C_HRO_TYPE-C-31-M-14.step": "ScottoKeebs, CC BY-NC-SA 4.0",
+}
+
+
+#: Third-party models used under their MIT option. Their authorship is not the
+#: library author's, so they carry no stamp; `NOTICE` and `LICENSE-kiswitch`
+#: record the origin and the copyright.
+MIT_MODELS = {
+    "Kiboar_Cutout.3dshapes/Choc_Cutout.step": "Keyswitch KiCad Library, MIT option",
+    "Kiboar_Cutout.3dshapes/MX_Cutout.step": "Keyswitch KiCad Library, MIT option",
+    "Kiboar_MechSwitch.3dshapes/Choc_V1.step": "Keyswitch KiCad Library, MIT option",
+    "Kiboar_MechSwitch.3dshapes/Hotswap_MX.step": "Keyswitch KiCad Library, MIT option",
+    "Kiboar_MechSwitch.3dshapes/MX_Plate.step": "Keyswitch KiCad Library, MIT option",
+    "Kiboar_Stabilizer.3dshapes/Stabilizer_MX_2.00u.step": "Keyswitch KiCad Library, MIT option",
+    "Kiboar_Stabilizer.3dshapes/Stabilizer_MX_3.00u.step": "Keyswitch KiCad Library, MIT option",
+    "Kiboar_Stabilizer.3dshapes/Stabilizer_MX_6.00u.step": "Keyswitch KiCad Library, MIT option",
+    "Kiboar_Stabilizer.3dshapes/Stabilizer_MX_6.25u.step": "Keyswitch KiCad Library, MIT option",
+    "Kiboar_Stabilizer.3dshapes/Stabilizer_MX_7.00u.step": "Keyswitch KiCad Library, MIT option",
+    "Kiboar_Stabilizer.3dshapes/Stabilizer_MX_8.00u.step": "Keyswitch KiCad Library, MIT option",
 }
 
 #: Symbols imported as CAD from a third party. The rest are drawn here.
@@ -297,7 +306,7 @@ def stamp_symbol(name, block):
 def check():
     problems = []
     for relative, path in model_paths():
-        if relative in EXTERNAL_MODELS:
+        if relative in EXTERNAL_MODELS or relative in MIT_MODELS:
             continue
         with open(path, "rb") as handle:
             text = handle.read(4000).decode("latin-1")
@@ -311,9 +320,10 @@ def check():
                 f"3dmodels/{relative}: author is {author!r} / {organization!r}, "
                 f"expected {AUTHOR!r} / {ORGANIZATION!r}"
             )
-    for relative in EXTERNAL_MODELS:
-        if not os.path.isfile(os.path.join(MODELS, relative)):
-            problems.append(f"3dmodels/{relative}: listed as third party but missing")
+    for table, reason in ((EXTERNAL_MODELS, "third party"), (MIT_MODELS, "third-party MIT")):
+        for relative in table:
+            if not os.path.isfile(os.path.join(MODELS, relative)):
+                problems.append(f"3dmodels/{relative}: listed as {reason} but missing")
 
     with open(SYMBOL_LIBRARY, encoding="utf-8") as handle:
         library = handle.read()
@@ -352,7 +362,7 @@ def main():
 
     stamped = 0
     for relative, path in model_paths():
-        if relative in EXTERNAL_MODELS:
+        if relative in EXTERNAL_MODELS or relative in MIT_MODELS:
             continue
         if stamp_model(path):
             stamped += 1
