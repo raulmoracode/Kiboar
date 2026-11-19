@@ -98,10 +98,11 @@ Files: the switch, hotswap and stabilizer models under
 `footprints/Kiboar_Stabilizer.pretty/`. The repository does not record which
 footprints, so the whole library is credited rather than a guessed subset.
 
-Evidence: these files are byte-identical to files in the upstream library —
-verified with SHA-256 for `Choc_V1`, `MX_PCB`, `MX_Plate`, `Hotswap_MX`,
-`Stabilizer_MX_2.00u` and `Stabilizer_MX_6.25u` — and the STEP headers name
-`kicad StepUp` with paths under `Switch_Keyboard_*`.
+Evidence: all eleven of these models are byte-identical to files in the
+upstream library, verified with SHA-256, and the STEP headers name
+`kicad StepUp` with paths under `Switch_Keyboard_*`. The upstream repository
+ships exactly eleven STEP models, so the match is complete rather than
+sampled.
 
 Source: <https://github.com/kiswitch/keyswitch-kicad-library>.
 Licence: dual MIT / CC BY-SA 4.0 (`LICENSE-MIT` and `LICENSE-CC-BY-SA`).
@@ -110,17 +111,28 @@ Licence: dual MIT / CC BY-SA 4.0 (`LICENSE-MIT` and `LICENSE-CC-BY-SA`).
 
 ### KiCad official libraries — CC BY-SA 4.0 with exception
 
-Files: eight models are byte-identical to the KiCad 10.0.8 library, verified
-with SHA-256:
+Files: twenty-four models come from the KiCad 10.0.8 library. Twenty-one are
+byte-identical, verified with SHA-256 against the installed library:
 
-- `3dmodels/Kiboar_Led.3dshapes/LED_D3.0mm_{Blue,Clear,Green,Yellow}.step`
-- `3dmodels/Kiboar_Led.3dshapes/LED_D5.0mm_{Blue,Clear,Green,Yellow}.step`
+- `3dmodels/Kiboar_Components.3dshapes/Battery_Holder_2032.step`,
+  `LED_0805.step`, `LED_1206.step` and `Resistor_0805.step`
+- `3dmodels/Kiboar_Led.3dshapes/LED_D3.0mm_{Blue,Clear,Green,Red,Yellow}.step`,
+  `LED_D5.0mm_{Blue,Clear,Green,Red,Yellow}.step` and `LED_WS2812B.step`
+- `3dmodels/Kiboar_Placeholder.3dshapes/Capacitor_0603.step`,
+  `Capacitor_Disc_D3.0mm_W1.6mm_P2.50mm.step`,
+  `Capacitor_Disc_D4.3mm_W1.9mm_P5.00mm.step`, `Diode_DO-35.step`,
+  `Resistor_0805.step` and `Resistor_1206.step`
 
-Sixteen more carry a `kicadStepUp` author and the file names of the KiCad
-library (`C_0603_1608Metric.step`, `D_SOD-123.step`, `SOT-23-5.step`,
-`LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm.step`…). They are not byte-identical, so
-they were re-exported or edited, but they are derived work and carry the same
+Three more — `3dmodels/Kiboar_Placeholder.3dshapes/Diode_SOD-123.step`,
+`SOT-23-5.step` and `SOT-23-8.step` — carry the `kicad StepUp` copyright and
+the CC BY-SA 4.0 notice in their own header. They are not byte-identical, so
+they were re-exported or edited, but they are derived work and keep the same
 licence.
+
+`Kiboar_Components.3dshapes/Resistor_0805.step` is byte-for-byte the KiCad
+`LED_0805_2012Metric.step`: the file has LED geometry under a resistor name.
+The footprint does not reference it, and it is scheduled for replacement with
+the other KiCad copies.
 
 Footprints are different: none of the 1329 is byte-identical to the KiCad 10.0.8
 library. The five that share a name with a KiCad footprint (`SOT-23-5`,
@@ -128,7 +140,7 @@ library. The five that share a name with a KiCad footprint (`SOT-23-5`,
 
 Source: <https://www.kicad.org/libraries/license/>. The KiCad exception lets the
 files be used inside a design; it does not let the files themselves be
-relicensed, so the sixteen derived models cannot be called MIT.
+relicensed, so the twenty-four copied or derived models cannot be called MIT.
 
 ### Manufacturer CAD
 
