@@ -27,13 +27,10 @@ Files:
 - `3dmodels/Kiboar_Components.3dshapes/Button_MJTP1243.step`,
   `Button_MJTP1250.step`, `USB_C_HRO_TYPE-C-31-M-14.step`.
 - `3dmodels/Kiboar_Scotto.3dshapes/Standoff.step`.
-- `footprints/Kiboar_Encoder.pretty/Encoder_EC11_MX_Combo.kicad_mod`,
-  `footprints/Kiboar_MountingHole.pretty/Standoff_M2x6mm.kicad_mod` and
-  `Standoff_M2x8mm.kicad_mod`.
 
 Evidence: the STEP `FILE_NAME` header names `jscotto` as author in every model
-listed above, and the three footprints refer to the Scotto libraries. Commit
-`77e730d` replaced `${SCOTTOKEEBS_KICAD}` references with these vendored files.
+listed above. Three footprints were vendored from the same source and have been
+removed, because the licence forbids commercial use.
 
 Source: <https://github.com/joe-scotto/scottokeebs> (`Extras/ScottoKicad`).
 Licence: the repository's `LICENSE.md` is CC BY-NC-SA 4.0. The ScottoKicad
@@ -126,8 +123,8 @@ relicensed until their source is known.
   the original work only.
 - The ScottoKeebs content under CC BY-NC-SA 4.0 **blocks commercial
   distribution** of the collection as it stands.
-- Before a v1.0.0 release: replace the Scotto models and footprints with
-  original work or obtain permission; keep the SnapEDA and kiswitch attributions
+- Before a v1.0.0 release: replace the Scotto models with original work or
+  obtain permission; keep the SnapEDA and kiswitch attributions
   with the files; decide what to do with the unknown-provenance set.
 
 ## Reporting

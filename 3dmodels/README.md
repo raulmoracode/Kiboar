@@ -25,7 +25,7 @@ and it leaves this list. If a maintainer decides a part will not be supported,
 remove the file in a dedicated change with its own issue.
 
 <!-- inventory:start -->
-**20 files, 34.2 MB** are not referenced by any footprint.
+**22 files, 35.5 MB** are not referenced by any footprint.
 
 | File | Size |
 | --- | ---: |
@@ -43,6 +43,8 @@ remove the file in a dedicated change with its own issue.
 | `Kiboar_MechSwitch.3dshapes/Hotswap_MX.step` | 2.5 MB |
 | `Kiboar_MechSwitch.3dshapes/MX_Plate.step` | 2.6 MB |
 | `Kiboar_MechSwitch.3dshapes/PG151101S11.step` | 498 KB |
+| `Kiboar_Scotto.3dshapes/EC11.step` | 1.3 MB |
+| `Kiboar_Scotto.3dshapes/Standoff.step` | 7 KB |
 | `Kiboar_Stabilizer.3dshapes/Stabilizer_MX_2.00u.step` | 2.0 MB |
 | `Kiboar_Stabilizer.3dshapes/Stabilizer_MX_3.00u.step` | 2.0 MB |
 | `Kiboar_Stabilizer.3dshapes/Stabilizer_MX_6.00u.step` | 2.0 MB |

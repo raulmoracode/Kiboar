@@ -53,8 +53,8 @@ LIBRARY_TEXT = {
         "Módulos de pantalla OLED y e-paper.",
     ),
     "Kiboar_Encoder": (
-        "Rotary encoders and encoder/switch combinations.",
-        "Encoders rotativos y combinaciones encoder/interruptor.",
+        "Rotary encoders and potentiometers.",
+        "Encoders rotativos y potenciómetros.",
     ),
     "Kiboar_Ethernet": ("RJ45 jacks.", "Conectores RJ45."),
     "Kiboar_Joystick": (
@@ -78,8 +78,8 @@ LIBRARY_TEXT = {
         "Puntos de prueba, hubs USB y board bites.",
     ),
     "Kiboar_MountingHole": (
-        "Mounting holes and M2 standoffs.",
-        "Taladros de montaje y separadores M2.",
+        "M1 and M2 mounting holes.",
+        "Taladros de montaje M1 y M2.",
     ),
     "Kiboar_OtherConnectors": ("Other connectors.", "Otros conectores."),
     "Kiboar_PinHeader": ("Pin headers.", "Tiras de pines."),
