@@ -6,16 +6,24 @@ Kiboar, copyright (c) 2025 Raúl Mora.
 footprints and models designed here, the scripts under `tools/`, and the
 documentation.
 
-It does not cover third-party CAD data collected from other projects. Those
-files keep the licence of their source, listed below. This is a provenance
-record built from evidence inside the files and from the upstream licences
-cited; it is not legal advice.
+It does not cover the third-party symbols listed under "Third-party origins".
+Those files keep the licence of their source. This is a provenance record built
+from evidence inside the files and from the upstream licences cited; it is not
+legal advice.
+
+No 3D model in the collection is third-party work. The fifty-four models that
+were, under KiCad, ScottoKeebs, manufacturer or unknown terms, have been
+removed: the footprints keep their pads, courtyard and fab outline and are
+shipped without a body. Every model that remains is MIT — either stamped
+original work, or one of the eleven models used under the Keyswitch library's
+MIT option.
 
 ## Original work — MIT
 
-Files: the models and symbols that no third-party heading below names, the
-footprints that are not from the Keyswitch library, the scripts under `tools/`,
-the documentation and the PCM metadata.
+Files: the models that carry the stamp, the symbols that no third-party heading
+below names, the footprints, the scripts under `tools/`, the documentation and
+the PCM metadata. A symbol drawn from a vendor datasheet is original work: the
+datasheet is the reference, not the CAD.
 
 Evidence: the STEP `FILE_NAME` header names `Raul Mora` as author and `Kiboar`
 as organization, and the symbols carry two hidden properties, `Author` and
@@ -26,9 +34,9 @@ fails the build.
 Counts at the time of writing: 133 models and 131 symbols carry the stamp.
 Another 11 models come from the Keyswitch KiCad Library and are used under its
 MIT option: they are MIT, and they carry no stamp because the authorship is not
-the library author's. The remaining 54 of the 198 models and 15 of the 146
-symbols are third-party under a non-MIT licence, and are listed below. The stamp
-is not a blanket claim: it marks original work only.
+the library author's. That leaves 144 models, all MIT, and 15 of the 146 symbols
+third-party under a non-MIT licence, listed below. The stamp is not a blanket
+claim: it marks original work only.
 
 The STEP header is an ASCII field, so the author is spelled `Raul Mora` there.
 `LICENSE` and this file keep the accented legal name.
@@ -75,34 +83,6 @@ rewritten, so the list below records what it used to say:
   `ryotagoto`
 
 ## Third-party origins
-
-### ScottoKeebs — CC BY-NC-SA 4.0, non-commercial
-
-Files:
-
-- `3dmodels/Kiboar_CAD.3dshapes/*_CAD.step` —
-  the sixteen keycap/plate models sized `MX_1.00u` … `MX_10.00u` and
-  `Choc_1.00u` … `Choc_1.75u`.
-- `3dmodels/Kiboar_MCU.3dshapes/Nice_Nano_V2.step`,
-  `Nice_Nano_V2_Flipped.step`, `RP2040_Pro_Micro.step`,
-  `RP2040_Pro_Micro_Flipped.step`, `RP2040_Zero.step` and
-  `RP2040_Zero_Flipped.step`.
-- `3dmodels/Kiboar_USB-C.3dshapes/USB_C_HRO_TYPE-C-31-M-14.step`.
-
-Evidence: the STEP `FILE_NAME` header names `jscotto` as author in every model
-listed above. Three footprints were vendored from the same source and have been
-removed, because the licence forbids commercial use.
-
-Source: <https://github.com/joe-scotto/scottokeebs> (`Extras/ScottoKicad`).
-Licence: the repository's `LICENSE.md` is CC BY-NC-SA 4.0. The ScottoKicad
-README says to refer to each library and that "most are Creative Commons
-CC-BY-SA 4.0", so the per-file licence is not uniform; the conservative reading
-applied here is CC BY-NC-SA 4.0.
-
-**Verdict: not MIT-compatible.** The licence forbids commercial use and requires
-ShareAlike on derivative library files. These files cannot be used in a
-commercial product, or distributed under MIT, without permission from the
-author.
 
 ### SnapEDA / SnapMagic — CC BY-SA 4.0 with Design Exception 1.0
 
@@ -156,73 +136,6 @@ only the licence choice is ours.
 the eleven models in `MIT_MODELS` so that no author stamp is written over
 someone else's work.
 
-### KiCad official libraries — CC BY-SA 4.0 with exception
-
-Files: twenty-four models come from the KiCad 10.0.8 library. Twenty-one are
-byte-identical, verified with SHA-256 against the installed library:
-
-- `3dmodels/Kiboar_Components.3dshapes/Battery_Holder_2032.step`,
-  `LED_0805.step`, `LED_1206.step` and `Resistor_0805.step`
-- `3dmodels/Kiboar_Led.3dshapes/LED_D3.0mm_{Blue,Clear,Green,Red,Yellow}.step`,
-  `LED_D5.0mm_{Blue,Clear,Green,Red,Yellow}.step` and `LED_WS2812B.step`
-- `3dmodels/Kiboar_Placeholder.3dshapes/Capacitor_0603.step`,
-  `Capacitor_Disc_D3.0mm_W1.6mm_P2.50mm.step`,
-  `Capacitor_Disc_D4.3mm_W1.9mm_P5.00mm.step`, `Diode_DO-35.step`,
-  `Resistor_0805.step` and `Resistor_1206.step`
-
-Three more — `3dmodels/Kiboar_Placeholder.3dshapes/Diode_SOD-123.step`,
-`SOT-23-5.step` and `SOT-23-8.step` — carry the `kicad StepUp` copyright and
-the CC BY-SA 4.0 notice in their own header. They are not byte-identical, so
-they were re-exported or edited, but they are derived work and keep the same
-licence.
-
-`Kiboar_Components.3dshapes/Resistor_0805.step` is byte-for-byte the KiCad
-`LED_0805_2012Metric.step`: the file has LED geometry under a resistor name.
-The footprint does not reference it, and it is scheduled for replacement with
-the other KiCad copies.
-
-Footprints are different: none of the 1329 is byte-identical to the KiCad 10.0.8
-library. The five that share a name with a KiCad footprint (`SOT-23-5`,
-`SOT-23-6`, `SOT-23-8` and two mounting holes) have different content.
-
-Source: <https://www.kicad.org/libraries/license/>. The KiCad exception lets the
-files be used inside a design; it does not let the files themselves be
-relicensed, so the twenty-four copied or derived models cannot be called MIT.
-
-### Manufacturer CAD
-
-Files: the models whose `FILE_NAME` field is a part number instead of a
-design: `Kiboar_PinHeader.3dshapes/61000621121.step` and
-`61001021121.step` (Molex), `Kiboar_Joystick.3dshapes/COM-10063.stp`
-(SparkFun), `FJ08K-S.step` (Same Sky) and
-`Kiboar_TRRS.3dshapes/PJ-320D.step` (Same Sky).
-
-A sixth model, `Kiboar_Placeholder.3dshapes/Fuse_PPTC1.stp`, declared
-`LicenseCCBY-ND4.0` from `CADENAS` in its header. **CC BY-ND forbids derivative
-works**, so it could not stay in an MIT collection: the file and its `(model)`
-reference have been removed. The `Fuse_PPTC1` footprint keeps its pads,
-courtyard and fab outline and is shipped without a 3D model until an original
-one replaces it.
-
-Many footprints and symbols also name a component vendor (Alps, Würth, Molex,
-TE Connectivity, Kailh, E-Switch…) in their `Datasheet` or description. A
-symbol drawn from a vendor datasheet is original work: the datasheet is the
-reference, not the CAD.
-
-Vendor terms commonly allow the model to be used in a design but do not grant
-redistribution as a library. They were not verified vendor by vendor; treat
-them as "used by permission for design work" until each vendor's terms are
-checked.
-
-### Unresolved origin
-
-Files whose header names no author, no licence and no usable source:
-
-- `Kiboar_Placeholder.3dshapes/Diode_SOD-80.wrl` — `#Exported from Wings 3D
-  1.4.1`
-- `Kiboar_Led.3dshapes/SK6812MINI-EA.wrl` — `generated by
-  easyeda2kicad.py`, so it comes from an EasyEDA part
-
 ### Imported symbols
 
 Files: fifteen, in two batches.
@@ -243,18 +156,21 @@ library.
 
 ## Consequences
 
-- This repository is a **mixed-licence collection**. `LICENSE` (MIT) describes
-  the original work only. Everything outside the lists above is MIT, and the
-  models and symbols say so in the file.
-- The ScottoKeebs content under CC BY-NC-SA 4.0 **blocks commercial
-  distribution** of the collection as it stands.
+- This repository is a **mixed-licence collection** only because of fifteen
+  imported symbols. `LICENSE` (MIT) covers every 3D model and every other
+  symbol and footprint, and the files say so.
+- All 144 remaining models are MIT. The fifty-four third-party models removed
+  here are gone with their `(model ...)` references; the footprints keep their
+  pads, courtyard and fab outline and ship without a body.
 - The Keyswitch KiCad Library models are **MIT** under the option elected here;
   `LICENSE-kiswitch` carries their copyright and permission notice.
-- No file in the collection is under a NoDerivatives licence: the one that was,
-  `Fuse_PPTC1.stp`, has been removed.
-- Before a v1.0.0 release: replace the Scotto models with original work or
-  obtain permission; check the licence of the remaining third-party models;
-  keep the SnapEDA, Samacsys and kiswitch attributions with the files.
+- No model or symbol in the collection is under a NoDerivatives or a
+  non-commercial licence. The ones that were — `Fuse_PPTC1.stp` under CC BY-ND,
+  the ScottoKeebs models under CC BY-NC-SA and their three footprints — have
+  been removed.
+- Before the next release: replace the fifteen imported symbols with original
+  drawings or obtain permission; keep the SnapEDA, Samacsys and kiswitch
+  attributions with the files.
 
 ## Reporting
 

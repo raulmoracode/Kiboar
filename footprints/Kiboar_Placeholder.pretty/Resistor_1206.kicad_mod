@@ -152,15 +152,4 @@
 		(uuid "0f7c8c85-86aa-4632-9ea9-d90a66b5867e")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_Placeholder.3dshapes/Resistor_1206.step"
-		(offset
-			(xyz 0 0 0)
-		)
-		(scale
-			(xyz 1 1 1)
-		)
-		(rotate
-			(xyz 0 0 0)
-		)
-	)
 )

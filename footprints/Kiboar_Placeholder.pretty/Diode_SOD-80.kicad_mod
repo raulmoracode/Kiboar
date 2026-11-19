@@ -168,15 +168,4 @@
 		(uuid "b41f3994-4287-4136-89c4-c6aa0966e9ab")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_Placeholder.3dshapes/Diode_SOD-80.wrl"
-		(offset
-			(xyz 0 0 0)
-		)
-		(scale
-			(xyz 1 1 1)
-		)
-		(rotate
-			(xyz 0 0 180)
-		)
-	)
 )

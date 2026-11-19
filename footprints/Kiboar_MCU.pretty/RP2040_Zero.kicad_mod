@@ -308,15 +308,4 @@
 		(uuid "8a11f86e-586e-495d-a11e-a1e650589934")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_MCU.3dshapes/RP2040_Zero.step"
-		(offset
-			(xyz 0 0.6 0)
-		)
-		(scale
-			(xyz 1 1 1)
-		)
-		(rotate
-			(xyz 0 0 -90)
-		)
-	)
 )

@@ -201,15 +201,4 @@
 		(uuid "c3d5521e-bedf-4f1f-a634-af0ea7900c9e")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_Joystick.3dshapes/COM-10063.stp"
-		(offset
-			(xyz 0 0 2)
-		)
-		(scale
-			(xyz 1 1 1)
-		)
-		(rotate
-			(xyz 0 0 0)
-		)
-	)
 )

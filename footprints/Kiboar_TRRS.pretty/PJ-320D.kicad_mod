@@ -171,15 +171,4 @@
 		(uuid "57f7fd13-4970-4956-834e-e0c128e9ef12")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_TRRS.3dshapes/PJ-320D.step"
-		(offset
-			(xyz 0 0 0)
-		)
-		(scale
-			(xyz 1 1 1)
-		)
-		(rotate
-			(xyz 0 0 180)
-		)
-	)
 )

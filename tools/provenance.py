@@ -38,66 +38,6 @@ AUTHOR = "Raul Mora"
 ORGANIZATION = "Kiboar"
 LICENCE = "MIT"
 
-#: Every model that is not original work, with the reason `NOTICE` records.
-EXTERNAL_MODELS = {
-    # VRML models: no metadata field, listed so the count stays complete.
-    "Kiboar_Placeholder.3dshapes/Diode_SOD-80.wrl": "Wings 3D export of unknown origin, see NOTICE",
-    "Kiboar_Led.3dshapes/SK6812MINI-EA.wrl": "easyeda2kicad export, see NOTICE",
-    "Kiboar_CAD.3dshapes/Choc_1.00u_CAD.step": "ScottoKeebs, CC BY-NC-SA 4.0",
-    "Kiboar_CAD.3dshapes/Choc_1.25u_CAD.step": "ScottoKeebs, CC BY-NC-SA 4.0",
-    "Kiboar_CAD.3dshapes/Choc_1.50u_CAD.step": "ScottoKeebs, CC BY-NC-SA 4.0",
-    "Kiboar_CAD.3dshapes/Choc_1.75u_CAD.step": "ScottoKeebs, CC BY-NC-SA 4.0",
-    "Kiboar_CAD.3dshapes/MX_1.00u_CAD.step": "ScottoKeebs, CC BY-NC-SA 4.0",
-    "Kiboar_CAD.3dshapes/MX_1.25u_CAD.step": "ScottoKeebs, CC BY-NC-SA 4.0",
-    "Kiboar_CAD.3dshapes/MX_1.50u_CAD.step": "ScottoKeebs, CC BY-NC-SA 4.0",
-    "Kiboar_CAD.3dshapes/MX_1.75u_CAD.step": "ScottoKeebs, CC BY-NC-SA 4.0",
-    "Kiboar_CAD.3dshapes/MX_10.00u_CAD.step": "ScottoKeebs, CC BY-NC-SA 4.0",
-    "Kiboar_CAD.3dshapes/MX_2.00u_CAD.step": "ScottoKeebs, CC BY-NC-SA 4.0",
-    "Kiboar_CAD.3dshapes/MX_2.25u_CAD.step": "ScottoKeebs, CC BY-NC-SA 4.0",
-    "Kiboar_CAD.3dshapes/MX_2.50u_CAD.step": "ScottoKeebs, CC BY-NC-SA 4.0",
-    "Kiboar_CAD.3dshapes/MX_2.75u_CAD.step": "ScottoKeebs, CC BY-NC-SA 4.0",
-    "Kiboar_CAD.3dshapes/MX_3.00u_CAD.step": "ScottoKeebs, CC BY-NC-SA 4.0",
-    "Kiboar_CAD.3dshapes/MX_6.25u_CAD.step": "ScottoKeebs, CC BY-NC-SA 4.0",
-    "Kiboar_CAD.3dshapes/MX_7.00u_CAD.step": "ScottoKeebs, CC BY-NC-SA 4.0",
-    "Kiboar_Components.3dshapes/Battery_Holder_2032.step": "KiCad StepUp export, CC BY-SA 4.0",
-    "Kiboar_Components.3dshapes/LED_0805.step": "KiCad StepUp export, CC BY-SA 4.0",
-    "Kiboar_Components.3dshapes/LED_1206.step": "KiCad StepUp export, CC BY-SA 4.0",
-    "Kiboar_Components.3dshapes/Resistor_0805.step": "KiCad StepUp export, CC BY-SA 4.0",
-    "Kiboar_Joystick.3dshapes/COM-10063.stp": "manufacturer CAD, see NOTICE",
-    "Kiboar_Joystick.3dshapes/FJ08K-S.step": "manufacturer CAD, see NOTICE",
-    "Kiboar_Led.3dshapes/LED_D3.0mm_Blue.step": "KiCad StepUp export, CC BY-SA 4.0",
-    "Kiboar_Led.3dshapes/LED_D3.0mm_Clear.step": "KiCad StepUp export, CC BY-SA 4.0",
-    "Kiboar_Led.3dshapes/LED_D3.0mm_Green.step": "KiCad StepUp export, CC BY-SA 4.0",
-    "Kiboar_Led.3dshapes/LED_D3.0mm_Red.step": "KiCad StepUp export, CC BY-SA 4.0",
-    "Kiboar_Led.3dshapes/LED_D3.0mm_Yellow.step": "KiCad StepUp export, CC BY-SA 4.0",
-    "Kiboar_Led.3dshapes/LED_D5.0mm_Blue.step": "KiCad StepUp export, CC BY-SA 4.0",
-    "Kiboar_Led.3dshapes/LED_D5.0mm_Clear.step": "KiCad StepUp export, CC BY-SA 4.0",
-    "Kiboar_Led.3dshapes/LED_D5.0mm_Green.step": "KiCad StepUp export, CC BY-SA 4.0",
-    "Kiboar_Led.3dshapes/LED_D5.0mm_Red.step": "KiCad StepUp export, CC BY-SA 4.0",
-    "Kiboar_Led.3dshapes/LED_D5.0mm_Yellow.step": "KiCad StepUp export, CC BY-SA 4.0",
-    "Kiboar_Led.3dshapes/LED_WS2812B.step": "KiCad StepUp export, CC BY-SA 4.0",
-    "Kiboar_MCU.3dshapes/Nice_Nano_V2.step": "ScottoKeebs, CC BY-NC-SA 4.0",
-    "Kiboar_MCU.3dshapes/Nice_Nano_V2_Flipped.step": "ScottoKeebs, CC BY-NC-SA 4.0",
-    "Kiboar_MCU.3dshapes/RP2040_Pro_Micro.step": "ScottoKeebs, CC BY-NC-SA 4.0",
-    "Kiboar_MCU.3dshapes/RP2040_Pro_Micro_Flipped.step": "ScottoKeebs, CC BY-NC-SA 4.0",
-    "Kiboar_MCU.3dshapes/RP2040_Zero.step": "ScottoKeebs, CC BY-NC-SA 4.0",
-    "Kiboar_MCU.3dshapes/RP2040_Zero_Flipped.step": "ScottoKeebs, CC BY-NC-SA 4.0",
-    "Kiboar_PinHeader.3dshapes/61000621121.step": "manufacturer CAD, see NOTICE",
-    "Kiboar_PinHeader.3dshapes/61001021121.step": "manufacturer CAD, see NOTICE",
-    "Kiboar_Placeholder.3dshapes/Capacitor_0603.step": "KiCad StepUp export, CC BY-SA 4.0",
-    "Kiboar_Placeholder.3dshapes/Capacitor_Disc_D3.0mm_W1.6mm_P2.50mm.step": "KiCad StepUp export, CC BY-SA 4.0",
-    "Kiboar_Placeholder.3dshapes/Capacitor_Disc_D4.3mm_W1.9mm_P5.00mm.step": "KiCad StepUp export, CC BY-SA 4.0",
-    "Kiboar_Placeholder.3dshapes/Diode_DO-35.step": "KiCad StepUp export, CC BY-SA 4.0",
-    "Kiboar_Placeholder.3dshapes/Diode_SOD-123.step": "KiCad StepUp export, CC BY-SA 4.0",
-    "Kiboar_Placeholder.3dshapes/Resistor_0805.step": "KiCad StepUp export, CC BY-SA 4.0",
-    "Kiboar_Placeholder.3dshapes/Resistor_1206.step": "KiCad StepUp export, CC BY-SA 4.0",
-    "Kiboar_Placeholder.3dshapes/SOT-23-5.step": "KiCad StepUp export, CC BY-SA 4.0",
-    "Kiboar_Placeholder.3dshapes/SOT-23-8.step": "KiCad StepUp export, CC BY-SA 4.0",
-    "Kiboar_TRRS.3dshapes/PJ-320D.step": "manufacturer CAD, see NOTICE",
-    "Kiboar_USB-C.3dshapes/USB_C_HRO_TYPE-C-31-M-14.step": "ScottoKeebs, CC BY-NC-SA 4.0",
-}
-
-
 #: Models whose header named another machine, project or author, but whose
 #: geometry is original work by the library author. `--write` replaces the whole
 #: ``FILE_NAME`` call, so no foreign path, author or organization survives.
@@ -312,7 +252,7 @@ def stamp_model(path, relative):
         if author and author != AUTHOR and looks_external(author, organization):
             raise SystemExit(
                 f"{os.path.relpath(path, ROOT)}: header names {author!r}; "
-                "add it to EXTERNAL_MODELS instead of stamping it"
+                "record the origin in NOTICE before stamping it"
             )
         author_span, organization_span = trim(text, spans[2]), trim(text, spans[3])
         replaced = (
@@ -388,7 +328,7 @@ def stamp_symbol(name, block):
 def check():
     problems = []
     for relative, path in model_paths():
-        if relative in EXTERNAL_MODELS or relative in MIT_MODELS:
+        if relative in MIT_MODELS:
             continue
         with open(path, "rb") as handle:
             text = handle.read(4000).decode("latin-1")
@@ -410,15 +350,12 @@ def check():
         product = REWRITTEN_PRODUCTS.get(relative)
         if product and f"'{product}'" in text:
             problems.append(f"3dmodels/{relative}: still names the project {product!r}")
-    for table, reason in ((EXTERNAL_MODELS, "third party"), (MIT_MODELS, "third-party MIT")):
-        for relative in table:
-            if not os.path.isfile(os.path.join(MODELS, relative)):
-                problems.append(f"3dmodels/{relative}: listed as {reason} but missing")
+    for relative in MIT_MODELS:
+        if not os.path.isfile(os.path.join(MODELS, relative)):
+            problems.append(f"3dmodels/{relative}: listed as third-party MIT but missing")
     for relative in REWRITTEN_MODELS:
         if not os.path.isfile(os.path.join(MODELS, relative)):
             problems.append(f"3dmodels/{relative}: listed as rewritten but missing")
-        elif relative in EXTERNAL_MODELS:
-            problems.append(f"3dmodels/{relative}: listed as rewritten and as third party")
 
     with open(SYMBOL_LIBRARY, encoding="utf-8") as handle:
         library = handle.read()
@@ -457,7 +394,7 @@ def main():
 
     stamped = 0
     for relative, path in model_paths():
-        if relative in EXTERNAL_MODELS or relative in MIT_MODELS:
+        if relative in MIT_MODELS:
             continue
         if stamp_model(path, relative):
             stamped += 1

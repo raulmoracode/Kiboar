@@ -62,9 +62,8 @@ Only contribute work you can license compatibly with this repository.
 - Original work is MIT, and a contribution is accepted under MIT.
 - Content derived from another project keeps that project's licence. Say which
   in the pull request and add it to `NOTICE` with the evidence.
-- Do not add non-commercial (CC BY-NC) content. The library already carries a
-  non-commercial subset from ScottoKeebs; adding more makes the licensing
-  problem worse, not better.
+- Do not add non-commercial (CC BY-NC) or NoDerivatives content. The third-party
+  3D bodies were removed for exactly that reason; adding one back undoes it.
 
 ## Commits and pull requests
 

@@ -112,29 +112,26 @@ link. The issue forms ask for both.
 
 ## Licensing
 
-Kiboar is a **mixed-licence collection**:
+Kiboar is a **mixed-licence collection**, and only because of its symbols:
 
-- the original work in this repository — the symbols, footprints and models
-  designed here, the scripts and the documentation — is **MIT** (see
-  [`LICENSE`](LICENSE));
-- CAD data collected from other projects keeps its own licence. [`NOTICE`](NOTICE)
-  lists every verified origin, the affected files and the evidence.
+- every 3D model and every footprint is **MIT**, and the symbols drawn here are
+  **MIT** too (see [`LICENSE`](LICENSE));
+- fifteen imported symbols keep the licence of their source, listed in
+  [`NOTICE`](NOTICE) with the evidence.
 
-The split is not a guess. 133 of the 198 models and 131 of the 146 symbols are
-original work, and say so in the file: the STEP `FILE_NAME` header names the
-author and `Kiboar`, and the symbols carry hidden `Author` and `License`
-properties. `tools/lint.py` fails when a stamp is missing. A further 11 models
-come from the Keyswitch KiCad Library under its MIT option and carry no stamp,
-because they are not this author's work. The rest is 54 models and 15 symbols,
-each listed in `NOTICE`.
+The split is not a guess. 133 models and 131 of the 146 symbols are original
+work, and say so in the file: the STEP `FILE_NAME` header names the author and
+`Kiboar`, and the symbols carry hidden `Author` and `License` properties.
+`tools/lint.py` fails when a stamp is missing. A further 11 models come from the
+Keyswitch KiCad Library under its MIT option and carry no stamp, because they
+are not this author's work. The other 15 symbols are the third-party imports
+listed in `NOTICE`.
 
-Two consequences matter before you use the library commercially:
-
-- the ScottoKeebs models are **CC BY-NC-SA 4.0**, which forbids commercial
-  use;
-- ten symbols are SnapEDA imports and five are Component Search Engine imports,
-  both under **CC BY-SA 4.0** with the Design Exception, so they need
-  attribution when the files themselves are redistributed.
+One thing matters before you use the library commercially: ten symbols are
+SnapEDA imports and five are Component Search Engine imports, both under
+**CC BY-SA 4.0** with the Design Exception, so they need attribution when the
+files themselves are redistributed. No model or footprint carries a
+non-commercial or NoDerivatives licence.
 
 The switch, hotswap, cutout and stabilizer models come from the Keyswitch KiCad
 Library, which is dual-licensed **MIT / CC BY-SA 4.0**. This repository uses
@@ -145,7 +142,6 @@ copyright and permission notice.
 
 - [Keyswitch KiCad Library](https://github.com/kiswitch/keyswitch-kicad-library)
   (perigoso, obra, rrotter, Lotier) — used under the MIT option
-- [ScottoKeebs / ScottoKicad](https://github.com/joe-scotto/scottokeebs) — CC BY-NC-SA 4.0
 - [SnapEDA / SnapMagic](https://www.snapeda.com) — CC BY-SA 4.0 with Design Exception 1.0
 - [marbastlib](https://github.com/ebastler/marbastlib), [keyswitches.pretty](https://github.com/daprice/keyswitches.pretty)
   and [kicad-libraries](https://github.com/sszczep/kicad-libraries) — reference material

@@ -472,15 +472,4 @@
 		(uuid "d08c16d6-5bf1-4c01-89b6-029bd09060e8")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_USB-C.3dshapes/USB_C_HRO_TYPE-C-31-M-14.step"
-		(offset
-			(xyz 0 0.07 0)
-		)
-		(scale
-			(xyz 1 1 1)
-		)
-		(rotate
-			(xyz 0 0 0)
-		)
-	)
 )

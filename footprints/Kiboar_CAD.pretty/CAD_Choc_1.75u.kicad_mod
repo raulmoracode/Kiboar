@@ -125,15 +125,4 @@
 			(xyz 0 0 0)
 		)
 	)
-	(model "${KIBOAR_3DMODELS}/Kiboar_CAD.3dshapes/Choc_1.75u_CAD.step"
-		(offset
-			(xyz 0 0 7.7)
-		)
-		(scale
-			(xyz 1 1 1)
-		)
-		(rotate
-			(xyz 0 180 90)
-		)
-	)
 )

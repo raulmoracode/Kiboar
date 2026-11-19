@@ -1160,15 +1160,4 @@
 		(uuid "a9ece3f8-3b7b-4561-b9a3-de893135e04c")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_MCU.3dshapes/Nice_Nano_V2_Flipped.step"
-		(offset
-			(xyz 0 1.25 2.5)
-		)
-		(scale
-			(xyz 1 1 1)
-		)
-		(rotate
-			(xyz 0 0 0)
-		)
-	)
 )
