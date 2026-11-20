@@ -2,10 +2,8 @@
 """Stamp the authorship and the licence into the CAD files.
 
 `NOTICE` is the authority for provenance: it names every third-party origin and
-the evidence. This tool is the machine-readable half of it. Third-party files
-whose licence offers an MIT option are listed in ``MIT_MODELS``: they stay MIT,
-but they are not stamped, because their authorship is not the library author's.
-Models in ``REWRITTEN_MODELS`` are original work whose header named another
+the evidence. This tool is the machine-readable half of it. Models in
+``REWRITTEN_MODELS`` are original work whose header named another
 machine or project: their whole ``FILE_NAME`` call is replaced, not just the
 author field, so no foreign path survives.
 Everything NOTICE does not attribute to a third party is original work by the
@@ -15,8 +13,8 @@ library author, released under MIT, and says so inside the file:
 - KiCad symbols carry it in two hidden properties, ``Author`` and ``License``.
 
 The STEP header is an ASCII field, so the author is spelled ``Raul Mora``
-there; `LICENSE` and `NOTICE` keep the accented legal name. Models that are not
-STEP (the two VRML files) have no metadata field and are covered by `NOTICE`.
+there; `LICENSE` and `NOTICE` keep the accented legal name. Every model in the
+repository is STEP, so the header covers all of them.
 
     python3 tools/provenance.py --check    # fail when a stamp is missing or wrong
     python3 tools/provenance.py --write    # stamp every original file
@@ -55,36 +53,12 @@ REWRITTEN_MODELS = {
     "Kiboar_Display.3dshapes/OLED_128x32.step",
     "Kiboar_MCU.3dshapes/Adafruit_KB2040.step",
     "Kiboar_MCU.3dshapes/Waveshare-ESP32-C6-Zero.step",
-    "Kiboar_MechSwitch.3dshapes/KailhSocket.stp",
-    "Kiboar_MechSwitch.3dshapes/LTST-A683CEGBW.step",
     "Kiboar_Placeholder.3dshapes/Capacitor_0402.step",
     "Kiboar_Switch.3dshapes/MSK12C02.step",
     "Kiboar_TRRS.3dshapes/PJ-320A.step",
     "Kiboar_USB-C.3dshapes/216990-0001.stp",
     "Kiboar_USB-C.3dshapes/216990-0002.stp",
     "Kiboar_USB-C.3dshapes/MOLEX_217179-0001.stp",
-}
-
-#: Part names inside a rewritten model that still name the project it came from.
-REWRITTEN_PRODUCTS = {
-    "Kiboar_MechSwitch.3dshapes/LTST-A683CEGBW.step": "Pady_fd",
-}
-
-#: Third-party models used under their MIT option. Their authorship is not the
-#: library author's, so they carry no stamp; `NOTICE` and `LICENSE-kiswitch`
-#: record the origin and the copyright.
-MIT_MODELS = {
-    "Kiboar_Cutout.3dshapes/Choc_Cutout.step": "Keyswitch KiCad Library, MIT option",
-    "Kiboar_Cutout.3dshapes/MX_Cutout.step": "Keyswitch KiCad Library, MIT option",
-    "Kiboar_MechSwitch.3dshapes/Choc_V1.step": "Keyswitch KiCad Library, MIT option",
-    "Kiboar_MechSwitch.3dshapes/Hotswap_MX.step": "Keyswitch KiCad Library, MIT option",
-    "Kiboar_MechSwitch.3dshapes/MX_Plate.step": "Keyswitch KiCad Library, MIT option",
-    "Kiboar_Stabilizer.3dshapes/Stabilizer_MX_2.00u.step": "Keyswitch KiCad Library, MIT option",
-    "Kiboar_Stabilizer.3dshapes/Stabilizer_MX_3.00u.step": "Keyswitch KiCad Library, MIT option",
-    "Kiboar_Stabilizer.3dshapes/Stabilizer_MX_6.00u.step": "Keyswitch KiCad Library, MIT option",
-    "Kiboar_Stabilizer.3dshapes/Stabilizer_MX_6.25u.step": "Keyswitch KiCad Library, MIT option",
-    "Kiboar_Stabilizer.3dshapes/Stabilizer_MX_7.00u.step": "Keyswitch KiCad Library, MIT option",
-    "Kiboar_Stabilizer.3dshapes/Stabilizer_MX_8.00u.step": "Keyswitch KiCad Library, MIT option",
 }
 
 #: Symbols imported as CAD from a third party. The rest are drawn here.
@@ -239,10 +213,6 @@ def stamp_model(path, relative):
             + rewritten_file_name(values, os.path.basename(path))
             + text[spans[-1][1] + 1 :]
         )
-        product = REWRITTEN_PRODUCTS.get(relative)
-        if product:
-            stem = os.path.splitext(os.path.basename(path))[0]
-            replaced = replaced.replace(f"'{product}'", f"'{stem}'")
         if replaced == text:
             return False
     else:
@@ -328,8 +298,6 @@ def stamp_symbol(name, block):
 def check():
     problems = []
     for relative, path in model_paths():
-        if relative in MIT_MODELS:
-            continue
         with open(path, "rb") as handle:
             text = handle.read(4000).decode("latin-1")
         try:
@@ -347,12 +315,6 @@ def check():
                 f"3dmodels/{relative}: file name is {name!r}, "
                 f"expected {os.path.basename(path)!r}"
             )
-        product = REWRITTEN_PRODUCTS.get(relative)
-        if product and f"'{product}'" in text:
-            problems.append(f"3dmodels/{relative}: still names the project {product!r}")
-    for relative in MIT_MODELS:
-        if not os.path.isfile(os.path.join(MODELS, relative)):
-            problems.append(f"3dmodels/{relative}: listed as third-party MIT but missing")
     for relative in REWRITTEN_MODELS:
         if not os.path.isfile(os.path.join(MODELS, relative)):
             problems.append(f"3dmodels/{relative}: listed as rewritten but missing")
@@ -394,8 +356,6 @@ def main():
 
     stamped = 0
     for relative, path in model_paths():
-        if relative in MIT_MODELS:
-            continue
         if stamp_model(path, relative):
             stamped += 1
     with open(SYMBOL_LIBRARY, encoding="utf-8") as handle:

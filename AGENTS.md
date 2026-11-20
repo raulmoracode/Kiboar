@@ -8,9 +8,11 @@ Read in this order: `README.md` → `AGENTS.md` → `CONTRIBUTING.md` → `NOTIC
 
 ## What this repository is
 
-Kiboar is a component library for mechanical keyboards in **KiCad 10**: 146
-symbols, 1329 footprints in 23 `.pretty` libraries, and 3D models for most of
-them. It ships as a PCM package and as a clone with library tables.
+Kiboar is a component library for mechanical keyboards in **KiCad 10**: 145
+symbols, 175 footprints in 20 `.pretty` libraries, and 3D models for all of
+them. Keyswitch footprints and models are being redesigned and are not in the
+repository at this time. It ships as a PCM package and as a clone with library
+tables.
 
 | Path | Contents |
 | --- | --- |
@@ -70,17 +72,14 @@ If any byte changes, the source was not current: commit the upgraded files.
 ### Licensing
 
 - `NOTICE` is authoritative. The collection is **mixed-licence**: original work
-  is MIT; eleven kiswitch models are used under their MIT option; ten SnapEDA
-  symbols and five Component Search Engine symbols are CC BY-SA. No 3D model
-  carries a third-party licence: the third-party bodies were removed and the
-  footprints ship without them.
+  is MIT; ten SnapEDA symbols and five Component Search Engine symbols are
+  CC BY-SA. No 3D model is third-party.
 - Original models and symbols carry their authorship in the file, written by
-  `tools/provenance.py`. The tool's `MIT_MODELS`, `REWRITTEN_MODELS` and
-  `EXTERNAL_SYMBOLS` are the machine-readable half of `NOTICE`: record a file
-  there before you add third-party CAD, or the stamp will claim it. Files in
-  `MIT_MODELS` are third-party work used under an MIT option and are never
-  stamped; `REWRITTEN_MODELS` are original models whose header named another
-  machine, and get their whole `FILE_NAME` call replaced.
+  `tools/provenance.py`. The tool's `REWRITTEN_MODELS` and `EXTERNAL_SYMBOLS`
+  are the machine-readable half of `NOTICE`: record a file there before you add
+  third-party CAD, or the stamp will claim it. `REWRITTEN_MODELS` are original
+  models whose header named another machine, and get their whole `FILE_NAME`
+  call replaced.
 - Do not relicense third-party files, do not remove or weaken `NOTICE`, and do
   not add new non-commercial content.
 - New CAD data needs its origin and licence recorded in `NOTICE`, or must be

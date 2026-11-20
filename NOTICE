@@ -11,19 +11,18 @@ Those files keep the licence of their source. This is a provenance record built
 from evidence inside the files and from the upstream licences cited; it is not
 legal advice.
 
-No 3D model in the collection is third-party work. The fifty-four models that
-were, under KiCad, ScottoKeebs, manufacturer or unknown terms, have been
-removed: the footprints keep their pads, courtyard and fab outline and are
-shipped without a body. Every model that remains is MIT — either stamped
-original work, or one of the eleven models used under the Keyswitch library's
-MIT option.
+Every 3D model in the collection is MIT and carries the stamp. The
+third-party models — KiCad, ScottoKeebs, manufacturer, kiswitch and unknown
+origin — and the whole mechanical-key-switch area they supported were removed in
+#44 and in the change that followed: the footprints that remain keep their pads, courtyard and fab
+outline and ship without a body.
 
 ## Original work — MIT
 
-Files: the models that carry the stamp, the symbols that no third-party heading
-below names, the footprints, the scripts under `tools/`, the documentation and
-the PCM metadata. A symbol drawn from a vendor datasheet is original work: the
-datasheet is the reference, not the CAD.
+Files: the models, the symbols that no third-party heading below names, the
+footprints, the scripts under `tools/`, the documentation and the PCM metadata.
+A symbol drawn from a vendor datasheet is original work: the datasheet is the
+reference, not the CAD.
 
 Evidence: the STEP `FILE_NAME` header names `Raul Mora` as author and `Kiboar`
 as organization, and the symbols carry two hidden properties, `Author` and
@@ -31,27 +30,23 @@ as organization, and the symbols carry two hidden properties, `Author` and
 `--check`, so a missing stamp, or a stamp on a file listed as third-party,
 fails the build.
 
-Counts at the time of writing: 133 models and 131 symbols carry the stamp.
-Another 11 models come from the Keyswitch KiCad Library and are used under its
-MIT option: they are MIT, and they carry no stamp because the authorship is not
-the library author's. That leaves 144 models, all MIT, and 15 of the 146 symbols
-third-party under a non-MIT licence, listed below. The stamp is not a blanket
-claim: it marks original work only.
+Counts at the time of writing: 130 models and 130 symbols carry the stamp. The
+15 imported symbols below are the only third-party files left, out of 145. The
+stamp is not a blanket claim: it marks original work only.
 
 The STEP header is an ASCII field, so the author is spelled `Raul Mora` there.
 `LICENSE` and this file keep the accented legal name.
 
 ### Reattributed models — MIT
 
-Files: nineteen models that were drawn here but carried the `FILE_NAME` header
+Files: seventeen models that were drawn here but carried the `FILE_NAME` header
 of the machine, project or tool that last touched them, so they could not be
 stamped as original work. `tools/provenance.py` lists them in
 `REWRITTEN_MODELS`; `--write` replaces the whole `FILE_NAME` call, so the name
 becomes the model's own file name and the author and organization become
 `Raul Mora` / `Kiboar`. The timestamp, the preprocessor and the originating
 system stay, because they describe the software that wrote the file, not the
-person who drew the geometry. The `PRODUCT` name `Pady_fd` that survived in
-`LTST-A683CEGBW.step` is normalised too.
+person who drew the geometry.
 
 The author of this repository confirms the geometry of these files is his own
 work. The header was the only provenance inside the file and it has been
@@ -71,10 +66,6 @@ rewritten, so the list below records what it used to say:
 - `Kiboar_MCU.3dshapes/Adafruit_KB2040.step` —
   `/Users/purplemac/Dropbox/3D/Products/KB2040/`
 - `Kiboar_MCU.3dshapes/Waveshare-ESP32-C6-Zero.step` — author `xiaojisheng`
-- `Kiboar_MechSwitch.3dshapes/KailhSocket.stp` —
-  `C:\Users\master\Documents\GitHub\qmk_hardware\…`, author `master`
-- `Kiboar_MechSwitch.3dshapes/LTST-A683CEGBW.step` — author `kicad StepUp`,
-  organization `ksu MCAD`, path `…/sebastianszczepanski/…/Pady_fd.step`
 - `Kiboar_Placeholder.3dshapes/Capacitor_0402.step` —
   `C:/Users/natha/Documents/GitHub/Palette_Chip/…`
 - `Kiboar_Switch.3dshapes/MSK12C02.step` —
@@ -109,33 +100,6 @@ required, and redistribution is capped at ten Design Files per location without
 written permission. This repository is exactly at that cap; an eleventh imported
 file needs permission.
 
-### Keyswitch KiCad Library — MIT, elected
-
-Files: the eleven models under `3dmodels/Kiboar_MechSwitch.3dshapes/`,
-`3dmodels/Kiboar_Cutout.3dshapes/` and `3dmodels/Kiboar_Stabilizer.3dshapes/`,
-plus some of the footprints under `footprints/Kiboar_MechSwitch.pretty/`,
-`footprints/Kiboar_Cutout.pretty/` and `footprints/Kiboar_Stabilizer.pretty/`.
-The repository does not record which footprints, so the whole library is
-credited rather than a guessed subset.
-
-Evidence: all eleven models are byte-identical to files in the upstream
-library, verified with SHA-256, and the STEP headers name `kicad StepUp` with
-paths under `Switch_Keyboard_*`. The upstream repository ships exactly eleven
-STEP models, so the match is complete rather than sampled.
-
-Source: <https://github.com/kiswitch/keyswitch-kicad-library>. The upstream
-README states: "The library is dual licensed under MIT and CC-BY-SA 4.0".
-
-Licence: this repository **elects the MIT option** for the files above. The MIT
-copyright notice and permission notice are reproduced verbatim in
-[`LICENSE-kiswitch`](LICENSE-kiswitch): copyright (c) 2019-2022
-keyswitch-kicad-library contributors. The files stay byte-identical to upstream;
-only the licence choice is ours.
-
-**Verdict: MIT.** The origin is still recorded, and `tools/provenance.py` keeps
-the eleven models in `MIT_MODELS` so that no author stamp is written over
-someone else's work.
-
 ### Imported symbols
 
 Files: fifteen, in two batches.
@@ -159,18 +123,16 @@ library.
 - This repository is a **mixed-licence collection** only because of fifteen
   imported symbols. `LICENSE` (MIT) covers every 3D model and every other
   symbol and footprint, and the files say so.
-- All 144 remaining models are MIT. The fifty-four third-party models removed
-  here are gone with their `(model ...)` references; the footprints keep their
-  pads, courtyard and fab outline and ship without a body.
-- The Keyswitch KiCad Library models are **MIT** under the option elected here;
-  `LICENSE-kiswitch` carries their copyright and permission notice.
-- No model or symbol in the collection is under a NoDerivatives or a
-  non-commercial licence. The ones that were — `Fuse_PPTC1.stp` under CC BY-ND,
-  the ScottoKeebs models under CC BY-NC-SA and their three footprints — have
-  been removed.
+- All 130 remaining models are MIT and stamped. The mechanical switch area —
+  footprints, cutouts, keycap outlines and their models — was removed so the
+  library can grow its own switch support deliberately.
+- No model or symbol in the collection is under a NoDerivatives, a
+  non-commercial or a third-party model licence. The ones that were — the
+  KiCad, ScottoKeebs, manufacturer, kiswitch and unknown-origin models, and
+  `Fuse_PPTC1.stp` under CC BY-ND — have been removed.
 - Before the next release: replace the fifteen imported symbols with original
-  drawings or obtain permission; keep the SnapEDA, Samacsys and kiswitch
-  attributions with the files.
+  drawings or obtain permission; keep the SnapEDA and Samacsys attributions
+  with the files.
 
 ## Reporting
 

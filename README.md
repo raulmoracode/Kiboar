@@ -10,9 +10,10 @@
 # Kiboar
 
 Kiboar is a component library for building mechanical keyboards with **KiCad
-10**: 146 symbols, 1329 footprints in 23 footprint libraries, and 3D models for
-most of them — switches, keycap and plate outlines, controller boards, encoders,
-connectors, displays, LEDs and the small parts around them.
+10**: 145 symbols and 175 footprints in 20 footprint libraries, with 3D models
+for all of them — controller boards, encoders, connectors, displays, LEDs and
+the small parts around them. Keyswitch footprints and models are being
+redesigned and are not part of this version.
 
 📖 **Documentation:** <https://kiboar.raulmoracode.com/docs> — English and Spanish.
 
@@ -72,9 +73,7 @@ global ones.
 | `Kiboar_BatteryJack` | 3 | JST-PH battery connectors |
 | `Kiboar_Button` | 21 | Tactile push buttons (Alps, Omron, Panasonic, E-Switch, C&K) |
 | `Kiboar_Buzzer` | 1 | SMD buzzer |
-| `Kiboar_CAD` | 16 | Keycap and plate outlines for CAD renders, MX and Choc |
 | `Kiboar_CBK` | 11 | Board and card-edge connectors (TE, Molex, Amphenol) |
-| `Kiboar_Cutout` | 67 | PCB and plate cutouts for switches, sockets and stabilizers |
 | `Kiboar_Dip` | 2 | DIP switches (Würth) |
 | `Kiboar_Display` | 3 | OLED 128×32, OLED 128×64 and NICE!VIEW displays |
 | `Kiboar_Encoder` | 12 | Rotary encoders and encoder/switch combinations (Alps) |
@@ -82,7 +81,6 @@ global ones.
 | `Kiboar_Joystick` | 8 | 5-way tactile and analog thumbsticks |
 | `Kiboar_Led` | 9 | Addressable RGB (WS2812, SK6812) and through-hole LEDs |
 | `Kiboar_MCU` | 32 | Controller boards: RP2040, ESP32, STM32, Pro Micro, Pico and clones |
-| `Kiboar_MechSwitch` | 1071 | Cherry MX and Kailh Choc switch positions with sockets, stabilizers and LEDs |
 | `Kiboar_Miscellaneous` | 6 | Test points, USB hubs and board bites |
 | `Kiboar_MountingHole` | 7 | Mounting holes and M2 standoffs |
 | `Kiboar_OtherConnectors` | 1 | SparkFun PRT-14417 |
@@ -96,8 +94,8 @@ global ones.
 
 1. Place the symbols in the schematic (for example `SWITCH_EG1215AA` or one of
    the `Placeholder_*` symbols for the matrix).
-2. Assign the matching `Kiboar_*` footprint. For a hotswap board use a
-   `Kiboar_MechSwitch` footprint; for a soldered board use `Kiboar_Switch`.
+2. Assign the matching `Kiboar_*` footprint. Keyswitch footprints are being
+   redesigned and are not included yet: use your own until they land.
 3. Every footprint carries a courtyard, so **Tools → Design Rules Checker**
    reports parts that overlap before you send the board out.
 4. The 3D viewer works once `KIBOAR_3DMODELS` resolves: with a clone it is the
@@ -119,13 +117,11 @@ Kiboar is a **mixed-licence collection**, and only because of its symbols:
 - fifteen imported symbols keep the licence of their source, listed in
   [`NOTICE`](NOTICE) with the evidence.
 
-The split is not a guess. 133 models and 131 of the 146 symbols are original
+The split is not a guess. 130 models and 130 of the 145 symbols are original
 work, and say so in the file: the STEP `FILE_NAME` header names the author and
 `Kiboar`, and the symbols carry hidden `Author` and `License` properties.
-`tools/lint.py` fails when a stamp is missing. A further 11 models come from the
-Keyswitch KiCad Library under its MIT option and carry no stamp, because they
-are not this author's work. The other 15 symbols are the third-party imports
-listed in `NOTICE`.
+`tools/lint.py` fails when a stamp is missing. The other 15 symbols are the
+third-party imports listed in `NOTICE`.
 
 One thing matters before you use the library commercially: ten symbols are
 SnapEDA imports and five are Component Search Engine imports, both under
@@ -133,15 +129,8 @@ SnapEDA imports and five are Component Search Engine imports, both under
 files themselves are redistributed. No model or footprint carries a
 non-commercial or NoDerivatives licence.
 
-The switch, hotswap, cutout and stabilizer models come from the Keyswitch KiCad
-Library, which is dual-licensed **MIT / CC BY-SA 4.0**. This repository uses
-them under the MIT option; [`LICENSE-kiswitch`](LICENSE-kiswitch) carries the
-copyright and permission notice.
-
 ## Credits
 
-- [Keyswitch KiCad Library](https://github.com/kiswitch/keyswitch-kicad-library)
-  (perigoso, obra, rrotter, Lotier) — used under the MIT option
 - [SnapEDA / SnapMagic](https://www.snapeda.com) — CC BY-SA 4.0 with Design Exception 1.0
 - [marbastlib](https://github.com/ebastler/marbastlib), [keyswitches.pretty](https://github.com/daprice/keyswitches.pretty)
   and [kicad-libraries](https://github.com/sszczep/kicad-libraries) — reference material
