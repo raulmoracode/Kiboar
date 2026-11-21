@@ -10,6 +10,9 @@
   "scripts": {
     "test": "pnpm --filter @kiboar/core test",
     "typecheck": "pnpm --filter @kiboar/core typecheck",
+    "build": "pnpm --filter @kiboar/studio build",
+    "test:rust": "cargo test -p kiboar-device",
+    "check:rust": "cargo check -p kiboar-studio",
     "schema:export": "pnpm --filter @kiboar/core schema:export"
   },
   "devDependencies": {
