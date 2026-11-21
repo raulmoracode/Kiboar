@@ -123,7 +123,7 @@
 		(uuid "7c79d640-76b9-4767-8406-f0504821e5e3")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_Button.3dshapes/SKTHBAE010.step"
+	(model "${KIBOAR_3DMODELS}/Kiboar_TactileButton.3dshapes/SKTHBAE010.step"
 		(offset
 			(xyz 0 0 0.2)
 		)

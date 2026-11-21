@@ -195,7 +195,7 @@
 		(uuid "574bc5ba-12b7-4362-a1d4-b607f3638369")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_Dip.3dshapes/418121270804.stp"
+	(model "${KIBOAR_3DMODELS}/Kiboar_DIPSwitch.3dshapes/418121270804.stp"
 		(offset
 			(xyz 0 0 3.099999858)
 		)

@@ -293,7 +293,7 @@
 		(uuid "4f6bdb88-0c80-4ab8-b048-3fb24a901c1b")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_Switch.3dshapes/EG1215AA.STEP"
+	(model "${KIBOAR_3DMODELS}/Kiboar_SlideSwitch.3dshapes/EG1215AA.STEP"
 		(offset
 			(xyz 0 0 1.4)
 		)

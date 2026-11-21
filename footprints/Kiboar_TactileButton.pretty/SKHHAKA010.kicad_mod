@@ -150,7 +150,7 @@
 		(uuid "24011e26-5699-4d0b-bb36-b5670a3bfad1")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_Button.3dshapes/SKHHAKA010.stp"
+	(model "${KIBOAR_3DMODELS}/Kiboar_TactileButton.3dshapes/SKHHAKA010.stp"
 		(offset
 			(xyz 0 0 0)
 		)

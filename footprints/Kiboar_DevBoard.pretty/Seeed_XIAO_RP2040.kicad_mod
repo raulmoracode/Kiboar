@@ -300,7 +300,7 @@
 		(uuid "6e81fa0a-b162-41f5-bcbb-ca9ce6f8984d")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_MCU.3dshapes/Seeed_XIAO_RP2040.step"
+	(model "${KIBOAR_3DMODELS}/Kiboar_DevBoard.3dshapes/Seeed_XIAO_RP2040.step"
 		(offset
 			(xyz 0 0 0)
 		)

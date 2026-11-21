@@ -419,7 +419,7 @@
 		(uuid "9827005a-3225-45a0-9211-6426944c942c")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_MCU.3dshapes/Adafruit_KB2040.step"
+	(model "${KIBOAR_3DMODELS}/Kiboar_DevBoard.3dshapes/Adafruit_KB2040.step"
 		(offset
 			(xyz -8.875 16.5 0)
 		)

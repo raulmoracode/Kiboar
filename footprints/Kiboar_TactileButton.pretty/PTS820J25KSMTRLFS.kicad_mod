@@ -184,7 +184,7 @@
 		(uuid "bc4dcc60-a499-406f-af1c-ed1c70706e5e")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_Button.3dshapes/PTS820J25KSMTRLFS.stp"
+	(model "${KIBOAR_3DMODELS}/Kiboar_TactileButton.3dshapes/PTS820J25KSMTRLFS.stp"
 		(offset
 			(xyz -2.2 1.5 0)
 		)

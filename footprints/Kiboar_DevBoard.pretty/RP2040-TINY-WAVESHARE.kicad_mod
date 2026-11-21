@@ -581,7 +581,7 @@
 		(uuid "d65a7f59-d8ad-4a66-b771-d3cad5573059")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_MCU.3dshapes/RP2040-Tiny.step"
+	(model "${KIBOAR_3DMODELS}/Kiboar_DevBoard.3dshapes/RP2040-Tiny.step"
 		(offset
 			(xyz -9.0045 -11.7545 0)
 		)

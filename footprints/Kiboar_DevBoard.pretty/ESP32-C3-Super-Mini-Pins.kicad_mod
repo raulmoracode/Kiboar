@@ -241,7 +241,7 @@
 		(uuid "05a748d9-20a4-4d83-b810-2021f3c7e176")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_MCU.3dshapes/ESP32-C3-SuperMini.step"
+	(model "${KIBOAR_3DMODELS}/Kiboar_DevBoard.3dshapes/ESP32-C3-SuperMini.step"
 		(offset
 			(xyz 0 -2.3 2.5)
 		)

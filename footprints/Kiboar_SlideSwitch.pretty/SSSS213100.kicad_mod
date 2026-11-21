@@ -189,7 +189,7 @@
 		)
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_Switch.3dshapes/SSSS213100.step"
+	(model "${KIBOAR_3DMODELS}/Kiboar_SlideSwitch.3dshapes/SSSS213100.step"
 		(offset
 			(xyz -0 0.058 -0.5)
 		)

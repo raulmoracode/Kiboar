@@ -275,7 +275,7 @@
 		(uuid "60bd81d4-bd85-46eb-b4cc-f716097db742")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_USB-C.3dshapes/216990-0002.stp"
+	(model "${KIBOAR_3DMODELS}/Kiboar_USBC.3dshapes/216990-0002.stp"
 		(offset
 			(xyz 0 -0.7999999999 1.249999981)
 		)

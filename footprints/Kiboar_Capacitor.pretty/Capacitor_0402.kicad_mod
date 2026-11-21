@@ -162,7 +162,7 @@
 		(uuid "07bccb1b-781c-4561-a379-63c349828818")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_Placeholder.3dshapes/Capacitor_0402.step"
+	(model "${KIBOAR_3DMODELS}/Kiboar_Capacitor.3dshapes/Capacitor_0402.step"
 		(offset
 			(xyz -0.24 -0.3 -0.2)
 		)

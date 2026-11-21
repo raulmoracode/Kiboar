@@ -234,7 +234,7 @@
 		(uuid "8a79922b-a4bd-4f5a-a529-118f6cdafb09")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_Button.3dshapes/TL3336AF160Q.stp"
+	(model "${KIBOAR_3DMODELS}/Kiboar_TactileButton.3dshapes/TL3336AF160Q.stp"
 		(offset
 			(xyz 0 -3.1 4)
 		)

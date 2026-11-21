@@ -1111,7 +1111,7 @@
 		(uuid "ad827714-6d8a-4515-9894-4131b841f024")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_MCU.3dshapes/Arduino_Pro_Micro.step"
+	(model "${KIBOAR_3DMODELS}/Kiboar_DevBoard.3dshapes/Arduino_Pro_Micro.step"
 		(offset
 			(xyz 0 0 0)
 		)
