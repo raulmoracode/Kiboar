@@ -1,3 +1,6 @@
 node_modules/
 coverage/
 *.tsbuildinfo
+target/
+app/dist/
+app/src-tauri/gen/

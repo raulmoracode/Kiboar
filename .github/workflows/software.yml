@@ -48,3 +48,56 @@ jobs:
 
       - name: Test
         run: pnpm test
+
+      - name: Build the frontend
+        run: pnpm --filter @kiboar/studio build
+
+  rust:
+    name: Rust and bindings
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Tauri and HID system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libwebkit2gtk-4.1-dev \
+            libayatana-appindicator3-dev \
+            librsvg2-dev \
+            patchelf \
+            libudev-dev \
+            libssl-dev
+
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: software
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 12.6.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: pnpm
+          cache-dependency-path: software/pnpm-lock.yaml
+
+      - name: Install and build the frontend
+        working-directory: software
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm --filter @kiboar/studio build
+
+      - name: Rust tests
+        working-directory: software
+        run: cargo test --locked -p kiboar-device
+
+      - name: TypeScript bindings are current
+        working-directory: software
+        run: git diff --exit-code -- app/src/lib/bindings
+
+      - name: Tauri shell checks
+        working-directory: software
+        run: cargo check --locked -p kiboar-studio

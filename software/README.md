@@ -3,9 +3,9 @@
 Desktop application for the keyboards built with Kiboar components: detect the
 board over USB, flash the right firmware, remap keys and visualise the layout.
 
-**Status: M0 — contract.** The board and registry schemas, three board
-definitions and the ADRs exist and are tested. There is no application shell
-yet; M1 starts with read-only detection.
+**Status: M1 — read-only detection.** The shell lists bootloaders and Kiboar
+boards and shows their identity. It does not flash or write. The real firmware
+path is verified with a simulated report until M2 produces the first firmware.
 
 ## Documents
 
@@ -14,6 +14,7 @@ yet; M1 starts with read-only detection.
 | [`BRIEF.md`](BRIEF.md) | What the application is, the problems it solves, scope, user journeys, identity model and success criteria |
 | [`DEVELOPMENT.md`](DEVELOPMENT.md) | Risk-first milestone order, stack, repository layout, testing, CI, licensing constraints and working agreements |
 | [`docs/adr/`](docs/adr/) | Architecture decision records: stack and scope, identity without an EEPROM |
+| [`docs/protocol.md`](docs/protocol.md) | The HID board info report the firmware must implement |
 
 ## Development
 
@@ -22,10 +23,14 @@ cd software
 pnpm install
 pnpm test
 pnpm typecheck
+pnpm build
+cargo test -p kiboar-device
+cargo check -p kiboar-studio      # needs the frontend build above
+pnpm --filter @kiboar/studio tauri dev
 ```
 
 `pnpm schema:export` regenerates `schemas/*.json` from the Zod source. CI fails
-when a committed schema is stale.
+when a committed schema or TypeScript binding is stale.
 
 ## Reading order
 

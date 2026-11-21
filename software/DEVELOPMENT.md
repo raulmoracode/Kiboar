@@ -1,6 +1,6 @@
 # Kiboar Studio — development brief
 
-**Version:** 1.0 · **Status:** planning · **Date:** 2026-11-21
+**Version:** 1.1 · **Status:** implementation in progress (M1) · **Date:** 2026-11-21
 
 This document is the companion to [`BRIEF.md`](BRIEF.md). It defines the stack,
 the order of work and the rules the implementation follows. It is deliberately
@@ -80,11 +80,14 @@ source and is usable by non-TypeScript tools; no Tauri, UI or USB code exists.
 - Device state machine: `idle → detecting → bootloader | kiboar | unknown`.
 - HID query for `board_id`, hardware revision, firmware version and protocol
   version.
+- `docs/protocol.md`: the board info report, its CRC and its validation rules.
+- `ts-rs` bindings generated from the Rust types.
 - Typed IPC between Rust and the frontend.
 
-**Acceptance:** an RP2040 in bootloader is detected by USB id; a board running
-Kiboar firmware is detected and its `board_id` is displayed; unknown devices are
-ignored; nothing is written to any device.
+**Acceptance:** an RP2040 in bootloader is detected by USB id; a valid Kiboar
+board info report, real or simulated, is parsed and its `board_id` displayed
+(M2 produces the first firmware, so the simulated report is the gate until
+then); unknown devices are ignored; nothing is written to any device.
 
 **Not in M1:** flashing, keymap writes, board selection.
 
@@ -175,6 +178,7 @@ stable.
 | State | **Zustand** | The flow is a finite state machine, not a web application |
 | Forms | **react-hook-form + Zod** | Board editor with immediate validation |
 | Schema | **Zod → JSON Schema** | One source of truth in TypeScript, consumable by non-TS tools |
+| IPC types | **`ts-rs`** | TypeScript bindings generated from the Rust types; the CI fails when they drift |
 | i18n | **i18next + react-i18next** | English and Spanish catalogues |
 | 2D | **SVG rendered by React** | Crisp, accessible, selectable; no canvas dependency |
 | Icons | **lucide-react** | Already used in `docs/` |
@@ -202,16 +206,21 @@ software/
   README.md · BRIEF.md · DEVELOPMENT.md
   pnpm-workspace.yaml · package.json · tsconfig.base.json
   app/                      # React + Vite frontend
-  app/src-tauri/            # Rust: USB, HID, flashing, registry
+  app/src-tauri/            # Tauri shell: USB/HID enumeration and commands
+  crates/kiboar-device/     # Pure types, bootloader table and HID report parser
   packages/core/            # Schema, matrix, VIA protocol, exporters (no DOM, no Node)
   boards/                   # Board definitions
   registry/                 # Index and signed firmware metadata
   schemas/                  # Exported JSON Schema
   docs/adr/                 # Architecture decision records
+  docs/protocol.md          # HID board info contract
 ```
 
-One Rust crate at the start. It is split into `crates/kiboar-usb` and
-`crates/kiboar-flash` when the single crate actually hurts, not before.
+Two Rust crates, split when the single crate started to hurt: `kiboar-device`
+holds the pure device types, the bootloader table and the report parser, so its
+tests never compile Tauri; `kiboar-studio` holds the Tauri shell, `nusb`,
+`hidapi` and the commands. The split keeps the fast test loop small and keeps
+platform code out of the contract.
 
 ---
 

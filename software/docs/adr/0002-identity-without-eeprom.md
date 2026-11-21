@@ -101,6 +101,8 @@ check cannot protect the first flash. The safety net is procedural:
 
 - A public board code or QR may be added to the silkscreen later for kits and
   support. It identifies, never authorises.
+- The HID board info report is defined in [protocol.md](../protocol.md) and is
+  implemented by firmware in M2.
 - A reserved provisioning flash sector, or a small probe firmware, is considered
   only if wrong-flash incidents justify it. Either would get its own ADR.
 - The confirmation dialogue and the recovery screen are acceptance criteria of
