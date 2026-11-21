@@ -3,6 +3,7 @@
 	(generator "pcbnew")
 	(generator_version "10.0")
 	(layer "F.Cu")
+	(descr "Joystick or 5-way switch, THT, 8 pads")
 	(property "Reference" "Ref**"
 		(at 0 0 0)
 		(layer "F.SilkS")

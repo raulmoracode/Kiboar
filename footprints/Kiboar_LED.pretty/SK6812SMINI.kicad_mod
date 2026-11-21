@@ -3,6 +3,7 @@
 	(generator "pcbnew")
 	(generator_version "10.0")
 	(layer "F.Cu")
+	(descr "LED, SMD, 4 pads")
 	(property "Reference" "Ref**"
 		(at 0.14995 -2.712 0)
 		(layer "F.SilkS")

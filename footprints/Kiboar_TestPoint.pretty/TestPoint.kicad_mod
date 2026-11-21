@@ -3,7 +3,7 @@
 	(generator "pcbnew")
 	(generator_version "10.0")
 	(layer "F.Cu")
-	(descr "THT pad as test Point, diameter 1.5mm, hole diameter 0.7mm")
+	(descr "THT test point, 1.7 mm pad, 1.0 mm drill")
 	(tags "test point THT pad")
 	(property "Reference" "REF**"
 		(at 0 -1.648 0)

@@ -3,6 +3,7 @@
 	(generator "pcbnew")
 	(generator_version "10.0")
 	(layer "F.Cu")
+	(descr "Tactile push button, THT and SMD, 5 pads")
 	(tags "EVP-AKE31A ")
 	(property "Reference" "REF**"
 		(at 0 0.97155 0)

@@ -3,6 +3,7 @@
 	(generator "pcbnew")
 	(generator_version "10.0")
 	(layer "F.Cu")
+	(descr "Development board, THT and SMD, 28 pads")
 	(property "Reference" "REF**"
 		(at 0 0 0)
 		(unlocked yes)

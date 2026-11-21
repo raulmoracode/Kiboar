@@ -3,6 +3,7 @@
 	(generator "pcbnew")
 	(generator_version "10.0")
 	(layer "F.Cu")
+	(descr "Tactile push button, SMD, 6 pads")
 	(tags "PTS820 J25K SMTR LFS ")
 	(property "Reference" "REF**"
 		(at 0 0 0)

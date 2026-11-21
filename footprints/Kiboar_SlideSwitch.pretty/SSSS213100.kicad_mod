@@ -3,6 +3,7 @@
 	(generator "pcbnew")
 	(generator_version "10.0")
 	(layer "F.Cu")
+	(descr "Slide switch, THT, 3 pads")
 	(property "Reference" "Ref**"
 		(at 0 0 0)
 		(layer "F.SilkS")
