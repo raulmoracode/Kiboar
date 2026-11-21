@@ -1,11 +1,10 @@
 {
   "title": "Placa y controles",
   "pages": [
-    "Kiboar_Button",
     "Kiboar_Encoder",
     "Kiboar_Joystick",
-    "Kiboar_Miscellaneous",
     "Kiboar_MountingHole",
-    "Kiboar_Placeholder"
+    "Kiboar_Panelization",
+    "Kiboar_TestPoint"
   ]
 }

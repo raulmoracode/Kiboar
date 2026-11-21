@@ -3,11 +3,11 @@
   "pages": [
     "Kiboar_BatteryHolder",
     "Kiboar_BatteryJack",
-    "Kiboar_CBK",
+    "Kiboar_BoardConnector",
     "Kiboar_Ethernet",
-    "Kiboar_OtherConnectors",
     "Kiboar_PinHeader",
+    "Kiboar_Qwiic",
     "Kiboar_TRRS",
-    "Kiboar_USB-C"
+    "Kiboar_USBC"
   ]
 }

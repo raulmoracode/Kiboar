@@ -9,7 +9,7 @@ Read in this order: `README.md` → `AGENTS.md` → `CONTRIBUTING.md` → `NOTIC
 ## What this repository is
 
 Kiboar is a component library for mechanical keyboards in **KiCad 10**: 145
-symbols, 175 footprints in 20 `.pretty` libraries, and 3D models for all of
+symbols, 173 footprints in 26 `.pretty` libraries, and 3D models for all of
 them. Keyswitch footprints and models are being redesigned and are not in the
 repository at this time. It ships as a PCM package and as a clone with library
 tables.

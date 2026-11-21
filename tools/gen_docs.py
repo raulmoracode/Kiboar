@@ -141,35 +141,45 @@ def library_preview(library):
 
 FAMILY_GROUPS = (
     (
-        ("Switches and keycaps", "Interruptores y teclas"),
-        ("Kiboar_MechSwitch", "Kiboar_CAD", "Kiboar_Switch", "Kiboar_Cutout"),
+        ("Switches and buttons", "Interruptores y botones"),
+        ("Kiboar_SlideSwitch", "Kiboar_DIPSwitch", "Kiboar_TactileButton"),
     ),
     (
         ("Electronics", "Electrónica"),
-        ("Kiboar_MCU", "Kiboar_Display", "Kiboar_Led", "Kiboar_Buzzer", "Kiboar_Dip"),
+        (
+            "Kiboar_MCU",
+            "Kiboar_DevBoard",
+            "Kiboar_Display",
+            "Kiboar_LED",
+            "Kiboar_Buzzer",
+            "Kiboar_Resistor",
+            "Kiboar_Capacitor",
+            "Kiboar_Diode",
+            "Kiboar_Fuse",
+            "Kiboar_SOT23",
+        ),
     ),
     (
         ("Connectors and power", "Conectores y energía"),
         (
-            "Kiboar_USB-C",
+            "Kiboar_USBC",
             "Kiboar_TRRS",
             "Kiboar_BatteryHolder",
             "Kiboar_BatteryJack",
             "Kiboar_Ethernet",
-            "Kiboar_CBK",
+            "Kiboar_BoardConnector",
             "Kiboar_PinHeader",
-            "Kiboar_OtherConnectors",
+            "Kiboar_Qwiic",
         ),
     ),
     (
         ("Board and controls", "Placa y controles"),
         (
-            "Kiboar_Button",
             "Kiboar_Encoder",
             "Kiboar_Joystick",
             "Kiboar_MountingHole",
-            "Kiboar_Miscellaneous",
-            "Kiboar_Placeholder",
+            "Kiboar_TestPoint",
+            "Kiboar_Panelization",
         ),
     ),
 )
@@ -178,7 +188,7 @@ FAMILY_GROUPS = (
 # Families rendered as a collapsible sidebar folder. A folder is a real
 # directory, so its pages move below it and their URL follows.
 FAMILY_FOLDERS = {
-    "Switches and keycaps": "switches-and-keycaps",
+    "Switches and buttons": "switches-and-buttons",
     "Electronics": "electronics",
     "Connectors and power": "connectors-and-power",
     "Board and controls": "board-and-controls",
