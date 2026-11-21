@@ -25,23 +25,13 @@ and it leaves this list. If a maintainer decides a part will not be supported,
 remove the file in a dedicated change with its own issue.
 
 <!-- inventory:start -->
-**13 files, 24.1 MB** are not referenced by any footprint.
+**3 files, 5.5 MB** are not referenced by any footprint.
 
 | File | Size |
 | --- | ---: |
 | `Kiboar_Components.3dshapes/TRRS_PJ-320B.step` | 3.4 MB |
 | `Kiboar_MCU.3dshapes/Elite-C.STEP` | 122 KB |
 | `Kiboar_MCU.3dshapes/Liatris.step` | 2.0 MB |
-| `Kiboar_MechSwitch.3dshapes/Choc_V1.step` | 1.1 MB |
-| `Kiboar_MechSwitch.3dshapes/Hotswap_MX.step` | 2.5 MB |
-| `Kiboar_MechSwitch.3dshapes/MX_Plate.step` | 2.6 MB |
-| `Kiboar_MechSwitch.3dshapes/PG151101S11.step` | 498 KB |
-| `Kiboar_Stabilizer.3dshapes/Stabilizer_MX_2.00u.step` | 2.0 MB |
-| `Kiboar_Stabilizer.3dshapes/Stabilizer_MX_3.00u.step` | 2.0 MB |
-| `Kiboar_Stabilizer.3dshapes/Stabilizer_MX_6.00u.step` | 2.0 MB |
-| `Kiboar_Stabilizer.3dshapes/Stabilizer_MX_6.25u.step` | 2.0 MB |
-| `Kiboar_Stabilizer.3dshapes/Stabilizer_MX_7.00u.step` | 2.0 MB |
-| `Kiboar_Stabilizer.3dshapes/Stabilizer_MX_8.00u.step` | 2.0 MB |
 <!-- inventory:end -->
 
 ## Regenerating this list
