@@ -30,7 +30,7 @@ as organization, and the symbols carry two hidden properties, `Author` and
 `--check`, so a missing stamp, or a stamp on a file listed as third-party,
 fails the build.
 
-Counts at the time of writing: 130 models and 130 symbols carry the stamp. The
+Counts at the time of writing: 129 models and 130 symbols carry the stamp. The
 15 imported symbols below are the only third-party files left, out of 145. The
 stamp is not a blanket claim: it marks original work only.
 
@@ -123,7 +123,7 @@ library.
 - This repository is a **mixed-licence collection** only because of fifteen
   imported symbols. `LICENSE` (MIT) covers every 3D model and every other
   symbol and footprint, and the files say so.
-- All 130 remaining models are MIT and stamped. The mechanical switch area —
+- All 129 remaining models are MIT and stamped. The mechanical switch area —
   footprints, cutouts, keycap outlines and their models — was removed so the
   library can grow its own switch support deliberately.
 - No model or symbol in the collection is under a NoDerivatives, a

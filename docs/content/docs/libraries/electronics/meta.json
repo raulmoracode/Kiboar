@@ -2,9 +2,14 @@
   "title": "Electronics",
   "pages": [
     "Kiboar_Buzzer",
-    "Kiboar_Dip",
+    "Kiboar_Capacitor",
+    "Kiboar_DevBoard",
+    "Kiboar_Diode",
     "Kiboar_Display",
-    "Kiboar_Led",
-    "Kiboar_MCU"
+    "Kiboar_Fuse",
+    "Kiboar_LED",
+    "Kiboar_MCU",
+    "Kiboar_Resistor",
+    "Kiboar_SOT23"
   ]
 }

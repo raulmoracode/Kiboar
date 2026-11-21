@@ -10,7 +10,7 @@
 # Kiboar
 
 Kiboar is a component library for building mechanical keyboards with **KiCad
-10**: 145 symbols and 175 footprints in 20 footprint libraries, with 3D models
+10**: 145 symbols and 173 footprints in 26 footprint libraries, with 3D models
 for all of them — controller boards, encoders, connectors, displays, LEDs and
 the small parts around them. Keyswitch footprints and models are being
 redesigned and are not part of this version.
@@ -71,24 +71,30 @@ global ones.
 | --- | ---: | --- |
 | `Kiboar_BatteryHolder` | 10 | Coin-cell and cylindrical battery holders (Keystone) |
 | `Kiboar_BatteryJack` | 3 | JST-PH battery connectors |
-| `Kiboar_Button` | 21 | Tactile push buttons (Alps, Omron, Panasonic, E-Switch, C&K) |
+| `Kiboar_BoardConnector` | 11 | Board and card-edge connectors (TE, Molex, Amphenol) |
 | `Kiboar_Buzzer` | 1 | SMD buzzer |
-| `Kiboar_CBK` | 11 | Board and card-edge connectors (TE, Molex, Amphenol) |
-| `Kiboar_Dip` | 2 | DIP switches (Würth) |
+| `Kiboar_Capacitor` | 7 | 0402, 0603, disc and MLCC placeholders |
+| `Kiboar_DevBoard` | 24 | Controller boards: RP2040, ESP32, STM32, Pro Micro, Pico and clones |
+| `Kiboar_Diode` | 4 | DO-35, SOD-123, SOD-80 and Zener placeholders |
+| `Kiboar_DIPSwitch` | 2 | DIP switches (Würth) |
 | `Kiboar_Display` | 3 | OLED 128×32, OLED 128×64 and NICE!VIEW displays |
-| `Kiboar_Encoder` | 12 | Rotary encoders and encoder/switch combinations (Alps) |
+| `Kiboar_Encoder` | 11 | Rotary encoders and encoder/switch combinations (Alps) |
 | `Kiboar_Ethernet` | 9 | RJ45 jacks (TE, Molex) |
+| `Kiboar_Fuse` | 2 | 0603 and PPTC fuse placeholders |
 | `Kiboar_Joystick` | 8 | 5-way tactile and analog thumbsticks |
-| `Kiboar_Led` | 9 | Addressable RGB (WS2812, SK6812) and through-hole LEDs |
-| `Kiboar_MCU` | 32 | Controller boards: RP2040, ESP32, STM32, Pro Micro, Pico and clones |
-| `Kiboar_Miscellaneous` | 6 | Test points, USB hubs and board bites |
-| `Kiboar_MountingHole` | 7 | Mounting holes and M2 standoffs |
-| `Kiboar_OtherConnectors` | 1 | SparkFun PRT-14417 |
+| `Kiboar_LED` | 9 | Addressable RGB (WS2812, SK6812) and through-hole LEDs |
+| `Kiboar_MCU` | 8 | Bare microcontrollers (ATmega, STM32, CH552) |
+| `Kiboar_MountingHole` | 5 | Mounting holes and M2 standoffs |
+| `Kiboar_Panelization` | 3 | Mouse-bite perforation rows for panelized boards |
 | `Kiboar_PinHeader` | 8 | Pin headers (Würth) |
-| `Kiboar_Placeholder` | 20 | Generic R, C, L, LED, diode, fuse, crystal and SOT-23 placeholders |
-| `Kiboar_Switch` | 7 | Slide and toggle switches (Alps, C&K) |
+| `Kiboar_Qwiic` | 1 | SparkFun Qwiic (JST-SH) connector |
+| `Kiboar_Resistor` | 3 | 0402, 0805 and 1206 placeholders |
+| `Kiboar_SlideSwitch` | 7 | Slide and detect switches (Alps, C&K) |
+| `Kiboar_SOT23` | 4 | SOT-23 3L, 5, 6 and 8 placeholders |
+| `Kiboar_TactileButton` | 21 | Tactile push buttons (Alps, Omron, Panasonic, E-Switch, C&K) |
+| `Kiboar_TestPoint` | 1 | Through-hole test point |
 | `Kiboar_TRRS` | 4 | TRRS audio jacks |
-| `Kiboar_USB-C` | 4 | USB-C receptacles |
+| `Kiboar_USBC` | 4 | USB-C receptacles |
 
 ## Usage
 
@@ -117,7 +123,7 @@ Kiboar is a **mixed-licence collection**, and only because of its symbols:
 - fifteen imported symbols keep the licence of their source, listed in
   [`NOTICE`](NOTICE) with the evidence.
 
-The split is not a guess. 130 models and 130 of the 145 symbols are original
+The split is not a guess. 129 models and 130 of the 145 symbols are original
 work, and say so in the file: the STEP `FILE_NAME` header names the author and
 `Kiboar`, and the symbols carry hidden `Author` and `License` properties.
 `tools/lint.py` fails when a stamp is missing. The other 15 symbols are the

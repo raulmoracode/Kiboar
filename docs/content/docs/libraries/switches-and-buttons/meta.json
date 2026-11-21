@@ -1,0 +1,8 @@
+{
+  "title": "Switches and buttons",
+  "pages": [
+    "Kiboar_DIPSwitch",
+    "Kiboar_SlideSwitch",
+    "Kiboar_TactileButton"
+  ]
+}
