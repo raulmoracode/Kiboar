@@ -163,7 +163,7 @@
 		(uuid "25307ff5-d623-4cfe-9a1b-09f6e0a34f15")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_Button.3dshapes/SKHLAAA010.stp"
+	(model "${KIBOAR_3DMODELS}/Kiboar_TactileButton.3dshapes/SKHLAAA010.stp"
 		(offset
 			(xyz 3.25 0 0)
 		)

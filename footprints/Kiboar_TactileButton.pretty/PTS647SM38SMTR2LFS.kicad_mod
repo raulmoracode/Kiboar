@@ -171,7 +171,7 @@
 		(uuid "599a0da3-9c44-4072-8e7f-110c880e4184")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_Button.3dshapes/PTS647SM38SMTR2LFS.STEP"
+	(model "${KIBOAR_3DMODELS}/Kiboar_TactileButton.3dshapes/PTS647SM38SMTR2LFS.STEP"
 		(offset
 			(xyz 0 0 0)
 		)

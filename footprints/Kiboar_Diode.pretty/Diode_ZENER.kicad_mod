@@ -212,7 +212,7 @@
 		(uuid "47cc0866-f7c1-44cd-83ab-d27737a434da")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_Placeholder.3dshapes/Diode_ZENER.stp"
+	(model "${KIBOAR_3DMODELS}/Kiboar_Diode.3dshapes/Diode_ZENER.stp"
 		(offset
 			(xyz 0 0 0)
 		)

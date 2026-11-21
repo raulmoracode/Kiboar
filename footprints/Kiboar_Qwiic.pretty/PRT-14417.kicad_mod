@@ -197,7 +197,7 @@
 		(uuid "a5f19e67-d7da-4334-a460-3cffcecc32bb")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_OtherConnectors.3dshapes/PRT-14417.step"
+	(model "${KIBOAR_3DMODELS}/Kiboar_Qwiic.3dshapes/PRT-14417.step"
 		(offset
 			(xyz 0 2 -0.3)
 		)

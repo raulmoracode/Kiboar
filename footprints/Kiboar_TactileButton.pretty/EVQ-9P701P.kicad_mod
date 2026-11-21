@@ -230,7 +230,7 @@
 		(uuid "dd9b31e3-463b-454f-8f89-2e0af52ae216")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_Button.3dshapes/EVQ-9P701P.STEP"
+	(model "${KIBOAR_3DMODELS}/Kiboar_TactileButton.3dshapes/EVQ-9P701P.STEP"
 		(offset
 			(xyz 0 0 0)
 		)

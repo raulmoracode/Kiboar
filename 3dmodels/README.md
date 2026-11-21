@@ -30,8 +30,8 @@ remove the file in a dedicated change with its own issue.
 | File | Size |
 | --- | ---: |
 | `Kiboar_Components.3dshapes/TRRS_PJ-320B.step` | 3.4 MB |
-| `Kiboar_MCU.3dshapes/Elite-C.STEP` | 122 KB |
-| `Kiboar_MCU.3dshapes/Liatris.step` | 2.0 MB |
+| `Kiboar_DevBoard.3dshapes/Elite-C.STEP` | 122 KB |
+| `Kiboar_DevBoard.3dshapes/Liatris.step` | 2.0 MB |
 <!-- inventory:end -->
 
 ## Regenerating this list

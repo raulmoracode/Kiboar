@@ -899,7 +899,7 @@
 		(uuid "dab46582-d741-4ceb-a320-b50dd5243d25")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_MCU.3dshapes/RP2040_Stamp.step"
+	(model "${KIBOAR_3DMODELS}/Kiboar_DevBoard.3dshapes/RP2040_Stamp.step"
 		(offset
 			(xyz 0 0 0)
 		)

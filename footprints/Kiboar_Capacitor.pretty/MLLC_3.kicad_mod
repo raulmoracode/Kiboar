@@ -223,7 +223,7 @@
 		(uuid "2320c919-fa2f-445e-b31d-e59422340391")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_Placeholder.3dshapes/MLLC_3.stp"
+	(model "${KIBOAR_3DMODELS}/Kiboar_Capacitor.3dshapes/MLLC_3.stp"
 		(offset
 			(xyz 0 0 0)
 		)

@@ -353,7 +353,7 @@
 		)
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_Button.3dshapes/SKQGAFE010.stp"
+	(model "${KIBOAR_3DMODELS}/Kiboar_TactileButton.3dshapes/SKQGAFE010.stp"
 		(offset
 			(xyz 0 0 0)
 		)

@@ -177,7 +177,7 @@
 		(uuid "a325aafe-e938-477b-a825-e8b219c6aa99")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_Button.3dshapes/EVP-AEDB2A.STEP"
+	(model "${KIBOAR_3DMODELS}/Kiboar_TactileButton.3dshapes/EVP-AEDB2A.STEP"
 		(offset
 			(xyz 0 1 0)
 		)

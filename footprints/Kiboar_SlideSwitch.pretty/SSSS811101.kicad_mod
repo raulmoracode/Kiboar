@@ -258,7 +258,7 @@
 		(uuid "1c0caca3-848c-4df5-b4a5-6a683dba7351")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_Switch.3dshapes/SSSS811101.step"
+	(model "${KIBOAR_3DMODELS}/Kiboar_SlideSwitch.3dshapes/SSSS811101.step"
 		(offset
 			(xyz 0 0 0)
 		)

@@ -453,7 +453,7 @@
 		(uuid "6acb3fe7-fd5c-420b-bce8-a1391e549d5c")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_Switch.3dshapes/MSK12C02.step"
+	(model "${KIBOAR_3DMODELS}/Kiboar_SlideSwitch.3dshapes/MSK12C02.step"
 		(offset
 			(xyz 0 0 -0.05)
 		)

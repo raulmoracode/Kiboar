@@ -240,7 +240,7 @@
 		)
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_Button.3dshapes/EVPBB2A9B000.step"
+	(model "${KIBOAR_3DMODELS}/Kiboar_TactileButton.3dshapes/EVPBB2A9B000.step"
 		(offset
 			(xyz 0 0 0)
 		)

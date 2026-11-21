@@ -228,7 +228,7 @@
 		(uuid "c94e419f-cacd-48ac-9d53-5ae563f6a599")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_Button.3dshapes/B3U-1000P.step"
+	(model "${KIBOAR_3DMODELS}/Kiboar_TactileButton.3dshapes/B3U-1000P.step"
 		(offset
 			(xyz 0 0 0)
 		)

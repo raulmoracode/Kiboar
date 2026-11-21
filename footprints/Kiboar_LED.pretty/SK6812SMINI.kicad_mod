@@ -160,7 +160,7 @@
 		)
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_Led.3dshapes/SK6812SMINI.step"
+	(model "${KIBOAR_3DMODELS}/Kiboar_LED.3dshapes/SK6812SMINI.step"
 		(offset
 			(xyz -0 0.0001 0)
 		)

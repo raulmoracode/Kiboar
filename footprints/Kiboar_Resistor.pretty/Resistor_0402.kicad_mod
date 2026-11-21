@@ -163,7 +163,7 @@
 		(uuid "b2dc4744-6f7a-4267-a134-185dba0d1741")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_Placeholder.3dshapes/Resistor_0402.step"
+	(model "${KIBOAR_3DMODELS}/Kiboar_Resistor.3dshapes/Resistor_0402.step"
 		(offset
 			(xyz 0 0 0)
 		)

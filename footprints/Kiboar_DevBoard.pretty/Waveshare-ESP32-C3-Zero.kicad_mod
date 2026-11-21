@@ -263,7 +263,7 @@
 		)
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_MCU.3dshapes/Waveshare-ESP32-C6-Zero.step"
+	(model "${KIBOAR_3DMODELS}/Kiboar_DevBoard.3dshapes/Waveshare-ESP32-C6-Zero.step"
 		(offset
 			(xyz 8.1005 2.3 1.5)
 		)

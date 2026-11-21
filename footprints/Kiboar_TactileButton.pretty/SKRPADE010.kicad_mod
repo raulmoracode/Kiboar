@@ -173,7 +173,7 @@
 		(uuid "4e6b9641-c735-4882-b4c7-2822149dc929")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_Button.3dshapes/SKRPADE010.stp"
+	(model "${KIBOAR_3DMODELS}/Kiboar_TactileButton.3dshapes/SKRPADE010.stp"
 		(offset
 			(xyz 0 0 0)
 		)

@@ -120,7 +120,7 @@
 		(uuid "7acd3b4e-1f7d-4a2d-9bd9-071524e52b9d")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_Button.3dshapes/434123025816.step"
+	(model "${KIBOAR_3DMODELS}/Kiboar_TactileButton.3dshapes/434123025816.step"
 		(offset
 			(xyz 0 0 0)
 		)

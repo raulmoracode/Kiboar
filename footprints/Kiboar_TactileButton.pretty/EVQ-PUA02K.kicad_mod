@@ -171,7 +171,7 @@
 		(uuid "8c5e6149-8a07-4b49-82b2-84a6781995c3")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_Button.3dshapes/EVQ-PUA02K.stp"
+	(model "${KIBOAR_3DMODELS}/Kiboar_TactileButton.3dshapes/EVQ-PUA02K.stp"
 		(offset
 			(xyz -0.03999999851 -0.01999999925 0)
 		)

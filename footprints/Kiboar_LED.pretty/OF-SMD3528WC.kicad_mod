@@ -101,7 +101,7 @@
 		(uuid "fd3f1ce3-c554-44b1-9d06-2a5dc1a25205")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_Led.3dshapes/OF-SMD3528WC.STEP"
+	(model "${KIBOAR_3DMODELS}/Kiboar_LED.3dshapes/OF-SMD3528WC.STEP"
 		(offset
 			(xyz 0 0 0)
 		)

@@ -295,7 +295,7 @@
 		(uuid "ef24b2e6-0cc9-4dfb-8e76-1472ccc70a5f")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_Led.3dshapes/SK6812MINI-E.step"
+	(model "${KIBOAR_3DMODELS}/Kiboar_LED.3dshapes/SK6812MINI-E.step"
 		(offset
 			(xyz 0 5.1 0)
 		)

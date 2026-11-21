@@ -235,7 +235,7 @@
 		(uuid "21de42ec-8c95-48a0-a78f-f38fa97c3081")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_CBK.3dshapes/2301843-2.step"
+	(model "${KIBOAR_3DMODELS}/Kiboar_BoardConnector.3dshapes/2301843-2.step"
 		(offset
 			(xyz 0 -6.019999891 6.939999953)
 		)

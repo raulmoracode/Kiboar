@@ -142,7 +142,7 @@
 		(uuid "9fb044e3-00d4-4901-9cd7-c364c152358f")
 	)
 	(embedded_fonts no)
-	(model "${KIBOAR_3DMODELS}/Kiboar_Led.3dshapes/WS2812B-MINI.step"
+	(model "${KIBOAR_3DMODELS}/Kiboar_LED.3dshapes/WS2812B-MINI.step"
 		(offset
 			(xyz 0 0 -0.06)
 		)
