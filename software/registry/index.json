@@ -1,0 +1,33 @@
+{
+  "schema": "kiboar.registry/1",
+  "generated": "2026-11-21",
+  "mcus": [
+    {
+      "id": "rp2040-zero",
+      "family": "rp2040",
+      "bootloader": {
+        "vid": "2e8a",
+        "pid": "0003"
+      },
+      "flash_kb": 2048
+    }
+  ],
+  "boards": [
+    {
+      "board_id": "kb60-hhkb",
+      "hw_rev": 1,
+      "definition": "boards/kb60-hhkb/rev1.json"
+    },
+    {
+      "board_id": "macropad-6",
+      "hw_rev": 1,
+      "definition": "boards/macropad-6/rev1.json"
+    },
+    {
+      "board_id": "split-4x6",
+      "hw_rev": 1,
+      "definition": "boards/split-4x6/rev1.json"
+    }
+  ],
+  "firmware": []
+}
