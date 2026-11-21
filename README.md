@@ -99,7 +99,7 @@ global ones.
 ## Usage
 
 1. Place the symbols in the schematic (for example `SWITCH_EG1215AA` or one of
-   the `Placeholder_*` symbols for the matrix).
+   the `Placeholder_*` symbols).
 2. Assign the matching `Kiboar_*` footprint. Keyswitch footprints are being
    redesigned and are not included yet: use your own until they land.
 3. Every footprint carries a courtyard, so **Tools → Design Rules Checker**

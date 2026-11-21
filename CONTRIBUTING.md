@@ -11,7 +11,7 @@ Kiboar is a KiCad 10 library. Contributions arrive as a pull request against
 ## Adding a footprint
 
 1. Put the file in the library that matches its family, for example
-   `footprints/Kiboar_Switch.pretty/`.
+   `footprints/Kiboar_SlideSwitch.pretty/`.
 2. Name it after the manufacturer part number. Avoid `\\ / : * ? " < > |` and
    trailing dots or spaces.
 3. Give it a courtyard on its own side and an `(attr ...)` that matches the

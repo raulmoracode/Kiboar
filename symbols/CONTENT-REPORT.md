@@ -2,6 +2,10 @@
 
 State after the metadata pass for issue #8. Counts are read from `symbols/Kiboar.kicad_sym`; URLs were checked with `curl -L -A "Mozilla/5.0"` and a 15 s timeout on 2026-11-13.
 
+> Historical snapshot of the #8 metadata pass. The library has changed
+> since: it now has 145 symbols and no keyswitch support. See `NOTICE` for
+> the current licensing state.
+
 ## Summary
 
 | Field | Before | After |
