@@ -55,7 +55,7 @@ jobs:
       - name: Render a sample footprint and symbol
         run: |
           mkdir -p artifacts
-          kicad-cli fp export svg -o artifacts footprints/Kiboar_Switch.pretty --fp EG1215AA
+          kicad-cli fp export svg -o artifacts footprints/Kiboar_SlideSwitch.pretty --fp EG1215AA
           kicad-cli sym export svg -o artifacts symbols/Kiboar.kicad_sym --symbol SWITCH_EG1215AA
 
       - name: Upload the sample SVGs
