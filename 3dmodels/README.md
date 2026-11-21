@@ -14,6 +14,12 @@ README). The PCM package rewrites these paths to the installed
 File names are matched case-sensitively by KiCad on Linux. `tools/lint.py`
 checks that every referenced path resolves with the exact case.
 
+One directory breaks the one-to-one rule on purpose: `Kiboar_Icsocket.3dshapes`
+has no `.pretty` of its own. Its two models are IC sockets used by the
+`ATMEGA328P-PU` and `ATMEGA32A-PU` footprints in `Kiboar_MCU.pretty`, and the
+library ships no IC-socket footprint library. It is recorded here so a future
+cleanup does not delete it as orphaned.
+
 ## Models not used by any footprint
 
 Some models are kept as source material for footprints that may be added later,
@@ -29,9 +35,9 @@ remove the file in a dedicated change with its own issue.
 
 | File | Size |
 | --- | ---: |
-| `Kiboar_Components.3dshapes/TRRS_PJ-320B.step` | 3.4 MB |
 | `Kiboar_DevBoard.3dshapes/Elite-C.STEP` | 122 KB |
 | `Kiboar_DevBoard.3dshapes/Liatris.step` | 2.0 MB |
+| `Kiboar_TRRS.3dshapes/TRRS_PJ-320B.step` | 3.4 MB |
 <!-- inventory:end -->
 
 ## Regenerating this list

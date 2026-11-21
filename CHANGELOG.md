@@ -4,6 +4,30 @@ All notable changes to Kiboar are recorded here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Removed
+
+- The mechanical keyswitch area: 1071 MX footprints, the keycap and plate
+  outlines, the plate cutouts, twelve switch, socket and stabilizer models, the
+  `Placeholder_Keyswitch` symbol and the Kiswitch licensing that came with the
+  models. Keyswitch support is being redesigned (#46).
+- `Kiboar_USBHub`, two undocumented THT headers already covered by the
+  `PinHeader` family (#48).
+- Every 3D model that carried a third-party licence, with the `(model)`
+  references that pointed at them (#44).
+
+### Changed
+
+- **Breaking:** the libraries are renamed after the family they contain, and
+  `Placeholder`, `Miscellaneous` and `MCU` are split, from 20 libraries to 26
+  (#48). A reference such as `Kiboar_Button:…` is now `Kiboar_TactileButton:…`.
+- **Breaking:** the model directories follow the footprint libraries, including
+  the MCU and Placeholder splits (#52).
+- Every footprint has a description derived from its own geometry (#50).
+- The fifteen imported symbols stay under CC BY-SA 4.0 with the Design
+  Exception; `NOTICE` records them.
+
 ## [1.0.0] - 2026-11-13
 
 First release, targeting **KiCad 10**.

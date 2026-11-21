@@ -32,7 +32,7 @@ body:
     attributes:
       label: Library and item
       description: The footprint or symbol name as it appears in the library
-      placeholder: "Kiboar_MechSwitch / EG1215AA, or SWITCH_EG1215AA"
+      placeholder: "Kiboar_SlideSwitch / EG1215AA, or SWITCH_EG1215AA"
     validations:
       required: true
 
@@ -43,7 +43,7 @@ body:
       description: What you did, in order
       placeholder: |
         1. Open the PCB editor with a board using Kiboar
-        2. Place Kiboar_MechSwitch:EG1215AA
+        2. Place Kiboar_SlideSwitch:EG1215AA
         3. Run the design rules checker
     validations:
       required: true
