@@ -1,6 +1,6 @@
 # Kiboar Studio — development brief
 
-**Version:** 1.1 · **Status:** implementation in progress (M1) · **Date:** 2026-11-21
+**Version:** 1.1 · **Status:** M1 merged; M2 (flasher) in progress · **Date:** 2026-11-21
 
 This document is the companion to [`BRIEF.md`](BRIEF.md). It defines the stack,
 the order of work and the rules the implementation follows. It is deliberately
@@ -188,10 +188,10 @@ stable.
 | Logs | **`tracing` + `tauri-plugin-log`** | Local logs for support, no telemetry |
 | Tests | **Vitest + Testing Library + Playwright + `cargo test`** | See section 8 |
 | Quality | **ESLint 9 + Prettier + `cargo clippy` + `cargo fmt`** | One standard for both sides |
-| Packages | **pnpm workspaces** | Fast and strict; `docs/` keeps npm |
+| Packages | **Root pnpm workspace + Turborepo** | One lockfile for docs and Studio; cached tasks and shared versions through the catalog |
 
-Versions of React, TypeScript, Tailwind and lucide follow `docs/package.json`,
-so the repository upgrades them once.
+Versions of React, TypeScript, Tailwind and lucide come from the `catalog` block
+of the root `pnpm-workspace.yaml`, so the repository upgrades them once.
 
 **Explicitly not used:** Electron, Next.js, Redux, SQLite, CSS-in-JS, 3D
 libraries, shell sidecars. Each one adds a cost the current scope does not
@@ -202,19 +202,25 @@ justify.
 ## 5. Repository layout
 
 ```text
-software/
-  README.md · BRIEF.md · DEVELOPMENT.md
-  pnpm-workspace.yaml · package.json · tsconfig.base.json
-  app/                      # React + Vite frontend
-  app/src-tauri/            # Tauri shell: USB/HID enumeration and commands
-  crates/kiboar-device/     # Pure types, bootloader table and HID report parser
-  packages/core/            # Schema, matrix, VIA protocol, exporters (no DOM, no Node)
-  boards/                   # Board definitions
-  registry/                 # Index and signed firmware metadata
-  schemas/                  # Exported JSON Schema
-  docs/adr/                 # Architecture decision records
-  docs/protocol.md          # HID board info contract
+Kiboar/                     # repository and pnpm workspace root
+  package.json · pnpm-workspace.yaml · pnpm-lock.yaml · turbo.json
+  docs/                     # kiboar-docs
+  software/
+    Cargo.toml              # Rust workspace
+    tsconfig.base.json
+    app/                    # @kiboar/studio: React + Vite frontend
+    app/src-tauri/          # Tauri shell: USB/HID enumeration and commands
+    crates/kiboar-device/   # Pure types, bootloader table and HID report parser
+    packages/core/          # @kiboar/core: schema, matrix, VIA, exporters
+    boards/                 # Board definitions
+    registry/               # Index and signed firmware metadata
+    schemas/                # Exported JSON Schema
+    docs/adr/               # Architecture decision records
+    docs/protocol.md        # HID board info contract
 ```
+
+There is no nested pnpm workspace: `docs` and `software` are packages of the
+root workspace, and one lockfile covers both.
 
 Two Rust crates, split when the single crate started to hurt: `kiboar-device`
 holds the pure device types, the bootloader table and the report parser, so its
@@ -281,10 +287,14 @@ lowest level that can express it.
 
 ## 9. CI and release
 
-- A dedicated workflow filtered on `software/**`. The existing KiCad lint,
-  format-upgrade and docs jobs are untouched.
-- Fast job: `pnpm lint`, `pnpm test`, `cargo clippy`, `cargo test`.
-- Build job: macOS, Linux and Windows matrix with `tauri-apps/tauri-action`.
+- A dedicated workflow filtered on `software/**`, plus the root workspace
+  files. The KiCad lint, format-upgrade and docs jobs are separate.
+- Fast job: `pnpm turbo run typecheck test` for `@kiboar/core` and
+  `@kiboar/studio`, then the schema-staleness check.
+- Build job: `pnpm turbo run build --filter=@kiboar/studio`; the Rust job runs
+  `cargo test` and `cargo check` against `software/Cargo.toml`.
+- Docs deploy on Vercel from `docs/`; Studio is desktop and has no Vercel
+  target.
 - Release job on tag: signed artefacts and notarised macOS build.
 - Three independent versions: application, firmware, registry.
 - Two independent signatures: the application update (Tauri) and the firmware
@@ -334,6 +344,10 @@ scope and the licence of the library.
 - Conventional Commits in English, with the same prefix as the branch.
 - Every architectural decision that is hard to reverse gets an ADR in
   `software/docs/adr/`.
+- The pnpm workspace root is the repository root. Do not add a nested
+  workspace; shared versions go in the `catalog` block of
+  `pnpm-workspace.yaml`.
+- Vercel deploys `docs` only. Studio is a desktop application.
 - The briefs are living documents: when a milestone changes scope, the brief
   changes in the same pull request.
 - No drive-by changes to the KiCad library, the docs site or the CI of the

@@ -6,11 +6,13 @@ Fumadocs. English is the default locale at `/docs`; Spanish is served at
 
 ## Local
 
+From the repository root:
+
 ```bash
-cd docs
-npm install
-npm run dev        # http://127.0.0.1:4321
-npm run build      # static output in docs/dist
+pnpm install
+pnpm --filter kiboar-docs dev    # http://127.0.0.1:4321
+pnpm --filter kiboar-docs build  # static output in docs/dist
+pnpm --filter kiboar-docs typecheck
 ```
 
 ## Content
@@ -98,15 +100,19 @@ users.
 
 ## Deploy
 
-Vercel project settings:
+The docs are one package in the root pnpm workspace. Vercel must use `docs` as
+the **Root Directory**; it detects `pnpm-workspace.yaml` and installs from the
+repository root, so the lockfile is shared with Studio.
 
 | Setting | Value |
 | --- | --- |
 | Root Directory | `docs` |
 | Framework | Astro |
-| Build Command | `npm run build` |
+| Install | automatic from the workspace root |
+| Build Command | `cd .. && pnpm turbo run build --filter=kiboar-docs` |
 | Output Directory | `dist` |
-| Domain | `kiboar.raulmoracode.com` |
+| Domain | `kiboar.raulmoracode.com/docs` |
 
-No `base` path is used: the docs are `/docs` and `/es/docs` by route, and
-there is no page at `/`. `vercel.json` pins the build settings.
+`docs/vercel.json` pins the build command and the output directory. No `base`
+path is used: the docs are `/docs` and `/es/docs` by route, and there is no page
+at `/`. Studio is a desktop application and is not deployed to Vercel.

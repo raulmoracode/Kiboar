@@ -18,16 +18,21 @@ path is verified with a simulated report until M2 produces the first firmware.
 
 ## Development
 
+The pnpm workspace root is the repository root; this directory no longer has
+its own `pnpm-workspace.yaml`. From the repository root:
+
 ```bash
-cd software
 pnpm install
 pnpm test
 pnpm typecheck
 pnpm build
-cargo test -p kiboar-device
-cargo check -p kiboar-studio      # needs the frontend build above
+pnpm test:rust
+pnpm check:rust                  # needs the frontend build above
 pnpm --filter @kiboar/studio tauri dev
 ```
+
+For Studio only, use `pnpm turbo run build --filter=@kiboar/studio` and
+`pnpm turbo run typecheck test --filter=@kiboar/core --filter=@kiboar/studio`.
 
 `pnpm schema:export` regenerates `schemas/*.json` from the Zod source. CI fails
 when a committed schema or TypeScript binding is stale.

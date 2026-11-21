@@ -17,6 +17,21 @@ redesigned and are not part of this version.
 
 📖 **Documentation:** <https://kiboar.raulmoracode.com/docs> — English and Spanish.
 
+## Repository layout
+
+Kiboar is one repository with three products:
+
+| Path | Product | Built with | Shipped as |
+| --- | --- | --- | --- |
+| `symbols/`, `footprints/`, `3dmodels/`, `lib-table-files/`, `pcm/`, `tools/` | KiCad library | KiCad 10, Python | PCM ZIP |
+| `docs/` | Documentation site | Astro + Fumadocs | Vercel at `/docs` |
+| `software/` | Kiboar Studio | Tauri 2, React, Rust | Desktop app |
+
+The library stays at the root because `${KIBOAR_ROOT}`, the library tables and
+the PCM package depend on those paths. `docs` and `software` share a pnpm
+workspace and a Turborepo task graph at the root. See
+[`ARCHITECTURE.md`](ARCHITECTURE.md) for the boundaries and the commands.
+
 ## Requirements
 
 **KiCad 10.0 or newer.** The files use the KiCad 10 format and KiCad 8/9 cannot

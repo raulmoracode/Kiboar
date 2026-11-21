@@ -3,7 +3,27 @@ name: CI
 on:
   push:
     branches: [main]
+    paths:
+      - "symbols/**"
+      - "footprints/**"
+      - "3dmodels/**"
+      - "tools/**"
+      - "pcm/**"
+      - "lib-table-files/**"
+      - "NOTICE"
+      - "LICENSE"
+      - ".github/workflows/ci.yml"
   pull_request:
+    paths:
+      - "symbols/**"
+      - "footprints/**"
+      - "3dmodels/**"
+      - "tools/**"
+      - "pcm/**"
+      - "lib-table-files/**"
+      - "NOTICE"
+      - "LICENSE"
+      - ".github/workflows/ci.yml"
   workflow_dispatch:
 
 permissions:

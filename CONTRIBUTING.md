@@ -3,6 +3,11 @@
 Kiboar is a KiCad 10 library. Contributions arrive as a pull request against
 `main`, one logical change per branch, with an issue that says what and why.
 
+The repository also contains the documentation site in `docs/` and Kiboar
+Studio in `software/`. They share a pnpm workspace at the root and are
+described in [`ARCHITECTURE.md`](ARCHITECTURE.md); this file covers the KiCad
+library at the root.
+
 ## Requirements
 
 - KiCad 10.0 or newer, for `kicad-cli`.
