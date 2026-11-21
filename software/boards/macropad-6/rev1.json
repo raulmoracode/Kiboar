@@ -1,0 +1,87 @@
+{
+  "schema": "kiboar.board/1",
+  "board_id": "macropad-6",
+  "name": "Kiboar Macropad 6",
+  "hw_rev": 1,
+  "mcu": "rp2040-zero",
+  "matrix": {
+    "rows": 2,
+    "cols": 3,
+    "diode": "COL2ROW"
+  },
+  "pins": {
+    "rows": [
+      "GP0",
+      "GP1"
+    ],
+    "cols": [
+      "GP2",
+      "GP3",
+      "GP4"
+    ]
+  },
+  "keys": [
+    {
+      "matrix": [
+        0,
+        0
+      ],
+      "x": 0,
+      "y": 0,
+      "keycode": "KC_MUTE"
+    },
+    {
+      "matrix": [
+        0,
+        1
+      ],
+      "x": 1,
+      "y": 0,
+      "keycode": "KC_VOLD"
+    },
+    {
+      "matrix": [
+        0,
+        2
+      ],
+      "x": 2,
+      "y": 0,
+      "keycode": "KC_VOLU"
+    },
+    {
+      "matrix": [
+        1,
+        0
+      ],
+      "x": 0,
+      "y": 1,
+      "keycode": "KC_MPRV"
+    },
+    {
+      "matrix": [
+        1,
+        1
+      ],
+      "x": 1,
+      "y": 1,
+      "keycode": "KC_MPLY"
+    },
+    {
+      "matrix": [
+        1,
+        2
+      ],
+      "x": 2,
+      "y": 1,
+      "keycode": "KC_MNXT"
+    }
+  ],
+  "layers": [
+    {
+      "name": "base"
+    }
+  ],
+  "encoders": [],
+  "display": null,
+  "split": false
+}

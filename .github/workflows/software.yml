@@ -1,0 +1,50 @@
+name: Software
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "software/**"
+      - ".github/workflows/software.yml"
+  pull_request:
+    paths:
+      - "software/**"
+      - ".github/workflows/software.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Schemas and tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: software
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 12.6.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: pnpm
+          cache-dependency-path: software/pnpm-lock.yaml
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Schemas are current
+        run: |
+          pnpm schema:export
+          git diff --exit-code -- schemas
+
+      - name: Test
+        run: pnpm test

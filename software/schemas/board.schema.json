@@ -1,0 +1,292 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:kiboar:board:1",
+  "title": "Kiboar board definition",
+  "description": "A Kiboar keyboard model: MCU, matrix, pins, keys, layers and optional peripherals.",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "kiboar.board/1"
+    },
+    "board_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{1,31}$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "hw_rev": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 99
+    },
+    "mcu": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{1,31}$"
+    },
+    "matrix": {
+      "type": "object",
+      "properties": {
+        "rows": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 32
+        },
+        "cols": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 32
+        },
+        "diode": {
+          "type": "string",
+          "enum": [
+            "COL2ROW",
+            "ROW2COL"
+          ]
+        }
+      },
+      "required": [
+        "rows",
+        "cols",
+        "diode"
+      ],
+      "additionalProperties": false
+    },
+    "pins": {
+      "type": "object",
+      "properties": {
+        "rows": {
+          "minItems": 1,
+          "maxItems": 32,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_.]{0,15}$"
+          }
+        },
+        "cols": {
+          "minItems": 1,
+          "maxItems": 32,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_.]{0,15}$"
+          }
+        }
+      },
+      "required": [
+        "rows",
+        "cols"
+      ],
+      "additionalProperties": false
+    },
+    "keys": {
+      "minItems": 1,
+      "maxItems": 256,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "matrix": {
+            "type": "array",
+            "prefixItems": [
+              {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 31
+              },
+              {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 31
+              }
+            ],
+            "items": false,
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "x": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1000
+          },
+          "y": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1000
+          },
+          "w": {
+            "default": 1,
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "maximum": 8
+          },
+          "h": {
+            "default": 1,
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "maximum": 8
+          },
+          "r": {
+            "default": 0,
+            "type": "number",
+            "minimum": -180,
+            "maximum": 180
+          },
+          "keycode": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_()+,.:-]{1,32}$"
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 16
+          }
+        },
+        "required": [
+          "matrix",
+          "x",
+          "y",
+          "keycode"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "layers": {
+      "minItems": 1,
+      "maxItems": 16,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 32
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "encoders": {
+      "default": [],
+      "maxItems": 8,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,31}$"
+          },
+          "x": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1000
+          },
+          "y": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1000
+          },
+          "r": {
+            "default": 0,
+            "type": "number",
+            "minimum": -180,
+            "maximum": 180
+          },
+          "pins": {
+            "type": "object",
+            "properties": {
+              "a": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9_.]{0,15}$"
+              },
+              "b": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9_.]{0,15}$"
+              }
+            },
+            "required": [
+              "a",
+              "b"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "id",
+          "x",
+          "y",
+          "pins"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "display": {
+      "default": null,
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "oled128x32",
+                "oled128x64"
+              ]
+            },
+            "i2c": {
+              "type": "object",
+              "properties": {
+                "sda": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z][A-Za-z0-9_.]{0,15}$"
+                },
+                "scl": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z][A-Za-z0-9_.]{0,15}$"
+                }
+              },
+              "required": [
+                "sda",
+                "scl"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "type",
+            "i2c"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "split": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "schema",
+    "board_id",
+    "name",
+    "hw_rev",
+    "mcu",
+    "matrix",
+    "pins",
+    "keys",
+    "layers"
+  ],
+  "additionalProperties": false
+}
