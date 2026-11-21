@@ -3,6 +3,7 @@
 	(generator "pcbnew")
 	(generator_version "10.0")
 	(layer "F.Cu")
+	(descr "Development board, THT, 32 pads")
 	(property "Reference" ""
 		(at 1.143 -20.7105 0)
 		(layer "F.SilkS")

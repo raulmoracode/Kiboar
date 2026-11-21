@@ -3,6 +3,7 @@
 	(generator "pcbnew")
 	(generator_version "10.0")
 	(layer "F.Cu")
+	(descr "Microcontroller, THT, 48 pads")
 	(property "Reference" ""
 		(at 14.93845 -1.085 0)
 		(layer "F.SilkS")

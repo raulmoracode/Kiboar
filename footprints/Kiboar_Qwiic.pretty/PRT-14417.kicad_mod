@@ -3,6 +3,7 @@
 	(generator "pcbnew")
 	(generator_version "10.0")
 	(layer "F.Cu")
+	(descr "Qwiic (JST-SH) connector, SMD, 6 pads")
 	(property "Reference" "REF**"
 		(at -0.5 -0.5 0)
 		(layer "F.SilkS")

@@ -3,6 +3,7 @@
 	(generator "pcbnew")
 	(generator_version "10.0")
 	(layer "F.Cu")
+	(descr "TRRS audio jack, THT, 4 pads")
 	(property "Reference" "REF**"
 		(at 0 14.2 0)
 		(layer "Dwgs.User")

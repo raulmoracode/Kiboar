@@ -3,6 +3,7 @@
 	(generator "pcbnew")
 	(generator_version "10.0")
 	(layer "F.Cu")
+	(descr "Tactile push button, THT and SMD, 6 pads")
 	(property "Reference" "REF**"
 		(at -0.508 -2.3114 0)
 		(layer "F.SilkS")
