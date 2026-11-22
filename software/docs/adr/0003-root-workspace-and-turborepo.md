@@ -1,5 +1,10 @@
 # ADR-0003: Root pnpm workspace and Turborepo
 
+> **Update 2026-11-22:** the KiCad library moved from the repository root into
+> `library/`. The workspace decision is unchanged; see `ARCHITECTURE.md` and
+> `library/AGENTS.md`. The paragraph below describes the context at the time of
+> the decision.
+
 - Status: Accepted
 - Date: 2026-11-21
 - Deciders: Kiboar maintainer
