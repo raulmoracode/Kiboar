@@ -15,3 +15,8 @@ nusb = "0.2"
 hidapi = "2"
 thiserror = "2"
 kiboar-device = { path = "../../crates/kiboar-device" }
+kiboar-flash = { path = "../../crates/kiboar-flash" }
+ts-rs = "12"
+
+[dev-dependencies]
+tempfile = "3"
