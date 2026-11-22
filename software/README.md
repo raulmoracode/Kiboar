@@ -7,6 +7,10 @@ board over USB, flash the right firmware, remap keys and visualise the layout.
 boards and shows their identity. It does not flash or write. The real firmware
 path is verified with a simulated report until M2 produces the first firmware.
 
+Studio is one of the three products in the [Kiboar repository](../README.md).
+The KiCad library lives in [`../library/`](../library/README.md) and the
+documentation site in [`../docs/`](../docs/README.md).
+
 ## Documents
 
 | File | Contents |
