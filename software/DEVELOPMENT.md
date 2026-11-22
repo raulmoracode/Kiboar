@@ -211,6 +211,7 @@ Kiboar/                     # repository and pnpm workspace root
     app/                    # @kiboar/studio: React + Vite frontend
     app/src-tauri/          # Tauri shell: USB/HID enumeration and commands
     crates/kiboar-device/   # Pure types, bootloader table and HID report parser
+    crates/kiboar-flash/    # UF2, digest, signature and artefact copy
     packages/core/          # @kiboar/core: schema, matrix, VIA, exporters
     boards/                 # Board definitions
     registry/               # Index and signed firmware metadata

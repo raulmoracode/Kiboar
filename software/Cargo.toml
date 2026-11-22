@@ -1,3 +1,7 @@
 [workspace]
 resolver = "2"
-members = ["app/src-tauri", "crates/kiboar-device"]
+members = [
+    "app/src-tauri",
+    "crates/kiboar-device",
+    "crates/kiboar-flash",
+]

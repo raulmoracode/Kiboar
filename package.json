@@ -20,7 +20,7 @@
     "lint:rust": "cargo fmt --manifest-path software/Cargo.toml --all -- --check && cargo clippy --manifest-path software/Cargo.toml --workspace --all-targets -- -D warnings",
     "schema:export": "pnpm --filter @kiboar/core schema:export",
     "library": "python3 library/tools/lint.py && python3 library/tools/gen_courtyard.py --check && python3 library/tools/normalize_symbols.py --check && python3 library/tools/model_inventory.py --check && python3 library/tools/provenance.py --check",
-    "test:rust": "cargo test --manifest-path software/Cargo.toml -p kiboar-device",
+    "test:rust": "cargo test --manifest-path software/Cargo.toml --workspace",
     "check:rust": "cargo check --manifest-path software/Cargo.toml -p kiboar-studio",
     "check": "pnpm library && pnpm lint && pnpm lint:rust && pnpm typecheck && pnpm test && pnpm build && pnpm test:rust && pnpm check:rust"
   },
