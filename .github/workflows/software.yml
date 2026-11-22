@@ -9,6 +9,8 @@ on:
       - "pnpm-workspace.yaml"
       - "turbo.json"
       - "package.json"
+      - ".node-version"
+      - "rust-toolchain.toml"
       - ".github/workflows/software.yml"
   pull_request:
     paths:
@@ -17,16 +19,23 @@ on:
       - "pnpm-workspace.yaml"
       - "turbo.json"
       - "package.json"
+      - ".node-version"
+      - "rust-toolchain.toml"
       - ".github/workflows/software.yml"
   workflow_dispatch:
 
 permissions:
   contents: read
 
+concurrency:
+  group: software-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test:
     name: Schemas and tests
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
 
@@ -36,7 +45,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version-file: .node-version
           cache: pnpm
           cache-dependency-path: pnpm-lock.yaml
 
@@ -57,6 +66,7 @@ jobs:
   rust:
     name: Rust and bindings
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
 
@@ -71,7 +81,9 @@ jobs:
             libudev-dev \
             libssl-dev
 
-      - uses: dtolnay/rust-toolchain@stable
+      - uses: dtolnay/rust-toolchain@1.100.0
+        with:
+          components: rustfmt, clippy
       - uses: Swatinem/rust-cache@v2
         with:
           workspaces: software
@@ -82,7 +94,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version-file: .node-version
           cache: pnpm
           cache-dependency-path: pnpm-lock.yaml
 
