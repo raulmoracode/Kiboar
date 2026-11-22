@@ -1,11 +1,50 @@
 # Kiboar Studio — development brief
 
-**Version:** 1.1 · **Status:** M1 merged; M2 (flasher) in progress · **Date:** 2026-11-22
+**Version:** 1.2 · **Status:** M1 merged; M2 flasher implemented; hardware verification pending; MVP scope defined · **Date:** 2026-11-22
 
 This document is the companion to [`BRIEF.md`](BRIEF.md). It defines the stack,
 the order of work and the rules the implementation follows. It is deliberately
 front-loaded: the hard, irreversible problems are solved before any interface is
 built.
+
+---
+
+## MVP scope (0.1)
+
+The first release is a **safe flasher for macOS**, not a configurator. It proves
+the path that can damage hardware before any keymap or editor work.
+
+### In the MVP
+
+- RP2040 bootloader volume detection.
+- Board selection from the registry, filtered by MCU, with the hardware revision.
+- UF2 inspection: structure, family and SHA-256.
+- Typed confirmation before any write.
+- Copy with progress, cancellation and partial-file cleanup.
+- Result state with reconnect instructions.
+- English UI, offline.
+- An unsigned macOS DMG.
+
+### Not in the MVP
+
+- Kiboar firmware identity, PID and post-flash re-enumeration.
+- Official signed artefacts.
+- Remap, layout, board editor and exporters.
+- Spanish, Linux and Windows.
+- Signing, notarization and auto-update.
+- Playwright, component tests and HIL scripts.
+
+### MVP exit
+
+- A valid UF2 is copied to a mounted bootloader volume with confirmation,
+  progress and cancellation.
+- A malformed, truncated or wrong-family file is rejected before any write.
+- A cancelled write leaves no partial file.
+- A real RP2040 board accepts the file and the volume unmounts.
+- The DMG runs on a clean macOS machine.
+
+Everything below describes the full product. Anything marked post-MVP is not
+part of 0.1 and must not be built to "save time" later.
 
 ---
 
@@ -34,13 +73,13 @@ flag.
 
 ## 2. Problems mapped to milestones
 
-| Problem | Milestone | Exit evidence |
+| Problem | Stage | Exit evidence |
 | --- | --- | --- |
 | P1 — no board artefact | M0 | Schema, three fixtures, registry format, validator tests |
-| P2 — manual, opaque flashing | M2 | A blank RP2040 flashed and verified; wrong model blocked; recovery documented |
-| P3 — remapping needs QMK knowledge | M3 | One key remapped and persisted across a power cycle |
-| P4 — layout invisible after fabrication | M4 | 2D layout rendered from the board definition |
-| P5 — CAD, firmware and keymap drift | M0 + M4 | One definition generates the exports and the firmware build |
+| P2 — manual, opaque flashing | M2 (MVP) | UF2 written with confirmation; bad file rejected; cancellation cleans up |
+| P3 — remapping needs QMK knowledge | M3 (post-MVP) | One key remapped and persisted across a power cycle |
+| P4 — layout invisible after fabrication | 0.3 (post-MVP) | 2D layout rendered from the board definition |
+| P5 — CAD, firmware and keymap drift | 0.3 + 1.x | One definition feeds the layout, the exports and the firmware build |
 
 ---
 
@@ -86,49 +125,82 @@ source and is usable by non-TypeScript tools; no Tauri, UI or USB code exists.
 
 **Acceptance:** an RP2040 in bootloader is detected by USB id; a valid Kiboar
 board info report, real or simulated, is parsed and its `board_id` displayed
-(M2 produces the first firmware, so the simulated report is the gate until
+(0.2 produces the first real firmware, so the simulated report is the gate until
 then); unknown devices are ignored; nothing is written to any device.
 
 **Not in M1:** flashing, keymap writes, board selection.
 
 ---
 
-### M2 — Flasher
+### M2 — Flasher (MVP)
 
-**Question:** can a blank board be flashed safely, and can a wrong choice be
-recovered?
+**Question:** can a board be flashed safely, without touching the wrong target?
 
 **Deliverables**
 
-- Bootloader detection and model selector filtered by the detected MCU.
-- Hardware revision selection and local `board.json` import.
+- Bootloader volume detection and model selector filtered by the detected MCU.
+- Hardware revision shown and confirmed.
 - Confirmation dialogue with board, revision, firmware, origin and SHA-256.
-- Artefact verification before writing.
-- UF2 flashing by copying to the mounted volume, then verification by
-  re-enumeration and `read_board_info`.
-- Cancellation, progress events and a recovery screen.
-- Unofficial-firmware path with an explicit warning and typed confirmation.
+- UF2 structure, MCU family and digest verification before writing.
+- Copy to the mounted volume with progress and cancellation.
+- Result state with reconnect instructions.
 
-**Acceptance:** a blank RP2040 Zero is flashed from the application and
-re-enumerates as Kiboar; an artefact with a bad digest is rejected; interrupting
-a flash leaves the board recoverable; no flash starts without confirmation.
+**Acceptance:** a valid UF2 is copied to a mounted RP2040 volume; a malformed,
+truncated or wrong-family file is rejected before any write; cancelling removes
+the partial file; no flash starts without the typed confirmation; a real board
+accepts the file and the volume unmounts.
 
-**Not in M2:** PICOBOOT, STM32, ESP32-S3, automatic updates.
+**Not in M2:** firmware identity, official signatures, local `board.json`
+import, a separate recovery screen, PICOBOOT, STM32, ESP32-S3, automatic
+updates.
 
 ---
 
-### M3 — Remap
+### 0.2 — Identity (post-MVP)
+
+**Question:** does the board know what it is after the flash?
+
+**Deliverables**
+
+- Minimal QMK firmware for the reference board with the HID identity report.
+- The product id.
+- Post-flash re-enumeration and `read_board_info`.
+- Official registry entries and minisign verification.
+
+**Acceptance:** a flashed board re-enumerates as Kiboar with the expected board
+id and revision; a wrong signature is rejected.
+
+**Not in 0.2:** remap, layout, editor.
+
+---
+
+### 0.3 — Layout (post-MVP)
+
+**Question:** can the application show the board it is about to flash?
+
+**Deliverables**
+
+- 2D SVG layout rendered from the board definition.
+- Local `board.json` import in the flasher.
+
+**Acceptance:** the rendered layout matches the definition; an imported board
+can be selected and flashed.
+
+**Not in 0.3:** editing and exporters.
+
+---
+
+### M3 — Remap (post-MVP, 1.0)
 
 **Question:** can the application change a key and make it stick?
 
 **Deliverables**
 
-- VIA protocol implementation in `packages/core` (report size, commands,
-  dynamic keymap, layers).
-- `read_keymap` and `write_keymap` commands.
-- Keymap screen with layer tabs and key capture.
-- QMK firmware with VIA enabled for the reference board, built in CI.
-- Fixtures for protocol responses, including malformed ones.
+- VIA integration first. Implement a Kiboar protocol only if VIA cannot cover
+  the reference boards.
+- If implemented: VIA protocol in `packages/core` (report size, commands,
+  dynamic keymap, layers), `read_keymap` and `write_keymap`, a keymap screen,
+  QMK firmware with VIA, and fixtures for malformed responses.
 
 **Acceptance:** one key is remapped, the keyboard is unplugged and reconnected,
 and the change is still there; malformed device responses produce a readable
@@ -138,22 +210,21 @@ error and no crash.
 
 ---
 
-### M4 — Layout and board editor
+### M4 — Layout and board editor (post-MVP, 1.x)
 
-**Question:** can a user create a board definition and get working firmware from
-it?
+**Question:** can a maintainer create a board definition and get working
+firmware from it?
 
 **Deliverables**
 
-- 2D SVG layout rendered from the board definition.
 - Board editor with live schema validation: matrix, pins, keys, layers.
 - Import and export of `board.json`.
 - Exporters: QMK `info.json` and VIA definition.
 - Firmware build pipeline for the reference board.
 
 **Acceptance:** a board created from scratch passes the schema, exports both
-files, the firmware builds in CI and flashes; the rendered layout matches the
-definition.
+files, the firmware builds in CI and flashes; the layout added in 0.3 renders
+it.
 
 **Not in M4:** 3D, DXF plate export, RGB, split, wireless.
 
@@ -192,6 +263,13 @@ stable.
 
 Versions of React, TypeScript, Tailwind and lucide come from the `catalog` block
 of the root `pnpm-workspace.yaml`, so the repository upgrades them once.
+
+**MVP stack:** Tauri 2, React 19, TypeScript, Vite, Tailwind, Zustand, Zod,
+`ts-rs`, `nusb`, `hidapi`, `sha2`, Vitest and `cargo test`.
+
+**Post-MVP:** Radix UI, react-hook-form, i18next, Playwright, Testing Library,
+`tracing` + `tauri-plugin-log`, and the official minisign path. None of them is
+needed to flash a board safely. Add one only when the MVP proves the need.
 
 **Explicitly not used:** Electron, Next.js, Redux, SQLite, CSS-in-JS, 3D
 libraries, shell sidecars. Each one adds a cost the current scope does not
@@ -262,24 +340,25 @@ platform code out of the contract.
 - **Firmware:** versioned independently; it reports `board_id`, `hw_rev`,
   `fw_version` and `protocol_version`.
 - **Application:** versioned independently from the three above.
-- **Local settings:** JSON in the Tauri app-config directory. No database in the
-  first version.
+- **Local settings:** not needed in the MVP. Add a JSON file when there is a
+  setting worth persisting, not before.
 
 ---
 
 ## 8. Testing
 
-| Level | Tool | Covers |
-| --- | --- | --- |
-| Core unit | Vitest | Schema, matrix, VIA protocol, exporters |
-| Components | Testing Library | Selector, confirmation, editor |
-| UI end-to-end | Playwright against Vite with **mocked IPC** | Complete flows without hardware |
-| Rust | `cargo test` | UF2 parsing, signature verification, malformed HID responses |
-| Hardware | Manual checklist and a small HIL script | Real flashing on an RP2040 Zero |
+The MVP runs three levels: core unit tests with Vitest, Rust tests with
+`cargo test`, and a manual hardware checklist. Component tests, UI end-to-end and
+HIL scripts are post-MVP; none of them can replace the hand on the board.
 
-`tauri-driver` does not reliably cover macOS, so the project does not promise
-native E2E on all three platforms. UI E2E runs with mocked IPC; real flashing is
-verified on hardware and recorded in the milestone evidence.
+| Level | Tool | Stage | Covers |
+| --- | --- | --- | --- |
+| Core unit | Vitest | MVP | Schema, matrix, registry |
+| Rust | `cargo test` | MVP | UF2, digest, signature, copy, volume detection |
+| Hardware | Manual checklist | MVP | Real flashing and re-enumeration |
+| Components | Testing Library | Post-MVP | Selector, confirmation, editor |
+| UI end-to-end | Playwright with mocked IPC | Post-MVP | Complete flows without hardware |
+| Hardware-in-the-loop | Small HIL script | Post-MVP | Repeatable flashing on a rig |
 
 Every bug fixed in the protocol or the flasher gets a regression test at the
 lowest level that can express it.
@@ -296,10 +375,15 @@ lowest level that can express it.
   `cargo test` and `cargo check` against `software/Cargo.toml`.
 - Docs deploy on Vercel from `docs/`; Studio is desktop and has no Vercel
   target.
-- Release job on tag: signed artefacts and notarised macOS build.
-- Three independent versions: application, firmware, registry.
-- Two independent signatures: the application update (Tauri) and the firmware
-  artefacts (`minisign`). The firmware public key is embedded in the application.
+- **MVP release:** an unsigned macOS DMG built by a macOS CI job and attached to
+  a GitHub release. Testers get Gatekeeper instructions; this is not a public
+  consumer build.
+- **Post-MVP release:** signing, notarization, the Tauri updater signature and a
+  tag-triggered release job.
+- Three independent versions remain the target; only the application version is
+  needed for 0.1.
+- The firmware signature (`minisign`) is wired when 0.2 adds official
+  artefacts. The public key ships embedded in the application.
 
 ---
 
@@ -353,7 +437,7 @@ scope and the licence of the library.
   changes in the same pull request.
 - No drive-by changes to the KiCad library, the docs site or the CI of the
   library.
-- A milestone closes only with its acceptance evidence and a recorded demo.
+- A milestone closes only with its acceptance evidence.
 
 ---
 
@@ -363,7 +447,8 @@ scope and the licence of the library.
 - The relevant tests exist and were run; the output is in the pull request.
 - The affected brief or ADR is updated.
 - The risk register reflects anything new.
-- Nothing from a later milestone was built to "save time".
+- Nothing from a later stage was built to "save time".
+- No post-MVP feature was added without moving it to a named stage first.
 
 ---
 

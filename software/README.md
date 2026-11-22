@@ -3,13 +3,24 @@
 Desktop application for the keyboards built with Kiboar components: detect the
 board over USB, flash the right firmware, remap keys and visualise the layout.
 
-**Status: M1 — read-only detection.** The shell lists bootloaders and Kiboar
-boards and shows their identity. It does not flash or write. The real firmware
-path is verified with a simulated report until M2 produces the first firmware.
+**Status: M2 — flasher (MVP).** Detection, board catalog, UF2 inspection, typed confirmation and copy with progress and cancellation are implemented. Hardware verification and the macOS DMG are pending. Kiboar firmware identity, remap, layout and the board editor are post-MVP.
 
 Studio is one of the three products in the [Kiboar repository](../README.md).
 The KiCad library lives in [`../library/`](../library/README.md) and the
 documentation site in [`../docs/`](../docs/README.md).
+
+## Roadmap
+
+| Stage | What it is | Status |
+| --- | --- | --- |
+| **0.1 MVP** | Safe flasher on macOS: detect, choose board, inspect UF2, confirm, write, cancel | Implemented; hardware test and DMG pending |
+| **0.2 Identity** | Minimal firmware, PID, post-flash re-enumeration, official signature | Not started |
+| **0.3 Layout** | Read-only 2D layout and local `board.json` import | Not started |
+| **1.0 Remap** | VIA integration first; own implementation only if needed | Not started |
+| **1.x Editor** | Board editor, exporters and firmware pipeline | Not started |
+
+The MVP is deliberately not a configurator. See
+[`DEVELOPMENT.md`](DEVELOPMENT.md#mvp-scope-01) for what is out of 0.1.
 
 ## Documents
 
