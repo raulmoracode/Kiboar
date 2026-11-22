@@ -4,6 +4,10 @@ The site at <https://kiboar.raulmoracode.com/docs>, built with Astro 7 and
 Fumadocs. English is the default locale at `/docs`; Spanish is served at
 `/es/docs`.
 
+The site is one of the three products in the [Kiboar repository](../README.md).
+The KiCad library lives in [`../library/`](../library/README.md) and Kiboar
+Studio in [`../software/`](../software/README.md).
+
 Agent instructions: [`AGENTS.md`](AGENTS.md).
 
 ## Local

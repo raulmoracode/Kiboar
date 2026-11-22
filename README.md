@@ -9,168 +9,95 @@
 
 # Kiboar
 
-Kiboar is a component library for building mechanical keyboards with **KiCad
-10**: 145 symbols and 173 footprints in 26 footprint libraries, with 3D models
-for all of them — controller boards, encoders, connectors, displays, LEDs and
-the small parts around them. Keyswitch footprints and models are being
-redesigned and are not part of this version.
+Kiboar is one repository with three products for building mechanical keyboards:
+the **KiCad component library**, the **documentation site** and **Kiboar Studio**.
+They are built and shipped separately and share a repository, a review flow and
+a CI pipeline.
+
+| Product | Path | README | What it is |
+| --- | --- | --- | --- |
+| KiCad library | `library/` | [`library/README.md`](library/README.md) | 145 symbols and 173 footprints in 26 footprint libraries, with 3D models, PCM packaging and the library tools |
+| Documentation | `docs/` | [`docs/README.md`](docs/README.md) | The Astro + Fumadocs site, English and Spanish |
+| Kiboar Studio | `software/` | [`software/README.md`](software/README.md) | The Tauri desktop application: detect, flash, remap and visualise a board |
 
 📖 **Documentation:** <https://kiboar.raulmoracode.com/docs> — English and Spanish.
 
-## Repository layout
+## Start here
 
-Kiboar is one repository with three products:
+### KiCad library
 
-| Path | Product | Built with | Shipped as |
-| --- | --- | --- | --- |
-| `library/` | KiCad library: symbols, footprints, 3D models, PCM and Python tools | KiCad 10, Python | PCM ZIP |
-| `docs/` | Documentation site | Astro + Fumadocs | Vercel at `/docs` |
-| `software/` | Kiboar Studio | Tauri 2, React, Rust | Desktop app |
+KiCad 10.0 or newer. Install the PCM package or clone the repository and point
+`KIBOAR_ROOT` at `library/`. The install steps, the library table and the usage
+notes are in [`library/README.md`](library/README.md).
 
-The library lives in `library/`. For a clone install, `KIBOAR_ROOT` points at
-`<clone>/library` and the library tables keep using `${KIBOAR_ROOT}`. The PCM
-ZIP keeps its internal `symbols/`, `footprints/` and `3dmodels/` layout.
-`docs` and `software` share a pnpm workspace and a Turborepo task graph at the
-root. See [`ARCHITECTURE.md`](ARCHITECTURE.md) for the boundaries and the
-commands.
+### Documentation
 
-Agent instructions live in [`AGENTS.md`](AGENTS.md) for the repository,
-[`library/AGENTS.md`](library/AGENTS.md) for the KiCad library,
-[`docs/AGENTS.md`](docs/AGENTS.md) for the documentation site and
-[`software/AGENTS.md`](software/AGENTS.md) for Studio. The label scheme for
-issues and pull requests is [`LABELS.md`](LABELS.md).
+The site is a package in the root pnpm workspace. It needs Node 22.23.4 or
+newer and pnpm 12; it does not need KiCad.
+
+```bash
+pnpm install
+pnpm --filter kiboar-docs dev    # http://127.0.0.1:4321
+```
+
+Content, generated pages and the Vercel deployment are described in
+[`docs/README.md`](docs/README.md).
+
+### Kiboar Studio
+
+The desktop application is also in the root pnpm workspace, with a Cargo
+workspace for the Rust side.
+
+```bash
+pnpm install
+pnpm turbo run typecheck test --filter=@kiboar/core --filter=@kiboar/studio
+pnpm test:rust
+pnpm --filter @kiboar/studio tauri dev
+```
+
+The application layout, documents and current milestone are in
+[`software/README.md`](software/README.md).
+
+## Repository
+
+- [`ARCHITECTURE.md`](ARCHITECTURE.md) — product boundaries, the workspace,
+  commands, versions and deployment.
+- [`AGENTS.md`](AGENTS.md) — the repository rules. Each product adds its own:
+  [`library/AGENTS.md`](library/AGENTS.md),
+  [`docs/AGENTS.md`](docs/AGENTS.md) and
+  [`software/AGENTS.md`](software/AGENTS.md).
+- [`LABELS.md`](LABELS.md) — the label scheme for issues and pull requests.
+- [`CONTRIBUTING.md`](CONTRIBUTING.md) — how to contribute and what a pull
+  request must include.
+- [`CHANGELOG.md`](CHANGELOG.md) — changes to the KiCad library and the PCM
+  package. The docs site and Studio have independent versions; see
+  `ARCHITECTURE.md`.
+- [`NOTICE`](NOTICE) — third-party origins and licences.
+
+`docs` and `software` share one pnpm workspace, one lockfile and a Turborepo
+task graph at the root. The KiCad library has its own CI workflow and its own
+Python tooling; it is not an npm package. `pnpm check` runs the library checks,
+the JavaScript typecheck, tests and build, and the Rust tests.
 
 ## Requirements
 
-**KiCad 10.0 or newer.** The files use the KiCad 10 format and KiCad 8/9 cannot
-open them.
+| Product | Needs |
+| --- | --- |
+| KiCad library | KiCad 10.0 or newer, Python 3 |
+| Documentation | Node 22.23.4 or newer, pnpm 12 |
+| Kiboar Studio | Node 22.23.4 or newer, pnpm 12, a Rust toolchain and the Tauri system dependencies |
 
-The documentation and Studio are a JavaScript workspace: **Node 22.23.4 or
-newer** and **pnpm 12**. They do not need KiCad. See
-[`docs/README.md`](docs/README.md) and [`software/README.md`](software/README.md).
-
-## Install
-
-### Plugin and Content Manager
-
-1. Build the package (or use the ZIP attached to a release):
-   ```bash
-   python3 library/tools/build_pcm.py
-   ```
-2. In KiCad: **Tools → Plugin and Content Manager → Install from File…** and
-   choose `dist/Kiboar-<version>.zip`.
-
-PCM installs the content under `${KICAD10_3RD_PARTY}` and registers the
-libraries in your global tables.
-
-KiCad prefixes installed library nicknames with `PCM_` by default, and the ZIP
-is built to match that: the symbols point at `PCM_Kiboar_*` footprints. If you
-cleared **Preferences → Packages and Updates → Library nickname prefix**, use
-the other variant instead:
-
-```bash
-python3 library/tools/build_pcm.py --no-prefix   # dist/Kiboar-<version>-no-prefix.zip
-```
-
-The package is not in the official PCM repository yet; the release is tracked in
-the issue tracker.
-
-### Clone
-
-```bash
-git clone https://github.com/raulmoracode/Kiboar.git
-```
-
-1. **Preferences → Configure Paths** — add `KIBOAR_ROOT` pointing at the
-   clone's `library/` directory, and `KIBOAR_3DMODELS` pointing at
-   `$KIBOAR_ROOT/3dmodels`.
-2. **Preferences → Manage Symbol Libraries → Global Libraries** — append
-   `library/lib-table-files/sym-lib-table`.
-3. **Preferences → Manage Footprint Libraries → Global Libraries** — append
-   `library/lib-table-files/fp-lib-table`.
-
-The tables reference `${KIBOAR_ROOT}`, so the variable must exist. For a single
-project, copy the two tables into the project directory instead of using the
-global ones.
-
-## Libraries
-
-| Library | Footprints | Contents |
-| --- | ---: | --- |
-| `Kiboar_BatteryHolder` | 10 | Coin-cell and cylindrical battery holders (Keystone) |
-| `Kiboar_BatteryJack` | 3 | JST-PH battery connectors |
-| `Kiboar_BoardConnector` | 11 | Board and card-edge connectors (TE, Molex, Amphenol) |
-| `Kiboar_Buzzer` | 1 | SMD buzzer |
-| `Kiboar_Capacitor` | 7 | 0402, 0603, disc and MLCC placeholders |
-| `Kiboar_DevBoard` | 24 | Controller boards: RP2040, ESP32, STM32, Pro Micro, Pico and clones |
-| `Kiboar_Diode` | 4 | DO-35, SOD-123, SOD-80 and Zener placeholders |
-| `Kiboar_DIPSwitch` | 2 | DIP switches (Würth) |
-| `Kiboar_Display` | 3 | OLED 128×32, OLED 128×64 and NICE!VIEW displays |
-| `Kiboar_Encoder` | 11 | Rotary encoders and encoder/switch combinations (Alps) |
-| `Kiboar_Ethernet` | 9 | RJ45 jacks (TE, Molex) |
-| `Kiboar_Fuse` | 2 | 0603 and PPTC fuse placeholders |
-| `Kiboar_Joystick` | 8 | 5-way tactile and analog thumbsticks |
-| `Kiboar_LED` | 9 | Addressable RGB (WS2812, SK6812) and through-hole LEDs |
-| `Kiboar_MCU` | 8 | Bare microcontrollers (ATmega, STM32, CH552) |
-| `Kiboar_MountingHole` | 5 | Mounting holes and M2 standoffs |
-| `Kiboar_Panelization` | 3 | Mouse-bite perforation rows for panelized boards |
-| `Kiboar_PinHeader` | 8 | Pin headers (Würth) |
-| `Kiboar_Qwiic` | 1 | SparkFun Qwiic (JST-SH) connector |
-| `Kiboar_Resistor` | 3 | 0402, 0805 and 1206 placeholders |
-| `Kiboar_SlideSwitch` | 7 | Slide and detect switches (Alps, C&K) |
-| `Kiboar_SOT23` | 4 | SOT-23 3L, 5, 6 and 8 placeholders |
-| `Kiboar_TactileButton` | 21 | Tactile push buttons (Alps, Omron, Panasonic, E-Switch, C&K) |
-| `Kiboar_TestPoint` | 1 | Through-hole test point |
-| `Kiboar_TRRS` | 4 | TRRS audio jacks |
-| `Kiboar_USBC` | 4 | USB-C receptacles |
-
-## Usage
-
-1. Place the symbols in the schematic (for example `SWITCH_EG1215AA` or one of
-   the `Placeholder_*` symbols).
-2. Assign the matching `Kiboar_*` footprint. Keyswitch footprints are being
-   redesigned and are not included yet: use your own until they land.
-3. Every footprint carries a courtyard, so **Tools → Design Rules Checker**
-   reports parts that overlap before you send the board out.
-4. The 3D viewer works once `KIBOAR_3DMODELS` resolves: with a clone it is the
-   path you configured, with PCM the package rewrites the model paths itself.
-
-## Contributing
-
-Issues and pull requests are welcome. When reporting a defect, include the KiCad
-version, the library and item name, and what you expected to see. When
-requesting a component, include the manufacturer part number and a datasheet
-link. The issue forms ask for both.
-
-The documentation site and Kiboar Studio are part of the same repository. Their
-contribution rules and commands are in [`docs/AGENTS.md`](docs/AGENTS.md) and
-[`software/AGENTS.md`](software/AGENTS.md); the KiCad library rules are in
-[`library/AGENTS.md`](library/AGENTS.md). This section covers the KiCad library.
+The KiCad files use the KiCad 10 format; KiCad 8 and 9 cannot open them.
 
 ## Licensing
 
-Kiboar is a **mixed-licence collection**, and only because of its symbols:
-
-- every 3D model and every footprint is **MIT**, and the symbols drawn here are
-  **MIT** too (see [`LICENSE`](LICENSE));
-- fifteen imported symbols keep the licence of their source, listed in
-  [`NOTICE`](NOTICE) with the evidence.
-
-The split is not a guess. 129 models and 130 of the 145 symbols are original
-work, and say so in the file: the STEP `FILE_NAME` header names the author and
-`Kiboar`, and the symbols carry hidden `Author` and `License` properties.
-`library/tools/lint.py` fails when a stamp is missing. The other 15 symbols are the
-third-party imports listed in `NOTICE`.
-
-One thing matters before you use the library commercially: ten symbols are
-SnapEDA imports and five are Component Search Engine imports, both under
-**CC BY-SA 4.0** with the Design Exception, so they need attribution when the
-files themselves are redistributed. No model or footprint carries a
-non-commercial or NoDerivatives licence.
+Kiboar is a **mixed-licence collection**, because of fifteen imported symbols in
+the library: original work is MIT, and those fifteen keep the licence of their
+source. The full split, the attribution requirements and the evidence are in
+[`NOTICE`](NOTICE) and [`library/README.md`](library/README.md#licensing). The
+documentation site and Studio are MIT.
 
 ## Credits
 
-- [SnapEDA / SnapMagic](https://www.snapeda.com) — CC BY-SA 4.0 with Design Exception 1.0
-- [marbastlib](https://github.com/ebastler/marbastlib), [keyswitches.pretty](https://github.com/daprice/keyswitches.pretty)
-  and [kicad-libraries](https://github.com/sszczep/kicad-libraries) — reference material
-- [KiCad](https://www.kicad.org) — the tool and its libraries
+Third-party origins and credits are listed in [`NOTICE`](NOTICE) and
+[`library/README.md`](library/README.md#credits).
