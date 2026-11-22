@@ -1,0 +1,23 @@
+{
+  "name": "kiboar",
+  "version": "0.0.0",
+  "private": true,
+  "packageManager": "pnpm@12.6.0",
+  "engines": {
+    "node": ">=22.23.4"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "test": "turbo run test",
+    "typecheck": "turbo run typecheck",
+    "schema:export": "pnpm --filter @kiboar/core schema:export",
+    "library": "python3 tools/lint.py && python3 tools/gen_courtyard.py --check && python3 tools/normalize_symbols.py --check && python3 tools/model_inventory.py --check && python3 tools/provenance.py --check",
+    "test:rust": "cargo test --manifest-path software/Cargo.toml -p kiboar-device",
+    "check:rust": "cargo check --manifest-path software/Cargo.toml -p kiboar-studio",
+    "check": "pnpm library && pnpm typecheck && pnpm test && pnpm build && pnpm test:rust && pnpm check:rust"
+  },
+  "devDependencies": {
+    "turbo": "^2.11.13"
+  }
+}

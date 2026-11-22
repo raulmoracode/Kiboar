@@ -3,8 +3,8 @@
 Instructions for AI agents working in this repository. The long form for humans
 is `CONTRIBUTING.md`; this file is the short, unambiguous version.
 
-Read in this order: `README.md` → `AGENTS.md` → `CONTRIBUTING.md` → `NOTICE` →
-`CHANGELOG.md`.
+Read in this order: `README.md` → `ARCHITECTURE.md` → `AGENTS.md` →
+`CONTRIBUTING.md` → `NOTICE` → `CHANGELOG.md`.
 
 ## What this repository is
 
@@ -22,6 +22,9 @@ tables.
 | `tools/` | Python stdlib scripts; each has a `--check` mode |
 | `pcm/`, `lib-table-files/` | PCM metadata and manual-install tables |
 | `docs/` | Astro + Fumadocs site, English and Spanish |
+| `software/` | Kiboar Studio: Tauri app, TypeScript core and Rust crates |
+| `package.json`, `pnpm-workspace.yaml`, `turbo.json` | Root JavaScript workspace for `docs` and `software` |
+| `ARCHITECTURE.md` | Product boundaries, commands, versions and deployment |
 | `NOTICE` | Third-party origins and licences |
 
 ## Hard rules
@@ -97,6 +100,19 @@ If any byte changes, the source was not current: commit the upgraded files.
 - `3dmodels/README.md` contains a generated inventory between markers. Run
   `python3 tools/model_inventory.py --write` after adding or referencing models.
 
+### JavaScript workspace
+
+- The workspace root is the repository root. Do not add another
+  `pnpm-workspace.yaml` under `docs/` or `software/`.
+- `docs` and `software` are the only workspace packages. The KiCad library is
+  not an npm package and must not be added to the workspace.
+- Shared versions live in the `catalog` block of `pnpm-workspace.yaml`. Use
+  `"catalog:"` for React, TypeScript, Tailwind, Zod and their types instead of
+  writing a new range.
+- Turborepo runs `build`, `typecheck`, `test` and `dev` for `docs` and
+  `software`. Rust and the library stay outside Turbo.
+- Vercel deploys `docs` only. Studio is a desktop application.
+
 ## Commands before you propose a change
 
 ```bash
@@ -111,7 +127,18 @@ For a PCM or docs change, also:
 
 ```bash
 python3 tools/build_pcm.py --check --schema
-cd docs && npm ci && npm run build
+python3 tools/gen_docs.py --check
+pnpm install
+pnpm --filter kiboar-docs build
+```
+
+For a Studio change:
+
+```bash
+pnpm install
+pnpm turbo run typecheck test --filter=@kiboar/core --filter=@kiboar/studio
+pnpm turbo run build --filter=@kiboar/studio
+cargo test --manifest-path software/Cargo.toml -p kiboar-device
 ```
 
 ## Git

@@ -13,5 +13,9 @@ _autosave-*
 __pycache__/
 *.pyc
 
+# JavaScript workspace
+node_modules/
+.turbo/
+
 # PCM build output
 dist/

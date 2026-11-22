@@ -5,10 +5,18 @@ on:
     branches: [main]
     paths:
       - "software/**"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+      - "turbo.json"
+      - "package.json"
       - ".github/workflows/software.yml"
   pull_request:
     paths:
       - "software/**"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+      - "turbo.json"
+      - "package.json"
       - ".github/workflows/software.yml"
   workflow_dispatch:
 
@@ -19,9 +27,6 @@ jobs:
   test:
     name: Schemas and tests
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: software
     steps:
       - uses: actions/checkout@v4
 
@@ -33,24 +38,21 @@ jobs:
         with:
           node-version: "22"
           cache: pnpm
-          cache-dependency-path: software/pnpm-lock.yaml
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: Install
         run: pnpm install --frozen-lockfile
 
-      - name: Typecheck
-        run: pnpm typecheck
+      - name: Typecheck and test
+        run: pnpm turbo run typecheck test --filter=@kiboar/core --filter=@kiboar/studio
 
       - name: Schemas are current
         run: |
           pnpm schema:export
-          git diff --exit-code -- schemas
+          git diff --exit-code -- software/schemas
 
-      - name: Test
-        run: pnpm test
-
-      - name: Build the frontend
-        run: pnpm --filter @kiboar/studio build
+      - name: Build Studio
+        run: pnpm turbo run build --filter=@kiboar/studio
 
   rust:
     name: Rust and bindings
@@ -82,22 +84,18 @@ jobs:
         with:
           node-version: "22"
           cache: pnpm
-          cache-dependency-path: software/pnpm-lock.yaml
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: Install and build the frontend
-        working-directory: software
         run: |
           pnpm install --frozen-lockfile
-          pnpm --filter @kiboar/studio build
+          pnpm turbo run build --filter=@kiboar/studio
 
       - name: Rust tests
-        working-directory: software
-        run: cargo test --locked -p kiboar-device
+        run: cargo test --locked --manifest-path software/Cargo.toml -p kiboar-device
 
       - name: TypeScript bindings are current
-        working-directory: software
-        run: git diff --exit-code -- app/src/lib/bindings
+        run: git diff --exit-code -- software/app/src/lib/bindings
 
       - name: Tauri shell checks
-        working-directory: software
-        run: cargo check --locked -p kiboar-studio
+        run: cargo check --locked --manifest-path software/Cargo.toml -p kiboar-studio

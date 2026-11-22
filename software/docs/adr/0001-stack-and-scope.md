@@ -3,7 +3,7 @@
 - Status: Accepted
 - Date: 2026-11-21
 - Deciders: Kiboar maintainer
-- Related: [BRIEF.md](../../BRIEF.md) · [DEVELOPMENT.md](../../DEVELOPMENT.md) · [ADR-0002](0002-identity-without-eeprom.md)
+- Related: [BRIEF.md](../../BRIEF.md) · [DEVELOPMENT.md](../../DEVELOPMENT.md) · [ADR-0002](0002-identity-without-eeprom.md) · [ADR-0003](0003-root-workspace-and-turborepo.md)
 
 ## Context
 
@@ -42,8 +42,9 @@ dependency; lucide-react for icons, as in `docs/`.
 
 `nusb` for USB without a system libusb dependency; `hidapi` for HID, run in
 `spawn_blocking` as it is synchronous; `sha2` + `minisign-verify` for digests;
-`tracing` + `tauri-plugin-log` for local logs. Packages use pnpm workspaces;
-`docs/` keeps npm. Tests: Vitest for `core`, Testing Library for components,
+`tracing` + `tauri-plugin-log` for local logs. Packages use a root pnpm
+workspace with Turborepo; the docs site joined it in ADR-0003. Tests: Vitest for
+`core`, Testing Library for components,
 Playwright with mocked IPC for whole flows without hardware, `cargo test` for UF2
 parsing, signatures and malformed HID responses.
 
