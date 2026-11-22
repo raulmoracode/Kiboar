@@ -37,7 +37,8 @@ commands.
 Agent instructions live in [`AGENTS.md`](AGENTS.md) for the repository,
 [`library/AGENTS.md`](library/AGENTS.md) for the KiCad library,
 [`docs/AGENTS.md`](docs/AGENTS.md) for the documentation site and
-[`software/AGENTS.md`](software/AGENTS.md) for Studio.
+[`software/AGENTS.md`](software/AGENTS.md) for Studio. The label scheme for
+issues and pull requests is [`LABELS.md`](LABELS.md).
 
 ## Requirements
 

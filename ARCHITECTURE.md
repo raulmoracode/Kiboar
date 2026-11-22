@@ -35,16 +35,18 @@ share a repository and a review flow, not a runtime.
 
 ## Agent instructions
 
-Four files tell an agent how to work here:
+The repository's agent files and label policy:
 
 - [`AGENTS.md`](AGENTS.md) — the repository; its Git, licensing and
   repository-wide rules apply everywhere.
 - [`library/AGENTS.md`](library/AGENTS.md) — the KiCad library.
 - [`docs/AGENTS.md`](docs/AGENTS.md) — the documentation site.
 - [`software/AGENTS.md`](software/AGENTS.md) — Kiboar Studio.
+- [`LABELS.md`](LABELS.md) — the repository label scheme.
 
-Read the root file first, then the product file for the area being changed. A
-product file adds commands and boundaries; it does not replace the root rules.
+Read the root file first, then `LABELS.md` and the product file for the area
+being changed. A product file adds commands and boundaries; it does not replace
+the root rules.
 
 ## Workspace
 

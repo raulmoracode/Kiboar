@@ -65,6 +65,18 @@ python3 library/tools/gen_docs.py --check
 - Relative links resolve.
 - Paste the real command output in the pull request.
 
+## Labels
+
+| Label | When |
+| --- | --- |
+| `product:docs` | Every issue or pull request that touches `docs/` |
+| Exactly one `type:*` from [`../LABELS.md`](../LABELS.md) | Matches the title prefix; usual here: `docs`, `feat`, `fix`, `refactor`, `chore`, `test`, `build` |
+| `risk:consequential` | A deployment, route or content-contract change that affects the public site |
+
+If the change also touches the library, Studio or root CI, add that product's
+label too. The full policy is [`../LABELS.md`](../LABELS.md). Do not use
+`area:*` for new work.
+
 ## Git
 
 Follow the root `AGENTS.md`: issue → branch → pull request. Use

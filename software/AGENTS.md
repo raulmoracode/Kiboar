@@ -78,6 +78,19 @@ Rust can also be run from `software/` with `cargo test -p kiboar-device`.
 - Paste the real command output in the pull request, and say what could not be
   tested (hardware, GUI, another OS).
 
+## Labels
+
+| Label | When |
+| --- | --- |
+| `product:studio` | Every issue or pull request that touches `software/` |
+| Exactly one `type:*` from [`../LABELS.md`](../LABELS.md) | Matches the title prefix; usual here: `feat`, `fix`, `refactor`, `chore`, `docs`, `test`, `build`, `ci`, `release` |
+| `risk:consequential` | A schema, protocol, install or integration change |
+| `risk:sensitive` | Only if authentication, personal data or deletion is involved; not expected today |
+
+If the change also touches the library, docs or root CI, add that product's
+label too. The full policy is [`../LABELS.md`](../LABELS.md). Do not use
+`area:*` for new work.
+
 ## Git
 
 Follow the root `AGENTS.md`: issue → branch → pull request. Use
