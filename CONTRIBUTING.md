@@ -6,8 +6,9 @@ Kiboar is a KiCad 10 library. Contributions arrive as a pull request against
 The repository also contains the documentation site in `docs/` and Kiboar
 Studio in `software/`. They share a pnpm workspace at the root and are
 described in [`ARCHITECTURE.md`](ARCHITECTURE.md); this file covers the KiCad
-library at the root. Their agent instructions are
-[`docs/AGENTS.md`](docs/AGENTS.md) and [`software/AGENTS.md`](software/AGENTS.md).
+library in `library/`. Their agent instructions are
+[`library/AGENTS.md`](library/AGENTS.md), [`docs/AGENTS.md`](docs/AGENTS.md) and
+[`software/AGENTS.md`](software/AGENTS.md).
 
 ## Requirements
 
@@ -17,48 +18,48 @@ library at the root. Their agent instructions are
 ## Adding a footprint
 
 1. Put the file in the library that matches its family, for example
-   `footprints/Kiboar_SlideSwitch.pretty/`.
+   `library/footprints/Kiboar_SlideSwitch.pretty/`.
 2. Name it after the manufacturer part number. Avoid `\\ / : * ? " < > |` and
    trailing dots or spaces.
 3. Give it a courtyard on its own side and an `(attr ...)` that matches the
-   pads. `python3 tools/gen_courtyard.py` derives a rectangle for a footprint
-   that has none; a hand-drawn courtyard is better when the part has a keepout
-   (a connector opening, switch travel).
+   pads. `python3 library/tools/gen_courtyard.py` derives a rectangle for a
+   footprint that has none; a hand-drawn courtyard is better when the part has a
+   keepout (a connector opening, switch travel).
 4. Point the model at `${KIBOAR_3DMODELS}/Kiboar_<family>.3dshapes/<name>.step`
    and use the exact case of the file on disk.
 5. Record where the CAD data came from in `NOTICE` if it is not original work.
 
 ## Adding a symbol
 
-1. Add it to `symbols/Kiboar.kicad_sym` with a name without whitespace.
+1. Add it to `library/symbols/Kiboar.kicad_sym` with a name without whitespace.
 2. Use the family reference prefix: `SW` for switches, buttons, encoders, DIP
    switches and joysticks; `U` for MCU and modules; `J` for connectors; `D` for
    LEDs; `BT` for battery holders; `DS` for displays. No `?`.
 3. Fill `Manufacturer` and `MPN` when they are known, plus `ki_keywords` and a
    `ki_fp_filters` entry that matches the linked footprint.
 4. Link a footprint that exists in this repository, by its exact nickname.
-5. `python3 tools/normalize_symbols.py --check` must report nothing.
+5. `python3 library/tools/normalize_symbols.py --check` must report nothing.
 
 ## Checks before a pull request
 
 ```bash
-python3 tools/lint.py
-python3 tools/gen_courtyard.py --check
-python3 tools/normalize_symbols.py --check
+python3 library/tools/lint.py
+python3 library/tools/gen_courtyard.py --check
+python3 library/tools/normalize_symbols.py --check
 ```
 
-The CI also runs KiCad's own upgrade check: it copies `symbols/` and
-`footprints/`, runs `kicad-cli sym upgrade` and `kicad-cli fp upgrade`, and
-fails if any byte changes. To run it locally:
+The CI also runs KiCad's own upgrade check: it copies `library/symbols/` and
+`library/footprints/`, runs `kicad-cli sym upgrade` and `kicad-cli fp upgrade`,
+and fails if any byte changes. To run it locally:
 
 ```bash
 work=$(mktemp -d)
-cp -R footprints "$work/"
-cp symbols/Kiboar.kicad_sym "$work/symbols.kicad_sym"
+cp -R library/footprints "$work/"
+cp library/symbols/Kiboar.kicad_sym "$work/symbols.kicad_sym"
 kicad-cli sym upgrade "$work/symbols.kicad_sym"
 for library in "$work"/footprints/*.pretty; do kicad-cli fp upgrade "$library"; done
-diff -r footprints "$work/footprints"
-cmp symbols/Kiboar.kicad_sym "$work/symbols.kicad_sym"
+diff -r library/footprints "$work/footprints"
+cmp library/symbols/Kiboar.kicad_sym "$work/symbols.kicad_sym"
 ```
 
 ## Licensing of contributions

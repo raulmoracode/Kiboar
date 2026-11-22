@@ -4,8 +4,8 @@
 Every footprint is listed in the page of its library, with pads, mount type,
 courtyard and 3D model. Nothing in the library is left out of the docs.
 
-    python3 tools/gen_docs.py            # write the pages
-    python3 tools/gen_docs.py --check    # fail when a page is stale
+    python3 library/tools/gen_docs.py            # write the pages
+    python3 library/tools/gen_docs.py --check    # fail when a page is stale
 """
 
 import argparse
@@ -19,7 +19,8 @@ from urllib.parse import quote
 import kicad_sexpr as sexpr
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DOCS = os.path.join(ROOT, "docs", "content", "docs")
+REPO_ROOT = os.path.dirname(ROOT)
+DOCS = os.path.join(REPO_ROOT, "docs", "content", "docs")
 
 LIBRARY_TEXT = {
     "Kiboar_BatteryHolder": (
@@ -123,13 +124,13 @@ def library_preview(library):
     """Preview that shows the most geometry without dragging a huge SVG along."""
     preferred = PREVIEW_OVERRIDES.get(library)
     if preferred:
-        path = os.path.join(ROOT, "docs", "public", "footprints", library, preferred + ".svg")
+        path = os.path.join(REPO_ROOT, "docs", "public", "footprints", library, preferred + ".svg")
         if os.path.exists(path):
             return f"/footprints/{library}/{quote(preferred)}.svg"
 
     assets = [
         path
-        for path in glob.glob(os.path.join(ROOT, "docs", "public", "footprints", library, "*.svg"))
+        for path in glob.glob(os.path.join(REPO_ROOT, "docs", "public", "footprints", library, "*.svg"))
         if os.path.getsize(path) <= 30_000
     ]
     if not assets:
@@ -341,7 +342,7 @@ def library_cards(library, footprints, spanish):
             lines.append('    <div class="grid content-start gap-4">')
             for uri in row["models"]:
                 rel = uri.split("/", 1)[1]
-                raw = f"https://raw.githubusercontent.com/raulmoracode/Kiboar/main/3dmodels/{quote(rel)}"
+                raw = f"https://raw.githubusercontent.com/raulmoracode/Kiboar/main/library/3dmodels/{quote(rel)}"
                 lines.append(f'      <kiboar-model compact url="{raw}"></kiboar-model>')
             lines.append("    </div>")
         else:
@@ -474,7 +475,7 @@ def main():
     for path in glob.glob(os.path.join(ROOT, "footprints", "*.pretty", "*.kicad_mod")):
         library = os.path.basename(os.path.dirname(path))[: -len(".pretty")]
         name = os.path.basename(path)[: -len(".kicad_mod")]
-        asset = os.path.join(ROOT, "docs", "public", "footprints", library, name + ".svg")
+        asset = os.path.join(REPO_ROOT, "docs", "public", "footprints", library, name + ".svg")
         if not os.path.exists(asset):
             missing.append(f"missing asset: docs/public/footprints/{library}/{name}.svg")
 

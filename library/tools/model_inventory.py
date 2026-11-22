@@ -5,9 +5,9 @@ Unused models are kept on purpose: they are source material for footprints
 that may be added later. This tool keeps the list in ``3dmodels/README.md``
 honest instead of letting it drift.
 
-    python3 tools/model_inventory.py            # print the inventory
-    python3 tools/model_inventory.py --write    # update the README section
-    python3 tools/model_inventory.py --check    # fail when the section is stale
+    python3 library/tools/model_inventory.py            # print the inventory
+    python3 library/tools/model_inventory.py --write    # update the README section
+    python3 library/tools/model_inventory.py --check    # fail when the section is stale
 """
 
 import argparse
@@ -98,7 +98,7 @@ def main():
     current = text[text.index(START) : text.index(END) + len(END)]
     if args.check:
         if current != rendered:
-            print("3dmodels/README.md is stale; run python3 tools/model_inventory.py --write")
+            print("3dmodels/README.md is stale; run python3 library/tools/model_inventory.py --write")
             return 1
         print("3dmodels/README.md inventory is current")
         return 0

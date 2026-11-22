@@ -21,12 +21,12 @@ pnpm --filter kiboar-docs typecheck
 
 - `content/docs/*.mdx` — English pages.
 - `content/docs/*.es.mdx` — Spanish pages.
-- `content/docs/libraries/` is **generated** by `tools/gen_docs.py` from
-  `footprints/`. Do not edit it by hand; change the library and run:
+- `content/docs/libraries/` is **generated** by `library/tools/gen_docs.py` from
+  `library/footprints/`. Do not edit it by hand; change the library and run:
 
 ```bash
-python3 tools/gen_docs.py          # rewrite the generated pages
-python3 tools/gen_docs.py --check  # fail when they are stale
+python3 library/tools/gen_docs.py          # rewrite the generated pages
+python3 library/tools/gen_docs.py --check  # fail when they are stale
 ```
 
 The generator lists every footprint of every library, so the docs cannot
@@ -79,16 +79,16 @@ under `public/footprints/`; regenerate them after changing a footprint:
 
 ```bash
 mkdir -p /tmp/fp
-for lib in footprints/*.pretty; do
+for lib in library/footprints/*.pretty; do
   name=$(basename "$lib" .pretty)
   kicad-cli fp export svg -o "/tmp/fp/$name" --layers F.Cu,F.SilkS,F.CrtYd,F.Fab --black-and-white "$lib"
 done
 npx svgo -r -f /tmp/fp -o docs/public/footprints --multipass
-python3 tools/gen_docs.py
+python3 library/tools/gen_docs.py
 ```
 
 The viewer downloads the STEP from
-`raw.githubusercontent.com/raulmoracode/Kiboar/main/3dmodels/…` when it scrolls
+`raw.githubusercontent.com/raulmoracode/Kiboar/main/library/3dmodels/…` when it scrolls
 into view, so the models are not duplicated into the site. Components without a
 model show the footprint and a "No 3D model" box.
 

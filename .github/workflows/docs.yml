@@ -5,9 +5,9 @@ on:
     branches: [main]
     paths:
       - "docs/**"
-      - "footprints/**"
-      - "3dmodels/**"
-      - "tools/gen_docs.py"
+      - "library/footprints/**"
+      - "library/3dmodels/**"
+      - "library/tools/gen_docs.py"
       - "pnpm-lock.yaml"
       - "pnpm-workspace.yaml"
       - "turbo.json"
@@ -16,9 +16,9 @@ on:
   pull_request:
     paths:
       - "docs/**"
-      - "footprints/**"
-      - "3dmodels/**"
-      - "tools/gen_docs.py"
+      - "library/footprints/**"
+      - "library/3dmodels/**"
+      - "library/tools/gen_docs.py"
       - "pnpm-lock.yaml"
       - "pnpm-workspace.yaml"
       - "turbo.json"
@@ -50,7 +50,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Generated pages are current
-        run: python3 tools/gen_docs.py --check
+        run: python3 library/tools/gen_docs.py --check
 
       - name: Typecheck
         run: pnpm turbo run typecheck --filter=kiboar-docs

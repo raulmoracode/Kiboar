@@ -12,7 +12,7 @@ silently undo them:
 - every original model and symbol carries the author and MIT stamp;
 - library directories follow the ``Kiboar_*`` naming and do not collide by case.
 
-    python3 tools/lint.py
+    python3 library/tools/lint.py
 """
 
 import argparse

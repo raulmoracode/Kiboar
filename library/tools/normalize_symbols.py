@@ -15,14 +15,16 @@ family uses different reference prefixes. This script applies one rule set:
 It does not touch descriptions, datasheets or part-specific keywords: those
 need a source per part, and guessing them would be worse than an empty field.
 
-    python3 tools/normalize_symbols.py --check
-    python3 tools/normalize_symbols.py symbols/Kiboar.kicad_sym
+    python3 library/tools/normalize_symbols.py --check
+    python3 library/tools/normalize_symbols.py library/symbols/Kiboar.kicad_sym
 """
 
 import argparse
 import os
 import re
 import sys
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # One prefix per family: switches are SW (never S), connectors J, LEDs D.
 PREFIX = {
@@ -290,7 +292,7 @@ def normalize(text):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("path", nargs="?", default=os.path.join("symbols", "Kiboar.kicad_sym"))
+    parser.add_argument("path", nargs="?", default=os.path.join(ROOT, "symbols", "Kiboar.kicad_sym"))
     parser.add_argument("--check", action="store_true", help="report what is not normalized")
     parser.add_argument("--quiet", action="store_true")
     args = parser.parse_args()

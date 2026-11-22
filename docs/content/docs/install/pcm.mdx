@@ -9,7 +9,7 @@ Kiboar ships as a library package: one ZIP that the Plugin and Content Manager
 ## Build the ZIP
 
 ```bash
-python3 tools/build_pcm.py
+python3 library/tools/build_pcm.py
 ```
 
 The default build matches KiCad's default nickname prefix (`PCM_`). If you
@@ -17,7 +17,7 @@ cleared **Preferences → Packages and Updates → Library nickname prefix**, bu
 the other variant:
 
 ```bash
-python3 tools/build_pcm.py --no-prefix
+python3 library/tools/build_pcm.py --no-prefix
 ```
 
 ## Install

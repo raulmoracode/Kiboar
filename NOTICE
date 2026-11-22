@@ -3,7 +3,7 @@
 Kiboar, copyright (c) 2025 Raúl Mora.
 
 `LICENSE` (MIT) covers the original work in this repository: the symbols,
-footprints and models designed here, the scripts under `tools/`, and the
+footprints and models designed here, the scripts under `library/tools/`, and the
 documentation.
 
 It does not cover the third-party symbols listed under "Third-party origins".
@@ -20,13 +20,13 @@ outline and ship without a body.
 ## Original work — MIT
 
 Files: the models, the symbols that no third-party heading below names, the
-footprints, the scripts under `tools/`, the documentation and the PCM metadata.
+footprints, the scripts under `library/tools/`, the documentation and the PCM metadata.
 A symbol drawn from a vendor datasheet is original work: the datasheet is the
 reference, not the CAD.
 
 Evidence: the STEP `FILE_NAME` header names `Raul Mora` as author and `Kiboar`
 as organization, and the symbols carry two hidden properties, `Author` and
-`License`. `tools/provenance.py` writes both and `tools/lint.py` runs its
+`License`. `library/tools/provenance.py` writes both and `library/tools/lint.py` runs its
 `--check`, so a missing stamp, or a stamp on a file listed as third-party,
 fails the build.
 
@@ -41,7 +41,7 @@ The STEP header is an ASCII field, so the author is spelled `Raul Mora` there.
 
 Files: seventeen models that were drawn here but carried the `FILE_NAME` header
 of the machine, project or tool that last touched them, so they could not be
-stamped as original work. `tools/provenance.py` lists them in
+stamped as original work. `library/tools/provenance.py` lists them in
 `REWRITTEN_MODELS`; `--write` replaces the whole `FILE_NAME` call, so the name
 becomes the model's own file name and the author and organization become
 `Raul Mora` / `Kiboar`. The timestamp, the preprocessor and the originating

@@ -16,12 +16,12 @@ instead.
 
 ## Testing
 
-What did you run, and what did it print? The CI runs `tools/lint.py`, the KiCad
-format check and the sample render; anything it cannot see (Kiboar version,
-board you tested with, screenshots) goes here.
+What did you run, and what did it print? The CI runs `library/tools/lint.py`,
+the KiCad format check and the sample render; anything it cannot see (Kiboar
+version, board you tested with, screenshots) goes here.
 
 ```text
-$ python3 tools/lint.py
+$ python3 library/tools/lint.py
 ```
 
 ## Risk
@@ -32,7 +32,7 @@ when there is no such risk.
 
 ## Checklist
 
-- [ ] `python3 tools/lint.py` passes.
+- [ ] `python3 library/tools/lint.py` passes.
 - [ ] `kicad-cli sym upgrade` and `fp upgrade` leave the library unchanged.
 - [ ] New symbols have `Manufacturer`, `MPN`, `ki_keywords` and `ki_fp_filters`
       where they apply.

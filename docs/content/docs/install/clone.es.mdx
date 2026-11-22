@@ -7,7 +7,7 @@ La vía del clon te da las fuentes, las herramientas y la documentación. Necesi
 dos variables de ruta y dos tablas de librerías.
 
 El clon también contiene la web de documentación en `docs/` y Kiboar Studio en
-`software/`. KiCad solo usa las rutas de la librería en la raíz; ignora el resto.
+`software/`. KiCad solo usa las rutas dentro de `library/`; ignora el resto.
 
 ```bash
 git clone https://github.com/raulmoracode/Kiboar.git
@@ -19,7 +19,7 @@ En **Preferencias → Configurar rutas**, añade:
 
 | Variable | Valor |
 | --- | --- |
-| `KIBOAR_ROOT` | el directorio del clon |
+| `KIBOAR_ROOT` | el directorio `library/` del clon |
 | `KIBOAR_3DMODELS` | `$KIBOAR_ROOT/3dmodels` |
 
 `KIBOAR_ROOT` lo usan las tablas de librerías. Cada footprint referencia
@@ -28,8 +28,8 @@ En **Preferencias → Configurar rutas**, añade:
 ## Tablas de librerías
 
 En **Preferencias → Gestionar librerías de símbolos → Librerías globales**,
-añade `lib-table-files/sym-lib-table`. En **Gestionar librerías de footprints**,
-añade `lib-table-files/fp-lib-table`.
+añade `library/lib-table-files/sym-lib-table`. En **Gestionar librerías de footprints**,
+añade `library/lib-table-files/fp-lib-table`.
 
 Los dos ficheros usan `${KIBOAR_ROOT}`. Para un solo proyecto, cópialos dentro
 del directorio del proyecto en vez de usar las tablas globales.

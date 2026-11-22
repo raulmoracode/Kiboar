@@ -8,6 +8,10 @@ The documentation site and Kiboar Studio have independent versions; see
 [`ARCHITECTURE.md`](ARCHITECTURE.md). Their changes are not entries in this
 library changelog.
 
+Paths in entries before the `Unreleased` section refer to the layout at the
+time of that release. The library moved into `library/` in the `Unreleased`
+section; historical entries are not rewritten.
+
 ## [Unreleased]
 
 ### Removed
@@ -23,6 +27,10 @@ library changelog.
 
 ### Changed
 
+- **Breaking for clone installs:** the library moved into `library/`. Set
+  `KIBOAR_ROOT` to `<clone>/library`; the library tables and the PCM builder
+  use that root. The PCM ZIP keeps its internal `symbols/`, `footprints/` and
+  `3dmodels/` layout, so PCM consumers are unaffected.
 - **Breaking:** the libraries are renamed after the family they contain, and
   `Placeholder`, `Miscellaneous` and `MCU` are split, from 20 libraries to 26
   (#48). A reference such as `Kiboar_Button:…` is now `Kiboar_TactileButton:…`.

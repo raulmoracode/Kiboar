@@ -16,8 +16,8 @@ The STEP header is an ASCII field, so the author is spelled ``Raul Mora``
 there; `LICENSE` and `NOTICE` keep the accented legal name. Every model in the
 repository is STEP, so the header covers all of them.
 
-    python3 tools/provenance.py --check    # fail when a stamp is missing or wrong
-    python3 tools/provenance.py --write    # stamp every original file
+    python3 library/tools/provenance.py --check    # fail when a stamp is missing or wrong
+    python3 library/tools/provenance.py --write    # stamp every original file
 """
 
 import argparse

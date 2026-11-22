@@ -8,16 +8,16 @@ share a repository and a review flow, not a runtime.
 
 | Product | Path | Built with | Shipped as |
 | --- | --- | --- | --- |
-| KiCad library | `symbols/`, `footprints/`, `3dmodels/`, `lib-table-files/`, `pcm/`, `tools/` | KiCad 10, Python standard library | PCM ZIP and a clone with library tables |
+| KiCad library | `library/symbols/`, `library/footprints/`, `library/3dmodels/`, `library/lib-table-files/`, `library/pcm/`, `library/tools/` | KiCad 10, Python standard library | PCM ZIP and a clone with library tables |
 | Documentation | `docs/` | Astro 7, Fumadocs, React | Static site on Vercel at `/docs` and `/es/docs` |
 | Kiboar Studio | `software/` | Tauri 2, React, TypeScript, Rust | Desktop application |
 
 ## Boundaries
 
-- **The library stays at the repository root.** `${KIBOAR_ROOT}`,
-  `lib-table-files`, the model paths and the PCM package all depend on
-  `symbols/`, `footprints/` and `3dmodels/` being at the root. Moving them is a
-  breaking change for every existing clone, not a cleanup.
+- **The library lives in `library/`.** For a clone install, `KIBOAR_ROOT`
+  points at `<clone>/library`; the library tables, the model paths and the PCM
+  builder all use that root. The PCM ZIP keeps `symbols/`, `footprints/` and
+  `3dmodels/` at its internal root, so PCM consumers are unaffected.
 - **`docs` and `software` are the JavaScript workspace.** The root
   `pnpm-workspace.yaml` includes `docs`, `software/app` and
   `software/packages/*`. There is one lockfile at the root.
@@ -31,14 +31,15 @@ share a repository and a review flow, not a runtime.
   the Tauri shell and the pure crates. `cargo` runs in its own CI job.
 - **The docs site is static.** It has no server, no database and no runtime
   dependency on the library; its generated pages come from
-  `tools/gen_docs.py` and are committed.
+  `library/tools/gen_docs.py` and are committed.
 
 ## Agent instructions
 
-Three files tell an agent how to work here:
+Four files tell an agent how to work here:
 
-- [`AGENTS.md`](AGENTS.md) — the repository and the KiCad library; its Git,
-  licensing and repository-wide rules apply everywhere.
+- [`AGENTS.md`](AGENTS.md) — the repository; its Git, licensing and
+  repository-wide rules apply everywhere.
+- [`library/AGENTS.md`](library/AGENTS.md) — the KiCad library.
 - [`docs/AGENTS.md`](docs/AGENTS.md) — the documentation site.
 - [`software/AGENTS.md`](software/AGENTS.md) — Kiboar Studio.
 
@@ -52,6 +53,7 @@ package.json            root scripts and Turbo
 pnpm-workspace.yaml     docs, software/app, software/packages/*
 pnpm-lock.yaml          one lockfile
 turbo.json              build, typecheck, test, dev
+library/                KiCad assets, tools, PCM and library tables
 docs/                   kiboar-docs
 software/app/           @kiboar/studio
 software/packages/core/ @kiboar/core
@@ -81,7 +83,7 @@ version drift; Turborepo is the task runner, not the version manager.
 
 | Product | Version | Source of truth |
 | --- | --- | --- |
-| KiCad library | `1.x` | `pcm/metadata.json` and `CHANGELOG.md` |
+| KiCad library | `1.x` | `library/pcm/metadata.json` and `CHANGELOG.md` |
 | Board schema | `kiboar.board/1` | `software/packages/core/src/schema` |
 | Registry | `kiboar.registry/1` | `software/registry/index.json` |
 | Studio | `0.x` | `software/app/package.json` and `software/app/src-tauri/tauri.conf.json` |
@@ -94,8 +96,8 @@ do not share it with the KiCad library.
 
 ## Deployment
 
-- **Library:** `python3 tools/build_pcm.py` produces the PCM ZIP; releases are
-  attached to a GitHub release.
+- **Library:** `python3 library/tools/build_pcm.py` produces the PCM ZIP;
+  releases are attached to a GitHub release.
 - **Documentation:** Vercel, project Root Directory `docs`. Vercel detects the
   pnpm workspace and installs from the repository root. `docs/vercel.json`
   builds with `cd .. && pnpm turbo run build --filter=kiboar-docs` and publishes

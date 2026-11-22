@@ -4,23 +4,13 @@ on:
   push:
     branches: [main]
     paths:
-      - "symbols/**"
-      - "footprints/**"
-      - "3dmodels/**"
-      - "tools/**"
-      - "pcm/**"
-      - "lib-table-files/**"
+      - "library/**"
       - "NOTICE"
       - "LICENSE"
       - ".github/workflows/ci.yml"
   pull_request:
     paths:
-      - "symbols/**"
-      - "footprints/**"
-      - "3dmodels/**"
-      - "tools/**"
-      - "pcm/**"
-      - "lib-table-files/**"
+      - "library/**"
       - "NOTICE"
       - "LICENSE"
       - ".github/workflows/ci.yml"
@@ -39,7 +29,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Check library rules
-        run: python3 tools/lint.py
+        run: python3 library/tools/lint.py
 
   kicad:
     name: KiCad 10 format and render
@@ -56,8 +46,8 @@ jobs:
       - name: Library is saved in the current format
         run: |
           work=$(mktemp -d)
-          cp -R footprints "$work/"
-          cp symbols/Kiboar.kicad_sym "$work/symbols.kicad_sym"
+          cp -R library/footprints "$work/"
+          cp library/symbols/Kiboar.kicad_sym "$work/symbols.kicad_sym"
 
           kicad-cli sym upgrade "$work/symbols.kicad_sym"
           for library in "$work"/footprints/*.pretty; do
@@ -65,8 +55,8 @@ jobs:
           done
 
           status=0
-          diff -r footprints "$work/footprints" || status=1
-          cmp -s symbols/Kiboar.kicad_sym "$work/symbols.kicad_sym" || status=1
+          diff -r library/footprints "$work/footprints" || status=1
+          cmp -s library/symbols/Kiboar.kicad_sym "$work/symbols.kicad_sym" || status=1
           if [ "$status" -ne 0 ]; then
             echo "::error::KiCad would upgrade the library; commit the upgraded files"
             exit 1
@@ -75,8 +65,8 @@ jobs:
       - name: Render a sample footprint and symbol
         run: |
           mkdir -p artifacts
-          kicad-cli fp export svg -o artifacts footprints/Kiboar_SlideSwitch.pretty --fp EG1215AA
-          kicad-cli sym export svg -o artifacts symbols/Kiboar.kicad_sym --symbol SWITCH_EG1215AA
+          kicad-cli fp export svg -o artifacts library/footprints/Kiboar_SlideSwitch.pretty --fp EG1215AA
+          kicad-cli sym export svg -o artifacts library/symbols/Kiboar.kicad_sym --symbol SWITCH_EG1215AA
 
       - name: Upload the sample SVGs
         uses: actions/upload-artifact@v4
