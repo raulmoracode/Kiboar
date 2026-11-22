@@ -76,9 +76,12 @@ release also has to update the package index that points at the new ZIP.
 
 Studio cannot produce a distributable bundle today: `bundle.active` is `false`
 in `software/app/src-tauri/tauri.conf.json`, no signing or notarisation is
-configured, and CI does not build a desktop artifact. A Studio release needs a
-separate change that enables bundling for the target platforms; until that
-lands, Studio has no release artifact to tag.
+configured, and CI does not build a desktop artifact.
+
+The 0.1 MVP target is an **unsigned macOS DMG for testers**. Enabling bundling
+and a macOS CI job is the release work; signing and notarization are post-MVP,
+and the release notes must say the build is unsigned. Until the DMG exists,
+Studio has no release artifact to tag.
 
 When bundling is enabled:
 

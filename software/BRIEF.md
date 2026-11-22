@@ -23,6 +23,24 @@ and the flasher are all derived.
 
 ---
 
+## 1.1 Product stages
+
+The brief describes the full product. The first release is deliberately smaller,
+so the dangerous path is proven before the configurator is built.
+
+| Stage | What it is | Exit evidence |
+| --- | --- | --- |
+| **0.1 MVP** | Safe flasher for macOS: detect, choose board, inspect UF2, confirm, write, cancel | A real RP2040 accepts the file; a bad file is rejected; no write without typed confirmation; unsigned DMG runs |
+| **0.2 Identity** | Minimal Kiboar firmware, PID, post-flash re-enumeration, official signature | A flashed board re-enumerates as Kiboar |
+| **0.3 Layout** | Read-only 2D layout and local `board.json` import | The rendered layout matches the definition |
+| **1.0 Remap** | VIA integration first; own implementation only if VIA does not cover Kiboar | A remap survives a power cycle |
+| **1.x Editor** | Board editor, QMK/VIA exporters, firmware pipeline | A board created from scratch builds and flashes |
+
+The MVP is not a demo of the vision. It is the product's safety core: the part
+that can damage hardware if it is wrong.
+
+---
+
 ## 2. The problems this application must solve
 
 | # | Problem | Consequence today |
@@ -73,37 +91,41 @@ All three share one constraint: they are not expected to know QMK internals.
 
 ---
 
-## 5. Scope of the first version
+## 5. Scope of the MVP (0.1)
+
+The MVP is a safe flasher on macOS. It proves the most dangerous path before
+any configurator work.
 
 ### In scope
 
-- `board.json` schema v1 and a validator.
-- A registry of board definitions and signed firmware artefacts.
-- Detection of an RP2040 board in bootloader mode and of a board running Kiboar
-  firmware.
-- Model selection filtered by the detected MCU, with hardware revision and
-  import of a local `board.json`.
-- A mandatory confirmation dialogue before any flash.
-- UF2 flashing with verification by re-enumeration and a documented recovery.
-- Keymap and layer read/write over the VIA protocol.
-- 2D layout rendering from the board definition.
-- A board-definition editor with live validation.
-- QMK and VIA export for the reference board.
-- English and Spanish UI.
+- `board.json` schema v1 and a validator (done).
+- A registry of board definitions (done).
+- Detection of an RP2040 bootloader and its mounted volume.
+- Board selection from the registry, filtered by the detected MCU.
+- Hardware revision shown and confirmed.
+- UF2 inspection: block structure, MCU family and SHA-256.
+- Mandatory confirmation that repeats the board id.
+- Write with progress, cancellation and partial-file cleanup.
+- A result state with reconnect instructions.
+- English UI, offline.
+- An unsigned macOS DMG for testers.
 
-### Out of scope
+### Not in 0.1
 
-- 3D rendering and STEP models.
-- Per-key RGB, effects and lighting.
-- Macros and tap-dance.
-- Wireless, split and ZMK.
-- STM32 and ESP32 flashing.
+- Kiboar firmware identity, PID and post-flash re-enumeration.
+- Official signed firmware artefacts.
+- Keymap read/write and remapping.
+- 2D layout rendering.
+- Board editor and QMK/VIA export.
+- Spanish UI.
+- Linux and Windows.
+- Signing, notarization and auto-update.
+- 3D, RGB, macros, split, wireless, STM32 and ESP32 flashing.
 - Editing KiCad schematics or PCBs.
 - Cloud profiles, accounts and telemetry.
-- Automatic application updates in the early milestones.
 
-Out-of-scope does not mean rejected. It means the milestone that delivers it
-does not exist yet, and the architecture must not pretend it does.
+Out-of-scope does not mean rejected. It means the stage that delivers it does
+not exist yet, and the architecture must not pretend it does.
 
 ---
 
@@ -142,6 +164,8 @@ An index of board definitions and firmware artefacts. Each artefact carries a
 SHA-256 digest and a signature. The application ships a registry snapshot and
 works offline; it verifies every artefact before flashing.
 
+The MVP ships the board entries only. The firmware list is empty until 0.2.
+
 ### Firmware artefact
 
 A per-board, per-revision build produced from the board definition. Versioned
@@ -158,6 +182,9 @@ independently from the application and from the board schema.
 ---
 
 ## 7. User journeys
+
+The journeys describe the full product. The MVP covers 7.1 up to the copy and
+the result state; re-enumeration arrives in 0.2 and daily remapping in 1.0.
 
 ### 7.1 First time — a freshly printed board
 
@@ -248,17 +275,27 @@ There is no external EEPROM and no unlock code.
 
 ## 10. Success criteria
 
-The first version is done when all of these are true:
+### MVP (0.1)
 
-- A blank RP2040 Zero is flashed from the application and re-enumerates as a
-  Kiboar device.
-- Selecting the wrong model is hard to do and recoverable: the selector is
-  filtered by MCU, the confirmation names the target and recovery is documented.
-- A key remap survives unplugging and reconnecting the keyboard.
-- A board definition created in the editor passes the schema, exports QMK and
-  VIA files, and the generated firmware builds and flashes.
-- The application works with no network connection.
-- The application runs on macOS and Linux. Windows follows.
+- A valid UF2 is written to a mounted RP2040 bootloader volume from the
+  application, with progress and without touching the wrong target.
+- A malformed, truncated or wrong-family file is rejected before any write.
+- Selecting the wrong model is hard: the selector is filtered by MCU and the
+  confirmation repeats the board id.
+- Cancelling a write removes the partial file.
+- The application works offline and produces an unsigned macOS DMG that runs on
+  a clean machine.
+- A real board accepts the file and the volume unmounts. This is manual evidence,
+  not an automated claim.
+
+### Later stages
+
+- A flashed board re-enumerates as Kiboar (0.2).
+- A key remap survives unplugging and reconnecting (1.0).
+- A board created in the editor exports QMK and VIA files and builds firmware
+  (1.x).
+- Linux, then Windows.
+- Spanish UI.
 
 ---
 
@@ -276,14 +313,17 @@ The first version is done when all of these are true:
 
 ---
 
-## 12. Open product decisions
+## 12. Decisions taken for the MVP
 
-1. Reference board for the first flash: a 60% HHKB with an RP2040 Zero
-   (recommended).
-2. Operating-system order: macOS and Linux first, Windows after (recommended).
-3. Whether Kiboar publishes official reference boards or only the format and
-   community boards.
-4. Whether macros and RGB are delivered through VIA, Vial or a Kiboar extension.
+1. **Reference board:** a 60% HHKB with an RP2040 Zero.
+2. **Operating systems:** macOS first. Linux after 0.1; Windows later.
+3. **Boards:** Kiboar publishes the format and the reference boards; community
+   boards follow once the format is stable.
+4. **Remapping:** VIA integration first. A Kiboar implementation exists only if
+   VIA cannot cover the reference boards.
+5. **Editor:** post-MVP and aimed at maintainers, not at the maker who already
+   has a board.
+6. **Firmware:** the MVP does not ship Kiboar firmware. Identity arrives in 0.2.
 
 ---
 

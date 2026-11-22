@@ -7,8 +7,10 @@ there apply here and are not repeated.
 ## What this product is
 
 A desktop application for keyboards built with Kiboar components, built with
-Tauri 2, React 19, TypeScript 7 and Rust. M1 (read-only device detection) is
-merged; M2 (the flasher) is in progress. Studio never deploys to Vercel.
+Tauri 2, React 19, TypeScript 7 and Rust. M1 is merged. M2 is implemented:
+detection, registry, UF2 inspection, typed confirmation and copy with progress
+and cancellation. Hardware verification is pending. The MVP is the flasher;
+firmware identity, remap, layout, editor and i18n are post-MVP.
 
 ## Layout
 
@@ -28,6 +30,9 @@ merged; M2 (the flasher) is in progress. Studio never deploys to Vercel.
 
 ## Boundaries
 
+- **The MVP is the flasher.** Do not build remap, layout, board editor,
+  exporters, Spanish or signing in 0.1. They are post-MVP stages in
+  [`DEVELOPMENT.md`](DEVELOPMENT.md).
 - **The workspace root is the repository root.** There is no nested
   `pnpm-workspace.yaml` under `software/`. Use the root catalog for shared
   versions.
