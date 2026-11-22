@@ -1,0 +1,13 @@
+[package]
+name = "kiboar-flash"
+version = "0.0.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+minisign-verify = "0.3"
+sha2 = "0.11"
+thiserror = "2"
+
+[dev-dependencies]
+minisign = "0.10"

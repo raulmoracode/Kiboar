@@ -116,7 +116,7 @@ jobs:
           cargo clippy --manifest-path software/Cargo.toml --workspace --all-targets -- -D warnings
 
       - name: Rust tests
-        run: cargo test --locked --manifest-path software/Cargo.toml -p kiboar-device
+        run: cargo test --locked --manifest-path software/Cargo.toml --workspace
 
       - name: TypeScript bindings are current
         run: git diff --exit-code -- software/app/src/lib/bindings

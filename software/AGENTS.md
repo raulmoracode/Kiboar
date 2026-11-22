@@ -19,6 +19,8 @@ merged; M2 (the flasher) is in progress. Studio never deploys to Vercel.
   protocol and exporters.
 - `crates/kiboar-device/` — pure Rust types, bootloader table and HID report
   parser. No Tauri, no USB.
+- `crates/kiboar-flash/` — pure Rust UF2 parsing, digest and signature
+  verification, and artefact copy. No Tauri, no USB, no filesystem paths.
 - `boards/`, `registry/`, `schemas/` — the board definitions, the signed
   artefacts index and the generated JSON Schema.
 - `docs/adr/`, `docs/protocol.md` — decisions and the HID identity contract.
@@ -33,6 +35,9 @@ merged; M2 (the flasher) is in progress. Studio never deploys to Vercel.
   It is the source of truth for the board and registry schemas.
 - **`kiboar-device` is pure Rust.** No Tauri, no `nusb`, no `hidapi`. Platform
   code belongs in `app/src-tauri`.
+- **`kiboar-flash` is pure Rust.** No Tauri, no USB and no OS-specific volume
+  detection. It validates and copies bytes; the application finds the volume
+  and removes a partial file after a failed or cancelled copy.
 - **Device input is untrusted.** Validate report lengths, checksums, board ids
   and errors before using them.
 - **TypeScript bindings are generated.** `ts-rs` writes
