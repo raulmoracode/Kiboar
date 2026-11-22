@@ -1,7 +1,8 @@
 # AGENTS.md
 
 Instructions for AI agents working in this repository. The long form for humans
-is `CONTRIBUTING.md`; this file is the short, unambiguous version.
+is `CONTRIBUTING.md`; this file is the short, unambiguous version and the root
+contract for the whole repository.
 
 Read in this order: `README.md` → `ARCHITECTURE.md` → this file → the product
 `AGENTS.md` for the area you are changing → `CONTRIBUTING.md` → `NOTICE` →
@@ -9,114 +10,47 @@ Read in this order: `README.md` → `ARCHITECTURE.md` → this file → the prod
 
 ## What this repository is
 
-Kiboar is a component library for mechanical keyboards in **KiCad 10**: 145
-symbols, 173 footprints in 26 `.pretty` libraries, and 3D models for all of
-them. Keyswitch footprints and models are being redesigned and are not in the
-repository at this time. It ships as a PCM package and as a clone with library
-tables.
+Kiboar is one repository with three products that are built and shipped
+separately.
 
 | Path | Contents |
 | --- | --- |
-| `symbols/Kiboar.kicad_sym` | The single symbol library |
-| `footprints/Kiboar_*.pretty/` | One library per component family |
-| `3dmodels/Kiboar_*.3dshapes/` | STEP models, referenced by `${KIBOAR_3DMODELS}` |
-| `tools/` | Python stdlib scripts; each has a `--check` mode |
-| `pcm/`, `lib-table-files/` | PCM metadata and manual-install tables |
-| `docs/` | Astro + Fumadocs site, English and Spanish |
+| `library/` | KiCad library: symbols, footprints, 3D models, PCM and Python tools |
+| `docs/` | Astro + Fumadocs documentation site, English and Spanish |
 | `software/` | Kiboar Studio: Tauri app, TypeScript core and Rust crates |
-| `docs/AGENTS.md`, `software/AGENTS.md` | Product-specific agent rules |
 | `package.json`, `pnpm-workspace.yaml`, `turbo.json` | Root JavaScript workspace for `docs` and `software` |
 | `ARCHITECTURE.md` | Product boundaries, commands, versions and deployment |
+| `library/AGENTS.md`, `docs/AGENTS.md`, `software/AGENTS.md` | Product-specific agent rules |
 | `NOTICE` | Third-party origins and licences |
 
 ## Product instructions
 
-This file is the root contract: it covers the repository and the KiCad library,
-and its Git, licensing and repository-wide rules apply everywhere.
-
-Two products have their own instructions. Read the product file after this one
-when you change that product; read both when a change spans products.
+This file covers the repository: Git, licensing, the JavaScript workspace and
+the rules that apply everywhere. The product files add the commands, generated
+artifacts and boundaries for their product.
 
 | Product | File | Covers |
 | --- | --- | --- |
+| KiCad library | [`library/AGENTS.md`](library/AGENTS.md) | KiCad format, footprints, symbols, provenance, PCM, library tools |
 | Documentation | [`docs/AGENTS.md`](docs/AGENTS.md) | Astro/Fumadocs, content, generated pages, EN/ES, Vercel |
 | Kiboar Studio | [`software/AGENTS.md`](software/AGENTS.md) | Workspace, TypeScript core, Rust, Tauri, schemas and bindings |
 
-The product files do not replace the Git or licensing rules here. If a product
-file and this one disagree, this one wins and the product file is corrected.
+Read the product file after this one when you change that product; read more
+than one when a change spans products. The product files do not replace the Git
+or licensing rules here. If a product file and this one disagree, this one wins
+and the product file is corrected.
 
-## Hard rules
-
-### KiCad format
-
-- The files are **KiCad 10 format**. Do not "downgrade" them to open in KiCad
-  8/9. The byte check below is the authority:
-
-```bash
-work=$(mktemp -d)
-cp -R footprints "$work/"
-cp symbols/Kiboar.kicad_sym "$work/symbols.kicad_sym"
-kicad-cli sym upgrade "$work/symbols.kicad_sym"
-for library in "$work"/footprints/*.pretty; do kicad-cli fp upgrade "$library"; done
-diff -r footprints "$work/footprints"
-cmp symbols/Kiboar.kicad_sym "$work/symbols.kicad_sym"
-```
-
-If any byte changes, the source was not current: commit the upgraded files.
-
-### Footprints
-
-- Every placed-part footprint needs a courtyard on its own side
-  (`F.CrtYd`/`B.CrtYd`). `python3 tools/gen_courtyard.py` derives one from the
-  Fab outline and pads plus 0.25 mm, snapped to 0.05 mm. Leave hand-drawn
-  courtyards alone.
-- `(attr ...)` must match the pads: `through_hole` if any pad is `thru_hole`,
-  otherwise `smd`. Footprints with only `np_thru_hole` pads keep their own
-  choice.
-- Model paths must use `${KIBOAR_3DMODELS}/Kiboar_<family>.3dshapes/<name>.step`.
-  Never use an absolute path, `${KIPRJMOD}` or an undefined variable.
-- Model file names are case-sensitive. `SLLB510100.step` and `.STEP` are not
-  the same file on Linux.
-
-### Symbols
-
-- Names and values contain no whitespace.
-- One reference prefix per family and no `?`: `SW` for switches, buttons,
-  encoders, DIP and joysticks; `U` for MCU/modules; `J` for connectors; `D` for
-  LEDs; `BT` for battery holders; `DS` for displays.
-- Manufacturer data lives in `Manufacturer` and `MPN` only. Do not add `MF`,
-  `MP`, `MANUFACTURER`, `Manufacturer_Name` or similar.
-- Keep `ki_keywords` and a `ki_fp_filters` entry that matches the linked
-  footprint.
-- The `Footprint` property must resolve to an existing `.kicad_mod`, exact case.
+## Repository rules
 
 ### Licensing
 
-- `NOTICE` is authoritative. The collection is **mixed-licence**: original work
-  is MIT; ten SnapEDA symbols and five Component Search Engine symbols are
-  CC BY-SA. No 3D model is third-party.
-- Original models and symbols carry their authorship in the file, written by
-  `tools/provenance.py`. The tool's `REWRITTEN_MODELS` and `EXTERNAL_SYMBOLS`
-  are the machine-readable half of `NOTICE`: record a file there before you add
-  third-party CAD, or the stamp will claim it. `REWRITTEN_MODELS` are original
-  models whose header named another machine, and get their whole `FILE_NAME`
-  call replaced.
+- `NOTICE` is authoritative. The library is **mixed-licence**: original work is
+  MIT; ten SnapEDA symbols and five Component Search Engine symbols are
+  CC BY-SA 4.0 with the Design Exception. The documentation and Studio are MIT.
 - Do not relicense third-party files, do not remove or weaken `NOTICE`, and do
-  not add new non-commercial content.
+  not add new non-commercial or NoDerivatives content.
 - New CAD data needs its origin and licence recorded in `NOTICE`, or must be
-  original work.
-
-### Generated files
-
-- `docs/content/docs/libraries/` is generated from the library by
-  `tools/gen_docs.py`. Do not hand-edit those pages; change the library or the
-  generator and re-run it.
-- The home pages (`docs/content/docs/index.mdx`, `index.es.mdx`) keep their
-  prose, but the family groups between the `generated:start` and
-  `generated:end` markers are generated by the same tool. Do not edit inside the
-  markers.
-- `3dmodels/README.md` contains a generated inventory between markers. Run
-  `python3 tools/model_inventory.py --write` after adding or referencing models.
+  original work. The library file has the detailed rules.
 
 ### JavaScript workspace
 
@@ -131,26 +65,20 @@ If any byte changes, the source was not current: commit the upgraded files.
   `software`. Rust and the library stay outside Turbo.
 - Vercel deploys `docs` only. Studio is a desktop application.
 
-## Commands before you propose a change
+### Generated files
 
-```bash
-python3 tools/lint.py                    # every rule in one place
-python3 tools/gen_courtyard.py --check   # courtyards
-python3 tools/normalize_symbols.py --check
-python3 tools/model_inventory.py --check
-python3 tools/provenance.py --check      # authorship stamps (also inside lint)
-```
+Generated artifacts belong to their product and are never hand-edited:
 
-For a docs or Studio change, follow the product file:
+- library pages and previews → [`docs/AGENTS.md`](docs/AGENTS.md)
+- 3D model inventory → [`library/AGENTS.md`](library/AGENTS.md)
+- JSON Schema and TypeScript bindings → [`software/AGENTS.md`](software/AGENTS.md)
 
-- **Documentation:** [`docs/AGENTS.md`](docs/AGENTS.md) — generated pages, EN/ES,
-  the docs build and the Vercel deployment.
-- **Studio:** [`software/AGENTS.md`](software/AGENTS.md) — the root workspace,
-  TypeScript core, Rust, generated schemas and generated bindings.
+## Commands
 
-Both share the root workspace. `pnpm install` installs it once and
-`pnpm check` runs the library, JavaScript and Rust checks; the product file
-names the checks that are specific to that product.
+`pnpm install` installs the JavaScript workspace once. `pnpm check` runs the
+library checks, the JavaScript typecheck/test/build and the Rust tests. The
+product files name the checks that are specific to that product and the cases
+where the full `pnpm check` is not the right entry point.
 
 ## Git
 

@@ -3,8 +3,8 @@
 
 A PCM library archive has a fixed shape: ``metadata.json`` at the root and
 ``symbols/``, ``footprints/``, ``3dmodels/`` below it, with no unrelated files.
-The repository root also holds the README, the tools and this script, so the
-archive is staged instead of zipping the working tree.
+The library directory also holds the tools, the PCM metadata and the tables, so
+the archive is staged instead of zipping the working tree.
 
 PCM installs the content under ``${KICAD10_3RD_PARTY}/<type>/<package id>/`` and
 prefixes library nicknames with ``PCM_`` by default (Preferences -> Packages
@@ -17,9 +17,9 @@ files, so the archive is built from rewritten copies:
 The files in the repository keep the clone-friendly paths. Build the matching
 variant for the user's setting:
 
-    python3 tools/build_pcm.py                 # PCM_ prefix (KiCad default)
-    python3 tools/build_pcm.py --no-prefix     # prefix cleared in Preferences
-    python3 tools/build_pcm.py --check [--schema]
+    python3 library/tools/build_pcm.py                 # PCM_ prefix (KiCad default)
+    python3 library/tools/build_pcm.py --no-prefix     # prefix cleared in Preferences
+    python3 library/tools/build_pcm.py --check [--schema]
 """
 
 import argparse
@@ -33,6 +33,7 @@ import sys
 import zipfile
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+REPO_ROOT = os.path.dirname(ROOT)
 METADATA = os.path.join(ROOT, "pcm", "metadata.json")
 CONTENT = ("symbols", "footprints", "3dmodels")
 ICON = os.path.join(ROOT, "pcm", "resources", "icon.png")
@@ -213,7 +214,7 @@ def main():
     version = metadata["versions"][0]["version"]
     prefix = "" if args.no_prefix else "PCM_"
     suffix = "-no-prefix" if args.no_prefix else ""
-    output = args.output or os.path.join(ROOT, "dist", f"Kiboar-{version}{suffix}.zip")
+    output = args.output or os.path.join(REPO_ROOT, "dist", f"Kiboar-{version}{suffix}.zip")
     count, install_size, download_size, digest = build(metadata, output, prefix)
     print(f"{count} files -> {output}")
     print(f"symbol footprint prefix {prefix or '(none)'}")

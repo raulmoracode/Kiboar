@@ -23,17 +23,20 @@ Kiboar is one repository with three products:
 
 | Path | Product | Built with | Shipped as |
 | --- | --- | --- | --- |
-| `symbols/`, `footprints/`, `3dmodels/`, `lib-table-files/`, `pcm/`, `tools/` | KiCad library | KiCad 10, Python | PCM ZIP |
+| `library/` | KiCad library: symbols, footprints, 3D models, PCM and Python tools | KiCad 10, Python | PCM ZIP |
 | `docs/` | Documentation site | Astro + Fumadocs | Vercel at `/docs` |
 | `software/` | Kiboar Studio | Tauri 2, React, Rust | Desktop app |
 
-The library stays at the root because `${KIBOAR_ROOT}`, the library tables and
-the PCM package depend on those paths. `docs` and `software` share a pnpm
-workspace and a Turborepo task graph at the root. See
-[`ARCHITECTURE.md`](ARCHITECTURE.md) for the boundaries and the commands.
+The library lives in `library/`. For a clone install, `KIBOAR_ROOT` points at
+`<clone>/library` and the library tables keep using `${KIBOAR_ROOT}`. The PCM
+ZIP keeps its internal `symbols/`, `footprints/` and `3dmodels/` layout.
+`docs` and `software` share a pnpm workspace and a Turborepo task graph at the
+root. See [`ARCHITECTURE.md`](ARCHITECTURE.md) for the boundaries and the
+commands.
 
-Agent instructions live in [`AGENTS.md`](AGENTS.md) for the repository and the
-library, [`docs/AGENTS.md`](docs/AGENTS.md) for the documentation site and
+Agent instructions live in [`AGENTS.md`](AGENTS.md) for the repository,
+[`library/AGENTS.md`](library/AGENTS.md) for the KiCad library,
+[`docs/AGENTS.md`](docs/AGENTS.md) for the documentation site and
 [`software/AGENTS.md`](software/AGENTS.md) for Studio.
 
 ## Requirements
@@ -51,7 +54,7 @@ newer** and **pnpm 12**. They do not need KiCad. See
 
 1. Build the package (or use the ZIP attached to a release):
    ```bash
-   python3 tools/build_pcm.py
+   python3 library/tools/build_pcm.py
    ```
 2. In KiCad: **Tools → Plugin and Content Manager → Install from File…** and
    choose `dist/Kiboar-<version>.zip`.
@@ -65,7 +68,7 @@ cleared **Preferences → Packages and Updates → Library nickname prefix**, us
 the other variant instead:
 
 ```bash
-python3 tools/build_pcm.py --no-prefix   # dist/Kiboar-<version>-no-prefix.zip
+python3 library/tools/build_pcm.py --no-prefix   # dist/Kiboar-<version>-no-prefix.zip
 ```
 
 The package is not in the official PCM repository yet; the release is tracked in
@@ -77,12 +80,13 @@ the issue tracker.
 git clone https://github.com/raulmoracode/Kiboar.git
 ```
 
-1. **Preferences → Configure Paths** — add `KIBOAR_ROOT` pointing at the clone,
-   and `KIBOAR_3DMODELS` pointing at `$KIBOAR_ROOT/3dmodels`.
+1. **Preferences → Configure Paths** — add `KIBOAR_ROOT` pointing at the
+   clone's `library/` directory, and `KIBOAR_3DMODELS` pointing at
+   `$KIBOAR_ROOT/3dmodels`.
 2. **Preferences → Manage Symbol Libraries → Global Libraries** — append
-   `lib-table-files/sym-lib-table`.
+   `library/lib-table-files/sym-lib-table`.
 3. **Preferences → Manage Footprint Libraries → Global Libraries** — append
-   `lib-table-files/fp-lib-table`.
+   `library/lib-table-files/fp-lib-table`.
 
 The tables reference `${KIBOAR_ROOT}`, so the variable must exist. For a single
 project, copy the two tables into the project directory instead of using the
@@ -139,8 +143,8 @@ link. The issue forms ask for both.
 
 The documentation site and Kiboar Studio are part of the same repository. Their
 contribution rules and commands are in [`docs/AGENTS.md`](docs/AGENTS.md) and
-[`software/AGENTS.md`](software/AGENTS.md); this section covers the KiCad
-library.
+[`software/AGENTS.md`](software/AGENTS.md); the KiCad library rules are in
+[`library/AGENTS.md`](library/AGENTS.md). This section covers the KiCad library.
 
 ## Licensing
 
@@ -154,7 +158,7 @@ Kiboar is a **mixed-licence collection**, and only because of its symbols:
 The split is not a guess. 129 models and 130 of the 145 symbols are original
 work, and say so in the file: the STEP `FILE_NAME` header names the author and
 `Kiboar`, and the symbols carry hidden `Author` and `License` properties.
-`tools/lint.py` fails when a stamp is missing. The other 15 symbols are the
+`library/tools/lint.py` fails when a stamp is missing. The other 15 symbols are the
 third-party imports listed in `NOTICE`.
 
 One thing matters before you use the library commercially: ten symbols are

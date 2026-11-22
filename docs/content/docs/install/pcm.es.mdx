@@ -10,7 +10,7 @@ globales.
 ## Generar el ZIP
 
 ```bash
-python3 tools/build_pcm.py
+python3 library/tools/build_pcm.py
 ```
 
 La compilación por defecto usa el prefijo de apodo de KiCad (`PCM_`). Si has
@@ -18,7 +18,7 @@ borrado **Preferencias → Paquetes y actualizaciones → Prefijo de apodo de
 librería**, genera la otra variante:
 
 ```bash
-python3 tools/build_pcm.py --no-prefix
+python3 library/tools/build_pcm.py --no-prefix
 ```
 
 ## Instalar

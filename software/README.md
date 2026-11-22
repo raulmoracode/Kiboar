@@ -43,6 +43,8 @@ when a committed schema or TypeScript binding is stale.
 1. `BRIEF.md` — why the application exists and what it does.
 2. `DEVELOPMENT.md` — how it is built and in which order.
 
-The application lives in this directory. The KiCad library at the repository
-root keeps its own rules in [`AGENTS.md`](../AGENTS.md) and
-[`CONTRIBUTING.md`](../CONTRIBUTING.md), and nothing here changes them.
+The application lives in this directory. The KiCad library lives in
+[`../library/`](../library/) and keeps its rules in
+[`../library/AGENTS.md`](../library/AGENTS.md); the repository rules are in
+[`../AGENTS.md`](../AGENTS.md) and [`../CONTRIBUTING.md`](../CONTRIBUTING.md),
+and nothing here changes them.

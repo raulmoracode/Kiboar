@@ -13,8 +13,8 @@ cannot, so a derived box would be a downgrade. Footprints without pads -- plate
 cutouts and keycap outlines -- are mechanical drawings rather than placed parts
 and are skipped; see ``process_file``.
 
-    python3 tools/gen_courtyard.py --check           # report, exit 1 if missing
-    python3 tools/gen_courtyard.py footprints        # rewrite in place
+    python3 library/tools/gen_courtyard.py --check           # report, exit 1 if missing
+    python3 library/tools/gen_courtyard.py library/footprints  # rewrite in place
 """
 
 import argparse
@@ -26,6 +26,7 @@ import uuid
 
 import kicad_sexpr as sexpr
 
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CLEARANCE = 0.25
 GRID = 0.05
 
@@ -400,7 +401,7 @@ def footprint_files(targets):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("targets", nargs="*", default=["footprints"])
+    parser.add_argument("targets", nargs="*", default=[os.path.join(ROOT, "footprints")])
     parser.add_argument("--check", action="store_true", help="report footprints that need a courtyard")
     parser.add_argument("--clearance", type=float, default=CLEARANCE)
     parser.add_argument("--grid", type=float, default=GRID)

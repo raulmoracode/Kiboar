@@ -11,7 +11,7 @@ The variable is configured in **Preferences → Configure Paths** (see the main
 README). The PCM package rewrites these paths to the installed
 `${KICAD10_3RD_PARTY}` location, so the same footprints work both ways.
 
-File names are matched case-sensitively by KiCad on Linux. `tools/lint.py`
+File names are matched case-sensitively by KiCad on Linux. `library/tools/lint.py`
 checks that every referenced path resolves with the exact case.
 
 One directory breaks the one-to-one rule on purpose: `Kiboar_Icsocket.3dshapes`
@@ -43,8 +43,8 @@ remove the file in a dedicated change with its own issue.
 ## Regenerating this list
 
 ```bash
-python3 tools/model_inventory.py --write   # rewrite the section above
-python3 tools/model_inventory.py --check   # fail when it is stale
+python3 library/tools/model_inventory.py --write   # rewrite the section above
+python3 library/tools/model_inventory.py --check   # fail when it is stale
 ```
 
 The check ignores case, so a `.STEP`/`.step` mismatch shows up as a lint error,
