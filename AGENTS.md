@@ -4,9 +4,9 @@ Instructions for AI agents working in this repository. The long form for humans
 is `CONTRIBUTING.md`; this file is the short, unambiguous version and the root
 contract for the whole repository.
 
-Read in this order: `README.md` → `ARCHITECTURE.md` → this file → the product
-`AGENTS.md` for the area you are changing → `CONTRIBUTING.md` → `NOTICE` →
-`CHANGELOG.md`.
+Read in this order: `README.md` → `ARCHITECTURE.md` → this file → `LABELS.md`
+→ the product `AGENTS.md` for the area you are changing → `CONTRIBUTING.md` →
+`NOTICE` → `CHANGELOG.md`.
 
 ## What this repository is
 
@@ -20,6 +20,7 @@ separately.
 | `software/` | Kiboar Studio: Tauri app, TypeScript core and Rust crates |
 | `package.json`, `pnpm-workspace.yaml`, `turbo.json` | Root JavaScript workspace for `docs` and `software` |
 | `ARCHITECTURE.md` | Product boundaries, commands, versions and deployment |
+| `LABELS.md` | The repository label scheme for issues and pull requests |
 | `library/AGENTS.md`, `docs/AGENTS.md`, `software/AGENTS.md` | Product-specific agent rules |
 | `NOTICE` | Third-party origins and licences |
 
@@ -27,7 +28,7 @@ separately.
 
 This file covers the repository: Git, licensing, the JavaScript workspace and
 the rules that apply everywhere. The product files add the commands, generated
-artifacts and boundaries for their product.
+artifacts, boundaries and label tables for their product.
 
 | Product | File | Covers |
 | --- | --- | --- |
@@ -39,6 +40,31 @@ Read the product file after this one when you change that product; read more
 than one when a change spans products. The product files do not replace the Git
 or licensing rules here. If a product file and this one disagree, this one wins
 and the product file is corrected.
+
+## Labels and `git-workflow`
+
+This repository does **not** use the generic label catalog that ships with
+`git-workflow`. The authoritative scheme is [`LABELS.md`](LABELS.md).
+
+| Label | When |
+| --- | --- |
+| `product:repo` | Root files, CI, repository process and cross-product docs |
+| Exactly one `type:*` from [`LABELS.md`](LABELS.md) | Matches the title prefix |
+| `risk:consequential` or `risk:sensitive` | Only for level 2 or 3; never both |
+
+When you use `git-workflow` here:
+
+1. Read [`LABELS.md`](LABELS.md).
+2. Read the **Labels** table in the `AGENTS.md` of every product the change
+   touches.
+3. Apply exactly one `type:*`, one `product:*` per touched product, and a
+   `risk:*` label only for level 2 or 3.
+4. Do not apply `area:*` to new work and do not create a label outside the
+   scheme.
+
+The skill's catalog is generic by design; this repository's product scheme is
+the local authority. `git-merge` accepts a repository-specific scheme, and this
+is it.
 
 ## Repository rules
 

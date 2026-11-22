@@ -77,5 +77,7 @@ Only contribute work you can license compatibly with this repository.
 - Conventional Commits (`fix:`, `feat:`, `docs:`, `chore:`, `ci:`, `release:`
   …), English.
 - Reference the issue with `Closes #N` in the pull request body.
+- Labels follow [`LABELS.md`](LABELS.md) and the product `AGENTS.md` table; the
+  PR template points to the checks for each product touched.
 - The PR template asks for the testing evidence. A statement that the lint
   passes is not evidence; paste the command and its result.

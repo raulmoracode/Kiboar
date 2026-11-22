@@ -117,6 +117,18 @@ python3 library/tools/provenance.py --check      # authorship stamps (also insid
 python3 library/tools/build_pcm.py --check --schema
 ```
 
+## Labels
+
+| Label | When |
+| --- | --- |
+| `product:library` | Every issue or pull request that touches `library/` |
+| Exactly one `type:*` from [`../LABELS.md`](../LABELS.md) | Matches the title prefix; usual here: `feat`, `fix`, `docs`, `chore`, `refactor`, `test`, `build`, `release` |
+| `risk:consequential` | A breaking library, PCM or clone contract change |
+
+If the change also touches root files, CI or another product, add that product's
+label too. The full policy is [`../LABELS.md`](../LABELS.md). Do not use
+`area:*` for new work.
+
 ## Git
 
 Follow the root `AGENTS.md`: issue → branch → pull request. Use

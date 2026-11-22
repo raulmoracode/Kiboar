@@ -1,7 +1,7 @@
 name: Component request
 description: Ask for a component to be added to the library
 title: "feat: "
-labels: ["type:feat"]
+labels: ["type:feat", "product:library"]
 body:
   - type: markdown
     attributes:

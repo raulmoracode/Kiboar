@@ -4,11 +4,12 @@ What does this change and why? Link the issue.
 
 Closes #
 
-For a documentation or Studio change, use the checks in
-[`docs/AGENTS.md`](../docs/AGENTS.md) or
-[`software/AGENTS.md`](../software/AGENTS.md). The KiCad checklist at the end
-applies to library changes; mark it not applicable and paste the product checks
-instead.
+## Products touched
+
+- [ ] `library`
+- [ ] `docs`
+- [ ] `studio`
+- [ ] `repo`
 
 ## Changes
 
@@ -16,26 +17,31 @@ instead.
 
 ## Testing
 
-What did you run, and what did it print? The CI runs `library/tools/lint.py`,
-the KiCad format check and the sample render; anything it cannot see (Kiboar
-version, board you tested with, screenshots) goes here.
+Run and paste the checks from the `AGENTS.md` of every product checked above.
+Do not tick a product you did not touch, and do not mark a product's checks when
+they did not run.
+
+| Product | Checks to follow |
+| --- | --- |
+| `library` | [`library/AGENTS.md`](../library/AGENTS.md) |
+| `docs` | [`docs/AGENTS.md`](../docs/AGENTS.md) |
+| `studio` | [`software/AGENTS.md`](../software/AGENTS.md) |
+| `repo` | [`AGENTS.md`](../AGENTS.md) and [`LABELS.md`](../LABELS.md) |
 
 ```text
-$ python3 library/tools/lint.py
+$ paste the commands and their real output
 ```
 
 ## Risk
 
-What can break for someone using the library today? Mention renamed symbols or
-footprints, changed model paths, or a new non-commercial file. Write `none`
-when there is no such risk.
+What can break for someone using the library, the docs or Studio today? Mention
+renamed library assets, install-path changes, a broken site build, or a schema
+or protocol change. Write `none` when there is no such risk.
 
 ## Checklist
 
-- [ ] `python3 library/tools/lint.py` passes.
-- [ ] `kicad-cli sym upgrade` and `fp upgrade` leave the library unchanged.
-- [ ] New symbols have `Manufacturer`, `MPN`, `ki_keywords` and `ki_fp_filters`
-      where they apply.
-- [ ] New footprints have a courtyard and an `(attr ...)` that matches the pads.
-- [ ] New CAD data has its origin and licence recorded in `NOTICE`, or is
-      original work covered by MIT.
+- [ ] The issue is linked and the labels match [`LABELS.md`](../LABELS.md) and
+      the product `AGENTS.md` tables.
+- [ ] Every touched product's checks ran; the real output is pasted above.
+- [ ] Generated files were regenerated, not hand-edited.
+- [ ] The diff contains only this change.
