@@ -1,0 +1,87 @@
+# AGENTS.md — Kiboar Studio
+
+This file covers Kiboar Studio in `software/`. Read the root
+[`AGENTS.md`](../AGENTS.md) first: the Git, licensing and repository-wide rules
+there apply here and are not repeated.
+
+## What this product is
+
+A desktop application for keyboards built with Kiboar components, built with
+Tauri 2, React 19, TypeScript 7 and Rust. M1 (read-only device detection) is
+merged; M2 (the flasher) is in progress. Studio never deploys to Vercel.
+
+## Layout
+
+- `app/` — `@kiboar/studio`: the React frontend and the Tauri shell.
+  - `app/src-tauri/` — Rust shell: USB/HID enumeration, commands and the
+    platform boundary.
+- `packages/core/` — `@kiboar/core`: pure TypeScript schema, matrix, VIA
+  protocol and exporters.
+- `crates/kiboar-device/` — pure Rust types, bootloader table and HID report
+  parser. No Tauri, no USB.
+- `boards/`, `registry/`, `schemas/` — the board definitions, the signed
+  artefacts index and the generated JSON Schema.
+- `docs/adr/`, `docs/protocol.md` — decisions and the HID identity contract.
+- `BRIEF.md`, `DEVELOPMENT.md` — product and development briefs.
+
+## Boundaries
+
+- **The workspace root is the repository root.** There is no nested
+  `pnpm-workspace.yaml` under `software/`. Use the root catalog for shared
+  versions.
+- **`@kiboar/core` is pure TypeScript.** No DOM, no Node, no Tauri imports.
+  It is the source of truth for the board and registry schemas.
+- **`kiboar-device` is pure Rust.** No Tauri, no `nusb`, no `hidapi`. Platform
+  code belongs in `app/src-tauri`.
+- **Device input is untrusted.** Validate report lengths, checksums, board ids
+  and errors before using them.
+- **TypeScript bindings are generated.** `ts-rs` writes
+  `app/src/lib/bindings/`; do not edit those files by hand. A test and the CI
+  diff fail when they drift.
+- **JSON Schema is generated.** `schemas/board.schema.json` and
+  `schemas/registry.schema.json` come from `@kiboar/core`; run
+  `pnpm schema:export`.
+- **M1 is read-only.** Do not add a path that writes to a device without the M2
+  verification, confirmation and recovery design.
+- **No telemetry, no cloud, no secrets.** Logs are local and support only.
+- **Update the briefs and ADRs when scope changes.** A protocol change belongs
+  in `docs/protocol.md`; an architectural decision belongs in `docs/adr/`.
+- **Vercel is for docs only.** Studio is a desktop app.
+
+## Commands
+
+From the repository root:
+
+```bash
+pnpm install
+pnpm turbo run typecheck test --filter=@kiboar/core --filter=@kiboar/studio
+pnpm turbo run build --filter=@kiboar/studio
+pnpm test:rust
+pnpm check:rust                  # needs the frontend build above
+pnpm schema:export
+pnpm --filter @kiboar/studio tauri dev
+```
+
+Rust can also be run from `software/` with `cargo test -p kiboar-device`.
+
+## Before a PR
+
+- `pnpm turbo run typecheck test --filter=@kiboar/core --filter=@kiboar/studio`
+  passes.
+- `pnpm turbo run build --filter=@kiboar/studio` passes.
+- `pnpm test:rust` passes.
+- `pnpm check:rust` passes after the build.
+- `git diff --exit-code -- software/schemas` is clean after
+  `pnpm schema:export`.
+- `git diff --exit-code -- software/app/src/lib/bindings` is clean after the
+  Rust tests.
+- Paste the real command output in the pull request, and say what could not be
+  tested (hardware, GUI, another OS).
+
+## Git
+
+Follow the root `AGENTS.md`: issue → branch → pull request. Use
+`feat/<issue>-<slug>`, `fix/<issue>-<slug>` or `docs/<issue>-<slug>` and a
+Conventional Commit with the same prefix. Do not commit `dist/` or `target/`.
+The generated bindings are committed, but only after `cargo test` regenerates
+them.

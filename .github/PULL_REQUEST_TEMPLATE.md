@@ -4,6 +4,12 @@ What does this change and why? Link the issue.
 
 Closes #
 
+For a documentation or Studio change, use the checks in
+[`docs/AGENTS.md`](../docs/AGENTS.md) or
+[`software/AGENTS.md`](../software/AGENTS.md). The KiCad checklist at the end
+applies to library changes; mark it not applicable and paste the product checks
+instead.
+
 ## Changes
 
 -

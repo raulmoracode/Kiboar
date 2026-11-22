@@ -32,10 +32,18 @@ the PCM package depend on those paths. `docs` and `software` share a pnpm
 workspace and a Turborepo task graph at the root. See
 [`ARCHITECTURE.md`](ARCHITECTURE.md) for the boundaries and the commands.
 
+Agent instructions live in [`AGENTS.md`](AGENTS.md) for the repository and the
+library, [`docs/AGENTS.md`](docs/AGENTS.md) for the documentation site and
+[`software/AGENTS.md`](software/AGENTS.md) for Studio.
+
 ## Requirements
 
 **KiCad 10.0 or newer.** The files use the KiCad 10 format and KiCad 8/9 cannot
 open them.
+
+The documentation and Studio are a JavaScript workspace: **Node 22.23.4 or
+newer** and **pnpm 12**. They do not need KiCad. See
+[`docs/README.md`](docs/README.md) and [`software/README.md`](software/README.md).
 
 ## Install
 
@@ -128,6 +136,11 @@ Issues and pull requests are welcome. When reporting a defect, include the KiCad
 version, the library and item name, and what you expected to see. When
 requesting a component, include the manufacturer part number and a datasheet
 link. The issue forms ask for both.
+
+The documentation site and Kiboar Studio are part of the same repository. Their
+contribution rules and commands are in [`docs/AGENTS.md`](docs/AGENTS.md) and
+[`software/AGENTS.md`](software/AGENTS.md); this section covers the KiCad
+library.
 
 ## Licensing
 

@@ -10,7 +10,7 @@ offer. The application works offline and verifies everything it uses.
   application carries the public key and refuses an index it cannot verify.
 - Every firmware entry carries its own `sha256` and `signature`. Both are checked
   before a flash; an artefact that fails either check is never written.
-- No firmware artefact exists in M0. The array is intentionally empty, and the
+- No firmware artefact exists yet. The array is intentionally empty, and the
   schema and the tests already cover its shape.
 
 ## Paths

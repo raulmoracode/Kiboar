@@ -1,6 +1,6 @@
 # Kiboar Studio — application brief
 
-**Version:** 1.0 · **Status:** planning · **Date:** 2026-11-21
+**Version:** 1.1 · **Status:** active — M1 implemented, M2 in progress · **Date:** 2026-11-22
 
 ---
 
@@ -14,11 +14,12 @@ The reference experience is Razer Synapse, but the hardware and the firmware are
 open. Kiboar Studio does not invent firmware or a protocol: it builds on QMK and
 the VIA protocol in the first version, and on ZMK for wireless boards later.
 
-The repository today is a KiCad 10 component library. It has no boards, no
-matrix, no keymap and no firmware. The application therefore starts by creating
-the artefact that does not exist yet: a **Kiboar board definition**, a single
-file that describes the model, the MCU, the matrix and the keys, and from which
-the firmware, the editor, the visualiser and the flasher are all derived.
+At the start of the project the repository was only a KiCad 10 component
+library. It had no boards, no matrix, no keymap and no firmware. The
+application therefore starts by creating the artefact that does not exist yet:
+a **Kiboar board definition**, a single file that describes the model, the MCU,
+the matrix and the keys, and from which the firmware, the editor, the visualiser
+and the flasher are all derived.
 
 ---
 

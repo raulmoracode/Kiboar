@@ -1,6 +1,6 @@
 # Kiboar Studio — development brief
 
-**Version:** 1.1 · **Status:** M1 merged; M2 (flasher) in progress · **Date:** 2026-11-21
+**Version:** 1.1 · **Status:** M1 merged; M2 (flasher) in progress · **Date:** 2026-11-22
 
 This document is the companion to [`BRIEF.md`](BRIEF.md). It defines the stack,
 the order of work and the rules the implementation follows. It is deliberately
