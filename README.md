@@ -67,6 +67,7 @@ The application layout, documents and current milestone are in
   [`docs/AGENTS.md`](docs/AGENTS.md) and
   [`software/AGENTS.md`](software/AGENTS.md).
 - [`LABELS.md`](LABELS.md) — the label scheme for issues and pull requests.
+- [`SECURITY.md`](SECURITY.md) — how to report a vulnerability privately.
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) — how to contribute and what a pull
   request must include.
 - [`CHANGELOG.md`](CHANGELOG.md) — changes to the KiCad library and the PCM
