@@ -72,6 +72,7 @@ The application layout, documents and current milestone are in
 - [`CHANGELOG.md`](CHANGELOG.md) — changes to the KiCad library and the PCM
   package. The docs site and Studio have independent versions; see
   `ARCHITECTURE.md`.
+- [`RELEASING.md`](RELEASING.md) — how a version is cut, tagged and published.
 - [`NOTICE`](NOTICE) — third-party origins and licences.
 
 `docs` and `software` share one pnpm workspace, one lockfile and a Turborepo
