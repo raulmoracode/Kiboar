@@ -66,8 +66,8 @@ pub fn parse_board_info(payload: &[u8]) -> Result<BoardInfo, ProtocolError> {
     if raw_board_id[end..].iter().any(|byte| *byte != 0) {
         return Err(ProtocolError::InvalidBoardId);
     }
-    let board_id = std::str::from_utf8(&raw_board_id[..end])
-        .map_err(|_| ProtocolError::InvalidBoardId)?;
+    let board_id =
+        std::str::from_utf8(&raw_board_id[..end]).map_err(|_| ProtocolError::InvalidBoardId)?;
     if !is_lowercase_slug(board_id) {
         return Err(ProtocolError::InvalidBoardId);
     }
@@ -130,6 +130,9 @@ pub fn crc16_ccitt(bytes: &[u8]) -> u16 {
 mod tests {
     use super::*;
 
+    // The helper mirrors the wire layout field by field, so the call sites read
+    // like the report they build.
+    #[allow(clippy::too_many_arguments)]
     fn encode(
         board_id: &str,
         hw_rev: u8,
@@ -216,21 +219,30 @@ mod tests {
     fn rejects_an_uppercase_board_id() {
         let mut payload = encode("kb60-hhkb", 1, (1, 0, 0), 1, 1, 1, 1, false);
         payload[1] = b'K';
-        assert_eq!(parse_board_info(&payload), Err(ProtocolError::InvalidBoardId));
+        assert_eq!(
+            parse_board_info(&payload),
+            Err(ProtocolError::InvalidBoardId)
+        );
     }
 
     #[test]
     fn rejects_bytes_after_the_nul_padding() {
         let mut payload = encode("ab", 1, (1, 0, 0), 1, 1, 1, 1, false);
         payload[4] = b'x';
-        assert_eq!(parse_board_info(&payload), Err(ProtocolError::InvalidBoardId));
+        assert_eq!(
+            parse_board_info(&payload),
+            Err(ProtocolError::InvalidBoardId)
+        );
     }
 
     #[test]
     fn rejects_a_zero_matrix() {
         let mut payload = encode("kb60-hhkb", 1, (1, 0, 0), 1, 1, 1, 1, false);
         payload[25] = 0;
-        assert_eq!(parse_board_info(&payload), Err(ProtocolError::InvalidMatrix));
+        assert_eq!(
+            parse_board_info(&payload),
+            Err(ProtocolError::InvalidMatrix)
+        );
     }
 
     #[test]

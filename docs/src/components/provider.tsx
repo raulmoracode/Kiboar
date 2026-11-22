@@ -1,9 +1,9 @@
-import { navigate } from 'astro:transitions/client';
-import type { ReactNode } from 'react';
-import { RootProvider } from 'fumadocs-ui/provider/astro';
-import { i18nProvider } from 'fumadocs-ui/i18n';
-import SearchDialog from '@/components/search';
-import { translations } from '@/lib/layout.shared';
+import { navigate } from "astro:transitions/client";
+import { i18nProvider } from "fumadocs-ui/i18n";
+import { RootProvider } from "fumadocs-ui/provider/astro";
+import type { ReactNode } from "react";
+import SearchDialog from "@/components/search";
+import { translations } from "@/lib/layout.shared";
 
 export interface ProviderProps {
   lang: string;

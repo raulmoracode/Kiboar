@@ -1,9 +1,9 @@
-import defaultMdxComponents from 'fumadocs-ui/mdx';
-import { Step, Steps } from 'fumadocs-ui/components/steps';
-import { DynamicLink } from 'fumadocs-core/dynamic-link';
-import { DocsBody } from 'fumadocs-ui/layouts/spacious/page';
-import type { MDXComponents } from 'mdx/types';
-import { ContentProvider, type ProviderProps } from '@/components/provider';
+import { DynamicLink } from "fumadocs-core/dynamic-link";
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { DocsBody } from "fumadocs-ui/layouts/spacious/page";
+import defaultMdxComponents from "fumadocs-ui/mdx";
+import type { MDXComponents } from "mdx/types";
+import { ContentProvider, type ProviderProps } from "@/components/provider";
 
 export function getMDXComponents(components?: MDXComponents) {
   return {

@@ -1,13 +1,14 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
-import tailwindcss from '@tailwindcss/vite';
-import fumadocs from '@fumadocs/astro';
+
+import fumadocs from "@fumadocs/astro";
+import tailwindcss from "@tailwindcss/vite";
+import { defineConfig } from "astro/config";
 
 export default defineConfig({
-  site: 'https://kiboar.raulmoracode.com',
+  site: "https://kiboar.raulmoracode.com",
   integrations: [
     fumadocs({
-      components: './src/components/mdx.tsx',
+      components: "./src/components/mdx.tsx",
     }),
   ],
   vite: {

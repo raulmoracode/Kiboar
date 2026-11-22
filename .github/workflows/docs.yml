@@ -13,6 +13,7 @@ on:
       - "turbo.json"
       - "package.json"
       - ".node-version"
+      - "biome.json"
       - ".github/workflows/docs.yml"
   pull_request:
     paths:
@@ -25,6 +26,7 @@ on:
       - "turbo.json"
       - "package.json"
       - ".node-version"
+      - "biome.json"
       - ".github/workflows/docs.yml"
   workflow_dispatch:
 
@@ -55,6 +57,9 @@ jobs:
 
       - name: Install
         run: pnpm install --frozen-lockfile
+
+      - name: Lint and format
+        run: pnpm lint:docs
 
       - name: Generated pages are current
         run: python3 library/tools/gen_docs.py --check

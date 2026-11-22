@@ -1,13 +1,13 @@
-import { ShoppingCart } from 'lucide-react';
-import { type ComponentProps } from 'react';
-import { type SerializedPageTree, useFumadocsLoader } from 'fumadocs-core/source/client';
-import type { TOCItemType } from 'fumadocs-core/toc';
-import { DocsLayout } from 'fumadocs-ui/layouts/spacious';
-import { DocsDescription, DocsPage, DocsTitle } from 'fumadocs-ui/layouts/spacious/page';
-import { HeaderActions } from 'fumadocs-ui/layouts/spacious/slots/actions';
-import { Provider, type ProviderProps } from '@/components/provider';
-import { baseOptions } from '@/lib/layout.shared';
-import { gitConfig } from '@/lib/shared';
+import { type SerializedPageTree, useFumadocsLoader } from "fumadocs-core/source/client";
+import type { TOCItemType } from "fumadocs-core/toc";
+import { DocsLayout } from "fumadocs-ui/layouts/spacious";
+import { DocsDescription, DocsPage, DocsTitle } from "fumadocs-ui/layouts/spacious/page";
+import { HeaderActions } from "fumadocs-ui/layouts/spacious/slots/actions";
+import { ShoppingCart } from "lucide-react";
+import type { ComponentProps } from "react";
+import { Provider, type ProviderProps } from "@/components/provider";
+import { baseOptions } from "@/lib/layout.shared";
+import { gitConfig } from "@/lib/shared";
 
 const repositoryUrl = `https://github.com/${gitConfig.user}/${gitConfig.repo}`;
 
@@ -21,9 +21,9 @@ function GitHubMark({ className }: { className?: string }) {
 }
 
 /** Spacious' actions plus the shop (label on desktop) and repository icon links. */
-function ActionsWithShop({ className, ...props }: ComponentProps<'div'>) {
+function ActionsWithShop({ className, ...props }: ComponentProps<"div">) {
   return (
-    <div className={`flex items-center gap-1 ${className ?? ''}`}>
+    <div className={`flex items-center gap-1 ${className ?? ""}`}>
       <a
         href="/shop"
         aria-label="Shop"

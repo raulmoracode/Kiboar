@@ -11,13 +11,21 @@
     "dev": "turbo run dev --parallel",
     "test": "turbo run test",
     "typecheck": "turbo run typecheck",
+    "lint": "biome check .",
+    "lint:docs": "biome check docs",
+    "lint:studio": "biome check software",
+    "lint:fix": "biome check --write .",
+    "format": "biome format --write .",
+    "format:check": "biome format .",
+    "lint:rust": "cargo fmt --manifest-path software/Cargo.toml --all -- --check && cargo clippy --manifest-path software/Cargo.toml --workspace --all-targets -- -D warnings",
     "schema:export": "pnpm --filter @kiboar/core schema:export",
     "library": "python3 library/tools/lint.py && python3 library/tools/gen_courtyard.py --check && python3 library/tools/normalize_symbols.py --check && python3 library/tools/model_inventory.py --check && python3 library/tools/provenance.py --check",
     "test:rust": "cargo test --manifest-path software/Cargo.toml -p kiboar-device",
     "check:rust": "cargo check --manifest-path software/Cargo.toml -p kiboar-studio",
-    "check": "pnpm library && pnpm typecheck && pnpm test && pnpm build && pnpm test:rust && pnpm check:rust"
+    "check": "pnpm library && pnpm lint && pnpm lint:rust && pnpm typecheck && pnpm test && pnpm build && pnpm test:rust && pnpm check:rust"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.6.8",
     "turbo": "^2.11.13"
   }
 }

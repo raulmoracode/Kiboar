@@ -54,6 +54,8 @@ From the repository root:
 
 ```bash
 pnpm install
+pnpm lint:studio
+pnpm lint:rust
 pnpm turbo run typecheck test --filter=@kiboar/core --filter=@kiboar/studio
 pnpm turbo run build --filter=@kiboar/studio
 pnpm test:rust
@@ -66,6 +68,8 @@ Rust can also be run from `software/` with `cargo test -p kiboar-device`.
 
 ## Before a PR
 
+- `pnpm lint:studio` passes.
+- `pnpm lint:rust` passes.
 - `pnpm turbo run typecheck test --filter=@kiboar/core --filter=@kiboar/studio`
   passes.
 - `pnpm turbo run build --filter=@kiboar/studio` passes.

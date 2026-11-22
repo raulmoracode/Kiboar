@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { boardSchema, formatIssues, type Board } from "../src";
+import { type Board, boardSchema, formatIssues } from "../src";
 
 export const SOFTWARE_ROOT = fileURLToPath(new URL("../../../", import.meta.url));
 

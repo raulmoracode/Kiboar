@@ -1,4 +1,4 @@
-import wasmUrl from 'occt-import-js/dist/occt-import-js.wasm?url';
+import wasmUrl from "occt-import-js/dist/occt-import-js.wasm?url";
 
 const MESSAGE_STYLE = `p{margin:0;display:flex;align-items:center;justify-content:center;height:100%;padding:0 1rem;text-align:center;font-size:.875rem;line-height:1.25rem;color:var(--color-fd-muted-foreground,#737373)}`;
 
@@ -7,7 +7,7 @@ const MESSAGE_STYLE = `p{margin:0;display:flex;align-items:center;justify-conten
  * change the HTML React hydrates and break the island (TOC included).
  */
 function shadow(host: HTMLElement) {
-  return host.shadowRoot ?? host.attachShadow({ mode: 'open' });
+  return host.shadowRoot ?? host.attachShadow({ mode: "open" });
 }
 
 function message(host: HTMLElement, text: string) {
@@ -19,12 +19,12 @@ class KiboarModel extends HTMLElement {
   private frame?: number;
 
   connectedCallback() {
-    const url = this.getAttribute('url');
+    const url = this.getAttribute("url");
     if (!url) {
-      message(this, 'No 3D model.');
+      message(this, "No 3D model.");
       return;
     }
-    message(this, 'Loading 3D model…');
+    message(this, "Loading 3D model…");
     this.observer = new IntersectionObserver((entries) => {
       if (!entries.some((entry) => entry.isIntersecting)) return;
       this.observer?.disconnect();
@@ -40,16 +40,16 @@ class KiboarModel extends HTMLElement {
 
   private async draw(url: string) {
     try {
-      const THREE = await import('three');
-      const { OrbitControls } = await import('three/examples/jsm/controls/OrbitControls.js');
-      const { default: occtimportjs } = await import('occt-import-js');
+      const THREE = await import("three");
+      const { OrbitControls } = await import("three/examples/jsm/controls/OrbitControls.js");
+      const { default: occtimportjs } = await import("occt-import-js");
 
       const response = await fetch(url);
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const buffer = new Uint8Array(await response.arrayBuffer());
       const occt = await occtimportjs({ locateFile: () => wasmUrl });
       const result = occt.ReadStepFile(buffer, null);
-      if (!result.success || !result.meshes?.length) throw new Error('empty model');
+      if (!result.success || !result.meshes?.length) throw new Error("empty model");
 
       const scene = new THREE.Scene();
       const group = new THREE.Group();
@@ -59,12 +59,12 @@ class KiboarModel extends HTMLElement {
       for (const mesh of result.meshes) {
         const geometry = new THREE.BufferGeometry();
         geometry.setAttribute(
-          'position',
+          "position",
           new THREE.Float32BufferAttribute(mesh.attributes.position.array, 3),
         );
         if (mesh.attributes.normal) {
           geometry.setAttribute(
-            'normal',
+            "normal",
             new THREE.Float32BufferAttribute(mesh.attributes.normal.array, 3),
           );
         } else {
@@ -74,8 +74,11 @@ class KiboarModel extends HTMLElement {
           geometry.setIndex(new THREE.Uint32BufferAttribute(mesh.index.array, 1));
         }
         geometry.computeBoundingBox();
-        min = min.min(geometry.boundingBox!.min);
-        max = max.max(geometry.boundingBox!.max);
+        const box = geometry.boundingBox;
+        if (box) {
+          min = min.min(box.min);
+          max = max.max(box.max);
+        }
 
         const color = mesh.color
           ? new THREE.Color(mesh.color[0], mesh.color[1], mesh.color[2])
@@ -111,8 +114,9 @@ class KiboarModel extends HTMLElement {
       const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       shadow(this).replaceChildren(renderer.domElement);
-      renderer.domElement.style.width = '100%';      renderer.domElement.style.height = '100%';
-      renderer.domElement.style.display = 'block';
+      renderer.domElement.style.width = "100%";
+      renderer.domElement.style.height = "100%";
+      renderer.domElement.style.display = "block";
 
       const controls = new OrbitControls(camera, renderer.domElement);
       controls.enableDamping = true;
@@ -139,12 +143,12 @@ class KiboarModel extends HTMLElement {
       };
       animate();
     } catch (error) {
-      console.error('Kiboar model viewer:', error);
-      message(this, 'The 3D model could not be loaded.');
+      console.error("Kiboar model viewer:", error);
+      message(this, "The 3D model could not be loaded.");
     }
   }
 }
 
-if (!customElements.get('kiboar-model')) {
-  customElements.define('kiboar-model', KiboarModel);
+if (!customElements.get("kiboar-model")) {
+  customElements.define("kiboar-model", KiboarModel);
 }
