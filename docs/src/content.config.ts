@@ -1,5 +1,5 @@
-import { defineCollection } from 'astro:content';
-import { metaLoader, pageLoader } from '@fumadocs/astro/loaders';
+import { defineCollection } from "astro:content";
+import { metaLoader, pageLoader } from "@fumadocs/astro/loaders";
 
 export const collections = {
   docs: defineCollection({ loader: pageLoader() }),

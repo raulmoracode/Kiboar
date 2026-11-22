@@ -12,10 +12,7 @@ const relativePathSchema = z
   .min(1)
   .max(256)
   .refine(
-    (value) =>
-      !value.startsWith("/") &&
-      !value.includes("\\") &&
-      !value.split("/").includes(".."),
+    (value) => !value.startsWith("/") && !value.includes("\\") && !value.split("/").includes(".."),
     "expected a relative POSIX path without '..'",
   );
 

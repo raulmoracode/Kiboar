@@ -187,7 +187,7 @@ stable.
 | Verification | **`sha2` + `minisign-verify`** | Digest and signature checks before flashing |
 | Logs | **`tracing` + `tauri-plugin-log`** | Local logs for support, no telemetry |
 | Tests | **Vitest + Testing Library + Playwright + `cargo test`** | See section 8 |
-| Quality | **ESLint 9 + Prettier + `cargo clippy` + `cargo fmt`** | One standard for both sides |
+| Quality | **Biome + `cargo clippy` + `cargo fmt`** | One standard for both sides |
 | Packages | **Root pnpm workspace + Turborepo** | One lockfile for docs and Studio; cached tasks and shared versions through the catalog |
 
 Versions of React, TypeScript, Tailwind and lucide come from the `catalog` block

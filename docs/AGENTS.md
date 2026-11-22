@@ -52,12 +52,14 @@ From the repository root:
 ```bash
 pnpm install
 pnpm --filter kiboar-docs dev
+pnpm lint:docs
 pnpm turbo run typecheck build --filter=kiboar-docs
 python3 library/tools/gen_docs.py --check
 ```
 
 ## Before a PR
 
+- `pnpm lint:docs` passes.
 - `python3 library/tools/gen_docs.py --check` passes.
 - `pnpm turbo run typecheck build --filter=kiboar-docs` passes.
 - `docs/dist/docs/index.html` exists.

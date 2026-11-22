@@ -11,6 +11,8 @@ on:
       - "package.json"
       - ".node-version"
       - "rust-toolchain.toml"
+      - "biome.json"
+      - "rustfmt.toml"
       - ".github/workflows/software.yml"
   pull_request:
     paths:
@@ -21,6 +23,8 @@ on:
       - "package.json"
       - ".node-version"
       - "rust-toolchain.toml"
+      - "biome.json"
+      - "rustfmt.toml"
       - ".github/workflows/software.yml"
   workflow_dispatch:
 
@@ -51,6 +55,9 @@ jobs:
 
       - name: Install
         run: pnpm install --frozen-lockfile
+
+      - name: Lint and format
+        run: pnpm lint:studio
 
       - name: Typecheck and test
         run: pnpm turbo run typecheck test --filter=@kiboar/core --filter=@kiboar/studio
@@ -102,6 +109,11 @@ jobs:
         run: |
           pnpm install --frozen-lockfile
           pnpm turbo run build --filter=@kiboar/studio
+
+      - name: Rust format and lints
+        run: |
+          cargo fmt --manifest-path software/Cargo.toml --all -- --check
+          cargo clippy --manifest-path software/Cargo.toml --workspace --all-targets -- -D warnings
 
       - name: Rust tests
         run: cargo test --locked --manifest-path software/Cargo.toml -p kiboar-device

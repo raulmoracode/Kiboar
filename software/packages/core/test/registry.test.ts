@@ -1,8 +1,8 @@
 import { existsSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { formatIssues, registrySchema, type Registry } from "../src";
-import { SOFTWARE_ROOT, parseBoard, readJson } from "./helpers";
+import { formatIssues, type Registry, registrySchema } from "../src";
+import { parseBoard, readJson, SOFTWARE_ROOT } from "./helpers";
 
 type MutableRegistry = Record<string, any>;
 

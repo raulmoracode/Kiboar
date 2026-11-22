@@ -15,20 +15,14 @@ const pinSchema = z
 
 const keycodeSchema = z
   .string()
-  .regex(
-    /^[A-Za-z0-9_()+,.:-]{1,32}$/,
-    "expected a QMK-style keycode such as KC_ESC or MO(1)",
-  );
+  .regex(/^[A-Za-z0-9_()+,.:-]{1,32}$/, "expected a QMK-style keycode such as KC_ESC or MO(1)");
 
 const positionSchema = z.number().finite().min(0).max(1000);
 const sizeSchema = z.number().finite().positive().max(8);
 const rotationSchema = z.number().finite().min(-180).max(180);
 
 export const keySchema = z.strictObject({
-  matrix: z.tuple([
-    z.number().int().min(0).max(31),
-    z.number().int().min(0).max(31),
-  ]),
+  matrix: z.tuple([z.number().int().min(0).max(31), z.number().int().min(0).max(31)]),
   x: positionSchema,
   y: positionSchema,
   w: sizeSchema.default(1),

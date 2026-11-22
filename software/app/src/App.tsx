@@ -38,16 +38,11 @@ function DeviceCard({ device }: { device: Device }) {
             Bootloader
           </span>
           <span className="font-mono text-xs text-zinc-500">
-            {device.vid.toString(16).padStart(4, "0")}:
-            {device.pid.toString(16).padStart(4, "0")}
+            {device.vid.toString(16).padStart(4, "0")}:{device.pid.toString(16).padStart(4, "0")}
           </span>
         </header>
-        <h2 className="mb-1 text-lg font-semibold text-zinc-100">
-          {FAMILY_LABEL[device.family]}
-        </h2>
-        <p className="mb-5 text-sm text-zinc-400">
-          {device.product ?? "Unnamed bootloader"}
-        </p>
+        <h2 className="mb-1 text-lg font-semibold text-zinc-100">{FAMILY_LABEL[device.family]}</h2>
+        <p className="mb-5 text-sm text-zinc-400">{device.product ?? "Unnamed bootloader"}</p>
         <div className="grid grid-cols-2 gap-4">
           <Fact label="Device" value={device.id} mono />
           <Fact label="Family" value={device.family} mono />
@@ -68,16 +63,11 @@ function DeviceCard({ device }: { device: Device }) {
             Kiboar
           </span>
           <span className="font-mono text-xs text-zinc-500">
-            {device.vid.toString(16).padStart(4, "0")}:
-            {device.pid.toString(16).padStart(4, "0")}
+            {device.vid.toString(16).padStart(4, "0")}:{device.pid.toString(16).padStart(4, "0")}
           </span>
         </header>
-        <h2 className="mb-1 font-mono text-lg font-semibold text-zinc-100">
-          {info.board_id}
-        </h2>
-        <p className="mb-5 text-sm text-zinc-400">
-          {device.product ?? "Kiboar keyboard"}
-        </p>
+        <h2 className="mb-1 font-mono text-lg font-semibold text-zinc-100">{info.board_id}</h2>
+        <p className="mb-5 text-sm text-zinc-400">{device.product ?? "Kiboar keyboard"}</p>
         <div className="grid grid-cols-2 gap-4">
           <Fact label="Hardware" value={`rev ${info.hw_rev}`} />
           <Fact label="Firmware" value={info.fw_version} mono />
@@ -86,9 +76,7 @@ function DeviceCard({ device }: { device: Device }) {
           <Fact label="Matrix" value={`${info.matrix.rows} × ${info.matrix.cols}`} />
           <Fact label="Layers" value={info.layers} />
         </div>
-        {info.split ? (
-          <p className="mt-4 text-xs text-emerald-200/70">Split keyboard</p>
-        ) : null}
+        {info.split ? <p className="mt-4 text-xs text-emerald-200/70">Split keyboard</p> : null}
       </article>
     );
   }
@@ -100,8 +88,7 @@ function DeviceCard({ device }: { device: Device }) {
           Unknown
         </span>
         <span className="font-mono text-xs text-zinc-500">
-          {device.vid.toString(16).padStart(4, "0")}:
-          {device.pid.toString(16).padStart(4, "0")}
+          {device.vid.toString(16).padStart(4, "0")}:{device.pid.toString(16).padStart(4, "0")}
         </span>
       </header>
       <h2 className="mb-1 text-lg font-semibold text-zinc-100">
@@ -132,12 +119,10 @@ export default function App() {
                 Kiboar Studio
               </span>
             </div>
-            <h1 className="text-3xl font-semibold tracking-tight text-zinc-50">
-              Connected boards
-            </h1>
+            <h1 className="text-3xl font-semibold tracking-tight text-zinc-50">Connected boards</h1>
             <p className="mt-2 max-w-xl text-sm text-zinc-400">
-              Read-only detection. The application looks for bootloaders and Kiboar
-              firmware; it does not write anything in this milestone.
+              Read-only detection. The application looks for bootloaders and Kiboar firmware; it
+              does not write anything in this milestone.
             </p>
           </div>
 
@@ -172,8 +157,8 @@ export default function App() {
           <div className="rounded-2xl border border-dashed border-white/15 px-5 py-14 text-center">
             <p className="text-sm font-medium text-zinc-300">No Kiboar device found.</p>
             <p className="mx-auto mt-2 max-w-md text-sm text-zinc-500">
-              Put a blank RP2040 in BOOTSEL mode, or connect a board running Kiboar
-              firmware, and scan again.
+              Put a blank RP2040 in BOOTSEL mode, or connect a board running Kiboar firmware, and
+              scan again.
             </p>
           </div>
         ) : null}
