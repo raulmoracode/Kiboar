@@ -6,7 +6,8 @@ Kiboar is a KiCad 10 library. Contributions arrive as a pull request against
 The repository also contains the documentation site in `docs/` and Kiboar
 Studio in `software/`. They share a pnpm workspace at the root and are
 described in [`ARCHITECTURE.md`](ARCHITECTURE.md); this file covers the KiCad
-library at the root.
+library at the root. Their agent instructions are
+[`docs/AGENTS.md`](docs/AGENTS.md) and [`software/AGENTS.md`](software/AGENTS.md).
 
 ## Requirements
 

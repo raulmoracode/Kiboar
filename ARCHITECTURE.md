@@ -33,6 +33,18 @@ share a repository and a review flow, not a runtime.
   dependency on the library; its generated pages come from
   `tools/gen_docs.py` and are committed.
 
+## Agent instructions
+
+Three files tell an agent how to work here:
+
+- [`AGENTS.md`](AGENTS.md) — the repository and the KiCad library; its Git,
+  licensing and repository-wide rules apply everywhere.
+- [`docs/AGENTS.md`](docs/AGENTS.md) — the documentation site.
+- [`software/AGENTS.md`](software/AGENTS.md) — Kiboar Studio.
+
+Read the root file first, then the product file for the area being changed. A
+product file adds commands and boundaries; it does not replace the root rules.
+
 ## Workspace
 
 ```text

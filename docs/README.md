@@ -4,6 +4,8 @@ The site at <https://kiboar.raulmoracode.com/docs>, built with Astro 7 and
 Fumadocs. English is the default locale at `/docs`; Spanish is served at
 `/es/docs`.
 
+Agent instructions: [`AGENTS.md`](AGENTS.md).
+
 ## Local
 
 From the repository root:

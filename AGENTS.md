@@ -3,8 +3,9 @@
 Instructions for AI agents working in this repository. The long form for humans
 is `CONTRIBUTING.md`; this file is the short, unambiguous version.
 
-Read in this order: `README.md` → `ARCHITECTURE.md` → `AGENTS.md` →
-`CONTRIBUTING.md` → `NOTICE` → `CHANGELOG.md`.
+Read in this order: `README.md` → `ARCHITECTURE.md` → this file → the product
+`AGENTS.md` for the area you are changing → `CONTRIBUTING.md` → `NOTICE` →
+`CHANGELOG.md`.
 
 ## What this repository is
 
@@ -23,9 +24,26 @@ tables.
 | `pcm/`, `lib-table-files/` | PCM metadata and manual-install tables |
 | `docs/` | Astro + Fumadocs site, English and Spanish |
 | `software/` | Kiboar Studio: Tauri app, TypeScript core and Rust crates |
+| `docs/AGENTS.md`, `software/AGENTS.md` | Product-specific agent rules |
 | `package.json`, `pnpm-workspace.yaml`, `turbo.json` | Root JavaScript workspace for `docs` and `software` |
 | `ARCHITECTURE.md` | Product boundaries, commands, versions and deployment |
 | `NOTICE` | Third-party origins and licences |
+
+## Product instructions
+
+This file is the root contract: it covers the repository and the KiCad library,
+and its Git, licensing and repository-wide rules apply everywhere.
+
+Two products have their own instructions. Read the product file after this one
+when you change that product; read both when a change spans products.
+
+| Product | File | Covers |
+| --- | --- | --- |
+| Documentation | [`docs/AGENTS.md`](docs/AGENTS.md) | Astro/Fumadocs, content, generated pages, EN/ES, Vercel |
+| Kiboar Studio | [`software/AGENTS.md`](software/AGENTS.md) | Workspace, TypeScript core, Rust, Tauri, schemas and bindings |
+
+The product files do not replace the Git or licensing rules here. If a product
+file and this one disagree, this one wins and the product file is corrected.
 
 ## Hard rules
 
@@ -123,23 +141,16 @@ python3 tools/model_inventory.py --check
 python3 tools/provenance.py --check      # authorship stamps (also inside lint)
 ```
 
-For a PCM or docs change, also:
+For a docs or Studio change, follow the product file:
 
-```bash
-python3 tools/build_pcm.py --check --schema
-python3 tools/gen_docs.py --check
-pnpm install
-pnpm --filter kiboar-docs build
-```
+- **Documentation:** [`docs/AGENTS.md`](docs/AGENTS.md) — generated pages, EN/ES,
+  the docs build and the Vercel deployment.
+- **Studio:** [`software/AGENTS.md`](software/AGENTS.md) — the root workspace,
+  TypeScript core, Rust, generated schemas and generated bindings.
 
-For a Studio change:
-
-```bash
-pnpm install
-pnpm turbo run typecheck test --filter=@kiboar/core --filter=@kiboar/studio
-pnpm turbo run build --filter=@kiboar/studio
-cargo test --manifest-path software/Cargo.toml -p kiboar-device
-```
+Both share the root workspace. `pnpm install` installs it once and
+`pnpm check` runs the library, JavaScript and Rust checks; the product file
+names the checks that are specific to that product.
 
 ## Git
 

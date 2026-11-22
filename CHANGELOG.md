@@ -1,8 +1,12 @@
 # Changelog
 
-All notable changes to Kiboar are recorded here. The format follows
-[Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
-[Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+All notable changes to the **KiCad library and the PCM package** are recorded
+here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
+and the project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+The documentation site and Kiboar Studio have independent versions; see
+[`ARCHITECTURE.md`](ARCHITECTURE.md). Their changes are not entries in this
+library changelog.
 
 ## [Unreleased]
 

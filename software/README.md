@@ -15,6 +15,7 @@ path is verified with a simulated report until M2 produces the first firmware.
 | [`DEVELOPMENT.md`](DEVELOPMENT.md) | Risk-first milestone order, stack, repository layout, testing, CI, licensing constraints and working agreements |
 | [`docs/adr/`](docs/adr/) | Architecture decision records: stack and scope, identity without an EEPROM |
 | [`docs/protocol.md`](docs/protocol.md) | The HID board info report the firmware must implement |
+| [`AGENTS.md`](AGENTS.md) | Agent rules for Studio: workspace, commands, boundaries and checks |
 
 ## Development
 
