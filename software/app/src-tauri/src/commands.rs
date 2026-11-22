@@ -1,9 +1,13 @@
 use std::path::PathBuf;
+use std::sync::atomic::Ordering;
+use std::sync::Arc;
 
 use kiboar_device::{BoardInfo, Device};
-use tauri::Manager;
+use tauri::{Emitter, Manager, State};
 
-use crate::flash::{self, ArtifactInspection, VolumeInfo};
+use crate::flash::{
+    self, ArtifactInspection, FlashOutcome, FlashProgress, FlashRequest, VolumeInfo,
+};
 use crate::registry::{self, BoardSummary};
 use crate::scanner::scan_devices;
 
@@ -60,4 +64,41 @@ pub async fn detect_bootloader_volume() -> Result<Option<VolumeInfo>, String> {
         .await
         .map_err(|error| format!("bootloader volume task failed: {error}"))?;
     Ok(volume)
+}
+
+#[tauri::command]
+pub async fn flash_firmware(
+    app: tauri::AppHandle,
+    state: State<'_, flash::FlashState>,
+    request: FlashRequest,
+) -> Result<FlashOutcome, String> {
+    let cancel = Arc::clone(&state.0);
+    cancel.store(false, Ordering::SeqCst);
+
+    let volume = flash::find_bootloader_volume()
+        .ok_or_else(|| "no RP2040 bootloader volume is mounted".to_string())?;
+    let volume_path = PathBuf::from(&volume.path);
+    let resource_dir = app.path().resource_dir().ok();
+    let app_for_events = app.clone();
+
+    tauri::async_runtime::spawn_blocking(move || {
+        let root = registry::data_root(resource_dir)?;
+        flash::flash_to_volume(&request, &root, &volume_path, &cancel, |progress| {
+            let _ = app_for_events.emit(
+                "flash-progress",
+                FlashProgress {
+                    bytes_written: u32::try_from(progress.bytes_written).unwrap_or(u32::MAX),
+                    total_bytes: u32::try_from(progress.total_bytes).unwrap_or(u32::MAX),
+                },
+            );
+        })
+        .map_err(|error| error.to_string())
+    })
+    .await
+    .map_err(|error| format!("flash task failed: {error}"))?
+}
+
+#[tauri::command]
+pub fn cancel_flash(state: State<'_, flash::FlashState>) {
+    state.0.store(true, Ordering::SeqCst);
 }

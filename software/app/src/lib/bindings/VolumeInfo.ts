@@ -3,4 +3,8 @@
 /**
  * A mounted bootloader volume.
  */
-export type VolumeInfo = { path: string, name: string, };
+export type VolumeInfo = { path: string, name: string, 
+/**
+ * True when the path comes from `KIBOAR_FLASH_VOLUME` in a debug build.
+ */
+is_development: boolean, };
