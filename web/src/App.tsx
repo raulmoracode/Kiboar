@@ -1,72 +1,53 @@
-const links = [
+import { Keyboard } from "./Keyboard";
+
+const products = [
   {
-    label: "Documentation",
-    href: "https://kiboar.raulmoracode.com/docs",
-    description: "Install the library, see the components and the pinouts.",
+    name: "Shop",
+    href: "/shop",
+    line: "Buy one assembled.",
   },
   {
-    label: "Studio",
+    name: "Library",
+    href: "https://kiboar.raulmoracode.com/docs/install/pcm",
+    line: "The official KiCad parts.",
+  },
+  {
+    name: "Studio",
     href: "https://github.com/raulmoracode/Kiboar/releases/tag/studio-v0.1.0",
-    description: "The desktop app that flashes and configures a Kiboar keyboard.",
+    line: "Flash and configure.",
   },
   {
-    label: "Source",
-    href: "https://github.com/raulmoracode/Kiboar",
-    description: "Symbols, footprints, models, Studio, the site and the shop.",
+    name: "Docs",
+    href: "https://kiboar.raulmoracode.com/docs",
+    line: "Install, build and flash.",
   },
 ];
 
 export default function App() {
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-3xl flex-col px-6 py-10 sm:py-16">
-      <header className="flex items-baseline justify-between">
-        <p className="text-sm font-semibold tracking-[0.2em] text-zinc-100 uppercase">Kiboar</p>
-        <p className="font-mono text-[11px] text-zinc-600">web 0.1</p>
-      </header>
+    <main className="min-h-screen bg-[#0a0b0d] text-zinc-200">
+      <div className="mx-auto flex min-h-screen w-full max-w-[1180px] flex-col px-6 py-10 sm:px-10 sm:py-14">
+        <h1 className="sr-only">Kiboar</h1>
 
-      <section className="mt-20 sm:mt-28">
-        <h1 className="max-w-2xl text-4xl leading-[1.1] font-medium tracking-tight text-zinc-100 sm:text-5xl">
-          Keyboards you can buy, build and repair.
-        </h1>
-        <p className="mt-6 max-w-xl text-sm leading-relaxed text-zinc-500">
-          Kiboar designs mechanical keyboards, sells them assembled and publishes the library and
-          the board definitions. Buy one, or build your own — then flash it with Kiboar Studio.
-        </p>
-      </section>
+        <div className="flex flex-1 items-center">
+          <section aria-label="Kiboar 60% keyboard" className="w-full">
+            <Keyboard />
+          </section>
+        </div>
 
-      <section aria-labelledby="start-heading" className="mt-16">
-        <h2
-          id="start-heading"
-          className="text-[10px] font-medium tracking-[0.22em] text-zinc-600 uppercase"
-        >
-          Start here
-        </h2>
-        <ul className="mt-4 divide-y divide-white/[0.06] border-y border-white/[0.06]">
-          {links.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                rel="noreferrer"
-                className="group flex items-baseline justify-between gap-6 py-4 transition hover:bg-white/[0.02]"
-              >
-                <span>
-                  <span className="block text-sm text-zinc-200 group-hover:text-lime-200">
-                    {link.label}
-                  </span>
-                  <span className="mt-1 block text-xs text-zinc-600">{link.description}</span>
-                </span>
-                <span aria-hidden="true" className="text-zinc-700 group-hover:text-lime-300">
-                  →
-                </span>
-              </a>
-            </li>
+        <section className="mt-auto grid gap-8 border-t border-white/[0.07] pt-1 sm:grid-cols-4">
+          {products.map((product) => (
+            <a key={product.name} href={product.href} className="group py-6">
+              <span className="block text-[13px] text-zinc-200 transition-colors group-hover:text-lime-200">
+                {product.name}
+              </span>
+              <span className="mt-1 block text-[12px] leading-relaxed text-zinc-400">
+                {product.line}
+              </span>
+            </a>
           ))}
-        </ul>
-      </section>
-
-      <footer className="mt-auto pt-20 font-mono text-[10px] text-zinc-700">
-        MIT · built with Vite, React and Tailwind
-      </footer>
+        </section>
+      </div>
     </main>
   );
 }
