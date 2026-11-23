@@ -18,6 +18,8 @@
     "@types/node": "^22.0.0",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
+    "@kiboar/design": "workspace:*",
+    "@kiboar/tsconfig": "workspace:*",
     "@vitejs/plugin-react": "^6.3.0",
     "tailwindcss": "catalog:",
     "typescript": "catalog:",

@@ -2,6 +2,7 @@ packages:
   - "docs"
   - "software/app"
   - "software/packages/*"
+  - "packages/*"
   - "web"
   - "shop"
   - "shop/storefront"

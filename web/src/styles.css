@@ -1,24 +1,2 @@
 @import "tailwindcss";
-
-:root {
-  color-scheme: dark;
-}
-
-html,
-body,
-#root {
-  min-height: 100%;
-}
-
-body {
-  margin: 0;
-  background: #0a0b0d;
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
-
-a:focus-visible,
-button:focus-visible {
-  outline: 2px solid #bef264;
-  outline-offset: 3px;
-}
+@import "@kiboar/design/base.css";

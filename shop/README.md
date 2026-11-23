@@ -44,8 +44,8 @@ pnpm --filter @kiboar/shop db:migrate   # applies the migrations
 ## Storefront
 
 `shop/storefront` is the customer-facing app, served under `/shop`. It is a
-separate project from `web`: the palette, type and spacing are copied on purpose,
-not imported.
+separate app from `web`: both use the base CSS and colour tokens from
+`@kiboar/design`, but neither imports the other's pages or components.
 
 ```bash
 cp shop/storefront/.env.template shop/storefront/.env.local

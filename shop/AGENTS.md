@@ -35,8 +35,8 @@ let anyone build the same board, so the shop never gates the design.
 - **No catalogue in the repository yet.** Products, regions and prices are not
   seeded from `src/`. A seed is a separate change with its own decision.
 - **The storefront is separate from `web`.** `shop/storefront` is its own Vite
-  app; do not import `web/` or `software/` code into it. The design language is
-  copied on purpose, not packaged.
+  app; do not import `web/` or `software/` code into it. Both front ends share
+  `@kiboar/design` and `@kiboar/tsconfig`, not screens.
 - **No secrets.** `.env` stays local; `.env.template` carries placeholders only.
 
 ## Commands

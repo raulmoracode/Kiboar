@@ -258,6 +258,10 @@ importers:
         specifier: 'catalog:'
         version: 7.0.2
 
+  packages/design: {}
+
+  packages/tsconfig: {}
+
   shop:
     dependencies:
       '@medusajs/admin-sdk':
@@ -334,6 +338,12 @@ importers:
         specifier: 'catalog:'
         version: 19.3.1(react@19.3.1)
     devDependencies:
+      '@kiboar/design':
+        specifier: workspace:*
+        version: link:../../packages/design
+      '@kiboar/tsconfig':
+        specifier: workspace:*
+        version: link:../../packages/tsconfig
       '@tailwindcss/vite':
         specifier: 'catalog:'
         version: 4.3.5(vite@8.3.8(@types/node@22.20.5)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))
@@ -436,6 +446,12 @@ importers:
         specifier: 'catalog:'
         version: 19.3.1(react@19.3.1)
     devDependencies:
+      '@kiboar/design':
+        specifier: workspace:*
+        version: link:../packages/design
+      '@kiboar/tsconfig':
+        specifier: workspace:*
+        version: link:../packages/tsconfig
       '@tailwindcss/vite':
         specifier: 'catalog:'
         version: 4.3.5(vite@8.3.8(@types/node@22.20.5)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))

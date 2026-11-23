@@ -103,9 +103,13 @@ is it.
 
 - The workspace root is the repository root. Do not add another
   `pnpm-workspace.yaml` under `docs/`, `software/`, `web/` or `shop/`.
-- `docs`, `software/app`, `software/packages/*`, `web` and `shop` are the
-  workspace packages. The KiCad library is not an npm package and must not be
-  added to the workspace.
+- `docs`, `software/app`, `software/packages/*`, `packages/*`, `web` and
+  `shop` are the workspace packages. The KiCad library is not an npm package and
+  must not be added to the workspace.
+- Shared code that two products need lives in `packages/*`
+  (`@kiboar/design`, `@kiboar/tsconfig`). Share tokens, CSS and configuration;
+  do not share a product's screens or its data layer. A package with one
+  consumer stays in that product.
 - Shared versions live in the `catalog` block of `pnpm-workspace.yaml`. Use
   `"catalog:"` for React, TypeScript, Tailwind, Zod and their types instead of
   writing a new range. Medusa's own packages keep the version its template
