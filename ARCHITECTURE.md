@@ -10,7 +10,7 @@ flow, not a runtime.
 
 | Product | Path | Built with | What it is |
 | --- | --- | --- | --- |
-| Shop | `shop/` | Medusa 2, Node, PostgreSQL | Sells assembled Kiboar keyboards; the commercial surface |
+| Shop | `shop/` | Medusa 2, Vite, Node, PostgreSQL | Sells assembled Kiboar keyboards: a static storefront and the Medusa service |
 | Web | `web/` | Vite 8, React 19, Tailwind 4 | The public front door that brings the brand together |
 | KiCad library | `library/symbols/`, `library/footprints/`, `library/3dmodels/`, `library/lib-table-files/`, `library/pcm/`, `library/tools/` | KiCad 10, Python standard library | The official library, published so anyone can design and build a board |
 | Kiboar Studio | `software/` | Tauri 2, React, TypeScript, Rust | Manages a Kiboar board: detects, flashes and (after 0.1) remaps it, bought or self-built |
@@ -45,11 +45,12 @@ flow, not a runtime.
 - **The docs site is static.** It has no server, no database and no runtime
   dependency on the library; its generated pages come from
   `library/tools/gen_docs.py` and are committed.
-- **`web` and `shop` are separate products.** `web` is a static Vite app with
-  no server; `shop` is a Medusa service that needs PostgreSQL at runtime. They
-  share the workspace and the catalog versions, not code: the storefront talks
-  to the Store API over HTTP. The root `.npmrc` carries the hoisting Medusa
-  needs on pnpm.
+- **`web` and `shop` are separate products with no shared code.** `web` is a
+  static Vite app with no server. `shop` holds two applications: the Medusa
+  service (Store API and admin, PostgreSQL) and the storefront
+  (`shop/storefront`), a static Vite app that reads the Store API over HTTP. The
+  storefront is not part of `web` and imports nothing from it; the shared design
+  language is copied, not packaged.
 - **The shop build does not need a database.** `medusa build` compiles the
   server and the admin in CI; only `dev`, `start` and `db:migrate` need
   PostgreSQL.
@@ -86,7 +87,8 @@ software/packages/core/ @kiboar/core
 software/crates/        Rust, outside Turbo
 software/Cargo.toml     Cargo workspace
 web/                    @kiboar/web
-shop/                   @kiboar/shop
+shop/                   @kiboar/shop (Medusa)
+shop/storefront/        @kiboar/storefront
 ```
 
 Shared versions live in the `catalog` block of `pnpm-workspace.yaml`. React,
@@ -146,19 +148,21 @@ One domain, three web surfaces, plus the library and the desktop app:
   pnpm workspace and installs from the repository root. `docs/vercel.json`
   builds with `cd .. && pnpm turbo run build --filter=kiboar-docs` and publishes
   `dist`. It owns the `/docs` prefix; Spanish lives at `/es/docs`.
-- **Shop:** a Medusa service with PostgreSQL and the admin dashboard, served
-  under `/shop`. It needs a Node runtime and a database, so a static host cannot
-  run it: the domain needs a reverse proxy or a rewrite from `/shop` to the
-  Medusa host. Medusa serves its API and its admin from the same process, so the
-  proxy must rewrite those paths consistently; do not assume the admin works
-  under `/shop/app` until that rewrite is tested.
+- **Shop:** two parts under `/shop`. The storefront is a static Vite build from
+  `shop/storefront`; build it with `VITE_BASE_PATH=/shop/` so its assets resolve
+  under the prefix. The Medusa service provides the Store API and the admin and
+  needs Node and PostgreSQL. The host serves the storefront at `/shop` and routes
+  the Store API to Medusa; the backend cannot run on a static host. Medusa serves
+  its API and its admin from the same process, so the proxy must keep those paths
+  consistent.
 - **Studio:** a desktop application. It is not deployed to Vercel and has no
   web build target.
 
 Routing rules for the domain: `/` belongs to `web`, `/docs/*` to the docs
-build and `/shop/*` to Medusa. A single static project cannot own all three;
-whichever host owns the domain needs explicit rewrites or a proxy, and the
-prefixes must not collide.
+build, and `/shop/*` to the shop (the storefront build, with the Store API
+proxied to Medusa). A single static project cannot own all three; whichever host
+owns the domain needs explicit rewrites or a proxy, and the prefixes must not
+collide.
 
 ## Licensing
 
