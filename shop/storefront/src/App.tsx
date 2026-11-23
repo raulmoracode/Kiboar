@@ -167,19 +167,7 @@ export default function App() {
         <Header count={count} onHome={() => go(null)} onOpenBag={() => setBagOpen(true)} />
 
         {handle ? (
-          <section aria-label="Product" className="mx-auto w-full max-w-[1200px]">
-            <div className="mb-4 flex h-8 items-center">
-              <a
-                href="?"
-                onClick={(event) => {
-                  event.preventDefault();
-                  go(null);
-                }}
-                className="text-[12px] text-zinc-500 transition-colors hover:text-zinc-200"
-              >
-                ← All boards
-              </a>
-            </div>
+          <section aria-label="Product" className="mx-auto mt-4 w-full max-w-[1200px]">
             <ProductPage key={handle} handle={handle} onBack={() => go(null)} onAdd={add} />
           </section>
         ) : (
