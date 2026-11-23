@@ -1,7 +1,9 @@
 # Kiboar storefront
 
-The customer-facing shop, served under `/shop`. It is a separate project from
-`web` and from the Medusa backend: it shares the design language, not the code.
+The customer-facing shop, served under `/shop`. It is a separate app from
+`web` and from the Medusa backend: they share `@kiboar/design`,
+`@kiboar/vite-config` and `@kiboar/tsconfig` from `packages/`, not pages or
+components.
 
 **Status: catalogue, product pages and a demo bag.** It lists the products
 published in Medusa as vertical cards with a photo, the name and the price, and
@@ -81,8 +83,9 @@ The storefront talks to Medusa over HTTP; it does not import the backend.
 
 ## Boundaries
 
-- No imports from `web/` or `software/`. The palette and type are copied on
-  purpose; extracting a shared package is a separate decision.
+- No imports from `web/` or `software/`. The design base and the Vite setup come
+  from `@kiboar/design` and `@kiboar/vite-config`; product pages and cards stay
+  in this app.
 - No Medusa admin code here. The admin is served by the Medusa application.
 - No secrets in the bundle. The publishable key is public by design; anything
   else belongs to the backend.

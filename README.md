@@ -103,14 +103,16 @@ See [`keyboards/README.md`](keyboards/README.md).
 - [`SECURITY.md`](SECURITY.md) — how to report a vulnerability privately.
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) — how to contribute and what a pull
   request must include.
+- [`packages/`](packages/README.md) — shared workspace packages: design tokens,
+  the Vite setup and the TypeScript config.
 - [`CHANGELOG.md`](CHANGELOG.md) — changes to the KiCad library and the PCM
   package. The docs site and Studio have independent versions; see
   `ARCHITECTURE.md`.
 - [`RELEASING.md`](RELEASING.md) — how a version is cut, tagged and published.
 - [`NOTICE`](NOTICE) — third-party origins and licences.
 
-`docs`, `software`, `web` and `shop` share one pnpm workspace, one lockfile and
-a Turborepo task graph at the root. The KiCad library has its own CI workflow
+`docs`, `software`, `web` and `shop` share one pnpm workspace, the shared
+packages in `packages/`, one lockfile and a Turborepo task graph at the root. The KiCad library has its own CI workflow
 and its own Python tooling; it is not an npm package. `pnpm check` runs the
 library checks, the JavaScript typecheck, tests and build, and the Rust tests.
 

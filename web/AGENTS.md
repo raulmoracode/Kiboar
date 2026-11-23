@@ -13,8 +13,9 @@ shop is the Medusa application in `shop/`, and this site points at it.
 ## Layout
 
 - `src/App.tsx` — the page. Keep it one page until there is a reason for more.
-- `src/styles.css` — the Tailwind import and the base styles.
-- `vite.config.ts` — React and Tailwind plugins, port 3000.
+- `src/styles.css` — the Tailwind import and the shared base from
+  `@kiboar/design`.
+- `vite.config.ts` — the shared `@kiboar/vite-config` setup and port 3000.
 
 ## Rules
 
@@ -23,7 +24,10 @@ shop is the Medusa application in `shop/`, and this site points at it.
 - **No framework migration without a decision.** Vite and React are the stack;
   switching to another framework is a new issue, not a refactor.
 - **The shop is a separate product.** Do not import `shop/` code into `web/`;
-  talk to its Store API over HTTP.
+  talk to its Store API over HTTP. Both apps share `@kiboar/design` and
+  `@kiboar/tsconfig`, not screens.
+- **Shared code goes to `packages/`.** Do not copy a component or a type into
+  `web/` when another product needs it; add it to a shared package instead.
 - **Static output only.** No server adapter, no runtime secret in the bundle.
 - **Accessible by default.** Semantic elements, focus styles and a real heading
   order; the page is a document, not a canvas.

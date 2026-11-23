@@ -1,0 +1,29 @@
+{
+  "name": "@kiboar/vite-config",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Shared Vite setup for the Kiboar React apps.",
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./index.mjs"
+    }
+  },
+  "files": [
+    "index.mjs",
+    "index.d.ts"
+  ],
+  "dependencies": {
+    "@tailwindcss/vite": "catalog:",
+    "@vitejs/plugin-react": "catalog:",
+    "tailwindcss": "catalog:"
+  },
+  "peerDependencies": {
+    "vite": "^8.3.8"
+  },
+  "devDependencies": {
+    "vite": "catalog:"
+  }
+}

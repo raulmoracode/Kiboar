@@ -8,8 +8,8 @@ contributions to the KiCad library in `library/`.
 Contributions arrive as a pull request against `main`, one logical change per
 branch, with an issue that says what and why.
 
-The products share a pnpm workspace at the root and are described in
-[`ARCHITECTURE.md`](ARCHITECTURE.md). Their agent instructions are
+The products share a pnpm workspace at the root, with shared packages under
+`packages/`, and are described in [`ARCHITECTURE.md`](ARCHITECTURE.md). Their agent instructions are
 [`library/AGENTS.md`](library/AGENTS.md), [`docs/AGENTS.md`](docs/AGENTS.md),
 [`software/AGENTS.md`](software/AGENTS.md), [`web/AGENTS.md`](web/AGENTS.md) and
 [`shop/AGENTS.md`](shop/AGENTS.md).

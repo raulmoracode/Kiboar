@@ -38,7 +38,7 @@ flow, not a runtime.
   `3dmodels/` at its internal root, so PCM consumers are unaffected.
 - **`docs` and `software` are the JavaScript workspace.** The root
   `pnpm-workspace.yaml` includes `docs`, `software/app`, `software/packages/*`,
-  `web` and `shop`. There is one lockfile at the root.
+  `packages/*`, `web` and `shop`. There is one lockfile at the root.
 - **The library is not an npm package.** It is a KiCad asset collection with
   Python tooling. Turborepo does not run its checks; the library has its own CI
   workflow and its own `pnpm library` script at the root.
@@ -50,12 +50,15 @@ flow, not a runtime.
 - **The docs site is static.** It has no server, no database and no runtime
   dependency on the library; its generated pages come from
   `library/tools/gen_docs.py` and are committed.
-- **`web` and `shop` are separate products with no shared code.** `web` is a
-  static Vite app with no server. `shop` holds two applications: the Medusa
-  service (Store API and admin, PostgreSQL) and the storefront
-  (`shop/storefront`), a static Vite app that reads the Store API over HTTP. The
-  storefront is not part of `web` and imports nothing from it; the shared design
-  language is copied, not packaged.
+- **`web` and `shop` are separate apps that share packages, not screens.**
+  `web` is a static Vite app with no server. `shop` holds two applications: the
+  Medusa service (Store API and admin, PostgreSQL) and the storefront
+  (`shop/storefront`), a static Vite app that reads the Store API over HTTP.
+  Both front ends use `@kiboar/design` for the base CSS and colour tokens,
+  `@kiboar/vite-config` for the Vite plugins and ports, and
+  `@kiboar/tsconfig` for their compiler options, from `packages/`. They do not
+  import each other's pages or components, and the storefront talks to the
+  Store API over HTTP.
 - **The shop build does not need a database.** `medusa build` compiles the
   server and the admin in CI; only `dev`, `start` and `db:migrate` need
   PostgreSQL.
@@ -81,7 +84,7 @@ the root rules.
 
 ```text
 package.json            root scripts and Turbo
-pnpm-workspace.yaml     docs, software/app, software/packages/*, web, shop
+pnpm-workspace.yaml     docs, software/app, software/packages/*, packages/*, web, shop
 pnpm-lock.yaml          one lockfile
 turbo.json              build, typecheck, test, dev
 .npmrc                  hoisting Medusa needs on pnpm
@@ -91,6 +94,9 @@ software/app/           @kiboar/studio
 software/packages/core/ @kiboar/core
 software/crates/        Rust, outside Turbo
 software/Cargo.toml     Cargo workspace
+packages/design/        @kiboar/design (base CSS and tokens)
+packages/tsconfig/      @kiboar/tsconfig
+packages/vite-config/   @kiboar/vite-config
 web/                    @kiboar/web
 shop/                   @kiboar/shop (Medusa)
 shop/storefront/        @kiboar/storefront
