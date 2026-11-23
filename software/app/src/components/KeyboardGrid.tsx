@@ -38,9 +38,9 @@ export function KeyboardGrid({ boards, customBoards, detected, selected, onSelec
       <button
         type="button"
         onClick={onAdd}
-        className="mt-3 flex shrink-0 items-center justify-center gap-2 rounded-lg border border-dashed border-white/[0.08] py-4 text-[11px] text-zinc-600 transition hover:border-white/15 hover:text-zinc-400"
+        className="mt-3 flex min-h-[112px] shrink-0 items-center justify-center gap-3 rounded-lg border border-dashed border-white/10 text-sm text-zinc-500 transition hover:border-white/20 hover:text-zinc-300"
       >
-        <Plus size={14} />
+        <Plus size={18} />
         Add keyboard
       </button>
     </section>
