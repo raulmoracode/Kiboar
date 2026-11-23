@@ -43,5 +43,9 @@ copying it.
 
 ## Deployment
 
-Not configured. A static `dist/` from `pnpm --filter @kiboar/web build` is the
-only output; the host is undecided.
+Served at the root of the brand domain, `https://kiboar.raulmoracode.com/`.
+`pnpm --filter @kiboar/web build` produces a static `dist/` with no server.
+
+The docs (`/docs`) and the shop (`/shop`) are separate deployments behind the
+same domain. This app owns `/` only; the host must route the other prefixes. See
+[`../ARCHITECTURE.md`](../ARCHITECTURE.md#deployment).

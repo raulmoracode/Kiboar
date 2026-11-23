@@ -23,8 +23,13 @@ site brings the whole brand together.
 | Shop | `shop/` | [`shop/README.md`](shop/README.md) | Sells assembled Kiboar keyboards; the commercial surface of the brand |
 | Web | `web/` | [`web/README.md`](web/README.md) | The public front door: the brand, the keyboards, the docs, Studio and the shop in one place |
 | KiCad library | `library/` | [`library/README.md`](library/README.md) | The official library Kiboar designs with, published so you can design and build your own board: 145 symbols and 173 footprints in 26 libraries |
-| Kiboar Studio | `software/` | [`software/README.md`](software/README.md) | Detects, flashes and — after 0.1 — remaps a Kiboar board, bought or self-built |
+| Kiboar Studio | `software/` | [`software/README.md`](software/README.md) | Manages a Kiboar keyboard: detects, flashes and — after 0.1 — remaps it, bought or self-built |
 | Documentation | `docs/` | [`docs/README.md`](docs/README.md) | How to install the library, build a board, flash it and what the licences allow |
+
+The public surfaces share one domain: `/` is the web site, `/docs` the
+documentation and `/shop` the Medusa store. The library is published as a PCM
+ZIP and in this repository; Studio is a desktop application. The routing each
+one needs is in [`ARCHITECTURE.md`](ARCHITECTURE.md#deployment).
 
 📖 **Documentation:** <https://kiboar.raulmoracode.com/docs> — English and Spanish.
 

@@ -15,6 +15,13 @@ in [`../software/`](../software/README.md), the public site in
 
 Agent instructions: [`AGENTS.md`](AGENTS.md).
 
+## Deployment
+
+Served at `https://kiboar.raulmoracode.com/docs` and `/es/docs`. Vercel builds
+from the `docs` Root Directory and publishes `docs/dist`. The deployment owns
+the `/docs` prefix: the domain root is `web` and `/shop` is the Medusa store. See
+[`../ARCHITECTURE.md`](../ARCHITECTURE.md#deployment).
+
 ## Local
 
 From the repository root:

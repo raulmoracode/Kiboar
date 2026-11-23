@@ -45,8 +45,19 @@ the repository root has an `.npmrc` with the four `public-hoist-pattern`
 entries from the Medusa pnpm guide. Do not remove them: without them the admin
 fails with `can't resolve @medusajs/dashboard` or a missing `QueryClient`.
 
+## Deployment
+
+Served under `/shop` on `https://kiboar.raulmoracode.com`. Medusa is a Node
+service with PostgreSQL and an admin dashboard, so it cannot run on a static
+host: the domain needs a reverse proxy or a rewrite from `/shop` to the Medusa
+process. The admin and the API come from that same process, so the rewrite has to
+keep their paths consistent. Production CORS must include the brand domain.
+
+The routing and the production host are not configured in this repository.
+
 ## What is not here
 
 - No storefront: `web/` is the public site and will consume the Store API.
 - No catalogue seed, no payment provider, no shipping options.
-- No deployment. Medusa Cloud or a Node host are the candidates.
+- No deployment configuration. The `/shop` route is a host concern; the
+  application itself is ready to build.

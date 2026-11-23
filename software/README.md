@@ -1,9 +1,9 @@
 # Kiboar Studio
 
 Kiboar Studio is the desktop application for Kiboar keyboards, whether you
-bought one assembled or built it from the published design. It detects the board
-over USB, flashes the right firmware and, after 0.1, remaps keys and visualises
-the layout.
+bought one assembled or built it from the published design. It is how you manage
+a Kiboar board: detect it over USB, flash the right firmware and, after 0.1,
+remap keys and visualise the layout.
 
 **Status: M2 — flasher (MVP).** Detection, board catalog, UF2 inspection, typed confirmation and copy with progress and cancellation are implemented. The macOS `.app`/`.dmg` build works; the release workflow and installation paths exist. Hardware verification is still pending. Kiboar firmware identity, remap, layout and the board editor are post-MVP.
 
