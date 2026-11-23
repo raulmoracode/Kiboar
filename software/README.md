@@ -28,6 +28,7 @@ The build is unsigned and not notarized. Homebrew is the recommended path:
 
 ```bash
 brew tap raulmoracode/kiboar
+brew trust --cask raulmoracode/kiboar/kiboar-studio
 brew install --cask kiboar-studio
 ```
 

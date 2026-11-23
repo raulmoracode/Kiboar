@@ -14,8 +14,12 @@ install it; Homebrew is the cleanest.
 
 ```bash
 brew tap raulmoracode/kiboar
+brew trust --cask raulmoracode/kiboar/kiboar-studio
 brew install --cask kiboar-studio
 ```
+
+Homebrew 7 requires trusting casks from third-party taps. `brew trust` is the
+explicit confirmation for this one cask; it does not trust every tap.
 
 If macOS blocks the first launch, remove the quarantine attribute from the
 installed app:
@@ -49,7 +53,7 @@ Options: `--version`, `--app-dir`, `--dmg`, `--no-open`. Run
 
 ## Manual DMG
 
-1. Download `Kiboar Studio_0.1.0_aarch64.dmg` from the
+1. Download `Kiboar.Studio_0.1.0_aarch64.dmg` from the
    [`studio-v0.1.0` release](https://github.com/raulmoracode/Kiboar/releases/tag/studio-v0.1.0).
 2. Open the DMG and drag **Kiboar Studio** to Applications.
 3. Remove the quarantine attribute:
@@ -63,7 +67,7 @@ Options: `--version`, `--app-dir`, `--dmg`, `--no-open`. Run
 To check the download yourself:
 
 ```bash
-shasum -a 256 "Kiboar Studio_0.1.0_aarch64.dmg"
+shasum -a 256 "Kiboar.Studio_0.1.0_aarch64.dmg"
 ```
 
 Compare it with the `SHA256SUMS` asset on the release.

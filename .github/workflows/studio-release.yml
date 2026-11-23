@@ -45,9 +45,13 @@ jobs:
       - name: Build the universal bundle
         run: pnpm --filter @kiboar/studio tauri build --target universal-apple-darwin
 
-      - name: Checksums
+      - name: Normalise and checksum
         run: |
           cd software/target/universal-apple-darwin/release/bundle/dmg
+          for dmg in *.dmg; do
+            safe="$(printf '%s' "$dmg" | tr ' ' '.')"
+            [ "$dmg" = "$safe" ] || mv "$dmg" "$safe"
+          done
           shasum -a 256 *.dmg > SHA256SUMS
           cat SHA256SUMS
 

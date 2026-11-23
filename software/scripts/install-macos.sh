@@ -102,13 +102,13 @@ if [ -n "$LOCAL_DMG" ]; then
 else
   # 0.1 and later publish a universal DMG; older or architecture-specific
   # releases use the aarch64/x64 name.
-  ASSET="Kiboar Studio_${VERSION}_universal.dmg"
+  ASSET="Kiboar.Studio_${VERSION}_universal.dmg"
   URL="https://github.com/${REPO}/releases/download/studio-v${VERSION}/${ASSET// /%20}"
   DMG="$TMP/$ASSET"
   printf 'Downloading %s\n' "$ASSET"
   if ! curl -fL --retry 3 --progress-bar -o "$DMG" "$URL"; then
     rm -f "$DMG"
-    ASSET="Kiboar Studio_${VERSION}_${ASSET_ARCH}.dmg"
+    ASSET="Kiboar.Studio_${VERSION}_${ASSET_ARCH}.dmg"
     URL="https://github.com/${REPO}/releases/download/studio-v${VERSION}/${ASSET// /%20}"
     DMG="$TMP/$ASSET"
     printf 'Universal DMG not found; trying %s\n' "$ASSET"
