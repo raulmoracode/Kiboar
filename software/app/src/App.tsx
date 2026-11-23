@@ -1,3 +1,4 @@
+import { ArrowLeft } from "lucide-react";
 import { useEffect, useState } from "react";
 import { AddKeyboardDialog } from "./components/AddKeyboardDialog";
 import { ConfirmFlashDialog } from "./components/ConfirmFlashDialog";
@@ -6,6 +7,7 @@ import { FlashAction } from "./components/FlashAction";
 import { KeyboardGrid } from "./components/KeyboardGrid";
 import { TopBar } from "./components/TopBar";
 import type { BoardInfo } from "./lib/bindings/BoardInfo";
+import type { BoardSummary } from "./lib/bindings/BoardSummary";
 import { boardKey, useStudioStore } from "./store";
 
 export default function App() {
@@ -22,7 +24,6 @@ export default function App() {
   const addCustomBoard = useStudioStore((state) => state.addCustomBoard);
 
   const volume = useStudioStore((state) => state.volume);
-  const volumeStatus = useStudioStore((state) => state.volumeStatus);
   const detectVolume = useStudioStore((state) => state.detectVolume);
   const artifact = useStudioStore((state) => state.artifact);
   const artifactStatus = useStudioStore((state) => state.artifactStatus);
@@ -43,6 +44,7 @@ export default function App() {
   const subscribeToProgress = useStudioStore((state) => state.subscribeToProgress);
 
   const [addOpen, setAddOpen] = useState(false);
+  const [openBoard, setOpenBoard] = useState<BoardSummary | null>(null);
 
   useEffect(() => {
     void scan();
@@ -58,23 +60,6 @@ export default function App() {
   }, [subscribeToProgress]);
 
   const bootloader = devices.some((device) => device.kind === "bootloader");
-  const statusLabel = volume
-    ? volume.name
-    : bootloader
-      ? "RP2040"
-      : volumeStatus === "loading"
-        ? "Scanning"
-        : "No device";
-  const statusDetail = volume
-    ? volume.path
-    : bootloader
-      ? "Volume not mounted"
-      : volumeStatus === "error"
-        ? "Could not read the bootloader volume"
-        : "Connect a board in BOOTSEL mode";
-  const statusDot = volume ? "bg-lime-300" : bootloader ? "bg-amber-300" : "bg-zinc-700";
-  const ready = Boolean(volume && selectedBoard && artifact);
-
   const detected = new Map<string, BoardInfo>();
   for (const device of devices) {
     if (device.kind === "kiboar") {
@@ -97,6 +82,16 @@ export default function App() {
       split: info.split,
     }));
   const gridBoards = [...detectedOnly, ...boards];
+  const openInfo = openBoard ? (detected.get(boardKey(openBoard)) ?? null) : null;
+  const openLocal = openBoard
+    ? customBoards.some((board) => boardKey(board) === boardKey(openBoard))
+    : false;
+  const ready = Boolean(volume && selectedBoard && artifact);
+  const deviceLine = volume
+    ? `${volume.name}${volume.is_development ? " · DEV" : ""}`
+    : bootloader
+      ? "Volume not mounted"
+      : "No bootloader";
 
   return (
     <main className="min-h-screen bg-[#0a0b0d] text-zinc-200">
@@ -110,78 +105,83 @@ export default function App() {
         }}
       />
 
-      <div className="mx-auto w-full max-w-[640px] px-6 pb-10 pt-8">
-        <section aria-labelledby="status-heading">
-          <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-zinc-600">
-            Device
-          </p>
-          <div className="mt-3 flex items-start gap-3">
-            <span className={`mt-2 size-1.5 shrink-0 rounded-full ${statusDot}`} />
+      {openBoard ? (
+        <div className="mx-auto w-full max-w-[640px] px-6 pb-10 pt-6">
+          <button
+            type="button"
+            onClick={() => setOpenBoard(null)}
+            className="flex items-center gap-2 text-[11px] text-zinc-600 transition hover:text-zinc-200"
+          >
+            <ArrowLeft size={13} />
+            Keyboards
+          </button>
+
+          <div className="mt-6 flex items-start justify-between gap-4">
             <div className="min-w-0">
-              <h1
-                id="status-heading"
-                className="flex items-center gap-2 text-2xl font-medium tracking-tight text-zinc-100"
-              >
-                <span className="truncate">{statusLabel}</span>
-                {volume?.is_development ? (
-                  <span className="rounded border border-amber-300/20 px-1.5 py-0.5 font-mono text-[9px] font-normal text-amber-200/60">
-                    DEV
-                  </span>
-                ) : null}
+              <h1 className="truncate text-2xl font-medium tracking-tight text-zinc-100">
+                {openBoard.name}
               </h1>
-              <p className="mt-1 truncate font-mono text-[11px] text-zinc-500">{statusDetail}</p>
+              <p className="mt-1 truncate font-mono text-[11px] text-zinc-600">
+                {openBoard.board_id} · rev {openBoard.hw_rev} · {deviceLine}
+              </p>
             </div>
+            <span className="shrink-0 text-[9px] uppercase tracking-[0.14em] text-zinc-600">
+              {openInfo ? `fw ${openInfo.fw_version}` : openLocal ? "Local" : "Registry"}
+            </span>
           </div>
-        </section>
 
-        <div className="my-6 h-px bg-white/[0.06]" />
+          <div className="my-6 h-px bg-white/[0.06]" />
 
-        <KeyboardGrid
-          boards={gridBoards}
-          customBoards={customBoards}
-          detected={detected}
-          selected={selectedBoard}
-          onSelect={selectBoard}
-          onAdd={() => setAddOpen(true)}
-        />
+          <FirmwarePicker
+            artifact={artifact}
+            status={artifactStatus}
+            error={artifactError}
+            onChoose={() => void chooseArtifact()}
+            onClear={clearArtifact}
+          />
 
-        {boardsStatus === "error" ? (
-          <p className="mt-2 text-[10px] text-rose-300/80">
-            Registry unavailable{" "}
-            <button
-              type="button"
-              onClick={() => void loadBoards()}
-              className="text-zinc-500 hover:text-zinc-200"
-            >
-              Retry
-            </button>
-          </p>
-        ) : null}
+          <FlashAction
+            ready={ready}
+            board={selectedBoard}
+            artifact={artifact}
+            status={flashStatus}
+            progress={progress}
+            outcome={outcome}
+            error={flashError}
+            cancelling={cancelling}
+            onFlash={beginFlash}
+            onCancel={() => void cancelFlash()}
+            onReset={resetFlash}
+          />
+        </div>
+      ) : (
+        <div className="mx-auto w-full max-w-[640px] px-6 pb-10 pt-8">
+          <KeyboardGrid
+            boards={gridBoards}
+            customBoards={customBoards}
+            detected={detected}
+            selected={null}
+            onSelect={(board) => {
+              selectBoard(board);
+              setOpenBoard(board);
+            }}
+            onAdd={() => setAddOpen(true)}
+          />
 
-        <div className="my-6 h-px bg-white/[0.06]" />
-
-        <FirmwarePicker
-          artifact={artifact}
-          status={artifactStatus}
-          error={artifactError}
-          onChoose={() => void chooseArtifact()}
-          onClear={clearArtifact}
-        />
-
-        <FlashAction
-          ready={ready}
-          board={selectedBoard}
-          artifact={artifact}
-          status={flashStatus}
-          progress={progress}
-          outcome={outcome}
-          error={flashError}
-          cancelling={cancelling}
-          onFlash={beginFlash}
-          onCancel={() => void cancelFlash()}
-          onReset={resetFlash}
-        />
-      </div>
+          {boardsStatus === "error" ? (
+            <p className="mt-3 text-[10px] text-rose-300/80">
+              Registry unavailable{" "}
+              <button
+                type="button"
+                onClick={() => void loadBoards()}
+                className="text-zinc-500 hover:text-zinc-200"
+              >
+                Retry
+              </button>
+            </p>
+          ) : null}
+        </div>
+      )}
 
       <AddKeyboardDialog
         open={addOpen}
@@ -193,6 +193,7 @@ export default function App() {
         onSave={(board) => {
           addCustomBoard(board, artifact);
           setAddOpen(false);
+          setOpenBoard(board);
         }}
       />
 
