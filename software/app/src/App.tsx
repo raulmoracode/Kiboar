@@ -1,21 +1,12 @@
-import { useEffect } from "react";
-import { BoardPicker } from "./components/BoardPicker";
+import { useEffect, useState } from "react";
+import { AddKeyboardDialog } from "./components/AddKeyboardDialog";
 import { ConfirmFlashDialog } from "./components/ConfirmFlashDialog";
 import { FirmwarePicker } from "./components/FirmwarePicker";
 import { FlashAction } from "./components/FlashAction";
+import { KeyboardGrid } from "./components/KeyboardGrid";
 import { TopBar } from "./components/TopBar";
-import type { Device } from "./lib/bindings/Device";
-import { useStudioStore } from "./store";
-
-function deviceLabel(device: Device): string {
-  if (device.kind === "kiboar") {
-    return device.info.board_id;
-  }
-  if (device.kind === "bootloader") {
-    return "RP2040 bootloader";
-  }
-  return "Unknown";
-}
+import type { BoardInfo } from "./lib/bindings/BoardInfo";
+import { boardKey, useStudioStore } from "./store";
 
 export default function App() {
   const devices = useStudioStore((state) => state.devices);
@@ -24,10 +15,11 @@ export default function App() {
 
   const boards = useStudioStore((state) => state.boards);
   const boardsStatus = useStudioStore((state) => state.boardsStatus);
-  const boardsError = useStudioStore((state) => state.boardsError);
   const selectedBoard = useStudioStore((state) => state.selectedBoard);
   const loadBoards = useStudioStore((state) => state.loadBoards);
   const selectBoard = useStudioStore((state) => state.selectBoard);
+  const customBoards = useStudioStore((state) => state.customBoards);
+  const addCustomBoard = useStudioStore((state) => state.addCustomBoard);
 
   const volume = useStudioStore((state) => state.volume);
   const volumeStatus = useStudioStore((state) => state.volumeStatus);
@@ -49,6 +41,8 @@ export default function App() {
   const cancelConfirmation = useStudioStore((state) => state.cancelConfirmation);
   const confirmFlash = useStudioStore((state) => state.confirmFlash);
   const subscribeToProgress = useStudioStore((state) => state.subscribeToProgress);
+
+  const [addOpen, setAddOpen] = useState(false);
 
   useEffect(() => {
     void scan();
@@ -80,6 +74,29 @@ export default function App() {
         : "Connect a board in BOOTSEL mode";
   const statusDot = volume ? "bg-lime-300" : bootloader ? "bg-amber-300" : "bg-zinc-700";
   const ready = Boolean(volume && selectedBoard && artifact);
+
+  const detected = new Map<string, BoardInfo>();
+  for (const device of devices) {
+    if (device.kind === "kiboar") {
+      detected.set(`${device.info.board_id}@${device.info.hw_rev}`, device.info);
+    }
+  }
+
+  const allBoards = [...customBoards, ...boards];
+  const detectedOnly = [...detected.entries()]
+    .filter(([key]) => !allBoards.some((board) => boardKey(board) === key))
+    .map(([, info]) => ({
+      board_id: info.board_id,
+      name: info.board_id,
+      hw_rev: info.hw_rev,
+      mcu: "rp2040-zero",
+      rows: info.matrix.rows,
+      cols: info.matrix.cols,
+      keys: 0,
+      layers: info.layers,
+      split: info.split,
+    }));
+  const gridBoards = [...detectedOnly, ...boards];
 
   return (
     <main className="min-h-screen bg-[#0a0b0d] text-zinc-200">
@@ -115,40 +132,31 @@ export default function App() {
               <p className="mt-1 truncate font-mono text-[11px] text-zinc-500">{statusDetail}</p>
             </div>
           </div>
-
-          {devices.length > 0 ? (
-            <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 pl-[18px]">
-              {devices.map((device) => (
-                <span
-                  key={device.id}
-                  className="flex items-center gap-1.5 text-[10px] text-zinc-600"
-                >
-                  <span
-                    className={`size-1 rounded-full ${
-                      device.kind === "kiboar"
-                        ? "bg-lime-300/70"
-                        : device.kind === "bootloader"
-                          ? "bg-amber-300/70"
-                          : "bg-zinc-700"
-                    }`}
-                  />
-                  <span className="font-mono">{deviceLabel(device)}</span>
-                </span>
-              ))}
-            </div>
-          ) : null}
         </section>
 
         <div className="my-6 h-px bg-white/[0.06]" />
 
-        <BoardPicker
-          boards={boards}
-          status={boardsStatus}
-          error={boardsError}
+        <KeyboardGrid
+          boards={gridBoards}
+          customBoards={customBoards}
+          detected={detected}
           selected={selectedBoard}
           onSelect={selectBoard}
-          onRetry={() => void loadBoards()}
+          onAdd={() => setAddOpen(true)}
         />
+
+        {boardsStatus === "error" ? (
+          <p className="mt-2 text-[10px] text-rose-300/80">
+            Registry unavailable{" "}
+            <button
+              type="button"
+              onClick={() => void loadBoards()}
+              className="text-zinc-500 hover:text-zinc-200"
+            >
+              Retry
+            </button>
+          </p>
+        ) : null}
 
         <div className="my-6 h-px bg-white/[0.06]" />
 
@@ -174,6 +182,19 @@ export default function App() {
           onReset={resetFlash}
         />
       </div>
+
+      <AddKeyboardDialog
+        open={addOpen}
+        existing={[...allBoards, ...detectedOnly].map(boardKey)}
+        artifact={artifact}
+        artifactStatus={artifactStatus}
+        onChoose={() => void chooseArtifact()}
+        onClose={() => setAddOpen(false)}
+        onSave={(board) => {
+          addCustomBoard(board, artifact);
+          setAddOpen(false);
+        }}
+      />
 
       <ConfirmFlashDialog
         open={flashStatus === "confirming"}
