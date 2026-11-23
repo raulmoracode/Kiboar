@@ -227,17 +227,8 @@ export function ProductPage({
       </article>
 
       {related.length > 0 ? (
-        <section
-          aria-labelledby="related-heading"
-          className="mt-16 border-t border-white/[0.06] pt-8"
-        >
-          <h2
-            id="related-heading"
-            className="text-[10px] tracking-[0.16em] text-zinc-500 uppercase"
-          >
-            More boards
-          </h2>
-          <div className="mt-4 grid gap-3 sm:grid-cols-3">
+        <section aria-label="More boards" className="mt-16 border-t border-white/[0.06] pt-8">
+          <div className="grid gap-3 sm:grid-cols-3">
             {related.map((entry) => (
               <ProductCard key={entry.id} product={entry} onOpen={onOpen} layout="related" />
             ))}
