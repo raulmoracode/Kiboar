@@ -3,9 +3,16 @@
 The customer-facing shop, served under `/shop`. It is a separate project from
 `web` and from the Medusa backend: it shares the design language, not the code.
 
-**Status: catalogue.** It lists the products published in Medusa as vertical
-cards with a photo, the name and the price. There is no cart, checkout, account
-or product page yet.
+**Status: catalogue with a demo bag.** It lists the products published in Medusa
+as vertical cards with a photo, the name and the price, and lets you add them to
+a local bag. There is no checkout, account or product page yet.
+
+## Bag
+
+The `Bag` control in the top bar opens a side panel with the selected products,
+quantities and total. The bag is **client-side only**: it does not create a
+Medusa cart, it is not persisted and it is lost on reload. Checkout is not
+connected.
 
 ## Photos
 
