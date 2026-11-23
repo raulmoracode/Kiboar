@@ -83,6 +83,7 @@ export function AddKeyboardDialog({
       keys: 0,
       layers: 1,
       split: false,
+      layout: [],
     });
   }
 

@@ -78,6 +78,7 @@ export default function App() {
       keys: 0,
       layers: info.layers,
       split: info.split,
+      layout: [],
     }));
   const gridBoards = [...detectedOnly, ...boards];
   const openInfo = openBoard ? (detected.get(boardKey(openBoard)) ?? null) : null;
@@ -150,7 +151,6 @@ export default function App() {
           <KeyboardGrid
             boards={gridBoards}
             customBoards={customBoards}
-            detected={detected}
             selected={null}
             onSelect={(board) => {
               selectBoard(board);

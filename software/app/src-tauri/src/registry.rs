@@ -17,6 +17,16 @@ pub struct BoardSummary {
     pub keys: u32,
     pub layers: u32,
     pub split: bool,
+    pub layout: Vec<KeyPosition>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, TS)]
+#[ts(export, export_to = "../../src/lib/bindings/")]
+pub struct KeyPosition {
+    pub x: f32,
+    pub y: f32,
+    pub w: f32,
+    pub h: f32,
 }
 
 #[derive(Deserialize)]
@@ -38,7 +48,7 @@ struct RawDefinition {
     hw_rev: u32,
     mcu: String,
     matrix: RawMatrix,
-    keys: Vec<serde_json::Value>,
+    keys: Vec<RawKey>,
     layers: Vec<serde_json::Value>,
     split: bool,
 }
@@ -47,6 +57,20 @@ struct RawDefinition {
 struct RawMatrix {
     rows: u32,
     cols: u32,
+}
+
+#[derive(Deserialize)]
+struct RawKey {
+    x: f32,
+    y: f32,
+    #[serde(default = "default_key_size")]
+    w: f32,
+    #[serde(default = "default_key_size")]
+    h: f32,
+}
+
+fn default_key_size() -> f32 {
+    1.0
 }
 
 /// Directory that holds `registry/index.json` and `boards/`.
@@ -111,6 +135,16 @@ pub fn list_boards_in(root: &Path) -> Result<Vec<BoardSummary>, String> {
             keys: definition.keys.len() as u32,
             layers: definition.layers.len() as u32,
             split: definition.split,
+            layout: definition
+                .keys
+                .into_iter()
+                .map(|key| KeyPosition {
+                    x: key.x,
+                    y: key.y,
+                    w: key.w,
+                    h: key.h,
+                })
+                .collect(),
         });
     }
 
@@ -146,6 +180,7 @@ mod tests {
         assert_eq!(kb60.keys, 61);
         assert_eq!(kb60.layers, 1);
         assert!(!kb60.split);
+        assert_eq!(kb60.layout.len(), 61);
     }
 
     #[test]

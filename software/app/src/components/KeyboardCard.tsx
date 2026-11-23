@@ -1,41 +1,30 @@
-import type { BoardInfo } from "../lib/bindings/BoardInfo";
 import type { BoardSummary } from "../lib/bindings/BoardSummary";
+import { KeyboardPreview } from "./KeyboardPreview";
 
 interface Props {
   board: BoardSummary;
-  connected: BoardInfo | null;
-  local: boolean;
   selected: boolean;
   onSelect: () => void;
 }
 
-export function KeyboardCard({ board, connected, local, selected, onSelect }: Props) {
+export function KeyboardCard({ board, selected, onSelect }: Props) {
   return (
     <button
       type="button"
       aria-pressed={selected}
       onClick={onSelect}
-      className={`flex h-full min-h-[140px] flex-col rounded-lg border p-5 text-left transition ${
+      className={`flex h-full min-h-[180px] flex-col overflow-hidden rounded-lg border p-0 text-left transition ${
         selected
-          ? "border-lime-300/30 bg-lime-300/[0.03]"
-          : "border-white/[0.06] bg-white/[0.015] hover:border-white/15"
+          ? "border-lime-300/30 bg-lime-300/[0.03] text-zinc-300"
+          : "border-white/[0.06] bg-white/[0.015] text-zinc-400 hover:border-white/15 hover:text-zinc-300"
       }`}
     >
-      <div className="flex items-center justify-between">
-        <span className={`size-1.5 rounded-full ${connected ? "bg-lime-300" : "bg-zinc-700"}`} />
-        <span className="text-[9px] uppercase tracking-[0.14em] text-zinc-600">
-          {local ? "Local" : connected ? "Connected" : "Registry"}
-        </span>
+      <div className="px-5 pt-4">
+        <p className="truncate text-[15px] text-zinc-200">{board.name}</p>
       </div>
-      <p className="mt-3 truncate text-[15px] text-zinc-200">{board.name}</p>
-      <p className="mt-1 truncate font-mono text-[10px] text-zinc-600">
-        {board.board_id} · rev {board.hw_rev}
-      </p>
-      {connected ? (
-        <p className="mt-auto pt-2 font-mono text-[10px] text-zinc-500">
-          fw {connected.fw_version}
-        </p>
-      ) : null}
+      <div className="flex min-h-0 flex-1 items-center justify-center p-4">
+        <KeyboardPreview layout={board.layout ?? []} className="h-full w-full" />
+      </div>
     </button>
   );
 }
