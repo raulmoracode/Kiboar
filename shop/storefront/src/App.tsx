@@ -68,7 +68,7 @@ function Catalogue({ state }: { state: State }) {
   }
 
   return (
-    <div className="grid gap-3 sm:grid-cols-2 md:h-full md:min-h-0 md:auto-rows-fr md:grid-cols-3">
+    <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
       {state.products.map((product) => {
         const price = priceOf(product);
         const image = product.thumbnail
@@ -80,7 +80,7 @@ function Catalogue({ state }: { state: State }) {
         return (
           <article
             key={product.id}
-            className="flex min-h-0 flex-col overflow-hidden rounded-lg border border-white/[0.06] bg-white/[0.015] transition-colors hover:border-white/15"
+            className="flex min-h-0 flex-col overflow-hidden rounded-lg border border-white/[0.06] bg-white/[0.015] transition-colors hover:border-white/15 md:h-[calc((100vh-5.5rem)/3)]"
           >
             <div className="flex items-baseline justify-between gap-4 px-4 pt-3.5 pb-3">
               <h2 className="min-w-0 truncate text-[14px] text-zinc-100">{product.title}</h2>
@@ -155,9 +155,9 @@ export default function App() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-[#0a0b0d] text-zinc-200 md:h-screen md:overflow-hidden">
-      <div className="mx-auto flex w-full max-w-[1600px] flex-col px-6 py-10 sm:px-10 md:h-full md:min-h-0">
-        <section aria-label="Products" className="md:flex md:min-h-0 md:flex-1">
+    <main className="min-h-screen bg-[#0a0b0d] text-zinc-200">
+      <div className="mx-auto w-full max-w-[1600px] px-6 py-8 sm:px-10">
+        <section aria-label="Products">
           <Catalogue state={state} />
         </section>
       </div>
