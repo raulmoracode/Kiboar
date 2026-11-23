@@ -11,20 +11,29 @@ use crate::flash::{
 use crate::registry::{self, BoardSummary};
 use crate::scanner::scan_devices;
 
-#[tauri::command]
-pub async fn list_devices() -> Result<Vec<Device>, String> {
-    tauri::async_runtime::spawn_blocking(scan_devices)
-        .await
-        .map_err(|error| format!("device scan task failed: {error}"))?
+/// hidapi must create its IOHIDManager on the main thread. Running the scan
+/// there also keeps the manager on the main run loop.
+fn scan_on_main(app: &tauri::AppHandle) -> Result<Vec<Device>, String> {
+    let (sender, receiver) = std::sync::mpsc::sync_channel(0);
+    app.run_on_main_thread(move || {
+        let _ = sender.send(scan_devices());
+    })
+    .map_err(|error| format!("cannot schedule the device scan: {error}"))?;
+
+    receiver
+        .recv()
+        .map_err(|error| format!("device scan channel closed: {error}"))?
         .map_err(|error| error.to_string())
 }
 
 #[tauri::command]
-pub async fn read_board_info(id: String) -> Result<BoardInfo, String> {
-    let devices = tauri::async_runtime::spawn_blocking(scan_devices)
-        .await
-        .map_err(|error| format!("device scan task failed: {error}"))?
-        .map_err(|error| error.to_string())?;
+pub async fn list_devices(app: tauri::AppHandle) -> Result<Vec<Device>, String> {
+    scan_on_main(&app)
+}
+
+#[tauri::command]
+pub async fn read_board_info(app: tauri::AppHandle, id: String) -> Result<BoardInfo, String> {
+    let devices = scan_on_main(&app)?;
 
     devices
         .into_iter()

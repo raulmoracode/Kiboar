@@ -151,6 +151,7 @@ export default function App() {
           <KeyboardGrid
             boards={gridBoards}
             customBoards={customBoards}
+            detected={detected}
             selected={null}
             onSelect={(board) => {
               selectBoard(board);

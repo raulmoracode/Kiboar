@@ -1,4 +1,5 @@
 import { Plus } from "lucide-react";
+import type { BoardInfo } from "../lib/bindings/BoardInfo";
 import type { BoardSummary } from "../lib/bindings/BoardSummary";
 import { boardKey } from "../store";
 import { KeyboardCard } from "./KeyboardCard";
@@ -6,12 +7,13 @@ import { KeyboardCard } from "./KeyboardCard";
 interface Props {
   boards: BoardSummary[];
   customBoards: BoardSummary[];
+  detected: Map<string, BoardInfo>;
   selected: BoardSummary | null;
   onSelect: (board: BoardSummary) => void;
   onAdd: () => void;
 }
 
-export function KeyboardGrid({ boards, customBoards, selected, onSelect, onAdd }: Props) {
+export function KeyboardGrid({ boards, customBoards, detected, selected, onSelect, onAdd }: Props) {
   const cards = [...customBoards, ...boards];
 
   return (
@@ -21,6 +23,7 @@ export function KeyboardGrid({ boards, customBoards, selected, onSelect, onAdd }
           <KeyboardCard
             key={boardKey(board)}
             board={board}
+            connected={detected.has(boardKey(board))}
             selected={selected !== null && boardKey(selected) === boardKey(board)}
             onSelect={() => onSelect(board)}
           />
