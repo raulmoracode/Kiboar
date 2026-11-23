@@ -164,6 +164,8 @@ export default function App() {
         {
           variantId: variant.id,
           title: product.title,
+          handle: product.handle,
+          thumbnail: product.thumbnail,
           variantTitle: (product.variants?.length ?? 0) > 1 ? variant.title : null,
           price,
           quantity: 1,
@@ -173,9 +175,37 @@ export default function App() {
     setBagOpen(true);
   }, []);
 
-  const remove = useCallback((variantId: string) => {
-    setItems((current) => current.filter((item) => item.variantId !== variantId));
+  const increase = useCallback((variantId: string) => {
+    setItems((current) =>
+      current.map((item) =>
+        item.variantId === variantId ? { ...item, quantity: item.quantity + 1 } : item,
+      ),
+    );
   }, []);
+
+  const decrease = useCallback((variantId: string) => {
+    setItems((current) =>
+      current.flatMap((item) => {
+        if (item.variantId !== variantId) {
+          return [item];
+        }
+        return item.quantity > 1 ? [{ ...item, quantity: item.quantity - 1 }] : [];
+      }),
+    );
+  }, []);
+
+  const openFromBag = useCallback(
+    (next: string) => {
+      setBagOpen(false);
+      go(next);
+    },
+    [go],
+  );
+
+  const browse = useCallback(() => {
+    setBagOpen(false);
+    go(null);
+  }, [go]);
 
   const count = items.reduce((total, item) => total + item.quantity, 0);
 
@@ -207,7 +237,16 @@ export default function App() {
         )}
       </div>
 
-      {bagOpen ? <Bag items={items} onClose={() => setBagOpen(false)} onRemove={remove} /> : null}
+      {bagOpen ? (
+        <Bag
+          items={items}
+          onClose={() => setBagOpen(false)}
+          onBrowse={browse}
+          onIncrease={increase}
+          onDecrease={decrease}
+          onOpenProduct={openFromBag}
+        />
+      ) : null}
     </main>
   );
 }

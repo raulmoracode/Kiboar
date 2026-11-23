@@ -22,3 +22,42 @@ button:focus-visible {
   outline: 2px solid #bef264;
   outline-offset: 3px;
 }
+
+@keyframes bag-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes bag-slide-up {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes bag-slide-in {
+  from {
+    transform: translateX(100%);
+  }
+}
+
+.bag-overlay {
+  animation: bag-fade 160ms ease-out;
+}
+
+.bag-panel {
+  animation: bag-slide-up 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (min-width: 640px) {
+  .bag-panel {
+    animation-name: bag-slide-in;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bag-overlay,
+  .bag-panel {
+    animation: none;
+  }
+}
