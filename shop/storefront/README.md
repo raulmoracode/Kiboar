@@ -15,7 +15,8 @@ product. There is no checkout, account or search yet.
 A card links to `?p=<handle>`, for example `/shop/?p=kiboar-60-hhkb`. The page
 reads the `handle` from the URL, loads that product from the Store API and shows
 the photo, the name, the price, the description and the variants, with an
-`Add to bag` button. Unknown handles render a "not published" state.
+`Add to bag` button. Below the details, three random other boards link to their
+pages. Unknown handles render a "not published" state.
 
 The handle lives in a query string on purpose: the build is static and no host
 rewrite is configured yet, so a real `/products/<handle>` path would break on a

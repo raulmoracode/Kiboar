@@ -8,9 +8,10 @@ Two applications live here: the Medusa v2 service (Store API and admin
 dashboard) and the storefront in `shop/storefront`, a static Vite app that reads
 the Store API over HTTP.
 
-**Status: catalogue.** The backend and the admin run, and the storefront lists
-the published products with their prices. There is no cart, checkout or account
-flow yet.
+**Status: catalogue and storefront.** The backend and the admin run; the
+storefront lists the published products, opens a product page with its photo
+gallery and keeps a demo bag in the browser. There is no Medusa cart, checkout,
+account or search yet.
 
 ## Requirements
 
@@ -79,7 +80,8 @@ The routing and the production host are not configured in this repository.
 
 ## What is not here
 
-- No cart, checkout, customer accounts or product detail pages.
+- No Medusa cart, checkout, customer accounts or search. The storefront bag is
+  local to the browser and is lost on reload.
 - No catalogue seed, payment provider or shipping options.
 - No deployment configuration. The `/shop` route is a host concern; the
   applications themselves are ready to build.

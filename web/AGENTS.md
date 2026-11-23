@@ -12,9 +12,10 @@ shop is the Medusa application in `shop/`, and this site points at it.
 
 ## Layout
 
-- `src/App.tsx` — the page. Keep it one page until there is a reason for more.
-- `src/styles.css` — the Tailwind import and the shared base from
-  `@kiboar/design`.
+- `src/App.tsx` — the page and the keyboard shortcut listener.
+- `src/Keyboard.tsx` — the drawn keyboard; the six lit keys are real links.
+- `src/products.ts` — the six destinations, their key and their description.
+- `src/styles.css` — the shared design entry from `@kiboar/design`.
 - `vite.config.ts` — the shared `@kiboar/vite-config` setup and port 3000.
 
 ## Rules
@@ -23,9 +24,13 @@ shop is the Medusa application in `shop/`, and this site points at it.
   `web/package-lock.json`. Shared versions come from the root `catalog`.
 - **No framework migration without a decision.** Vite and React are the stack;
   switching to another framework is a new issue, not a refactor.
+- **The letter menu is the navigation.** Every destination lives in
+  `src/products.ts` with its key. Keep the keys as real links inside the SVG and
+  the shortcut handler ignoring modifiers, key repeats and form fields; every
+  destination opens in a new tab.
 - **The shop is a separate product.** Do not import `shop/` code into `web/`;
-  talk to its Store API over HTTP. Both apps share `@kiboar/design` and
-  `@kiboar/tsconfig`, not screens.
+  talk to its Store API over HTTP. Both apps share `@kiboar/design`,
+  `@kiboar/vite-config` and `@kiboar/tsconfig`, not screens.
 - **Shared code goes to `packages/`.** Do not copy a component or a type into
   `web/` when another product needs it; add it to a shared package instead.
 - **Static output only.** No server adapter, no runtime secret in the bundle.

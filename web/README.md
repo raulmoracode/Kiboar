@@ -4,10 +4,11 @@ The public front door of the Kiboar brand: the keyboards, the official library,
 Kiboar Studio, the documentation and the shop in one place. A Vite 8 + React 19 +
 Tailwind 4 single page application.
 
-**Status: scaffold.** One landing page that points at the documentation, the
-Studio release and the source. It does not replace the docs or the shop; it
-points at them. The Medusa Store API integration is the next step once the
-catalogue exists.
+**Status: brand page.** One page where the word Kiboar sits on the keyboard.
+Each letter opens one destination in a new tab (Keyboards, Library, Shop,
+Studio, Docs, GitHub), and pressing the letter does the same. It does not
+replace the docs or the shop; it points at them. The storefront in `shop/`
+reads Medusa; `web` does not call the Store API.
 
 ## Development
 
@@ -28,15 +29,17 @@ allows in `STORE_CORS`.
 ```text
 index.html          Vite entry
 src/main.tsx        React root
-src/App.tsx         the page
-src/styles.css      Tailwind import and the shared base
+src/App.tsx         the page and the keyboard shortcuts
+src/Keyboard.tsx    the drawn keyboard and the letter links
+src/products.ts     the six destinations and their keys
+src/styles.css      the shared design entry
 vite.config.ts      shared Vite config and port 3000
 ```
 
 ## Sharing
 
-The package is part of the root pnpm workspace, so React, TypeScript and
-Tailwind come from the `catalog` block of `pnpm-workspace.yaml`. There is no
+The package is part of the root pnpm workspace, so React, Vite, Tailwind and
+TypeScript come from the `catalog` block of `pnpm-workspace.yaml`. There is no
 second lockfile and no nested workspace.
 
 The base CSS and colour tokens come from `@kiboar/design`, the Vite plugins and
