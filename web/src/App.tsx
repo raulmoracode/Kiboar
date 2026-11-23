@@ -1,34 +1,35 @@
+import { useEffect } from "react";
 import { Keyboard } from "./Keyboard";
-
-const products = [
-  {
-    name: "Shop",
-    href: "/shop",
-    line: "Buy one assembled.",
-  },
-  {
-    name: "Keyboards",
-    href: "https://github.com/raulmoracode/Kiboar/tree/main/keyboards",
-    line: "The official board files.",
-  },
-  {
-    name: "Library",
-    href: "https://kiboar.raulmoracode.com/docs/install/pcm",
-    line: "The official KiCad parts.",
-  },
-  {
-    name: "Studio",
-    href: "https://github.com/raulmoracode/Kiboar/releases/tag/studio-v0.1.0",
-    line: "Flash and configure.",
-  },
-  {
-    name: "Docs",
-    href: "https://kiboar.raulmoracode.com/docs",
-    line: "Install, build and flash.",
-  },
-];
+import { productForKey, products } from "./products";
 
 export default function App() {
+  useEffect(() => {
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.metaKey || event.ctrlKey || event.altKey || event.repeat) {
+        return;
+      }
+
+      const target = event.target as HTMLElement | null;
+      if (
+        target?.isContentEditable ||
+        target?.tagName === "INPUT" ||
+        target?.tagName === "TEXTAREA" ||
+        target?.tagName === "SELECT"
+      ) {
+        return;
+      }
+
+      const product = productForKey(event.key);
+      if (product) {
+        event.preventDefault();
+        window.open(product.href, "_blank", "noopener,noreferrer");
+      }
+    }
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
+
   return (
     <main className="min-h-screen bg-[#0a0b0d] text-zinc-200">
       <div className="mx-auto flex min-h-screen w-full max-w-[1180px] flex-col px-6 py-10 sm:px-10 sm:py-14">
@@ -40,11 +41,23 @@ export default function App() {
           </section>
         </div>
 
-        <section className="mt-auto grid gap-8 sm:grid-cols-3 lg:grid-cols-5">
+        <section className="mt-auto grid gap-6 sm:grid-cols-3 lg:grid-cols-6">
           {products.map((product) => (
-            <a key={product.name} href={product.href} className="group py-6">
-              <span className="block text-[13px] text-zinc-200 transition-colors group-hover:text-lime-200">
-                {product.name}
+            <a
+              key={product.name}
+              href={product.href}
+              target="_blank"
+              rel="noreferrer"
+              className="group py-6"
+            >
+              <span className="flex items-center gap-2">
+                <kbd className="inline-flex size-5 items-center justify-center rounded border border-white/15 font-mono text-[10px] text-zinc-400 transition-colors group-hover:border-lime-300/40 group-hover:text-lime-200">
+                  {product.key}
+                </kbd>
+                <span className="text-[13px] text-zinc-200 transition-colors group-hover:text-lime-200">
+                  {product.name}
+                </span>
+                <span className="sr-only"> (opens in a new tab)</span>
               </span>
               <span className="mt-1 block text-[12px] leading-relaxed text-zinc-400">
                 {product.line}
