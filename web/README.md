@@ -1,10 +1,13 @@
 # Kiboar web
 
-The public site: a Vite 8 + React 19 + Tailwind 4 single page application.
+The public front door of the Kiboar brand: the keyboards, the official library,
+Kiboar Studio, the documentation and the shop in one place. A Vite 8 + React 19 +
+Tailwind 4 single page application.
 
 **Status: scaffold.** One landing page that points at the documentation, the
-Studio release and the source. It does not talk to the shop yet; the Medusa
-Store API integration is the next step once the catalogue exists.
+Studio release and the source. It does not replace the docs or the shop; it
+points at them. The Medusa Store API integration is the next step once the
+catalogue exists.
 
 ## Development
 

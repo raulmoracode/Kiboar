@@ -1,11 +1,13 @@
 # Kiboar shop
 
-The Medusa v2 application for the Kiboar shop: the Store API, the admin dashboard
-and the place where products, regions and orders will live.
+The commercial surface of the brand: it sells assembled Kiboar keyboards. Buying
+is a convenience, not a lock-in — the library and the board definitions are
+published and the documentation lets anyone build the same board. A Medusa v2
+application with the Store API and the admin dashboard.
 
 **Status: scaffold.** The application is wired into the repository workspace and
-builds, but it has no products, no storefront integration and no deployment. The
-`web` product is the public site and the future storefront.
+builds and runs, but it has no products, no region and no storefront
+integration. The `web` product is the public site and the future storefront.
 
 ## Requirements
 

@@ -10,8 +10,24 @@ Read in this order: `README.md` → `ARCHITECTURE.md` → this file → `LABELS.
 
 ## What this repository is
 
-Kiboar is one repository with five products that are built and shipped
-separately.
+Kiboar is a keyboard brand, not only a CAD library. It designs keyboards, sells
+them assembled and publishes the library and the board definitions so anyone
+can build, repair and customise their own. Two paths are first-class and every
+product must serve both: buying a Kiboar keyboard and building one from the
+published design.
+
+- `shop/` is the commercial surface; it never gates the design.
+- `web/` is the public front door that brings the brand together.
+- `library/` is the official CAD, published for Kiboar's boards and for anyone
+  else's.
+- `software/` is the tool for both paths: detect, flash, and after 0.1 remap.
+- `docs/` explains both paths and the licences.
+
+Do not claim a hardware file, a manufacturing asset or the firmware source is
+published unless it is in this repository. Today that is the library and
+`software/boards`; the rest of the hardware release is planned, not shipped.
+
+The repository has five products, built and shipped separately.
 
 | Path | Contents |
 | --- | --- |

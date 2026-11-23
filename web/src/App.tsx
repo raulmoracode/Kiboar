@@ -7,12 +7,12 @@ const links = [
   {
     label: "Studio",
     href: "https://github.com/raulmoracode/Kiboar/releases/tag/studio-v0.1.0",
-    description: "The unsigned macOS flasher for boards built with Kiboar.",
+    description: "The desktop app that flashes and configures a Kiboar keyboard.",
   },
   {
     label: "Source",
     href: "https://github.com/raulmoracode/Kiboar",
-    description: "Symbols, footprints, models, tools and the desktop app.",
+    description: "Symbols, footprints, models, Studio, the site and the shop.",
   },
 ];
 
@@ -26,11 +26,11 @@ export default function App() {
 
       <section className="mt-20 sm:mt-28">
         <h1 className="max-w-2xl text-4xl leading-[1.1] font-medium tracking-tight text-zinc-100 sm:text-5xl">
-          Keyboard components for people who build their own.
+          Keyboards you can buy, build and repair.
         </h1>
         <p className="mt-6 max-w-xl text-sm leading-relaxed text-zinc-500">
-          A KiCad library, a documentation site and a flasher for boards built with Kiboar
-          components. This site is the public entry point; the shop is coming.
+          Kiboar designs mechanical keyboards, sells them assembled and publishes the library and
+          the board definitions. Buy one, or build your own — then flash it with Kiboar Studio.
         </p>
       </section>
 

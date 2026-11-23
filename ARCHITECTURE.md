@@ -1,21 +1,32 @@
 # Architecture
 
-Kiboar is one repository with five products that are built and shipped
-separately: the KiCad library, the documentation site, Kiboar Studio, the public
-site and the shop. They share a repository and a review flow, not a runtime.
+Kiboar is a keyboard brand. It designs keyboards, sells them assembled and
+publishes the library and the board definitions so anyone can build, repair and
+customise their own. The repository holds the five products that make both paths
+work; they are built and shipped separately and share a repository and a review
+flow, not a runtime.
 
 ## Products
 
-| Product | Path | Built with | Shipped as |
+| Product | Path | Built with | What it is |
 | --- | --- | --- | --- |
-| KiCad library | `library/symbols/`, `library/footprints/`, `library/3dmodels/`, `library/lib-table-files/`, `library/pcm/`, `library/tools/` | KiCad 10, Python standard library | PCM ZIP and a clone with library tables |
-| Documentation | `docs/` | Astro 7, Fumadocs, React | Static site on Vercel at `/docs` and `/es/docs` |
-| Kiboar Studio | `software/` | Tauri 2, React, TypeScript, Rust | Desktop application |
-| Web | `web/` | Vite 8, React 19, Tailwind 4 | Static site, host undecided |
-| Shop | `shop/` | Medusa 2, Node, PostgreSQL | Medusa service and admin, host undecided |
+| Shop | `shop/` | Medusa 2, Node, PostgreSQL | Sells assembled Kiboar keyboards; the commercial surface |
+| Web | `web/` | Vite 8, React 19, Tailwind 4 | The public front door that brings the brand together |
+| KiCad library | `library/symbols/`, `library/footprints/`, `library/3dmodels/`, `library/lib-table-files/`, `library/pcm/`, `library/tools/` | KiCad 10, Python standard library | The official library, published so anyone can design and build a board |
+| Kiboar Studio | `software/` | Tauri 2, React, TypeScript, Rust | Detects, flashes and (after 0.1) remaps a board, bought or self-built |
+| Documentation | `docs/` | Astro 7, Fumadocs, React | How to install the library, build a board, flash it and what the licences allow |
 
 ## Boundaries
 
+- **Buying and building are both first-class.** `shop/` is the commercial
+  surface, not the source of truth. The library, the docs and Studio must work
+  for a board that was never bought.
+- **The published design is not gated by the shop.** No product may require an
+  order, an account or a running shop to install the library, flash a board or
+  read the docs.
+- **Published today:** the library, the board definitions in `software/boards`
+  and the source of the five products. The rest of the hardware release is
+  planned; do not present it as already available.
 - **The library lives in `library/`.** For a clone install, `KIBOAR_ROOT`
   points at `<clone>/library`; the library tables, the model paths and the PCM
   builder all use that root. The PCM ZIP keeps `symbols/`, `footprints/` and
