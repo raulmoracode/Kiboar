@@ -28,7 +28,7 @@ const ROWS: readonly (readonly KeyDef[])[] = [
     { w: 1 },
     { w: 1 },
     { w: 1 },
-    { w: 1, label: "T" },
+    { w: 1 },
     { w: 1 },
     { w: 1 },
     { w: 1 },
@@ -41,14 +41,14 @@ const ROWS: readonly (readonly KeyDef[])[] = [
   [
     { w: 1.75 },
     { w: 1 },
-    { w: 1, label: "S" },
-    { w: 1, label: "D" },
-    { w: 1 },
-    { w: 1, label: "G" },
     { w: 1 },
     { w: 1 },
     { w: 1, label: "K" },
-    { w: 1, label: "L" },
+    { w: 1, label: "i" },
+    { w: 1, label: "b" },
+    { w: 1, label: "o" },
+    { w: 1, label: "a" },
+    { w: 1, label: "r" },
     { w: 1 },
     { w: 1 },
     { w: 2.25 },
@@ -71,7 +71,7 @@ const ROWS: readonly (readonly KeyDef[])[] = [
     { w: 1.25 },
     { w: 1.25 },
     { w: 1.25 },
-    { w: 6.25, label: "Kiboar" },
+    { w: 6.25 },
     { w: 1.25 },
     { w: 1.25 },
     { w: 1.25 },
@@ -101,8 +101,6 @@ function layout(): Key[] {
 const KEYS = layout();
 
 function Cap({ cap }: { cap: Key }) {
-  const brand = cap.label !== undefined && cap.label.length > 1;
-
   return (
     <>
       <rect
@@ -126,8 +124,7 @@ function Cap({ cap }: { cap: Key }) {
           fill="#bef264"
           fillOpacity={0.9}
           fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace"
-          fontSize={brand ? 0.2 : 0.26}
-          letterSpacing={brand ? 0.06 : 0}
+          fontSize={0.26}
         >
           {cap.label}
         </text>

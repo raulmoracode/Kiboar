@@ -2,7 +2,7 @@ export interface Product {
   name: string;
   href: string;
   line: string;
-  /** Single letter that opens the product from the physical keyboard. */
+  /** Letter of "Kiboar" that opens the product. */
   key: string;
 }
 
@@ -11,7 +11,7 @@ export const products: readonly Product[] = [
     name: "Shop",
     href: "/shop",
     line: "Buy one assembled.",
-    key: "s",
+    key: "b",
   },
   {
     name: "Keyboards",
@@ -23,25 +23,25 @@ export const products: readonly Product[] = [
     name: "Library",
     href: "https://kiboar.raulmoracode.com/docs/install/pcm",
     line: "The official KiCad parts.",
-    key: "l",
+    key: "i",
   },
   {
     name: "Studio",
     href: "https://github.com/raulmoracode/Kiboar/releases/tag/studio-v0.1.0",
     line: "Flash and configure.",
-    key: "t",
+    key: "o",
   },
   {
     name: "Docs",
     href: "https://kiboar.raulmoracode.com/docs",
     line: "Install, build and flash.",
-    key: "d",
+    key: "a",
   },
   {
     name: "GitHub",
     href: "https://github.com/raulmoracode/Kiboar",
     line: "The repository.",
-    key: "g",
+    key: "r",
   },
 ];
 
