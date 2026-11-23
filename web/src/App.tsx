@@ -22,7 +22,7 @@ export default function App() {
       const product = productForKey(event.key);
       if (product) {
         event.preventDefault();
-        window.location.assign(product.href);
+        window.open(product.href, "_blank", "noopener,noreferrer");
       }
     }
 
@@ -43,7 +43,13 @@ export default function App() {
 
         <section className="mt-auto grid gap-6 sm:grid-cols-3 lg:grid-cols-6">
           {products.map((product) => (
-            <a key={product.name} href={product.href} className="group py-6">
+            <a
+              key={product.name}
+              href={product.href}
+              target="_blank"
+              rel="noreferrer"
+              className="group py-6"
+            >
               <span className="flex items-center gap-2">
                 <kbd className="inline-flex size-5 items-center justify-center rounded border border-white/15 font-mono text-[10px] text-zinc-400 transition-colors group-hover:border-lime-300/40 group-hover:text-lime-200">
                   {product.key}
@@ -51,6 +57,7 @@ export default function App() {
                 <span className="text-[13px] text-zinc-200 transition-colors group-hover:text-lime-200">
                   {product.name}
                 </span>
+                <span className="sr-only"> (opens in a new tab)</span>
               </span>
               <span className="mt-1 block text-[12px] leading-relaxed text-zinc-400">
                 {product.line}

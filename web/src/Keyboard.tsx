@@ -144,7 +144,9 @@ export function Keyboard() {
             <a
               key={`${key.x}-${key.y}`}
               href={product.href}
-              aria-label={product.name}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`${product.name} (opens in a new tab)`}
               className="cursor-pointer"
             >
               <Cap cap={key} />
