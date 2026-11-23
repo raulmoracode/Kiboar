@@ -31,25 +31,47 @@ function BagIcon() {
 
 function Header({
   count,
+  inProduct,
   onHome,
   onOpenBag,
 }: {
   count: number;
+  inProduct: boolean;
   onHome: () => void;
   onOpenBag: () => void;
 }) {
   return (
     <header className="mb-3 flex h-11 items-center justify-between">
-      <a
-        href="?"
-        onClick={(event) => {
-          event.preventDefault();
-          onHome();
-        }}
-        className="text-[13px] font-semibold text-zinc-100"
-      >
-        Kiboar
-      </a>
+      <div className="flex items-baseline gap-2.5">
+        <a
+          href="?"
+          onClick={(event) => {
+            event.preventDefault();
+            onHome();
+          }}
+          className="text-[13px] font-semibold text-zinc-100"
+        >
+          Kiboar
+        </a>
+        {inProduct ? (
+          <>
+            <span aria-hidden="true" className="text-[12px] text-zinc-700">
+              /
+            </span>
+            <a
+              href="?"
+              onClick={(event) => {
+                event.preventDefault();
+                onHome();
+              }}
+              aria-label="Back to the shop"
+              className="text-[12px] text-zinc-400 transition-colors hover:text-zinc-100"
+            >
+              Shop
+            </a>
+          </>
+        ) : null}
+      </div>
       <button
         type="button"
         onClick={onOpenBag}
@@ -166,7 +188,12 @@ export default function App() {
   return (
     <main className="min-h-screen bg-[#0a0b0d] text-zinc-200">
       <div className="mx-auto w-full max-w-[1600px] px-6 py-8 sm:px-10">
-        <Header count={count} onHome={() => go(null)} onOpenBag={() => setBagOpen(true)} />
+        <Header
+          count={count}
+          inProduct={handle !== null}
+          onHome={() => go(null)}
+          onOpenBag={() => setBagOpen(true)}
+        />
 
         {handle ? (
           <section aria-label="Product" className="mx-auto mt-4 w-full max-w-[1200px]">
