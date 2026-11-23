@@ -375,9 +375,9 @@ lowest level that can express it.
   `cargo test` and `cargo check` against `software/Cargo.toml`.
 - Docs deploy on Vercel from `docs/`; Studio is desktop and has no Vercel
   target.
-- **MVP release:** an unsigned macOS DMG built by a macOS CI job and attached to
-  a GitHub release. Testers get Gatekeeper instructions; this is not a public
-  consumer build.
+- **MVP release:** `.github/workflows/studio-release.yml` builds a universal macOS
+  DMG on `macos-14`, writes `SHA256SUMS` and publishes an unsigned pre-release.
+  Testers get Gatekeeper instructions; this is not a public consumer build.
 - **Post-MVP release:** signing, notarization, the Tauri updater signature and a
   tag-triggered release job.
 - Three independent versions remain the target; only the application version is

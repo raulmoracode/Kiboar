@@ -33,6 +33,9 @@ firmware identity, remap, layout, editor and i18n are post-MVP.
 - **The MVP is the flasher.** Do not build remap, layout, board editor,
   exporters, Spanish or signing in 0.1. They are post-MVP stages in
   [`DEVELOPMENT.md`](DEVELOPMENT.md).
+- **Bundled resources are part of the contract.** `registry/` and `boards/` are
+  copied into the app's resource directory. If the catalog is empty in a
+  bundled build, check `Contents/Resources` before anything else.
 - **The workspace root is the repository root.** There is no nested
   `pnpm-workspace.yaml` under `software/`. Use the root catalog for shared
   versions.
@@ -72,6 +75,7 @@ pnpm test:rust
 pnpm check:rust                  # needs the frontend build above
 pnpm schema:export
 pnpm --filter @kiboar/studio tauri dev
+pnpm --filter @kiboar/studio tauri build   # needs macOS for a bundle
 ```
 
 Rust can also be run from `software/` with `cargo test -p kiboar-device`.
