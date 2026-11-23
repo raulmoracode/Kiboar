@@ -1,3 +1,5 @@
+use std::sync::Mutex;
+
 use hidapi::HidApi;
 use kiboar_device::bootloader::classify;
 use kiboar_device::device::BoardInfo;
@@ -26,7 +28,15 @@ pub enum ProbeError {
     Protocol(#[from] kiboar_device::ProtocolError),
 }
 
+static SCAN_LOCK: Mutex<()> = Mutex::new(());
+
 pub fn scan_devices() -> Result<Vec<Device>, ScanError> {
+    // hidapi creates an IOHIDManager per scan. Concurrent enumerations on
+    // different blocking threads abort inside CFRunLoopAddSource on macOS.
+    let _guard = SCAN_LOCK
+        .lock()
+        .unwrap_or_else(|poisoned| poisoned.into_inner());
+
     let mut devices = Vec::new();
     scan_bootloaders(&mut devices)?;
     scan_kiboar(&mut devices)?;
