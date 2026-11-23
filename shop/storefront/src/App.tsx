@@ -68,7 +68,7 @@ function Catalogue({ state }: { state: State }) {
   }
 
   return (
-    <div className="grid gap-3 sm:grid-cols-2">
+    <div className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-3">
       {state.products.map((product) => {
         const price = priceOf(product);
         const image = product.thumbnail
@@ -80,25 +80,27 @@ function Catalogue({ state }: { state: State }) {
         return (
           <article
             key={product.id}
-            className="overflow-hidden rounded-lg border border-white/[0.06] bg-white/[0.015] transition-colors hover:border-white/15"
+            className="flex flex-col overflow-hidden rounded-lg border border-white/[0.06] bg-white/[0.015] transition-colors hover:border-white/15"
           >
-            {image ? (
-              <img
-                src={image}
-                alt={product.title}
-                loading="lazy"
-                className="aspect-[4/5] w-full object-cover"
-              />
-            ) : (
-              <div className="flex aspect-[4/5] items-center justify-center bg-white/[0.02]">
-                <span className="text-[10px] tracking-[0.16em] text-zinc-600 uppercase">
-                  No photo
-                </span>
-              </div>
-            )}
-            <div className="flex items-baseline justify-between gap-4 p-4">
+            <div className="flex items-baseline justify-between gap-4 px-4 pt-3.5 pb-3">
               <h2 className="min-w-0 truncate text-[14px] text-zinc-100">{product.title}</h2>
               <p className="shrink-0 font-mono text-[12px] text-zinc-300">{price ?? "—"}</p>
+            </div>
+            <div className="aspect-[4/3] w-full overflow-hidden">
+              {image ? (
+                <img
+                  src={image}
+                  alt={product.title}
+                  loading="lazy"
+                  className="h-full w-full object-cover"
+                />
+              ) : (
+                <div className="flex h-full w-full items-center justify-center bg-white/[0.02]">
+                  <span className="text-[10px] tracking-[0.16em] text-zinc-600 uppercase">
+                    No photo
+                  </span>
+                </div>
+              )}
             </div>
           </article>
         );
