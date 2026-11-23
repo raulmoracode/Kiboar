@@ -154,7 +154,7 @@ export default function App() {
 
   return (
     <main className="min-h-screen bg-[#0a0b0d] text-zinc-200">
-      <div className="mx-auto w-full max-w-[1180px] px-6 py-10 sm:px-10">
+      <div className="mx-auto w-full max-w-[1600px] px-6 py-10 sm:px-10">
         <section aria-label="Products">
           <Catalogue state={state} />
         </section>
