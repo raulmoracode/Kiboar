@@ -8,12 +8,6 @@ export interface Product {
 
 export const products: readonly Product[] = [
   {
-    name: "Shop",
-    href: "/shop",
-    line: "Buy one assembled.",
-    key: "b",
-  },
-  {
     name: "Keyboards",
     href: "https://github.com/raulmoracode/Kiboar/tree/main/keyboards",
     line: "The official board files.",
@@ -24,6 +18,12 @@ export const products: readonly Product[] = [
     href: "https://kiboar.raulmoracode.com/docs/install/pcm",
     line: "The official KiCad parts.",
     key: "i",
+  },
+  {
+    name: "Shop",
+    href: "/shop",
+    line: "Buy one assembled.",
+    key: "b",
   },
   {
     name: "Studio",
