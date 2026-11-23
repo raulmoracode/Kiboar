@@ -1,0 +1,10 @@
+# Medusa build output and local state
+.medusa/
+.cache/
+
+# Local environment with the database URL and secrets
+.env
+
+# Local npm output
+node_modules/
+dist/

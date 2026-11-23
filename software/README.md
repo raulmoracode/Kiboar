@@ -5,7 +5,7 @@ board over USB, flash the right firmware, remap keys and visualise the layout.
 
 **Status: M2 — flasher (MVP).** Detection, board catalog, UF2 inspection, typed confirmation and copy with progress and cancellation are implemented. The macOS `.app`/`.dmg` build works; the release workflow and installation paths exist. Hardware verification is still pending. Kiboar firmware identity, remap, layout and the board editor are post-MVP.
 
-Studio is one of the three products in the [Kiboar repository](../README.md).
+Studio is one of the products in the [Kiboar repository](../README.md).
 The KiCad library lives in [`../library/`](../library/README.md) and the
 documentation site in [`../docs/`](../docs/README.md).
 

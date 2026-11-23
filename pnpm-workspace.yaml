@@ -2,9 +2,15 @@ packages:
   - "docs"
   - "software/app"
   - "software/packages/*"
+  - "web"
+  - "shop"
 
 allowBuilds:
+  "@medusajs/telemetry": false
+  "@swc/core": true
   esbuild: true
+  msgpackr-extract: true
+  protobufjs: true
   sharp: true
 
 catalog:

@@ -3,7 +3,7 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build", "typecheck"],
-      "outputs": ["dist/**", ".astro/**"]
+      "outputs": ["dist/**", ".astro/**", ".medusa/**"]
     },
     "typecheck": {
       "dependsOn": ["^build"],

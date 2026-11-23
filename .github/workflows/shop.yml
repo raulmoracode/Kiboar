@@ -1,0 +1,59 @@
+name: Shop
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "shop/**"
+      - ".npmrc"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+      - "package.json"
+      - ".node-version"
+      - "biome.json"
+      - ".github/workflows/shop.yml"
+  pull_request:
+    paths:
+      - "shop/**"
+      - ".npmrc"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+      - "package.json"
+      - ".node-version"
+      - "biome.json"
+      - ".github/workflows/shop.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: shop-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Lint and build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 12.6.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm exec biome check shop
+
+      - name: Build without a database
+        run: pnpm --filter @kiboar/shop build
