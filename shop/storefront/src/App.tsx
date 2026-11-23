@@ -185,13 +185,16 @@ export default function App() {
 
   const decrease = useCallback((variantId: string) => {
     setItems((current) =>
-      current.flatMap((item) => {
-        if (item.variantId !== variantId) {
-          return [item];
-        }
-        return item.quantity > 1 ? [{ ...item, quantity: item.quantity - 1 }] : [];
-      }),
+      current.map((item) =>
+        item.variantId === variantId && item.quantity > 1
+          ? { ...item, quantity: item.quantity - 1 }
+          : item,
+      ),
     );
+  }, []);
+
+  const remove = useCallback((variantId: string) => {
+    setItems((current) => current.filter((item) => item.variantId !== variantId));
   }, []);
 
   const openFromBag = useCallback(
@@ -244,6 +247,7 @@ export default function App() {
           onBrowse={browse}
           onIncrease={increase}
           onDecrease={decrease}
+          onRemove={remove}
           onOpenProduct={openFromBag}
         />
       ) : null}

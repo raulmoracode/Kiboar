@@ -23,7 +23,8 @@ reload or a shared link. Moving to a path is a routing decision for the host.
 
 The `Bag` control in the top bar opens a drawer on the right; on phones it is a
 bottom sheet. Each line has the product photo and name (both link back to the
-product), a quantity stepper and the line total; the `−` at 1 removes the line.
+product), a quantity stepper and the line total. The `−` stops at 1; the red
+trash button removes the whole line, whatever the quantity.
 The footer shows the subtotal and a disabled `Checkout` button, because the
 checkout is not connected. When the bag is empty, `Browse boards` closes it and
 returns to the catalogue.
