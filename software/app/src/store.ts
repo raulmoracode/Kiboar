@@ -202,8 +202,12 @@ export const useStudioStore = create<StudioStore>((set, get) => ({
       flashError: null,
       cancelling: false,
     }),
-  subscribeToProgress: () =>
-    listen<FlashProgress>("flash-progress", (event) => {
+  subscribeToProgress: () => {
+    if (typeof window === "undefined" || !("__TAURI_INTERNALS__" in window)) {
+      return Promise.resolve(() => {});
+    }
+    return listen<FlashProgress>("flash-progress", (event) => {
       set({ progress: event.payload });
-    }),
+    });
+  },
 }));
