@@ -6,10 +6,11 @@ there apply here.
 
 ## What this product is
 
-The commercial surface of the Kiboar brand: it sells assembled keyboards. A
-Medusa v2 application with the Store API and the admin dashboard. It is
-`@kiboar/shop`, a package of the root pnpm workspace. It is not the public site;
-`web/` is.
+The commercial surface of the Kiboar brand: it sells assembled keyboards. Two
+applications live here: a Medusa v2 service with the Store API and the admin
+dashboard (`@kiboar/shop`), and the storefront in `shop/storefront`
+(`@kiboar/storefront`), a separate static Vite app that reads the Store API over
+HTTP. Neither is the public site; `web/` is.
 
 Buying is a convenience, not a lock-in: the library and the documentation must
 let anyone build the same board, so the shop never gates the design.
@@ -19,6 +20,7 @@ let anyone build the same board, so the shop never gates the design.
 - `medusa-config.ts` — database and CORS configuration, read from `.env`.
 - `src/api/` — custom API routes.
 - `src/admin/` — admin customizations, when they exist.
+- `storefront/` — the customer-facing Vite app, served under `/shop`.
 - `.env.template` — the variables a local `.env` needs. Never commit `.env`.
 
 ## Rules
@@ -32,8 +34,10 @@ let anyone build the same board, so the shop never gates the design.
   it that way. `dev`, `start` and `db:migrate` may require PostgreSQL.
 - **No catalogue in the repository yet.** Products, regions and prices are not
   seeded from `src/`. A seed is a separate change with its own decision.
+- **The storefront is separate from `web`.** `shop/storefront` is its own Vite
+  app; do not import `web/` or `software/` code into it. The design language is
+  copied on purpose, not packaged.
 - **No secrets.** `.env` stays local; `.env.template` carries placeholders only.
-- **No storefront here.** The customer-facing UI belongs to `web/`.
 
 ## Commands
 
@@ -42,6 +46,10 @@ cp shop/.env.template shop/.env       # once, then edit it
 pnpm --filter @kiboar/shop build
 pnpm --filter @kiboar/shop dev        # needs PostgreSQL
 pnpm --filter @kiboar/shop db:migrate
+
+cp shop/storefront/.env.template shop/storefront/.env.local
+pnpm --filter @kiboar/storefront dev        # http://localhost:3001
+pnpm --filter @kiboar/storefront build
 ```
 
 ## Before a PR

@@ -4,6 +4,7 @@ packages:
   - "software/packages/*"
   - "web"
   - "shop"
+  - "shop/storefront"
 
 allowBuilds:
   "@medusajs/telemetry": false

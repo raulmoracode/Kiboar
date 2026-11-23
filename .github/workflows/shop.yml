@@ -57,3 +57,8 @@ jobs:
 
       - name: Build without a database
         run: pnpm --filter @kiboar/shop build
+
+      - name: Build the storefront
+        run: |
+          pnpm --filter @kiboar/storefront typecheck
+          pnpm --filter @kiboar/storefront build
