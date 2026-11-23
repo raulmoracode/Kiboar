@@ -1,5 +1,4 @@
-@import "tailwindcss";
-@import "@kiboar/design/base.css";
+@import "@kiboar/design/app.css";
 
 @keyframes bag-fade {
   from {

@@ -15,7 +15,7 @@ shop is the Medusa application in `shop/`, and this site points at it.
 - `src/App.tsx` — the page. Keep it one page until there is a reason for more.
 - `src/styles.css` — the Tailwind import and the shared base from
   `@kiboar/design`.
-- `vite.config.ts` — React and Tailwind plugins, port 3000.
+- `vite.config.ts` — the shared `@kiboar/vite-config` setup and port 3000.
 
 ## Rules
 

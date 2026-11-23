@@ -54,7 +54,8 @@ flow, not a runtime.
   `web` is a static Vite app with no server. `shop` holds two applications: the
   Medusa service (Store API and admin, PostgreSQL) and the storefront
   (`shop/storefront`), a static Vite app that reads the Store API over HTTP.
-  Both front ends use `@kiboar/design` for the base CSS and colour tokens and
+  Both front ends use `@kiboar/design` for the base CSS and colour tokens,
+  `@kiboar/vite-config` for the Vite plugins and ports, and
   `@kiboar/tsconfig` for their compiler options, from `packages/`. They do not
   import each other's pages or components, and the storefront talks to the
   Store API over HTTP.
@@ -95,6 +96,7 @@ software/crates/        Rust, outside Turbo
 software/Cargo.toml     Cargo workspace
 packages/design/        @kiboar/design (base CSS and tokens)
 packages/tsconfig/      @kiboar/tsconfig
+packages/vite-config/   @kiboar/vite-config
 web/                    @kiboar/web
 shop/                   @kiboar/shop (Medusa)
 shop/storefront/        @kiboar/storefront

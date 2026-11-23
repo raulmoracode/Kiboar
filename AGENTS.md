@@ -107,11 +107,11 @@ is it.
   `shop` are the workspace packages. The KiCad library is not an npm package and
   must not be added to the workspace.
 - Shared code that two products need lives in `packages/*`
-  (`@kiboar/design`, `@kiboar/tsconfig`). Share tokens, CSS and configuration;
-  do not share a product's screens or its data layer. A package with one
-  consumer stays in that product.
+  (`@kiboar/design`, `@kiboar/tsconfig`, `@kiboar/vite-config`). Share tokens,
+  CSS, compiler and build configuration; do not share a product's screens or
+  its data layer. A package with one consumer stays in that product.
 - Shared versions live in the `catalog` block of `pnpm-workspace.yaml`. Use
-  `"catalog:"` for React, TypeScript, Tailwind, Zod and their types instead of
+  `"catalog:"` for React, TypeScript, Tailwind, Vite, Zod and their types instead of
   writing a new range. Medusa's own packages keep the version its template
   pins; do not move them into the catalog.
 - Turborepo runs `build`, `typecheck`, `test` and `dev` for the JavaScript

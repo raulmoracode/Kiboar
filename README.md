@@ -103,8 +103,8 @@ See [`keyboards/README.md`](keyboards/README.md).
 - [`SECURITY.md`](SECURITY.md) — how to report a vulnerability privately.
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) — how to contribute and what a pull
   request must include.
-- [`packages/`](packages/README.md) — shared workspace packages: design tokens
-  and TypeScript config.
+- [`packages/`](packages/README.md) — shared workspace packages: design tokens,
+  the Vite setup and the TypeScript config.
 - [`CHANGELOG.md`](CHANGELOG.md) — changes to the KiCad library and the PCM
   package. The docs site and Studio have independent versions; see
   `ARCHITECTURE.md`.

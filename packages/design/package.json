@@ -5,9 +5,14 @@
   "description": "Shared base CSS and design tokens for the Kiboar JavaScript apps.",
   "license": "MIT",
   "exports": {
+    "./app.css": "./app.css",
     "./base.css": "./base.css"
   },
   "files": [
+    "app.css",
     "base.css"
-  ]
+  ],
+  "dependencies": {
+    "tailwindcss": "catalog:"
+  }
 }

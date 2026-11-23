@@ -30,7 +30,7 @@ index.html          Vite entry
 src/main.tsx        React root
 src/App.tsx         the page
 src/styles.css      Tailwind import and the shared base
-vite.config.ts      React and Tailwind plugins
+vite.config.ts      shared Vite config and port 3000
 ```
 
 ## Sharing
@@ -39,8 +39,10 @@ The package is part of the root pnpm workspace, so React, TypeScript and
 Tailwind come from the `catalog` block of `pnpm-workspace.yaml`. There is no
 second lockfile and no nested workspace.
 
-The base CSS and colour tokens come from `@kiboar/design` and the compiler
-options from `@kiboar/tsconfig`, both in `packages/`. If a component or a type
+The base CSS and colour tokens come from `@kiboar/design`, the Vite plugins and
+ports from `@kiboar/vite-config`, and the compiler options from
+`@kiboar/tsconfig`, all in `packages/`. React, Vite, Tailwind and TypeScript
+versions come from the catalog. If a component or a type
 is needed by both `web` and another product, add it as a shared package instead
 of copying it; a component used by one product stays in that product.
 

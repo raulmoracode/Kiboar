@@ -9,13 +9,14 @@ than one product uses it; until then it stays in the app that owns it.
 
 ## Usage
 
-Add the package to the app and import it after Tailwind, so the tokens win over
-the preflight:
+Import the app entry, which pulls Tailwind and the base in the right order:
 
 ```css
-@import "tailwindcss";
-@import "@kiboar/design/base.css";
+@import "@kiboar/design/app.css";
 ```
+
+`app.css` is `@import "tailwindcss"` followed by `base.css`. An app that does not
+use Tailwind can import `@kiboar/design/base.css` directly.
 
 Tokens:
 
@@ -30,7 +31,8 @@ apps still use Tailwind classes; this package does not replace Tailwind.
 
 ## Boundaries
 
-- CSS only. No React, no JavaScript and no build step.
+- CSS only. No React and no build step. It owns the Tailwind entry and
+therefore depends on `tailwindcss` from the catalog.
 - No product-specific layout. `web` is a brand page and the storefront is a
   catalogue; neither belongs here.
 - No remote fonts. The font stack is the system UI stack.

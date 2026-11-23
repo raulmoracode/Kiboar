@@ -36,7 +36,7 @@ let anyone build the same board, so the shop never gates the design.
   seeded from `src/`. A seed is a separate change with its own decision.
 - **The storefront is separate from `web`.** `shop/storefront` is its own Vite
   app; do not import `web/` or `software/` code into it. Both front ends share
-  `@kiboar/design` and `@kiboar/tsconfig`, not screens.
+  `@kiboar/design`, `@kiboar/vite-config` and `@kiboar/tsconfig`, not screens.
 - **No secrets.** `.env` stays local; `.env.template` carries placeholders only.
 
 ## Commands
