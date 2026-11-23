@@ -1,7 +1,9 @@
+import { AlertTriangle, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import type { ArtifactInspection } from "../lib/bindings/ArtifactInspection";
 import type { BoardSummary } from "../lib/bindings/BoardSummary";
 import type { VolumeInfo } from "../lib/bindings/VolumeInfo";
+import { fileName, shortDigest } from "../lib/format";
 
 interface Props {
   open: boolean;
@@ -10,10 +12,6 @@ interface Props {
   volume: VolumeInfo | null;
   onCancel: () => void;
   onConfirm: (confirmation: string) => void;
-}
-
-function fileName(path: string): string {
-  return path.split(/[\\/]/).pop() ?? path;
 }
 
 export function ConfirmFlashDialog({ open, board, artifact, volume, onCancel, onConfirm }: Props) {
@@ -44,72 +42,62 @@ export function ConfirmFlashDialog({ open, board, artifact, volume, onCancel, on
         event.preventDefault();
         onCancel();
       }}
-      className="w-[min(36rem,calc(100vw-2rem))] rounded-2xl border border-white/10 bg-[#0f1216] p-0 text-zinc-200 backdrop:bg-black/70"
+      className="w-[min(420px,calc(100vw-2rem))] rounded-xl border border-white/10 bg-[#0c0e11] p-0 text-zinc-200 backdrop:bg-black/70"
     >
       {ready ? (
         <div className="p-6">
-          <div className="flex items-start justify-between gap-4">
+          <div className="flex items-start justify-between">
             <div>
-              <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-zinc-500">
-                {volume.is_development ? "Development volume" : "Bootloader mounted"}
+              <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-zinc-600">
+                Confirm
               </p>
-              <h2 id="confirm-title" className="mt-2 text-xl font-semibold text-zinc-50">
-                Confirm flash
+              <h2 id="confirm-title" className="mt-2 text-lg font-medium text-zinc-100">
+                Flash
               </h2>
             </div>
-            <span className="rounded-full border border-amber-400/30 bg-amber-400/10 px-2.5 py-1 text-[11px] font-medium uppercase tracking-wider text-amber-300">
-              Unofficial · unverified
-            </span>
+            <button
+              type="button"
+              onClick={onCancel}
+              aria-label="Cancel"
+              className="text-zinc-600 transition hover:text-zinc-200"
+            >
+              <X size={16} />
+            </button>
           </div>
 
-          <dl className="mt-5 grid gap-3 rounded-xl border border-white/10 bg-white/[0.03] p-4 text-sm">
+          <dl className="mt-6 grid gap-2.5 text-xs">
             <div className="flex justify-between gap-4">
-              <dt className="text-zinc-500">Board</dt>
-              <dd className="text-right font-medium text-zinc-100">{board.name}</dd>
-            </div>
-            <div className="flex justify-between gap-4">
-              <dt className="text-zinc-500">Board id</dt>
-              <dd className="font-mono text-zinc-300">
-                {board.board_id} · rev {board.hw_rev}
+              <dt className="text-zinc-600">Board</dt>
+              <dd className="text-right text-zinc-300">
+                {board.name} <span className="text-zinc-600">rev {board.hw_rev}</span>
               </dd>
             </div>
             <div className="flex justify-between gap-4">
-              <dt className="text-zinc-500">MCU</dt>
-              <dd className="font-mono text-zinc-300">{board.mcu}</dd>
-            </div>
-            <div className="flex justify-between gap-4">
-              <dt className="text-zinc-500">Firmware</dt>
-              <dd className="max-w-[60%] break-all text-right font-mono text-zinc-300">
+              <dt className="text-zinc-600">File</dt>
+              <dd className="max-w-[65%] truncate font-mono text-[11px] text-zinc-400">
                 {fileName(artifact.path)}
               </dd>
             </div>
             <div className="flex justify-between gap-4">
-              <dt className="text-zinc-500">SHA-256</dt>
-              <dd className="max-w-[70%] break-all text-right font-mono text-xs text-zinc-400">
-                {artifact.sha256}
-              </dd>
-            </div>
-            <div className="flex justify-between gap-4">
-              <dt className="text-zinc-500">Volume</dt>
-              <dd className="max-w-[70%] break-all text-right font-mono text-xs text-zinc-400">
-                {volume.path}
+              <dt className="text-zinc-600">SHA</dt>
+              <dd className="font-mono text-[10px] text-zinc-600">
+                {shortDigest(artifact.sha256)}
               </dd>
             </div>
           </dl>
 
-          <p className="mt-4 rounded-xl border border-amber-500/25 bg-amber-500/5 px-4 py-3 text-sm text-amber-100/90">
-            This file does not declare compatibility with this board. A wrong pin mapping can damage
-            the keyboard, and it may stop being recognised afterwards.
+          <p className="mt-5 flex items-start gap-2 text-[11px] leading-relaxed text-amber-200/70">
+            <AlertTriangle size={13} className="mt-0.5 shrink-0" />
+            Unofficial firmware. A wrong board can damage it.
           </p>
 
-          {volume.is_development ? (
-            <p className="mt-3 text-xs text-zinc-500">
-              Development volume: the bytes are written to this directory, not to a board.
-            </p>
-          ) : null}
+          <p className="mt-2 font-mono text-[10px] text-zinc-600">
+            → {volume.path}
+            {volume.is_development ? " · directory" : ""}
+          </p>
 
-          <label className="mt-5 block text-sm" htmlFor="confirmation">
-            Type <span className="font-mono text-zinc-200">{board.board_id}</span> to confirm
+          <label htmlFor="confirmation" className="mt-5 block text-[11px] text-zinc-500">
+            Type <span className="font-mono text-zinc-300">{board.board_id}</span> to confirm
             <input
               id="confirmation"
               value={confirmation}
@@ -117,15 +105,15 @@ export function ConfirmFlashDialog({ open, board, artifact, volume, onCancel, on
               autoFocus
               spellCheck={false}
               autoComplete="off"
-              className="mt-2 w-full rounded-lg border border-white/15 bg-black/30 px-3 py-2 font-mono text-sm text-zinc-100 outline-none focus:border-emerald-400/60"
+              className="mt-2 w-full border-b border-white/10 bg-transparent pb-2 font-mono text-sm text-zinc-100 outline-none transition focus:border-lime-300"
             />
           </label>
 
-          <div className="mt-6 flex justify-end gap-3">
+          <div className="mt-6 flex items-center justify-end gap-4">
             <button
               type="button"
               onClick={onCancel}
-              className="rounded-full border border-white/15 px-4 py-2 text-sm text-zinc-300 transition hover:bg-white/5"
+              className="text-[11px] text-zinc-500 transition hover:text-zinc-200"
             >
               Cancel
             </button>
@@ -133,9 +121,9 @@ export function ConfirmFlashDialog({ open, board, artifact, volume, onCancel, on
               type="button"
               disabled={!canConfirm}
               onClick={() => onConfirm(confirmation)}
-              className="rounded-full bg-emerald-400 px-5 py-2 text-sm font-semibold text-emerald-950 transition hover:bg-emerald-300 disabled:cursor-not-allowed disabled:opacity-40"
+              className="rounded-md bg-lime-300 px-4 py-2 text-xs font-semibold text-lime-950 transition hover:bg-lime-200 disabled:cursor-not-allowed disabled:bg-white/[0.04] disabled:text-zinc-600"
             >
-              Flash firmware
+              Flash
             </button>
           </div>
         </div>

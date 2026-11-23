@@ -3,7 +3,11 @@
 /**
  * Everything the UI must confirm before a write.
  */
-export type FlashRequest = { board_id: string, hw_rev: number, artifact_path: string, expected_sha256: string, 
+export type FlashRequest = { board_id: string, hw_rev: number, 
+/**
+ * Used when the board is not in the registry.
+ */
+mcu: string, artifact_path: string, expected_sha256: string, 
 /**
  * Must repeat the board id; the backend enforces it.
  */

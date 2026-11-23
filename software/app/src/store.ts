@@ -10,6 +10,10 @@ import type { FlashProgress } from "./lib/bindings/FlashProgress";
 import type { FlashRequest } from "./lib/bindings/FlashRequest";
 import type { VolumeInfo } from "./lib/bindings/VolumeInfo";
 
+export function boardKey(board: BoardSummary): string {
+  return `${board.board_id}@${board.hw_rev}`;
+}
+
 type LoadStatus = "idle" | "loading" | "ready" | "error";
 type FlashStatus = "idle" | "confirming" | "flashing" | "done" | "error";
 
@@ -25,6 +29,10 @@ interface StudioStore {
   selectedBoard: BoardSummary | null;
   loadBoards: () => Promise<void>;
   selectBoard: (board: BoardSummary) => void;
+
+  customBoards: BoardSummary[];
+  customArtifacts: Record<string, ArtifactInspection>;
+  addCustomBoard: (board: BoardSummary, artifact: ArtifactInspection | null) => void;
 
   volume: VolumeInfo | null;
   volumeStatus: LoadStatus;
@@ -77,7 +85,28 @@ export const useStudioStore = create<StudioStore>((set, get) => ({
       set({ boards: [], boardsStatus: "error", boardsError: String(error) });
     }
   },
-  selectBoard: (board) => set({ selectedBoard: board }),
+  selectBoard: (board) =>
+    set((state) => {
+      const stored = state.customArtifacts[boardKey(board)];
+      return stored
+        ? { selectedBoard: board, artifact: stored, artifactStatus: "ready", artifactError: null }
+        : { selectedBoard: board };
+    }),
+
+  customBoards: [],
+  customArtifacts: {},
+  addCustomBoard: (board, artifact) =>
+    set((state) => {
+      const key = boardKey(board);
+      return {
+        customBoards: [...state.customBoards.filter((entry) => boardKey(entry) !== key), board],
+        customArtifacts: artifact
+          ? { ...state.customArtifacts, [key]: artifact }
+          : state.customArtifacts,
+        selectedBoard: board,
+        ...(artifact ? { artifact, artifactStatus: "ready" as const, artifactError: null } : {}),
+      };
+    }),
 
   volume: null,
   volumeStatus: "idle",
@@ -121,13 +150,20 @@ export const useStudioStore = create<StudioStore>((set, get) => ({
     }
   },
   clearArtifact: () =>
-    set({
-      artifact: null,
-      artifactStatus: "idle",
-      artifactError: null,
-      flashStatus: "idle",
-      outcome: null,
-      progress: null,
+    set((state) => {
+      const customArtifacts = { ...state.customArtifacts };
+      if (state.selectedBoard) {
+        delete customArtifacts[boardKey(state.selectedBoard)];
+      }
+      return {
+        artifact: null,
+        artifactStatus: "idle",
+        artifactError: null,
+        flashStatus: "idle",
+        outcome: null,
+        progress: null,
+        customArtifacts,
+      };
     }),
 
   flashStatus: "idle",
@@ -152,6 +188,7 @@ export const useStudioStore = create<StudioStore>((set, get) => ({
     const request: FlashRequest = {
       board_id: selectedBoard.board_id,
       hw_rev: selectedBoard.hw_rev,
+      mcu: selectedBoard.mcu,
       artifact_path: artifact.path,
       expected_sha256: artifact.sha256,
       confirmation,
@@ -176,6 +213,7 @@ export const useStudioStore = create<StudioStore>((set, get) => ({
         },
       });
       void get().detectVolume();
+      void get().scan();
     } catch (error) {
       const message = String(error);
       if (message.toLowerCase().includes("cancelled")) {
@@ -202,8 +240,12 @@ export const useStudioStore = create<StudioStore>((set, get) => ({
       flashError: null,
       cancelling: false,
     }),
-  subscribeToProgress: () =>
-    listen<FlashProgress>("flash-progress", (event) => {
+  subscribeToProgress: () => {
+    if (typeof window === "undefined" || !("__TAURI_INTERNALS__" in window)) {
+      return Promise.resolve(() => {});
+    }
+    return listen<FlashProgress>("flash-progress", (event) => {
       set({ progress: event.payload });
-    }),
+    });
+  },
 }));

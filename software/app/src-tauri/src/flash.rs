@@ -42,6 +42,8 @@ pub struct VolumeInfo {
 pub struct FlashRequest {
     pub board_id: String,
     pub hw_rev: u32,
+    /// Used when the board is not in the registry.
+    pub mcu: String,
     pub artifact_path: String,
     pub expected_sha256: String,
     /// Must repeat the board id; the backend enforces it.
@@ -167,22 +169,25 @@ pub fn flash_to_volume(
     }
 
     let boards = registry::list_boards_in(root).map_err(FlashError::Registry)?;
-    let board = boards
+    let known = boards
         .into_iter()
-        .find(|board| board.board_id == request.board_id && board.hw_rev == request.hw_rev)
-        .ok_or_else(|| FlashError::UnknownBoard {
-            board_id: request.board_id.clone(),
-            hw_rev: request.hw_rev,
-        })?;
+        .find(|board| board.board_id == request.board_id && board.hw_rev == request.hw_rev);
+    let (board_id, hw_rev, mcu) = match known {
+        Some(board) => (board.board_id, board.hw_rev, board.mcu),
+        None => (
+            request.board_id.clone(),
+            request.hw_rev,
+            request.mcu.clone(),
+        ),
+    };
 
-    let family =
-        family_for_mcu(&board.mcu).ok_or_else(|| FlashError::UnsupportedMcu(board.mcu.clone()))?;
+    let family = family_for_mcu(&mcu).ok_or(FlashError::UnsupportedMcu(mcu))?;
     let bytes = fs::read(&request.artifact_path).map_err(FlashError::Read)?;
     let uf2 = Uf2::parse(&bytes)?;
     uf2.validate_for_family(family)?;
     verify_sha256(&bytes, &request.expected_sha256)?;
 
-    let file_name = format!("kiboar-{}-rev{}.uf2", board.board_id, board.hw_rev);
+    let file_name = format!("kiboar-{board_id}-rev{hw_rev}.uf2");
     let path = volume.join(&file_name);
     let mut file = File::create(&path).map_err(FlashError::Write)?;
 
@@ -198,8 +203,8 @@ pub fn flash_to_volume(
 
     match result {
         Ok(written) => Ok(FlashOutcome {
-            board_id: board.board_id,
-            hw_rev: board.hw_rev,
+            board_id,
+            hw_rev,
             volume_path: volume.display().to_string(),
             file_name,
             bytes_written: u32::try_from(written)
@@ -254,8 +259,6 @@ fn default_search_roots() -> Vec<(PathBuf, usize)> {
 
 #[derive(Debug, Error)]
 pub enum FlashError {
-    #[error("the board {board_id} rev {hw_rev} is not in the registry")]
-    UnknownBoard { board_id: String, hw_rev: u32 },
     #[error("the confirmation does not match the board id")]
     ConfirmationMismatch,
     #[error("the board MCU {0} cannot be flashed")]
@@ -316,6 +319,7 @@ mod tests {
         FlashRequest {
             board_id: "kb60-hhkb".to_string(),
             hw_rev: 1,
+            mcu: "rp2040-zero".to_string(),
             artifact_path: path.display().to_string(),
             expected_sha256: sha256_hex(bytes),
             confirmation: "kb60-hhkb".to_string(),
@@ -436,14 +440,40 @@ mod tests {
     }
 
     #[test]
-    fn rejects_an_unknown_board() {
+    fn writes_a_board_outside_the_registry() {
+        let dir = tempfile::tempdir().unwrap();
+        let bytes = artefact(1, RP2040_FAMILY_ID);
+        let artifact_path = dir.path().join("firmware.uf2");
+        fs::write(&artifact_path, &bytes).unwrap();
+        let volume = dir.path().join("RPI-RP2");
+        fs::create_dir(&volume).unwrap();
+        let mut request = request(&artifact_path, &bytes);
+        request.board_id = "custom-60".to_string();
+        request.confirmation = "custom-60".to_string();
+
+        let outcome = flash_to_volume(
+            &request,
+            &repo_root(),
+            &volume,
+            &AtomicBool::new(false),
+            |_| {},
+        )
+        .unwrap();
+
+        assert_eq!(outcome.board_id, "custom-60");
+        assert!(volume.join("kiboar-custom-60-rev1.uf2").exists());
+    }
+
+    #[test]
+    fn rejects_an_unsupported_mcu() {
         let dir = tempfile::tempdir().unwrap();
         let bytes = artefact(1, RP2040_FAMILY_ID);
         let artifact_path = dir.path().join("firmware.uf2");
         fs::write(&artifact_path, &bytes).unwrap();
         let mut request = request(&artifact_path, &bytes);
-        request.board_id = "not-a-board".to_string();
-        request.confirmation = "not-a-board".to_string();
+        request.board_id = "custom-60".to_string();
+        request.confirmation = "custom-60".to_string();
+        request.mcu = "stm32".to_string();
 
         let error = flash_to_volume(
             &request,
@@ -454,7 +484,7 @@ mod tests {
         )
         .unwrap_err();
 
-        assert!(matches!(error, FlashError::UnknownBoard { .. }));
+        assert!(matches!(error, FlashError::UnsupportedMcu(_)));
     }
 
     #[test]
