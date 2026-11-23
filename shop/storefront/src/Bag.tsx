@@ -151,7 +151,7 @@ export function Bag({
           </div>
         ) : (
           <>
-            <ul className="flex-1 divide-y divide-white/[0.14] overflow-y-auto px-5">
+            <ul className="flex-1 divide-y divide-white/[0.2] overflow-y-auto px-5">
               {items.map((item) => {
                 const image = imageUrl(item.thumbnail);
 
