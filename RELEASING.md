@@ -83,6 +83,17 @@ pre-release when the ref is a `studio-v*` tag.
 The 0.1 build is **ad-hoc signed and not notarized**. It is a tester build, not
 a public consumer one; the release notes say so.
 
+If the account cannot use macOS hosted runners, the workflow is cancelled before
+its first step. Build locally instead:
+
+```bash
+pnpm --filter @kiboar/studio tauri build
+```
+
+That produces an `aarch64` DMG on Apple Silicon. Attach it to the same
+`studio-v<version>` release with `SHA256SUMS`, then update the cask. The 0.1
+release was published this way.
+
 1. **Set the same version** in `software/app/package.json`,
    `software/app/src-tauri/tauri.conf.json` and
    `software/app/src-tauri/Cargo.toml`.
