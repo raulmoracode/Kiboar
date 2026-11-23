@@ -18,18 +18,8 @@ export function KeyboardGrid({ boards, customBoards, detected, selected, onSelec
   const cards = [...customBoards, ...boards];
 
   return (
-    <section aria-labelledby="keyboards-heading" className="flex flex-1 flex-col">
-      <div className="mb-3 flex items-baseline justify-between">
-        <h2
-          id="keyboards-heading"
-          className="text-[10px] font-medium uppercase tracking-[0.22em] text-zinc-600"
-        >
-          Keyboards
-        </h2>
-        <span className="font-mono text-[10px] text-zinc-700">{cards.length}</span>
-      </div>
-
-      <div className="grid flex-1 auto-rows-fr gap-3 sm:grid-cols-2 xl:grid-cols-3">
+    <section aria-label="Keyboards" className="flex min-h-0 flex-1 flex-col">
+      <div className="grid min-h-0 flex-1 auto-rows-fr gap-3 overflow-y-auto sm:grid-cols-2 xl:grid-cols-3">
         {cards.map((board) => {
           const key = boardKey(board);
           return (

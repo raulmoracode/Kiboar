@@ -213,6 +213,7 @@ export const useStudioStore = create<StudioStore>((set, get) => ({
         },
       });
       void get().detectVolume();
+      void get().scan();
     } catch (error) {
       const message = String(error);
       if (message.toLowerCase().includes("cancelled")) {

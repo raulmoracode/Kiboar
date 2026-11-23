@@ -5,14 +5,12 @@ import { ConfirmFlashDialog } from "./components/ConfirmFlashDialog";
 import { FirmwarePicker } from "./components/FirmwarePicker";
 import { FlashAction } from "./components/FlashAction";
 import { KeyboardGrid } from "./components/KeyboardGrid";
-import { TopBar } from "./components/TopBar";
 import type { BoardInfo } from "./lib/bindings/BoardInfo";
 import type { BoardSummary } from "./lib/bindings/BoardSummary";
 import { boardKey, useStudioStore } from "./store";
 
 export default function App() {
   const devices = useStudioStore((state) => state.devices);
-  const status = useStudioStore((state) => state.status);
   const scan = useStudioStore((state) => state.scan);
 
   const boards = useStudioStore((state) => state.boards);
@@ -95,21 +93,14 @@ export default function App() {
 
   return (
     <main className="min-h-screen bg-[#0a0b0d] text-zinc-200">
-      <TopBar
-        volume={volume}
-        bootloader={bootloader}
-        scanning={status === "loading"}
-        onScan={() => {
-          void scan();
-          void detectVolume();
-        }}
-      />
-
       {openBoard ? (
-        <div className="mx-auto w-full max-w-[640px] px-6 pb-10 pt-6">
+        <div className="mx-auto w-full max-w-[640px] px-6 py-6">
           <button
             type="button"
-            onClick={() => setOpenBoard(null)}
+            onClick={() => {
+              void scan();
+              setOpenBoard(null);
+            }}
             className="flex items-center gap-2 text-[11px] text-zinc-600 transition hover:text-zinc-200"
           >
             <ArrowLeft size={13} />
@@ -155,7 +146,7 @@ export default function App() {
           />
         </div>
       ) : (
-        <div className="mx-auto flex min-h-[calc(100vh-3.5rem)] w-full flex-col px-6 pb-6 pt-6">
+        <div className="flex h-screen w-full flex-col p-6">
           <KeyboardGrid
             boards={gridBoards}
             customBoards={customBoards}
