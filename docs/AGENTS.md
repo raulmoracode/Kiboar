@@ -6,10 +6,11 @@ there apply here and are not repeated.
 
 ## What this product is
 
-A static documentation site for the KiCad library, built with Astro 7 and
-Fumadocs. English is served at `/docs` and Spanish at `/es/docs`. It is the
-`kiboar-docs` package in the root pnpm workspace and deploys to Vercel from the
-`docs` Root Directory.
+A static documentation site for Kiboar: the official KiCad library and how to
+use it, Kiboar Studio and the licences. It covers both paths, buying an
+assembled keyboard or building your own. Built with Astro 7 and Fumadocs. English
+is served at `/docs` and Spanish at `/es/docs`. It is the `kiboar-docs` package
+in the root pnpm workspace and deploys to Vercel from the `docs` Root Directory.
 
 ## Layout
 
@@ -39,6 +40,8 @@ Fumadocs. English is served at `/docs` and Spanish at `/es/docs`. It is the
   `docs`; the build command is
   `cd .. && pnpm turbo run build --filter=kiboar-docs`. Do not hard-code an npm
   command or a second lockfile.
+- **The deployment owns `/docs` and `/es/docs`.** The root of the domain is
+  `web` and `/shop` is the Medusa store; the docs project must not claim `/`.
 - **The library lives in `library/`.** The generator reads `library/footprints/`;
   do not copy or relocate library data into `docs/`.
 - `docs/dist/` and `docs/.astro/` are generated; do not commit them.

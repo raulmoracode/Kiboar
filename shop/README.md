@@ -1,11 +1,13 @@
 # Kiboar shop
 
-The Medusa v2 application for the Kiboar shop: the Store API, the admin dashboard
-and the place where products, regions and orders will live.
+The commercial surface of the brand: it sells assembled Kiboar keyboards. Buying
+is a convenience, not a lock-in — the library and the board definitions are
+published and the documentation lets anyone build the same board. A Medusa v2
+application with the Store API and the admin dashboard.
 
 **Status: scaffold.** The application is wired into the repository workspace and
-builds, but it has no products, no storefront integration and no deployment. The
-`web` product is the public site and the future storefront.
+builds and runs, but it has no products, no region and no storefront
+integration. The `web` product is the public site and the future storefront.
 
 ## Requirements
 
@@ -43,8 +45,19 @@ the repository root has an `.npmrc` with the four `public-hoist-pattern`
 entries from the Medusa pnpm guide. Do not remove them: without them the admin
 fails with `can't resolve @medusajs/dashboard` or a missing `QueryClient`.
 
+## Deployment
+
+Served under `/shop` on `https://kiboar.raulmoracode.com`. Medusa is a Node
+service with PostgreSQL and an admin dashboard, so it cannot run on a static
+host: the domain needs a reverse proxy or a rewrite from `/shop` to the Medusa
+process. The admin and the API come from that same process, so the rewrite has to
+keep their paths consistent. Production CORS must include the brand domain.
+
+The routing and the production host are not configured in this repository.
+
 ## What is not here
 
 - No storefront: `web/` is the public site and will consume the Store API.
 - No catalogue seed, no payment provider, no shipping options.
-- No deployment. Medusa Cloud or a Node host are the candidates.
+- No deployment configuration. The `/shop` route is a host concern; the
+  application itself is ready to build.

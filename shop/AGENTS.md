@@ -6,9 +6,13 @@ there apply here.
 
 ## What this product is
 
-The Kiboar shop backend: a Medusa v2 application with the Store API and the
-admin dashboard. It is `@kiboar/shop`, a package of the root pnpm workspace. It
-is not the public site; `web/` is.
+The commercial surface of the Kiboar brand: it sells assembled keyboards. A
+Medusa v2 application with the Store API and the admin dashboard. It is
+`@kiboar/shop`, a package of the root pnpm workspace. It is not the public site;
+`web/` is.
+
+Buying is a convenience, not a lock-in: the library and the documentation must
+let anyone build the same board, so the shop never gates the design.
 
 ## Layout
 
