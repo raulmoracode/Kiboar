@@ -5,8 +5,8 @@ The customer-facing shop, served under `/shop`. It is a separate project from
 
 **Status: catalogue, product pages and a demo bag.** It lists the products
 published in Medusa as vertical cards with a photo, the name and the price, and
-each card opens a page for that board. There is no checkout, account or search
-yet.
+each card opens a page for that board, with a gallery of every photo on the
+product. There is no checkout, account or search yet.
 
 ## Product pages
 
@@ -29,10 +29,11 @@ connected.
 
 ## Photos
 
-Each card uses the product's `thumbnail` from the Store API. Upload one in the
-Medusa admin (**Products → the product → Media**) and the card shows it. Without
-a thumbnail the card renders a neutral "No photo" panel; no image is invented or
-bundled.
+Each card uses the product's `thumbnail`. The product page shows every image in
+the product's `images` gallery, with a thumbnail strip under the main photo; with
+no images it falls back to the thumbnail. Upload them in the Medusa admin
+(**Products → the product → Media**). Without any image the card renders a
+neutral "No photo" panel; no image is invented or bundled.
 
 ## Development
 

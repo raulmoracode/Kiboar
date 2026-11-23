@@ -9,19 +9,25 @@ export interface Variant {
   prices?: Price[];
 }
 
+export interface ProductImage {
+  id: string;
+  url: string;
+}
+
 export interface Product {
   id: string;
   title: string;
   handle: string;
   description: string | null;
   thumbnail: string | null;
+  images?: ProductImage[];
   variants?: Variant[];
 }
 
 const BASE_URL = (import.meta.env.VITE_MEDUSA_URL ?? "http://localhost:9000").replace(/\/$/, "");
 const PUBLISHABLE_KEY = import.meta.env.VITE_MEDUSA_PUBLISHABLE_KEY ?? "";
 
-const FIELDS = "id,title,handle,description,thumbnail,*variants,*variants.prices";
+const FIELDS = "id,title,handle,description,thumbnail,*images,*variants,*variants.prices";
 
 export class NotConfiguredError extends Error {}
 

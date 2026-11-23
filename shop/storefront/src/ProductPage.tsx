@@ -26,6 +26,7 @@ export function ProductPage({
 }) {
   const [state, setState] = useState<State>({ status: "loading" });
   const [variantId, setVariantId] = useState<string | null>(null);
+  const [imageIndex, setImageIndex] = useState(0);
 
   useEffect(() => {
     let cancelled = false;
@@ -45,6 +46,7 @@ export function ProductPage({
         }
 
         setVariantId(product.variants?.[0]?.id ?? null);
+        setImageIndex(0);
         setState({ status: "ready", product });
         document.title = `${product.title} · Kiboar`;
       } catch (error) {
@@ -106,16 +108,46 @@ export function ProductPage({
   const variants = product.variants ?? [];
   const variant = variants.find((entry) => entry.id === variantId) ?? variants[0];
   const price = variantPrice(variant);
-  const image = imageUrl(product.thumbnail);
+  const images = (product.images ?? [])
+    .map((entry) => imageUrl(entry.url))
+    .filter((url): url is string => Boolean(url));
+  const fallback = imageUrl(product.thumbnail);
+  if (images.length === 0 && fallback) {
+    images.push(fallback);
+  }
+  const image = images[imageIndex] ?? images[0] ?? null;
 
   return (
     <article className="grid gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] lg:items-start">
-      <div className="flex aspect-[4/3] w-full items-center justify-center overflow-hidden rounded-lg border border-white/[0.06] bg-white/[0.015]">
-        {image ? (
-          <img src={image} alt={product.title} className="h-full w-full object-contain" />
-        ) : (
-          <span className="text-[10px] tracking-[0.16em] text-zinc-600 uppercase">No photo</span>
-        )}
+      <div>
+        <div className="flex aspect-[4/3] w-full items-center justify-center overflow-hidden rounded-lg border border-white/[0.06] bg-white/[0.015]">
+          {image ? (
+            <img src={image} alt={product.title} className="h-full w-full object-contain" />
+          ) : (
+            <span className="text-[10px] tracking-[0.16em] text-zinc-600 uppercase">No photo</span>
+          )}
+        </div>
+
+        {images.length > 1 ? (
+          <div className="mt-3 flex flex-wrap gap-2">
+            {images.map((url, index) => (
+              <button
+                key={url}
+                type="button"
+                aria-label={`View image ${index + 1} of ${images.length}`}
+                aria-pressed={index === imageIndex}
+                onClick={() => setImageIndex(index)}
+                className={`aspect-[4/3] w-20 overflow-hidden rounded border bg-white/[0.015] transition-colors ${
+                  index === imageIndex
+                    ? "border-lime-300/60"
+                    : "border-white/10 hover:border-white/30"
+                }`}
+              >
+                <img src={url} alt="" className="h-full w-full object-contain" />
+              </button>
+            ))}
+          </div>
+        ) : null}
       </div>
 
       <div className="lg:py-2">
