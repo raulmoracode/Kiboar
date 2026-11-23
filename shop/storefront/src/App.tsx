@@ -132,12 +132,6 @@ export default function App() {
     return () => window.removeEventListener("popstate", onPopState);
   }, []);
 
-  useEffect(() => {
-    if (!handle) {
-      document.title = "Kiboar · Shop";
-    }
-  }, [handle]);
-
   const go = useCallback((next: string | null) => {
     const url = new URL(window.location.href);
     if (next) {

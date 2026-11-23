@@ -47,14 +47,12 @@ export function ProductPage({
 
         if (!product) {
           setState({ status: "missing" });
-          document.title = "Board not found · Kiboar";
           return;
         }
 
         setVariantId(product.variants?.[0]?.id ?? null);
         setImageIndex(0);
         setState({ status: "ready", product });
-        document.title = `${product.title} · Kiboar`;
       } catch (error) {
         if (!cancelled) {
           setState({
