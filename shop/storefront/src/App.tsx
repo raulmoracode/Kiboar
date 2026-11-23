@@ -1,46 +1,11 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { listProducts, NotConfiguredError, type Product, type Variant, variantPrice } from "./api";
+import { Bag, type BagItem } from "./Bag";
+import { Catalogue, type CatalogueState } from "./Catalogue";
+import { ProductPage } from "./ProductPage";
 
-interface Price {
-  amount: number;
-  currency_code: string;
-}
-
-interface Variant {
-  id: string;
-  prices?: Price[];
-}
-
-interface Product {
-  id: string;
-  title: string;
-  description: string | null;
-  thumbnail: string | null;
-  variants?: Variant[];
-}
-
-type State =
-  | { status: "loading" }
-  | { status: "error"; message: string }
-  | { status: "ready"; products: Product[] };
-
-const MEDUSA_URL = import.meta.env.VITE_MEDUSA_URL ?? "http://localhost:9000";
-const PUBLISHABLE_KEY = import.meta.env.VITE_MEDUSA_PUBLISHABLE_KEY ?? "";
-
-function priceOf(product: Product): string | null {
-  const prices = product.variants?.flatMap((variant) => variant.prices ?? []) ?? [];
-  if (prices.length === 0) {
-    return null;
-  }
-
-  const price = prices.find((entry) => entry.currency_code === "eur") ?? prices[0];
-  if (!price) {
-    return null;
-  }
-
-  return new Intl.NumberFormat("en-IE", {
-    style: "currency",
-    currency: price.currency_code.toUpperCase(),
-  }).format(price.amount / 100);
+function handleFromUrl(): string | null {
+  return new URLSearchParams(window.location.search).get("p");
 }
 
 function BagIcon() {
@@ -62,107 +27,66 @@ function BagIcon() {
   );
 }
 
-function Catalogue({ state }: { state: State }) {
-  if (state.status === "loading") {
-    return <p className="text-[13px] text-zinc-500">Loading the shop…</p>;
-  }
-
-  if (state.status === "error") {
-    return (
-      <p className="text-[13px] text-zinc-400">
-        {state.message}{" "}
-        <a
-          className="text-zinc-200 underline decoration-white/20 underline-offset-4 hover:text-lime-200"
-          href="https://kiboar.raulmoracode.com/"
-        >
-          Back to Kiboar
-        </a>
-        .
-      </p>
-    );
-  }
-
-  if (state.products.length === 0) {
-    return <p className="text-[13px] text-zinc-400">The first boards are not published yet.</p>;
-  }
-
+function Header({
+  count,
+  onHome,
+  onOpenBag,
+}: {
+  count: number;
+  onHome: () => void;
+  onOpenBag: () => void;
+}) {
   return (
-    <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
-      {state.products.map((product) => {
-        const price = priceOf(product);
-        const image = product.thumbnail
-          ? product.thumbnail.startsWith("http")
-            ? product.thumbnail
-            : `${MEDUSA_URL}${product.thumbnail}`
-          : null;
-
-        return (
-          <article
-            key={product.id}
-            className="flex min-h-0 flex-col overflow-hidden rounded-lg border border-white/[0.06] bg-white/[0.015] transition-colors hover:border-white/15 md:h-[calc((100vh-9rem)/3)]"
-          >
-            <div className="flex items-baseline justify-between gap-4 px-4 pt-3.5 pb-3">
-              <h2 className="min-w-0 truncate text-[14px] text-zinc-100">{product.title}</h2>
-              <p className="shrink-0 font-mono text-[12px] text-zinc-300">{price ?? "—"}</p>
-            </div>
-            <div className="aspect-[4/3] w-full overflow-hidden md:aspect-auto md:min-h-0 md:flex-1">
-              {image ? (
-                <img
-                  src={image}
-                  alt={product.title}
-                  loading="lazy"
-                  className="h-full w-full object-contain"
-                />
-              ) : (
-                <div className="flex h-full w-full items-center justify-center bg-white/[0.02]">
-                  <span className="text-[10px] tracking-[0.16em] text-zinc-600 uppercase">
-                    No photo
-                  </span>
-                </div>
-              )}
-            </div>
-          </article>
-        );
-      })}
-    </div>
+    <header className="mb-3 flex h-11 items-center justify-between">
+      <a
+        href="?"
+        onClick={(event) => {
+          event.preventDefault();
+          onHome();
+        }}
+        className="text-[13px] font-semibold text-zinc-100"
+      >
+        Kiboar
+      </a>
+      <button
+        type="button"
+        onClick={onOpenBag}
+        aria-label={
+          count > 0 ? `Open the bag, ${count} ${count === 1 ? "item" : "items"}` : "Open the bag"
+        }
+        className="flex items-center gap-2 text-[12px] text-zinc-400 transition-colors hover:text-zinc-100"
+      >
+        <BagIcon />
+        Bag
+        {count > 0 ? <span className="font-mono text-[11px] text-lime-300">{count}</span> : null}
+      </button>
+    </header>
   );
 }
 
 export default function App() {
-  const [state, setState] = useState<State>({ status: "loading" });
+  const [state, setState] = useState<CatalogueState>({ status: "loading" });
+  const [handle, setHandle] = useState<string | null>(handleFromUrl);
+  const [items, setItems] = useState<BagItem[]>([]);
   const [bagOpen, setBagOpen] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
 
     async function load() {
-      if (!PUBLISHABLE_KEY) {
-        setState({
-          status: "error",
-          message: "The shop is not configured: the publishable key is missing.",
-        });
-        return;
-      }
-
       try {
-        const response = await fetch(
-          `${MEDUSA_URL}/store/products?limit=24&fields=title,handle,description,thumbnail,*variants,*variants.prices`,
-          { headers: { "x-publishable-api-key": PUBLISHABLE_KEY } },
-        );
-
-        if (!response.ok) {
-          throw new Error(`store API responded ${response.status}`);
-        }
-
-        const data = (await response.json()) as { products: Product[] };
+        const products = await listProducts();
         if (!cancelled) {
-          setState({ status: "ready", products: data.products });
+          setState({ status: "ready", products });
         }
-      } catch {
+      } catch (error) {
         if (!cancelled) {
           setState({
             status: "error",
-            message: "The shop cannot be reached right now.",
+            message:
+              error instanceof NotConfiguredError
+                ? error.message
+                : "The shop cannot be reached right now.",
           });
         }
       }
@@ -174,60 +98,98 @@ export default function App() {
     };
   }, []);
 
+  useEffect(() => {
+    function onPopState() {
+      setHandle(handleFromUrl());
+      window.scrollTo(0, 0);
+    }
+
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, []);
+
+  useEffect(() => {
+    if (!handle) {
+      document.title = "Kiboar · Shop";
+    }
+  }, [handle]);
+
+  const go = useCallback((next: string | null) => {
+    const url = new URL(window.location.href);
+    if (next) {
+      url.searchParams.set("p", next);
+    } else {
+      url.searchParams.delete("p");
+    }
+
+    window.history.pushState({}, "", url);
+    setHandle(next);
+    window.scrollTo(0, 0);
+  }, []);
+
+  const add = useCallback((product: Product, variant: Variant) => {
+    const price = variantPrice(variant);
+    if (!price) {
+      return;
+    }
+
+    setItems((current) => {
+      const existing = current.find((item) => item.variantId === variant.id);
+      if (existing) {
+        return current.map((item) =>
+          item.variantId === variant.id ? { ...item, quantity: item.quantity + 1 } : item,
+        );
+      }
+
+      return [
+        ...current,
+        {
+          variantId: variant.id,
+          title: product.title,
+          variantTitle: (product.variants?.length ?? 0) > 1 ? variant.title : null,
+          price,
+          quantity: 1,
+        },
+      ];
+    });
+    setBagOpen(true);
+  }, []);
+
+  const remove = useCallback((variantId: string) => {
+    setItems((current) => current.filter((item) => item.variantId !== variantId));
+  }, []);
+
+  const count = items.reduce((total, item) => total + item.quantity, 0);
+
   return (
     <main className="min-h-screen bg-[#0a0b0d] text-zinc-200">
       <div className="mx-auto w-full max-w-[1600px] px-6 py-8 sm:px-10">
-        <header className="mb-3 flex h-11 items-center justify-between">
-          <a
-            href="https://kiboar.raulmoracode.com/"
-            className="text-[13px] font-semibold text-zinc-100"
-          >
-            Kiboar
-          </a>
-          <button
-            type="button"
-            onClick={() => setBagOpen(true)}
-            className="flex items-center gap-2 text-[12px] text-zinc-400 transition-colors hover:text-zinc-100"
-          >
-            <BagIcon />
-            Bag
-          </button>
-        </header>
+        <Header count={count} onHome={() => go(null)} onOpenBag={() => setBagOpen(true)} />
 
-        <section aria-label="Products">
-          <Catalogue state={state} />
-        </section>
-      </div>
-
-      {bagOpen ? (
-        <div className="fixed inset-0 z-50" role="dialog" aria-modal="true" aria-label="Bag">
-          <button
-            type="button"
-            aria-label="Close the bag"
-            onClick={() => setBagOpen(false)}
-            className="absolute inset-0 bg-black/60"
-          />
-          <aside className="absolute inset-y-0 right-0 flex w-[min(380px,100vw)] flex-col border-l border-white/10 bg-[#0c0e11] p-6">
-            <div className="flex items-center justify-between">
-              <h2 className="text-[15px] font-medium text-zinc-100">Bag</h2>
-              <button
-                type="button"
-                onClick={() => setBagOpen(false)}
-                aria-label="Close the bag"
+        {handle ? (
+          <section aria-label="Product" className="mx-auto w-full max-w-[1200px]">
+            <div className="mb-4 flex h-8 items-center">
+              <a
+                href="?"
+                onClick={(event) => {
+                  event.preventDefault();
+                  go(null);
+                }}
                 className="text-[12px] text-zinc-500 transition-colors hover:text-zinc-200"
               >
-                Close
-              </button>
+                ← All boards
+              </a>
             </div>
+            <ProductPage key={handle} handle={handle} onBack={() => go(null)} onAdd={add} />
+          </section>
+        ) : (
+          <section aria-label="Products">
+            <Catalogue state={state} onOpen={go} />
+          </section>
+        )}
+      </div>
 
-            <p className="mt-6 text-[13px] text-zinc-400">Your bag is empty.</p>
-
-            <p className="mt-auto pt-6 text-[10px] leading-relaxed text-zinc-600">
-              Demo bag. Checkout is not connected to Medusa yet.
-            </p>
-          </aside>
-        </div>
-      ) : null}
+      {bagOpen ? <Bag items={items} onClose={() => setBagOpen(false)} onRemove={remove} /> : null}
     </main>
   );
 }
