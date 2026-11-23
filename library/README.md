@@ -6,7 +6,7 @@ them — controller boards, encoders, connectors, displays, LEDs and the small
 parts around them. Keyswitch footprints and models are being redesigned and are
 not part of this version.
 
-The library is one of the three products in the [Kiboar repository](../README.md).
+The library is one of the products in the [Kiboar repository](../README.md).
 It is distributed as a PCM ZIP and as a clone with library tables, and it is not
 an npm package. Agent rules: [`AGENTS.md`](AGENTS.md). Architecture and product
 boundaries: [`../ARCHITECTURE.md`](../ARCHITECTURE.md).

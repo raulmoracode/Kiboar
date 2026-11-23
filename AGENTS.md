@@ -10,7 +10,7 @@ Read in this order: `README.md` → `ARCHITECTURE.md` → this file → `LABELS.
 
 ## What this repository is
 
-Kiboar is one repository with three products that are built and shipped
+Kiboar is one repository with five products that are built and shipped
 separately.
 
 | Path | Contents |
@@ -18,10 +18,12 @@ separately.
 | `library/` | KiCad library: symbols, footprints, 3D models, PCM and Python tools |
 | `docs/` | Astro + Fumadocs documentation site, English and Spanish |
 | `software/` | Kiboar Studio: Tauri app, TypeScript core and Rust crates |
-| `package.json`, `pnpm-workspace.yaml`, `turbo.json` | Root JavaScript workspace for `docs` and `software` |
+| `web/` | Public site: Vite + React + Tailwind |
+| `shop/` | Shop: Medusa v2 application |
+| `package.json`, `pnpm-workspace.yaml`, `turbo.json` | Root JavaScript workspace for `docs`, `software`, `web` and `shop` |
 | `ARCHITECTURE.md` | Product boundaries, commands, versions and deployment |
 | `LABELS.md` | The repository label scheme for issues and pull requests |
-| `library/AGENTS.md`, `docs/AGENTS.md`, `software/AGENTS.md` | Product-specific agent rules |
+| `library/AGENTS.md`, `docs/AGENTS.md`, `software/AGENTS.md`, `web/AGENTS.md`, `shop/AGENTS.md` | Product-specific agent rules |
 | `NOTICE` | Third-party origins and licences |
 
 ## Product instructions
@@ -35,6 +37,8 @@ artifacts, boundaries and label tables for their product.
 | KiCad library | [`library/AGENTS.md`](library/AGENTS.md) | KiCad format, footprints, symbols, provenance, PCM, library tools |
 | Documentation | [`docs/AGENTS.md`](docs/AGENTS.md) | Astro/Fumadocs, content, generated pages, EN/ES, Vercel |
 | Kiboar Studio | [`software/AGENTS.md`](software/AGENTS.md) | Workspace, TypeScript core, Rust, Tauri, schemas and bindings |
+| Web | [`web/AGENTS.md`](web/AGENTS.md) | Vite, React, Tailwind, the public page and its deployment |
+| Shop | [`shop/AGENTS.md`](shop/AGENTS.md) | Medusa, the Store API, the admin, PostgreSQL and pnpm hoisting |
 
 Read the product file after this one when you change that product; read more
 than one when a change spans products. The product files do not replace the Git
@@ -81,15 +85,20 @@ is it.
 ### JavaScript workspace
 
 - The workspace root is the repository root. Do not add another
-  `pnpm-workspace.yaml` under `docs/` or `software/`.
-- `docs` and `software` are the only workspace packages. The KiCad library is
-  not an npm package and must not be added to the workspace.
+  `pnpm-workspace.yaml` under `docs/`, `software/`, `web/` or `shop/`.
+- `docs`, `software/app`, `software/packages/*`, `web` and `shop` are the
+  workspace packages. The KiCad library is not an npm package and must not be
+  added to the workspace.
 - Shared versions live in the `catalog` block of `pnpm-workspace.yaml`. Use
   `"catalog:"` for React, TypeScript, Tailwind, Zod and their types instead of
-  writing a new range.
-- Turborepo runs `build`, `typecheck`, `test` and `dev` for `docs` and
-  `software`. Rust and the library stay outside Turbo.
-- Vercel deploys `docs` only. Studio is a desktop application.
+  writing a new range. Medusa's own packages keep the version its template
+  pins; do not move them into the catalog.
+- Turborepo runs `build`, `typecheck`, `test` and `dev` for the JavaScript
+  packages. Rust and the library stay outside Turbo.
+- The root `.npmrc` hoists four package patterns because Medusa requires them
+  at the top level of `node_modules`. Do not remove those entries.
+- Vercel deploys `docs` only. Studio is a desktop application. `web` is a static
+  app with no host configured yet, and `shop` is a Medusa service.
 
 ### Generated files
 

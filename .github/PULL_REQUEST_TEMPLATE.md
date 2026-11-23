@@ -9,6 +9,8 @@ Closes #
 - [ ] `library`
 - [ ] `docs`
 - [ ] `studio`
+- [ ] `web`
+- [ ] `shop`
 - [ ] `repo`
 
 ## Changes
@@ -26,6 +28,8 @@ they did not run.
 | `library` | [`library/AGENTS.md`](../library/AGENTS.md) |
 | `docs` | [`docs/AGENTS.md`](../docs/AGENTS.md) |
 | `studio` | [`software/AGENTS.md`](../software/AGENTS.md) |
+| `web` | [`web/AGENTS.md`](../web/AGENTS.md) |
+| `shop` | [`shop/AGENTS.md`](../shop/AGENTS.md) |
 | `repo` | [`AGENTS.md`](../AGENTS.md) and [`LABELS.md`](../LABELS.md) |
 
 ```text

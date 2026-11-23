@@ -9,16 +9,18 @@
 
 # Kiboar
 
-Kiboar is one repository with three products for building mechanical keyboards:
-the **KiCad component library**, the **documentation site** and **Kiboar Studio**.
-They are built and shipped separately and share a repository, a review flow and
-a CI pipeline.
+Kiboar is one repository with five products for building mechanical keyboards:
+the **KiCad component library**, the **documentation site**, **Kiboar Studio**,
+the **public site** and the **shop**. They are built and shipped separately and
+share a repository, a review flow and a CI pipeline.
 
 | Product | Path | README | What it is |
 | --- | --- | --- | --- |
 | KiCad library | `library/` | [`library/README.md`](library/README.md) | 145 symbols and 173 footprints in 26 footprint libraries, with 3D models, PCM packaging and the library tools |
 | Documentation | `docs/` | [`docs/README.md`](docs/README.md) | The Astro + Fumadocs site, English and Spanish |
 | Kiboar Studio | `software/` | [`software/README.md`](software/README.md) | The Tauri desktop application: detect, flash, remap and visualise a board |
+| Web | `web/` | [`web/README.md`](web/README.md) | The public site: Vite, React and Tailwind |
+| Shop | `shop/` | [`shop/README.md`](shop/README.md) | The Medusa application: Store API, admin dashboard and PostgreSQL |
 
 📖 **Documentation:** <https://kiboar.raulmoracode.com/docs> — English and Spanish.
 
@@ -58,6 +60,21 @@ pnpm --filter @kiboar/studio tauri dev
 The application layout, documents and current milestone are in
 [`software/README.md`](software/README.md).
 
+### Web and shop
+
+Both are packages of the same root workspace. `web` is static and needs no
+database; `shop` is a Medusa application and needs PostgreSQL at runtime.
+
+```bash
+pnpm install
+pnpm --filter @kiboar/web dev        # http://localhost:3000
+pnpm --filter @kiboar/shop build     # no database needed
+pnpm --filter @kiboar/shop dev       # needs shop/.env and PostgreSQL
+```
+
+The setup, the commands and the scope of each are in
+[`web/README.md`](web/README.md) and [`shop/README.md`](shop/README.md).
+
 ## Repository
 
 - [`ARCHITECTURE.md`](ARCHITECTURE.md) — product boundaries, the workspace,
@@ -76,10 +93,10 @@ The application layout, documents and current milestone are in
 - [`RELEASING.md`](RELEASING.md) — how a version is cut, tagged and published.
 - [`NOTICE`](NOTICE) — third-party origins and licences.
 
-`docs` and `software` share one pnpm workspace, one lockfile and a Turborepo
-task graph at the root. The KiCad library has its own CI workflow and its own
-Python tooling; it is not an npm package. `pnpm check` runs the library checks,
-the JavaScript typecheck, tests and build, and the Rust tests.
+`docs`, `software`, `web` and `shop` share one pnpm workspace, one lockfile and
+a Turborepo task graph at the root. The KiCad library has its own CI workflow
+and its own Python tooling; it is not an npm package. `pnpm check` runs the
+library checks, the JavaScript typecheck, tests and build, and the Rust tests.
 
 ## Requirements
 
@@ -88,6 +105,8 @@ the JavaScript typecheck, tests and build, and the Rust tests.
 | KiCad library | KiCad 10.0 or newer, Python 3 |
 | Documentation | Node 22.23.4 or newer, pnpm 12 |
 | Kiboar Studio | Node 22.23.4 or newer, pnpm 12, a Rust toolchain and the Tauri system dependencies |
+| Web | Node 22.23.4 or newer, pnpm 12 |
+| Shop | Node 22.23.4 or newer, pnpm 12 and PostgreSQL for `dev` |
 
 The KiCad files use the KiCad 10 format; KiCad 8 and 9 cannot open them.
 
@@ -97,7 +116,7 @@ Kiboar is a **mixed-licence collection**, because of fifteen imported symbols in
 the library: original work is MIT, and those fifteen keep the licence of their
 source. The full split, the attribution requirements and the evidence are in
 [`NOTICE`](NOTICE) and [`library/README.md`](library/README.md#licensing). The
-documentation site and Studio are MIT.
+documentation site, Studio, the web site and the shop are MIT.
 
 ## Credits
 

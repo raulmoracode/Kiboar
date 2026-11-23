@@ -26,6 +26,8 @@ repository for history; do not delete them without a separate migration.
 | `product:library` | `library/`: KiCad assets, PCM and library tools |
 | `product:docs` | `docs/`: the documentation site |
 | `product:studio` | `software/`: Kiboar Studio |
+| `product:web` | `web/`: the public site |
+| `product:shop` | `shop/`: the Medusa application |
 | `product:repo` | Root files, CI, repository process and cross-product docs |
 
 A change to a product's `AGENTS.md`, `README.md` or tests gets that product's
@@ -72,6 +74,8 @@ The exact labels to apply for a product live in that product's agent file:
 - [`library/AGENTS.md`](library/AGENTS.md)
 - [`docs/AGENTS.md`](docs/AGENTS.md)
 - [`software/AGENTS.md`](software/AGENTS.md)
+- [`web/AGENTS.md`](web/AGENTS.md)
+- [`shop/AGENTS.md`](shop/AGENTS.md)
 - [`AGENTS.md`](AGENTS.md) for `product:repo`
 
 For a cross-product change, read all the tables for the products you touch.

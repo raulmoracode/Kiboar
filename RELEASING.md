@@ -1,6 +1,6 @@
 # Releasing
 
-Kiboar ships three products with independent versions. A release is a tagged
+Kiboar ships several products with independent versions. A release is a tagged
 commit plus the artifacts that belong to it; the documentation site is the
 exception, because it deploys from `main` and has no version.
 

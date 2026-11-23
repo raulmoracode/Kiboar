@@ -3,12 +3,14 @@
 Kiboar is a KiCad 10 library. Contributions arrive as a pull request against
 `main`, one logical change per branch, with an issue that says what and why.
 
-The repository also contains the documentation site in `docs/` and Kiboar
-Studio in `software/`. They share a pnpm workspace at the root and are
-described in [`ARCHITECTURE.md`](ARCHITECTURE.md); this file covers the KiCad
-library in `library/`. Their agent instructions are
-[`library/AGENTS.md`](library/AGENTS.md), [`docs/AGENTS.md`](docs/AGENTS.md) and
-[`software/AGENTS.md`](software/AGENTS.md).
+The repository also contains the documentation site in `docs/`, Kiboar Studio in
+`software/`, the public site in `web/` and the Medusa shop in `shop/`. They share
+a pnpm workspace at the root and are described in
+[`ARCHITECTURE.md`](ARCHITECTURE.md); this file covers the KiCad library in
+`library/`. Their agent instructions are
+[`library/AGENTS.md`](library/AGENTS.md), [`docs/AGENTS.md`](docs/AGENTS.md),
+[`software/AGENTS.md`](software/AGENTS.md), [`web/AGENTS.md`](web/AGENTS.md) and
+[`shop/AGENTS.md`](shop/AGENTS.md).
 
 ## Requirements
 

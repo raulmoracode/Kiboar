@@ -1,8 +1,8 @@
 # Architecture
 
-Kiboar is one repository with three products that are built and shipped
-separately: the KiCad library, the documentation site and Kiboar Studio. They
-share a repository and a review flow, not a runtime.
+Kiboar is one repository with five products that are built and shipped
+separately: the KiCad library, the documentation site, Kiboar Studio, the public
+site and the shop. They share a repository and a review flow, not a runtime.
 
 ## Products
 
@@ -11,6 +11,8 @@ share a repository and a review flow, not a runtime.
 | KiCad library | `library/symbols/`, `library/footprints/`, `library/3dmodels/`, `library/lib-table-files/`, `library/pcm/`, `library/tools/` | KiCad 10, Python standard library | PCM ZIP and a clone with library tables |
 | Documentation | `docs/` | Astro 7, Fumadocs, React | Static site on Vercel at `/docs` and `/es/docs` |
 | Kiboar Studio | `software/` | Tauri 2, React, TypeScript, Rust | Desktop application |
+| Web | `web/` | Vite 8, React 19, Tailwind 4 | Static site, host undecided |
+| Shop | `shop/` | Medusa 2, Node, PostgreSQL | Medusa service and admin, host undecided |
 
 ## Boundaries
 
@@ -19,8 +21,8 @@ share a repository and a review flow, not a runtime.
   builder all use that root. The PCM ZIP keeps `symbols/`, `footprints/` and
   `3dmodels/` at its internal root, so PCM consumers are unaffected.
 - **`docs` and `software` are the JavaScript workspace.** The root
-  `pnpm-workspace.yaml` includes `docs`, `software/app` and
-  `software/packages/*`. There is one lockfile at the root.
+  `pnpm-workspace.yaml` includes `docs`, `software/app`, `software/packages/*`,
+  `web` and `shop`. There is one lockfile at the root.
 - **The library is not an npm package.** It is a KiCad asset collection with
   Python tooling. Turborepo does not run its checks; the library has its own CI
   workflow and its own `pnpm library` script at the root.
@@ -32,6 +34,14 @@ share a repository and a review flow, not a runtime.
 - **The docs site is static.** It has no server, no database and no runtime
   dependency on the library; its generated pages come from
   `library/tools/gen_docs.py` and are committed.
+- **`web` and `shop` are separate products.** `web` is a static Vite app with
+  no server; `shop` is a Medusa service that needs PostgreSQL at runtime. They
+  share the workspace and the catalog versions, not code: the storefront talks
+  to the Store API over HTTP. The root `.npmrc` carries the hoisting Medusa
+  needs on pnpm.
+- **The shop build does not need a database.** `medusa build` compiles the
+  server and the admin in CI; only `dev`, `start` and `db:migrate` need
+  PostgreSQL.
 
 ## Agent instructions
 
@@ -42,6 +52,8 @@ The repository's agent files and label policy:
 - [`library/AGENTS.md`](library/AGENTS.md) — the KiCad library.
 - [`docs/AGENTS.md`](docs/AGENTS.md) — the documentation site.
 - [`software/AGENTS.md`](software/AGENTS.md) — Kiboar Studio.
+- [`web/AGENTS.md`](web/AGENTS.md) — the public site.
+- [`shop/AGENTS.md`](shop/AGENTS.md) — the Medusa application.
 - [`LABELS.md`](LABELS.md) — the repository label scheme.
 
 Read the root file first, then `LABELS.md` and the product file for the area
@@ -52,15 +64,18 @@ the root rules.
 
 ```text
 package.json            root scripts and Turbo
-pnpm-workspace.yaml     docs, software/app, software/packages/*
+pnpm-workspace.yaml     docs, software/app, software/packages/*, web, shop
 pnpm-lock.yaml          one lockfile
 turbo.json              build, typecheck, test, dev
+.npmrc                  hoisting Medusa needs on pnpm
 library/                KiCad assets, tools, PCM and library tables
 docs/                   kiboar-docs
 software/app/           @kiboar/studio
 software/packages/core/ @kiboar/core
 software/crates/        Rust, outside Turbo
 software/Cargo.toml     Cargo workspace
+web/                    @kiboar/web
+shop/                   @kiboar/shop
 ```
 
 Shared versions live in the `catalog` block of `pnpm-workspace.yaml`. React,
@@ -73,10 +88,12 @@ version drift; Turborepo is the task runner, not the version manager.
 | Command | What it does |
 | --- | --- |
 | `pnpm install` | Install the whole JavaScript workspace once |
-| `pnpm build` | Build docs and Studio through Turbo |
-| `pnpm typecheck` | Typecheck core, docs and Studio |
+| `pnpm build` | Build docs, Studio, web and shop through Turbo |
+| `pnpm typecheck` | Typecheck core, docs, Studio and web |
 | `pnpm test` | Run the core tests |
-| `pnpm dev` | Start the docs and Studio dev servers in parallel |
+| `pnpm dev` | Start the docs, Studio and web dev servers; the shop needs PostgreSQL, so it is excluded and has its own script |
+| `pnpm dev:web` | Start the web dev server |
+| `pnpm dev:shop` | Start Medusa; needs a `shop/.env` with `DATABASE_URL` and PostgreSQL |
 | `pnpm library` | Run every KiCad library check |
 | `pnpm test:rust` | Run the Rust unit tests |
 | `pnpm check` | Library + JavaScript + Rust checks |
@@ -89,6 +106,8 @@ version drift; Turborepo is the task runner, not the version manager.
 | Board schema | `kiboar.board/1` | `software/packages/core/src/schema` |
 | Registry | `kiboar.registry/1` | `software/registry/index.json` |
 | Studio | `0.x` | `software/app/package.json` and `software/app/src-tauri/tauri.conf.json` |
+| Web | `0.x` | `web/package.json` |
+| Shop | `0.x` | `shop/package.json` and the pinned Medusa version |
 | Firmware | `0.x` | Reported by the board over HID; independent of the app |
 
 The products do not share one version number. A library patch does not force a
@@ -107,6 +126,10 @@ do not share it with the KiCad library.
   at `/es/docs`.
 - **Studio:** a desktop application. It is not deployed to Vercel and has no
   web build target.
+- **Web:** a static `dist/` from `pnpm --filter @kiboar/web build`. No host is
+  configured yet.
+- **Shop:** a Medusa service with PostgreSQL and the admin dashboard. It is not
+  deployed; Medusa Cloud or a Node host are the candidates.
 
 ## Licensing
 
