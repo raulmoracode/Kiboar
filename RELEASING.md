@@ -74,29 +74,43 @@ release also has to update the package index that points at the new ZIP.
 
 ## Kiboar Studio
 
-Studio cannot produce a distributable bundle today: `bundle.active` is `false`
-in `software/app/src-tauri/tauri.conf.json`, no signing or notarisation is
-configured, and CI does not build a desktop artifact.
+Bundling is enabled: `bundle.active` is `true`, the targets are `app` and `dmg`,
+and the registry and board definitions are copied into `Contents/Resources`.
+`.github/workflows/studio-release.yml` builds a **universal** DMG on
+`macos-14`, writes `SHA256SUMS`, uploads the artifact and publishes a
+pre-release when the ref is a `studio-v*` tag.
 
-The 0.1 MVP target is an **unsigned macOS DMG for testers**. Enabling bundling
-and a macOS CI job is the release work; signing and notarization are post-MVP,
-and the release notes must say the build is unsigned. Until the DMG exists,
-Studio has no release artifact to tag.
+The 0.1 build is **ad-hoc signed and not notarized**. It is a tester build, not
+a public consumer one; the release notes say so.
 
-When bundling is enabled:
-
-1. **Set the same version** in `software/app/package.json` and
-   `software/app/src-tauri/tauri.conf.json`.
+1. **Set the same version** in `software/app/package.json`,
+   `software/app/src-tauri/tauri.conf.json` and
+   `software/app/src-tauri/Cargo.toml`.
 2. **Run the gate.** `pnpm check` must pass.
-3. **Build on each target OS.** `pnpm --filter @kiboar/studio tauri build`
-   produces the bundles locally; cross-compiling is not supported.
-4. **Sign and notarise** where the platform requires it, or state explicitly in
-   the release notes that the build is unsigned.
-5. **Tag `studio-v<version>`**, create the GitHub release and attach the
-   bundles for every platform built.
+3. **Build locally if you want to inspect it:**
+   ```bash
+   pnpm --filter @kiboar/studio tauri build
+   ```
+   The DMG lands in `software/target/release/bundle/dmg/`. Confirm that
+   `Contents/Resources/registry/index.json` and `Contents/Resources/boards/`
+   exist; without them the app opens with an empty board list.
+4. **Tag `studio-v<version>`** on the merge commit and push it. The workflow
+   builds the universal DMG, uploads `SHA256SUMS` and creates the pre-release.
+5. **Verify the release assets** and download the `SHA256SUMS` digest.
+6. **Update the Homebrew cask** in `raulmoracode/homebrew-kiboar`
+   (`Casks/kiboar-studio.rb`) with the version and the new digest, then test:
+   ```bash
+   brew tap raulmoracode/kiboar
+   brew fetch --cask kiboar-studio
+   brew install --cask kiboar-studio
+   ```
 
-Studio has no changelog yet. The release notes carry the changes until one
-exists.
+Signing, notarization and the Tauri updater signature are post-MVP. When they
+land, the same workflow adds the credentials and stops calling the release
+unsigned.
+
+Studio has no changelog yet. The generated release notes carry the changes until
+one exists.
 
 ## Documentation
 
