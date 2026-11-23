@@ -14,6 +14,7 @@ interface Product {
   id: string;
   title: string;
   description: string | null;
+  thumbnail: string | null;
   variants?: Variant[];
 }
 
@@ -67,24 +68,38 @@ function Catalogue({ state }: { state: State }) {
   }
 
   return (
-    <div>
+    <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
       {state.products.map((product) => {
         const price = priceOf(product);
+        const image = product.thumbnail
+          ? product.thumbnail.startsWith("http")
+            ? product.thumbnail
+            : `${MEDUSA_URL}${product.thumbnail}`
+          : null;
 
         return (
           <article
             key={product.id}
-            className="grid gap-2 border-t border-white/[0.07] py-6 sm:grid-cols-[1fr_auto] sm:items-baseline"
+            className="overflow-hidden rounded-lg border border-white/[0.06] bg-white/[0.015] transition-colors hover:border-white/15"
           >
-            <div>
-              <h2 className="text-[17px] font-medium text-zinc-100">{product.title}</h2>
-              {product.description ? (
-                <p className="mt-1 max-w-xl text-[13px] leading-relaxed text-zinc-400">
-                  {product.description}
-                </p>
-              ) : null}
+            {image ? (
+              <img
+                src={image}
+                alt={product.title}
+                loading="lazy"
+                className="aspect-[4/3] w-full object-cover"
+              />
+            ) : (
+              <div className="flex aspect-[4/3] items-center justify-center bg-white/[0.02]">
+                <span className="text-[10px] tracking-[0.16em] text-zinc-600 uppercase">
+                  No photo
+                </span>
+              </div>
+            )}
+            <div className="flex items-baseline justify-between gap-4 p-4">
+              <h2 className="min-w-0 truncate text-[14px] text-zinc-100">{product.title}</h2>
+              <p className="shrink-0 font-mono text-[12px] text-zinc-300">{price ?? "—"}</p>
             </div>
-            <p className="font-mono text-[13px] text-zinc-300">{price ?? "—"}</p>
           </article>
         );
       })}
@@ -109,7 +124,7 @@ export default function App() {
 
       try {
         const response = await fetch(
-          `${MEDUSA_URL}/store/products?limit=24&fields=title,handle,description,*variants,*variants.prices`,
+          `${MEDUSA_URL}/store/products?limit=24&fields=title,handle,description,thumbnail,*variants,*variants.prices`,
           { headers: { "x-publishable-api-key": PUBLISHABLE_KEY } },
         );
 

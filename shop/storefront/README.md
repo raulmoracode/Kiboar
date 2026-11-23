@@ -3,8 +3,16 @@
 The customer-facing shop, served under `/shop`. It is a separate project from
 `web` and from the Medusa backend: it shares the design language, not the code.
 
-**Status: catalogue.** It lists the products published in Medusa with their
-prices. There is no cart, checkout, account or product page yet.
+**Status: catalogue.** It lists the products published in Medusa as vertical
+cards with a photo, the name and the price. There is no cart, checkout, account
+or product page yet.
+
+## Photos
+
+Each card uses the product's `thumbnail` from the Store API. Upload one in the
+Medusa admin (**Products → the product → Media**) and the card shows it. Without
+a thumbnail the card renders a neutral "No photo" panel; no image is invented or
+bundled.
 
 ## Development
 
