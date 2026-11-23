@@ -8,6 +8,8 @@ function handleFromUrl(): string | null {
   return new URLSearchParams(window.location.search).get("p");
 }
 
+const NO_PRODUCTS: Product[] = [];
+
 function BagIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="size-4">
@@ -168,7 +170,14 @@ export default function App() {
 
         {handle ? (
           <section aria-label="Product" className="mx-auto mt-4 w-full max-w-[1200px]">
-            <ProductPage key={handle} handle={handle} onBack={() => go(null)} onAdd={add} />
+            <ProductPage
+              key={handle}
+              handle={handle}
+              products={state.status === "ready" ? state.products : NO_PRODUCTS}
+              onOpen={go}
+              onBack={() => go(null)}
+              onAdd={add}
+            />
           </section>
         ) : (
           <section aria-label="Products">
