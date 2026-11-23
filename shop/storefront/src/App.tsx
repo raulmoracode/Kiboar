@@ -68,7 +68,7 @@ function Catalogue({ state }: { state: State }) {
   }
 
   return (
-    <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+    <div className="grid gap-3 sm:grid-cols-2">
       {state.products.map((product) => {
         const price = priceOf(product);
         const image = product.thumbnail
@@ -87,10 +87,10 @@ function Catalogue({ state }: { state: State }) {
                 src={image}
                 alt={product.title}
                 loading="lazy"
-                className="aspect-[4/3] w-full object-cover"
+                className="aspect-[4/5] w-full object-cover"
               />
             ) : (
-              <div className="flex aspect-[4/3] items-center justify-center bg-white/[0.02]">
+              <div className="flex aspect-[4/5] items-center justify-center bg-white/[0.02]">
                 <span className="text-[10px] tracking-[0.16em] text-zinc-600 uppercase">
                   No photo
                 </span>
@@ -154,36 +154,10 @@ export default function App() {
 
   return (
     <main className="min-h-screen bg-[#0a0b0d] text-zinc-200">
-      <div className="mx-auto flex min-h-screen w-full max-w-[980px] flex-col px-6 py-10 sm:px-10 sm:py-14">
-        <header className="flex items-center justify-between">
-          <a
-            href="https://kiboar.raulmoracode.com/"
-            className="text-[15px] font-semibold text-zinc-100"
-          >
-            Kiboar
-          </a>
-          <a
-            className="text-[13px] text-zinc-400 transition-colors hover:text-zinc-100"
-            href="https://kiboar.raulmoracode.com/"
-          >
-            Back to the site
-          </a>
-        </header>
-
-        <section className="mt-20">
-          <h1 className="text-[clamp(2.4rem,5vw,3.8rem)] leading-none font-medium tracking-[-0.035em] text-zinc-100">
-            Keyboards
-          </h1>
-          <p className="mt-4 max-w-md text-[15px] leading-relaxed text-zinc-400">
-            Built from the official Kiboar library.
-          </p>
-        </section>
-
-        <section aria-label="Products" className="mt-14">
+      <div className="mx-auto w-full max-w-[1180px] px-6 py-10 sm:px-10">
+        <section aria-label="Products">
           <Catalogue state={state} />
         </section>
-
-        <footer className="mt-auto pt-16 font-mono text-[11px] text-zinc-600">Kiboar · Shop</footer>
       </div>
     </main>
   );
