@@ -40,7 +40,7 @@ export default function App() {
           </section>
         </div>
 
-        <section className="mt-auto grid gap-8 border-t border-white/[0.07] pt-1 sm:grid-cols-3 lg:grid-cols-5">
+        <section className="mt-auto grid gap-8 sm:grid-cols-3 lg:grid-cols-5">
           {products.map((product) => (
             <a key={product.name} href={product.href} className="group py-6">
               <span className="block text-[13px] text-zinc-200 transition-colors group-hover:text-lime-200">
