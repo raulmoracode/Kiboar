@@ -68,7 +68,7 @@ function Catalogue({ state }: { state: State }) {
   }
 
   return (
-    <div className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-3">
+    <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
       {state.products.map((product) => {
         const price = priceOf(product);
         const image = product.thumbnail
