@@ -41,7 +41,7 @@ export default function App() {
           </section>
         </div>
 
-        <section className="mt-auto grid gap-8 sm:grid-cols-3 lg:grid-cols-5">
+        <section className="mt-auto grid gap-6 sm:grid-cols-3 lg:grid-cols-6">
           {products.map((product) => (
             <a key={product.name} href={product.href} className="group py-6">
               <span className="flex items-center gap-2">

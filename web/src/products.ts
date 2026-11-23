@@ -37,6 +37,12 @@ export const products: readonly Product[] = [
     line: "Install, build and flash.",
     key: "d",
   },
+  {
+    name: "GitHub",
+    href: "https://github.com/raulmoracode/Kiboar",
+    line: "The repository.",
+    key: "g",
+  },
 ];
 
 export function productForKey(key: string): Product | undefined {

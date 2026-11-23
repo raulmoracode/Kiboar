@@ -44,7 +44,7 @@ const ROWS: readonly (readonly KeyDef[])[] = [
     { w: 1, label: "S" },
     { w: 1, label: "D" },
     { w: 1 },
-    { w: 1 },
+    { w: 1, label: "G" },
     { w: 1 },
     { w: 1 },
     { w: 1, label: "K" },
