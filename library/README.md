@@ -1,6 +1,7 @@
 # Kiboar KiCad library
 
-The KiCad component library for building mechanical keyboards: **145 symbols**
+Kiboar's official KiCad component library: the parts the Kiboar keyboards are
+designed with, published so you can design and build your own. **145 symbols**
 and **173 footprints** in **26 footprint libraries**, with 3D models for all of
 them — controller boards, encoders, connectors, displays, LEDs and the small
 parts around them. Keyswitch footprints and models are being redesigned and are
@@ -125,12 +126,13 @@ link. The issue forms ask for both.
 The contribution rules and the exact commands are in [`AGENTS.md`](AGENTS.md),
 and the repository-wide Git and licensing rules are in
 [`../AGENTS.md`](../AGENTS.md) and [`../CONTRIBUTING.md`](../CONTRIBUTING.md).
-The other products live in [`../docs/`](../docs/README.md) and
-[`../software/`](../software/README.md).
+The other products live in [`../docs/`](../docs/README.md),
+[`../software/`](../software/README.md), [`../web/`](../web/README.md) and
+[`../shop/`](../shop/README.md).
 
 ## Licensing
 
-Kiboar is a **mixed-licence collection**, and only because of its symbols:
+The library is a **mixed-licence collection**, and only because of its symbols:
 
 - every 3D model and every footprint is **MIT**, and the symbols drawn here are
   **MIT** too (see [`../LICENSE`](../LICENSE));

@@ -6,11 +6,15 @@ there apply here and are not repeated.
 
 ## What this product is
 
-A desktop application for keyboards built with Kiboar components, built with
-Tauri 2, React 19, TypeScript 7 and Rust. M1 is merged. M2 is implemented:
-detection, registry, UF2 inspection, typed confirmation and copy with progress
-and cancellation. Hardware verification is pending. The MVP is the flasher;
-firmware identity, remap, layout, editor and i18n are post-MVP.
+Kiboar Studio, the desktop application for Kiboar keyboards, whether bought
+assembled or built from the published design. Built with Tauri 2, React 19,
+TypeScript 7 and Rust. M1 is merged. M2 is implemented: detection, registry, UF2
+inspection, typed confirmation and copy with progress and cancellation.
+Hardware verification is pending. The MVP is the flasher; firmware identity,
+remap, layout, editor and i18n are post-MVP.
+
+The same build serves the customer and the maker: neither path may require the
+other, and nothing in Studio may assume the board was bought.
 
 ## Layout
 
