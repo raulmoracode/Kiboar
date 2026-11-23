@@ -18,14 +18,6 @@ interface Product {
   variants?: Variant[];
 }
 
-interface CartItem {
-  id: string;
-  title: string;
-  amount: number;
-  currency: string;
-  quantity: number;
-}
-
 type State =
   | { status: "loading" }
   | { status: "error"; message: string }
@@ -34,7 +26,7 @@ type State =
 const MEDUSA_URL = import.meta.env.VITE_MEDUSA_URL ?? "http://localhost:9000";
 const PUBLISHABLE_KEY = import.meta.env.VITE_MEDUSA_PUBLISHABLE_KEY ?? "";
 
-function priceValue(product: Product): { amount: number; currency: string } | null {
+function priceOf(product: Product): string | null {
   const prices = product.variants?.flatMap((variant) => variant.prices ?? []) ?? [];
   if (prices.length === 0) {
     return null;
@@ -45,19 +37,10 @@ function priceValue(product: Product): { amount: number; currency: string } | nu
     return null;
   }
 
-  return { amount: price.amount, currency: price.currency_code };
-}
-
-function formatPrice(amount: number, currency: string): string {
   return new Intl.NumberFormat("en-IE", {
     style: "currency",
-    currency: currency.toUpperCase(),
-  }).format(amount / 100);
-}
-
-function priceOf(product: Product): string | null {
-  const value = priceValue(product);
-  return value ? formatPrice(value.amount, value.currency) : null;
+    currency: price.currency_code.toUpperCase(),
+  }).format(price.amount / 100);
 }
 
 function BagIcon() {
@@ -79,7 +62,7 @@ function BagIcon() {
   );
 }
 
-function Catalogue({ state, onAdd }: { state: State; onAdd: (product: Product) => void }) {
+function Catalogue({ state }: { state: State }) {
   if (state.status === "loading") {
     return <p className="text-[13px] text-zinc-500">Loading the shop…</p>;
   }
@@ -116,13 +99,13 @@ function Catalogue({ state, onAdd }: { state: State; onAdd: (product: Product) =
         return (
           <article
             key={product.id}
-            className="group flex min-h-0 flex-col overflow-hidden rounded-lg border border-white/[0.06] bg-white/[0.015] transition-colors hover:border-white/15 md:h-[calc((100vh-9rem)/3)]"
+            className="flex min-h-0 flex-col overflow-hidden rounded-lg border border-white/[0.06] bg-white/[0.015] transition-colors hover:border-white/15 md:h-[calc((100vh-9rem)/3)]"
           >
             <div className="flex items-baseline justify-between gap-4 px-4 pt-3.5 pb-3">
               <h2 className="min-w-0 truncate text-[14px] text-zinc-100">{product.title}</h2>
               <p className="shrink-0 font-mono text-[12px] text-zinc-300">{price ?? "—"}</p>
             </div>
-            <div className="relative aspect-[4/3] w-full overflow-hidden md:aspect-auto md:min-h-0 md:flex-1">
+            <div className="aspect-[4/3] w-full overflow-hidden md:aspect-auto md:min-h-0 md:flex-1">
               {image ? (
                 <img
                   src={image}
@@ -137,14 +120,6 @@ function Catalogue({ state, onAdd }: { state: State; onAdd: (product: Product) =
                   </span>
                 </div>
               )}
-              <button
-                type="button"
-                onClick={() => onAdd(product)}
-                aria-label={`Add ${product.title} to the bag`}
-                className="absolute right-3 top-3 flex size-7 items-center justify-center rounded-full border border-white/15 bg-[#0a0b0d]/80 text-[15px] leading-none text-zinc-300 transition hover:border-lime-300/50 hover:text-lime-200 md:opacity-0 md:group-hover:opacity-100 md:group-focus-within:opacity-100"
-              >
-                +
-              </button>
             </div>
           </article>
         );
@@ -155,7 +130,6 @@ function Catalogue({ state, onAdd }: { state: State; onAdd: (product: Product) =
 
 export default function App() {
   const [state, setState] = useState<State>({ status: "loading" });
-  const [items, setItems] = useState<CartItem[]>([]);
   const [bagOpen, setBagOpen] = useState(false);
 
   useEffect(() => {
@@ -200,36 +174,6 @@ export default function App() {
     };
   }, []);
 
-  function add(product: Product) {
-    const value = priceValue(product);
-    if (!value) {
-      return;
-    }
-
-    setItems((current) => {
-      const existing = current.find((item) => item.id === product.id);
-      if (existing) {
-        return current.map((item) =>
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item,
-        );
-      }
-      return [
-        ...current,
-        {
-          id: product.id,
-          title: product.title,
-          amount: value.amount,
-          currency: value.currency,
-          quantity: 1,
-        },
-      ];
-    });
-  }
-
-  const count = items.reduce((total, item) => total + item.quantity, 0);
-  const total = items.reduce((sum, item) => sum + item.amount * item.quantity, 0);
-  const currency = items[0]?.currency ?? "eur";
-
   return (
     <main className="min-h-screen bg-[#0a0b0d] text-zinc-200">
       <div className="mx-auto w-full max-w-[1600px] px-6 py-8 sm:px-10">
@@ -247,14 +191,11 @@ export default function App() {
           >
             <BagIcon />
             Bag
-            {count > 0 ? (
-              <span className="font-mono text-[11px] text-lime-300">{count}</span>
-            ) : null}
           </button>
         </header>
 
         <section aria-label="Products">
-          <Catalogue state={state} onAdd={add} />
+          <Catalogue state={state} />
         </section>
       </div>
 
@@ -279,35 +220,11 @@ export default function App() {
               </button>
             </div>
 
-            {items.length === 0 ? (
-              <p className="mt-6 text-[13px] text-zinc-400">Your bag is empty.</p>
-            ) : (
-              <ul className="mt-6 divide-y divide-white/[0.07] border-y border-white/[0.07]">
-                {items.map((item) => (
-                  <li key={item.id} className="flex items-baseline justify-between gap-4 py-3">
-                    <div className="min-w-0">
-                      <p className="truncate text-[13px] text-zinc-200">{item.title}</p>
-                      <p className="mt-0.5 font-mono text-[10px] text-zinc-600">
-                        {item.quantity} × {formatPrice(item.amount, item.currency)}
-                      </p>
-                    </div>
-                    <p className="shrink-0 font-mono text-[12px] text-zinc-300">
-                      {formatPrice(item.amount * item.quantity, item.currency)}
-                    </p>
-                  </li>
-                ))}
-              </ul>
-            )}
+            <p className="mt-6 text-[13px] text-zinc-400">Your bag is empty.</p>
 
-            <div className="mt-auto pt-6">
-              <div className="flex items-baseline justify-between text-[13px]">
-                <span className="text-zinc-500">Total</span>
-                <span className="font-mono text-zinc-100">{formatPrice(total, currency)}</span>
-              </div>
-              <p className="mt-4 text-[10px] leading-relaxed text-zinc-600">
-                Demo bag. Checkout is not connected to Medusa yet.
-              </p>
-            </div>
+            <p className="mt-auto pt-6 text-[10px] leading-relaxed text-zinc-600">
+              Demo bag. Checkout is not connected to Medusa yet.
+            </p>
           </aside>
         </div>
       ) : null}
