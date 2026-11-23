@@ -19,7 +19,7 @@ export function KeyboardGrid({ boards, customBoards, detected, selected, onSelec
 
   return (
     <section aria-label="Keyboards" className="flex min-h-0 flex-1 flex-col">
-      <div className="grid min-h-0 flex-1 auto-rows-fr gap-3 overflow-y-auto sm:grid-cols-2 xl:grid-cols-3">
+      <div className="grid min-h-0 flex-1 auto-rows-fr gap-3 overflow-y-auto sm:grid-cols-2 md:grid-cols-3">
         {cards.map((board) => {
           const key = boardKey(board);
           return (
@@ -33,16 +33,16 @@ export function KeyboardGrid({ boards, customBoards, detected, selected, onSelec
             />
           );
         })}
-
-        <button
-          type="button"
-          onClick={onAdd}
-          className="flex h-full min-h-[140px] items-center justify-center gap-2 rounded-lg border border-dashed border-white/[0.08] text-[11px] text-zinc-600 transition hover:border-white/15 hover:text-zinc-400"
-        >
-          <Plus size={14} />
-          Add keyboard
-        </button>
       </div>
+
+      <button
+        type="button"
+        onClick={onAdd}
+        className="mt-3 flex shrink-0 items-center justify-center gap-2 rounded-lg border border-dashed border-white/[0.08] py-4 text-[11px] text-zinc-600 transition hover:border-white/15 hover:text-zinc-400"
+      >
+        <Plus size={14} />
+        Add keyboard
+      </button>
     </section>
   );
 }
