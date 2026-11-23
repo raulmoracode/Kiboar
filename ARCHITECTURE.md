@@ -114,9 +114,9 @@ version drift; Turborepo is the task runner, not the version manager.
 | --- | --- |
 | `pnpm install` | Install the whole JavaScript workspace once |
 | `pnpm build` | Build docs, Studio, web and shop through Turbo |
-| `pnpm typecheck` | Typecheck core, docs, Studio and web |
+| `pnpm typecheck` | Typecheck core, docs, Studio, web and the storefront |
 | `pnpm test` | Run the core tests |
-| `pnpm dev` | Start the docs, Studio and web dev servers; the shop needs PostgreSQL, so it is excluded and has its own script |
+| `pnpm dev` | Start the docs, Studio, web and storefront dev servers; the Medusa service needs PostgreSQL, so it is excluded and has its own script |
 | `pnpm dev:web` | Start the web dev server |
 | `pnpm dev:shop` | Start Medusa; needs a `shop/.env` with `DATABASE_URL` and PostgreSQL |
 | `pnpm library` | Run every KiCad library check |

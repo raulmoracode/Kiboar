@@ -34,6 +34,9 @@ let anyone build the same board, so the shop never gates the design.
   it that way. `dev`, `start` and `db:migrate` may require PostgreSQL.
 - **No catalogue in the repository yet.** Products, regions and prices are not
   seeded from `src/`. A seed is a separate change with its own decision.
+- **The storefront bag is a demo.** It lives in browser memory, does not create
+  a Medusa cart and has no checkout. Do not document it as a working purchase
+  flow.
 - **The storefront is separate from `web`.** `shop/storefront` is its own Vite
   app; do not import `web/` or `software/` code into it. Both front ends share
   `@kiboar/design`, `@kiboar/vite-config` and `@kiboar/tsconfig`, not screens.

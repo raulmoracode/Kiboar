@@ -71,14 +71,16 @@ The application layout, documents and current milestone are in
 
 ### Web and shop
 
-Both are packages of the same root workspace. `web` is static and needs no
-database; `shop` is a Medusa application and needs PostgreSQL at runtime.
+`web` is a static Vite app with no database. `shop` holds the Medusa service
+and the storefront in `shop/storefront`, a static Vite app that reads the Store
+API; the storefront needs Medusa running and a publishable key.
 
 ```bash
 pnpm install
-pnpm --filter @kiboar/web dev        # http://localhost:3000
-pnpm --filter @kiboar/shop build     # no database needed
-pnpm --filter @kiboar/shop dev       # needs shop/.env and PostgreSQL
+pnpm --filter @kiboar/web dev          # http://localhost:3000
+pnpm --filter @kiboar/storefront dev   # http://localhost:3001
+pnpm --filter @kiboar/shop build       # no database needed
+pnpm --filter @kiboar/shop dev         # needs shop/.env and PostgreSQL
 ```
 
 The setup, the commands and the scope of each are in
