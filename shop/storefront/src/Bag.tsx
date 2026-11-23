@@ -25,12 +25,27 @@ function CloseIcon() {
   );
 }
 
+function TrashIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="size-4">
+      <path
+        d="M4 7h16M10 7V5.5A1.5 1.5 0 0 1 11.5 4h1A1.5 1.5 0 0 1 14 5.5V7M6.5 7l.8 11.2A2 2 0 0 0 9.3 20h5.4a2 2 0 0 0 2-1.8L17.5 7M10 11v5M14 11v5"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export function Bag({
   items,
   onClose,
   onBrowse,
   onIncrease,
   onDecrease,
+  onRemove,
   onOpenProduct,
 }: {
   items: BagItem[];
@@ -38,6 +53,7 @@ export function Bag({
   onBrowse: () => void;
   onIncrease: (variantId: string) => void;
   onDecrease: (variantId: string) => void;
+  onRemove: (variantId: string) => void;
   onOpenProduct: (handle: string) => void;
 }) {
   const panel = useRef<HTMLElement>(null);
@@ -153,12 +169,14 @@ export function Bag({
                         event.preventDefault();
                         onOpenProduct(item.handle);
                       }}
-                      className="aspect-[4/3] w-14 self-start overflow-hidden rounded border border-white/[0.06] bg-white/[0.015]"
+                      className={`aspect-[4/3] w-[60px] self-center overflow-hidden rounded p-1 ${
+                        image ? "bg-[#e8e5de]" : "bg-white/[0.02]"
+                      }`}
                     >
                       {image ? (
                         <img src={image} alt="" className="h-full w-full object-contain" />
                       ) : (
-                        <span className="grid h-full w-full place-items-center text-[8px] tracking-[0.12em] text-zinc-600 uppercase">
+                        <span className="grid h-full w-full place-items-center text-[7px] tracking-[0.1em] text-zinc-600 uppercase">
                           No photo
                         </span>
                       )}
@@ -187,12 +205,9 @@ export function Bag({
                         <button
                           type="button"
                           onClick={() => onDecrease(item.variantId)}
-                          aria-label={
-                            item.quantity === 1
-                              ? `Remove ${item.title} from the bag`
-                              : `Decrease the quantity of ${item.title}`
-                          }
-                          className="grid size-6 place-items-center text-[13px] leading-none text-zinc-500 transition-colors hover:text-zinc-100"
+                          disabled={item.quantity === 1}
+                          aria-label={`Decrease the quantity of ${item.title}`}
+                          className="grid size-6 place-items-center text-[13px] leading-none text-zinc-500 transition-colors hover:text-zinc-100 disabled:cursor-not-allowed disabled:opacity-30"
                         >
                           −
                         </button>
@@ -210,12 +225,22 @@ export function Bag({
                       </div>
                     </div>
 
-                    <p className="self-start pt-0.5 font-mono text-[12px] text-zinc-300">
-                      {formatPrice({
-                        amount: item.price.amount * item.quantity,
-                        currency_code: item.price.currency_code,
-                      })}
-                    </p>
+                    <div className="flex flex-col items-end gap-2">
+                      <p className="font-mono text-[12px] text-zinc-300">
+                        {formatPrice({
+                          amount: item.price.amount * item.quantity,
+                          currency_code: item.price.currency_code,
+                        })}
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => onRemove(item.variantId)}
+                        aria-label={`Remove ${item.title} from the bag`}
+                        className="grid size-7 place-items-center rounded text-red-400/80 transition-colors hover:bg-red-500/10 hover:text-red-300"
+                      >
+                        <TrashIcon />
+                      </button>
+                    </div>
                   </li>
                 );
               })}
