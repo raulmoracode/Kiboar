@@ -75,6 +75,13 @@ pnpm --filter @kiboar/shop dev       # needs shop/.env and PostgreSQL
 The setup, the commands and the scope of each are in
 [`web/README.md`](web/README.md) and [`shop/README.md`](shop/README.md).
 
+### Keyboards
+
+The official hardware files for the Kiboar boards live in `keyboards/`: one
+directory per keyboard and revision, with its README, licence, KiCad project and
+firmware notes. The board definitions Studio reads stay in `software/boards/`.
+See [`keyboards/README.md`](keyboards/README.md).
+
 ## Repository
 
 - [`ARCHITECTURE.md`](ARCHITECTURE.md) — product boundaries, the workspace,

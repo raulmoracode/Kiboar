@@ -20,6 +20,7 @@ separately.
 | `software/` | Kiboar Studio: Tauri app, TypeScript core and Rust crates |
 | `web/` | Public site: Vite + React + Tailwind |
 | `shop/` | Shop: Medusa v2 application |
+| `keyboards/` | Official keyboard hardware: one directory per board and revision |
 | `package.json`, `pnpm-workspace.yaml`, `turbo.json` | Root JavaScript workspace for `docs`, `software`, `web` and `shop` |
 | `ARCHITECTURE.md` | Product boundaries, commands, versions and deployment |
 | `LABELS.md` | The repository label scheme for issues and pull requests |

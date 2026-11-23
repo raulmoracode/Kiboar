@@ -16,6 +16,11 @@ site and the shop. They share a repository and a review flow, not a runtime.
 
 ## Boundaries
 
+- **The official hardware lives in `keyboards/`.** One directory per board and
+  revision, with its own README, licence, KiCad project and firmware notes. The
+  board definitions Studio reads stay in `software/boards/`; moving them is a
+  separate change. The directory is the published home and starts empty: do not
+  claim a keyboard file exists until it is there.
 - **The library lives in `library/`.** For a clone install, `KIBOAR_ROOT`
   points at `<clone>/library`; the library tables, the model paths and the PCM
   builder all use that root. The PCM ZIP keeps `symbols/`, `footprints/` and
@@ -76,6 +81,7 @@ software/crates/        Rust, outside Turbo
 software/Cargo.toml     Cargo workspace
 web/                    @kiboar/web
 shop/                   @kiboar/shop
+keyboards/              official board files, one directory per board and revision
 ```
 
 Shared versions live in the `catalog` block of `pnpm-workspace.yaml`. React,
