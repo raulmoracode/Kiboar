@@ -15,7 +15,7 @@ export function KeyboardCard({ board, connected, local, selected, onSelect }: Pr
       type="button"
       aria-pressed={selected}
       onClick={onSelect}
-      className={`flex min-h-[108px] flex-col rounded-lg border p-4 text-left transition ${
+      className={`flex h-full min-h-[140px] flex-col rounded-lg border p-5 text-left transition ${
         selected
           ? "border-lime-300/30 bg-lime-300/[0.03]"
           : "border-white/[0.06] bg-white/[0.015] hover:border-white/15"
@@ -27,7 +27,7 @@ export function KeyboardCard({ board, connected, local, selected, onSelect }: Pr
           {local ? "Local" : connected ? "Connected" : "Registry"}
         </span>
       </div>
-      <p className="mt-3 truncate text-sm text-zinc-200">{board.name}</p>
+      <p className="mt-3 truncate text-[15px] text-zinc-200">{board.name}</p>
       <p className="mt-1 truncate font-mono text-[10px] text-zinc-600">
         {board.board_id} · rev {board.hw_rev}
       </p>

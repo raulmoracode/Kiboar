@@ -155,7 +155,7 @@ export default function App() {
           />
         </div>
       ) : (
-        <div className="mx-auto w-full max-w-[640px] px-6 pb-10 pt-8">
+        <div className="mx-auto flex min-h-[calc(100vh-3.5rem)] w-full flex-col px-6 pb-6 pt-6">
           <KeyboardGrid
             boards={gridBoards}
             customBoards={customBoards}

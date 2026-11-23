@@ -18,8 +18,8 @@ export function KeyboardGrid({ boards, customBoards, detected, selected, onSelec
   const cards = [...customBoards, ...boards];
 
   return (
-    <section aria-labelledby="keyboards-heading">
-      <div className="flex items-baseline justify-between">
+    <section aria-labelledby="keyboards-heading" className="flex flex-1 flex-col">
+      <div className="mb-3 flex items-baseline justify-between">
         <h2
           id="keyboards-heading"
           className="text-[10px] font-medium uppercase tracking-[0.22em] text-zinc-600"
@@ -29,7 +29,7 @@ export function KeyboardGrid({ boards, customBoards, detected, selected, onSelec
         <span className="font-mono text-[10px] text-zinc-700">{cards.length}</span>
       </div>
 
-      <div className="mt-3 grid gap-2 sm:grid-cols-2">
+      <div className="grid flex-1 auto-rows-fr gap-3 sm:grid-cols-2 xl:grid-cols-3">
         {cards.map((board) => {
           const key = boardKey(board);
           return (
@@ -47,7 +47,7 @@ export function KeyboardGrid({ boards, customBoards, detected, selected, onSelec
         <button
           type="button"
           onClick={onAdd}
-          className="flex min-h-[108px] items-center justify-center gap-2 rounded-lg border border-dashed border-white/[0.08] text-[11px] text-zinc-600 transition hover:border-white/15 hover:text-zinc-400"
+          className="flex h-full min-h-[140px] items-center justify-center gap-2 rounded-lg border border-dashed border-white/[0.08] text-[11px] text-zinc-600 transition hover:border-white/15 hover:text-zinc-400"
         >
           <Plus size={14} />
           Add keyboard
