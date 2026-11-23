@@ -101,6 +101,7 @@ a public consumer one; the release notes say so.
    (`Casks/kiboar-studio.rb`) with the version and the new digest, then test:
    ```bash
    brew tap raulmoracode/kiboar
+   brew trust --cask raulmoracode/kiboar/kiboar-studio
    brew fetch --cask kiboar-studio
    brew install --cask kiboar-studio
    ```
