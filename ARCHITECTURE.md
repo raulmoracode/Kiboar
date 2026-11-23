@@ -1,21 +1,32 @@
 # Architecture
 
-Kiboar is one repository with five products that are built and shipped
-separately: the KiCad library, the documentation site, Kiboar Studio, the public
-site and the shop. They share a repository and a review flow, not a runtime.
+Kiboar is a keyboard brand. It designs keyboards, sells them assembled and
+publishes the library and the board definitions so anyone can build, repair and
+customise their own. The repository holds the five products that make both paths
+work; they are built and shipped separately and share a repository and a review
+flow, not a runtime.
 
 ## Products
 
-| Product | Path | Built with | Shipped as |
+| Product | Path | Built with | What it is |
 | --- | --- | --- | --- |
-| KiCad library | `library/symbols/`, `library/footprints/`, `library/3dmodels/`, `library/lib-table-files/`, `library/pcm/`, `library/tools/` | KiCad 10, Python standard library | PCM ZIP and a clone with library tables |
-| Documentation | `docs/` | Astro 7, Fumadocs, React | Static site on Vercel at `/docs` and `/es/docs` |
-| Kiboar Studio | `software/` | Tauri 2, React, TypeScript, Rust | Desktop application |
-| Web | `web/` | Vite 8, React 19, Tailwind 4 | Static site, host undecided |
-| Shop | `shop/` | Medusa 2, Node, PostgreSQL | Medusa service and admin, host undecided |
+| Shop | `shop/` | Medusa 2, Node, PostgreSQL | Sells assembled Kiboar keyboards; the commercial surface |
+| Web | `web/` | Vite 8, React 19, Tailwind 4 | The public front door that brings the brand together |
+| KiCad library | `library/symbols/`, `library/footprints/`, `library/3dmodels/`, `library/lib-table-files/`, `library/pcm/`, `library/tools/` | KiCad 10, Python standard library | The official library, published so anyone can design and build a board |
+| Kiboar Studio | `software/` | Tauri 2, React, TypeScript, Rust | Manages a Kiboar board: detects, flashes and (after 0.1) remaps it, bought or self-built |
+| Documentation | `docs/` | Astro 7, Fumadocs, React | How to install the library, build a board, flash it and what the licences allow |
 
 ## Boundaries
 
+- **Buying and building are both first-class.** `shop/` is the commercial
+  surface, not the source of truth. The library, the docs and Studio must work
+  for a board that was never bought.
+- **The published design is not gated by the shop.** No product may require an
+  order, an account or a running shop to install the library, flash a board or
+  read the docs.
+- **Published today:** the library, the board definitions in `software/boards`
+  and the source of the five products. The rest of the hardware release is
+  planned; do not present it as already available.
 - **The official hardware lives in `keyboards/`.** One directory per board and
   revision, with its own README, licence, KiCad project and firmware notes. The
   board definitions Studio reads stay in `software/boards/`; moving them is a
@@ -123,19 +134,37 @@ do not share it with the KiCad library.
 
 ## Deployment
 
+One domain, three web surfaces, plus the library and the desktop app:
+
+| Surface | URL | Hosting |
+| --- | --- | --- |
+| Web | `https://kiboar.raulmoracode.com/` | Static Vite build from `web/dist` |
+| Docs | `https://kiboar.raulmoracode.com/docs` and `/es/docs` | Static Astro build from `docs/dist` |
+| Shop | `https://kiboar.raulmoracode.com/shop` | Medusa service: Node and PostgreSQL |
+| Library | GitHub releases and the repository | PCM ZIP |
+| Studio | Desktop | macOS bundle, not a web surface |
+
 - **Library:** `python3 library/tools/build_pcm.py` produces the PCM ZIP;
   releases are attached to a GitHub release.
+- **Web:** the root of the brand domain. `pnpm --filter @kiboar/web build`
+  produces a static `dist/`; the host serves it at `/`.
 - **Documentation:** Vercel, project Root Directory `docs`. Vercel detects the
   pnpm workspace and installs from the repository root. `docs/vercel.json`
   builds with `cd .. && pnpm turbo run build --filter=kiboar-docs` and publishes
-  `dist`. The site is served at `kiboar.raulmoracode.com/docs`; Spanish lives
-  at `/es/docs`.
+  `dist`. It owns the `/docs` prefix; Spanish lives at `/es/docs`.
+- **Shop:** a Medusa service with PostgreSQL and the admin dashboard, served
+  under `/shop`. It needs a Node runtime and a database, so a static host cannot
+  run it: the domain needs a reverse proxy or a rewrite from `/shop` to the
+  Medusa host. Medusa serves its API and its admin from the same process, so the
+  proxy must rewrite those paths consistently; do not assume the admin works
+  under `/shop/app` until that rewrite is tested.
 - **Studio:** a desktop application. It is not deployed to Vercel and has no
   web build target.
-- **Web:** a static `dist/` from `pnpm --filter @kiboar/web build`. No host is
-  configured yet.
-- **Shop:** a Medusa service with PostgreSQL and the admin dashboard. It is not
-  deployed; Medusa Cloud or a Node host are the candidates.
+
+Routing rules for the domain: `/` belongs to `web`, `/docs/*` to the docs
+build and `/shop/*` to Medusa. A single static project cannot own all three;
+whichever host owns the domain needs explicit rewrites or a proxy, and the
+prefixes must not collide.
 
 ## Licensing
 

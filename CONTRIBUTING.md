@@ -1,13 +1,15 @@
 # Contributing
 
-Kiboar is a KiCad 10 library. Contributions arrive as a pull request against
-`main`, one logical change per branch, with an issue that says what and why.
+Kiboar is a keyboard brand: it designs and sells keyboards and publishes the
+library and the board definitions. This repository holds the official KiCad
+library, Kiboar Studio, the public site and the shop. This file covers
+contributions to the KiCad library in `library/`.
 
-The repository also contains the documentation site in `docs/`, Kiboar Studio in
-`software/`, the public site in `web/` and the Medusa shop in `shop/`. They share
-a pnpm workspace at the root and are described in
-[`ARCHITECTURE.md`](ARCHITECTURE.md); this file covers the KiCad library in
-`library/`. Their agent instructions are
+Contributions arrive as a pull request against `main`, one logical change per
+branch, with an issue that says what and why.
+
+The products share a pnpm workspace at the root and are described in
+[`ARCHITECTURE.md`](ARCHITECTURE.md). Their agent instructions are
 [`library/AGENTS.md`](library/AGENTS.md), [`docs/AGENTS.md`](docs/AGENTS.md),
 [`software/AGENTS.md`](software/AGENTS.md), [`web/AGENTS.md`](web/AGENTS.md) and
 [`shop/AGENTS.md`](shop/AGENTS.md).

@@ -9,18 +9,27 @@
 
 # Kiboar
 
-Kiboar is one repository with five products for building mechanical keyboards:
-the **KiCad component library**, the **documentation site**, **Kiboar Studio**,
-the **public site** and the **shop**. They are built and shipped separately and
-share a repository, a review flow and a CI pipeline.
+Kiboar is a keyboard brand. It designs keyboards, sells them assembled and
+publishes the library and the board definitions so anyone can build, repair and
+customise their own.
+
+Buying and building are both first-class. The shop sells the assembled
+keyboards; the library and the documentation make the other path possible; and
+Kiboar Studio flashes and configures a board whichever way you got it. The web
+site brings the whole brand together.
 
 | Product | Path | README | What it is |
 | --- | --- | --- | --- |
-| KiCad library | `library/` | [`library/README.md`](library/README.md) | 145 symbols and 173 footprints in 26 footprint libraries, with 3D models, PCM packaging and the library tools |
-| Documentation | `docs/` | [`docs/README.md`](docs/README.md) | The Astro + Fumadocs site, English and Spanish |
-| Kiboar Studio | `software/` | [`software/README.md`](software/README.md) | The Tauri desktop application: detect, flash, remap and visualise a board |
-| Web | `web/` | [`web/README.md`](web/README.md) | The public site: Vite, React and Tailwind |
-| Shop | `shop/` | [`shop/README.md`](shop/README.md) | The Medusa application: Store API, admin dashboard and PostgreSQL |
+| Shop | `shop/` | [`shop/README.md`](shop/README.md) | Sells assembled Kiboar keyboards; the commercial surface of the brand |
+| Web | `web/` | [`web/README.md`](web/README.md) | The public front door: the brand, the keyboards, the docs, Studio and the shop in one place |
+| KiCad library | `library/` | [`library/README.md`](library/README.md) | The official library Kiboar designs with, published so you can design and build your own board: 145 symbols and 173 footprints in 26 libraries |
+| Kiboar Studio | `software/` | [`software/README.md`](software/README.md) | Manages a Kiboar keyboard: detects, flashes and — after 0.1 — remaps it, bought or self-built |
+| Documentation | `docs/` | [`docs/README.md`](docs/README.md) | How to install the library, build a board, flash it and what the licences allow |
+
+The public surfaces share one domain: `/` is the web site, `/docs` the
+documentation and `/shop` the Medusa store. The library is published as a PCM
+ZIP and in this repository; Studio is a desktop application. The routing each
+one needs is in [`ARCHITECTURE.md`](ARCHITECTURE.md#deployment).
 
 📖 **Documentation:** <https://kiboar.raulmoracode.com/docs> — English and Spanish.
 
@@ -119,8 +128,8 @@ The KiCad files use the KiCad 10 format; KiCad 8 and 9 cannot open them.
 
 ## Licensing
 
-Kiboar is a **mixed-licence collection**, because of fifteen imported symbols in
-the library: original work is MIT, and those fifteen keep the licence of their
+The KiCad library is a **mixed-licence collection**, because of fifteen imported
+symbols: original work is MIT, and those fifteen keep the licence of their
 source. The full split, the attribution requirements and the evidence are in
 [`NOTICE`](NOTICE) and [`library/README.md`](library/README.md#licensing). The
 documentation site, Studio, the web site and the shop are MIT.

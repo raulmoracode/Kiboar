@@ -5,9 +5,10 @@ first: the Git, licensing and repository-wide rules there apply here.
 
 ## What this product is
 
-The public Kiboar site: a Vite + React + Tailwind single page application. It is
+The public front door of the Kiboar brand: the keyboards, the official library,
+Kiboar Studio, the documentation and the shop in one place. It is
 `@kiboar/web`, a package of the root pnpm workspace. It is not the shop: the
-shop is the Medusa application in `shop/`.
+shop is the Medusa application in `shop/`, and this site points at it.
 
 ## Layout
 

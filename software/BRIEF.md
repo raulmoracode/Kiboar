@@ -6,9 +6,16 @@
 
 ## 1. Summary
 
-Kiboar Studio is a desktop application for the keyboards built with Kiboar
-components. It detects the board over USB, shows its layout, remaps keys and
-flashes the correct firmware when the board is empty or needs an update.
+Kiboar Studio is the desktop application for Kiboar keyboards, bought assembled
+or built from the published design. It detects the board over USB, shows its
+layout, remaps keys and flashes the correct firmware when the board is empty or
+needs an update.
+
+Kiboar is a keyboard brand: it sells assembled keyboards and publishes the
+library and the board definitions so anyone can build their own. Studio
+therefore serves two users with the same build, the customer who bought a board
+and the maker who built one from the published library and board definition.
+Neither path may require the other.
 
 The reference experience is Razer Synapse, but the hardware and the firmware are
 open. Kiboar Studio does not invent firmware or a protocol: it builds on QMK and
