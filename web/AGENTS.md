@@ -12,9 +12,10 @@ shop is the Medusa application in `shop/`, and this site points at it.
 
 ## Layout
 
-- `src/App.tsx` — the page and the keyboard shortcut listener.
+- `src/App.tsx` — the minimal router, the home page and the keyboard shortcut listener.
 - `src/Keyboard.tsx` — the drawn keyboard; the six lit keys are real links.
-- `src/products.ts` — the six destinations, their key and their description.
+- `src/StudioPage.tsx` — the `/studio` page: download, install paths and scope.
+- `src/products.ts` — the six destinations, their key and whether they are internal.
 - `src/styles.css` — the shared design entry from `@kiboar/design`.
 - `vite.config.ts` — the shared `@kiboar/vite-config` setup and port 3000.
 
@@ -26,8 +27,12 @@ shop is the Medusa application in `shop/`, and this site points at it.
   switching to another framework is a new issue, not a refactor.
 - **The letter menu is the navigation.** Every destination lives in
   `src/products.ts` with its key. Keep the keys as real links inside the SVG and
-  the shortcut handler ignoring modifiers, key repeats and form fields; every
-  destination opens in a new tab.
+  the shortcut handler ignoring modifiers, key repeats and form fields. External
+  destinations open in a new tab; `internal: true` destinations (Studio) use the
+  local router and the same tab.
+- **Studio stays honest.** The page links the real release asset and install
+  paths; do not add a screenshot or claim hardware verification that has not
+  happened.
 - **The shop is a separate product.** Do not import `shop/` code into `web/`;
   talk to its Store API over HTTP. Both apps share `@kiboar/design`,
   `@kiboar/vite-config` and `@kiboar/tsconfig`, not screens.
