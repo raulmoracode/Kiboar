@@ -26,19 +26,19 @@ export const products: readonly Product[] = [
     internal: true,
   },
   {
+    name: "Studio",
+    href: "/studio",
+    line: "Flash and configure.",
+    key: "o",
+    internal: true,
+  },
+  {
     name: "Shop",
     href: "/shop",
     line: "Buy one assembled.",
     key: "b",
     // The storefront is not deployed and checkout is not connected.
     disabled: true,
-  },
-  {
-    name: "Studio",
-    href: "/studio",
-    line: "Flash and configure.",
-    key: "o",
-    internal: true,
   },
   {
     name: "Docs",
