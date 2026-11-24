@@ -93,7 +93,7 @@ export default function App() {
       : "No bootloader";
 
   return (
-    <main className="min-h-screen bg-[#0a0b0d] text-zinc-200">
+    <main className="min-h-screen bg-[var(--kiboar-bg)] text-zinc-200">
       {openBoard ? (
         <div className="mx-auto w-full max-w-[640px] px-6 py-6">
           <button

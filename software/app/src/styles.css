@@ -1,11 +1,1 @@
-@import "tailwindcss";
-
-:root {
-  color-scheme: dark;
-}
-
-body {
-  margin: 0;
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  background: #0a0b0d;
-}
+@import "@kiboar/design/app.css";

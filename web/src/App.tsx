@@ -31,7 +31,7 @@ export default function App() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-[#0a0b0d] text-zinc-200">
+    <main className="min-h-screen bg-[var(--kiboar-bg)] text-zinc-200">
       <div className="mx-auto flex min-h-screen w-full max-w-[1180px] flex-col px-6 py-10 sm:px-10 sm:py-14">
         <h1 className="sr-only">Kiboar</h1>
 

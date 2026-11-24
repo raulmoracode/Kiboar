@@ -54,11 +54,12 @@ flow, not a runtime.
   `web` is a static Vite app with no server. `shop` holds two applications: the
   Medusa service (Store API and admin, PostgreSQL) and the storefront
   (`shop/storefront`), a static Vite app that reads the Store API over HTTP.
-  Both front ends use `@kiboar/design` for the base CSS and colour tokens,
-  `@kiboar/vite-config` for the Vite plugins and ports, and
-  `@kiboar/tsconfig` for their compiler options, from `packages/`. They do not
-  import each other's pages or components, and the storefront talks to the
-  Store API over HTTP.
+  The three front ends — `web`, the storefront and Studio — use
+  `@kiboar/design` for the base CSS and colour tokens, `@kiboar/vite-config`
+  for the Vite plugins and ports, and `@kiboar/tsconfig` for their compiler
+  options, from `packages/`. Studio adds its Tauri overrides in its own Vite
+  config. They do not import each other's pages or components, and the
+  storefront talks to the Store API over HTTP.
 - **The shop build does not need a database.** `medusa build` compiles the
   server and the admin in CI; only `dev`, `start` and `db:migrate` need
   PostgreSQL.

@@ -43,6 +43,10 @@ other, and nothing in Studio may assume the board was bought.
 - **The workspace root is the repository root.** There is no nested
   `pnpm-workspace.yaml` under `software/`. Use the root catalog for shared
   versions.
+- **The frontend uses the shared design system.** Style with Tailwind
+  utilities; the base CSS and tokens come from `@kiboar/design` and the Vite
+  setup from `@kiboar/vite-config`, with the Tauri overrides in
+  `app/vite.config.ts`. Do not copy the base CSS or the plugins again.
 - **`@kiboar/core` is pure TypeScript.** No DOM, no Node, no Tauri imports.
   It is the source of truth for the board and registry schemas.
 - **`kiboar-device` is pure Rust.** No Tauri, no `nusb`, no `hidapi`. Platform

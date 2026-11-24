@@ -95,7 +95,7 @@ export function AddKeyboardDialog({
         event.preventDefault();
         onClose();
       }}
-      className="w-[min(420px,calc(100vw-2rem))] rounded-xl border border-white/10 bg-[#0c0e11] p-0 text-zinc-200 backdrop:bg-black/70"
+      className="w-[min(420px,calc(100vw-2rem))] rounded-xl border border-white/10 bg-[var(--kiboar-surface)] p-0 text-zinc-200 backdrop:bg-black/70"
     >
       <div className="p-6">
         <div className="flex items-start justify-between">

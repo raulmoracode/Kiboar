@@ -21,10 +21,21 @@ export default kiboarViteConfig({
 });
 ```
 
+Studio adds its Tauri overrides without repeating the plugins:
+
+```ts
+export default kiboarViteConfig({
+  port: 1420,
+  clearScreen: false,
+  server: { watch: { ignored: ["**/src-tauri/**"] } },
+});
+```
+
 ## Boundaries
 
 - The package exports the config; the app still owns its `vite` binary and its
-  `index.html`, because Vite runs from the app root.
+  `index.html`, because Vite runs from the app root. `server`, `preview` and
+  `clearScreen` accept per-app overrides for the Tauri shell.
 - `vite` is a peer dependency: the app decides the Vite version and the package
   does not install a second copy.
 - React itself is not re-exported here. Each app declares `react` and

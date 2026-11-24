@@ -213,7 +213,7 @@ export function ProductPage({
             type="button"
             disabled={!variant || !price}
             onClick={() => variant && onAdd(product, variant)}
-            className="mt-8 h-10 w-full max-w-sm rounded bg-zinc-100 text-[12px] font-medium text-[#0a0b0d] transition-colors hover:bg-lime-200 disabled:cursor-not-allowed disabled:bg-zinc-700 disabled:text-zinc-500"
+            className="mt-8 h-10 w-full max-w-sm rounded bg-zinc-100 text-[12px] font-medium text-[var(--kiboar-bg)] transition-colors hover:bg-lime-200 disabled:cursor-not-allowed disabled:bg-zinc-700 disabled:text-zinc-500"
           >
             Add to bag
           </button>
