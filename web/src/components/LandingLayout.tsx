@@ -33,10 +33,7 @@ export function LandingLayout({
         {children ? (
           <p className="absolute inset-x-0 top-8 flex items-center justify-center gap-2 font-mono text-[10px] tracking-[0.2em] text-zinc-500 uppercase">
             Scroll for details
-            <span
-              aria-hidden="true"
-              className="text-[13px] leading-none text-lime-300/90 motion-safe:animate-bounce"
-            >
+            <span aria-hidden="true" className="text-[13px] leading-none text-lime-300/90">
               ↓
             </span>
           </p>
