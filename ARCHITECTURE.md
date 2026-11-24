@@ -10,7 +10,7 @@ flow, not a runtime.
 
 | Product | Path | Built with | What it is |
 | --- | --- | --- | --- |
-| Shop | `shop/` | Medusa 2, Vite, Node, PostgreSQL | Sells assembled Kiboar keyboards: a static storefront and the Medusa service |
+| Shop | `shop/` | Medusa 2, Vite, Node, PostgreSQL | The commercial surface: a static storefront and the Medusa service; checkout is not connected yet |
 | Web | `web/` | Vite 8, React 19, Tailwind 4 | The public front door that brings the brand together |
 | KiCad library | `library/symbols/`, `library/footprints/`, `library/3dmodels/`, `library/lib-table-files/`, `library/pcm/`, `library/tools/` | KiCad 10, Python standard library | The official library, published so anyone can design and build a board |
 | Kiboar Studio | `software/` | Tauri 2, React, TypeScript, Rust | Manages a Kiboar board: detects, flashes and (after 0.1) remaps it, bought or self-built |
@@ -143,7 +143,10 @@ do not share it with the KiCad library.
 
 ## Deployment
 
-One domain, three web surfaces, plus the library and the desktop app:
+One domain, three web surfaces, plus the library and the desktop app. The table
+describes the intended routing; none of the three web surfaces is deployed
+today, and `kiboar.raulmoracode.com` has no Vercel deployment. The Studio 0.1.0
+release is the only published artefact.
 
 | Surface | URL | Hosting |
 | --- | --- | --- |

@@ -57,8 +57,9 @@ of copying it; a component used by one product stays in that product.
 
 ## Deployment
 
-Served at the root of the brand domain, `https://kiboar.raulmoracode.com/`.
-`pnpm --filter @kiboar/web build` produces a static `dist/` with no server.
+`pnpm --filter @kiboar/web build` produces a static `dist/` with no server. It
+is intended for the root of the brand domain, `https://kiboar.raulmoracode.com/`,
+which has no deployment yet.
 
 The app also serves `/studio`, `/library` and `/keyboards`, and a client-side
 404 for any other path. The host must fall back to `index.html` for those
