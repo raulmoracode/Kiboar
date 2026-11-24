@@ -61,3 +61,9 @@ jobs:
         run: |
           pnpm --filter @kiboar/web typecheck
           pnpm --filter @kiboar/web build
+
+      - name: Install Chromium
+        run: pnpm --filter @kiboar/web exec playwright install --with-deps chromium
+
+      - name: End-to-end tests
+        run: pnpm --filter @kiboar/web test:e2e
