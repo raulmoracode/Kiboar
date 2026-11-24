@@ -8,7 +8,8 @@
     "dev": "medusa develop",
     "build": "medusa build",
     "start": "medusa start",
-    "db:migrate": "medusa db:migrate"
+    "db:migrate": "medusa db:migrate",
+    "test": "vitest run"
   },
   "dependencies": {
     "@medusajs/admin-sdk": "2.23.0",
