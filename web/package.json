@@ -20,6 +20,8 @@
     "typescript": "catalog:",
     "vite": "catalog:",
     "@kiboar/vite-config": "workspace:*",
-    "@types/node": "catalog:"
+    "@types/node": "catalog:",
+    "@playwright/test": "catalog:",
+    "vitest": "catalog:"
   }
 }

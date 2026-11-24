@@ -30,7 +30,9 @@
     "@types/react-dom": "catalog:",
     "@types/three": "^0.187.0",
     "tailwindcss": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "@playwright/test": "catalog:",
+    "vitest": "catalog:"
   },
   "engines": {
     "node": ">=22.23.4"

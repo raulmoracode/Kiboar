@@ -26,6 +26,8 @@
     "vite": "catalog:",
     "@kiboar/design": "workspace:*",
     "@kiboar/vite-config": "workspace:*",
-    "@kiboar/tsconfig": "workspace:*"
+    "@kiboar/tsconfig": "workspace:*",
+    "@playwright/test": "catalog:",
+    "vitest": "catalog:"
   }
 }
