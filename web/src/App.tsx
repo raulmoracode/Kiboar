@@ -1,5 +1,6 @@
 import { type MouseEvent, useCallback, useEffect, useState } from "react";
 import { Keyboard } from "./Keyboard";
+import { KeyboardsPage } from "./KeyboardsPage";
 import { LibraryPage } from "./LibraryPage";
 import { productForKey, products } from "./products";
 import { StudioPage } from "./StudioPage";
@@ -80,6 +81,14 @@ export default function App() {
     return (
       <main className="min-h-screen bg-[var(--kiboar-bg)] text-zinc-200">
         <LibraryPage onHome={() => navigate("/")} />
+      </main>
+    );
+  }
+
+  if (path === "/keyboards") {
+    return (
+      <main className="min-h-screen bg-[var(--kiboar-bg)] text-zinc-200">
+        <KeyboardsPage onHome={() => navigate("/")} />
       </main>
     );
   }
