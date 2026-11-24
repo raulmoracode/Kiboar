@@ -31,8 +31,8 @@ export function LandingLayout({
         <ProductLinks onNavigate={onNavigate} {...(word ? { current: word } : {})} />
 
         {children ? (
-          <p className="absolute inset-x-0 top-8 flex justify-center font-mono text-[10px] tracking-[0.2em] text-zinc-500 uppercase">
-            Scroll for details
+          <p className="absolute top-10 left-6 text-[12px] text-zinc-500 sm:top-14 sm:left-10">
+            Details below
           </p>
         ) : null}
       </div>
