@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "software/**"
+      - "packages/**"
       - "pnpm-lock.yaml"
       - "pnpm-workspace.yaml"
       - "turbo.json"
@@ -17,6 +18,7 @@ on:
   pull_request:
     paths:
       - "software/**"
+      - "packages/**"
       - "pnpm-lock.yaml"
       - "pnpm-workspace.yaml"
       - "turbo.json"
