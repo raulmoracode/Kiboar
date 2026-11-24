@@ -12,6 +12,7 @@
     "dev:web": "pnpm --filter @kiboar/web dev",
     "dev:shop": "pnpm --filter @kiboar/shop dev",
     "test": "turbo run test",
+    "test:e2e": "turbo run test:e2e",
     "typecheck": "turbo run typecheck",
     "lint": "biome check .",
     "lint:docs": "biome check docs",
