@@ -31,9 +31,16 @@ export function LandingLayout({
         <ProductLinks onNavigate={onNavigate} {...(word ? { current: word } : {})} />
 
         {children ? (
-          <p className="absolute inset-x-0 bottom-0 flex items-center justify-center gap-2 pb-2 font-mono text-[10px] tracking-[0.16em] text-zinc-600 uppercase">
-            <span aria-hidden="true">↓</span>
-            Scroll
+          <p className="absolute inset-x-0 bottom-3 flex justify-center">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 font-mono text-[11px] tracking-[0.16em] text-zinc-300 uppercase">
+              <span
+                aria-hidden="true"
+                className="text-[13px] leading-none text-lime-300/80 motion-safe:animate-bounce"
+              >
+                ↓
+              </span>
+              Scroll
+            </span>
           </p>
         ) : null}
       </div>
