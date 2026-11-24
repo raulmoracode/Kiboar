@@ -116,6 +116,9 @@ is it.
   pins; do not move them into the catalog.
 - Turborepo runs `build`, `typecheck`, `test` and `dev` for the JavaScript
   packages. Rust and the library stay outside Turbo.
+- `minimumReleaseAge: 1440` is enforced. A new or bumped dependency must be at
+  least 24 hours old before it can be resolved; `minimumReleaseAgeExclude` is a
+  time-boxed exception for one package, never a default.
 - The root `.npmrc` hoists four package patterns because Medusa requires them
   at the top level of `node_modules`. Do not remove those entries.
 - Vercel deploys `docs` only. Studio is a desktop application. `web` is a static
