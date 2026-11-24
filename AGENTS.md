@@ -118,8 +118,9 @@ is it.
   packages. Rust and the library stay outside Turbo.
 - The root `.npmrc` hoists four package patterns because Medusa requires them
   at the top level of `node_modules`. Do not remove those entries.
-- Vercel deploys `docs` only. Studio is a desktop application. `web` is a static
-  app with no host configured yet, and `shop` is a Medusa service.
+- One Vercel project at the repository root serves web at `/` and docs at
+  `/docs` (`pnpm build:vercel`). It is configured but not deployed yet. Studio is
+  a desktop application and `shop` is a Medusa service.
 
 ### Generated files
 

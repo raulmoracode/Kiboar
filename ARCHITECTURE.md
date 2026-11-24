@@ -143,15 +143,16 @@ do not share it with the KiCad library.
 
 ## Deployment
 
-One domain, three web surfaces, plus the library and the desktop app. The table
-describes the intended routing; none of the three web surfaces is deployed
-today, and `kiboar.raulmoracode.com` has no Vercel deployment. The Studio 0.1.0
-release is the only published artefact.
+One domain, three web surfaces, plus the library and the desktop app. A single
+Vercel project at the repository root serves web at `/` and docs at `/docs`; the
+shop keeps its own host. The project is configured but not deployed yet, and
+`kiboar.raulmoracode.com` has no Vercel deployment. The Studio 0.1.0 release is
+the only published artefact.
 
 | Surface | URL | Hosting |
 | --- | --- | --- |
 | Web | `https://kiboar.raulmoracode.com/` | Static Vite build from `web/dist` |
-| Docs | `https://kiboar.raulmoracode.com/docs` and `/es/docs` | Static Astro build from `docs/dist` |
+| Docs | `https://kiboar.raulmoracode.com/docs` and `/es/docs` | Static Astro build staged into the same Vercel output |
 | Shop | `https://kiboar.raulmoracode.com/shop` | Medusa service: Node and PostgreSQL |
 | Library | GitHub releases and the repository | PCM ZIP |
 | Studio | Desktop | macOS bundle, not a web surface |
@@ -159,13 +160,15 @@ release is the only published artefact.
 - **Library:** `python3 library/tools/build_pcm.py` produces the PCM ZIP;
   releases are attached to a GitHub release.
 - **Web:** the root of the brand domain, `/studio`, `/library` and
-  `/keyboards`. `pnpm --filter @kiboar/web build` produces a static `dist/`; the
-  host serves it at `/` and falls back to `index.html` for the product routes
-  and the client-side 404 so a reload works.
-- **Documentation:** Vercel, project Root Directory `docs`. Vercel detects the
-  pnpm workspace and installs from the repository root. `docs/vercel.json`
-  builds with `cd .. && pnpm turbo run build --filter=kiboar-docs` and publishes
-  `dist`. It owns the `/docs` prefix; Spanish lives at `/es/docs`.
+  `/keyboards`. `pnpm --filter @kiboar/web build` produces a static `dist/`.
+- **Documentation:** a static Astro build. Its HTML references absolute
+  `/_astro`, `/footprints` and `/api/search` assets, so it cannot be proxied
+  under `/docs` alone.
+- **Vercel:** one project with the repository root as its Root Directory.
+  `pnpm build:vercel` builds web and docs and `scripts/stage-vercel.mjs` stages
+  `dist/vercel`: web at `/`, docs at `/docs` and `/es/docs`, and the docs assets
+  at the root. `vercel.json` sets the build and output and falls back to
+  `index.html` for the web client routes.
 - **Shop:** two parts under `/shop`. The storefront is a static Vite build from
   `shop/storefront`; build it with `VITE_BASE_PATH=/shop/` so its assets resolve
   under the prefix. The Medusa service provides the Store API and the admin and
@@ -176,11 +179,10 @@ release is the only published artefact.
 - **Studio:** a desktop application. It is not deployed to Vercel and has no
   web build target.
 
-Routing rules for the domain: `/` belongs to `web`, `/docs/*` to the docs
-build, and `/shop/*` to the shop (the storefront build, with the Store API
-proxied to Medusa). A single static project cannot own all three; whichever host
-owns the domain needs explicit rewrites or a proxy, and the prefixes must not
-collide.
+Routing rules for the domain: `/` belongs to `web`, `/docs/*` and `/es/docs/*`
+to the staged docs output, and `/shop/*` to the shop (the storefront build, with
+the Store API proxied to Medusa). The staged files win before the SPA fallback;
+the prefixes must not collide.
 
 ## Licensing
 
