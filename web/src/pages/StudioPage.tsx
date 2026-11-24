@@ -1,4 +1,4 @@
-import { PageHeader } from "./PageHeader";
+import { PageHeader } from "../components/PageHeader";
 
 const RELEASE = "https://github.com/raulmoracode/Kiboar/releases/tag/studio-v0.1.0";
 const DMG =

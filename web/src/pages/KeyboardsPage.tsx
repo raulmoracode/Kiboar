@@ -1,5 +1,5 @@
-import { boards, type OpenBoard } from "./boards";
-import { PageHeader } from "./PageHeader";
+import { PageHeader } from "../components/PageHeader";
+import { boards, type OpenBoard } from "../data/boards";
 
 const README = "https://github.com/raulmoracode/Kiboar/blob/main/keyboards/README.md";
 

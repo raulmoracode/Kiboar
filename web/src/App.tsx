@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
-import { KeyboardsPage } from "./KeyboardsPage";
-import { LandingLayout } from "./LandingLayout";
-import { LibraryPage } from "./LibraryPage";
-import { NotFoundPage } from "./NotFoundPage";
-import { productForKey } from "./products";
-import { StudioPage } from "./StudioPage";
+import { productForKey } from "./data/products";
+import { HomePage } from "./pages/HomePage";
+import { KeyboardsPage } from "./pages/KeyboardsPage";
+import { LibraryPage } from "./pages/LibraryPage";
+import { NotFoundPage } from "./pages/NotFoundPage";
+import { StudioPage } from "./pages/StudioPage";
 
 function pathFromLocation(): string {
   return window.location.pathname.replace(/\/+$/, "") || "/";
@@ -100,7 +100,7 @@ export default function App() {
 
   return (
     <main className="min-h-screen bg-[var(--kiboar-bg)] text-zinc-200">
-      <LandingLayout title="Kiboar" keyboardLabel="Kiboar 60% keyboard" onNavigate={navigate} />
+      <HomePage onNavigate={navigate} />
     </main>
   );
 }

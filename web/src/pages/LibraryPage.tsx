@@ -1,4 +1,4 @@
-import { PageHeader } from "./PageHeader";
+import { PageHeader } from "../components/PageHeader";
 
 const PCM = "https://kiboar.raulmoracode.com/docs/install/pcm";
 const CLONE = "https://kiboar.raulmoracode.com/docs/install/clone";

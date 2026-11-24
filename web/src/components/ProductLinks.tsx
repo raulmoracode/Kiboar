@@ -1,9 +1,6 @@
 import type { MouseEvent } from "react";
-import { products } from "./products";
-
-function isPlainClick(event: MouseEvent<HTMLAnchorElement>): boolean {
-  return event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey;
-}
+import { products } from "../data/products";
+import { isPlainClick } from "../lib/links";
 
 export function ProductLinks({ onNavigate }: { onNavigate: (href: string) => void }) {
   return (
