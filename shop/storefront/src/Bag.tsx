@@ -119,7 +119,7 @@ export function Bag({
       <aside
         ref={panel}
         tabIndex={-1}
-        className="bag-panel absolute inset-x-0 bottom-0 flex max-h-[85vh] flex-col rounded-t-xl border-t border-white/10 bg-[#0c0e11] outline-none sm:inset-x-auto sm:inset-y-0 sm:right-0 sm:max-h-none sm:w-[420px] sm:rounded-none sm:border-t-0 sm:border-l"
+        className="bag-panel absolute inset-x-0 bottom-0 flex max-h-[85vh] flex-col rounded-t-xl border-t border-white/10 bg-[var(--kiboar-surface)] outline-none sm:inset-x-auto sm:inset-y-0 sm:right-0 sm:max-h-none sm:w-[420px] sm:rounded-none sm:border-t-0 sm:border-l"
       >
         <div className="flex items-center justify-between border-b border-white/[0.07] px-5 py-4">
           <h2 className="flex items-baseline gap-2 text-[15px] font-medium text-zinc-100">

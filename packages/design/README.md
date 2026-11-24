@@ -37,5 +37,5 @@ therefore depends on `tailwindcss` from the catalog.
   catalogue; neither belongs here.
 - No remote fonts. The font stack is the system UI stack.
 
-Consumed by `web` and `shop/storefront`. `docs` keeps the Fumadocs theme and
-does not use this package yet.
+Consumed by `web`, `shop/storefront` and `software/app` (Studio). `docs`
+keeps the Fumadocs theme and does not use this package yet.

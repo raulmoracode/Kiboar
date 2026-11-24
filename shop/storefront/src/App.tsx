@@ -213,7 +213,7 @@ export default function App() {
   const count = items.reduce((total, item) => total + item.quantity, 0);
 
   return (
-    <main className="min-h-screen bg-[#0a0b0d] text-zinc-200">
+    <main className="min-h-screen bg-[var(--kiboar-bg)] text-zinc-200">
       <div className="mx-auto w-full max-w-[1600px] px-6 py-8 sm:px-10">
         <Header
           count={count}

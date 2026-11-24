@@ -1,13 +1,9 @@
-import tailwindcss from "@tailwindcss/vite";
-import react from "@vitejs/plugin-react";
-import { defineConfig } from "vite";
+import { kiboarViteConfig } from "@kiboar/vite-config";
 
-export default defineConfig({
-  plugins: [react(), tailwindcss()],
+export default kiboarViteConfig({
+  port: 1420,
   clearScreen: false,
   server: {
-    port: 1420,
-    strictPort: true,
     watch: {
       ignored: ["**/src-tauri/**"],
     },

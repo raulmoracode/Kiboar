@@ -12,6 +12,10 @@ The KiCad library lives in [`../library/`](../library/README.md), the
 documentation site in [`../docs/`](../docs/README.md), the public site in
 [`../web/`](../web/README.md) and the shop in [`../shop/`](../shop/README.md).
 
+The frontend uses the shared design tokens (`@kiboar/design`) and Vite setup
+(`@kiboar/vite-config`) from [`../packages/`](../packages/README.md). The
+Tauri-specific overrides stay in `app/vite.config.ts`.
+
 ## Roadmap
 
 | Stage | What it is | Status |
