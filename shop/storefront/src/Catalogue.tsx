@@ -31,18 +31,11 @@ export function Catalogue({
     return (
       <p className="text-[13px] text-zinc-400">
         {state.message}{" "}
-        <button
-          type="button"
-          onClick={onRetry}
-          className="text-zinc-200 underline decoration-white/20 underline-offset-4 hover:text-lime-200"
-        >
+        <button type="button" onClick={onRetry} className="text-zinc-200 kiboar-link">
           Try again
         </button>{" "}
         or{" "}
-        <a
-          className="text-zinc-200 underline decoration-white/20 underline-offset-4 hover:text-lime-200"
-          href="https://kiboar.raulmoracode.com/"
-        >
+        <a className="text-zinc-200 kiboar-link" href="https://kiboar.raulmoracode.com/">
           back to Kiboar
         </a>
         .

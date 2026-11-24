@@ -108,16 +108,12 @@ export function ProductPage({
         <button
           type="button"
           onClick={() => setAttempt((current) => current + 1)}
-          className="text-zinc-200 underline decoration-white/20 underline-offset-4 hover:text-lime-200"
+          className="text-zinc-200 kiboar-link"
         >
           Try again
         </button>{" "}
         or{" "}
-        <button
-          type="button"
-          onClick={onBack}
-          className="text-zinc-200 underline decoration-white/20 underline-offset-4 hover:text-lime-200"
-        >
+        <button type="button" onClick={onBack} className="text-zinc-200 kiboar-link">
           back to all boards
         </button>
         .
@@ -129,11 +125,7 @@ export function ProductPage({
     return (
       <p className="text-[13px] text-zinc-400">
         This board is not published.{" "}
-        <button
-          type="button"
-          onClick={onBack}
-          className="text-zinc-200 underline decoration-white/20 underline-offset-4 hover:text-lime-200"
-        >
+        <button type="button" onClick={onBack} className="text-zinc-200 kiboar-link">
           Back to all boards
         </button>
         .
@@ -159,7 +151,7 @@ export function ProductPage({
     <>
       <article className="grid gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] lg:items-start">
         <div>
-          <div className="flex aspect-[4/3] w-full items-center justify-center overflow-hidden rounded-lg border border-white/[0.06] bg-white/[0.015]">
+          <div className="flex aspect-[4/3] w-full items-center justify-center overflow-hidden kiboar-card">
             {image ? (
               <img src={image} alt={product.title} className="h-full w-full object-contain" />
             ) : (

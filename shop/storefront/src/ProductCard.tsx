@@ -33,7 +33,7 @@ export function ProductCard({
         event.preventDefault();
         onOpen(product.handle);
       }}
-      className={`group flex min-h-0 flex-col overflow-hidden rounded-lg border border-white/[0.06] bg-white/[0.015] transition-colors hover:border-white/25 ${
+      className={`group flex min-h-0 flex-col overflow-hidden kiboar-card transition-colors hover:border-white/25 ${
         layout === "grid" ? "md:h-[calc((100vh-9rem)/3)]" : ""
       }`}
     >

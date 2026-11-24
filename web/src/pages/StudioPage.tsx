@@ -27,9 +27,7 @@ export function StudioPage({ onHome }: { onHome: () => void }) {
       />
 
       <section aria-labelledby="studio-title" className="mt-20">
-        <p className="font-mono text-[10px] tracking-[0.16em] text-zinc-500 uppercase">
-          macOS · flasher
-        </p>
+        <p className="kiboar-eyebrow">macOS · flasher</p>
         <h1
           id="studio-title"
           className="mt-3 text-[28px] leading-tight font-medium tracking-[-0.01em] text-zinc-100"
@@ -42,19 +40,14 @@ export function StudioPage({ onHome }: { onHome: () => void }) {
         </p>
 
         <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3">
-          <a
-            href={DMG}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex h-9 items-center rounded bg-zinc-100 px-4 text-[12px] font-medium text-[var(--kiboar-bg)] transition-colors hover:bg-lime-200"
-          >
+          <a href={DMG} target="_blank" rel="noreferrer" className="kiboar-button-primary">
             Download for macOS
           </a>
           <a
             href={INSTALL}
             target="_blank"
             rel="noreferrer"
-            className="text-[12px] text-zinc-400 underline decoration-white/20 underline-offset-4 transition-colors hover:text-lime-200"
+            className="text-[12px] text-zinc-400 kiboar-link"
           >
             Install guide
           </a>
@@ -65,10 +58,7 @@ export function StudioPage({ onHome }: { onHome: () => void }) {
       </section>
 
       <section aria-labelledby="install-title" className="mt-16 border-t border-white/[0.07] pt-8">
-        <h2
-          id="install-title"
-          className="font-mono text-[10px] tracking-[0.16em] text-zinc-500 uppercase"
-        >
+        <h2 id="install-title" className="kiboar-eyebrow">
           Install
         </h2>
         <p className="mt-4 max-w-[560px] text-[13px] leading-relaxed text-zinc-400">
@@ -89,19 +79,14 @@ brew install --cask kiboar-studio`}</code>
             href="https://raw.githubusercontent.com/raulmoracode/Kiboar/main/software/scripts/install-macos.sh"
             target="_blank"
             rel="noreferrer"
-            className="text-zinc-300 underline decoration-white/20 underline-offset-4 hover:text-lime-200"
+            className="text-zinc-300 kiboar-link"
           >
             install-macos.sh
           </a>
         </p>
 
         <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-[12px]">
-          <a
-            href={DMG}
-            target="_blank"
-            rel="noreferrer"
-            className="text-zinc-300 underline decoration-white/20 underline-offset-4 hover:text-lime-200"
-          >
+          <a href={DMG} target="_blank" rel="noreferrer" className="text-zinc-300 kiboar-link">
             DMG
           </a>
           <a
@@ -124,10 +109,7 @@ brew install --cask kiboar-studio`}</code>
       </section>
 
       <section aria-labelledby="scope-title" className="mt-12 border-t border-white/[0.07] pt-8">
-        <h2
-          id="scope-title"
-          className="font-mono text-[10px] tracking-[0.16em] text-zinc-500 uppercase"
-        >
+        <h2 id="scope-title" className="kiboar-eyebrow">
           Scope
         </h2>
         <p className="mt-4 max-w-[560px] text-[13px] leading-relaxed text-zinc-400">
@@ -142,7 +124,7 @@ brew install --cask kiboar-studio`}</code>
           href={DEVELOPMENT}
           target="_blank"
           rel="noreferrer"
-          className="mt-5 inline-block text-[12px] text-zinc-400 underline decoration-white/20 underline-offset-4 hover:text-lime-200"
+          className="mt-5 inline-block text-[12px] text-zinc-400 kiboar-link"
         >
           Development plan
         </a>
@@ -157,12 +139,7 @@ brew install --cask kiboar-studio`}</code>
         <dd className="text-zinc-300">Unsigned, not notarized</dd>
         <dt className="text-zinc-500">Source</dt>
         <dd>
-          <a
-            href={SOURCE}
-            target="_blank"
-            rel="noreferrer"
-            className="text-zinc-300 underline decoration-white/20 underline-offset-4 hover:text-lime-200"
-          >
+          <a href={SOURCE} target="_blank" rel="noreferrer" className="text-zinc-300 kiboar-link">
             software/
           </a>
         </dd>
