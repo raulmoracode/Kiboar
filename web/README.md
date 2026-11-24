@@ -36,6 +36,7 @@ src/PageHeader.tsx  the shared Kiboar / section breadcrumb
 src/StudioPage.tsx  the Studio page: download, install and scope
 src/LibraryPage.tsx the library page: counts, install and scope
 src/KeyboardsPage.tsx  the open board definitions as cards
+src/NotFoundPage.tsx   the client-side 404
 src/boards.ts       the board data mirrored from software/boards
 src/products.ts     the six destinations, their keys and internal links
 src/styles.css      the shared design entry
@@ -60,9 +61,10 @@ of copying it; a component used by one product stays in that product.
 Served at the root of the brand domain, `https://kiboar.raulmoracode.com/`.
 `pnpm --filter @kiboar/web build` produces a static `dist/` with no server.
 
-The app also serves `/studio`, `/library` and `/keyboards`. The host must fall
-back to `index.html` for those paths, as for any client-side route, so a reload
-or a shared link works.
+The app also serves `/studio`, `/library` and `/keyboards`, and a client-side
+404 for any other path. The host must fall back to `index.html` for those
+routes, as for any client-side route, so a reload or a shared link works. The
+404 is a client-side page, not an HTTP 404 status; it sets `robots: noindex`.
 
 The docs (`/docs`) and the shop (`/shop`) are separate deployments behind the
 same domain. This app owns `/`, `/studio`, `/library` and `/keyboards`; the host must route the other

@@ -18,6 +18,7 @@ shop is the Medusa application in `shop/`, and this site points at it.
 - `src/StudioPage.tsx` — the `/studio` page: download, install paths and scope.
 - `src/LibraryPage.tsx` — the `/library` page: counts, install and scope.
 - `src/KeyboardsPage.tsx` — the `/keyboards` page: the open board definitions as cards.
+- `src/NotFoundPage.tsx` — the client-side 404; it sets `robots: noindex`.
 - `src/boards.ts` — the board data mirrored from `software/boards`; update it when a definition changes.
 - `src/products.ts` — the six destinations, their key and whether they are internal.
 - `src/styles.css` — the shared design entry from `@kiboar/design`.
