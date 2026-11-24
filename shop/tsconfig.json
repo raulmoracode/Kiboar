@@ -30,6 +30,6 @@
     ".cache",
     "storefront",
     "test",
-    "vitest.config.ts"
+    "vitest.config.mts"
   ]
 }
