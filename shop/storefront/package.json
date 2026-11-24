@@ -7,20 +7,22 @@
     "dev": "vite",
     "build": "vite build",
     "typecheck": "tsc --noEmit",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:e2e": "VITE_MEDUSA_URL=http://127.0.0.1:3101 VITE_MEDUSA_PUBLISHABLE_KEY=pk_e2e vite build && node test/run-e2e.mjs"
   },
   "dependencies": {
     "react": "catalog:",
     "react-dom": "catalog:"
   },
   "devDependencies": {
+    "@kiboar/design": "workspace:*",
+    "@kiboar/tsconfig": "workspace:*",
+    "@kiboar/vite-config": "workspace:*",
+    "@playwright/test": "^1.65.1",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "@kiboar/design": "workspace:*",
-    "@kiboar/tsconfig": "workspace:*",
     "typescript": "catalog:",
-    "vite": "catalog:",
-    "@kiboar/vite-config": "workspace:*"
+    "vite": "catalog:"
   }
 }
