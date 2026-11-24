@@ -61,3 +61,6 @@ jobs:
         run: |
           pnpm --filter @kiboar/web typecheck
           pnpm --filter @kiboar/web build
+
+      - name: Test
+        run: pnpm --filter @kiboar/web test

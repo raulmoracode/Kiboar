@@ -6,6 +6,7 @@
     "dev": "vite",
     "build": "vite build",
     "typecheck": "tsc --noEmit",
+    "test": "vitest run",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -13,13 +14,17 @@
     "react-dom": "catalog:"
   },
   "devDependencies": {
-    "@types/react": "catalog:",
-    "@types/react-dom": "catalog:",
     "@kiboar/design": "workspace:*",
     "@kiboar/tsconfig": "workspace:*",
+    "@kiboar/vite-config": "workspace:*",
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/react": "^16.3.3",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "jsdom": "^26.1.0",
     "typescript": "catalog:",
     "vite": "catalog:",
-    "@kiboar/vite-config": "workspace:*",
-    "@types/node": "catalog:"
+    "vitest": "^5.1.1"
   }
 }
