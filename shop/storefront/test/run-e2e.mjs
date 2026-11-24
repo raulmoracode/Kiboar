@@ -1,5 +1,9 @@
 import { spawn } from "node:child_process";
 
+// The preview also loads vite.config.ts, which requires the production env.
+process.env.VITE_MEDUSA_URL ??= "http://127.0.0.1:3101";
+process.env.VITE_MEDUSA_PUBLISHABLE_KEY ??= "pk_e2e";
+
 const server = spawn(
   "pnpm",
   ["exec", "vite", "preview", "--host", "127.0.0.1", "--port", "3101", "--strictPort"],
