@@ -26,8 +26,9 @@ Tauri-specific overrides stay in `app/vite.config.ts`.
 | **1.0 Remap** | VIA integration first; own implementation only if needed | Not started |
 | **1.x Editor** | Board editor, exporters and firmware pipeline | Not started |
 
-The MVP is deliberately not a configurator. See
-[`DEVELOPMENT.md`](DEVELOPMENT.md#mvp-scope-01) for what is out of 0.1.
+The MVP is deliberately not a configurator. The scope of 0.1 and the staging of
+later milestones are in
+[ADR-0004](docs/adr/0004-safety-principles-and-contracts.md#scope).
 
 ## Install (0.1)
 
@@ -55,10 +56,8 @@ in [`INSTALL.md`](INSTALL.md).
 
 | File | Contents |
 | --- | --- |
-| [`BRIEF.md`](BRIEF.md) | What the application is, the problems it solves, scope, user journeys, identity model and success criteria |
-| [`DEVELOPMENT.md`](DEVELOPMENT.md) | Risk-first milestone order, stack, repository layout, testing, CI, licensing constraints and working agreements |
 | [`INSTALL.md`](INSTALL.md) | Installing the unsigned macOS build with Homebrew, the script or the DMG |
-| [`docs/adr/`](docs/adr/) | Architecture decision records: stack and scope, identity without an EEPROM |
+| [`docs/adr/`](docs/adr/) | Architecture decision records: stack and scope, identity, workspace, safety and licensing |
 | [`docs/protocol.md`](docs/protocol.md) | The HID board info report the firmware must implement |
 | [`AGENTS.md`](AGENTS.md) | Agent rules for Studio: workspace, commands, boundaries and checks |
 
@@ -86,8 +85,11 @@ when a committed schema or TypeScript binding is stale.
 
 ## Reading order
 
-1. `BRIEF.md` — why the application exists and what it does.
-2. `DEVELOPMENT.md` — how it is built and in which order.
+1. This README — what the application is and where it is going.
+2. [`AGENTS.md`](AGENTS.md) — the rules for a change.
+3. [`docs/adr/`](docs/adr/) — why the stack, the safety model and the licensing
+   boundary are what they are.
+4. [`docs/protocol.md`](docs/protocol.md) — the report the firmware implements.
 
 The application lives in this directory. The KiCad library lives in
 [`../library/`](../library/) and keeps its rules in

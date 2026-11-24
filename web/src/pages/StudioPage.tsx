@@ -5,7 +5,8 @@ const DMG =
   "https://github.com/raulmoracode/Kiboar/releases/download/studio-v0.1.0/Kiboar.Studio_0.1.0_aarch64.dmg";
 const SUMS = "https://github.com/raulmoracode/Kiboar/releases/download/studio-v0.1.0/SHA256SUMS";
 const INSTALL = "https://github.com/raulmoracode/Kiboar/blob/main/software/INSTALL.md";
-const DEVELOPMENT = "https://github.com/raulmoracode/Kiboar/blob/main/software/DEVELOPMENT.md";
+const DEVELOPMENT =
+  "https://github.com/raulmoracode/Kiboar/blob/main/software/docs/adr/0004-safety-principles-and-contracts.md";
 const SOURCE = "https://github.com/raulmoracode/Kiboar/tree/main/software";
 
 export function StudioPage({ onHome }: { onHome: () => void }) {
@@ -144,7 +145,7 @@ brew install --cask kiboar-studio`}</code>
           rel="noreferrer"
           className="mt-5 inline-block text-[12px] text-zinc-400 underline decoration-white/20 underline-offset-4 hover:text-lime-200"
         >
-          Development plan
+          Scope and safety
         </a>
       </section>
 

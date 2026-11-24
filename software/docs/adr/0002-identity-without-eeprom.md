@@ -3,7 +3,7 @@
 - Status: Accepted
 - Date: 2026-11-21
 - Deciders: Kiboar maintainer
-- Related: [BRIEF.md](../../BRIEF.md) · [DEVELOPMENT.md](../../DEVELOPMENT.md) · [ADR-0001](0001-stack-and-scope.md)
+- Related: [ADR-0001](0001-stack-and-scope.md)
 
 ## Context
 

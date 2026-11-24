@@ -30,13 +30,12 @@ other, and nothing in Studio may assume the board was bought.
 - `boards/`, `registry/`, `schemas/` — the board definitions, the signed
   artefacts index and the generated JSON Schema.
 - `docs/adr/`, `docs/protocol.md` — decisions and the HID identity contract.
-- `BRIEF.md`, `DEVELOPMENT.md` — product and development briefs.
 
 ## Boundaries
 
 - **The MVP is the flasher.** Do not build remap, layout, board editor,
-  exporters, Spanish or signing in 0.1. They are post-MVP stages in
-  [`DEVELOPMENT.md`](DEVELOPMENT.md).
+  exporters, Spanish or signing in 0.1. They are post-MVP stages in the README
+  roadmap and [ADR-0004](docs/adr/0004-safety-principles-and-contracts.md).
 - **Bundled resources are part of the contract.** `registry/` and `boards/` are
   copied into the app's resource directory. If the catalog is empty in a
   bundled build, check `Contents/Resources` before anything else.
@@ -65,8 +64,8 @@ other, and nothing in Studio may assume the board was bought.
 - **M1 is read-only.** Do not add a path that writes to a device without the M2
   verification, confirmation and recovery design.
 - **No telemetry, no cloud, no secrets.** Logs are local and support only.
-- **Update the briefs and ADRs when scope changes.** A protocol change belongs
-  in `docs/protocol.md`; an architectural decision belongs in `docs/adr/`.
+- **Update the ADRs when a decision changes.** A protocol change belongs in
+  `docs/protocol.md`; an architectural decision belongs in `docs/adr/`.
 - **Vercel is for docs only.** Studio is a desktop app.
 
 ## Commands

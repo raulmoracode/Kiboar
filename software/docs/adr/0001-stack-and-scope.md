@@ -3,7 +3,7 @@
 - Status: Accepted
 - Date: 2026-11-21
 - Deciders: Kiboar maintainer
-- Related: [BRIEF.md](../../BRIEF.md) · [DEVELOPMENT.md](../../DEVELOPMENT.md) · [ADR-0002](0002-identity-without-eeprom.md) · [ADR-0003](0003-root-workspace-and-turborepo.md)
+- Related: [ADR-0002](0002-identity-without-eeprom.md) · [ADR-0003](0003-root-workspace-and-turborepo.md)
 
 ## Context
 
@@ -106,7 +106,7 @@ never depends on a later milestone's interface.
 ## Follow-up
 
 - M0 publishes the Zod schema, three board fixtures and the registry format.
-- Revisit the stack only if a named `DEVELOPMENT.md` assumption fails: UF2 by
+- Revisit the stack only if a named assumption fails (see ADR-0004): UF2 by
   mounted volume unreliable, VIA outgrowing the scope, QMK licensing blocking.
 - New boards, MCUs and exporters enter through their own milestone, not by
   widening v1.
