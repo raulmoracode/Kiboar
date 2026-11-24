@@ -23,18 +23,17 @@ export function LandingLayout({
         {children ? null : <h1 className="sr-only">{title}</h1>}
 
         <div className="flex flex-1 items-center">
-          <section aria-label={keyboardLabel} className="w-full">
-            <Keyboard onNavigate={onNavigate} interactive={!word} {...(word ? { word } : {})} />
-          </section>
+          <div className="relative w-full">
+            {children ? (
+              <p className="absolute -top-6 left-0 text-[12px] text-zinc-500">Details below</p>
+            ) : null}
+            <section aria-label={keyboardLabel} className="w-full">
+              <Keyboard onNavigate={onNavigate} interactive={!word} {...(word ? { word } : {})} />
+            </section>
+          </div>
         </div>
 
         <ProductLinks onNavigate={onNavigate} {...(word ? { current: word } : {})} />
-
-        {children ? (
-          <p className="absolute top-10 left-6 text-[12px] text-zinc-500 sm:top-14 sm:left-10">
-            Details below
-          </p>
-        ) : null}
       </div>
 
       {children ? (
