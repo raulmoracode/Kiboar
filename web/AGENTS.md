@@ -14,11 +14,13 @@ shop is the Medusa application in `shop/`, and this site points at it.
 
 - `src/App.tsx` — the minimal router, the home page and the keyboard shortcut listener.
 - `src/Keyboard.tsx` — the drawn keyboard; the six lit keys are real links.
+- `src/LandingLayout.tsx` — the keyboard-first layout shared by the home page and the 404.
+- `src/ProductLinks.tsx` — the six destination links under the keyboard.
 - `src/PageHeader.tsx` — the shared `Kiboar / section` breadcrumb.
 - `src/StudioPage.tsx` — the `/studio` page: download, install paths and scope.
 - `src/LibraryPage.tsx` — the `/library` page: counts, install and scope.
 - `src/KeyboardsPage.tsx` — the `/keyboards` page: the open board definitions as cards.
-- `src/NotFoundPage.tsx` — the client-side 404; it sets `robots: noindex`.
+- `src/NotFoundPage.tsx` — the 404 page: the landing layout with a 404 keyboard; it sets `robots: noindex`.
 - `src/boards.ts` — the board data mirrored from `software/boards`; update it when a definition changes.
 - `src/products.ts` — the six destinations, their key and whether they are internal.
 - `src/styles.css` — the shared design entry from `@kiboar/design`.
@@ -39,6 +41,9 @@ shop is the Medusa application in `shop/`, and this site points at it.
   Keyboards cards use the real definitions in `software/boards` and say the
   hardware files are pending; the Library page states the real counts and the
   keyswitch limitation. Do not add invented screenshots or prices.
+- **The 404 reuses the home layout.** It is the landing layout with `404` on the
+  keyboard and `robots: noindex`, not a separate page design. Keep it identical
+  to the home page apart from the keyboard word.
 - **The shop is a separate product.** Do not import `shop/` code into `web/`;
   talk to its Store API over HTTP. Both apps share `@kiboar/design`,
   `@kiboar/vite-config` and `@kiboar/tsconfig`, not screens.

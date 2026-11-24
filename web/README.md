@@ -32,11 +32,13 @@ index.html          Vite entry
 src/main.tsx        React root
 src/App.tsx         the router, home page and keyboard shortcuts
 src/Keyboard.tsx    the drawn keyboard and the letter links
+src/LandingLayout.tsx  the keyboard-first layout shared by home and 404
+src/ProductLinks.tsx   the six destination links
 src/PageHeader.tsx  the shared Kiboar / section breadcrumb
 src/StudioPage.tsx  the Studio page: download, install and scope
 src/LibraryPage.tsx the library page: counts, install and scope
 src/KeyboardsPage.tsx  the open board definitions as cards
-src/NotFoundPage.tsx   the client-side 404
+src/NotFoundPage.tsx   the 404 page: the landing layout with a 404 keyboard
 src/boards.ts       the board data mirrored from software/boards
 src/products.ts     the six destinations, their keys and internal links
 src/styles.css      the shared design entry

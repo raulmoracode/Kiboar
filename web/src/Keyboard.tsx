@@ -134,11 +134,37 @@ function Cap({ cap }: { cap: Key }) {
   );
 }
 
-export function Keyboard({ onNavigate }: { onNavigate?: (href: string) => void }) {
+export function Keyboard({
+  onNavigate,
+  word,
+}: {
+  onNavigate?: (href: string) => void;
+  word?: string;
+}) {
+  const wordRow = KEYS.filter((key) => key.y === 2);
+  const customLabels = new Map<Key, string>();
+
+  if (word) {
+    const letters = Array.from(word.toLowerCase().replace(/\s+/g, ""));
+    const start = Math.max(0, Math.round((wordRow.length - letters.length) / 2));
+    letters.forEach((letter, index) => {
+      const key = wordRow[start + index];
+      if (key) {
+        customLabels.set(key, letter);
+      }
+    });
+  }
+
   return (
-    <svg viewBox="0 0 15 5" aria-label="Kiboar keyboard" className="w-full">
+    <svg
+      viewBox="0 0 15 5"
+      aria-label={word ? `${word} keyboard` : "Kiboar keyboard"}
+      className="w-full"
+    >
       {KEYS.map((key) => {
-        const product = key.label ? productForKey(key.label) : undefined;
+        const label = word ? customLabels.get(key) : key.label;
+        const product = label ? productForKey(label) : undefined;
+        const cap: Key = label ? { ...key, label } : { x: key.x, y: key.y, w: key.w };
 
         if (product) {
           const internal = product.internal === true;
@@ -169,14 +195,14 @@ export function Keyboard({ onNavigate }: { onNavigate?: (href: string) => void }
               aria-label={internal ? product.name : `${product.name} (opens in a new tab)`}
               className="cursor-pointer"
             >
-              <Cap cap={key} />
+              <Cap cap={cap} />
             </a>
           );
         }
 
         return (
           <g key={`${key.x}-${key.y}`}>
-            <Cap cap={key} />
+            <Cap cap={cap} />
           </g>
         );
       })}
