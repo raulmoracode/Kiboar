@@ -25,6 +25,7 @@
     "typescript": "catalog:",
     "vite": "catalog:",
     "@kiboar/design": "workspace:*",
-    "@kiboar/vite-config": "workspace:*"
+    "@kiboar/vite-config": "workspace:*",
+    "@kiboar/tsconfig": "workspace:*"
   }
 }
