@@ -1,3 +1,5 @@
+import { PageHeader } from "./PageHeader";
+
 const RELEASE = "https://github.com/raulmoracode/Kiboar/releases/tag/studio-v0.1.0";
 const DMG =
   "https://github.com/raulmoracode/Kiboar/releases/download/studio-v0.1.0/Kiboar.Studio_0.1.0_aarch64.dmg";
@@ -9,32 +11,20 @@ const SOURCE = "https://github.com/raulmoracode/Kiboar/tree/main/software";
 export function StudioPage({ onHome }: { onHome: () => void }) {
   return (
     <div className="mx-auto w-full max-w-[760px] px-6 py-10 sm:px-10 sm:py-14">
-      <header className="flex h-11 items-center justify-between">
-        <div className="flex items-baseline gap-2.5">
+      <PageHeader
+        section="Studio"
+        onHome={onHome}
+        right={
           <a
-            href="/"
-            onClick={(event) => {
-              event.preventDefault();
-              onHome();
-            }}
-            className="text-[13px] font-semibold text-zinc-100"
+            href={RELEASE}
+            target="_blank"
+            rel="noreferrer"
+            className="text-[12px] text-zinc-500 transition-colors hover:text-zinc-200"
           >
-            Kiboar
+            0.1.0
           </a>
-          <span aria-hidden="true" className="text-[12px] text-zinc-700">
-            /
-          </span>
-          <span className="text-[12px] text-zinc-400">Studio</span>
-        </div>
-        <a
-          href={RELEASE}
-          target="_blank"
-          rel="noreferrer"
-          className="text-[12px] text-zinc-500 transition-colors hover:text-zinc-200"
-        >
-          0.1.0
-        </a>
-      </header>
+        }
+      />
 
       <section aria-labelledby="studio-title" className="mt-20">
         <p className="font-mono text-[10px] tracking-[0.16em] text-zinc-500 uppercase">

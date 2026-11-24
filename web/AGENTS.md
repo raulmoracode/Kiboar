@@ -14,7 +14,9 @@ shop is the Medusa application in `shop/`, and this site points at it.
 
 - `src/App.tsx` — the minimal router, the home page and the keyboard shortcut listener.
 - `src/Keyboard.tsx` — the drawn keyboard; the six lit keys are real links.
+- `src/PageHeader.tsx` — the shared `Kiboar / section` breadcrumb.
 - `src/StudioPage.tsx` — the `/studio` page: download, install paths and scope.
+- `src/LibraryPage.tsx` — the `/library` page: counts, install and scope.
 - `src/products.ts` — the six destinations, their key and whether they are internal.
 - `src/styles.css` — the shared design entry from `@kiboar/design`.
 - `vite.config.ts` — the shared `@kiboar/vite-config` setup and port 3000.
@@ -28,10 +30,11 @@ shop is the Medusa application in `shop/`, and this site points at it.
 - **The letter menu is the navigation.** Every destination lives in
   `src/products.ts` with its key. Keep the keys as real links inside the SVG and
   the shortcut handler ignoring modifiers, key repeats and form fields. External
-  destinations open in a new tab; `internal: true` destinations (Studio) use the
-  local router and the same tab.
-- **Studio stays honest.** The page links the real release asset and install
-  paths; do not add a screenshot or claim hardware verification that has not
+  destinations open in a new tab; `internal: true` destinations (Library and
+  Studio) use the local router and the same tab.
+- **Product pages stay honest.** Studio links the real release asset; the
+  Library page states the real counts and the keyswitch limitation. Do not add
+  invented screenshots or claims of hardware verification that has not
   happened.
 - **The shop is a separate product.** Do not import `shop/` code into `web/`;
   talk to its Store API over HTTP. Both apps share `@kiboar/design`,
