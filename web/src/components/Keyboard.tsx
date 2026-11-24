@@ -165,7 +165,7 @@ export function Keyboard({
   const customLabels = new Map<Key, string>();
 
   if (word) {
-    const letters = Array.from(word.toLowerCase().replace(/\s+/g, ""));
+    const letters = Array.from(word.replace(/\s+/g, ""));
     const start = Math.max(0, Math.round((wordRow.length - letters.length) / 2));
     letters.forEach((letter, index) => {
       const key = wordRow[start + index];
