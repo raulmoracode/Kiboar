@@ -17,9 +17,10 @@ export const products: readonly Product[] = [
   },
   {
     name: "Library",
-    href: "https://kiboar.raulmoracode.com/docs/install/pcm",
+    href: "/library",
     line: "The official KiCad parts.",
     key: "i",
+    internal: true,
   },
   {
     name: "Shop",
