@@ -1,4 +1,4 @@
-import { PageHeader } from "../components/PageHeader";
+import { LandingLayout } from "../components/LandingLayout";
 
 const RELEASE = "https://github.com/raulmoracode/Kiboar/releases/tag/studio-v0.1.0";
 const DMG =
@@ -8,25 +8,15 @@ const INSTALL = "https://github.com/raulmoracode/Kiboar/blob/main/software/INSTA
 const DEVELOPMENT = "https://github.com/raulmoracode/Kiboar/blob/main/software/DEVELOPMENT.md";
 const SOURCE = "https://github.com/raulmoracode/Kiboar/tree/main/software";
 
-export function StudioPage({ onHome }: { onHome: () => void }) {
+export function StudioPage({ onNavigate }: { onNavigate: (href: string) => void }) {
   return (
-    <div className="mx-auto w-full max-w-[760px] px-6 py-10 sm:px-10 sm:py-14">
-      <PageHeader
-        section="Studio"
-        onHome={onHome}
-        right={
-          <a
-            href={RELEASE}
-            target="_blank"
-            rel="noreferrer"
-            className="text-[12px] text-zinc-500 transition-colors hover:text-zinc-200"
-          >
-            0.1.0
-          </a>
-        }
-      />
-
-      <section aria-labelledby="studio-title" className="mt-20">
+    <LandingLayout
+      title="Kiboar Studio"
+      word="Studio"
+      keyboardLabel="Studio keyboard"
+      onNavigate={onNavigate}
+    >
+      <section aria-labelledby="studio-title">
         <p className="font-mono text-[10px] tracking-[0.16em] text-zinc-500 uppercase">
           macOS · flasher
         </p>
@@ -189,6 +179,6 @@ brew install --cask kiboar-studio`}</code>
           GitHub
         </a>
       </footer>
-    </div>
+    </LandingLayout>
   );
 }

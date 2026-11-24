@@ -138,9 +138,11 @@ function Cap({ cap }: { cap: Key }) {
 export function Keyboard({
   onNavigate,
   word,
+  interactive = true,
 }: {
   onNavigate?: (href: string) => void;
   word?: string;
+  interactive?: boolean;
 }) {
   const wordRow = KEYS.filter((key) => key.y === 2);
   const customLabels = new Map<Key, string>();
@@ -164,7 +166,7 @@ export function Keyboard({
     >
       {KEYS.map((key) => {
         const label = word ? customLabels.get(key) : key.label;
-        const product = label ? productForKey(label) : undefined;
+        const product = interactive && label ? productForKey(label) : undefined;
         const cap: Key = label ? { ...key, label } : { x: key.x, y: key.y, w: key.w };
 
         if (product) {
