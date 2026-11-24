@@ -7,6 +7,9 @@ export interface Variant {
   id: string;
   title: string;
   prices?: Price[];
+  manage_inventory?: boolean;
+  allow_backorder?: boolean;
+  inventory_quantity?: number | null;
 }
 
 export interface ProductImage {
@@ -24,10 +27,24 @@ export interface Product {
   variants?: Variant[];
 }
 
+export interface Region {
+  id: string;
+  name: string;
+  currency_code: string;
+}
+
+export interface ProductPage {
+  products: Product[];
+  count: number;
+}
+
 const BASE_URL = (import.meta.env.VITE_MEDUSA_URL ?? "http://localhost:9000").replace(/\/$/, "");
 const PUBLISHABLE_KEY = import.meta.env.VITE_MEDUSA_PUBLISHABLE_KEY ?? "";
 
-const FIELDS = "id,title,handle,description,thumbnail,*images,*variants,*variants.prices";
+const FIELDS =
+  "id,title,handle,description,thumbnail,*images,*variants,*variants.prices,*variants.inventory_quantity";
+
+export const PAGE_SIZE = 12;
 
 export class NotConfiguredError extends Error {}
 
@@ -47,25 +64,77 @@ async function request<T>(path: string): Promise<T> {
   return (await response.json()) as T;
 }
 
-export async function listProducts(): Promise<Product[]> {
-  const data = await request<{ products: Product[] }>(`/store/products?limit=24&fields=${FIELDS}`);
-  return data.products;
+export async function listRegions(): Promise<Region[]> {
+  const data = await request<{ regions: Region[] }>("/store/regions?limit=50");
+  return data.regions;
 }
 
-export async function getProduct(handle: string): Promise<Product | null> {
-  const data = await request<{ products: Product[] }>(
-    `/store/products?handle=${encodeURIComponent(handle)}&fields=${FIELDS}`,
-  );
+export async function listProducts({
+  offset = 0,
+  limit = PAGE_SIZE,
+  regionId,
+}: {
+  offset?: number;
+  limit?: number;
+  regionId?: string | undefined;
+} = {}): Promise<ProductPage> {
+  const params = new URLSearchParams({
+    limit: String(limit),
+    offset: String(offset),
+    fields: FIELDS,
+  });
+
+  if (regionId) {
+    params.set("region_id", regionId);
+  }
+
+  const data = await request<ProductPage>(`/store/products?${params.toString()}`);
+  return { products: data.products, count: data.count };
+}
+
+export async function getProduct(handle: string, regionId?: string): Promise<Product | null> {
+  const params = new URLSearchParams({
+    handle,
+    fields: FIELDS,
+  });
+
+  if (regionId) {
+    params.set("region_id", regionId);
+  }
+
+  const data = await request<{ products: Product[] }>(`/store/products?${params.toString()}`);
   return data.products[0] ?? null;
 }
 
-export function variantPrice(variant: Variant | undefined): Price | null {
+export function variantPrice(variant: Variant | undefined, currency?: string): Price | null {
   const prices = variant?.prices ?? [];
+
+  if (currency) {
+    const match = prices.find(
+      (price) => price.currency_code.toLowerCase() === currency.toLowerCase(),
+    );
+    if (match) {
+      return match;
+    }
+  }
+
   return prices.find((price) => price.currency_code === "eur") ?? prices[0] ?? null;
 }
 
-export function productPrice(product: Product): Price | null {
-  return variantPrice(product.variants?.[0]);
+export function productPrice(product: Product, currency?: string): Price | null {
+  return variantPrice(product.variants?.[0], currency);
+}
+
+export function isVariantSoldOut(variant: Variant | undefined): boolean {
+  if (!variant || variant.inventory_quantity == null) {
+    return false;
+  }
+
+  return (
+    variant.manage_inventory === true &&
+    variant.allow_backorder !== true &&
+    variant.inventory_quantity <= 0
+  );
 }
 
 export function formatPrice(price: Price | null): string {
@@ -73,7 +142,9 @@ export function formatPrice(price: Price | null): string {
     return "—";
   }
 
-  return new Intl.NumberFormat("en-IE", {
+  const locale = typeof navigator === "undefined" ? "en" : navigator.language;
+
+  return new Intl.NumberFormat(locale, {
     style: "currency",
     currency: price.currency_code.toUpperCase(),
   }).format(price.amount / 100);

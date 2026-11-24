@@ -6,9 +6,11 @@ The customer-facing shop, served under `/shop`. It is a separate app from
 components.
 
 **Status: catalogue, product pages and a demo bag.** It lists the products
-published in Medusa as vertical cards with a photo, the name and the price, and
-each card opens a page for that board, with a gallery of every photo on the
-product. There is no checkout, account or search yet.
+published in Medusa as vertical cards with a photo, the name and the price. The
+catalogue loads in pages, prices follow the Medusa region when one exists, a
+failed request can be retried, and each card opens a page for that board with a
+gallery of every photo. The bag survives a reload. There is no checkout, account
+or search yet.
 
 ## Product pages
 
@@ -22,6 +24,17 @@ The handle lives in a query string on purpose: the build is static and no host
 rewrite is configured yet, so a real `/products/<handle>` path would break on a
 reload or a shared link. Moving to a path is a routing decision for the host.
 
+## Catalogue and currency
+
+The catalogue reads the Store API `count` and loads twelve products at a time;
+`Load more` appends the next page. A failed catalogue or product request offers
+`Try again` without reloading the page.
+
+At boot the storefront reads `/store/regions`. If `VITE_REGION_ID` is set, it
+uses that region; otherwise it uses the first published one. The region
+`currency_code` selects the price and formats it with the browser locale. With
+no regions, it falls back to the currency of the product prices.
+
 ## Bag
 
 The `Bag` control in the top bar opens a drawer on the right; on phones it is a
@@ -33,9 +46,19 @@ checkout is not connected. When the bag is empty, `Browse boards` closes it and
 returns to the catalogue.
 
 Products are added from their own page, not from the card. The bag is
-**client-side only**: it does not create a Medusa cart, it is not persisted and
-it is lost on reload. It closes on Escape, keeps focus inside and returns focus
-to the control that opened it.
+**client-side only**: it does not create a Medusa cart. It is stored in
+`localStorage` under a versioned key so it survives a reload; malformed stored
+data is ignored. It closes on Escape, keeps focus inside and returns focus to
+the control that opened it.
+
+## Stock
+
+The add button shows `Sold out` when the Store API returns
+`inventory_quantity: 0` with `manage_inventory` enabled and no backorder. The
+default Medusa Store API does not expose inventory quantities, so with the
+current backend the field is absent and every published variant stays
+available. A real stock gate needs a store-level availability endpoint or a
+custom field; this app does not invent one.
 
 ## Photos
 
@@ -53,6 +76,7 @@ From the repository root:
 pnpm install
 cp shop/storefront/.env.template shop/storefront/.env.local
 # edit .env.local: VITE_MEDUSA_URL and the publishable key
+# optional: VITE_REGION_ID to pin one region
 pnpm --filter @kiboar/storefront dev        # http://localhost:3001
 ```
 
@@ -69,14 +93,24 @@ The Medusa service must allow this origin. Its `STORE_CORS` includes
 pnpm --filter @kiboar/storefront dev
 pnpm --filter @kiboar/storefront typecheck
 pnpm --filter @kiboar/storefront build
+pnpm --filter @kiboar/storefront test:e2e
 ```
+
+The end-to-end suite builds the storefront, serves the static output and mocks
+the Store API with Playwright, so it needs no Medusa or PostgreSQL. The Playwright
+browser is installed once with
+`pnpm --filter @kiboar/storefront exec playwright install chromium`.
 
 ## Deployment
 
-The output is static. It is served under `/shop`, so build with the base path:
+The output is static. It is served under `/shop`, so build with the base path.
+A production build fails if the Medusa URL or the publishable key is missing:
 
 ```bash
-VITE_BASE_PATH=/shop/ pnpm --filter @kiboar/storefront build
+VITE_BASE_PATH=/shop/ \
+VITE_MEDUSA_URL=https://shop.example.com \
+VITE_MEDUSA_PUBLISHABLE_KEY=pk_live_... \
+pnpm --filter @kiboar/storefront build
 ```
 
 The host must route `/shop` to this build and proxy the Store API separately.

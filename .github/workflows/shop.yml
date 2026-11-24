@@ -61,6 +61,35 @@ jobs:
         run: pnpm --filter @kiboar/shop build
 
       - name: Build the storefront
+        env:
+          VITE_MEDUSA_URL: http://localhost:9000
+          VITE_MEDUSA_PUBLISHABLE_KEY: pk_test_build
         run: |
           pnpm --filter @kiboar/storefront typecheck
           pnpm --filter @kiboar/storefront build
+
+  e2e:
+    name: Storefront end-to-end
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 12.6.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Chromium
+        run: pnpm --filter @kiboar/storefront exec playwright install --with-deps chromium
+
+      - name: Run the storefront tests
+        run: pnpm --filter @kiboar/storefront test:e2e

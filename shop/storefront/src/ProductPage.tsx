@@ -3,6 +3,7 @@ import {
   formatPrice,
   getProduct,
   imageUrl,
+  isVariantSoldOut,
   NotConfiguredError,
   type Product,
   type Variant,
@@ -19,12 +20,16 @@ type State =
 export function ProductPage({
   handle,
   products,
+  regionId,
+  currency,
   onOpen,
   onBack,
   onAdd,
 }: {
   handle: string;
   products: Product[];
+  regionId?: string | undefined;
+  currency?: string | undefined;
   onOpen: (handle: string) => void;
   onBack: () => void;
   onAdd: (product: Product, variant: Variant) => void;
@@ -33,6 +38,7 @@ export function ProductPage({
   const [variantId, setVariantId] = useState<string | null>(null);
   const [imageIndex, setImageIndex] = useState(0);
   const [related, setRelated] = useState<Product[]>([]);
+  const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
     let cancelled = false;
@@ -40,7 +46,7 @@ export function ProductPage({
 
     async function load() {
       try {
-        const product = await getProduct(handle);
+        const product = await getProduct(handle, regionId);
         if (cancelled) {
           return;
         }
@@ -70,7 +76,7 @@ export function ProductPage({
     return () => {
       cancelled = true;
     };
-  }, [handle]);
+  }, [handle, regionId, attempt]);
 
   useEffect(() => {
     if (state.status !== "ready" || products.length === 0) {
@@ -101,10 +107,18 @@ export function ProductPage({
         {state.message}{" "}
         <button
           type="button"
+          onClick={() => setAttempt((current) => current + 1)}
+          className="text-zinc-200 underline decoration-white/20 underline-offset-4 hover:text-lime-200"
+        >
+          Try again
+        </button>{" "}
+        or{" "}
+        <button
+          type="button"
           onClick={onBack}
           className="text-zinc-200 underline decoration-white/20 underline-offset-4 hover:text-lime-200"
         >
-          Back to all boards
+          back to all boards
         </button>
         .
       </p>
@@ -130,7 +144,8 @@ export function ProductPage({
   const { product } = state;
   const variants = product.variants ?? [];
   const variant = variants.find((entry) => entry.id === variantId) ?? variants[0];
-  const price = variantPrice(variant);
+  const price = variantPrice(variant, currency);
+  const soldOut = isVariantSoldOut(variant);
   const images = (product.images ?? [])
     .map((entry) => imageUrl(entry.url))
     .filter((url): url is string => Boolean(url));
@@ -211,11 +226,11 @@ export function ProductPage({
 
           <button
             type="button"
-            disabled={!variant || !price}
+            disabled={!variant || !price || soldOut}
             onClick={() => variant && onAdd(product, variant)}
             className="mt-8 h-10 w-full max-w-sm rounded bg-zinc-100 text-[12px] font-medium text-[var(--kiboar-bg)] transition-colors hover:bg-lime-200 disabled:cursor-not-allowed disabled:bg-zinc-700 disabled:text-zinc-500"
           >
-            Add to bag
+            {soldOut ? "Sold out" : "Add to bag"}
           </button>
 
           <p className="mt-3 text-[10px] leading-relaxed text-zinc-600">

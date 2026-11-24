@@ -11,10 +11,12 @@ function opensInPlace(event: MouseEvent<HTMLAnchorElement>): boolean {
 
 export function ProductCard({
   product,
+  currency,
   onOpen,
   layout = "grid",
 }: {
   product: Product;
+  currency?: string | undefined;
   onOpen: (handle: string) => void;
   layout?: "grid" | "related";
 }) {
@@ -38,7 +40,7 @@ export function ProductCard({
       <div className="flex items-baseline justify-between gap-4 px-4 pt-3.5 pb-3">
         <Title className="min-w-0 truncate text-[14px] text-zinc-100">{product.title}</Title>
         <p className="shrink-0 font-mono text-[12px] text-zinc-300">
-          {formatPrice(productPrice(product))}
+          {formatPrice(productPrice(product, currency))}
         </p>
       </div>
       <div

@@ -1,11 +1,36 @@
 import { useCallback, useEffect, useState } from "react";
-import { listProducts, NotConfiguredError, type Product, type Variant, variantPrice } from "./api";
+import {
+  listProducts,
+  listRegions,
+  NotConfiguredError,
+  type Product,
+  type Region,
+  type Variant,
+  variantPrice,
+} from "./api";
 import { Bag, type BagItem } from "./Bag";
+import { loadBag, saveBag } from "./bagStorage";
 import { Catalogue, type CatalogueState } from "./Catalogue";
 import { ProductPage } from "./ProductPage";
 
 function handleFromUrl(): string | null {
   return new URLSearchParams(window.location.search).get("p");
+}
+
+function resolveRegion(regions: Region[]): Region | null {
+  const configured = import.meta.env.VITE_REGION_ID;
+
+  if (configured) {
+    const region = regions.find((entry) => entry.id === configured);
+    if (!region) {
+      throw new NotConfiguredError(
+        `The configured region ${configured} is not published in the store.`,
+      );
+    }
+    return region;
+  }
+
+  return regions[0] ?? null;
 }
 
 const NO_PRODUCTS: Product[] = [];
@@ -90,18 +115,28 @@ function Header({
 
 export default function App() {
   const [state, setState] = useState<CatalogueState>({ status: "loading" });
+  const [region, setRegion] = useState<Region | null>(null);
+  const [reloadToken, setReloadToken] = useState(0);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [loadMoreError, setLoadMoreError] = useState(false);
   const [handle, setHandle] = useState<string | null>(handleFromUrl);
-  const [items, setItems] = useState<BagItem[]>([]);
+  const [items, setItems] = useState<BagItem[]>(loadBag);
   const [bagOpen, setBagOpen] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
 
     async function load() {
+      setState({ status: "loading" });
+
       try {
-        const products = await listProducts();
+        const regions = await listRegions();
+        const selected = resolveRegion(regions);
+        const { products, count } = await listProducts({ regionId: selected?.id });
+
         if (!cancelled) {
-          setState({ status: "ready", products });
+          setRegion(selected);
+          setState({ status: "ready", products, count });
         }
       } catch (error) {
         if (!cancelled) {
@@ -120,7 +155,11 @@ export default function App() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [reloadToken]);
+
+  useEffect(() => {
+    saveBag(items);
+  }, [items]);
 
   useEffect(() => {
     function onPopState() {
@@ -145,35 +184,68 @@ export default function App() {
     window.scrollTo(0, 0);
   }, []);
 
-  const add = useCallback((product: Product, variant: Variant) => {
-    const price = variantPrice(variant);
-    if (!price) {
+  const loadMore = useCallback(async () => {
+    if (state.status !== "ready" || loadingMore) {
       return;
     }
 
-    setItems((current) => {
-      const existing = current.find((item) => item.variantId === variant.id);
-      if (existing) {
-        return current.map((item) =>
-          item.variantId === variant.id ? { ...item, quantity: item.quantity + 1 } : item,
-        );
+    setLoadingMore(true);
+    setLoadMoreError(false);
+
+    try {
+      const { products } = await listProducts({
+        offset: state.products.length,
+        regionId: region?.id,
+      });
+
+      setState((current) =>
+        current.status === "ready"
+          ? {
+              status: "ready",
+              products: [...current.products, ...products],
+              count: current.count,
+            }
+          : current,
+      );
+    } catch {
+      setLoadMoreError(true);
+    } finally {
+      setLoadingMore(false);
+    }
+  }, [state, region?.id, loadingMore]);
+
+  const add = useCallback(
+    (product: Product, variant: Variant) => {
+      const price = variantPrice(variant, region?.currency_code);
+      if (!price) {
+        return;
       }
 
-      return [
-        ...current,
-        {
-          variantId: variant.id,
-          title: product.title,
-          handle: product.handle,
-          thumbnail: product.thumbnail,
-          variantTitle: (product.variants?.length ?? 0) > 1 ? variant.title : null,
-          price,
-          quantity: 1,
-        },
-      ];
-    });
-    setBagOpen(true);
-  }, []);
+      setItems((current) => {
+        const existing = current.find((item) => item.variantId === variant.id);
+        if (existing) {
+          return current.map((item) =>
+            item.variantId === variant.id ? { ...item, quantity: item.quantity + 1 } : item,
+          );
+        }
+
+        return [
+          ...current,
+          {
+            variantId: variant.id,
+            title: product.title,
+            handle: product.handle,
+            thumbnail: product.thumbnail,
+            variantTitle: (product.variants?.length ?? 0) > 1 ? variant.title : null,
+            price,
+            quantity: 1,
+          },
+        ];
+      });
+      setBagOpen(true);
+    },
+    [region?.currency_code],
+  );
 
   const increase = useCallback((variantId: string) => {
     setItems((current) =>
@@ -228,6 +300,8 @@ export default function App() {
               key={handle}
               handle={handle}
               products={state.status === "ready" ? state.products : NO_PRODUCTS}
+              regionId={region?.id}
+              currency={region?.currency_code}
               onOpen={go}
               onBack={() => go(null)}
               onAdd={add}
@@ -235,7 +309,15 @@ export default function App() {
           </section>
         ) : (
           <section aria-label="Products">
-            <Catalogue state={state} onOpen={go} />
+            <Catalogue
+              state={state}
+              currency={region?.currency_code}
+              loadingMore={loadingMore}
+              loadMoreError={loadMoreError}
+              onLoadMore={loadMore}
+              onOpen={go}
+              onRetry={() => setReloadToken((current) => current + 1)}
+            />
           </section>
         )}
       </div>
