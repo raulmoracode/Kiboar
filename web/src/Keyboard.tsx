@@ -1,3 +1,4 @@
+import type { MouseEvent } from "react";
 import { productForKey } from "./products";
 
 interface KeyDef {
@@ -133,20 +134,39 @@ function Cap({ cap }: { cap: Key }) {
   );
 }
 
-export function Keyboard() {
+export function Keyboard({ onNavigate }: { onNavigate?: (href: string) => void }) {
   return (
     <svg viewBox="0 0 15 5" aria-label="Kiboar keyboard" className="w-full">
       {KEYS.map((key) => {
         const product = key.label ? productForKey(key.label) : undefined;
 
         if (product) {
+          const internal = product.internal === true;
+          const href = product.href;
+
+          function onInternalClick(event: MouseEvent<HTMLAnchorElement>) {
+            if (
+              event.button !== 0 ||
+              event.metaKey ||
+              event.ctrlKey ||
+              event.shiftKey ||
+              event.altKey ||
+              !onNavigate
+            ) {
+              return;
+            }
+            event.preventDefault();
+            onNavigate(href);
+          }
+
           return (
             <a
               key={`${key.x}-${key.y}`}
-              href={product.href}
-              target="_blank"
-              rel="noreferrer"
-              aria-label={`${product.name} (opens in a new tab)`}
+              href={href}
+              {...(internal
+                ? { onClick: onInternalClick }
+                : { target: "_blank", rel: "noreferrer" })}
+              aria-label={internal ? product.name : `${product.name} (opens in a new tab)`}
               className="cursor-pointer"
             >
               <Cap cap={key} />

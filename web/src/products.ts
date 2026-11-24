@@ -4,6 +4,8 @@ export interface Product {
   line: string;
   /** Letter of "Kiboar" that opens the product. */
   key: string;
+  /** True when the destination lives in this app and opens in the same tab. */
+  internal?: boolean;
 }
 
 export const products: readonly Product[] = [
@@ -27,9 +29,10 @@ export const products: readonly Product[] = [
   },
   {
     name: "Studio",
-    href: "https://github.com/raulmoracode/Kiboar/releases/tag/studio-v0.1.0",
+    href: "/studio",
     line: "Flash and configure.",
     key: "o",
+    internal: true,
   },
   {
     name: "Docs",
