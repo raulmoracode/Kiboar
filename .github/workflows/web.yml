@@ -6,6 +6,7 @@ on:
     paths:
       - "web/**"
       - "packages/**"
+      - ".npmrc"
       - "pnpm-lock.yaml"
       - "pnpm-workspace.yaml"
       - "turbo.json"
@@ -17,6 +18,7 @@ on:
     paths:
       - "web/**"
       - "packages/**"
+      - ".npmrc"
       - "pnpm-lock.yaml"
       - "pnpm-workspace.yaml"
       - "turbo.json"

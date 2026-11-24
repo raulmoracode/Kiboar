@@ -42,6 +42,23 @@ jobs:
       - name: Install
         run: pnpm install --frozen-lockfile
 
+      - name: Test before packaging
+        run: |
+          pnpm lint
+          pnpm turbo run typecheck test build --filter=@kiboar/core --filter=@kiboar/studio
+          cargo test --locked --manifest-path software/Cargo.toml --workspace
+
+      - name: Check the tag matches the versions
+        if: startsWith(github.ref, 'refs/tags/studio-v')
+        run: |
+          tag="${GITHUB_REF_NAME#studio-v}"
+          app="$(node -p "require('./software/app/package.json').version")"
+          tauri="$(node -p "require('./software/app/src-tauri/tauri.conf.json').version")"
+          cargo="$(sed -n 's/^version = "\(.*\)"/\1/p' software/app/src-tauri/Cargo.toml | head -n 1)"
+          for version in "$app" "$tauri" "$cargo"; do
+            [ "$version" = "$tag" ] || { echo "::error::version $version does not match tag $tag"; exit 1; }
+          done
+
       - name: Build the universal bundle
         run: pnpm --filter @kiboar/studio tauri build --target universal-apple-darwin
 

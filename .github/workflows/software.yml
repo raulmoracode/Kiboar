@@ -6,6 +6,7 @@ on:
     paths:
       - "software/**"
       - "packages/**"
+      - ".npmrc"
       - "pnpm-lock.yaml"
       - "pnpm-workspace.yaml"
       - "turbo.json"
@@ -19,6 +20,7 @@ on:
     paths:
       - "software/**"
       - "packages/**"
+      - ".npmrc"
       - "pnpm-lock.yaml"
       - "pnpm-workspace.yaml"
       - "turbo.json"
@@ -115,7 +117,7 @@ jobs:
       - name: Rust format and lints
         run: |
           cargo fmt --manifest-path software/Cargo.toml --all -- --check
-          cargo clippy --manifest-path software/Cargo.toml --workspace --all-targets -- -D warnings
+          cargo clippy --locked --manifest-path software/Cargo.toml --workspace --all-targets -- -D warnings
 
       - name: Rust tests
         run: cargo test --locked --manifest-path software/Cargo.toml --workspace
