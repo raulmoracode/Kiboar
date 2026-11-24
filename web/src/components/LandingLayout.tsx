@@ -24,12 +24,15 @@ export function LandingLayout({
 
         <div className="flex flex-1 items-center">
           <div className="relative w-full">
-            {children ? (
-              <p className="absolute -top-6 left-0 text-[12px] text-zinc-500">Details below</p>
-            ) : null}
             <section aria-label={keyboardLabel} className="w-full">
-              <Keyboard onNavigate={onNavigate} interactive={!word} {...(word ? { word } : {})} />
+              <Keyboard
+                onNavigate={onNavigate}
+                interactive={!word}
+                {...(word ? { word } : {})}
+                {...(children ? { hint: "details below" } : {})}
+              />
             </section>
+            {children ? <p className="sr-only">Details below</p> : null}
           </div>
         </div>
 
