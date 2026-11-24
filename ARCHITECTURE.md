@@ -155,9 +155,10 @@ One domain, three web surfaces, plus the library and the desktop app:
 
 - **Library:** `python3 library/tools/build_pcm.py` produces the PCM ZIP;
   releases are attached to a GitHub release.
-- **Web:** the root of the brand domain and `/studio`. `pnpm --filter
-  @kiboar/web build` produces a static `dist/`; the host serves it at `/` and
-  falls back to `index.html` for `/studio` so a reload works.
+- **Web:** the root of the brand domain, `/studio`, `/library` and
+  `/keyboards`. `pnpm --filter @kiboar/web build` produces a static `dist/`; the
+  host serves it at `/` and falls back to `index.html` for the product routes
+  and the client-side 404 so a reload works.
 - **Documentation:** Vercel, project Root Directory `docs`. Vercel detects the
   pnpm workspace and installs from the repository root. `docs/vercel.json`
   builds with `cd .. && pnpm turbo run build --filter=kiboar-docs` and publishes
