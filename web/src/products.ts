@@ -11,9 +11,10 @@ export interface Product {
 export const products: readonly Product[] = [
   {
     name: "Keyboards",
-    href: "https://github.com/raulmoracode/Kiboar/tree/main/keyboards",
-    line: "The official board files.",
+    href: "/keyboards",
+    line: "The open board definitions.",
     key: "k",
+    internal: true,
   },
   {
     name: "Library",
