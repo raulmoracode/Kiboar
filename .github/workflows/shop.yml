@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "shop/**"
+      - "packages/**"
       - ".npmrc"
       - "pnpm-lock.yaml"
       - "pnpm-workspace.yaml"
@@ -15,6 +16,7 @@ on:
   pull_request:
     paths:
       - "shop/**"
+      - "packages/**"
       - ".npmrc"
       - "pnpm-lock.yaml"
       - "pnpm-workspace.yaml"
