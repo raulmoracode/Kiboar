@@ -12,17 +12,19 @@ shop is the Medusa application in `shop/`, and this site points at it.
 
 ## Layout
 
-- `src/App.tsx` — the minimal router, the home page and the keyboard shortcut listener.
-- `src/Keyboard.tsx` — the drawn keyboard; the six lit keys are real links.
-- `src/LandingLayout.tsx` — the keyboard-first layout shared by the home page and the 404.
-- `src/ProductLinks.tsx` — the six destination links under the keyboard.
-- `src/PageHeader.tsx` — the shared `Kiboar / section` breadcrumb.
-- `src/StudioPage.tsx` — the `/studio` page: download, install paths and scope.
-- `src/LibraryPage.tsx` — the `/library` page: counts, install and scope.
-- `src/KeyboardsPage.tsx` — the `/keyboards` page: the open board definitions as cards.
-- `src/NotFoundPage.tsx` — the 404 page: the landing layout with a 404 keyboard; it sets `robots: noindex`.
-- `src/boards.ts` — the board data mirrored from `software/boards`; update it when a definition changes.
-- `src/products.ts` — the six destinations, their key and whether they are internal.
+- `src/App.tsx` — the minimal router and the keyboard shortcut listener.
+- `src/pages/HomePage.tsx` — the home page: the keyboard and the six product links.
+- `src/pages/StudioPage.tsx` — the `/studio` page: download, install paths and scope.
+- `src/pages/LibraryPage.tsx` — the `/library` page: counts, install and scope.
+- `src/pages/KeyboardsPage.tsx` — the `/keyboards` page: the open board definitions as cards.
+- `src/pages/NotFoundPage.tsx` — the 404 page: the landing layout with a 404 keyboard; it sets `robots: noindex`.
+- `src/components/Keyboard.tsx` — the drawn keyboard; the six lit keys are real links.
+- `src/components/LandingLayout.tsx` — the keyboard-first layout shared by the home page and the 404.
+- `src/components/ProductLinks.tsx` — the six destination links under the keyboard.
+- `src/components/PageHeader.tsx` — the shared `Kiboar / section` breadcrumb.
+- `src/data/boards.ts` — the board data mirrored from `software/boards`; update it when a definition changes.
+- `src/data/products.ts` — the six destinations, their key and whether they are internal.
+- `src/lib/links.ts` — the plain-click helper shared by the keyboard and the product links.
 - `src/styles.css` — the shared design entry from `@kiboar/design`.
 - `vite.config.ts` — the shared `@kiboar/vite-config` setup and port 3000.
 
@@ -32,8 +34,11 @@ shop is the Medusa application in `shop/`, and this site points at it.
   `web/package-lock.json`. Shared versions come from the root `catalog`.
 - **No framework migration without a decision.** Vite and React are the stack;
   switching to another framework is a new issue, not a refactor.
+- **Group by responsibility.** Route pages live in `src/pages/`, shared UI in
+  `src/components/`, static data in `src/data/` and helpers in `src/lib/`. Keep
+  `App.tsx` as the router and `main.tsx` as the entry.
 - **The letter menu is the navigation.** Every destination lives in
-  `src/products.ts` with its key. Keep the keys as real links inside the SVG and
+  `src/data/products.ts` with its key. Keep the keys as real links inside the SVG and
   the shortcut handler ignoring modifiers, key repeats and form fields. External
   destinations open in a new tab; `internal: true` destinations (Keyboards,
   Library and Studio) use the local router and the same tab.

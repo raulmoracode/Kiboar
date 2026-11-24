@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { LandingLayout } from "./LandingLayout";
+import { LandingLayout } from "../components/LandingLayout";
 
 export function NotFoundPage({ onNavigate }: { onNavigate: (href: string) => void }) {
   useEffect(() => {

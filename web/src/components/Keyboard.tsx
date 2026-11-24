@@ -1,5 +1,6 @@
 import type { MouseEvent } from "react";
-import { productForKey } from "./products";
+import { productForKey } from "../data/products";
+import { isPlainClick } from "../lib/links";
 
 interface KeyDef {
   w: number;
@@ -171,14 +172,7 @@ export function Keyboard({
           const href = product.href;
 
           function onInternalClick(event: MouseEvent<HTMLAnchorElement>) {
-            if (
-              event.button !== 0 ||
-              event.metaKey ||
-              event.ctrlKey ||
-              event.shiftKey ||
-              event.altKey ||
-              !onNavigate
-            ) {
+            if (!isPlainClick(event) || !onNavigate) {
               return;
             }
             event.preventDefault();
