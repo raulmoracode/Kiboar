@@ -21,6 +21,22 @@ export function ProductLinks({
         const href = isCurrent ? HOME.href : product.href;
         const line = isCurrent ? HOME.line : product.line;
         const internal = isCurrent || product.internal === true;
+        const unavailable = product.disabled === true && !isCurrent;
+
+        if (unavailable) {
+          return (
+            <span key={product.name} aria-disabled="true" className="cursor-not-allowed py-6">
+              <span className="flex items-center gap-2">
+                <kbd className="inline-flex size-5 items-center justify-center rounded border border-white/5 font-mono text-[10px] text-zinc-700">
+                  {product.key}
+                </kbd>
+                <span className="text-[13px] text-zinc-600">{name}</span>
+                <span className="sr-only"> (unavailable)</span>
+              </span>
+              <span className="mt-1 block text-[12px] leading-relaxed text-zinc-700">{line}</span>
+            </span>
+          );
+        }
 
         return (
           <a
