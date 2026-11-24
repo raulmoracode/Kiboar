@@ -19,6 +19,11 @@ pub const FLAG_FAMILY_ID_PRESENT: u32 = 0x0000_2000;
 /// Family id of the RP2040 flash, as written by the UF2 converter.
 pub const RP2040_FAMILY_ID: u32 = 0xE48B_FF56;
 
+/// Start of the RP2040 XIP flash window.
+pub const RP2040_FLASH_START: u32 = 0x1000_0000;
+/// End of the 16 MiB RP2040 XIP flash window.
+pub const RP2040_FLASH_END: u32 = 0x1100_0000;
+
 /// One 512-byte UF2 block, reduced to the fields the application uses.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Uf2Block {
@@ -195,6 +200,37 @@ impl Uf2 {
                 });
             }
         }
+
+        let mut ranges = Vec::with_capacity(self.blocks.len());
+        for block in &self.blocks {
+            let start = block.target_addr;
+            let end = start.checked_add(block.payload.len() as u32).ok_or(
+                Uf2Error::AddressOutOfRange {
+                    number: block.block_no,
+                    address: start,
+                },
+            )?;
+            if expected == RP2040_FAMILY_ID
+                && (start < RP2040_FLASH_START || end > RP2040_FLASH_END)
+            {
+                return Err(Uf2Error::AddressOutOfRange {
+                    number: block.block_no,
+                    address: start,
+                });
+            }
+            ranges.push((start, end, block.block_no));
+        }
+
+        ranges.sort_unstable();
+        for pair in ranges.windows(2) {
+            if pair[1].0 < pair[0].1 {
+                return Err(Uf2Error::OverlappingBlocks {
+                    number: pair[1].2,
+                    address: pair[1].0,
+                });
+            }
+        }
+
         Ok(())
     }
 }
@@ -247,6 +283,10 @@ pub enum Uf2Error {
     NotMainFlash { number: u32 },
     #[error("block {number} is a file container, not a flash image")]
     FileContainer { number: u32 },
+    #[error("block {number} targets {address:#010x}, outside the RP2040 flash window")]
+    AddressOutOfRange { number: u32, address: u32 },
+    #[error("block {number} at {address:#010x} overlaps the previous block")]
+    OverlappingBlocks { number: u32, address: u32 },
 }
 
 #[cfg(test)]
@@ -263,7 +303,7 @@ mod tests {
             flags |= FLAG_FAMILY_ID_PRESENT;
         }
         raw[8..12].copy_from_slice(&flags.to_le_bytes());
-        raw[12..16].copy_from_slice(&(number * 256).to_le_bytes());
+        raw[12..16].copy_from_slice(&(RP2040_FLASH_START + number * 256).to_le_bytes());
         raw[16..20].copy_from_slice(&(payload.len() as u32).to_le_bytes());
         raw[20..24].copy_from_slice(&number.to_le_bytes());
         raw[24..28].copy_from_slice(&total.to_le_bytes());
@@ -472,6 +512,58 @@ mod tests {
         assert_eq!(
             uf2.validate_for_family(RP2040_FAMILY_ID),
             Err(Uf2Error::FileContainer { number: 0 })
+        );
+    }
+
+    fn at(mut raw: [u8; BLOCK_SIZE], address: u32) -> [u8; BLOCK_SIZE] {
+        raw[12..16].copy_from_slice(&address.to_le_bytes());
+        raw
+    }
+
+    #[test]
+    fn rejects_a_block_outside_the_rp2040_window() {
+        let raw = at(
+            block(0, 1, Some(RP2040_FAMILY_ID), b"firmware"),
+            0x2000_0000,
+        );
+        let uf2 = Uf2::parse(&raw).unwrap();
+        assert_eq!(
+            uf2.validate_for_family(RP2040_FAMILY_ID),
+            Err(Uf2Error::AddressOutOfRange {
+                number: 0,
+                address: 0x2000_0000
+            })
+        );
+    }
+
+    #[test]
+    fn rejects_a_block_that_runs_past_the_rp2040_window() {
+        let start = RP2040_FLASH_END - 4;
+        let raw = at(block(0, 1, Some(RP2040_FAMILY_ID), b"firmware"), start);
+        let uf2 = Uf2::parse(&raw).unwrap();
+        assert_eq!(
+            uf2.validate_for_family(RP2040_FAMILY_ID),
+            Err(Uf2Error::AddressOutOfRange {
+                number: 0,
+                address: start
+            })
+        );
+    }
+
+    #[test]
+    fn rejects_overlapping_blocks() {
+        let first = block(0, 2, Some(RP2040_FAMILY_ID), b"0123456789");
+        let second = at(
+            block(1, 2, Some(RP2040_FAMILY_ID), b"abcdefghij"),
+            RP2040_FLASH_START + 5,
+        );
+        let uf2 = Uf2::parse(&artefact(&[first, second])).unwrap();
+        assert_eq!(
+            uf2.validate_for_family(RP2040_FAMILY_ID),
+            Err(Uf2Error::OverlappingBlocks {
+                number: 1,
+                address: RP2040_FLASH_START + 5
+            })
         );
     }
 }

@@ -96,7 +96,8 @@ pub fn parse_board_info(payload: &[u8]) -> Result<BoardInfo, ProtocolError> {
     })
 }
 
-fn is_lowercase_slug(value: &str) -> bool {
+/// True when `value` is a board id the registry and the file name accept.
+pub fn is_lowercase_slug(value: &str) -> bool {
     let bytes = value.as_bytes();
     if bytes.len() < 2 || bytes.len() > BOARD_ID_LEN {
         return false;
