@@ -72,6 +72,12 @@ jobs:
       - name: Build Studio
         run: pnpm turbo run build --filter=@kiboar/studio
 
+      - name: Install Chromium
+        run: pnpm --filter @kiboar/studio exec playwright install --with-deps chromium
+
+      - name: Studio end-to-end
+        run: pnpm --filter @kiboar/studio test:e2e
+
   rust:
     name: Rust and bindings
     runs-on: ubuntu-latest
