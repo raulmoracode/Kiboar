@@ -24,7 +24,8 @@
     "library": "python3 library/tools/lint.py && python3 library/tools/gen_courtyard.py --check && python3 library/tools/normalize_symbols.py --check && python3 library/tools/model_inventory.py --check && python3 library/tools/provenance.py --check && python3 -m unittest discover -s library/tools/tests -p 'test_*.py'",
     "test:rust": "cargo test --manifest-path software/Cargo.toml --workspace",
     "check:rust": "cargo check --manifest-path software/Cargo.toml -p kiboar-studio",
-    "check": "pnpm library && pnpm lint && pnpm lint:rust && pnpm typecheck && pnpm test && pnpm build && pnpm test:rust && pnpm check:rust"
+    "check": "pnpm library && pnpm lint && pnpm lint:rust && pnpm typecheck && pnpm test && pnpm build && pnpm test:rust && pnpm check:rust",
+    "build:vercel": "pnpm --filter @kiboar/web build && pnpm --filter kiboar-docs build && node scripts/stage-vercel.mjs"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.6.8",

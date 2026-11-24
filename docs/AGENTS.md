@@ -36,12 +36,13 @@ in the root pnpm workspace and deploys to Vercel from the `docs` Root Directory.
   changes.
 - **No `base` path.** The routes are `/docs` and `/es/docs`; do not add a base
   path or a server adapter. The output is static.
-- **Vercel builds from the workspace root.** The project Root Directory is
-  `docs`; the build command is
-  `cd .. && pnpm turbo run build --filter=kiboar-docs`. Do not hard-code an npm
-  command or a second lockfile.
+- **Vercel builds from the workspace root.** The repository root is the Vercel
+  Root Directory; `pnpm build:vercel` builds web and docs and stages
+  `dist/vercel`. Do not add a docs-only Vercel project or a second lockfile.
 - **The deployment owns `/docs` and `/es/docs`.** The root of the domain is
-  `web` and `/shop` is the Medusa store; the docs project must not claim `/`.
+  `web` and `/shop` is the Medusa store. The docs build emits absolute
+  `/_astro`, `/footprints` and `/api/search` assets; the staging script places
+  them at the root of the combined output.
 - **The library lives in `library/`.** The generator reads `library/footprints/`;
   do not copy or relocate library data into `docs/`.
 - `docs/dist/` and `docs/.astro/` are generated; do not commit them.

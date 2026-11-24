@@ -18,9 +18,11 @@ Agent instructions: [`AGENTS.md`](AGENTS.md).
 ## Deployment
 
 The build is intended for `https://kiboar.raulmoracode.com/docs` and `/es/docs`.
-`docs/vercel.json` builds from the `docs` Root Directory and publishes
-`docs/dist`; the project is configured but not deployed yet. The build owns the
-`/docs` prefix: the domain root is `web` and `/shop` is the Medusa store. See
+There is no docs-only Vercel project: the repository root is the Vercel Root
+Directory, `pnpm build:vercel` builds web and docs, and `scripts/stage-vercel.mjs`
+places the docs pages under `/docs` and the absolute `/_astro`, `/footprints` and
+`/api/search` assets at the root of the combined output. The project is
+configured but not deployed yet. See
 [`../ARCHITECTURE.md`](../ARCHITECTURE.md#deployment).
 
 ## Local

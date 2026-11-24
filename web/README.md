@@ -57,15 +57,15 @@ of copying it; a component used by one product stays in that product.
 
 ## Deployment
 
-`pnpm --filter @kiboar/web build` produces a static `dist/` with no server. It
-is intended for the root of the brand domain, `https://kiboar.raulmoracode.com/`,
-which has no deployment yet.
+`pnpm --filter @kiboar/web build` produces a static `dist/` with no server. At
+the repository root, `pnpm build:vercel` builds this app and the docs and stages
+both in `dist/vercel`: web at `/`, docs at `/docs`. The Vercel project is
+configured but not deployed yet.
 
-The app also serves `/studio`, `/library` and `/keyboards`, and a client-side
-404 for any other path. The host must fall back to `index.html` for those
-routes, as for any client-side route, so a reload or a shared link works. The
-404 is a client-side page, not an HTTP 404 status; it sets `robots: noindex`.
+The app serves `/studio`, `/library` and `/keyboards`, and a client-side 404 for
+any other path. `vercel.json` falls back to `index.html` for those routes, so a
+reload or a shared link works. The 404 is a client-side page, not an HTTP 404
+status; it sets `robots: noindex`.
 
-The docs (`/docs`) and the shop (`/shop`) are separate deployments behind the
-same domain. This app owns `/`, `/studio`, `/library` and `/keyboards`; the host must route the other
-prefixes. See [`../ARCHITECTURE.md`](../ARCHITECTURE.md#deployment).
+The shop (`/shop`) keeps its own deployment. See
+[`../ARCHITECTURE.md`](../ARCHITECTURE.md#deployment).
