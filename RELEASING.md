@@ -22,8 +22,8 @@ covers cutting a version.
 
 ## Tags
 
-There are no tags yet. The first release under this policy starts the
-convention, and the `1.0.0` library entry in the changelog predates it.
+The convention starts with the published Studio release `studio-v0.1.0`. The
+`1.0.0` library entry in the changelog predates this policy and was not tagged.
 
 | Product | Tag |
 | --- | --- |
@@ -76,9 +76,10 @@ release also has to update the package index that points at the new ZIP.
 
 Bundling is enabled: `bundle.active` is `true`, the targets are `app` and `dmg`,
 and the registry and board definitions are copied into `Contents/Resources`.
-`.github/workflows/studio-release.yml` builds a **universal** DMG on
-`macos-14`, writes `SHA256SUMS`, uploads the artifact and publishes a
-pre-release when the ref is a `studio-v*` tag.
+`.github/workflows/studio-release.yml` is configured to build a **universal**
+DMG on `macos-14`, write `SHA256SUMS`, upload the artifact and publish a
+pre-release when the ref is a `studio-v*` tag. The published 0.1.0 release
+contains the Apple Silicon build; it was produced before the universal target.
 
 The 0.1 build is **ad-hoc signed and not notarized**. It is a tester build, not
 a public consumer one; the release notes say so.
@@ -142,8 +143,8 @@ cut.
 
 | Gap | Consequence |
 | --- | --- |
-| No release workflow | Tagging, building the PCM ZIP and attaching artifacts are manual |
-| No CI desktop bundle | Studio cannot be released from CI |
+| Library release is manual | Tagging, building the PCM ZIP and attaching artifacts are manual |
+| No test gate in the Studio release | The tag build packages without running the Rust or frontend tests |
 | No signing or notarisation | Studio builds are unsigned today |
 | No changelog for docs or Studio | Their release notes are written by hand |
 | PCM not in the official repository | The library release is a GitHub release only |
