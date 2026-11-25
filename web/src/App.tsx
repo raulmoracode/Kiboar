@@ -16,7 +16,7 @@ export default function App() {
   useEffect(() => {
     function onPopState() {
       setPath(pathFromLocation());
-      window.scrollTo(0, 0);
+      window.scrollTo({ top: 0, behavior: "instant" });
     }
 
     window.addEventListener("popstate", onPopState);
@@ -26,7 +26,7 @@ export default function App() {
   const navigate = useCallback((href: string) => {
     window.history.pushState({}, "", href);
     setPath(pathFromLocation());
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: "instant" });
   }, []);
 
   useEffect(() => {
