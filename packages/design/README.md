@@ -50,5 +50,7 @@ therefore depends on `tailwindcss` from the catalog.
   product-specific layout never moves here.
 - No remote fonts. The font stack is the system UI stack.
 
-Consumed by `web`, `shop/storefront` and `software/app` (Studio). `docs`
-keeps the Fumadocs theme and does not use this package yet.
+Consumed by `web`, `shop/storefront` and `software/app` (Studio) through
+`app.css`. `docs` imports `tokens.css` and maps the Fumadocs `--color-fd-*`
+tokens to the Kiboar palette; it keeps its own structure and does not import
+the document defaults or the component classes.

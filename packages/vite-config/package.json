@@ -21,7 +21,7 @@
     "tailwindcss": "catalog:"
   },
   "peerDependencies": {
-    "vite": "^8.3.8"
+    "vite": "catalog:"
   },
   "devDependencies": {
     "vite": "catalog:"

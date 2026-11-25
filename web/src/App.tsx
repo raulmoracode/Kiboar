@@ -16,7 +16,7 @@ export default function App() {
   useEffect(() => {
     function onPopState() {
       setPath(pathFromLocation());
-      window.scrollTo(0, 0);
+      window.scrollTo({ top: 0, behavior: "instant" });
     }
 
     window.addEventListener("popstate", onPopState);
@@ -26,14 +26,10 @@ export default function App() {
   const navigate = useCallback((href: string) => {
     window.history.pushState({}, "", href);
     setPath(pathFromLocation());
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: "instant" });
   }, []);
 
   useEffect(() => {
-    if (path !== "/") {
-      return;
-    }
-
     function onKeyDown(event: KeyboardEvent) {
       if (event.metaKey || event.ctrlKey || event.altKey || event.repeat) {
         return;
@@ -55,7 +51,9 @@ export default function App() {
       }
 
       event.preventDefault();
-      if (product.internal) {
+      if (product.href === path) {
+        navigate("/");
+      } else if (product.internal) {
         navigate(product.href);
       } else {
         window.open(product.href, "_blank", "noopener,noreferrer");
@@ -69,7 +67,7 @@ export default function App() {
   if (path === "/studio") {
     return (
       <main className="kiboar-shell">
-        <StudioPage onHome={() => navigate("/")} />
+        <StudioPage onNavigate={navigate} />
       </main>
     );
   }
@@ -77,7 +75,7 @@ export default function App() {
   if (path === "/library") {
     return (
       <main className="kiboar-shell">
-        <LibraryPage onHome={() => navigate("/")} />
+        <LibraryPage onNavigate={navigate} />
       </main>
     );
   }
@@ -85,7 +83,7 @@ export default function App() {
   if (path === "/keyboards") {
     return (
       <main className="kiboar-shell">
-        <KeyboardsPage onHome={() => navigate("/")} />
+        <KeyboardsPage onNavigate={navigate} />
       </main>
     );
   }

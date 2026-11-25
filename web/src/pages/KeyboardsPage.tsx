@@ -1,4 +1,4 @@
-import { PageHeader } from "../components/PageHeader";
+import { LandingLayout } from "../components/LandingLayout";
 import { boards, type OpenBoard } from "../data/boards";
 
 const README = "https://github.com/raulmoracode/Kiboar/blob/main/keyboards/README.md";
@@ -76,25 +76,16 @@ function BoardCard({ board }: { board: OpenBoard }) {
   );
 }
 
-export function KeyboardsPage({ onHome }: { onHome: () => void }) {
+export function KeyboardsPage({ onNavigate }: { onNavigate: (href: string) => void }) {
   return (
-    <div className="mx-auto w-full max-w-[1180px] px-6 py-10 sm:px-10 sm:py-14">
-      <PageHeader
-        section="Keyboards"
-        onHome={onHome}
-        right={
-          <a
-            href={README}
-            target="_blank"
-            rel="noreferrer"
-            className="text-[12px] text-zinc-500 transition-colors hover:text-zinc-200"
-          >
-            README
-          </a>
-        }
-      />
-
-      <section aria-labelledby="keyboards-title" className="mt-20">
+    <LandingLayout
+      title="Keyboards"
+      word="Keyboards"
+      keyboardLabel="Keyboards keyboard"
+      onNavigate={onNavigate}
+      wide
+    >
+      <section aria-labelledby="keyboards-title">
         <p className="kiboar-eyebrow">Open hardware · {boards.length} board definitions</p>
         <h1
           id="keyboards-title"
@@ -128,6 +119,6 @@ export function KeyboardsPage({ onHome }: { onHome: () => void }) {
         </a>{" "}
         and starts empty.
       </p>
-    </div>
+    </LandingLayout>
   );
 }

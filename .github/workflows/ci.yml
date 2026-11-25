@@ -5,12 +5,18 @@ on:
     branches: [main]
     paths:
       - "library/**"
+      - "package.json"
+      - "pnpm-workspace.yaml"
+      - ".node-version"
       - "NOTICE"
       - "LICENSE"
       - ".github/workflows/ci.yml"
   pull_request:
     paths:
       - "library/**"
+      - "package.json"
+      - "pnpm-workspace.yaml"
+      - ".node-version"
       - "NOTICE"
       - "LICENSE"
       - ".github/workflows/ci.yml"
@@ -29,17 +35,15 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 12.6.0
+      - uses: pnpm/action-setup@v6
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version-file: .node-version
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
 
@@ -54,7 +58,7 @@ jobs:
       image: kicad/kicad:10.0.8
       options: --user root
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: KiCad version
         run: kicad-cli version
@@ -85,7 +89,7 @@ jobs:
           kicad-cli sym export svg -o artifacts library/symbols/Kiboar.kicad_sym --symbol SWITCH_EG1215AA
 
       - name: Upload the sample SVGs
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: sample-svg
           path: artifacts/

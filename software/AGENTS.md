@@ -27,8 +27,9 @@ other, and nothing in Studio may assume the board was bought.
   parser. No Tauri, no USB.
 - `crates/kiboar-flash/` — pure Rust UF2 parsing, digest and signature
   verification, and artefact copy. No Tauri, no USB, no filesystem paths.
-- `boards/`, `registry/`, `schemas/` — the board definitions, the signed
-  artefacts index and the generated JSON Schema.
+- `boards/`, `registry/`, `schemas/` — the board definitions, the artefacts
+  index and the generated JSON Schema. The index has no firmware entries and
+  nothing is signed yet.
 - `docs/adr/`, `docs/protocol.md` — decisions and the HID identity contract.
 - `BRIEF.md`, `DEVELOPMENT.md` — product and development briefs.
 

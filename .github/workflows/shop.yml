@@ -39,13 +39,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 12.6.0
+      - uses: pnpm/action-setup@v6
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version-file: .node-version
           cache: pnpm
@@ -56,6 +54,11 @@ jobs:
 
       - name: Lint
         run: pnpm exec biome check shop
+
+      - name: Unit tests
+        run: |
+          pnpm --filter @kiboar/shop test
+          pnpm --filter @kiboar/storefront test
 
       - name: Build without a database
         run: pnpm --filter @kiboar/shop build
@@ -73,13 +76,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 12.6.0
+      - uses: pnpm/action-setup@v6
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version-file: .node-version
           cache: pnpm
@@ -87,6 +88,12 @@ jobs:
 
       - name: Install
         run: pnpm install --frozen-lockfile
+
+      - name: Cache the Playwright browsers
+        uses: actions/cache@v6
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
 
       - name: Install Chromium
         run: pnpm --filter @kiboar/storefront exec playwright install --with-deps chromium

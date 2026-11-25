@@ -17,9 +17,10 @@ Agent instructions: [`AGENTS.md`](AGENTS.md).
 
 ## Deployment
 
-Served at `https://kiboar.raulmoracode.com/docs` and `/es/docs`. Vercel builds
-from the `docs` Root Directory and publishes `docs/dist`. The deployment owns
-the `/docs` prefix: the domain root is `web` and `/shop` is the Medusa store. See
+The build is intended for `https://kiboar.raulmoracode.com/docs` and `/es/docs`.
+`docs/vercel.json` builds from the `docs` Root Directory and publishes
+`docs/dist`; the project is configured but not deployed yet. The build owns the
+`/docs` prefix: the domain root is `web` and `/shop` is the Medusa store. See
 [`../ARCHITECTURE.md`](../ARCHITECTURE.md#deployment).
 
 ## Local

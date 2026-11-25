@@ -5,6 +5,9 @@
 # Local environment with the database URL and secrets
 .env
 
+# Local uploads from the Medusa admin; production uses object storage
+static/
+
 # Local npm output
 node_modules/
 dist/

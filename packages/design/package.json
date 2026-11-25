@@ -6,11 +6,13 @@
   "license": "MIT",
   "exports": {
     "./app.css": "./app.css",
-    "./base.css": "./base.css"
+    "./base.css": "./base.css",
+    "./tokens.css": "./tokens.css"
   },
   "files": [
     "app.css",
-    "base.css"
+    "base.css",
+    "tokens.css"
   ],
   "dependencies": {
     "tailwindcss": "catalog:"
