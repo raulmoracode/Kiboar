@@ -364,7 +364,7 @@ importers:
         specifier: ^1.7.28
         version: 1.16.22(@swc/helpers@0.5.24)
       '@types/node':
-        specifier: ^22.0.0
+        specifier: 'catalog:'
         version: 22.20.5
       '@types/react':
         specifier: 'catalog:'
@@ -490,7 +490,7 @@ importers:
         specifier: workspace:*
         version: link:../../../packages/tsconfig
       '@types/node':
-        specifier: ^22.0.0
+        specifier: 'catalog:'
         version: 22.20.5
       ajv:
         specifier: ^8.20.0

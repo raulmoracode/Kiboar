@@ -15,7 +15,7 @@
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@types/node": "^22.0.0",
+    "@types/node": "catalog:",
     "ajv": "^8.20.0",
     "tsx": "^4.23.15",
     "typescript": "catalog:",
