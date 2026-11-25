@@ -5,12 +5,18 @@ on:
     branches: [main]
     paths:
       - "library/**"
+      - "package.json"
+      - "pnpm-workspace.yaml"
+      - ".node-version"
       - "NOTICE"
       - "LICENSE"
       - ".github/workflows/ci.yml"
   pull_request:
     paths:
       - "library/**"
+      - "package.json"
+      - "pnpm-workspace.yaml"
+      - ".node-version"
       - "NOTICE"
       - "LICENSE"
       - ".github/workflows/ci.yml"

@@ -6,8 +6,9 @@ on:
     paths:
       - "docs/**"
       - "library/footprints/**"
+      - "library/tools/**"
       - "library/3dmodels/**"
-      - "library/tools/gen_docs.py"
+      - ".npmrc"
       - "pnpm-lock.yaml"
       - "pnpm-workspace.yaml"
       - "turbo.json"
@@ -19,8 +20,9 @@ on:
     paths:
       - "docs/**"
       - "library/footprints/**"
+      - "library/tools/**"
       - "library/3dmodels/**"
-      - "library/tools/gen_docs.py"
+      - ".npmrc"
       - "pnpm-lock.yaml"
       - "pnpm-workspace.yaml"
       - "turbo.json"
