@@ -8,11 +8,11 @@ The documentation site and Kiboar Studio have independent versions; see
 [`ARCHITECTURE.md`](ARCHITECTURE.md). Their changes are not entries in this
 library changelog.
 
-Paths in entries before the `Unreleased` section refer to the layout at the
-time of that release. The library moved into `library/` in the `Unreleased`
-section; historical entries are not rewritten.
+Paths in entries before `2.0.0` refer to the layout at the time of that
+release. The library moved into `library/` in `2.0.0`; historical entries are
+not rewritten.
 
-## [Unreleased]
+## [2.0.0] - 2026-11-24
 
 ### Removed
 
@@ -110,4 +110,5 @@ First release, targeting **KiCad 10**.
   **CC BY-NC-SA 4.0**. The MIT licence covers the original work only; see
   [`NOTICE`](NOTICE).
 
+[2.0.0]: https://github.com/raulmoracode/Kiboar/compare/v1.0.0...v2.0.0
 [1.0.0]: https://github.com/raulmoracode/Kiboar/releases/tag/v1.0.0
