@@ -46,3 +46,42 @@ test("the home loads without failed assets", async ({ page }) => {
   await page.goto("/", { waitUntil: "networkidle" });
   expect(failed).toEqual([]);
 });
+
+test("the spacebar hint scrolls smoothly to the details", async ({ page }) => {
+  await page.goto("/studio");
+
+  const hint = page.locator('svg a[href="#details"]');
+  await expect(hint).toHaveCount(1);
+  expect(await page.evaluate(() => getComputedStyle(document.documentElement).scrollBehavior)).toBe(
+    "smooth",
+  );
+
+  await hint.click();
+  await page.waitForFunction(() => window.scrollY > 100);
+  expect(new URL(page.url()).hash).toBe("#details");
+});
+
+test("reduced motion keeps the jump instant", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/studio");
+
+  expect(
+    await page.evaluate(() => getComputedStyle(document.documentElement).scrollBehavior),
+  ).not.toBe("smooth");
+
+  await page.locator('svg a[href="#details"]').click();
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
+});
+
+test("a route change starts at the top without animating", async ({ page }) => {
+  await page.goto("/studio");
+  await page.locator('svg a[href="#details"]').click();
+  await page.waitForFunction(() => window.scrollY > 100);
+
+  await page
+    .getByRole("link", { name: /Keyboards/ })
+    .first()
+    .click();
+  await expect(page).toHaveURL(/\/keyboards$/);
+  expect(await page.evaluate(() => window.scrollY)).toBe(0);
+});

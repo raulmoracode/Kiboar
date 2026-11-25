@@ -188,6 +188,21 @@ export function Keyboard({
         // The spacebar is the only wide key; the hint sits on it.
         const capHint = key.w > 4 && hint ? { hint } : {};
 
+        // The wide key carries the "details below" legend; it is the only
+        // interactive key on a page whose words are otherwise inert.
+        if (hint && key.w > 4) {
+          return (
+            <a
+              key={`${key.x}-${key.y}`}
+              href="#details"
+              aria-label="Scroll to the details"
+              className="cursor-pointer"
+            >
+              <Cap cap={cap} {...capHint} />
+            </a>
+          );
+        }
+
         if (product) {
           const internal = product.internal === true;
           const href = product.href;

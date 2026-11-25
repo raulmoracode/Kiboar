@@ -41,7 +41,8 @@ export function LandingLayout({
 
       {children ? (
         <div
-          className={`mx-auto w-full px-6 pt-16 pb-10 sm:px-10 sm:pb-14 ${
+          id="details"
+          className={`mx-auto w-full scroll-mt-10 px-6 pt-16 pb-10 sm:px-10 sm:pb-14 ${
             wide ? "max-w-[1180px]" : "max-w-[760px]"
           }`}
         >
