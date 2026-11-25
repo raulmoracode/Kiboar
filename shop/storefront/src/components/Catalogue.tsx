@@ -1,3 +1,4 @@
+import { home } from "@kiboar/links";
 import type { Product } from "../lib/api";
 import { ProductCard } from "./ProductCard";
 
@@ -35,7 +36,7 @@ export function Catalogue({
           Try again
         </button>{" "}
         or{" "}
-        <a className="text-zinc-200 kiboar-link" href="https://kiboar.raulmoracode.com/">
+        <a className="text-zinc-200 kiboar-link" href={home}>
           back to Kiboar
         </a>
         .

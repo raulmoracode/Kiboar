@@ -1,3 +1,4 @@
+import { repository } from "@kiboar/links";
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 
@@ -18,7 +19,7 @@ describe("the product links", () => {
   it("opens the external destination in a new tab", () => {
     const { container } = render(<ProductLinks onNavigate={vi.fn()} />);
     const link = (href: string) => container.querySelector(`a[href="${href}"]`);
-    expect(link("https://github.com/raulmoracode/Kiboar")?.getAttribute("target")).toBe("_blank");
+    expect(link(repository)?.getAttribute("target")).toBe("_blank");
   });
 
   it("keeps the internal destinations in the same tab", () => {

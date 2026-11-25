@@ -1,17 +1,16 @@
+import { docs as DOCS, studio } from "@kiboar/links";
 import { LandingLayout } from "../components/LandingLayout";
 
-const RELEASE = "https://github.com/raulmoracode/Kiboar/releases/tag/studio-v0.1.0";
-const DMG =
-  "https://github.com/raulmoracode/Kiboar/releases/download/studio-v0.1.0/Kiboar.Studio_0.1.0_aarch64.dmg";
-const SUMS = "https://github.com/raulmoracode/Kiboar/releases/download/studio-v0.1.0/SHA256SUMS";
-const INSTALL = "https://github.com/raulmoracode/Kiboar/blob/main/software/INSTALL.md";
-const DEVELOPMENT =
-  "https://github.com/raulmoracode/Kiboar/blob/main/software/docs/adr/0004-safety-principles-and-contracts.md";
-const SCRIPT =
-  "https://raw.githubusercontent.com/raulmoracode/Kiboar/main/software/scripts/install-macos.sh";
-const SOURCE = "https://github.com/raulmoracode/Kiboar/tree/main/software";
-const ROADMAP = "https://github.com/raulmoracode/Kiboar/blob/main/software/README.md#roadmap";
-const DOCS = "https://kiboar.raulmoracode.com/docs";
+const {
+  release: RELEASE,
+  dmg: DMG,
+  sums: SUMS,
+  install: INSTALL,
+  adr: DEVELOPMENT,
+  script: SCRIPT,
+  source: SOURCE,
+  roadmap: ROADMAP,
+} = studio;
 
 const NOTE_LINK = "underline decoration-white/20 underline-offset-4 hover:text-lime-200";
 const FOOTER_LINK = "transition-colors hover:text-zinc-200";

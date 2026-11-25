@@ -1,10 +1,7 @@
+import { library } from "@kiboar/links";
 import { LandingLayout } from "../components/LandingLayout";
 
-const PCM = "https://kiboar.raulmoracode.com/docs/install/pcm";
-const CLONE = "https://kiboar.raulmoracode.com/docs/install/clone";
-const LICENSING = "https://kiboar.raulmoracode.com/docs/licensing";
-const NOTICE = "https://github.com/raulmoracode/Kiboar/blob/main/NOTICE";
-const SOURCE = "https://github.com/raulmoracode/Kiboar/tree/main/library";
+const { pcm: PCM, clone: CLONE, licensing: LICENSING, notice: NOTICE, source: SOURCE } = library;
 
 const STATS = [
   ["Symbols", "145"],

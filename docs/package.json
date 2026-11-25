@@ -23,7 +23,8 @@
     "occt-import-js": "^0.0.23",
     "react": "catalog:",
     "react-dom": "catalog:",
-    "three": "^0.187.0"
+    "three": "^0.187.0",
+    "@kiboar/links": "workspace:*"
   },
   "devDependencies": {
     "@tailwindcss/vite": "catalog:",
