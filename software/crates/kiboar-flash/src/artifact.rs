@@ -35,7 +35,7 @@ mod tests {
 
     use crate::{
         sha256_hex, Uf2Error, BLOCK_SIZE, DATA_SIZE, FLAG_FAMILY_ID_PRESENT, MAGIC_END,
-        MAGIC_START0, MAGIC_START1, RP2040_FAMILY_ID,
+        MAGIC_START0, MAGIC_START1, RP2040_FAMILY_ID, RP2040_FLASH_START,
     };
 
     use super::*;
@@ -45,6 +45,7 @@ mod tests {
         raw[0..4].copy_from_slice(&MAGIC_START0.to_le_bytes());
         raw[4..8].copy_from_slice(&MAGIC_START1.to_le_bytes());
         raw[8..12].copy_from_slice(&FLAG_FAMILY_ID_PRESENT.to_le_bytes());
+        raw[12..16].copy_from_slice(&RP2040_FLASH_START.to_le_bytes());
         raw[16..20].copy_from_slice(&(DATA_SIZE as u32).to_le_bytes());
         raw[24..28].copy_from_slice(&1u32.to_le_bytes());
         raw[28..32].copy_from_slice(&RP2040_FAMILY_ID.to_le_bytes());
