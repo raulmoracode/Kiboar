@@ -13,23 +13,26 @@ Kiboar is a keyboard brand. It designs keyboards, sells them assembled and
 publishes the library and the board definitions so anyone can build, repair and
 customise their own.
 
-Buying and building are both first-class. The shop sells the assembled
-keyboards; the library and the documentation make the other path possible; and
-Kiboar Studio flashes and configures a board whichever way you got it. The web
-site brings the whole brand together.
+Buying and building are both first-class. The shop is being built to sell the
+assembled keyboards: today it lists the catalogue and the storefront, and
+checkout is not connected yet. The library and the documentation make the other
+path possible; Kiboar Studio flashes and configures a board whichever way you
+got it. The web site brings the whole brand together.
 
 | Product | Path | README | What it is |
 | --- | --- | --- | --- |
-| Shop | `shop/` | [`shop/README.md`](shop/README.md) | Sells assembled Kiboar keyboards; the commercial surface of the brand |
+| Shop | `shop/` | [`shop/README.md`](shop/README.md) | The commercial surface of the brand: catalogue and storefront; checkout is not connected yet |
 | Web | `web/` | [`web/README.md`](web/README.md) | The public front door: the brand, the keyboards, the docs, Studio and the shop in one place |
 | KiCad library | `library/` | [`library/README.md`](library/README.md) | The official library Kiboar designs with, published so you can design and build your own board: 145 symbols and 173 footprints in 26 libraries |
 | Kiboar Studio | `software/` | [`software/README.md`](software/README.md) | Manages a Kiboar keyboard: detects, flashes and — after 0.1 — remaps it, bought or self-built |
 | Documentation | `docs/` | [`docs/README.md`](docs/README.md) | How to install the library, build a board, flash it and what the licences allow |
 
-The public surfaces share one domain: `/` is the web site, `/docs` the
-documentation and `/shop` the Medusa store. The library is published as a PCM
-ZIP and in this repository; Studio is a desktop application. The routing each
-one needs is in [`ARCHITECTURE.md`](ARCHITECTURE.md#deployment).
+The public surfaces are designed to share one domain: `/` is the web site,
+`/docs` the documentation and `/shop` the Medusa store. The library is published
+as a PCM ZIP and in this repository; Studio is a desktop application. The
+routing each one needs is in [`ARCHITECTURE.md`](ARCHITECTURE.md#deployment).
+Today the only published artefact is the Studio 0.1.0 release; the web, docs and
+shop deployments are not live.
 
 📖 **Documentation:** <https://kiboar.raulmoracode.com/docs> — English and Spanish.
 
@@ -88,10 +91,11 @@ The setup, the commands and the scope of each are in
 
 ### Keyboards
 
-The official hardware files for the Kiboar boards live in `keyboards/`: one
-directory per keyboard and revision, with its README, licence, KiCad project and
-firmware notes. The board definitions Studio reads stay in `software/boards/`.
-See [`keyboards/README.md`](keyboards/README.md).
+The official hardware files for the Kiboar boards will live in `keyboards/`:
+one directory per keyboard and revision, with its README, licence, KiCad project
+and firmware notes. No board has published its files there yet; the directory
+contains its README and starts empty. The board definitions Studio reads stay in
+`software/boards/`. See [`keyboards/README.md`](keyboards/README.md).
 
 ## Repository
 

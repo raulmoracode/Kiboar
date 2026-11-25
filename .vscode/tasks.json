@@ -1,0 +1,50 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "check",
+      "detail": "Library, JavaScript and Rust checks",
+      "type": "shell",
+      "command": "pnpm check",
+      "problemMatcher": []
+    },
+    {
+      "label": "dev",
+      "detail": "Docs, Studio, web and storefront dev servers",
+      "type": "shell",
+      "command": "pnpm dev",
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "dev: web",
+      "detail": "The public site on port 3000",
+      "type": "shell",
+      "command": "pnpm --filter @kiboar/web dev",
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "dev: studio",
+      "detail": "Kiboar Studio through Tauri",
+      "type": "shell",
+      "command": "pnpm --filter @kiboar/studio tauri dev",
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "test: rust",
+      "detail": "The Rust workspace tests",
+      "type": "shell",
+      "command": "pnpm test:rust",
+      "problemMatcher": []
+    },
+    {
+      "label": "library",
+      "detail": "Every KiCad library check",
+      "type": "shell",
+      "command": "pnpm library",
+      "problemMatcher": []
+    }
+  ]
+}

@@ -6,10 +6,13 @@ Tailwind 4 single page application.
 
 **Status: brand page and product pages.** The home page draws the word Kiboar on
 the keyboard. Each letter opens one destination — Keyboards, Library, Shop,
-Studio, Docs and GitHub — and pressing the letter does the same. Keyboards,
-Library and Studio open the local pages in the same tab; the rest open in a new
-tab. It does not replace the docs or the shop. The storefront in `shop/` reads
-Medusa; `web` does not call the Store API.
+Studio, Docs and GitHub — and pressing the letter does the same on every page.
+Keyboards, Library and Studio are the same layout with their own name on the
+keyboard, a scroll cue and their detail below the first screen; the keyboard and
+links keep the home position. On those pages the link for the current page
+becomes Home, and its letter returns home. The rest open in a new tab. It does
+not replace the docs or the shop. The storefront in `shop/` reads Medusa; `web`
+does not call the Store API.
 
 ## Development
 
@@ -31,7 +34,7 @@ allows in `STORE_CORS`.
 index.html              Vite entry
 src/main.tsx            React root
 src/App.tsx             the router and keyboard shortcuts
-src/components/         Keyboard, LandingLayout, PageHeader, ProductLinks
+src/components/         Keyboard, LandingLayout, ProductLinks
 src/data/               boards and products
 src/lib/                shared link helpers
 src/pages/              Home, Keyboards, Library, Studio and 404 pages
@@ -57,8 +60,9 @@ of copying it; a component used by one product stays in that product.
 
 ## Deployment
 
-Served at the root of the brand domain, `https://kiboar.raulmoracode.com/`.
-`pnpm --filter @kiboar/web build` produces a static `dist/` with no server.
+`pnpm --filter @kiboar/web build` produces a static `dist/` with no server. It
+is intended for the root of the brand domain, `https://kiboar.raulmoracode.com/`,
+which has no deployment yet.
 
 The app also serves `/studio`, `/library` and `/keyboards`, and a client-side
 404 for any other path. The host must fall back to `index.html` for those
