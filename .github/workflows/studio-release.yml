@@ -31,7 +31,7 @@ jobs:
           cache: pnpm
           cache-dependency-path: pnpm-lock.yaml
 
-      - uses: dtolnay/rust-toolchain@1.100.0
+      - uses: dtolnay/rust-toolchain@1.120.0
         with:
           targets: aarch64-apple-darwin,x86_64-apple-darwin
 
