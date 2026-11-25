@@ -12,7 +12,8 @@
   },
   "dependencies": {
     "react": "catalog:",
-    "react-dom": "catalog:"
+    "react-dom": "catalog:",
+    "@kiboar/links": "workspace:*"
   },
   "devDependencies": {
     "@kiboar/design": "workspace:*",

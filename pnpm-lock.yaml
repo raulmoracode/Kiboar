@@ -247,6 +247,9 @@ importers:
       '@fumadocs/astro':
         specifier: 0.3.0
         version: 0.3.0(057024128cfe26bba208c39da8256787)
+      '@kiboar/links':
+        specifier: workspace:*
+        version: link:../packages/links
       astro:
         specifier: ^7.4.10
         version: 7.4.13(@types/node@22.20.5)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1)
@@ -326,6 +329,8 @@ importers:
       tailwindcss:
         specifier: 'catalog:'
         version: 4.3.5
+
+  packages/links: {}
 
   packages/tsconfig: {}
 
@@ -423,6 +428,9 @@ importers:
 
   shop/storefront:
     dependencies:
+      '@kiboar/links':
+        specifier: workspace:*
+        version: link:../../packages/links
       react:
         specifier: 'catalog:'
         version: 19.3.1
@@ -564,6 +572,9 @@ importers:
 
   web:
     dependencies:
+      '@kiboar/links':
+        specifier: workspace:*
+        version: link:../packages/links
       react:
         specifier: 'catalog:'
         version: 19.3.1

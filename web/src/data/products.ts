@@ -1,3 +1,5 @@
+import { docs, repository } from "@kiboar/links";
+
 export interface Product {
   name: string;
   href: string;
@@ -42,7 +44,7 @@ export const products: readonly Product[] = [
   },
   {
     name: "Docs",
-    href: "https://kiboar.raulmoracode.com/docs",
+    href: docs,
     line: "Install, build and flash.",
     key: "a",
     // The docs domain has no deployment yet.
@@ -50,7 +52,7 @@ export const products: readonly Product[] = [
   },
   {
     name: "GitHub",
-    href: "https://github.com/raulmoracode/Kiboar",
+    href: repository,
     line: "The repository.",
     key: "r",
   },

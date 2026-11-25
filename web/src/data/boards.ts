@@ -1,4 +1,4 @@
-const REPOSITORY = "https://github.com/raulmoracode/Kiboar";
+import { repository as REPOSITORY } from "@kiboar/links";
 
 export interface OpenBoard {
   id: string;

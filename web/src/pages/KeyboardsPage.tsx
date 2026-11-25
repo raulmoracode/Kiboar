@@ -1,7 +1,6 @@
+import { keyboards } from "@kiboar/links";
 import { LandingLayout } from "../components/LandingLayout";
 import { boards, type OpenBoard } from "../data/boards";
-
-const README = "https://github.com/raulmoracode/Kiboar/blob/main/keyboards/README.md";
 
 function MatrixPreview({ board }: { board: OpenBoard }) {
   const groups = board.split ? [board.cols / 2, board.cols / 2] : [board.cols];
@@ -110,7 +109,7 @@ export function KeyboardsPage({ onNavigate }: { onNavigate: (href: string) => vo
         A board definition is the matrix, pins and layers Studio uses; it is not a KiCad project or
         a firmware image. The hardware release lives in{" "}
         <a
-          href={README}
+          href={keyboards.readme}
           target="_blank"
           rel="noreferrer"
           className="text-zinc-400 underline decoration-white/15 underline-offset-4 hover:text-lime-200"
