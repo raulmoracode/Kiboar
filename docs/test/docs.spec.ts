@@ -57,4 +57,8 @@ test("the docs use only the Kiboar dark theme", async ({ page }) => {
   expect(theme.background).toBe("rgb(10, 11, 13)");
   expect(theme.primary).toBe("#bef264");
   expect(await page.getByRole("button", { name: /theme|light mode/i }).count()).toBe(0);
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/docs");
+  expect(await page.getByRole("button", { name: /toggle theme/i }).count()).toBe(0);
 });
