@@ -598,6 +598,9 @@ importers:
       '@types/react-dom':
         specifier: 'catalog:'
         version: 19.3.0(@types/react@19.3.0)
+      axe-core:
+        specifier: 'catalog:'
+        version: 4.14.1
       jsdom:
         specifier: 'catalog:'
         version: 31.0.1
