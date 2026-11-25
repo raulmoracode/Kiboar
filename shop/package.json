@@ -34,7 +34,8 @@
     "react": "catalog:",
     "react-dom": "catalog:",
     "ts-node": "^10.9.2",
-    "typescript": "^6.0.3",
+    "typescript": "catalog:",
+    "@typescript/typescript6": "^6.0.2",
     "@playwright/test": "catalog:",
     "vitest": "catalog:"
   },
