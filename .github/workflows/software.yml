@@ -48,8 +48,6 @@ jobs:
       - uses: actions/checkout@v4
 
       - uses: pnpm/action-setup@v4
-        with:
-          version: 12.6.0
 
       - uses: actions/setup-node@v4
         with:
@@ -106,16 +104,16 @@ jobs:
             libudev-dev \
             libssl-dev
 
-      - uses: dtolnay/rust-toolchain@1.100.0
+      - uses: actions-rust-lang/setup-rust-toolchain@v2
         with:
-          components: rustfmt, clippy
+          cache: "false"
+          # Keep the previous behaviour: warnings are not errors at build time.
+          build-warnings: ""
       - uses: Swatinem/rust-cache@v2
         with:
           workspaces: software
 
       - uses: pnpm/action-setup@v4
-        with:
-          version: 12.6.0
 
       - uses: actions/setup-node@v4
         with:
