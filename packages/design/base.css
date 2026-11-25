@@ -1,8 +1,7 @@
+@import "./tokens.css";
+
 :root {
   color-scheme: dark;
-  --kiboar-bg: #0a0b0d;
-  --kiboar-surface: #0c0e11;
-  --kiboar-accent: #bef264;
 }
 
 html,

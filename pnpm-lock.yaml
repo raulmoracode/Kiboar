@@ -251,6 +251,9 @@ importers:
         specifier: ^0.187.0
         version: 0.187.0
     devDependencies:
+      '@kiboar/design':
+        specifier: workspace:*
+        version: link:../packages/design
       '@playwright/test':
         specifier: 'catalog:'
         version: 1.65.1
