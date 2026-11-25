@@ -2,6 +2,7 @@
 @import "fumadocs-ui/css/generated/spacious.css";
 @import "fumadocs-ui/css/neutral.css";
 @import "fumadocs-ui/css/preset.css";
+@import "@kiboar/design/tokens.css";
 
 html {
   scrollbar-gutter: stable;
@@ -56,4 +57,27 @@ kiboar-model {
 
 kiboar-model[compact] {
   height: 14rem;
+}
+
+/* One theme: the Kiboar one. The docs keep the Fumadocs structure and the
+   components, but not its neutral light palette. */
+html.dark {
+  color-scheme: dark;
+  --color-fd-background: var(--kiboar-bg);
+  --color-fd-foreground: #e4e4e7;
+  --color-fd-muted: #18181b;
+  --color-fd-muted-foreground: #a1a1aa;
+  --color-fd-popover: var(--kiboar-surface);
+  --color-fd-popover-foreground: #e4e4e7;
+  --color-fd-card: var(--kiboar-surface);
+  --color-fd-card-foreground: #f4f4f5;
+  --color-fd-border: rgba(255, 255, 255, 0.08);
+  --color-fd-primary: var(--kiboar-accent);
+  --color-fd-primary-foreground: var(--kiboar-bg);
+  --color-fd-secondary: #18181b;
+  --color-fd-secondary-foreground: #e4e4e7;
+  --color-fd-accent: #27272a;
+  --color-fd-accent-foreground: #f4f4f5;
+  --color-fd-ring: var(--kiboar-accent);
+  --color-fd-overlay: rgba(0, 0, 0, 0.6);
 }

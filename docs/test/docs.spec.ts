@@ -39,3 +39,26 @@ test("the home loads without failed assets", async ({ page }) => {
   await page.goto("/docs", { waitUntil: "networkidle" });
   expect(failed).toEqual([]);
 });
+
+test("the docs use only the Kiboar dark theme", async ({ page }) => {
+  await page.goto("/docs");
+
+  const theme = await page.evaluate(() => ({
+    htmlClass: document.documentElement.className,
+    colorScheme: getComputedStyle(document.documentElement).colorScheme,
+    background: getComputedStyle(document.body).backgroundColor,
+    primary: getComputedStyle(document.documentElement)
+      .getPropertyValue("--color-fd-primary")
+      .trim(),
+  }));
+
+  expect(theme.htmlClass).toContain("dark");
+  expect(theme.colorScheme).toBe("dark");
+  expect(theme.background).toBe("rgb(10, 11, 13)");
+  expect(theme.primary).toBe("#bef264");
+  expect(await page.getByRole("button", { name: /theme|light mode/i }).count()).toBe(0);
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/docs");
+  expect(await page.getByRole("button", { name: /toggle theme/i }).count()).toBe(0);
+});
