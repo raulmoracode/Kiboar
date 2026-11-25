@@ -31,6 +31,7 @@
     "@types/mdx": "^2.0.14",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
+    "@types/jsdom": "^28.0.3",
     "@types/three": "^0.187.0",
     "tailwindcss": "catalog:",
     "typescript": "catalog:",
