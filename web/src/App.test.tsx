@@ -15,10 +15,10 @@ beforeEach(() => {
 afterEach(() => visit("/"));
 
 describe("the app", () => {
-  it("renders the six keyboard destinations and the six links", () => {
+  it("renders the six keyboard destinations and the four live links", () => {
     const { container } = render(<App />);
     expect(container.querySelectorAll("svg a")).toHaveLength(6);
-    expect(screen.getAllByRole("link")).toHaveLength(12);
+    expect(screen.getAllByRole("link")).toHaveLength(10);
   });
 
   it("opens a product page from a keyboard key", () => {

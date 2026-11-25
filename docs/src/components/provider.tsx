@@ -19,6 +19,7 @@ export function Provider({ lang, pathname, params, children }: ProviderProps) {
       params={params}
       navigate={navigate}
       i18n={i18nProvider(translations, lang)}
+      theme={{ defaultTheme: "dark", forcedTheme: "dark", enableSystem: false, hotKey: false }}
       search={{ SearchDialog }}
     >
       {children}

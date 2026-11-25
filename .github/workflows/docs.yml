@@ -72,3 +72,12 @@ jobs:
 
       - name: Output exists
         run: test -f docs/dist/docs/index.html
+
+      - name: Unit tests
+        run: pnpm --filter kiboar-docs test
+
+      - name: Install Chromium
+        run: pnpm --filter kiboar-docs exec playwright install --with-deps chromium
+
+      - name: End-to-end tests
+        run: pnpm --filter kiboar-docs test:e2e

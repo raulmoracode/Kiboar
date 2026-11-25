@@ -8,7 +8,8 @@
     "dev": "medusa develop",
     "build": "medusa build",
     "start": "medusa start",
-    "db:migrate": "medusa db:migrate"
+    "db:migrate": "medusa db:migrate",
+    "test": "vitest run"
   },
   "dependencies": {
     "@medusajs/admin-sdk": "2.23.0",
@@ -27,13 +28,15 @@
   },
   "devDependencies": {
     "@swc/core": "^1.7.28",
-    "@types/node": "^22.0.0",
+    "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
     "ts-node": "^10.9.2",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "@playwright/test": "catalog:",
+    "vitest": "catalog:"
   },
   "engines": {
     "node": ">=22.23.4"

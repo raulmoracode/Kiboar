@@ -57,6 +57,11 @@ jobs:
       - name: Lint
         run: pnpm exec biome check shop
 
+      - name: Unit tests
+        run: |
+          pnpm --filter @kiboar/shop test
+          pnpm --filter @kiboar/storefront test
+
       - name: Build without a database
         run: pnpm --filter @kiboar/shop build
 

@@ -1,4 +1,4 @@
-import { PageHeader } from "../components/PageHeader";
+import { LandingLayout } from "../components/LandingLayout";
 
 const PCM = "https://kiboar.raulmoracode.com/docs/install/pcm";
 const CLONE = "https://kiboar.raulmoracode.com/docs/install/clone";
@@ -13,25 +13,15 @@ const STATS = [
   ["3D models", "89"],
 ] as const;
 
-export function LibraryPage({ onHome }: { onHome: () => void }) {
+export function LibraryPage({ onNavigate }: { onNavigate: (href: string) => void }) {
   return (
-    <div className="mx-auto w-full max-w-[760px] px-6 py-10 sm:px-10 sm:py-14">
-      <PageHeader
-        section="Library"
-        onHome={onHome}
-        right={
-          <a
-            href={NOTICE}
-            target="_blank"
-            rel="noreferrer"
-            className="text-[12px] text-zinc-500 transition-colors hover:text-zinc-200"
-          >
-            NOTICE
-          </a>
-        }
-      />
-
-      <section aria-labelledby="library-title" className="mt-20">
+    <LandingLayout
+      title="Library"
+      word="Library"
+      keyboardLabel="Library keyboard"
+      onNavigate={onNavigate}
+    >
+      <section aria-labelledby="library-title">
         <p className="font-mono text-[10px] tracking-[0.16em] text-zinc-500 uppercase">
           KiCad 10 · MIT
         </p>
@@ -117,6 +107,6 @@ export function LibraryPage({ onHome }: { onHome: () => void }) {
           NOTICE
         </a>
       </footer>
-    </div>
+    </LandingLayout>
   );
 }

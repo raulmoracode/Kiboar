@@ -6,10 +6,13 @@ Tailwind 4 single page application.
 
 **Status: brand page and product pages.** The home page draws the word Kiboar on
 the keyboard. Each letter opens one destination — Keyboards, Library, Shop,
-Studio, Docs and GitHub — and pressing the letter does the same. Keyboards,
-Library and Studio open the local pages in the same tab; the rest open in a new
-tab. It does not replace the docs or the shop. The storefront in `shop/` reads
-Medusa; `web` does not call the Store API.
+Studio, Docs and GitHub — and pressing the letter does the same on every page.
+Keyboards, Library and Studio are the same layout with their own name on the
+keyboard, a scroll cue and their detail below the first screen; the keyboard and
+links keep the home position. On those pages the link for the current page
+becomes Home, and its letter returns home. The rest open in a new tab. It does
+not replace the docs or the shop. The storefront in `shop/` reads Medusa; `web`
+does not call the Store API.
 
 ## Development
 
@@ -31,7 +34,7 @@ allows in `STORE_CORS`.
 index.html              Vite entry
 src/main.tsx            React root
 src/App.tsx             the router and keyboard shortcuts
-src/components/         Keyboard, LandingLayout, PageHeader, ProductLinks
+src/components/         Keyboard, LandingLayout, ProductLinks
 src/data/               boards and products
 src/lib/                shared link helpers
 src/pages/              Home, Keyboards, Library, Studio and 404 pages

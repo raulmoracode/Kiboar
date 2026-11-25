@@ -4,16 +4,20 @@ import { describe, expect, it, vi } from "vitest";
 import { ProductLinks } from "./ProductLinks";
 
 describe("the product links", () => {
-  it("renders the six destinations", () => {
+  it("renders the four live destinations", () => {
     render(<ProductLinks onNavigate={vi.fn()} />);
-    expect(screen.getAllByRole("link")).toHaveLength(6);
+    expect(screen.getAllByRole("link")).toHaveLength(4);
   });
 
-  it("opens the external destinations in a new tab", () => {
+  it("marks the destinations that are not live as unavailable", () => {
+    render(<ProductLinks onNavigate={vi.fn()} />);
+    expect(screen.getByText("Shop").closest("span[aria-disabled]")).not.toBeNull();
+    expect(screen.getByText("Docs").closest("span[aria-disabled]")).not.toBeNull();
+  });
+
+  it("opens the external destination in a new tab", () => {
     const { container } = render(<ProductLinks onNavigate={vi.fn()} />);
     const link = (href: string) => container.querySelector(`a[href="${href}"]`);
-    expect(link("/shop")?.getAttribute("target")).toBe("_blank");
-    expect(link("https://kiboar.raulmoracode.com/docs")?.getAttribute("target")).toBe("_blank");
     expect(link("https://github.com/raulmoracode/Kiboar")?.getAttribute("target")).toBe("_blank");
   });
 
