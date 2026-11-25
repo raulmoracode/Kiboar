@@ -28,6 +28,22 @@ pnpm --filter @kiboar/shop db:migrate
 pnpm --filter @kiboar/shop dev
 ```
 
+### Local database
+
+If PostgreSQL is not already running, the repository ships a compose file whose
+defaults match `shop/.env.template`:
+
+```bash
+docker compose -f shop/docker-compose.yml up -d --wait
+docker compose -f shop/docker-compose.yml down      # stop, keep the data
+docker compose -f shop/docker-compose.yml down -v   # stop and delete the data
+```
+
+Use `docker-compose` instead of `docker compose` when your installation only
+ships the standalone binary. Override `POSTGRES_USER`, `POSTGRES_PASSWORD`,
+`POSTGRES_DB` or `POSTGRES_PORT` in the environment if you need different
+credentials; the URL in `shop/.env` must match.
+
 The API runs at <http://localhost:9000> and the admin dashboard at
 <http://localhost:9000/app>. The first launch asks you to create an admin user.
 
