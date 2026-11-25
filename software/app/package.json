@@ -30,6 +30,10 @@
     "@kiboar/vite-config": "workspace:*",
     "@kiboar/tsconfig": "workspace:*",
     "@playwright/test": "catalog:",
+    "@testing-library/dom": "catalog:",
+    "@testing-library/react": "catalog:",
+    "axe-core": "catalog:",
+    "jsdom": "catalog:",
     "vitest": "catalog:"
   }
 }
