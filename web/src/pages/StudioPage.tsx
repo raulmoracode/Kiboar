@@ -5,6 +5,8 @@ const DMG =
   "https://github.com/raulmoracode/Kiboar/releases/download/studio-v0.1.0/Kiboar.Studio_0.1.0_aarch64.dmg";
 const SUMS = "https://github.com/raulmoracode/Kiboar/releases/download/studio-v0.1.0/SHA256SUMS";
 const INSTALL = "https://github.com/raulmoracode/Kiboar/blob/main/software/INSTALL.md";
+const DEVELOPMENT =
+  "https://github.com/raulmoracode/Kiboar/blob/main/software/docs/adr/0004-safety-principles-and-contracts.md";
 const SCRIPT =
   "https://raw.githubusercontent.com/raulmoracode/Kiboar/main/software/scripts/install-macos.sh";
 const SOURCE = "https://github.com/raulmoracode/Kiboar/tree/main/software";
@@ -85,6 +87,14 @@ brew install --cask kiboar-studio`}</code>
           0.1 flashes: detect, verify, write, cancel, with partial-file cleanup. Remap, layout and
           the editor come later. Detection and copy are tested; hardware verification is pending.
         </p>
+        <a
+          href={DEVELOPMENT}
+          target="_blank"
+          rel="noreferrer"
+          className="mt-5 inline-block text-[12px] text-zinc-400 underline decoration-white/20 underline-offset-4 hover:text-lime-200"
+        >
+          Scope and safety
+        </a>
 
         <p className="mt-6 flex flex-wrap gap-x-4 gap-y-2 text-[11px] text-zinc-500">
           <a href={SOURCE} target="_blank" rel="noreferrer" className={FOOTER_LINK}>
