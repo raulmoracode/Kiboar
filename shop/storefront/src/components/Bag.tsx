@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { formatPrice, imageUrl, type Price } from "./api";
+import { formatPrice, imageUrl, type Price } from "../lib/api";
 import { productHref } from "./ProductCard";
 
 export interface BagItem {

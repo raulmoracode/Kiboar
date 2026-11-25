@@ -1,4 +1,4 @@
-import type { BagItem } from "./Bag";
+import type { BagItem } from "../components/Bag";
 
 const STORAGE_KEY = "kiboar.bag.v1";
 

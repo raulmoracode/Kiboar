@@ -2,9 +2,8 @@
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import axe from "axe-core";
 import { afterEach, describe, expect, it, vi } from "vitest";
-
-import type { Product } from "./api";
-import { ProductCard } from "./ProductCard";
+import { ProductCard } from "../components/ProductCard";
+import type { Product } from "../lib/api";
 
 const product: Product = {
   id: "prod_1",

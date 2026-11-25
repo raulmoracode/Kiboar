@@ -1,5 +1,5 @@
 import type { MouseEvent } from "react";
-import { formatPrice, imageUrl, type Product, productPrice } from "./api";
+import { formatPrice, imageUrl, type Product, productPrice } from "../lib/api";
 
 export function productHref(handle: string): string {
   return `?p=${encodeURIComponent(handle)}`;

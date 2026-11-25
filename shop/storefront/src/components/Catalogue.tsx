@@ -1,5 +1,5 @@
 import { home } from "@kiboar/links";
-import type { Product } from "./api";
+import type { Product } from "../lib/api";
 import { ProductCard } from "./ProductCard";
 
 export type CatalogueState =
