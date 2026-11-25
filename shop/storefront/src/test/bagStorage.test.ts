@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import type { BagItem } from "./Bag";
-import { loadBag, saveBag } from "./bagStorage";
+import type { BagItem } from "../components/Bag";
+import { loadBag, saveBag } from "../lib/bagStorage";
 
 const STORAGE_KEY = "kiboar.bag.v1";
 const store = new Map<string, string>();

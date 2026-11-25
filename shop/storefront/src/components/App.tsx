@@ -7,9 +7,9 @@ import {
   type Region,
   type Variant,
   variantPrice,
-} from "./api";
+} from "../lib/api";
+import { loadBag, saveBag } from "../lib/bagStorage";
 import { Bag, type BagItem } from "./Bag";
-import { loadBag, saveBag } from "./bagStorage";
 import { Catalogue, type CatalogueState } from "./Catalogue";
 import { ProductPage } from "./ProductPage";
 
