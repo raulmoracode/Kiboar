@@ -8,7 +8,7 @@ import {
   type Product,
   type Variant,
   variantPrice,
-} from "./api";
+} from "../lib/api";
 import { ProductCard } from "./ProductCard";
 
 type State =

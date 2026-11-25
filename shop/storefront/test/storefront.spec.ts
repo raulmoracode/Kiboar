@@ -1,5 +1,5 @@
 import { expect, type Page, test } from "@playwright/test";
-import type { Product } from "../src/api";
+import type { Product } from "../src/lib/api";
 
 const pageSize = 12;
 
