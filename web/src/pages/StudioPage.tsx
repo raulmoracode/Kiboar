@@ -25,9 +25,7 @@ export function StudioPage({ onNavigate }: { onNavigate: (href: string) => void 
       onNavigate={onNavigate}
     >
       <section aria-labelledby="studio-title" className="border-t border-white/[0.07] pt-10">
-        <p className="font-mono text-[10px] tracking-[0.16em] text-zinc-500 uppercase">
-          macOS · flasher · 0.1.0
-        </p>
+        <p className="kiboar-eyebrow">macOS · flasher · 0.1.0</p>
         <h1
           id="studio-title"
           className="mt-3 text-[26px] leading-tight font-medium tracking-[-0.01em] text-zinc-100"
@@ -40,12 +38,7 @@ export function StudioPage({ onNavigate }: { onNavigate: (href: string) => void 
         </p>
 
         <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
-          <a
-            href={DMG}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex h-9 items-center rounded bg-zinc-100 px-4 text-[12px] font-medium text-[var(--kiboar-bg)] transition-colors hover:bg-lime-200"
-          >
+          <a href={DMG} target="_blank" rel="noreferrer" className="kiboar-button-primary">
             Download for macOS
           </a>
           <a

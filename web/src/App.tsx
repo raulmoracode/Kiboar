@@ -66,7 +66,7 @@ export default function App() {
 
   if (path === "/studio") {
     return (
-      <main className="min-h-screen bg-[var(--kiboar-bg)] text-zinc-200">
+      <main className="kiboar-shell">
         <StudioPage onNavigate={navigate} />
       </main>
     );
@@ -74,7 +74,7 @@ export default function App() {
 
   if (path === "/library") {
     return (
-      <main className="min-h-screen bg-[var(--kiboar-bg)] text-zinc-200">
+      <main className="kiboar-shell">
         <LibraryPage onNavigate={navigate} />
       </main>
     );
@@ -82,7 +82,7 @@ export default function App() {
 
   if (path === "/keyboards") {
     return (
-      <main className="min-h-screen bg-[var(--kiboar-bg)] text-zinc-200">
+      <main className="kiboar-shell">
         <KeyboardsPage onNavigate={navigate} />
       </main>
     );
@@ -90,14 +90,14 @@ export default function App() {
 
   if (path !== "/") {
     return (
-      <main className="min-h-screen bg-[var(--kiboar-bg)] text-zinc-200">
+      <main className="kiboar-shell">
         <NotFoundPage onNavigate={navigate} />
       </main>
     );
   }
 
   return (
-    <main className="min-h-screen bg-[var(--kiboar-bg)] text-zinc-200">
+    <main className="kiboar-shell">
       <HomePage onNavigate={navigate} />
     </main>
   );

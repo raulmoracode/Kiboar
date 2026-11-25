@@ -1,2 +1,29 @@
 @import "tailwindcss";
 @import "./base.css";
+
+@layer components {
+  /* The page shell every route in the three apps starts from. */
+  .kiboar-shell {
+    @apply min-h-screen bg-[var(--kiboar-bg)] text-zinc-200;
+  }
+
+  /* The mono label above a section title. */
+  .kiboar-eyebrow {
+    @apply font-mono text-[10px] tracking-[0.16em] text-zinc-500 uppercase;
+  }
+
+  /* The translucent card used by boards, products and keyboards. */
+  .kiboar-card {
+    @apply rounded-lg border border-white/[0.06] bg-white/[0.015];
+  }
+
+  /* The light call to action. */
+  .kiboar-button-primary {
+    @apply inline-flex h-9 items-center rounded bg-zinc-100 px-4 text-[12px] font-medium text-[var(--kiboar-bg)] transition-colors hover:bg-lime-200;
+  }
+
+  /* The muted underlined link; colour and size stay at the call site. */
+  .kiboar-link {
+    @apply underline decoration-white/20 underline-offset-4 transition-colors hover:text-lime-200;
+  }
+}

@@ -32,7 +32,7 @@ function MatrixPreview({ board }: { board: OpenBoard }) {
 
 function BoardCard({ board }: { board: OpenBoard }) {
   return (
-    <article className="flex h-full flex-col rounded-lg border border-white/[0.06] bg-white/[0.015] p-4">
+    <article className="flex h-full flex-col kiboar-card p-4">
       <div className="flex items-baseline justify-between gap-4">
         <h2 className="min-w-0 truncate text-[14px] text-zinc-100">{board.name}</h2>
         <span className="shrink-0 font-mono text-[10px] text-zinc-600">rev{board.revision}</span>
@@ -86,9 +86,7 @@ export function KeyboardsPage({ onNavigate }: { onNavigate: (href: string) => vo
       wide
     >
       <section aria-labelledby="keyboards-title">
-        <p className="font-mono text-[10px] tracking-[0.16em] text-zinc-500 uppercase">
-          Open hardware · {boards.length} board definitions
-        </p>
+        <p className="kiboar-eyebrow">Open hardware · {boards.length} board definitions</p>
         <h1
           id="keyboards-title"
           className="mt-3 text-[28px] leading-tight font-medium tracking-[-0.01em] text-zinc-100"

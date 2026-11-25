@@ -22,9 +22,7 @@ export function LibraryPage({ onNavigate }: { onNavigate: (href: string) => void
       onNavigate={onNavigate}
     >
       <section aria-labelledby="library-title">
-        <p className="font-mono text-[10px] tracking-[0.16em] text-zinc-500 uppercase">
-          KiCad 10 · MIT
-        </p>
+        <p className="kiboar-eyebrow">KiCad 10 · MIT</p>
         <h1
           id="library-title"
           className="mt-3 text-[28px] leading-tight font-medium tracking-[-0.01em] text-zinc-100"
@@ -37,19 +35,14 @@ export function LibraryPage({ onNavigate }: { onNavigate: (href: string) => void
         </p>
 
         <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3">
-          <a
-            href={PCM}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex h-9 items-center rounded bg-zinc-100 px-4 text-[12px] font-medium text-[var(--kiboar-bg)] transition-colors hover:bg-lime-200"
-          >
+          <a href={PCM} target="_blank" rel="noreferrer" className="kiboar-button-primary">
             Install with PCM
           </a>
           <a
             href={CLONE}
             target="_blank"
             rel="noreferrer"
-            className="text-[12px] text-zinc-400 underline decoration-white/20 underline-offset-4 transition-colors hover:text-lime-200"
+            className="text-[12px] text-zinc-400 kiboar-link"
           >
             Clone install
           </a>
@@ -71,10 +64,7 @@ export function LibraryPage({ onNavigate }: { onNavigate: (href: string) => void
       </dl>
 
       <section aria-labelledby="library-scope-title" className="mt-12">
-        <h2
-          id="library-scope-title"
-          className="font-mono text-[10px] tracking-[0.16em] text-zinc-500 uppercase"
-        >
+        <h2 id="library-scope-title" className="kiboar-eyebrow">
           Scope
         </h2>
         <p className="mt-4 max-w-[560px] text-[13px] leading-relaxed text-zinc-400">
@@ -90,7 +80,7 @@ export function LibraryPage({ onNavigate }: { onNavigate: (href: string) => void
           href={LICENSING}
           target="_blank"
           rel="noreferrer"
-          className="mt-5 inline-block text-[12px] text-zinc-400 underline decoration-white/20 underline-offset-4 hover:text-lime-200"
+          className="mt-5 inline-block text-[12px] text-zinc-400 kiboar-link"
         >
           Licensing
         </a>
