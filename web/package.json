@@ -6,20 +6,27 @@
     "dev": "vite",
     "build": "vite build",
     "typecheck": "tsc --noEmit",
-    "preview": "vite preview"
+    "test": "vitest run",
+    "preview": "vite preview",
+    "test:e2e": "pnpm build && playwright test"
   },
   "dependencies": {
     "react": "catalog:",
     "react-dom": "catalog:"
   },
   "devDependencies": {
-    "@types/react": "catalog:",
-    "@types/react-dom": "catalog:",
     "@kiboar/design": "workspace:*",
     "@kiboar/tsconfig": "workspace:*",
+    "@kiboar/vite-config": "workspace:*",
+    "@playwright/test": "catalog:",
+    "@testing-library/dom": "catalog:",
+    "@testing-library/react": "catalog:",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "jsdom": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",
-    "@kiboar/vite-config": "workspace:*",
-    "@types/node": "catalog:"
+    "vitest": "catalog:"
   }
 }

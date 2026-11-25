@@ -85,3 +85,12 @@ Only contribute work you can license compatibly with this repository.
   PR template points to the checks for each product touched.
 - The PR template asks for the testing evidence. A statement that the lint
   passes is not evidence; paste the command and its result.
+
+## Dependencies
+
+A new or bumped dependency must be at least 24 hours old. The workspace sets
+`minimumReleaseAge: 1440` in `pnpm-workspace.yaml`, so `pnpm install` refuses a
+lockfile entry that is younger than that. When a security fix genuinely needs a
+same-day version, add it to `minimumReleaseAgeExclude` for that one package,
+explain why in the pull request and remove the exception afterwards. Never set
+`trustLockfile: true` to bypass the check.

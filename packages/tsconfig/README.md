@@ -1,10 +1,14 @@
 # @kiboar/tsconfig
 
-The TypeScript options shared by the Kiboar React apps: the browser libraries,
-Bundler resolution, strict mode and the `noUncheckedIndexedAccess` and
-`exactOptionalPropertyTypes` flags the two apps already enforce.
+The TypeScript options shared by the Kiboar apps and Node packages.
+
+- `base.json` — the strict base for Node libraries: ES2022, Bundler resolution,
+  `strict`, `noUncheckedIndexedAccess` and `exactOptionalPropertyTypes`.
+- `react.json` — the base plus the browser libraries, `react-jsx` and `noEmit`.
 
 ## Usage
+
+React apps:
 
 ```json
 {
@@ -16,16 +20,26 @@ Bundler resolution, strict mode and the `noUncheckedIndexedAccess` and
 }
 ```
 
-Keep in the app only what is genuinely per app:
+Node packages:
 
-- `types`, because the storefront includes `node` for its Vite config.
-- `include`, because each app owns its source roots.
+```json
+{
+  "extends": "@kiboar/tsconfig/base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "types": ["node"]
+  },
+  "include": ["src", "test"]
+}
+```
 
-The base does not include a `$schema`-driven `include` or `types`, so the app
-still decides what enters the program.
+Keep in the project only what is genuinely per project:
+
+- `types`, because the storefront and core add `node` for their tooling.
+- `include`, because each project owns its source roots.
 
 ## Boundaries
 
-- No path aliases and no project references yet; both apps have one `src` tree.
-- Node-only packages do not extend this file. Medusa and the library tooling
-  keep their own configuration.
+- No path aliases and no project references yet.
+- Astro (`docs`) extends Astro's own strict config and Medusa (`shop`) needs
+  `Node16` resolution and decorators; neither extends this package.

@@ -87,6 +87,7 @@ export function Docs({
         {...baseOptions(props.lang)}
         tree={data.tree}
         sidebar={{ defaultOpenLevel: 1 }}
+        themeSwitch={{ enabled: false }}
         slots={{ actions: ActionsWithShop }}
       >
         <DocsPage full={full} toc={toc} tableOfContent={{ enabled: true }} className={className}>

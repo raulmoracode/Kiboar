@@ -102,7 +102,7 @@ function layout(): Key[] {
 
 const KEYS = layout();
 
-function Cap({ cap }: { cap: Key }) {
+function Cap({ cap, hint }: { cap: Key; hint?: string }) {
   return (
     <>
       <rect
@@ -131,6 +131,21 @@ function Cap({ cap }: { cap: Key }) {
           {cap.label}
         </text>
       ) : null}
+      {hint ? (
+        <text
+          x={cap.x + cap.w / 2}
+          y={cap.y + 0.52}
+          textAnchor="middle"
+          dominantBaseline="middle"
+          fill="#d4d4d8"
+          fillOpacity={0.9}
+          fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace"
+          fontSize={0.15}
+          letterSpacing={0.02}
+        >
+          {hint}
+        </text>
+      ) : null}
     </>
   );
 }
@@ -138,15 +153,19 @@ function Cap({ cap }: { cap: Key }) {
 export function Keyboard({
   onNavigate,
   word,
+  interactive = true,
+  hint,
 }: {
   onNavigate?: (href: string) => void;
   word?: string;
+  interactive?: boolean;
+  hint?: string;
 }) {
   const wordRow = KEYS.filter((key) => key.y === 2);
   const customLabels = new Map<Key, string>();
 
   if (word) {
-    const letters = Array.from(word.toLowerCase().replace(/\s+/g, ""));
+    const letters = Array.from(word.replace(/\s+/g, ""));
     const start = Math.max(0, Math.round((wordRow.length - letters.length) / 2));
     letters.forEach((letter, index) => {
       const key = wordRow[start + index];
@@ -164,8 +183,25 @@ export function Keyboard({
     >
       {KEYS.map((key) => {
         const label = word ? customLabels.get(key) : key.label;
-        const product = label ? productForKey(label) : undefined;
+        const product = interactive && label ? productForKey(label) : undefined;
         const cap: Key = label ? { ...key, label } : { x: key.x, y: key.y, w: key.w };
+        // The spacebar is the only wide key; the hint sits on it.
+        const capHint = key.w > 4 && hint ? { hint } : {};
+
+        // The wide key carries the "details below" legend; it is the only
+        // interactive key on a page whose words are otherwise inert.
+        if (hint && key.w > 4) {
+          return (
+            <a
+              key={`${key.x}-${key.y}`}
+              href="#details"
+              aria-label="Scroll to the details"
+              className="cursor-pointer"
+            >
+              <Cap cap={cap} {...capHint} />
+            </a>
+          );
+        }
 
         if (product) {
           const internal = product.internal === true;
@@ -189,14 +225,14 @@ export function Keyboard({
               aria-label={internal ? product.name : `${product.name} (opens in a new tab)`}
               className="cursor-pointer"
             >
-              <Cap cap={cap} />
+              <Cap cap={cap} {...capHint} />
             </a>
           );
         }
 
         return (
           <g key={`${key.x}-${key.y}`}>
-            <Cap cap={cap} />
+            <Cap cap={cap} {...capHint} />
           </g>
         );
       })}

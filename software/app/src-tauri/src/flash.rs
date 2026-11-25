@@ -4,6 +4,7 @@ use std::path::{Path, PathBuf};
 use std::sync::atomic::AtomicBool;
 use std::sync::Arc;
 
+use kiboar_device::protocol::is_lowercase_slug;
 use kiboar_flash::{
     sha256_hex, verify_sha256, write_artifact, DigestError, Progress, Uf2, Uf2Error, WriteError,
     RP2040_FAMILY_ID,
@@ -187,7 +188,7 @@ pub fn flash_to_volume(
     uf2.validate_for_family(family)?;
     verify_sha256(&bytes, &request.expected_sha256)?;
 
-    let file_name = format!("kiboar-{board_id}-rev{hw_rev}.uf2");
+    let file_name = artifact_file_name(&board_id, hw_rev)?;
     let path = volume.join(&file_name);
     let mut file = File::create(&path).map_err(FlashError::Write)?;
 
@@ -227,6 +228,17 @@ fn family_for_mcu(mcu: &str) -> Option<u32> {
     }
 }
 
+/// The file name the bootloader volume receives.
+///
+/// The registry is trusted, but `request.board_id` is untrusted IPC input for a
+/// board that is not in the registry, so it is validated again here.
+fn artifact_file_name(board_id: &str, hw_rev: u32) -> Result<String, FlashError> {
+    if !is_lowercase_slug(board_id) {
+        return Err(FlashError::InvalidBoardId(board_id.to_owned()));
+    }
+    Ok(format!("kiboar-{board_id}-rev{hw_rev}.uf2"))
+}
+
 #[cfg(debug_assertions)]
 fn development_volume() -> Option<PathBuf> {
     let path = PathBuf::from(std::env::var_os("KIBOAR_FLASH_VOLUME")?);
@@ -261,6 +273,8 @@ fn default_search_roots() -> Vec<(PathBuf, usize)> {
 pub enum FlashError {
     #[error("the confirmation does not match the board id")]
     ConfirmationMismatch,
+    #[error("the board id {0:?} is not a lowercase slug")]
+    InvalidBoardId(String),
     #[error("the board MCU {0} cannot be flashed")]
     UnsupportedMcu(String),
     #[error("cannot read the board registry: {0}")]
@@ -284,6 +298,7 @@ mod tests {
 
     use kiboar_flash::{
         BLOCK_SIZE, DATA_SIZE, FLAG_FAMILY_ID_PRESENT, MAGIC_END, MAGIC_START0, MAGIC_START1,
+        RP2040_FLASH_START,
     };
 
     fn repo_root() -> PathBuf {
@@ -299,7 +314,8 @@ mod tests {
         raw[0..4].copy_from_slice(&MAGIC_START0.to_le_bytes());
         raw[4..8].copy_from_slice(&MAGIC_START1.to_le_bytes());
         raw[8..12].copy_from_slice(&FLAG_FAMILY_ID_PRESENT.to_le_bytes());
-        raw[12..16].copy_from_slice(&(number * DATA_SIZE as u32).to_le_bytes());
+        raw[12..16]
+            .copy_from_slice(&(RP2040_FLASH_START + number * DATA_SIZE as u32).to_le_bytes());
         raw[16..20].copy_from_slice(&(DATA_SIZE as u32).to_le_bytes());
         raw[20..24].copy_from_slice(&number.to_le_bytes());
         raw[24..28].copy_from_slice(&total.to_le_bytes());
@@ -551,5 +567,31 @@ mod tests {
 
         let found = find_bootloader_volume_in(&[(dir.path().to_path_buf(), 3)]).unwrap();
         assert_eq!(found.path, volume.display().to_string());
+    }
+}
+
+#[cfg(test)]
+mod naming_tests {
+    use super::*;
+
+    #[test]
+    fn rejects_an_unsafe_board_id() {
+        for board_id in ["../../evil", "Kiboar", "kb 60", "", "a"] {
+            assert!(
+                matches!(
+                    artifact_file_name(board_id, 1),
+                    Err(FlashError::InvalidBoardId(_))
+                ),
+                "{board_id:?} should be rejected"
+            );
+        }
+    }
+
+    #[test]
+    fn names_a_known_board() {
+        assert_eq!(
+            artifact_file_name("kb60-hhkb", 2).unwrap(),
+            "kiboar-kb60-hhkb-rev2.uf2"
+        );
     }
 }
