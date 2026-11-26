@@ -31,14 +31,14 @@ export const products: readonly Product[] = [
     name: "Studio",
     href: "/studio",
     line: "Flash and configure.",
-    key: "o",
+    key: "b",
     internal: true,
   },
   {
     name: "Shop",
     href: "/shop",
     line: "Buy one assembled.",
-    key: "b",
+    key: "o",
     // The storefront is not deployed and checkout is not connected.
     disabled: true,
   },
