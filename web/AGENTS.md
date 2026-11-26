@@ -25,6 +25,7 @@ shop is the Medusa application in `shop/`, and this site points at it.
 - `src/data/products.ts` — the six destinations, their key and whether they are internal.
 - `src/lib/links.ts` — the plain-click helper shared by the keyboard and the product links.
 - `src/styles.css` — the shared design entry from `@kiboar/design`.
+- `test/` — the Vitest unit and accessibility tests plus the Playwright end-to-end spec.
 - `vite.config.ts` — the shared `@kiboar/vite-config` setup and port 3000.
 
 ## Rules
@@ -34,8 +35,8 @@ shop is the Medusa application in `shop/`, and this site points at it.
 - **No framework migration without a decision.** Vite and React are the stack;
   switching to another framework is a new issue, not a refactor.
 - **Group by responsibility.** Route pages live in `src/pages/`, shared UI in
-  `src/components/`, static data in `src/data/` and helpers in `src/lib/`. Keep
-  `App.tsx` as the router and `main.tsx` as the entry.
+  `src/components/`, static data in `src/data/`, helpers in `src/lib/` and tests
+  in `test/`. Keep `App.tsx` as the router and `main.tsx` as the entry.
 - **The letter menu is the navigation.** Every destination lives in
   `src/data/products.ts` with its key. On the home page, keep the keys as real
   links inside the SVG. The shortcut handler runs on every page, ignoring

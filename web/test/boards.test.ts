@@ -3,7 +3,7 @@ import { resolve } from "node:path";
 
 import { describe, expect, it } from "vitest";
 
-import { boards } from "./boards";
+import { boards } from "../src/data/boards";
 
 interface BoardDefinition {
   board_id: string;

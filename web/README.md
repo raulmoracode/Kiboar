@@ -39,11 +39,12 @@ src/data/               boards and products
 src/lib/                shared link helpers
 src/pages/              Home, Keyboards, Library, Studio and 404 pages
 src/styles.css          the shared design entry
+test/                   Vitest unit and accessibility tests, Playwright e2e
 vite.config.ts          shared Vite config and port 3000
 ```
 
 Pages live in `src/pages`, shared UI in `src/components`, static data in
-`src/data` and helpers in `src/lib`.
+`src/data`, helpers in `src/lib` and tests in `test/`.
 
 ## Sharing
 
