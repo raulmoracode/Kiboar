@@ -53,6 +53,9 @@ let anyone build the same board, so the shop never gates the design.
   API for the authenticated operations (login and checkout). It never carries a
   secret key. Its non-secret configuration uses `EXPO_PUBLIC_*`; credentials are
   stored in the device keychain.
+- **The POS palette is shared.** Import `kiboarColors` from
+  `@kiboar/design/tokens`; do not copy hex values into `shop/pos`. Only POS
+  spacing, typography and layout belong in the app's theme file.
 - **No secrets.** `.env` stays local; `.env.template` carries placeholders only.
 
 ## Commands

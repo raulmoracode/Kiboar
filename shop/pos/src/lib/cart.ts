@@ -4,6 +4,7 @@ export interface CartLine {
   unitAmount: number;
   currency: string;
   quantity: number;
+  thumbnail?: string | null;
 }
 
 export function addLine(lines: readonly CartLine[], line: Omit<CartLine, "quantity">): CartLine[] {

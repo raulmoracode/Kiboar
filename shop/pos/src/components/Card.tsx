@@ -9,11 +9,11 @@ export function Card({ children }: { children: ReactNode }) {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: colors.surface,
+    backgroundColor: colors.card,
     borderColor: colors.border,
     borderRadius: radius.lg,
     borderWidth: 1,
-    gap: spacing.sm,
-    padding: spacing.md,
+    gap: spacing.md,
+    padding: spacing.lg,
   },
 });

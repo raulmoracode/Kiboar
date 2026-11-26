@@ -2,14 +2,16 @@ import { useRouter } from "expo-router";
 import { useState } from "react";
 import { StyleSheet, Text } from "react-native";
 
+import { AppBar } from "@/components/AppBar";
 import { Button } from "@/components/Button";
 import { Card } from "@/components/Card";
 import { Field } from "@/components/Field";
+import { PageHeader } from "@/components/PageHeader";
 import { Screen } from "@/components/Screen";
 import { MedusaAdminClient } from "@/lib/api";
 import { useAuth } from "@/lib/auth-context";
 import { apiUrl } from "@/lib/config";
-import { colors, fonts, spacing } from "@/theme/tokens";
+import { colors, typography } from "@/theme/tokens";
 
 export default function Login() {
   const router = useRouter();
@@ -41,9 +43,9 @@ export default function Login() {
   if (!ready) {
     return (
       <Screen>
-        <Text style={styles.eyebrow}>Staff access</Text>
-        <Text style={styles.title}>Sign in</Text>
-        <Text style={styles.body}>Checking the saved session…</Text>
+        <AppBar back backTo="/" title="Staff" />
+        <PageHeader eyebrow="Staff access" title="Sign in" />
+        <Text style={typography.body}>Checking the saved session…</Text>
       </Screen>
     );
   }
@@ -51,71 +53,63 @@ export default function Login() {
   if (token) {
     return (
       <Screen>
-        <Text style={styles.eyebrow}>Staff access</Text>
-        <Text style={styles.title}>Signed in</Text>
-        <Text style={styles.body}>The Admin API token is stored on this device.</Text>
-
-        <Button label="Open sales" onPress={() => router.replace("/orders")} />
-        <Button
-          label="Sign out"
-          variant="ghost"
-          onPress={() => {
-            void signOut();
-            setPassword("");
-          }}
+        <AppBar back backTo="/" title="Staff" />
+        <PageHeader
+          eyebrow="Staff access"
+          subtitle="The Admin API token is stored on this device."
+          title="Signed in"
         />
+
+        <Card>
+          <Text style={typography.eyebrow}>Session</Text>
+          <Text style={styles.value}>Active</Text>
+          <Text style={typography.small}>
+            Sign out on a shared till or when the device changes hands.
+          </Text>
+          <Button label="Open sales" onPress={() => router.replace("/orders")} />
+          <Button label="Sign out" variant="ghost" onPress={() => void signOut()} />
+        </Card>
       </Screen>
     );
   }
 
   return (
     <Screen>
-      <Text style={styles.eyebrow}>Staff access</Text>
-      <Text style={styles.title}>Sign in</Text>
-      <Text style={styles.body}>Backend: {apiUrl}</Text>
+      <AppBar back backTo="/" title="Staff" />
+      <PageHeader
+        eyebrow="Staff access"
+        subtitle="Use the Medusa admin account for the shop."
+        title="Sign in"
+      />
 
       <Card>
         <Field
-          label="Email"
-          value={email}
-          onChangeText={setEmail}
-          keyboardType="email-address"
           autoCapitalize="none"
+          keyboardType="email-address"
+          label="Email"
+          onChangeText={setEmail}
+          value={email}
         />
-        <Field label="Password" value={password} onChangeText={setPassword} secureTextEntry />
+        <Field label="Password" onChangeText={setPassword} secureTextEntry value={password} />
       </Card>
 
       {error ? <Text style={styles.error}>{error}</Text> : null}
 
       <Button
+        disabled={submitting || !email.trim() || password.length === 0}
         label={submitting ? "Signing in…" : "Sign in"}
         onPress={() => void submit()}
-        disabled={submitting || !email.trim() || password.length === 0}
       />
-      <Text style={styles.note}>
-        The token goes to expo-secure-store (memory in the web preview). Use an admin user created
-        with `medusa user`.
+
+      <Text style={typography.small}>
+        Backend: {apiUrl}. The token goes to expo-secure-store on a device and stays in memory in
+        the web preview.
       </Text>
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  eyebrow: {
-    color: colors.faint,
-    fontFamily: fonts.mono,
-    fontSize: 10,
-    letterSpacing: 1.6,
-    textTransform: "uppercase",
-  },
-  title: { color: colors.text, fontFamily: fonts.sans, fontSize: 32, fontWeight: "500" },
-  body: { color: colors.muted, fontFamily: fonts.sans, fontSize: 13 },
-  error: { color: colors.danger, fontFamily: fonts.sans, fontSize: 13 },
-  note: {
-    color: colors.faint,
-    fontFamily: fonts.sans,
-    fontSize: 12,
-    lineHeight: 18,
-    marginTop: spacing.sm,
-  },
+  value: { color: colors.text, fontFamily: typography.mono.fontFamily, fontSize: 13 },
+  error: { color: colors.danger, fontFamily: typography.body.fontFamily, fontSize: 13 },
 });

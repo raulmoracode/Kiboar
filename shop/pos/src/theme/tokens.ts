@@ -1,18 +1,7 @@
-import { Platform } from "react-native";
+import { kiboarColors } from "@kiboar/design/tokens";
+import { Platform, type TextStyle } from "react-native";
 
-export const colors = {
-  background: "#0a0b0d",
-  surface: "#0c0e11",
-  elevated: "#111318",
-  border: "rgba(255, 255, 255, 0.08)",
-  borderStrong: "rgba(255, 255, 255, 0.16)",
-  text: "#e4e4e7",
-  muted: "#a1a1aa",
-  faint: "#71717a",
-  accent: "#bef264",
-  accentText: "#0a0b0d",
-  danger: "#f87171",
-} as const;
+export const colors = kiboarColors;
 
 export const spacing = {
   xs: 4,
@@ -20,12 +9,14 @@ export const spacing = {
   md: 16,
   lg: 24,
   xl: 32,
+  xxl: 48,
 } as const;
 
 export const radius = {
-  sm: 4,
-  md: 8,
-  lg: 12,
+  sm: 6,
+  md: 10,
+  lg: 14,
+  pill: 999,
 } as const;
 
 export const fonts = {
@@ -34,4 +25,61 @@ export const fonts = {
     Platform.select({ ios: "Menlo", android: "monospace", default: "monospace" }) ?? "monospace",
 } as const;
 
-export const theme = { colors, spacing, radius, fonts } as const;
+export const typography = {
+  /** The mono label above a title, the same as `kiboar-eyebrow` on the web. */
+  eyebrow: {
+    color: colors.faint,
+    fontFamily: fonts.mono,
+    fontSize: 10,
+    letterSpacing: 1.6,
+    textTransform: "uppercase",
+  },
+  display: {
+    color: colors.textStrong,
+    fontFamily: fonts.sans,
+    fontSize: 34,
+    fontWeight: "500",
+    letterSpacing: -0.6,
+    lineHeight: 40,
+  },
+  title: {
+    color: colors.textStrong,
+    fontFamily: fonts.sans,
+    fontSize: 24,
+    fontWeight: "500",
+    letterSpacing: -0.3,
+    lineHeight: 30,
+  },
+  body: {
+    color: colors.muted,
+    fontFamily: fonts.sans,
+    fontSize: 14,
+    lineHeight: 21,
+  },
+  small: {
+    color: colors.faint,
+    fontFamily: fonts.sans,
+    fontSize: 12,
+    lineHeight: 18,
+  },
+  mono: {
+    color: colors.text,
+    fontFamily: fonts.mono,
+    fontSize: 12,
+  },
+  amount: {
+    color: colors.textStrong,
+    fontFamily: fonts.mono,
+    fontSize: 40,
+    fontWeight: "500",
+    letterSpacing: -1,
+    lineHeight: 46,
+  },
+} satisfies Record<string, TextStyle>;
+
+export const layout = {
+  maxWidth: 1120,
+  gutter: 20,
+} as const;
+
+export const theme = { colors, spacing, radius, fonts, typography, layout } as const;

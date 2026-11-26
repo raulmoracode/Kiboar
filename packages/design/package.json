@@ -7,14 +7,19 @@
   "exports": {
     "./app.css": "./app.css",
     "./base.css": "./base.css",
-    "./tokens.css": "./tokens.css"
+    "./tokens.css": "./tokens.css",
+    "./tokens": "./tokens.js"
   },
   "files": [
     "app.css",
     "base.css",
-    "tokens.css"
+    "tokens.css",
+    "tokens.js",
+    "tokens.d.ts"
   ],
   "dependencies": {
     "tailwindcss": "catalog:"
-  }
+  },
+  "main": "./tokens.js",
+  "types": "./tokens.d.ts"
 }

@@ -16,6 +16,8 @@ yet.
 - Expo SDK 58, React Native 0.88, React 19 (workspace catalog) and Expo Router.
 - TypeScript strict, Biome for formatting/lint, Jest + React Native Testing
   Library for unit tests.
+- The palette comes from `@kiboar/design/tokens`; only POS spacing, typography
+  and layout live in `shop/pos/src/theme/tokens.ts`.
 - It is a third application of the shop product, next to the Medusa service and
   `shop/storefront`; it reads the catalogue from the Store API with the POS
   publishable key and uses the Admin API for authenticated staff operations.
