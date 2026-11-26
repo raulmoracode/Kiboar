@@ -11,6 +11,7 @@ import { colors, fonts, spacing } from "@/theme/tokens";
 export default function Cart() {
   const router = useRouter();
   const cart = useCart();
+  const currency = cart.lines[0]?.currency ?? "EUR";
 
   return (
     <Screen>
@@ -47,7 +48,7 @@ export default function Cart() {
 
       <View style={styles.totalRow}>
         <Text style={styles.totalLabel}>Total</Text>
-        <Text style={styles.total}>{formatMoney(cart.total, "EUR")}</Text>
+        <Text style={styles.total}>{formatMoney(cart.total, currency)}</Text>
       </View>
 
       <Button

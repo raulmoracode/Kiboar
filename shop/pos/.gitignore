@@ -1,3 +1,7 @@
 .expo/
 dist/
 *.log
+
+# Local Expo environment
+.env
+.env.local

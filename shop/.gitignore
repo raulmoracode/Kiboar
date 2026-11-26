@@ -11,3 +11,6 @@ static/
 # Local npm output
 node_modules/
 dist/
+
+# Local seed output with the generated publishable keys
+seed-output.json

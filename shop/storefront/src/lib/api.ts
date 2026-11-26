@@ -3,10 +3,16 @@ export interface Price {
   currency_code: string;
 }
 
+export interface CalculatedPrice {
+  calculated_amount: number;
+  currency_code: string;
+}
+
 export interface Variant {
   id: string;
   title: string;
   prices?: Price[];
+  calculated_price?: CalculatedPrice | null;
   manage_inventory?: boolean;
   allow_backorder?: boolean;
   inventory_quantity?: number | null;
@@ -42,7 +48,7 @@ const BASE_URL = (import.meta.env.VITE_MEDUSA_URL ?? "http://localhost:9000").re
 const PUBLISHABLE_KEY = import.meta.env.VITE_MEDUSA_PUBLISHABLE_KEY ?? "";
 
 const FIELDS =
-  "id,title,handle,description,thumbnail,*images,*variants,*variants.prices,*variants.inventory_quantity";
+  "id,title,handle,description,thumbnail,*images,*variants,*variants.prices,*variants.calculated_price,*variants.inventory_quantity";
 
 export const PAGE_SIZE = 12;
 
@@ -107,6 +113,16 @@ export async function getProduct(handle: string, regionId?: string): Promise<Pro
 }
 
 export function variantPrice(variant: Variant | undefined, currency?: string): Price | null {
+  const calculated = variant?.calculated_price;
+  if (calculated) {
+    if (!currency || calculated.currency_code.toLowerCase() === currency.toLowerCase()) {
+      return {
+        amount: calculated.calculated_amount,
+        currency_code: calculated.currency_code,
+      };
+    }
+  }
+
   const prices = variant?.prices ?? [];
 
   if (currency) {
@@ -147,7 +163,7 @@ export function formatPrice(price: Price | null): string {
   return new Intl.NumberFormat(locale, {
     style: "currency",
     currency: price.currency_code.toUpperCase(),
-  }).format(price.amount / 100);
+  }).format(price.amount);
 }
 
 export function imageUrl(thumbnail: string | null): string | null {

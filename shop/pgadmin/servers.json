@@ -1,0 +1,14 @@
+{
+  "Servers": {
+    "1": {
+      "Name": "Kiboar shop (local)",
+      "Group": "Servers",
+      "Host": "postgres",
+      "Port": 5432,
+      "MaintenanceDB": "kiboar-shop",
+      "Username": "kiboar",
+      "Password": "kiboar",
+      "SSLMode": "prefer"
+    }
+  }
+}

@@ -19,8 +19,8 @@ function makeProduct(index: number): Product {
         allow_backorder: false,
         inventory_quantity: 5,
         prices: [
-          { amount: 10000 + (index - 1) * 100, currency_code: "eur" },
-          { amount: 12000 + (index - 1) * 100, currency_code: "usd" },
+          { amount: 100 + (index - 1), currency_code: "eur" },
+          { amount: 120 + (index - 1), currency_code: "usd" },
         ],
       },
     ],

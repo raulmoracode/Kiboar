@@ -11,7 +11,7 @@ const product: Product = {
   handle: "kiboar-60",
   description: null,
   thumbnail: null,
-  variants: [{ id: "var_1", title: "Default", prices: [{ amount: 18900, currency_code: "eur" }] }],
+  variants: [{ id: "var_1", title: "Default", prices: [{ amount: 189, currency_code: "eur" }] }],
 };
 
 afterEach(cleanup);
