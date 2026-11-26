@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { type ReactNode, useEffect } from "react";
 import { Keyboard } from "./Keyboard";
 import { ProductLinks } from "./ProductLinks";
 
@@ -17,6 +17,24 @@ export function LandingLayout({
   children?: ReactNode;
   wide?: boolean;
 }) {
+  useEffect(() => {
+    if (!children) {
+      return;
+    }
+
+    function scrollToDetails() {
+      if (window.location.hash === "#details") {
+        document.getElementById("details")?.scrollIntoView();
+      }
+    }
+
+    // The section mounts after the first paint, so the browser cannot perform
+    // its own hash scroll on a direct load or a refresh.
+    scrollToDetails();
+    window.addEventListener("hashchange", scrollToDetails);
+    return () => window.removeEventListener("hashchange", scrollToDetails);
+  }, [children]);
+
   return (
     <>
       <div className="relative mx-auto flex min-h-screen w-full max-w-[1180px] flex-col px-6 py-10 sm:px-10 sm:py-14">
