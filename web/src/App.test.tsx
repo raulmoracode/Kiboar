@@ -68,6 +68,17 @@ describe("the app", () => {
     expect(window.location.pathname).toBe("/");
   });
 
+  it("keeps the scroll position between detail pages", () => {
+    visit("/keyboards");
+    Object.defineProperty(window, "scrollY", { configurable: true, value: 300 });
+
+    render(<App />);
+    fireEvent.keyDown(window, { key: "i" });
+
+    expect(window.location.pathname).toBe("/library");
+    expect(window.scrollTo).not.toHaveBeenCalled();
+  });
+
   it("renders the 404 for an unknown route", () => {
     visit("/missing");
     render(<App />);

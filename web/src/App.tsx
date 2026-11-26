@@ -10,6 +10,8 @@ function pathFromLocation(): string {
   return window.location.pathname.replace(/\/+$/, "") || "/";
 }
 
+const DETAIL_PATHS = new Set(["/keyboards", "/library", "/studio"]);
+
 export default function App() {
   const [path, setPath] = useState(pathFromLocation);
   const navigation = useRef(0);
@@ -24,10 +26,12 @@ export default function App() {
     return () => window.removeEventListener("popstate", onPopState);
   }, []);
 
-  const commit = useCallback((href: string) => {
+  const commit = useCallback((href: string, keepScroll = false) => {
     window.history.pushState({}, "", href);
     setPath(pathFromLocation());
-    window.scrollTo({ top: 0, behavior: "instant" });
+    if (!keepScroll) {
+      window.scrollTo({ top: 0, behavior: "instant" });
+    }
   }, []);
 
   const navigate = useCallback(
@@ -37,7 +41,7 @@ export default function App() {
 
       if (!leavingForHome) {
         navigation.current += 1;
-        commit(href);
+        commit(href, DETAIL_PATHS.has(path) && DETAIL_PATHS.has(target) && window.scrollY > 0);
         return;
       }
 
