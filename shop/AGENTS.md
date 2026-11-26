@@ -23,7 +23,7 @@ let anyone build the same board, so the shop never gates the design.
 - `src/admin/` — admin customizations, when they exist.
 - `storefront/` — the customer-facing Vite app, served under `/shop`.
 - `pos/` — the Expo/React Native POS scaffold; it is not part of `medusa build`
-  and has its own `shop-pos` CI workflow.
+  (the Medusa `tsconfig.json` excludes it) and has its own `shop-pos` CI workflow.
 - `.env.template` — the variables a local `.env` needs. Never commit `.env`.
 
 ## Rules

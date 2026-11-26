@@ -22,7 +22,10 @@
   "ts-node": {
     "swc": true
   },
-  "include": ["**/*", ".medusa/types/*"],
+  "include": [
+    "**/*",
+    ".medusa/types/*"
+  ],
   "exclude": [
     "node_modules",
     ".medusa/server",
@@ -30,6 +33,7 @@
     ".cache",
     "storefront",
     "test",
-    "vitest.config.mts"
+    "vitest.config.mts",
+    "pos"
   ]
 }
