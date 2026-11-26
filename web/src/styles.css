@@ -1,6 +1,6 @@
 @import "@kiboar/design/app.css";
 
-/* In-page navigation (the spacebar hint on a product page) glides; the app
+/* In-page navigation (the spacebar on a product page) glides; the app
    drives the route and entry scrolls explicitly. */
 @media (prefers-reduced-motion: no-preference) {
   html {

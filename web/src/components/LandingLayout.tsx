@@ -122,7 +122,7 @@ export function LandingLayout({
                 onNavigate={onNavigate}
                 interactive={!word}
                 {...(word ? { word } : {})}
-                {...(children ? { hint: "details below" } : {})}
+                detailsLink={Boolean(children)}
               />
             </section>
             {children ? <p className="sr-only">Details below</p> : null}

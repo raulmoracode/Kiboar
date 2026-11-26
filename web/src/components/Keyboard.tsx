@@ -102,7 +102,7 @@ function layout(): Key[] {
 
 const KEYS = layout();
 
-function Cap({ cap, hint }: { cap: Key; hint?: string }) {
+function Cap({ cap }: { cap: Key }) {
   return (
     <>
       <rect
@@ -131,21 +131,6 @@ function Cap({ cap, hint }: { cap: Key; hint?: string }) {
           {cap.label}
         </text>
       ) : null}
-      {hint ? (
-        <text
-          x={cap.x + cap.w / 2}
-          y={cap.y + 0.52}
-          textAnchor="middle"
-          dominantBaseline="middle"
-          fill="#d4d4d8"
-          fillOpacity={0.9}
-          fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace"
-          fontSize={0.15}
-          letterSpacing={0.02}
-        >
-          {hint}
-        </text>
-      ) : null}
     </>
   );
 }
@@ -154,12 +139,12 @@ export function Keyboard({
   onNavigate,
   word,
   interactive = true,
-  hint,
+  detailsLink = false,
 }: {
   onNavigate?: (href: string) => void;
   word?: string;
   interactive?: boolean;
-  hint?: string;
+  detailsLink?: boolean;
 }) {
   const wordRow = KEYS.filter((key) => key.y === 2);
   const customLabels = new Map<Key, string>();
@@ -185,12 +170,10 @@ export function Keyboard({
         const label = word ? customLabels.get(key) : key.label;
         const product = interactive && label ? productForKey(label) : undefined;
         const cap: Key = label ? { ...key, label } : { x: key.x, y: key.y, w: key.w };
-        // The spacebar is the only wide key; the hint sits on it.
-        const capHint = key.w > 4 && hint ? { hint } : {};
 
-        // The wide key carries the "details below" legend; it is the only
+        // The wide key is the detail-page shortcut; it is the only
         // interactive key on a page whose words are otherwise inert.
-        if (hint && key.w > 4) {
+        if (detailsLink && key.w > 4) {
           return (
             <a
               key={`${key.x}-${key.y}`}
@@ -198,7 +181,7 @@ export function Keyboard({
               aria-label="Scroll to the details"
               className="cursor-pointer"
             >
-              <Cap cap={cap} {...capHint} />
+              <Cap cap={cap} />
             </a>
           );
         }
@@ -225,14 +208,14 @@ export function Keyboard({
               aria-label={internal ? product.name : `${product.name} (opens in a new tab)`}
               className="cursor-pointer"
             >
-              <Cap cap={cap} {...capHint} />
+              <Cap cap={cap} />
             </a>
           );
         }
 
         return (
           <g key={`${key.x}-${key.y}`}>
-            <Cap cap={cap} {...capHint} />
+            <Cap cap={cap} />
           </g>
         );
       })}

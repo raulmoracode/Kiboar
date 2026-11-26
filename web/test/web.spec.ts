@@ -47,16 +47,16 @@ test("the home loads without failed assets", async ({ page }) => {
   expect(failed).toEqual([]);
 });
 
-test("the spacebar hint scrolls smoothly to the details", async ({ page }) => {
+test("the spacebar scrolls smoothly to the details", async ({ page }) => {
   await page.goto("/studio");
 
-  const hint = page.locator('svg a[href="#details"]');
-  await expect(hint).toHaveCount(1);
+  const spacebar = page.locator('svg a[href="#details"]');
+  await expect(spacebar).toHaveCount(1);
   expect(await page.evaluate(() => getComputedStyle(document.documentElement).scrollBehavior)).toBe(
     "smooth",
   );
 
-  await hint.click();
+  await spacebar.click();
   await page.waitForFunction(() => window.scrollY > 100);
   expect(new URL(page.url()).hash).toBe("#details");
 });
