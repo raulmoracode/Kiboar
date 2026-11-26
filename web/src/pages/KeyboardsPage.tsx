@@ -1,4 +1,3 @@
-import { keyboards } from "@kiboar/links";
 import { LandingLayout } from "../components/LandingLayout";
 import { boards, type OpenBoard } from "../data/boards";
 
@@ -6,12 +5,12 @@ function MatrixPreview({ board }: { board: OpenBoard }) {
   const groups = board.split ? [board.cols / 2, board.cols / 2] : [board.cols];
 
   return (
-    <div aria-hidden="true" className="flex items-center gap-2">
+    <div aria-hidden="true" className="flex w-full max-w-[240px] items-center justify-center gap-2">
       {groups.map((group, groupIndex) => (
         <div
           key={groupIndex}
-          className="grid gap-[3px]"
-          style={{ gridTemplateColumns: `repeat(${group}, 0.5rem)` }}
+          className="grid min-w-0 flex-1 gap-1"
+          style={{ gridTemplateColumns: `repeat(${group}, minmax(0, 1fr))` }}
         >
           {Array.from({ length: board.rows * group }, (_, index) => {
             const row = Math.floor(index / group);
@@ -19,7 +18,7 @@ function MatrixPreview({ board }: { board: OpenBoard }) {
             return (
               <span
                 key={`${groupIndex}:${row}:${col}`}
-                className="size-2 rounded-[2px] border border-white/10 bg-white/[0.04]"
+                className="aspect-square rounded-[2px] border border-white/10 bg-white/[0.04] transition-colors group-hover:border-lime-300/25 group-hover:bg-lime-300/[0.04]"
               />
             );
           })}
@@ -29,47 +28,41 @@ function MatrixPreview({ board }: { board: OpenBoard }) {
   );
 }
 
-function BoardCard({ board }: { board: OpenBoard }) {
+function BoardCard({ board, index }: { board: OpenBoard; index: number }) {
   return (
-    <article className="flex h-full flex-col kiboar-card p-4">
-      <div className="flex items-baseline justify-between gap-4">
-        <h2 className="min-w-0 truncate text-[14px] text-zinc-100">{board.name}</h2>
-        <span className="shrink-0 font-mono text-[10px] text-zinc-600">rev{board.revision}</span>
-      </div>
-      <p className="mt-1 font-mono text-[10px] text-zinc-600">{board.id}</p>
-
-      <div className="mt-6 flex min-h-[72px] items-center">
+    <article className="group flex h-full flex-col overflow-hidden kiboar-card transition-colors hover:border-white/25">
+      <div className="flex min-h-[180px] flex-1 items-center justify-center border-b border-white/[0.06] px-5 py-10">
         <MatrixPreview board={board} />
       </div>
 
-      <dl className="mt-5 space-y-1.5 border-t border-white/[0.07] pt-3 font-mono text-[10px]">
-        <div className="flex items-baseline justify-between gap-3">
-          <dt className="text-zinc-600">MCU</dt>
-          <dd className="text-zinc-400">{board.mcu}</dd>
+      <div className="flex flex-col gap-3 p-5">
+        <div className="flex items-start justify-between gap-4">
+          <div className="min-w-0">
+            <p className="font-mono text-[10px] tracking-[0.12em] text-zinc-600 uppercase">
+              Board {String(index + 1).padStart(2, "0")}
+            </p>
+            <h2 className="mt-1 truncate text-[15px] font-medium text-zinc-100">{board.name}</h2>
+          </div>
+          <span className="shrink-0 font-mono text-[10px] text-zinc-600">rev{board.revision}</span>
         </div>
-        <div className="flex items-baseline justify-between gap-3">
-          <dt className="text-zinc-600">Matrix</dt>
-          <dd className="text-zinc-400">
-            {board.rows} × {board.cols}
-            {board.split ? " · split" : ""}
-          </dd>
-        </div>
-        <div className="flex items-baseline justify-between gap-3">
-          <dt className="text-zinc-600">Keys</dt>
-          <dd className="text-zinc-400">{board.keys}</dd>
-        </div>
-      </dl>
 
-      <div className="mt-auto flex items-baseline justify-between gap-3 pt-4">
-        <span className="text-[10px] text-zinc-600">Hardware files pending</span>
-        <a
-          href={board.definition}
-          target="_blank"
-          rel="noreferrer"
-          className="text-[11px] text-zinc-400 underline decoration-white/15 underline-offset-4 transition-colors hover:text-lime-200"
-        >
-          Definition
-        </a>
+        <p className="font-mono text-[10px] tracking-[0.12em] text-zinc-500 uppercase">
+          {board.keys} keys · {board.rows} × {board.cols}
+          {board.split ? " · split" : ""}
+        </p>
+
+        <div className="mt-auto flex items-baseline justify-between gap-3 border-t border-white/[0.06] pt-3">
+          <span className="font-mono text-[10px] text-zinc-600">{board.mcu}</span>
+          <a
+            href={board.definition}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={`${board.name} definition (opens in a new tab)`}
+            className="text-[11px] text-zinc-400 underline decoration-white/15 underline-offset-4 transition-colors hover:text-lime-200"
+          >
+            Definition
+          </a>
+        </div>
       </div>
     </article>
   );
@@ -84,40 +77,13 @@ export function KeyboardsPage({ onNavigate }: { onNavigate: (href: string) => vo
       onNavigate={onNavigate}
       wide
     >
-      <section aria-labelledby="keyboards-title">
-        <p className="kiboar-eyebrow">Open hardware · {boards.length} board definitions</p>
-        <h1
-          id="keyboards-title"
-          className="mt-3 text-[28px] leading-tight font-medium tracking-[-0.01em] text-zinc-100"
-        >
-          Keyboards
-        </h1>
-        <p className="mt-5 max-w-[560px] text-[13px] leading-relaxed text-zinc-400">
-          The boards Kiboar designs. Studio reads these definitions today; the KiCad project,
-          fabrication files and firmware will live in <code className="font-mono">keyboards/</code>{" "}
-          as each board is released.
-        </p>
-      </section>
+      <h1 className="sr-only">Keyboards</h1>
 
-      <section aria-label="Board definitions" className="mt-10 grid gap-3 md:grid-cols-3">
-        {boards.map((board) => (
-          <BoardCard key={board.id} board={board} />
+      <section aria-label="Board definitions" className="grid gap-3 md:grid-cols-3">
+        {boards.map((board, index) => (
+          <BoardCard key={board.id} board={board} index={index} />
         ))}
       </section>
-
-      <p className="mt-8 max-w-[560px] text-[11px] leading-relaxed text-zinc-600">
-        A board definition is the matrix, pins and layers Studio uses; it is not a KiCad project or
-        a firmware image. The hardware release lives in{" "}
-        <a
-          href={keyboards.readme}
-          target="_blank"
-          rel="noreferrer"
-          className="text-zinc-400 underline decoration-white/15 underline-offset-4 hover:text-lime-200"
-        >
-          keyboards/
-        </a>{" "}
-        and starts empty.
-      </p>
     </LandingLayout>
   );
 }

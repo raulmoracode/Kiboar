@@ -10,6 +10,41 @@ const STATS = [
   ["3D models", "89"],
 ] as const;
 
+const CARD_LINK =
+  "group flex flex-col justify-between kiboar-card p-6 transition-colors hover:border-white/25";
+const NOTE_LINK =
+  "text-[11px] text-zinc-400 underline decoration-white/15 underline-offset-4 transition-colors hover:text-lime-200";
+
+function InstallCard({
+  href,
+  label,
+  line,
+  action,
+}: {
+  href: string;
+  label: string;
+  line: string;
+  action: string;
+}) {
+  return (
+    <a href={href} target="_blank" rel="noreferrer" className={CARD_LINK}>
+      <div>
+        <h2 className="font-mono text-[10px] tracking-[0.12em] text-zinc-600 uppercase">{label}</h2>
+        <p className="mt-4 max-w-[320px] text-[13px] leading-relaxed text-zinc-400">{line}</p>
+      </div>
+      <span className="mt-8 flex items-center justify-between gap-4 border-t border-white/[0.06] pt-3 text-[12px] text-zinc-200">
+        {action}
+        <span
+          aria-hidden="true"
+          className="text-zinc-600 transition-transform group-hover:translate-x-0.5 group-hover:text-lime-200"
+        >
+          →
+        </span>
+      </span>
+    </a>
+  );
+}
+
 export function LibraryPage({ onNavigate }: { onNavigate: (href: string) => void }) {
   return (
     <LandingLayout
@@ -17,83 +52,53 @@ export function LibraryPage({ onNavigate }: { onNavigate: (href: string) => void
       word="Library"
       keyboardLabel="Library keyboard"
       onNavigate={onNavigate}
+      wide
     >
-      <section aria-labelledby="library-title">
-        <p className="kiboar-eyebrow">KiCad 10 · MIT</p>
-        <h1
-          id="library-title"
-          className="mt-3 text-[28px] leading-tight font-medium tracking-[-0.01em] text-zinc-100"
-        >
-          Library
-        </h1>
-        <p className="mt-5 max-w-[560px] text-[13px] leading-relaxed text-zinc-400">
-          The official KiCad parts Kiboar designs with, published so you can design and build your
-          own board. Symbols, footprints and 3D models, distributed as a PCM package or a clone.
-        </p>
+      <h1 className="sr-only">Library</h1>
 
-        <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3">
-          <a href={PCM} target="_blank" rel="noreferrer" className="kiboar-button-primary">
-            Install with PCM
-          </a>
-          <a
-            href={CLONE}
-            target="_blank"
-            rel="noreferrer"
-            className="text-[12px] text-zinc-400 kiboar-link"
-          >
-            Clone install
-          </a>
-        </div>
-        <p className="mt-3 font-mono text-[10px] text-zinc-600">
-          KiCad 10.0 or newer · not an npm package
-        </p>
+      <section aria-label="Install the library" className="grid gap-3 md:grid-cols-2">
+        <InstallCard
+          href={PCM}
+          label="PCM package"
+          line="Install the official parts from KiCad's Plugin and Content Manager."
+          action="Install with PCM"
+        />
+        <InstallCard
+          href={CLONE}
+          label="Git clone"
+          line="Point KiCad at the repository and run the clone setup."
+          action="Clone install"
+        />
       </section>
 
-      <dl className="mt-12 grid grid-cols-2 gap-y-6 border-y border-white/[0.07] py-6 sm:grid-cols-4">
+      <dl className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-white/[0.06] bg-white/[0.06] sm:grid-cols-4">
         {STATS.map(([label, value]) => (
-          <div key={label}>
+          <div key={label} className="bg-[var(--kiboar-bg)] p-5">
             <dt className="font-mono text-[10px] tracking-[0.12em] text-zinc-600 uppercase">
               {label}
             </dt>
-            <dd className="mt-1 font-mono text-[20px] text-zinc-200">{value}</dd>
+            <dd className="mt-2 font-mono text-[26px] text-zinc-200">{value}</dd>
           </div>
         ))}
       </dl>
 
-      <section aria-labelledby="library-scope-title" className="mt-12">
-        <h2 id="library-scope-title" className="kiboar-eyebrow">
-          Scope
-        </h2>
-        <p className="mt-4 max-w-[560px] text-[13px] leading-relaxed text-zinc-400">
-          Original work is MIT. Fifteen imported symbols keep the licence of their source, recorded
-          in the NOTICE. Keyswitch footprints and models are being redesigned and are not part of
-          this version.
+      <div className="mt-6 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-3">
+        <p className="max-w-[560px] font-mono text-[10px] leading-relaxed text-zinc-600">
+          KiCad 10.0 or newer · not an npm package · original work MIT; imported symbols keep their
+          source licence.
         </p>
-        <p className="mt-3 max-w-[560px] text-[13px] leading-relaxed text-zinc-400">
-          The library is a collection of KiCad assets with Python tooling. It is not an npm package
-          and does not run inside Studio.
-        </p>
-        <a
-          href={LICENSING}
-          target="_blank"
-          rel="noreferrer"
-          className="mt-5 inline-block text-[12px] text-zinc-400 kiboar-link"
-        >
-          Licensing
-        </a>
-      </section>
-
-      <footer className="mt-12 flex flex-wrap gap-5 border-t border-white/[0.07] pt-6 text-[12px] text-zinc-500">
-        <a href={SOURCE} target="_blank" rel="noreferrer" className="hover:text-zinc-200">
-          Source
-        </a>
-        <a href={PCM} target="_blank" rel="noreferrer" className="hover:text-zinc-200">
-          Documentation
-        </a>
-        <a href={NOTICE} target="_blank" rel="noreferrer" className="hover:text-zinc-200">
-          NOTICE
-        </a>
-      </footer>
+        <nav aria-label="Library links" className="flex flex-wrap gap-x-4 gap-y-2 text-[11px]">
+          <a href={LICENSING} target="_blank" rel="noreferrer" className={NOTE_LINK}>
+            Licensing
+          </a>
+          <a href={SOURCE} target="_blank" rel="noreferrer" className={NOTE_LINK}>
+            Source
+          </a>
+          <a href={NOTICE} target="_blank" rel="noreferrer" className={NOTE_LINK}>
+            NOTICE
+          </a>
+        </nav>
+      </div>
     </LandingLayout>
   );
 }

@@ -12,8 +12,11 @@ const {
   roadmap: ROADMAP,
 } = studio;
 
-const NOTE_LINK = "underline decoration-white/20 underline-offset-4 hover:text-lime-200";
+const LINK =
+  "text-[11px] text-zinc-400 underline decoration-white/15 underline-offset-4 transition-colors hover:text-lime-200";
 const FOOTER_LINK = "transition-colors hover:text-zinc-200";
+
+const STEPS = ["Detect", "Verify", "Write", "Cancel"] as const;
 
 export function StudioPage({ onNavigate }: { onNavigate: (href: string) => void }) {
   return (
@@ -22,87 +25,119 @@ export function StudioPage({ onNavigate }: { onNavigate: (href: string) => void 
       word="Studio"
       keyboardLabel="Studio keyboard"
       onNavigate={onNavigate}
+      wide
     >
-      <section aria-labelledby="studio-title" className="border-t border-white/[0.07] pt-10">
-        <p className="kiboar-eyebrow">macOS · flasher · 0.1.0</p>
-        <h1
-          id="studio-title"
-          className="mt-3 text-[26px] leading-tight font-medium tracking-[-0.01em] text-zinc-100"
-        >
-          Kiboar Studio
-        </h1>
-        <p className="mt-4 max-w-[520px] text-[13px] leading-relaxed text-zinc-400">
-          Detects a Kiboar board, verifies the firmware and writes it — bought assembled or built
-          from the published library.
-        </p>
+      <h1 className="sr-only">Kiboar Studio</h1>
 
-        <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
-          <a href={DMG} target="_blank" rel="noreferrer" className="kiboar-button-primary">
-            Download for macOS
-          </a>
-          <a
-            href={INSTALL}
-            target="_blank"
-            rel="noreferrer"
-            className={`text-[12px] text-zinc-400 ${NOTE_LINK}`}
+      <div className="grid gap-3 lg:grid-cols-[1.15fr_0.85fr]">
+        <section aria-labelledby="studio-download-title" className="flex flex-col kiboar-card p-6">
+          <p className="font-mono text-[10px] tracking-[0.12em] text-zinc-600 uppercase">
+            macOS · 0.1.0
+          </p>
+          <h2
+            id="studio-download-title"
+            className="mt-3 text-[22px] leading-tight font-medium text-zinc-100"
           >
-            Install guide
-          </a>
-        </div>
-        <p className="mt-3 font-mono text-[10px] text-zinc-600">
-          Apple Silicon · unsigned · Gatekeeper warns
-        </p>
+            Download
+          </h2>
+          <p className="mt-4 max-w-[420px] text-[13px] leading-relaxed text-zinc-400">
+            Detects a Kiboar board, verifies the firmware and writes it — bought assembled or built
+            from the published library.
+          </p>
 
-        <pre className="mt-6 overflow-x-auto rounded border border-white/[0.07] bg-black/30 p-3 font-mono text-[10px] leading-relaxed text-zinc-300 sm:p-4">
-          <code>{`brew tap raulmoracode/kiboar
+          <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-3 pt-8">
+            <a href={DMG} target="_blank" rel="noreferrer" className="kiboar-button-primary">
+              Download for macOS
+            </a>
+            <a href={INSTALL} target="_blank" rel="noreferrer" className={LINK}>
+              Install guide
+            </a>
+          </div>
+          <p className="mt-3 font-mono text-[10px] text-zinc-600">
+            Apple Silicon · unsigned · Gatekeeper warns
+          </p>
+        </section>
+
+        <section aria-labelledby="studio-brew-title" className="flex flex-col kiboar-card p-6">
+          <p className="font-mono text-[10px] tracking-[0.12em] text-zinc-600 uppercase">
+            Homebrew
+          </p>
+          <h2
+            id="studio-brew-title"
+            className="mt-3 text-[22px] leading-tight font-medium text-zinc-100"
+          >
+            Terminal install
+          </h2>
+
+          <pre className="mt-5 overflow-x-auto rounded border border-white/[0.07] bg-black/30 p-3 font-mono text-[10px] leading-relaxed text-zinc-300 sm:p-4">
+            <code>{`brew tap raulmoracode/kiboar
 brew trust --cask raulmoracode/kiboar/kiboar-studio
 brew install --cask kiboar-studio`}</code>
-        </pre>
-        <p className="mt-2 text-[11px] leading-relaxed text-zinc-500">
-          Or{" "}
-          <a
-            href={SCRIPT}
-            target="_blank"
-            rel="noreferrer"
-            className={`text-zinc-300 ${NOTE_LINK}`}
-          >
-            install-macos.sh
-          </a>
-          , which checks the{" "}
-          <a href={SUMS} target="_blank" rel="noreferrer" className={`text-zinc-300 ${NOTE_LINK}`}>
-            SHA-256
-          </a>{" "}
-          and clears quarantine.
-        </p>
+          </pre>
 
-        <p className="mt-8 max-w-[520px] text-[12px] leading-relaxed text-zinc-500">
-          0.1 flashes: detect, verify, write, cancel, with partial-file cleanup. Remap, layout and
-          the editor come later. Detection and copy are tested; hardware verification is pending.
-        </p>
-        <a
-          href={DEVELOPMENT}
-          target="_blank"
-          rel="noreferrer"
-          className="mt-5 inline-block text-[12px] text-zinc-400 underline decoration-white/20 underline-offset-4 hover:text-lime-200"
-        >
-          Scope and safety
-        </a>
+          <p className="mt-3 text-[11px] leading-relaxed text-zinc-500">
+            Or{" "}
+            <a href={SCRIPT} target="_blank" rel="noreferrer" className={LINK}>
+              install-macos.sh
+            </a>
+            , which checks the{" "}
+            <a href={SUMS} target="_blank" rel="noreferrer" className={LINK}>
+              SHA-256
+            </a>{" "}
+            and clears quarantine.
+          </p>
+        </section>
+      </div>
 
-        <p className="mt-6 flex flex-wrap gap-x-4 gap-y-2 text-[11px] text-zinc-500">
-          <a href={SOURCE} target="_blank" rel="noreferrer" className={FOOTER_LINK}>
-            Source
+      <section aria-labelledby="studio-status-title" className="mt-3 kiboar-card p-6">
+        <div className="flex flex-wrap items-baseline justify-between gap-3">
+          <div>
+            <p className="font-mono text-[10px] tracking-[0.12em] text-zinc-600 uppercase">
+              0.1 · flasher
+            </p>
+            <h2
+              id="studio-status-title"
+              className="mt-2 text-[20px] leading-tight font-medium text-zinc-100"
+            >
+              What it does today
+            </h2>
+          </div>
+          <a href={DEVELOPMENT} target="_blank" rel="noreferrer" className={LINK}>
+            Scope and safety
           </a>
-          <a href={RELEASE} target="_blank" rel="noreferrer" className={FOOTER_LINK}>
-            Releases
-          </a>
-          <a href={ROADMAP} target="_blank" rel="noreferrer" className={FOOTER_LINK}>
-            Roadmap
-          </a>
-          <a href={DOCS} target="_blank" rel="noreferrer" className={FOOTER_LINK}>
-            Docs
-          </a>
+        </div>
+
+        <div className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-4">
+          {STEPS.map((step) => (
+            <span
+              key={step}
+              className="rounded border border-white/[0.07] px-3 py-2 font-mono text-[11px] text-zinc-400"
+            >
+              {step}
+            </span>
+          ))}
+        </div>
+
+        <p className="mt-4 max-w-[560px] text-[11px] leading-relaxed text-zinc-600">
+          Remap, layout and the editor come later. Detection and copy are tested; hardware
+          verification is pending.
         </p>
       </section>
+
+      <footer className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-[11px] text-zinc-500">
+        <a href={SOURCE} target="_blank" rel="noreferrer" className={FOOTER_LINK}>
+          Source
+        </a>
+        <a href={RELEASE} target="_blank" rel="noreferrer" className={FOOTER_LINK}>
+          Releases
+        </a>
+        <a href={ROADMAP} target="_blank" rel="noreferrer" className={FOOTER_LINK}>
+          Roadmap
+        </a>
+        <a href={DOCS} target="_blank" rel="noreferrer" className={FOOTER_LINK}>
+          Docs
+        </a>
+      </footer>
     </LandingLayout>
   );
 }
