@@ -13,8 +13,8 @@ staff that uses the Admin API.
 catalogue is seeded into PostgreSQL and both the storefront and the POS read
 the published products and their photos from the Store API. The admin **Sales**
 page and the POS sales screen read one register with the channel and the POS
-payment method. The storefront keeps a demo bag in the browser. There is no
-Medusa cart, checkout, account or search yet.
+payment method. The POS completes cash sales; the storefront keeps a demo bag in
+the browser. There is no online Medusa cart, checkout, account or search yet.
 
 ## Requirements
 
@@ -104,8 +104,8 @@ web preview.
 
 `shop/pos` is the mobile till. It reads the catalogue from the Store API with
 the **Kiboar POS** publishable key, and signs staff in against the Admin API to
-read the sales register and, later, to run the checkout. It keeps the cart
-locally and will take payment with a QR to a Stripe Checkout Session. See
+read the sales register and complete cash sales. It keeps the cart locally and
+takes Stripe QR payments once the checkout endpoint lands. See
 [`pos/README.md`](pos/README.md) for the stack, the backend contract and the
 distribution notes.
 
@@ -145,14 +145,15 @@ The routing and the production host are not configured in this repository.
 and the POS **Sales register** screen. It returns the orders with `channel`
 (`online`, `pos` or `other`), `channel_name` and `payment_method`
 (`stripe_link`, `cash` or `other`). The seed tags the two sales channels with
-`metadata.kiboar_channel`; the POS checkout must write
-`order.metadata.payment_method` as `cash` or `stripe_link`. When the metadata is
+`metadata.kiboar_channel`; cash sales write `order.metadata.payment_method` as
+`cash`, and the Stripe checkout must write `stripe_link`. When the metadata is
 missing, the register falls back to the Stripe provider id and then to `other`.
 
 ## What is not here
 
-- No Medusa cart, checkout, customer accounts or search. The storefront bag is
-  local to the browser and is lost on reload.
+- No online Medusa cart, checkout, customer accounts or search. The storefront
+  bag is local to the browser and is lost on reload. The POS completes cash
+  sales; the Stripe QR is still pending.
 - No payment provider beyond the system provider the seed registers, and no
   shipping rates beyond the seeded free store pickup.
 - No deployment configuration. The `/shop` route is a host concern; the

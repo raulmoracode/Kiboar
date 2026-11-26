@@ -3,13 +3,13 @@
 Mobile till for the Kiboar shop. Expo/React Native app that reads the catalogue
 from the Medusa **Store API** with a publishable key scoped to the POS sales
 channel, and uses the **Admin API** as a staff member for the operations that
-need it. It builds a cart and will take payment with a QR that opens a Stripe
-Checkout Session on the customer's phone.
+need it. It builds a cart, completes cash sales and will take Stripe QR payments
+when the Checkout Session endpoint lands.
 
-**Status: catalogue wired.** The screens, theme, cart state, the DB-backed
-catalogue and the typed Admin API contract exist. The QR is a placeholder until
-the backend endpoint and the Stripe webhook land. Authentication is not wired
-yet.
+**Status: catalogue, auth, register and cash.** The screens, theme, cart state,
+DB-backed catalogue, staff login and sales register exist. Cash creates a real
+Medusa order in the POS channel and captures the payment. The Stripe QR is still
+a placeholder until the checkout endpoint and webhook land.
 
 ## Stack
 
@@ -86,11 +86,24 @@ satisfy the checker. `react-native-svg` stays at the Expo-compatible 15.16.0.
   19.3; do not add a second React copy.
 - It is not part of `medusa build` and has its own `shop-pos` CI workflow.
 
-## Backend contract (next change)
+## Backend contract
+
+```
+POST /admin/pos/cash
+  { items: [{ variantId, quantity }] }
+  → { sale: { id, display_id, total, currency_code, payment_method: "cash" } }
+```
+
+Cash creates a cart in the POS sales channel, adds the seeded store pickup
+option, creates a system payment session, completes the cart, captures the
+payment and writes `order.metadata.payment_method = "cash"` and
+`pos_sale = true`. The order then appears in the sales register.
+
+The Stripe QR path is the next change:
 
 ```
 POST /admin/pos/checkout
-  { items: [{ variantId, quantity }], customerId?, salesChannelId?, locationId? }
+  { items: [{ variantId, quantity }] }
   → { url, draftOrderId, expiresAt, status: "pending" }
 
 GET /admin/pos/checkout/:draftOrderId
@@ -113,5 +126,5 @@ the sale. The QR encodes `url`; it is never treated as proof of payment.
 
 ## Not in this scaffold
 
-Payments, authentication wiring, cash, receipts, offline, hardware (printer,
-drawer, scanner), RBAC, order history and the sales register.
+Stripe QR completion, receipts, offline, hardware (printer, drawer, scanner),
+RBAC and refunds.
