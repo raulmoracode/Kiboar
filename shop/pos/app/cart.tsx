@@ -41,67 +41,66 @@ export default function Cart() {
           <Button label="Start sale" onPress={() => router.push("/catalogue")} />
         </View>
       ) : (
-        cart.lines.map((line) => {
-          const photo = imageUrl(line.thumbnail ?? null);
+        <>
+          {cart.lines.map((line) => {
+            const photo = imageUrl(line.thumbnail ?? null);
 
-          return (
-            <Card key={line.id}>
-              <View style={styles.line}>
-                {photo ? (
-                  <Image
-                    accessibilityLabel={`${line.title} photo`}
-                    resizeMode="contain"
-                    source={{ uri: photo }}
-                    style={styles.thumb}
-                  />
-                ) : (
-                  <View style={[styles.thumb, styles.thumbEmpty]}>
-                    <Text style={styles.noPhoto}>No photo</Text>
+            return (
+              <Card key={line.id}>
+                <View style={styles.line}>
+                  {photo ? (
+                    <Image
+                      accessibilityLabel={`${line.title} photo`}
+                      resizeMode="contain"
+                      source={{ uri: photo }}
+                      style={styles.thumb}
+                    />
+                  ) : (
+                    <View style={[styles.thumb, styles.thumbEmpty]}>
+                      <Text style={styles.noPhoto}>No photo</Text>
+                    </View>
+                  )}
+                  <View style={styles.info}>
+                    <Text numberOfLines={1} style={styles.product}>
+                      {line.title}
+                    </Text>
+                    <Text style={styles.unit}>
+                      {formatMoney(line.unitAmount, line.currency)} each
+                    </Text>
                   </View>
-                )}
-                <View style={styles.info}>
-                  <Text numberOfLines={1} style={styles.product}>
-                    {line.title}
-                  </Text>
-                  <Text style={styles.unit}>
-                    {formatMoney(line.unitAmount, line.currency)} each
+                  <Text style={styles.lineTotal}>
+                    {formatMoney(line.unitAmount * line.quantity, line.currency)}
                   </Text>
                 </View>
-                <Text style={styles.lineTotal}>
-                  {formatMoney(line.unitAmount * line.quantity, line.currency)}
-                </Text>
-              </View>
 
-              <View style={styles.controls}>
-                <QuantityStepper
-                  quantity={line.quantity}
-                  onChange={(quantity) => cart.setQuantity(line.id, quantity)}
-                />
-                <Pressable
-                  accessibilityLabel={`Remove ${line.title} from the cart`}
-                  accessibilityRole="button"
-                  hitSlop={8}
-                  onPress={() => cart.setQuantity(line.id, 0)}
-                  style={({ pressed }) => [styles.remove, pressed ? styles.removePressed : null]}
-                >
-                  <TrashIcon />
-                </Pressable>
-              </View>
-            </Card>
-          );
-        })
+                <View style={styles.controls}>
+                  <QuantityStepper
+                    quantity={line.quantity}
+                    onChange={(quantity) => cart.setQuantity(line.id, quantity)}
+                  />
+                  <Pressable
+                    accessibilityLabel={`Remove ${line.title} from the cart`}
+                    accessibilityRole="button"
+                    hitSlop={8}
+                    onPress={() => cart.setQuantity(line.id, 0)}
+                    style={({ pressed }) => [styles.remove, pressed ? styles.removePressed : null]}
+                  >
+                    <TrashIcon />
+                  </Pressable>
+                </View>
+              </Card>
+            );
+          })}
+
+          <View style={styles.totalRow}>
+            <Text style={typography.eyebrow}>Total</Text>
+            <Text style={styles.total}>{formatMoney(cart.total, currency)}</Text>
+          </View>
+
+          <Button label="Take payment" onPress={() => router.push("/payment")} />
+          <Button label="Clear cart" variant="danger" onPress={cart.clear} />
+        </>
       )}
-
-      <View style={styles.totalRow}>
-        <Text style={typography.eyebrow}>Total</Text>
-        <Text style={styles.total}>{formatMoney(cart.total, currency)}</Text>
-      </View>
-
-      <Button
-        disabled={cart.lines.length === 0}
-        label="Take payment"
-        onPress={() => router.push("/payment")}
-      />
     </Screen>
   );
 }

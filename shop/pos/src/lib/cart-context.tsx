@@ -8,6 +8,7 @@ interface CartContextValue {
   total: number;
   add: (line: Omit<CartLine, "quantity">) => void;
   setQuantity: (id: string, quantity: number) => void;
+  clear: () => void;
 }
 
 const CartContext = createContext<CartContextValue | undefined>(undefined);
@@ -23,6 +24,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         total: cartTotal(lines),
         add: (line) => setLines((current) => addLine(current, line)),
         setQuantity: (id, quantity) => setLines((current) => setQuantity(current, id, quantity)),
+        clear: () => setLines([]),
       }}
     >
       {children}
