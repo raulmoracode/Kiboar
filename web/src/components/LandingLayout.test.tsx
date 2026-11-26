@@ -48,6 +48,8 @@ describe("the details anchor", () => {
     );
 
     expect(scrollIntoView).not.toHaveBeenCalled();
+    vi.advanceTimersByTime(700);
+    expect(scrollIntoView).not.toHaveBeenCalled();
     vi.advanceTimersByTime(200);
     expect(scrollIntoView).toHaveBeenCalledWith({ behavior: "smooth" });
   });

@@ -2,6 +2,8 @@ import { type ReactNode, useEffect } from "react";
 import { Keyboard } from "./Keyboard";
 import { ProductLinks } from "./ProductLinks";
 
+const DETAILS_SCROLL_DELAY = 800;
+
 export function LandingLayout({
   title,
   word,
@@ -48,8 +50,8 @@ export function LandingLayout({
       // its own hash scroll on a direct load or a refresh.
       scrollToDetails();
     } else if (autoScroll) {
-      // Start on the next task so the hero paints before the scroll begins.
-      timer = window.setTimeout(scrollToDetails, 0);
+      // Hold the hero long enough for the page word to be read before moving.
+      timer = window.setTimeout(scrollToDetails, reduceMotion ? 0 : DETAILS_SCROLL_DELAY);
     }
 
     window.addEventListener("hashchange", onHashChange);
