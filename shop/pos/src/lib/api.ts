@@ -1,17 +1,6 @@
 import { apiUrl } from "./config";
 import type { CheckoutInput, QrPayment } from "./payments";
 
-export interface MedusaProduct {
-  id: string;
-  title: string;
-  thumbnail?: string | null;
-  variants?: {
-    id: string;
-    title: string;
-    prices?: { amount: number; currency_code: string }[];
-  }[];
-}
-
 export class MedusaAdminClient {
   private readonly baseUrl: string;
   private token: string | undefined;
@@ -48,13 +37,6 @@ export class MedusaAdminClient {
     });
     this.token = result.token;
     return result.token;
-  }
-
-  async listProducts(): Promise<MedusaProduct[]> {
-    const result = await this.request<{ products: MedusaProduct[] }>(
-      "/admin/products?limit=100&fields=id,title,thumbnail,*variants,*variants.prices",
-    );
-    return result.products;
   }
 
   /** Contract implemented by the shop backend in a later change. */

@@ -15,14 +15,15 @@ export default function Home() {
       <Text style={styles.title}>Counter</Text>
       <Text style={styles.body}>
         Mobile till for the shop. This scaffold wires the screens and the Admin API contract; the
-        Stripe QR is the next change.
+        catalogue reads the POS sales channel and the Stripe QR is the next change.
       </Text>
 
       <Card>
         <Text style={styles.cardTitle}>What is wired</Text>
         <Text style={styles.cardBody}>
-          Theme tokens, cart state, typed Admin API client and the checkout contract. The catalogue
-          is demo data until the store has products.
+          Theme tokens, cart state, a typed Admin API client and the checkout contract. The
+          catalogue and its photos come from Medusa, scoped to the POS sales channel; the cart and
+          payment contract are next.
         </Text>
       </Card>
 

@@ -1,12 +1,15 @@
 # Kiboar POS
 
-Mobile till for the Kiboar shop. Expo/React Native app that talks to the Medusa
-**Admin API** as a staff member, builds a cart and will take payment with a QR
-that opens a Stripe Checkout Session on the customer's phone.
+Mobile till for the Kiboar shop. Expo/React Native app that reads the catalogue
+from the Medusa **Store API** with a publishable key scoped to the POS sales
+channel, and uses the **Admin API** as a staff member for the operations that
+need it. It builds a cart and will take payment with a QR that opens a Stripe
+Checkout Session on the customer's phone.
 
-**Status: scaffold.** The screens, theme, cart state and the typed Admin API
-contract exist. The QR is a placeholder until the backend endpoint and the
-Stripe webhook land. Authentication is not wired yet.
+**Status: catalogue wired.** The screens, theme, cart state, the DB-backed
+catalogue and the typed Admin API contract exist. The QR is a placeholder until
+the backend endpoint and the Stripe webhook land. Authentication is not wired
+yet.
 
 ## Stack
 
@@ -14,7 +17,8 @@ Stripe webhook land. Authentication is not wired yet.
 - TypeScript strict, Biome for formatting/lint, Jest + React Native Testing
   Library for unit tests.
 - It is a third application of the shop product, next to the Medusa service and
-  `shop/storefront`; it uses the Admin API, not the Store API.
+  `shop/storefront`; it reads the catalogue from the Store API with the POS
+  publishable key and uses the Admin API for authenticated staff operations.
 
 ## Commands
 
@@ -29,20 +33,26 @@ pnpm --filter @kiboar/pos export      # Android JS bundle
 ```
 
 The Medusa service must be running for real data (`pnpm --filter @kiboar/shop
-dev`, with PostgreSQL). The scaffold catalogue is demo data.
+dev`, with PostgreSQL and `pnpm --filter @kiboar/shop seed`). The catalogue and
+its photos come from the seeded products; the app has loading, error and empty
+states instead of a hardcoded fallback.
 
 ## Configuration
 
-Only non-secret values belong in the app:
+Only non-secret values belong in the app. Copy `.env.template` to `.env.local`:
 
 ```bash
 EXPO_PUBLIC_MEDUSA_URL=http://localhost:9000
+EXPO_PUBLIC_POS_PUBLISHABLE_KEY=pk_...
 EXPO_PUBLIC_POS_SALES_CHANNEL_ID=sc_...
 EXPO_PUBLIC_POS_LOCATION_ID=sloc_...
 ```
 
-The Admin API credentials are entered by staff and will be stored with
-`expo-secure-store`; never put a secret key in an `EXPO_PUBLIC_` variable.
+The seed writes the POS publishable key, the POS sales channel ID and the stock
+location ID to `shop/seed-output.json`. The publishable key is not a secret: it
+only scopes Store API reads to the POS sales channel. The Admin API credentials
+are entered by staff and will be stored with `expo-secure-store`; never put a
+secret key in an `EXPO_PUBLIC_` variable.
 
 ## Web preview
 
@@ -54,7 +64,9 @@ pnpm --filter @kiboar/pos web   # http://localhost:8081
 ```
 
 It is a preview, not the shipping target: the product is a mobile app. It needs
-`react-dom` and `react-native-web`, both in `package.json`.
+`react-dom` and `react-native-web`, both in `package.json`. The Medusa
+`STORE_CORS` must include `http://localhost:8081`; `shop/.env.template` already
+does.
 
 ## Version notes
 
@@ -99,5 +111,5 @@ the sale. The QR encodes `url`; it is never treated as proof of payment.
 
 ## Not in this scaffold
 
-Payments, authentication wiring, real catalogue, cash, receipts, offline,
-hardware (printer, drawer, scanner), RBAC and order history.
+Payments, authentication wiring, cash, receipts, offline, hardware (printer,
+drawer, scanner), RBAC, order history and the sales register.

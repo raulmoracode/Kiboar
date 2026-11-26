@@ -11,11 +11,12 @@ import { colors, fonts, spacing } from "@/theme/tokens";
 export default function Payment() {
   const router = useRouter();
   const cart = useCart();
+  const currency = cart.lines[0]?.currency ?? "EUR";
 
   return (
     <Screen>
       <Text style={styles.eyebrow}>Payment</Text>
-      <Text style={styles.title}>{formatMoney(cart.total, "EUR")}</Text>
+      <Text style={styles.title}>{formatMoney(cart.total, currency)}</Text>
       <Text style={styles.body}>
         The QR will encode the Stripe Checkout Session URL returned by `POST /admin/pos/checkout`.
         The app only completes the sale when the backend reports the session as paid.
