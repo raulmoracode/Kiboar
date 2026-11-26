@@ -1,7 +1,7 @@
 import { library } from "@kiboar/links";
 import { LandingLayout } from "../components/LandingLayout";
 
-const { pcm: PCM, clone: CLONE, licensing: LICENSING, notice: NOTICE, source: SOURCE } = library;
+const { pcm: PCM, clone: CLONE } = library;
 
 const STATS = [
   ["Symbols", "145"],
@@ -12,8 +12,6 @@ const STATS = [
 
 const CARD_LINK =
   "group flex flex-col justify-between kiboar-card p-6 transition-colors hover:border-white/25";
-const NOTE_LINK =
-  "text-[11px] text-zinc-400 underline decoration-white/15 underline-offset-4 transition-colors hover:text-lime-200";
 
 function InstallCard({
   href,
@@ -81,24 +79,6 @@ export function LibraryPage({ onNavigate }: { onNavigate: (href: string) => void
           </div>
         ))}
       </dl>
-
-      <div className="mt-6 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-3">
-        <p className="max-w-[560px] font-mono text-[10px] leading-relaxed text-zinc-600">
-          KiCad 10.0 or newer · not an npm package · original work MIT; imported symbols keep their
-          source licence.
-        </p>
-        <nav aria-label="Library links" className="flex flex-wrap gap-x-4 gap-y-2 text-[11px]">
-          <a href={LICENSING} target="_blank" rel="noreferrer" className={NOTE_LINK}>
-            Licensing
-          </a>
-          <a href={SOURCE} target="_blank" rel="noreferrer" className={NOTE_LINK}>
-            Source
-          </a>
-          <a href={NOTICE} target="_blank" rel="noreferrer" className={NOTE_LINK}>
-            NOTICE
-          </a>
-        </nav>
-      </div>
     </LandingLayout>
   );
 }

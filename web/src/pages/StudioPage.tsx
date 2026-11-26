@@ -1,20 +1,10 @@
-import { docs as DOCS, studio } from "@kiboar/links";
+import { studio } from "@kiboar/links";
 import { LandingLayout } from "../components/LandingLayout";
 
-const {
-  release: RELEASE,
-  dmg: DMG,
-  sums: SUMS,
-  install: INSTALL,
-  adr: DEVELOPMENT,
-  script: SCRIPT,
-  source: SOURCE,
-  roadmap: ROADMAP,
-} = studio;
+const { dmg: DMG, sums: SUMS, install: INSTALL, adr: DEVELOPMENT, script: SCRIPT } = studio;
 
 const LINK =
   "text-[11px] text-zinc-400 underline decoration-white/15 underline-offset-4 transition-colors hover:text-lime-200";
-const FOOTER_LINK = "transition-colors hover:text-zinc-200";
 
 const STEPS = ["Detect", "Verify", "Write", "Cancel"] as const;
 
@@ -123,21 +113,6 @@ brew install --cask kiboar-studio`}</code>
           verification is pending.
         </p>
       </section>
-
-      <footer className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-[11px] text-zinc-500">
-        <a href={SOURCE} target="_blank" rel="noreferrer" className={FOOTER_LINK}>
-          Source
-        </a>
-        <a href={RELEASE} target="_blank" rel="noreferrer" className={FOOTER_LINK}>
-          Releases
-        </a>
-        <a href={ROADMAP} target="_blank" rel="noreferrer" className={FOOTER_LINK}>
-          Roadmap
-        </a>
-        <a href={DOCS} target="_blank" rel="noreferrer" className={FOOTER_LINK}>
-          Docs
-        </a>
-      </footer>
     </LandingLayout>
   );
 }
