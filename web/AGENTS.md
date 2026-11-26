@@ -19,7 +19,7 @@ shop is the Medusa application in `shop/`, and this site points at it.
 - `src/pages/KeyboardsPage.tsx` — the `/keyboards` page: the Keyboards keyboard, the links and the open board definitions as cards.
 - `src/pages/NotFoundPage.tsx` — the 404 page: the landing layout with a 404 keyboard; it sets `robots: noindex`.
 - `src/components/Keyboard.tsx` — the drawn keyboard; the six lit keys are real links.
-- `src/components/LandingLayout.tsx` — the keyboard-first layout shared by the home page, the 404 and the three product pages; it keeps the keyboard and the links in the home position, shows a scroll cue and renders the page detail below the first screen.
+- `src/components/LandingLayout.tsx` — the keyboard-first layout shared by the home page, the 404 and the three product pages; it keeps the keyboard and the links in the home position, makes the spacebar a link to the details and renders the page detail below the first screen.
 - `src/components/ProductLinks.tsx` — the six destination links under the keyboard; the current page becomes Home.
 - `src/data/boards.ts` — the board data mirrored from `software/boards`; update it when a definition changes.
 - `src/data/products.ts` — the six destinations, their key and whether they are internal.
@@ -47,11 +47,11 @@ shop is the Medusa application in `shop/`, and this site points at it.
 - **Product pages are the landing layout, with their detail underneath.**
   Keyboards, Library and Studio put their name on the keyboard, keep the product
   links below it and render the page detail after the first screen. The first
-  screen is identical to the home page: the keyboard, the links and the scroll
-  cue must not move them (the cue is absolute, the detail follows the screen).
+  screen is identical to the home page: the keyboard, the links and the
+  spacebar detail link must not move them (the detail follows the screen).
   The detail stays honest: Studio links the real release asset; the Keyboards
-  cards use the real definitions in `software/boards` and say the hardware files
-  are pending; the Library page states the real counts and the keyswitch
+  cards use the real definitions in `software/boards`; the hardware files are
+  not published yet; the Library page states the real counts and the keyswitch
   limitation. Do not add invented screenshots or prices.
 - **The current page becomes Home.** On a product page, the link for that page is
   replaced by Home and points at `/`; it keeps the slot's keyboard letter. The
