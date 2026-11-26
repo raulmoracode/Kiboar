@@ -1,17 +1,18 @@
 #!/usr/bin/env node
 import { spawn, spawnSync } from "node:child_process";
-import { existsSync, readFileSync } from "node:fs";
+import { closeSync, existsSync, mkdirSync, openSync, readFileSync } from "node:fs";
 import net from "node:net";
 import { dirname, join } from "node:path";
-import readline from "node:readline";
 import { fileURLToPath } from "node:url";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 process.chdir(root);
 
+const logDirectory = join(root, ".dev-logs");
+mkdirSync(logDirectory, { recursive: true });
+
 const colored = process.stdout.isTTY;
 const paint = (code, text) => (colored ? `\x1b[${code}m${text}\x1b[0m` : text);
-const green = (text) => paint("32", text);
 const red = (text) => paint("31", text);
 const dim = (text) => paint("2", text);
 const bold = (text) => paint("1", text);
@@ -23,21 +24,18 @@ const DEFINITIONS = {
     args: ["--filter", "@kiboar/web", "dev"],
     port: 3000,
     url: "http://localhost:3000/",
-    ansi: "36",
   },
   docs: {
     label: "docs",
     args: ["--filter", "kiboar-docs", "exec", "astro", "dev", "--ignore-lock"],
     port: 4321,
     url: "http://localhost:4321/",
-    ansi: "35",
   },
   medusa: {
     label: "medusa js",
     args: ["--filter", "@kiboar/shop", "dev"],
     port: 9000,
     url: "http://localhost:9000/",
-    ansi: "33",
     timeout: 120_000,
     needsDb: true,
   },
@@ -46,7 +44,6 @@ const DEFINITIONS = {
     args: ["--filter", "@kiboar/storefront", "dev"],
     port: 3001,
     url: "http://localhost:3001/",
-    ansi: "34",
     needsMedusa: true,
   },
   pos: {
@@ -54,7 +51,6 @@ const DEFINITIONS = {
     args: ["--filter", "@kiboar/pos", "web"],
     port: 8081,
     url: "http://localhost:8081/",
-    ansi: "32",
     env: { BROWSER: "none" },
     needsMedusa: true,
   },
@@ -71,10 +67,12 @@ const GROUPS = {
 };
 
 const children = new Map();
+const logFds = new Map();
 const startedContainers = [];
 let usedCompose = false;
 let databasePort = 5432;
 let stopping = false;
+let hadStartupError = false;
 
 const sleep = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
 
@@ -241,10 +239,10 @@ async function startDatabase() {
     if (!commandExists("colima")) {
       throw new Error("Docker is not running. Start Docker Desktop and try again.");
     }
-    console.log(dim("Starting Colima..."));
-    const started = spawnSync("colima", ["start"], { cwd: root, stdio: "inherit" });
+    const started = spawnSync("colima", ["start"], { cwd: root, encoding: "utf8" });
     if (started.status !== 0 || spawnSync("docker", ["info"], { stdio: "ignore" }).status !== 0) {
-      throw new Error("Colima could not start Docker.");
+      const detail = `${started.stdout ?? ""}${started.stderr ?? ""}`.trim();
+      throw new Error(`Colima could not start Docker.${detail ? `\n${detail}` : ""}`);
     }
   }
 
@@ -254,9 +252,9 @@ async function startDatabase() {
       docker(["ps", "--format", "{{.Names}}"]).stdout?.split("\n").filter(Boolean) ?? [],
     );
     if (!running.has(existing)) {
-      const result = docker(["start", existing], { stdio: "inherit" });
+      const result = docker(["start", existing]);
       if (result.status !== 0) {
-        throw new Error(`Could not start the ${existing} container.`);
+        throw new Error(`Could not start the ${existing} container. ${result.stderr ?? ""}`.trim());
       }
       startedContainers.push(existing);
     }
@@ -267,11 +265,12 @@ async function startDatabase() {
       );
     }
     const result = composeRun(["up", "-d", "postgres"], {
-      stdio: "inherit",
       env: { ...process.env, POSTGRES_PORT: String(databasePort) },
     });
     if (result.status !== 0) {
-      throw new Error("Could not start the PostgreSQL compose service.");
+      throw new Error(
+        `Could not start the PostgreSQL compose service. ${result.stderr ?? ""}`.trim(),
+      );
     }
     usedCompose = true;
   }
@@ -281,49 +280,45 @@ async function startDatabase() {
   }
 }
 
-function prefix(stream, service) {
-  const label = colored ? `\x1b[${service.ansi}m[${service.key}]\x1b[0m` : `[${service.key}]`;
-  const lines = readline.createInterface({ input: stream });
-  lines.on("line", (line) => {
-    if (stopping && /ERR_PNPM|ELIFECYCLE|Command failed|recursive (run|exec)/.test(line)) {
-      return;
-    }
-    console.log(`${label} ${line}`);
-  });
-}
-
 function launch(key) {
   const service = DEFINITIONS[key];
+  const logFd = openSync(join(logDirectory, `${key}.log`), "w");
+  logFds.set(key, logFd);
+
   const child = spawn("pnpm", service.args, {
     cwd: root,
     detached: true,
-    stdio: ["ignore", "pipe", "pipe"],
+    stdio: ["ignore", logFd, logFd],
     env: { ...process.env, FORCE_COLOR: "1", ...service.env },
   });
 
   children.set(key, child);
-  prefix(child.stdout, { ...service, key });
-  prefix(child.stderr, { ...service, key });
-
   child.on("error", (error) => {
+    hadStartupError = true;
     console.log(`${red("✖")} ${service.label}: ${error.message}`);
   });
   child.on("exit", (code, signal) => {
     if (!stopping) {
-      console.log(`${red("✖")} ${service.label} exited (${signal ?? code}).`);
+      hadStartupError = true;
+      console.log(
+        `${red("✖")} ${service.label} exited (${signal ?? code}); see .dev-logs/${key}.log`,
+      );
+    }
+    const fd = logFds.get(key);
+    if (fd !== undefined) {
+      try {
+        closeSync(fd);
+      } catch {
+        // The descriptor is already closed.
+      }
+      logFds.delete(key);
     }
   });
 }
 
 async function reportWhenReady(key) {
   const service = DEFINITIONS[key];
-  const ready = await waitForPort(service.port, service.timeout ?? 90_000);
-  if (ready) {
-    console.log(`${green("✔")} ${service.label} ${dim("is listening")}`);
-  } else {
-    console.log(`${red("✖")} ${service.label} did not open ${service.url} in time.`);
-  }
-  return ready;
+  return waitForPort(service.port, service.timeout ?? 90_000);
 }
 
 function printTable(selected, ready) {
@@ -350,6 +345,11 @@ function printTable(selected, ready) {
   }
   if (selected.has("db")) {
     rows.push(["db", `localhost:${databasePort}`, true]);
+  }
+
+  // biome-ignore lint/suspicious/noUndeclaredEnvVars: pnpm sets this for every script run.
+  if (colored && !hadStartupError && process.env.npm_lifecycle_event) {
+    process.stdout.write("\x1b[1A\x1b[2K");
   }
 
   console.log(`\n  ${bold("Kiboar is up")}\n`);
@@ -395,10 +395,19 @@ async function shutdown(exitCode = 0) {
     }
   }
 
+  for (const fd of logFds.values()) {
+    try {
+      closeSync(fd);
+    } catch {
+      // The descriptor is already closed.
+    }
+  }
+  logFds.clear();
+
   if (usedCompose) {
-    composeRun(["stop", "postgres"], { stdio: "inherit" });
+    composeRun(["stop", "postgres"], { stdio: "ignore" });
   } else if (startedContainers.length > 0) {
-    docker(["stop", ...startedContainers], { stdio: "inherit" });
+    docker(["stop", ...startedContainers], { stdio: "ignore" });
   }
 
   console.log(dim("Stopped."));
@@ -447,6 +456,9 @@ async function main() {
   const settled = await Promise.all(
     readiness.map(async ({ key, promise }) => ({ key, ok: await promise })),
   );
+  if (settled.some(({ ok }) => !ok)) {
+    hadStartupError = true;
+  }
   printTable(selected, new Map(settled.map(({ key, ok }) => [key, ok])));
 }
 

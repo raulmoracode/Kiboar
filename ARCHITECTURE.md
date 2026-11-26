@@ -132,6 +132,10 @@ version drift; Turborepo is the task runner, not the version manager.
 | `pnpm test:rust` | Run the Rust unit tests |
 | `pnpm check` | Library + JavaScript + Rust checks |
 
+The `dev` commands print only the local URL table; each service writes its
+output to `.dev-logs/<service>.log`. Use `pnpm --silent dev` when the pnpm
+script banner is not wanted.
+
 ## Versions
 
 | Product | Version | Source of truth |
