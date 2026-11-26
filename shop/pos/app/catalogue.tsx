@@ -4,9 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 
 import { AppBar } from "@/components/AppBar";
 import { Button } from "@/components/Button";
-import { Card } from "@/components/Card";
 import { CartButton } from "@/components/CartButton";
-import { PageHeader } from "@/components/PageHeader";
 import { ProductTile } from "@/components/ProductTile";
 import { Screen } from "@/components/Screen";
 import { useCart } from "@/lib/cart-context";
@@ -56,35 +54,20 @@ export default function Catalogue() {
       <AppBar
         back
         backTo="/"
-        title="Catalogue"
         action={<CartButton count={cart.count} onPress={() => router.push("/cart")} />}
       />
 
-      <PageHeader
-        eyebrow="Catalogue"
-        subtitle="Tap a board to add it to the current sale."
-        title="Boards"
-      />
-
-      {state.status === "loading" ? (
-        <Text style={typography.body}>Loading the catalogue…</Text>
-      ) : null}
+      {state.status === "loading" ? <Text style={typography.body}>Loading…</Text> : null}
 
       {state.status === "error" ? (
-        <Card>
+        <View style={styles.stack}>
           <Text style={typography.small}>{state.message}</Text>
           <Button label="Try again" onPress={() => setAttempt((current) => current + 1)} />
-          <Button label="Back home" variant="ghost" onPress={() => router.push("/")} />
-        </Card>
+        </View>
       ) : null}
 
       {state.status === "ready" && state.items.length === 0 ? (
-        <Card>
-          <Text style={typography.small}>
-            The POS sales channel has no published products yet. Run the shop seed and check the
-            channel in Medusa.
-          </Text>
-        </Card>
+        <Text style={typography.small}>No products in the POS channel.</Text>
       ) : null}
 
       {state.status === "ready" && state.items.length > 0 ? (
@@ -106,18 +89,11 @@ export default function Catalogue() {
           ))}
         </View>
       ) : null}
-
-      {cart.count > 0 ? (
-        <Button
-          label={`Open cart (${cart.count})`}
-          variant="ghost"
-          onPress={() => router.push("/cart")}
-        />
-      ) : null}
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
   grid: { flexDirection: "row", flexWrap: "wrap", gap: spacing.md },
+  stack: { gap: spacing.md },
 });
