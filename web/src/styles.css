@@ -1,7 +1,7 @@
 @import "@kiboar/design/app.css";
 
-/* In-page navigation (the spacebar hint on a product page) glides; route
-   changes still jump to the top because the app scrolls with `instant`. */
+/* In-page navigation (the spacebar hint on a product page) glides; the app
+   drives the route and entry scrolls explicitly. */
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;

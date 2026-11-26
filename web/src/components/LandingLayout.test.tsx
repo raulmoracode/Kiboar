@@ -3,23 +3,15 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { LandingLayout } from "./LandingLayout";
 
-const original = Element.prototype.scrollIntoView;
-
 afterEach(() => {
   vi.useRealTimers();
   vi.unstubAllGlobals();
   window.history.replaceState({}, "", "/");
-  if (original) {
-    Element.prototype.scrollIntoView = original;
-  } else {
-    delete (Element.prototype as { scrollIntoView?: unknown }).scrollIntoView;
-  }
 });
 
 describe("the details anchor", () => {
   it("scrolls to the details on a direct #details load", () => {
-    const scrollIntoView = vi.fn();
-    Element.prototype.scrollIntoView = scrollIntoView;
+    window.scrollTo = vi.fn();
     window.history.replaceState({}, "", "/keyboards#details");
 
     render(
@@ -28,13 +20,12 @@ describe("the details anchor", () => {
       </LandingLayout>,
     );
 
-    expect(scrollIntoView).toHaveBeenCalled();
+    expect(window.scrollTo).toHaveBeenCalled();
   });
 
-  it("smoothly scrolls to the details on entry when autoScroll is set", () => {
+  it("holds the hero before scrolling on entry", () => {
     vi.useFakeTimers();
-    const scrollIntoView = vi.fn();
-    Element.prototype.scrollIntoView = scrollIntoView;
+    window.scrollTo = vi.fn();
 
     render(
       <LandingLayout
@@ -47,18 +38,17 @@ describe("the details anchor", () => {
       </LandingLayout>,
     );
 
-    expect(scrollIntoView).not.toHaveBeenCalled();
+    expect(window.scrollTo).not.toHaveBeenCalled();
     vi.advanceTimersByTime(150);
-    expect(scrollIntoView).not.toHaveBeenCalled();
+    expect(window.scrollTo).not.toHaveBeenCalled();
     vi.advanceTimersByTime(100);
-    expect(scrollIntoView).toHaveBeenCalledWith({ behavior: "smooth" });
+    expect(window.scrollTo).toHaveBeenCalled();
   });
 
-  it("jumps instead of animating when reduced motion is requested", () => {
+  it("jumps without the hold when reduced motion is requested", () => {
     vi.useFakeTimers();
     vi.stubGlobal("matchMedia", () => ({ matches: true }));
-    const scrollIntoView = vi.fn();
-    Element.prototype.scrollIntoView = scrollIntoView;
+    window.scrollTo = vi.fn();
 
     render(
       <LandingLayout
@@ -72,6 +62,6 @@ describe("the details anchor", () => {
     );
 
     vi.advanceTimersByTime(1);
-    expect(scrollIntoView).toHaveBeenCalledWith({ behavior: "auto" });
+    expect(window.scrollTo).toHaveBeenCalledWith({ top: 0, behavior: "auto" });
   });
 });

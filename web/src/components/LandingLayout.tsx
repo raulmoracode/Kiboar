@@ -3,6 +3,11 @@ import { Keyboard } from "./Keyboard";
 import { ProductLinks } from "./ProductLinks";
 
 const DETAILS_SCROLL_DELAY = 200;
+const DETAILS_SCROLL_DURATION = 500;
+
+function easeInOutCubic(progress: number): number {
+  return progress < 0.5 ? 4 * progress * progress * progress : 1 - (-2 * progress + 2) ** 3 / 2;
+}
 
 export function LandingLayout({
   title,
@@ -27,16 +32,60 @@ export function LandingLayout({
       return;
     }
 
-    const details = document.getElementById("details");
-    if (!details) {
+    const section = document.getElementById("details");
+    if (!section) {
       return;
     }
 
     const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
 
-    function scrollToDetails() {
-      details?.scrollIntoView?.({ behavior: reduceMotion ? "auto" : "smooth" });
+    let frame = 0;
+    let timer = 0;
+
+    function stopAnimation() {
+      if (frame) {
+        window.cancelAnimationFrame(frame);
+        frame = 0;
+      }
     }
+
+    const scrollToDetails = () => {
+      stopAnimation();
+
+      const start = window.scrollY;
+      const margin = Number.parseFloat(getComputedStyle(section).scrollMarginTop) || 0;
+      const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+      const target = Math.min(
+        Math.max(0, start + section.getBoundingClientRect().top - margin),
+        maxScroll,
+      );
+
+      if (reduceMotion) {
+        window.scrollTo({ top: target, behavior: "auto" });
+        return;
+      }
+
+      const distance = target - start;
+      if (Math.abs(distance) < 1) {
+        window.scrollTo({ top: target, behavior: "instant" });
+        return;
+      }
+
+      const startedAt = performance.now();
+      function step(now: number) {
+        const progress = Math.min((now - startedAt) / DETAILS_SCROLL_DURATION, 1);
+        window.scrollTo({
+          top: start + distance * easeInOutCubic(progress),
+          behavior: "instant",
+        });
+        if (progress < 1) {
+          frame = window.requestAnimationFrame(step);
+        } else {
+          frame = 0;
+        }
+      }
+      frame = window.requestAnimationFrame(step);
+    };
 
     function onHashChange() {
       if (window.location.hash === "#details") {
@@ -44,7 +93,6 @@ export function LandingLayout({
       }
     }
 
-    let timer = 0;
     if (window.location.hash === "#details") {
       // The section mounts after the first paint, so the browser cannot perform
       // its own hash scroll on a direct load or a refresh.
@@ -57,6 +105,7 @@ export function LandingLayout({
     window.addEventListener("hashchange", onHashChange);
     return () => {
       window.clearTimeout(timer);
+      stopAnimation();
       window.removeEventListener("hashchange", onHashChange);
     };
   }, [children, autoScroll]);
