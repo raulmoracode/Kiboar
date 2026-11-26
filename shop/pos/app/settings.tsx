@@ -4,7 +4,6 @@ import { StyleSheet, Text, View } from "react-native";
 import { AppBar } from "@/components/AppBar";
 import { Button } from "@/components/Button";
 import { Card } from "@/components/Card";
-import { PageHeader } from "@/components/PageHeader";
 import { Screen } from "@/components/Screen";
 import { useAuth } from "@/lib/auth-context";
 import { apiUrl, locationId, salesChannelId } from "@/lib/config";
@@ -25,13 +24,7 @@ export default function Settings() {
 
   return (
     <Screen>
-      <AppBar back backTo="/" title="Settings" />
-
-      <PageHeader
-        eyebrow="Settings"
-        subtitle="The non-secret configuration this device uses."
-        title="Till setup"
-      />
+      <AppBar back backTo="/" />
 
       <Card>
         <SettingRow label="Backend" value={apiUrl} />
@@ -40,16 +33,7 @@ export default function Settings() {
         <SettingRow label="Session" value={token ? "Signed in" : "Signed out"} />
       </Card>
 
-      <Text style={typography.small}>
-        These values come from EXPO_PUBLIC_ variables. Secrets never go in the app; the Admin API
-        credentials are entered by staff and stored in expo-secure-store.
-      </Text>
-
-      <Button
-        label={token ? "Manage staff session" : "Sign in"}
-        variant="ghost"
-        onPress={() => router.push("/login")}
-      />
+      <Button label="Staff account" variant="ghost" onPress={() => router.push("/login")} />
     </Screen>
   );
 }

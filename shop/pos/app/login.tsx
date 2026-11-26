@@ -1,17 +1,15 @@
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 import { AppBar } from "@/components/AppBar";
 import { Button } from "@/components/Button";
-import { Card } from "@/components/Card";
 import { Field } from "@/components/Field";
-import { PageHeader } from "@/components/PageHeader";
 import { Screen } from "@/components/Screen";
 import { MedusaAdminClient } from "@/lib/api";
 import { useAuth } from "@/lib/auth-context";
 import { apiUrl } from "@/lib/config";
-import { colors, typography } from "@/theme/tokens";
+import { colors, spacing, typography } from "@/theme/tokens";
 
 export default function Login() {
   const router = useRouter();
@@ -34,82 +32,50 @@ export default function Login() {
       await signIn(nextToken);
       router.replace("/orders");
     } catch {
-      setError("Could not sign in. Check the email, the password and the backend.");
+      setError("Could not sign in.");
     } finally {
       setSubmitting(false);
     }
   }
 
-  if (!ready) {
-    return (
-      <Screen>
-        <AppBar back backTo="/" title="Staff" />
-        <PageHeader eyebrow="Staff access" title="Sign in" />
-        <Text style={typography.body}>Checking the saved session…</Text>
-      </Screen>
-    );
-  }
-
-  if (token) {
-    return (
-      <Screen>
-        <AppBar back backTo="/" title="Staff" />
-        <PageHeader
-          eyebrow="Staff access"
-          subtitle="The Admin API token is stored on this device."
-          title="Signed in"
-        />
-
-        <Card>
-          <Text style={typography.eyebrow}>Session</Text>
-          <Text style={styles.value}>Active</Text>
-          <Text style={typography.small}>
-            Sign out on a shared till or when the device changes hands.
-          </Text>
-          <Button label="Open sales" onPress={() => router.replace("/orders")} />
-          <Button label="Sign out" variant="ghost" onPress={() => void signOut()} />
-        </Card>
-      </Screen>
-    );
-  }
-
   return (
     <Screen>
-      <AppBar back backTo="/" title="Staff" />
-      <PageHeader
-        eyebrow="Staff access"
-        subtitle="Use the Medusa admin account for the shop."
-        title="Sign in"
-      />
+      <AppBar back backTo="/" />
 
-      <Card>
-        <Field
-          autoCapitalize="none"
-          keyboardType="email-address"
-          label="Email"
-          onChangeText={setEmail}
-          value={email}
-        />
-        <Field label="Password" onChangeText={setPassword} secureTextEntry value={password} />
-      </Card>
+      {!ready ? (
+        <Text style={typography.body}>Loading…</Text>
+      ) : token ? (
+        <View style={styles.stack}>
+          <Text style={typography.body}>Signed in.</Text>
+          <Button label="Open sales" onPress={() => router.replace("/orders")} />
+          <Button label="Sign out" variant="ghost" onPress={() => void signOut()} />
+        </View>
+      ) : (
+        <View style={styles.form}>
+          <Field
+            autoCapitalize="none"
+            keyboardType="email-address"
+            label="Email"
+            onChangeText={setEmail}
+            value={email}
+          />
+          <Field label="Password" onChangeText={setPassword} secureTextEntry value={password} />
 
-      {error ? <Text style={styles.error}>{error}</Text> : null}
+          {error ? <Text style={styles.error}>{error}</Text> : null}
 
-      <Button
-        disabled={submitting || !email.trim() || password.length === 0}
-        label={submitting ? "Signing in…" : "Sign in"}
-        onPress={() => void submit()}
-      />
-
-      <Text style={typography.small}>
-        Backend: {apiUrl}. The token goes to expo-secure-store on a device and stays in memory in
-        the web preview.
-      </Text>
+          <Button
+            disabled={submitting || !email.trim() || password.length === 0}
+            label={submitting ? "Signing in…" : "Sign in"}
+            onPress={() => void submit()}
+          />
+        </View>
+      )}
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  value: { color: colors.text, fontFamily: typography.mono.fontFamily, fontSize: 13 },
+  stack: { gap: spacing.md },
+  form: { gap: spacing.md },
   error: { color: colors.danger, fontFamily: typography.body.fontFamily, fontSize: 13 },
 });

@@ -7,9 +7,7 @@ export function QrCode({ value }: { value: string | null }) {
   if (!value) {
     return (
       <View style={styles.placeholder}>
-        <Text style={styles.placeholderText}>
-          The payment QR appears here once the backend returns the Stripe Checkout URL.
-        </Text>
+        <Text style={styles.placeholderText}>QR pending.</Text>
       </View>
     );
   }

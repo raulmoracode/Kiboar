@@ -6,7 +6,6 @@ import { AppBar } from "@/components/AppBar";
 import { Badge } from "@/components/Badge";
 import { Button } from "@/components/Button";
 import { Card } from "@/components/Card";
-import { PageHeader } from "@/components/PageHeader";
 import { Screen } from "@/components/Screen";
 import { MedusaAdminClient, type Sale, type SalesChannelKind } from "@/lib/api";
 import { useAuth } from "@/lib/auth-context";
@@ -78,32 +77,20 @@ export default function Orders() {
 
   return (
     <Screen>
-      <AppBar back backTo="/" title="Sales register" />
-
-      <PageHeader
-        eyebrow="Sales register"
-        subtitle="Online and POS orders, newest first."
-        title="All sales"
-      />
+      <AppBar back backTo="/" />
 
       {state.status === "signed_out" ? (
-        <Card>
-          <Text style={styles.cardTitle}>Staff sign-in required</Text>
-          <Text style={typography.small}>
-            Sign in with an admin user to read the online and POS sales register.
-          </Text>
+        <View style={styles.stack}>
+          <Text style={typography.small}>Staff sign-in required.</Text>
           <Button label="Sign in" onPress={() => router.push("/login")} />
-        </Card>
+        </View>
       ) : null}
 
-      {state.status === "loading" ? (
-        <Text style={typography.body}>Loading the register…</Text>
-      ) : null}
+      {state.status === "loading" ? <Text style={typography.body}>Loading…</Text> : null}
 
       {state.status === "error" ? (
-        <Card>
-          <Text style={styles.cardTitle}>The register cannot be reached</Text>
-          <Text style={typography.small}>Check the backend and try again.</Text>
+        <View style={styles.stack}>
+          <Text style={typography.small}>Register unavailable.</Text>
           <Button label="Try again" onPress={() => setAttempt((value) => value + 1)} />
           <Button
             label="Sign in again"
@@ -113,16 +100,11 @@ export default function Orders() {
               router.push("/login");
             }}
           />
-        </Card>
+        </View>
       ) : null}
 
       {state.status === "ready" && state.sales.length === 0 ? (
-        <Card>
-          <Text style={styles.cardTitle}>No sales yet</Text>
-          <Text style={typography.small}>
-            Online and POS orders will appear here as soon as they are paid.
-          </Text>
-        </Card>
+        <Text style={typography.body}>No sales yet.</Text>
       ) : null}
 
       {state.status === "ready"
@@ -149,14 +131,12 @@ export default function Orders() {
             </Card>
           ))
         : null}
-
-      <Button label="Back home" variant="ghost" onPress={() => router.push("/")} />
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  cardTitle: { ...typography.title, fontSize: 20, lineHeight: 26 },
+  stack: { gap: spacing.md },
   row: { alignItems: "baseline", flexDirection: "row", justifyContent: "space-between" },
   order: { color: colors.text, fontFamily: fonts.sans, fontSize: 15, fontWeight: "500" },
   total: { color: colors.text, fontFamily: fonts.mono, fontSize: 14 },
