@@ -2,7 +2,7 @@ import { type ReactNode, useEffect } from "react";
 import { Keyboard } from "./Keyboard";
 import { ProductLinks } from "./ProductLinks";
 
-const DETAILS_SCROLL_DELAY = 400;
+const DETAILS_SCROLL_DELAY = 200;
 
 export function LandingLayout({
   title,
