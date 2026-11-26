@@ -10,7 +10,8 @@
     "start": "medusa start",
     "db:migrate": "medusa db:migrate",
     "test": "vitest run",
-    "seed": "medusa exec ./src/scripts/seed.ts"
+    "seed": "medusa exec ./src/scripts/seed.ts",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@medusajs/admin-sdk": "2.23.0",
