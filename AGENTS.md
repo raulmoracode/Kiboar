@@ -35,7 +35,7 @@ The repository has five products, built and shipped separately.
 | `docs/` | Astro + Fumadocs documentation site, English and Spanish |
 | `software/` | Kiboar Studio: Tauri app, TypeScript core and Rust crates |
 | `web/` | Public site: Vite + React + Tailwind |
-| `shop/` | Shop: Medusa v2 application |
+| `shop/` | Shop: Medusa v2 application, storefront and POS |
 | `keyboards/` | Official keyboard hardware: one directory per board and revision |
 | `package.json`, `pnpm-workspace.yaml`, `turbo.json` | Root JavaScript workspace for `docs`, `software`, `web` and `shop` |
 | `ARCHITECTURE.md` | Product boundaries, commands, versions and deployment |
@@ -55,7 +55,7 @@ artifacts, boundaries and label tables for their product.
 | Documentation | [`docs/AGENTS.md`](docs/AGENTS.md) | Astro/Fumadocs, content, generated pages, EN/ES, Vercel |
 | Kiboar Studio | [`software/AGENTS.md`](software/AGENTS.md) | Workspace, TypeScript core, Rust, Tauri, schemas and bindings |
 | Web | [`web/AGENTS.md`](web/AGENTS.md) | Vite, React, Tailwind, the public page and its deployment |
-| Shop | [`shop/AGENTS.md`](shop/AGENTS.md) | Medusa, the Store API, the admin, PostgreSQL and pnpm hoisting |
+| Shop | [`shop/AGENTS.md`](shop/AGENTS.md) | Medusa, the Store API, the admin, PostgreSQL, the storefront, the POS and pnpm hoisting |
 
 Read the product file after this one when you change that product; read more
 than one when a change spans products. The product files do not replace the Git

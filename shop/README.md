@@ -4,9 +4,10 @@ The commercial surface of the brand: it sells assembled Kiboar keyboards. Buying
 is a convenience, not a lock-in — the library and the board definitions are
 published and the documentation lets anyone build the same board.
 
-Two applications live here: the Medusa v2 service (Store API and admin
-dashboard) and the storefront in `shop/storefront`, a static Vite app that reads
-the Store API over HTTP.
+Three applications live here: the Medusa v2 service (Store API and admin
+dashboard), the storefront in `shop/storefront`, a static Vite app that reads the
+Store API over HTTP, and the POS in `shop/pos`, an Expo/React Native app for
+staff that uses the Admin API.
 
 **Status: catalogue and storefront.** The backend and the admin run; the
 storefront lists the published products, opens a product page with its photo
@@ -76,6 +77,19 @@ pnpm --filter @kiboar/storefront build
 The key is created in the admin under **Settings → Developer → Publishable API
 keys**. The Medusa `STORE_CORS` must include the storefront origin; the template
 allows both `http://localhost:3000` and `http://localhost:3001` in development.
+
+## POS
+
+`shop/pos` is the mobile till scaffold. It uses the Admin API as a staff member,
+keeps the cart locally and will take payment with a QR to a Stripe Checkout
+Session. See [`pos/README.md`](pos/README.md) for the stack, the backend contract
+and the distribution notes.
+
+```bash
+pnpm --filter @kiboar/pos start
+pnpm --filter @kiboar/pos typecheck
+pnpm --filter @kiboar/pos test
+```
 
 ## pnpm notes
 

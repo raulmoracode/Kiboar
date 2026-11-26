@@ -1,0 +1,66 @@
+name: POS
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "shop/pos/**"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+      - "package.json"
+      - ".node-version"
+      - ".npmrc"
+      - "biome.json"
+      - ".github/workflows/shop-pos.yml"
+  pull_request:
+    paths:
+      - "shop/pos/**"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+      - "package.json"
+      - ".node-version"
+      - ".npmrc"
+      - "biome.json"
+      - ".github/workflows/shop-pos.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pos-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Lint, typecheck, test and bundle
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      CI: "1"
+      EXPO_NO_TELEMETRY: "1"
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm exec biome check shop/pos
+
+      - name: Typecheck
+        run: pnpm --filter @kiboar/pos typecheck
+
+      - name: Test
+        run: pnpm --filter @kiboar/pos test
+
+      - name: Bundle the Android app
+        run: pnpm --filter @kiboar/pos export

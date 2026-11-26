@@ -1,0 +1,41 @@
+{
+  "name": "@kiboar/pos",
+  "version": "0.0.0",
+  "private": true,
+  "main": "expo-router/entry",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "typecheck": "tsc --noEmit",
+    "test": "jest --runInBand",
+    "export": "expo export --platform android --output-dir dist",
+    "lint": "biome check ."
+  },
+  "dependencies": {
+    "expo": "~58.0.26",
+    "expo-constants": "~58.0.16",
+    "expo-linking": "~58.0.17",
+    "expo-router": "~58.0.32",
+    "expo-secure-store": "~58.0.3",
+    "expo-status-bar": "~58.0.5",
+    "react": "catalog:",
+    "react-native": "0.88.1",
+    "react-native-qrcode-svg": "^6.3.54",
+    "react-native-reanimated": "4.7.1",
+    "react-native-safe-area-context": "~5.11.1",
+    "react-native-screens": "~4.30.1",
+    "react-native-svg": "15.16.0",
+    "react-native-worklets": "0.13.0",
+    "@expo/metro-runtime": "~58.0.17"
+  },
+  "devDependencies": {
+    "@testing-library/react-native": "^14.1.0",
+    "@types/jest": "^30.0.0",
+    "@types/react": "catalog:",
+    "jest": "^30.0.0",
+    "jest-expo": "~58.0.15",
+    "test-renderer": "^1.3.1",
+    "typescript": "catalog:"
+  }
+}
