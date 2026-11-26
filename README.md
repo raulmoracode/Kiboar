@@ -80,11 +80,25 @@ API; the storefront needs Medusa running and a publishable key.
 
 ```bash
 pnpm install
-pnpm --filter @kiboar/web dev          # http://localhost:3000
-pnpm --filter @kiboar/storefront dev   # http://localhost:3001
+pnpm dev             # every product + PostgreSQL; prints every URL
+pnpm dev:all         # alias for pnpm dev
+pnpm dev:web         # web only
+pnpm dev:docs        # docs only
+pnpm dev:shop        # PostgreSQL + Medusa + storefront + POS
+pnpm dev:api         # PostgreSQL + Medusa
+pnpm dev:storefront  # PostgreSQL + Medusa + storefront
+pnpm dev:pos         # PostgreSQL + Medusa + POS
+pnpm dev:studio      # desktop app (Tauri)
 pnpm --filter @kiboar/shop build       # no database needed
-pnpm --filter @kiboar/shop dev         # needs shop/.env and PostgreSQL
 ```
+
+`pnpm dev` (and its alias `pnpm dev:all`) starts every server product and the
+PostgreSQL container that `shop/.env` points at, then prints each one with its
+local URL. The `dev:*` commands start only what a product needs: `dev:shop`
+brings up PostgreSQL, Medusa, the storefront and the POS; `dev:api` stops at
+Medusa. `Ctrl+C` stops the servers and the container it started. The command
+expects the three local env files from the product READMEs; when one is missing
+it says which copy command to run.
 
 The setup, the commands and the scope of each are in
 [`web/README.md`](web/README.md) and [`shop/README.md`](shop/README.md).
