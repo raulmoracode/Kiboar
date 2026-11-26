@@ -51,6 +51,7 @@ export function LibraryPage({ onNavigate }: { onNavigate: (href: string) => void
       keyboardLabel="Library keyboard"
       onNavigate={onNavigate}
       wide
+      autoScroll
     >
       <h1 className="sr-only">Library</h1>
 

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { productForKey } from "./data/products";
 import { HomePage } from "./pages/HomePage";
 import { KeyboardsPage } from "./pages/KeyboardsPage";
@@ -10,8 +10,11 @@ function pathFromLocation(): string {
   return window.location.pathname.replace(/\/+$/, "") || "/";
 }
 
+const DETAIL_PATHS = new Set(["/keyboards", "/library", "/studio"]);
+
 export default function App() {
   const [path, setPath] = useState(pathFromLocation);
+  const navigation = useRef(0);
 
   useEffect(() => {
     function onPopState() {
@@ -23,11 +26,48 @@ export default function App() {
     return () => window.removeEventListener("popstate", onPopState);
   }, []);
 
-  const navigate = useCallback((href: string) => {
+  const commit = useCallback((href: string, keepScroll = false) => {
     window.history.pushState({}, "", href);
     setPath(pathFromLocation());
-    window.scrollTo({ top: 0, behavior: "instant" });
+    if (!keepScroll) {
+      window.scrollTo({ top: 0, behavior: "instant" });
+    }
   }, []);
+
+  const navigate = useCallback(
+    (href: string) => {
+      const target = href.replace(/#.*$/, "").replace(/\/+$/, "") || "/";
+      const leavingForHome = target === "/" && path !== "/" && window.scrollY > 0;
+
+      if (!leavingForHome) {
+        navigation.current += 1;
+        commit(href, DETAIL_PATHS.has(path) && DETAIL_PATHS.has(target) && window.scrollY > 0);
+        return;
+      }
+
+      // Swapping the route first clamps the scroll to the top in one frame.
+      // Rewind the current page smoothly, then commit once it reaches the top.
+      const id = ++navigation.current;
+      const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
+      const deadline = performance.now() + 800;
+
+      window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+
+      function commitWhenAtTop() {
+        if (navigation.current !== id) {
+          return;
+        }
+        if (window.scrollY === 0 || performance.now() > deadline) {
+          commit(href);
+          return;
+        }
+        window.requestAnimationFrame(commitWhenAtTop);
+      }
+
+      window.requestAnimationFrame(commitWhenAtTop);
+    },
+    [commit, path],
+  );
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {

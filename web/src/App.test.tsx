@@ -12,7 +12,11 @@ beforeEach(() => {
   visit("/");
 });
 
-afterEach(() => visit("/"));
+afterEach(() => {
+  vi.unstubAllGlobals();
+  Object.defineProperty(window, "scrollY", { configurable: true, value: 0 });
+  visit("/");
+});
 
 describe("the app", () => {
   it("renders the six keyboard destinations and the four live links", () => {
@@ -40,6 +44,39 @@ describe("the app", () => {
     render(<App />);
     fireEvent.keyDown(window, { key: "k", metaKey: true });
     expect(window.location.pathname).toBe("/");
+  });
+
+  it("rewinds a scrolled detail page before going home", () => {
+    visit("/keyboards");
+    Object.defineProperty(window, "scrollY", { configurable: true, value: 300 });
+    const smooth = vi.fn();
+    window.scrollTo = ((options: ScrollToOptions) => {
+      if (options.behavior === "smooth") {
+        smooth();
+        Object.defineProperty(window, "scrollY", { configurable: true, value: 0 });
+      }
+    }) as typeof window.scrollTo;
+    vi.stubGlobal("requestAnimationFrame", (callback: FrameRequestCallback) => {
+      callback(0);
+      return 1;
+    });
+
+    render(<App />);
+    fireEvent.keyDown(window, { key: "k" });
+
+    expect(smooth).toHaveBeenCalledTimes(1);
+    expect(window.location.pathname).toBe("/");
+  });
+
+  it("keeps the scroll position between detail pages", () => {
+    visit("/keyboards");
+    Object.defineProperty(window, "scrollY", { configurable: true, value: 300 });
+
+    render(<App />);
+    fireEvent.keyDown(window, { key: "i" });
+
+    expect(window.location.pathname).toBe("/library");
+    expect(window.scrollTo).not.toHaveBeenCalled();
   });
 
   it("renders the 404 for an unknown route", () => {

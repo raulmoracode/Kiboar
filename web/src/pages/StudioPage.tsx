@@ -16,6 +16,7 @@ export function StudioPage({ onNavigate }: { onNavigate: (href: string) => void 
       keyboardLabel="Studio keyboard"
       onNavigate={onNavigate}
       wide
+      autoScroll
     >
       <h1 className="sr-only">Kiboar Studio</h1>
 
