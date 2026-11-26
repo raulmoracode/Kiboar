@@ -1,7 +1,7 @@
 import { studio } from "@kiboar/links";
 import { LandingLayout } from "../components/LandingLayout";
 
-const { dmg: DMG, sums: SUMS, install: INSTALL, adr: DEVELOPMENT, script: SCRIPT } = studio;
+const { dmg: DMG, sums: SUMS, install: INSTALL, script: SCRIPT } = studio;
 
 const LINK =
   "text-[11px] text-zinc-400 underline decoration-white/15 underline-offset-4 transition-colors hover:text-lime-200";
@@ -80,37 +80,31 @@ brew install --cask kiboar-studio`}</code>
       </div>
 
       <section aria-labelledby="studio-status-title" className="mt-3 kiboar-card p-6">
-        <div className="flex flex-wrap items-baseline justify-between gap-3">
-          <div>
-            <p className="font-mono text-[10px] tracking-[0.12em] text-zinc-600 uppercase">
-              0.1 · flasher
-            </p>
-            <h2
-              id="studio-status-title"
-              className="mt-2 text-[20px] leading-tight font-medium text-zinc-100"
-            >
-              What it does today
-            </h2>
-          </div>
-          <a href={DEVELOPMENT} target="_blank" rel="noreferrer" className={LINK}>
-            Scope and safety
-          </a>
-        </div>
+        <h2
+          id="studio-status-title"
+          className="text-[20px] leading-tight font-medium text-zinc-100"
+        >
+          One app for the whole board
+        </h2>
+        <p className="mt-3 max-w-[640px] text-[13px] leading-relaxed text-zinc-400">
+          Studio detects a connected Kiboar board, verifies the firmware and writes it. It is also
+          where remapping, layouts and the keymap editor will live, so flashing and configuring stop
+          being separate tools.
+        </p>
 
         <div className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-4">
           {STEPS.map((step) => (
             <span
               key={step}
-              className="rounded border border-white/[0.07] px-3 py-2 font-mono text-[11px] text-zinc-400"
+              className="rounded bg-[var(--kiboar-accent)] px-3 py-2 font-mono text-[11px] text-[var(--kiboar-accent-text)]"
             >
               {step}
             </span>
           ))}
         </div>
 
-        <p className="mt-4 max-w-[560px] text-[11px] leading-relaxed text-zinc-600">
-          Remap, layout and the editor come later. Detection and copy are tested; hardware
-          verification is pending.
+        <p className="mt-4 max-w-[640px] text-[11px] leading-relaxed text-zinc-600">
+          Detect, verify and write ship in 0.1. Remap, layouts and the editor are in progress.
         </p>
       </section>
     </LandingLayout>
