@@ -28,41 +28,24 @@ function MatrixPreview({ board }: { board: OpenBoard }) {
   );
 }
 
-function BoardCard({ board, index }: { board: OpenBoard; index: number }) {
+function BoardCard({ board }: { board: OpenBoard }) {
   return (
     <article className="group flex h-full flex-col overflow-hidden kiboar-card transition-colors hover:border-white/25">
       <div className="flex min-h-[180px] flex-1 items-center justify-center border-b border-white/[0.06] px-5 py-10">
         <MatrixPreview board={board} />
       </div>
 
-      <div className="flex flex-col gap-3 p-5">
-        <div className="flex items-start justify-between gap-4">
-          <div className="min-w-0">
-            <p className="font-mono text-[10px] tracking-[0.12em] text-zinc-600 uppercase">
-              Board {String(index + 1).padStart(2, "0")}
-            </p>
-            <h2 className="mt-1 truncate text-[15px] font-medium text-zinc-100">{board.name}</h2>
-          </div>
-          <span className="shrink-0 font-mono text-[10px] text-zinc-600">rev{board.revision}</span>
-        </div>
-
-        <p className="font-mono text-[10px] tracking-[0.12em] text-zinc-500 uppercase">
-          {board.keys} keys · {board.rows} × {board.cols}
-          {board.split ? " · split" : ""}
-        </p>
-
-        <div className="mt-auto flex items-baseline justify-between gap-3 border-t border-white/[0.06] pt-3">
-          <span className="font-mono text-[10px] text-zinc-600">{board.mcu}</span>
-          <a
-            href={board.definition}
-            target="_blank"
-            rel="noreferrer"
-            aria-label={`${board.name} definition (opens in a new tab)`}
-            className="text-[11px] text-zinc-400 underline decoration-white/15 underline-offset-4 transition-colors hover:text-lime-200"
-          >
-            Definition
-          </a>
-        </div>
+      <div className="flex items-baseline justify-between gap-4 p-5">
+        <h2 className="min-w-0 truncate text-[15px] font-medium text-zinc-100">{board.name}</h2>
+        <a
+          href={board.files}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={`${board.name} files on GitHub (opens in a new tab)`}
+          className="shrink-0 text-[11px] text-zinc-400 underline decoration-white/15 underline-offset-4 transition-colors hover:text-lime-200"
+        >
+          GitHub
+        </a>
       </div>
     </article>
   );
@@ -80,8 +63,8 @@ export function KeyboardsPage({ onNavigate }: { onNavigate: (href: string) => vo
       <h1 className="sr-only">Keyboards</h1>
 
       <section aria-label="Board definitions" className="grid gap-3 md:grid-cols-3">
-        {boards.map((board, index) => (
-          <BoardCard key={board.id} board={board} index={index} />
+        {boards.map((board) => (
+          <BoardCard key={board.id} board={board} />
         ))}
       </section>
     </LandingLayout>

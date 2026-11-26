@@ -75,7 +75,7 @@ export function LibraryPage({ onNavigate }: { onNavigate: (href: string) => void
             <dt className="font-mono text-[10px] tracking-[0.12em] text-zinc-600 uppercase">
               {label}
             </dt>
-            <dd className="mt-2 font-mono text-[26px] text-zinc-200">{value}</dd>
+            <dd className="mt-2 font-mono text-[26px] text-[var(--kiboar-accent)]">{value}</dd>
           </div>
         ))}
       </dl>
