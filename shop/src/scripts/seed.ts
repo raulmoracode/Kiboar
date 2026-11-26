@@ -108,17 +108,30 @@ export default async function seedKiboar({ container }: ExecArgs) {
   const [store] = await storeService.listStores();
 
   logger.info("Seeding store, sales channels and region...");
-  const channelByName = async (name: string) => {
+  const channelByName = async (name: string, kind: "online" | "pos") => {
     const [existing] = await salesChannelService.listSalesChannels({ name });
-    if (existing) return existing;
+
+    if (existing) {
+      if (existing.metadata?.kiboar_channel !== kind) {
+        await salesChannelService.updateSalesChannels(existing.id, {
+          metadata: { ...(existing.metadata ?? {}), kiboar_channel: kind },
+        });
+      }
+      return existing;
+    }
+
     const { result } = await createSalesChannelsWorkflow(container).run({
       input: { salesChannelsData: [{ name }] },
     });
-    return result[0];
+    const created = result[0];
+    await salesChannelService.updateSalesChannels(created.id, {
+      metadata: { kiboar_channel: kind },
+    });
+    return created;
   };
 
-  const onlineChannel = await channelByName(ONLINE_CHANNEL);
-  const posChannel = await channelByName(POS_CHANNEL);
+  const onlineChannel = await channelByName(ONLINE_CHANNEL, "online");
+  const posChannel = await channelByName(POS_CHANNEL, "pos");
 
   await updateStoreCurrencies(container).run({
     input: {
