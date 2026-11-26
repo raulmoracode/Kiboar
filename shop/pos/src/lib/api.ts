@@ -23,6 +23,18 @@ export interface SalesPage {
   offset: number;
 }
 
+export interface CashSale {
+  id: string;
+  display_id: number | null;
+  total: number;
+  currency_code: string;
+  payment_method: "cash";
+}
+
+export interface CashSaleInput {
+  items: { variantId: string; quantity: number }[];
+}
+
 export class MedusaAdminClient {
   private readonly baseUrl: string;
   private token: string | undefined;
@@ -65,6 +77,14 @@ export class MedusaAdminClient {
     const query = new URLSearchParams({ limit: String(limit), offset: String(offset) });
     const result = await this.request<SalesPage>(`/admin/reports/sales?${query.toString()}`);
     return result.sales;
+  }
+
+  async createCashSale(input: CashSaleInput): Promise<CashSale> {
+    const result = await this.request<{ sale: CashSale }>("/admin/pos/cash", {
+      method: "POST",
+      body: input,
+    });
+    return result.sale;
   }
 
   /** Contract implemented by the shop backend in a later change. */
