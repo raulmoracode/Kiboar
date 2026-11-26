@@ -6,6 +6,8 @@ import { LandingLayout } from "./LandingLayout";
 const original = Element.prototype.scrollIntoView;
 
 afterEach(() => {
+  vi.useRealTimers();
+  vi.unstubAllGlobals();
   window.history.replaceState({}, "", "/");
   if (original) {
     Element.prototype.scrollIntoView = original;
@@ -27,5 +29,47 @@ describe("the details anchor", () => {
     );
 
     expect(scrollIntoView).toHaveBeenCalled();
+  });
+
+  it("smoothly scrolls to the details on entry when autoScroll is set", () => {
+    vi.useFakeTimers();
+    const scrollIntoView = vi.fn();
+    Element.prototype.scrollIntoView = scrollIntoView;
+
+    render(
+      <LandingLayout
+        title="Keyboards"
+        keyboardLabel="Keyboards keyboard"
+        onNavigate={() => {}}
+        autoScroll
+      >
+        <p>Details</p>
+      </LandingLayout>,
+    );
+
+    expect(scrollIntoView).not.toHaveBeenCalled();
+    vi.advanceTimersByTime(200);
+    expect(scrollIntoView).toHaveBeenCalledWith({ behavior: "smooth" });
+  });
+
+  it("jumps instead of animating when reduced motion is requested", () => {
+    vi.useFakeTimers();
+    vi.stubGlobal("matchMedia", () => ({ matches: true }));
+    const scrollIntoView = vi.fn();
+    Element.prototype.scrollIntoView = scrollIntoView;
+
+    render(
+      <LandingLayout
+        title="Keyboards"
+        keyboardLabel="Keyboards keyboard"
+        onNavigate={() => {}}
+        autoScroll
+      >
+        <p>Details</p>
+      </LandingLayout>,
+    );
+
+    vi.advanceTimersByTime(1);
+    expect(scrollIntoView).toHaveBeenCalledWith({ behavior: "auto" });
   });
 });

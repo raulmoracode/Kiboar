@@ -9,6 +9,7 @@ export function LandingLayout({
   onNavigate,
   children,
   wide,
+  autoScroll = false,
 }: {
   title: string;
   word?: string;
@@ -16,24 +17,47 @@ export function LandingLayout({
   onNavigate: (href: string) => void;
   children?: ReactNode;
   wide?: boolean;
+  /** Scroll to the details section after the page paints. */
+  autoScroll?: boolean;
 }) {
   useEffect(() => {
     if (!children) {
       return;
     }
 
+    const details = document.getElementById("details");
+    if (!details) {
+      return;
+    }
+
+    const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
+
     function scrollToDetails() {
+      details?.scrollIntoView?.({ behavior: reduceMotion ? "auto" : "smooth" });
+    }
+
+    function onHashChange() {
       if (window.location.hash === "#details") {
-        document.getElementById("details")?.scrollIntoView();
+        scrollToDetails();
       }
     }
 
-    // The section mounts after the first paint, so the browser cannot perform
-    // its own hash scroll on a direct load or a refresh.
-    scrollToDetails();
-    window.addEventListener("hashchange", scrollToDetails);
-    return () => window.removeEventListener("hashchange", scrollToDetails);
-  }, [children]);
+    let timer = 0;
+    if (window.location.hash === "#details") {
+      // The section mounts after the first paint, so the browser cannot perform
+      // its own hash scroll on a direct load or a refresh.
+      scrollToDetails();
+    } else if (autoScroll) {
+      // Start on the next task so the hero paints before the scroll begins.
+      timer = window.setTimeout(scrollToDetails, 0);
+    }
+
+    window.addEventListener("hashchange", onHashChange);
+    return () => {
+      window.clearTimeout(timer);
+      window.removeEventListener("hashchange", onHashChange);
+    };
+  }, [children, autoScroll]);
 
   return (
     <>

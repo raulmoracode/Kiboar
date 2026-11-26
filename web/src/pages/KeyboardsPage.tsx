@@ -59,6 +59,7 @@ export function KeyboardsPage({ onNavigate }: { onNavigate: (href: string) => vo
       keyboardLabel="Keyboards keyboard"
       onNavigate={onNavigate}
       wide
+      autoScroll
     >
       <h1 className="sr-only">Keyboards</h1>
 
