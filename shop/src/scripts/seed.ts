@@ -16,6 +16,7 @@ import {
   createTaxRegionsWorkflow,
   linkSalesChannelsToApiKeyWorkflow,
   linkSalesChannelsToStockLocationWorkflow,
+  updateProductsWorkflow,
   updateStoresStep,
   updateStoresWorkflow,
 } from "@medusajs/medusa/core-flows";
@@ -312,6 +313,21 @@ export default async function seedKiboar({ container }: ExecArgs) {
           ],
           sales_channels: [{ id: onlineChannel.id }, { id: posChannel.id }],
         })),
+      },
+    });
+  }
+
+  const seededProducts = await productService.listProducts(
+    { handle: products.map((product) => product.handle) },
+    { take: products.length },
+  );
+  if (seededProducts.length) {
+    await updateProductsWorkflow(container).run({
+      input: {
+        selector: { id: seededProducts.map((product) => product.id) },
+        update: {
+          sales_channels: [{ id: onlineChannel.id }, { id: posChannel.id }],
+        },
       },
     });
   }
