@@ -1,6 +1,28 @@
 import { apiUrl } from "./config";
 import type { CheckoutInput, QrPayment } from "./payments";
 
+export type SalesChannelKind = "online" | "pos" | "other";
+export type SalesPaymentMethod = "stripe_link" | "cash" | "other";
+
+export interface Sale {
+  id: string;
+  display_id: number | null;
+  created_at: string;
+  status: string;
+  total: number;
+  currency_code: string;
+  channel: SalesChannelKind;
+  channel_name: string;
+  payment_method: SalesPaymentMethod;
+}
+
+export interface SalesPage {
+  sales: Sale[];
+  count: number;
+  limit: number;
+  offset: number;
+}
+
 export class MedusaAdminClient {
   private readonly baseUrl: string;
   private token: string | undefined;
@@ -37,6 +59,12 @@ export class MedusaAdminClient {
     });
     this.token = result.token;
     return result.token;
+  }
+
+  async listSales(limit = 100, offset = 0): Promise<Sale[]> {
+    const query = new URLSearchParams({ limit: String(limit), offset: String(offset) });
+    const result = await this.request<SalesPage>(`/admin/reports/sales?${query.toString()}`);
+    return result.sales;
   }
 
   /** Contract implemented by the shop backend in a later change. */
