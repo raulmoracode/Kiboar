@@ -61,6 +61,7 @@ pnpm --filter @kiboar/storefront dev        # http://localhost:3001
 pnpm --filter @kiboar/storefront build
 
 pnpm --filter @kiboar/pos start
+pnpm --filter @kiboar/pos web          # browser preview
 pnpm --filter @kiboar/pos typecheck
 pnpm --filter @kiboar/pos test
 ```

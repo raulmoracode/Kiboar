@@ -22,6 +22,7 @@ Stripe webhook land. Authentication is not wired yet.
 pnpm --filter @kiboar/pos start       # Expo dev server (device or simulator)
 pnpm --filter @kiboar/pos android     # dev server, open Android
 pnpm --filter @kiboar/pos ios         # dev server, open iOS (macOS)
+pnpm --filter @kiboar/pos web         # browser preview at localhost:8081
 pnpm --filter @kiboar/pos typecheck
 pnpm --filter @kiboar/pos test
 pnpm --filter @kiboar/pos export      # Android JS bundle
@@ -42,6 +43,18 @@ EXPO_PUBLIC_POS_LOCATION_ID=sloc_...
 
 The Admin API credentials are entered by staff and will be stored with
 `expo-secure-store`; never put a secret key in an `EXPO_PUBLIC_` variable.
+
+## Web preview
+
+The web target is enabled because Expo Router supports it and it is the fastest
+way to check the layout in a browser:
+
+```bash
+pnpm --filter @kiboar/pos web   # http://localhost:8081
+```
+
+It is a preview, not the shipping target: the product is a mobile app. It needs
+`react-dom` and `react-native-web`, both in `package.json`.
 
 ## Version notes
 
