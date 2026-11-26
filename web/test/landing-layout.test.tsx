@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { LandingLayout } from "./LandingLayout";
+import { LandingLayout } from "../src/components/LandingLayout";
 
 afterEach(() => {
   vi.useRealTimers();

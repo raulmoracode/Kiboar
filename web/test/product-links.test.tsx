@@ -2,7 +2,7 @@ import { repository } from "@kiboar/links";
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 
-import { ProductLinks } from "./ProductLinks";
+import { ProductLinks } from "../src/components/ProductLinks";
 
 describe("the product links", () => {
   it("renders the four live destinations", () => {

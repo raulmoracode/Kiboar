@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import axe from "axe-core";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import App from "./App";
+import App from "../src/App";
 
 const routes = ["/", "/keyboards", "/library", "/studio", "/missing"];
 
