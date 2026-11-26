@@ -1,14 +1,17 @@
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
-import { Image, StyleSheet, Text } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
+import { AppBar } from "@/components/AppBar";
 import { Button } from "@/components/Button";
 import { Card } from "@/components/Card";
+import { CartButton } from "@/components/CartButton";
+import { PageHeader } from "@/components/PageHeader";
+import { ProductTile } from "@/components/ProductTile";
 import { Screen } from "@/components/Screen";
 import { useCart } from "@/lib/cart-context";
 import { type CatalogueItem, imageUrl, listCatalogue, NotConfiguredError } from "@/lib/catalogue";
-import { formatMoney } from "@/lib/format";
-import { colors, fonts, radius, spacing } from "@/theme/tokens";
+import { spacing, typography } from "@/theme/tokens";
 
 type State =
   | { status: "loading" }
@@ -48,95 +51,73 @@ export default function Catalogue() {
     };
   }, [attempt]);
 
-  if (state.status === "loading") {
-    return (
-      <Screen>
-        <Text style={styles.eyebrow}>Catalogue</Text>
-        <Text style={styles.title}>Products</Text>
-        <Text style={styles.body}>Loading the catalogue…</Text>
-      </Screen>
-    );
-  }
-
-  if (state.status === "error") {
-    return (
-      <Screen>
-        <Text style={styles.eyebrow}>Catalogue</Text>
-        <Text style={styles.title}>Products</Text>
-        <Text style={styles.body}>{state.message}</Text>
-        <Button label="Try again" onPress={() => setAttempt((current) => current + 1)} />
-        <Button label="Back home" variant="ghost" onPress={() => router.push("/")} />
-      </Screen>
-    );
-  }
-
   return (
     <Screen>
-      <Text style={styles.eyebrow}>Catalogue</Text>
-      <Text style={styles.title}>Products</Text>
-
-      {state.items.length === 0 ? (
-        <Text style={styles.body}>
-          The POS sales channel has no published products yet. Run the shop seed and check the
-          channel in Medusa.
-        </Text>
-      ) : (
-        state.items.map((item) => {
-          const photo = imageUrl(item.thumbnail);
-
-          return (
-            <Card key={item.variantId}>
-              {photo ? (
-                <Image
-                  source={{ uri: photo }}
-                  accessibilityLabel={`${item.title} photo`}
-                  resizeMode="contain"
-                  style={styles.photo}
-                />
-              ) : null}
-              <Text style={styles.product}>{item.title}</Text>
-              <Text style={styles.price}>{formatMoney(item.unitAmount, item.currency)}</Text>
-              <Button
-                label="Add to cart"
-                onPress={() =>
-                  cart.add({
-                    id: item.variantId,
-                    title: item.title,
-                    unitAmount: item.unitAmount,
-                    currency: item.currency,
-                  })
-                }
-              />
-            </Card>
-          );
-        })
-      )}
-
-      <Button
-        label={`Open cart (${cart.count})`}
-        variant="ghost"
-        onPress={() => router.push("/cart")}
+      <AppBar
+        back
+        backTo="/"
+        title="Catalogue"
+        action={<CartButton count={cart.count} onPress={() => router.push("/cart")} />}
       />
+
+      <PageHeader
+        eyebrow="Catalogue"
+        subtitle="Tap a board to add it to the current sale."
+        title="Boards"
+      />
+
+      {state.status === "loading" ? (
+        <Text style={typography.body}>Loading the catalogue…</Text>
+      ) : null}
+
+      {state.status === "error" ? (
+        <Card>
+          <Text style={typography.small}>{state.message}</Text>
+          <Button label="Try again" onPress={() => setAttempt((current) => current + 1)} />
+          <Button label="Back home" variant="ghost" onPress={() => router.push("/")} />
+        </Card>
+      ) : null}
+
+      {state.status === "ready" && state.items.length === 0 ? (
+        <Card>
+          <Text style={typography.small}>
+            The POS sales channel has no published products yet. Run the shop seed and check the
+            channel in Medusa.
+          </Text>
+        </Card>
+      ) : null}
+
+      {state.status === "ready" && state.items.length > 0 ? (
+        <View style={styles.grid}>
+          {state.items.map((item) => (
+            <ProductTile
+              key={item.variantId}
+              item={item}
+              onAdd={() =>
+                cart.add({
+                  id: item.variantId,
+                  title: item.title,
+                  unitAmount: item.unitAmount,
+                  currency: item.currency,
+                  thumbnail: imageUrl(item.thumbnail),
+                })
+              }
+            />
+          ))}
+        </View>
+      ) : null}
+
+      {cart.count > 0 ? (
+        <Button
+          label={`Open cart (${cart.count})`}
+          variant="ghost"
+          onPress={() => router.push("/cart")}
+        />
+      ) : null}
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  eyebrow: {
-    color: colors.faint,
-    fontFamily: fonts.mono,
-    fontSize: 10,
-    letterSpacing: 1.6,
-    textTransform: "uppercase",
-  },
-  title: { color: colors.text, fontFamily: fonts.sans, fontSize: 32, fontWeight: "500" },
-  body: { color: colors.muted, fontFamily: fonts.sans, fontSize: 13, lineHeight: 20 },
-  photo: {
-    backgroundColor: colors.background,
-    borderRadius: radius.md,
-    height: 160,
-    width: "100%",
-  },
-  product: { color: colors.text, fontFamily: fonts.sans, fontSize: 15, fontWeight: "500" },
-  price: { color: colors.muted, fontFamily: fonts.mono, fontSize: 12, marginBottom: spacing.sm },
+  grid: { flexDirection: "row", flexWrap: "wrap", gap: spacing.md },
 });

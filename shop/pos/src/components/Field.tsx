@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 
-import { colors, fonts, radius, spacing } from "@/theme/tokens";
+import { colors, fonts, radius, spacing, typography } from "@/theme/tokens";
 
 interface Props {
   label: string;
@@ -13,15 +14,20 @@ interface Props {
 }
 
 export function Field({ label, value, onChangeText, ...input }: Props) {
+  const [focused, setFocused] = useState(false);
+
   return (
     <View style={styles.wrapper}>
-      <Text style={styles.label}>{label}</Text>
+      <Text style={typography.eyebrow}>{label}</Text>
       <TextInput
         accessibilityLabel={label}
-        style={styles.input}
+        onBlur={() => setFocused(false)}
+        onFocus={() => setFocused(true)}
+        placeholderTextColor={colors.faint}
+        selectionColor={colors.accent}
+        style={[styles.input, focused ? styles.focused : null]}
         value={value}
         onChangeText={onChangeText}
-        placeholderTextColor={colors.faint}
         {...input}
       />
     </View>
@@ -30,22 +36,16 @@ export function Field({ label, value, onChangeText, ...input }: Props) {
 
 const styles = StyleSheet.create({
   wrapper: { gap: spacing.xs },
-  label: {
-    color: colors.faint,
-    fontFamily: fonts.mono,
-    fontSize: 10,
-    letterSpacing: 1.2,
-    textTransform: "uppercase",
-  },
   input: {
-    backgroundColor: colors.background,
+    backgroundColor: colors.surface,
     borderColor: colors.border,
     borderRadius: radius.md,
     borderWidth: 1,
     color: colors.text,
     fontFamily: fonts.sans,
     fontSize: 15,
-    minHeight: 48,
+    minHeight: 52,
     paddingHorizontal: spacing.md,
   },
+  focused: { borderColor: colors.accent },
 });

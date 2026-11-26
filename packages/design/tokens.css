@@ -1,5 +1,18 @@
 :root {
   --kiboar-bg: #0a0b0d;
   --kiboar-surface: #0c0e11;
+  --kiboar-elevated: #111318;
+  --kiboar-card: rgba(255, 255, 255, 0.015);
+  --kiboar-card-pressed: rgba(255, 255, 255, 0.04);
+  --kiboar-border: rgba(255, 255, 255, 0.06);
+  --kiboar-border-strong: rgba(255, 255, 255, 0.16);
+  --kiboar-text: #e4e4e7;
+  --kiboar-text-strong: #f4f4f5;
+  --kiboar-muted: #a1a1aa;
+  --kiboar-faint: #71717a;
   --kiboar-accent: #bef264;
+  --kiboar-accent-soft: rgba(190, 242, 100, 0.12);
+  --kiboar-accent-text: #0a0b0d;
+  --kiboar-danger: #f87171;
+  --kiboar-danger-soft: rgba(248, 113, 113, 0.12);
 }

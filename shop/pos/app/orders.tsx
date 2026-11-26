@@ -2,14 +2,17 @@ import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
+import { AppBar } from "@/components/AppBar";
+import { Badge } from "@/components/Badge";
 import { Button } from "@/components/Button";
 import { Card } from "@/components/Card";
+import { PageHeader } from "@/components/PageHeader";
 import { Screen } from "@/components/Screen";
 import { MedusaAdminClient, type Sale, type SalesChannelKind } from "@/lib/api";
 import { useAuth } from "@/lib/auth-context";
 import { apiUrl } from "@/lib/config";
 import { formatMoney } from "@/lib/format";
-import { colors, fonts, radius, spacing } from "@/theme/tokens";
+import { colors, fonts, spacing, typography } from "@/theme/tokens";
 
 const CHANNEL_LABEL: Record<SalesChannelKind, string> = {
   online: "Online",
@@ -75,23 +78,32 @@ export default function Orders() {
 
   return (
     <Screen>
-      <Text style={styles.eyebrow}>Sales register</Text>
-      <Text style={styles.title}>All sales</Text>
+      <AppBar back backTo="/" title="Sales register" />
+
+      <PageHeader
+        eyebrow="Sales register"
+        subtitle="Online and POS orders, newest first."
+        title="All sales"
+      />
 
       {state.status === "signed_out" ? (
-        <>
-          <Text style={styles.body}>
+        <Card>
+          <Text style={styles.cardTitle}>Staff sign-in required</Text>
+          <Text style={typography.small}>
             Sign in with an admin user to read the online and POS sales register.
           </Text>
           <Button label="Sign in" onPress={() => router.push("/login")} />
-        </>
+        </Card>
       ) : null}
 
-      {state.status === "loading" ? <Text style={styles.body}>Loading the register…</Text> : null}
+      {state.status === "loading" ? (
+        <Text style={typography.body}>Loading the register…</Text>
+      ) : null}
 
       {state.status === "error" ? (
-        <>
-          <Text style={styles.body}>The register cannot be reached right now.</Text>
+        <Card>
+          <Text style={styles.cardTitle}>The register cannot be reached</Text>
+          <Text style={typography.small}>Check the backend and try again.</Text>
           <Button label="Try again" onPress={() => setAttempt((value) => value + 1)} />
           <Button
             label="Sign in again"
@@ -101,13 +113,16 @@ export default function Orders() {
               router.push("/login");
             }}
           />
-        </>
+        </Card>
       ) : null}
 
       {state.status === "ready" && state.sales.length === 0 ? (
-        <Text style={styles.body}>
-          No sales recorded yet. Online and POS orders will appear here.
-        </Text>
+        <Card>
+          <Text style={styles.cardTitle}>No sales yet</Text>
+          <Text style={typography.small}>
+            Online and POS orders will appear here as soon as they are paid.
+          </Text>
+        </Card>
       ) : null}
 
       {state.status === "ready"
@@ -123,16 +138,12 @@ export default function Orders() {
                 {formatDate(sale.created_at)} · {sale.status}
               </Text>
               <View style={styles.tags}>
-                <Text
-                  style={[
-                    styles.badge,
-                    sale.channel === "pos" ? styles.badgePos : styles.badgeOther,
-                  ]}
-                >
-                  {CHANNEL_LABEL[sale.channel]}
-                </Text>
+                <Badge
+                  label={CHANNEL_LABEL[sale.channel]}
+                  tone={sale.channel === "pos" ? "accent" : "neutral"}
+                />
                 {sale.channel === "pos" ? (
-                  <Text style={styles.badge}>{PAYMENT_LABEL[sale.payment_method]}</Text>
+                  <Badge label={PAYMENT_LABEL[sale.payment_method]} />
                 ) : null}
               </View>
             </Card>
@@ -145,32 +156,10 @@ export default function Orders() {
 }
 
 const styles = StyleSheet.create({
-  eyebrow: {
-    color: colors.faint,
-    fontFamily: fonts.mono,
-    fontSize: 10,
-    letterSpacing: 1.6,
-    textTransform: "uppercase",
-  },
-  title: { color: colors.text, fontFamily: fonts.sans, fontSize: 32, fontWeight: "500" },
-  body: { color: colors.muted, fontFamily: fonts.sans, fontSize: 13, lineHeight: 20 },
-  row: { flexDirection: "row", justifyContent: "space-between" },
+  cardTitle: { ...typography.title, fontSize: 20, lineHeight: 26 },
+  row: { alignItems: "baseline", flexDirection: "row", justifyContent: "space-between" },
   order: { color: colors.text, fontFamily: fonts.sans, fontSize: 15, fontWeight: "500" },
   total: { color: colors.text, fontFamily: fonts.mono, fontSize: 14 },
   meta: { color: colors.faint, fontFamily: fonts.sans, fontSize: 12 },
   tags: { flexDirection: "row", gap: spacing.xs, marginTop: spacing.xs },
-  badge: {
-    borderColor: colors.borderStrong,
-    borderRadius: radius.sm,
-    borderWidth: 1,
-    color: colors.muted,
-    fontFamily: fonts.mono,
-    fontSize: 10,
-    letterSpacing: 1.2,
-    paddingHorizontal: spacing.sm,
-    paddingVertical: 2,
-    textTransform: "uppercase",
-  },
-  badgePos: { borderColor: colors.accent, color: colors.accent },
-  badgeOther: { borderColor: colors.borderStrong, color: colors.muted },
 });

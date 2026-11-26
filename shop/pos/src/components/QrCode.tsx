@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
 import QRCode from "react-native-qrcode-svg";
 
-import { colors, fonts, radius, spacing } from "@/theme/tokens";
+import { colors, radius, spacing, typography } from "@/theme/tokens";
 
 export function QrCode({ value }: { value: string | null }) {
   if (!value) {
     return (
       <View style={styles.placeholder}>
         <Text style={styles.placeholderText}>
-          The payment QR appears here once the backend returns it.
+          The payment QR appears here once the backend returns the Stripe Checkout URL.
         </Text>
       </View>
     );
@@ -24,21 +24,26 @@ export function QrCode({ value }: { value: string | null }) {
 const styles = StyleSheet.create({
   placeholder: {
     alignItems: "center",
-    backgroundColor: colors.background,
+    alignSelf: "center",
+    backgroundColor: colors.card,
     borderColor: colors.border,
-    borderRadius: radius.md,
+    borderRadius: radius.lg,
     borderStyle: "dashed",
     borderWidth: 1,
-    height: 220,
+    height: 240,
     justifyContent: "center",
-    padding: spacing.md,
-    width: 220,
+    padding: spacing.lg,
+    width: 240,
   },
   placeholderText: {
-    color: colors.faint,
-    fontFamily: fonts.sans,
-    fontSize: 12,
+    ...typography.small,
+    maxWidth: 180,
     textAlign: "center",
   },
-  qr: { alignSelf: "center", backgroundColor: "#ffffff", padding: spacing.md },
+  qr: {
+    alignSelf: "center",
+    backgroundColor: "#ffffff",
+    borderRadius: radius.md,
+    padding: spacing.md,
+  },
 });
