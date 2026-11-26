@@ -1,0 +1,22 @@
+{
+  "expo": {
+    "name": "Kiboar POS",
+    "slug": "kiboar-pos",
+    "scheme": "kiboar-pos",
+    "version": "0.0.0",
+    "orientation": "landscape",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "plugins": ["expo-router"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.kiboar.pos"
+    },
+    "android": {
+      "package": "com.kiboar.pos"
+    },
+    "web": {
+      "bundler": "metro"
+    }
+  }
+}

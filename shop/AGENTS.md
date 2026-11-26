@@ -6,11 +6,12 @@ there apply here.
 
 ## What this product is
 
-The commercial surface of the Kiboar brand: it sells assembled keyboards. Two
+The commercial surface of the Kiboar brand: it sells assembled keyboards. Three
 applications live here: a Medusa v2 service with the Store API and the admin
-dashboard (`@kiboar/shop`), and the storefront in `shop/storefront`
-(`@kiboar/storefront`), a separate static Vite app that reads the Store API over
-HTTP. Neither is the public site; `web/` is.
+dashboard (`@kiboar/shop`), the storefront in `shop/storefront`
+(`@kiboar/storefront`), a static Vite app that reads the Store API over HTTP,
+and the POS in `shop/pos` (`@kiboar/pos`), an Expo/React Native app for staff
+that uses the Admin API. None is the public site; `web/` is.
 
 Buying is a convenience, not a lock-in: the library and the documentation must
 let anyone build the same board, so the shop never gates the design.
@@ -21,6 +22,8 @@ let anyone build the same board, so the shop never gates the design.
 - `src/api/` — custom API routes.
 - `src/admin/` — admin customizations, when they exist.
 - `storefront/` — the customer-facing Vite app, served under `/shop`.
+- `pos/` — the Expo/React Native POS scaffold; it is not part of `medusa build`
+  (the Medusa `tsconfig.json` excludes it) and has its own `shop-pos` CI workflow.
 - `.env.template` — the variables a local `.env` needs. Never commit `.env`.
 
 ## Rules
@@ -40,6 +43,9 @@ let anyone build the same board, so the shop never gates the design.
 - **The storefront is separate from `web`.** `shop/storefront` is its own Vite
   app; do not import `web/` or `software/` code into it. Both front ends share
   `@kiboar/design`, `@kiboar/vite-config` and `@kiboar/tsconfig`, not screens.
+- **The POS is a staff surface.** `shop/pos` uses the Admin API, not the Store
+  API, and never carries a secret key. Its non-secret configuration uses
+  `EXPO_PUBLIC_*`; credentials are stored in the device keychain.
 - **No secrets.** `.env` stays local; `.env.template` carries placeholders only.
 
 ## Commands
@@ -53,6 +59,11 @@ pnpm --filter @kiboar/shop db:migrate
 cp shop/storefront/.env.template shop/storefront/.env.local
 pnpm --filter @kiboar/storefront dev        # http://localhost:3001
 pnpm --filter @kiboar/storefront build
+
+pnpm --filter @kiboar/pos start
+pnpm --filter @kiboar/pos web          # browser preview
+pnpm --filter @kiboar/pos typecheck
+pnpm --filter @kiboar/pos test
 ```
 
 ## Before a PR

@@ -6,6 +6,7 @@ packages:
   - "web"
   - "shop"
   - "shop/storefront"
+  - "shop/pos"
 
 # A new dependency must be at least a day old before it can be resolved.
 # Writing the value enables strict enforcement; see CONTRIBUTING.md.
@@ -13,6 +14,7 @@ minimumReleaseAge: 1440
 
 allowBuilds:
   "@medusajs/telemetry": false
+  "@parcel/watcher": true
   "@swc/core": true
   esbuild: true
   msgpackr-extract: true

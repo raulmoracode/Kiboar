@@ -10,7 +10,7 @@ flow, not a runtime.
 
 | Product | Path | Built with | What it is |
 | --- | --- | --- | --- |
-| Shop | `shop/` | Medusa 2, Vite, Node, PostgreSQL | The commercial surface: a static storefront and the Medusa service; checkout is not connected yet |
+| Shop | `shop/` | Medusa 2, Vite, Expo/React Native, Node, PostgreSQL | The commercial surface: a static storefront, the Medusa service and the POS app; checkout is not connected yet |
 | Web | `web/` | Vite 8, React 19, Tailwind 4 | The public front door that brings the brand together |
 | KiCad library | `library/symbols/`, `library/footprints/`, `library/3dmodels/`, `library/lib-table-files/`, `library/pcm/`, `library/tools/` | KiCad 10, Python standard library | The official library, published so anyone can design and build a board |
 | Kiboar Studio | `software/` | Tauri 2, React, TypeScript, Rust | Manages a Kiboar board: detects, flashes and (after 0.1) remaps it, bought or self-built |
@@ -51,9 +51,11 @@ flow, not a runtime.
   dependency on the library; its generated pages come from
   `library/tools/gen_docs.py` and are committed.
 - **`web` and `shop` are separate apps that share packages, not screens.**
-  `web` is a static Vite app with no server. `shop` holds two applications: the
-  Medusa service (Store API and admin, PostgreSQL) and the storefront
-  (`shop/storefront`), a static Vite app that reads the Store API over HTTP.
+  `web` is a static Vite app with no server. `shop` holds three applications: the
+  Medusa service (Store API and admin, PostgreSQL), the storefront
+  (`shop/storefront`), a static Vite app that reads the Store API over HTTP, and
+  the POS (`shop/pos`), an Expo/React Native app that uses the Admin API as a
+  staff member.
   The three front ends — `web`, the storefront and Studio — use
   `@kiboar/design` for the base CSS and colour tokens, `@kiboar/vite-config`
   for the Vite plugins and ports, and `@kiboar/tsconfig` for their compiler
@@ -101,6 +103,7 @@ packages/vite-config/   @kiboar/vite-config
 web/                    @kiboar/web
 shop/                   @kiboar/shop (Medusa)
 shop/storefront/        @kiboar/storefront
+shop/pos/               @kiboar/pos (Expo/React Native)
 keyboards/              official board files, one directory per board and revision
 ```
 
