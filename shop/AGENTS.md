@@ -63,6 +63,7 @@ let anyone build the same board, so the shop never gates the design.
 ```bash
 cp shop/.env.template shop/.env       # once, then edit it
 pnpm --filter @kiboar/shop build
+pnpm --filter @kiboar/shop typecheck
 pnpm --filter @kiboar/shop dev        # needs PostgreSQL
 pnpm --filter @kiboar/shop db:migrate
 pnpm --filter @kiboar/shop seed       # needs PostgreSQL; idempotent

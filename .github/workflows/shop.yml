@@ -55,6 +55,9 @@ jobs:
       - name: Lint
         run: pnpm exec biome check shop
 
+      - name: Typecheck
+        run: pnpm --filter @kiboar/shop typecheck
+
       - name: Unit tests
         run: |
           pnpm --filter @kiboar/shop test
