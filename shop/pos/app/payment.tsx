@@ -1,11 +1,11 @@
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 import { AppBar } from "@/components/AppBar";
 import { QrCode } from "@/components/QrCode";
 import { Screen } from "@/components/Screen";
 import { useCart } from "@/lib/cart-context";
 import { formatMoney } from "@/lib/format";
-import { colors, fonts, typography } from "@/theme/tokens";
+import { colors, fonts, spacing, typography } from "@/theme/tokens";
 
 export default function Payment() {
   const cart = useCart();
@@ -15,9 +15,10 @@ export default function Payment() {
     <Screen>
       <AppBar back backTo="/cart" />
 
-      <Text style={typography.amount}>{formatMoney(cart.total, currency)}</Text>
-
-      <QrCode value={null} />
+      <View style={styles.hero}>
+        <Text style={[typography.amount, styles.amount]}>{formatMoney(cart.total, currency)}</Text>
+        <QrCode value={null} />
+      </View>
 
       <Text accessibilityLiveRegion="polite" style={styles.status}>
         Waiting for the backend
@@ -27,6 +28,8 @@ export default function Payment() {
 }
 
 const styles = StyleSheet.create({
+  hero: { alignItems: "center", gap: spacing.md },
+  amount: { textAlign: "center" },
   status: {
     color: colors.accent,
     fontFamily: fonts.mono,
