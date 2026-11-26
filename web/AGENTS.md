@@ -19,7 +19,7 @@ shop is the Medusa application in `shop/`, and this site points at it.
 - `src/pages/KeyboardsPage.tsx` — the `/keyboards` page: the Keyboards keyboard, the links and the open board definitions as cards.
 - `src/pages/NotFoundPage.tsx` — the 404 page: the landing layout with a 404 keyboard; it sets `robots: noindex`.
 - `src/components/Keyboard.tsx` — the drawn keyboard; the six lit keys are real links.
-- `src/components/LandingLayout.tsx` — the keyboard-first layout shared by the home page, the 404 and the three product pages; it keeps the keyboard and the links in the home position, shows a scroll cue and renders the page detail below the first screen.
+- `src/components/LandingLayout.tsx` — the keyboard-first layout shared by the home page, the 404 and the three product pages; it keeps the keyboard and the links in the home position, makes the spacebar a link to the details and renders the page detail below the first screen.
 - `src/components/ProductLinks.tsx` — the six destination links under the keyboard; the current page becomes Home.
 - `src/data/boards.ts` — the board data mirrored from `software/boards`; update it when a definition changes.
 - `src/data/products.ts` — the six destinations, their key and whether they are internal.

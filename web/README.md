@@ -8,8 +8,8 @@ Tailwind 4 single page application.
 the keyboard. Each letter opens one destination — Keyboards, Library, Shop,
 Studio, Docs and GitHub — and pressing the letter does the same on every page.
 Keyboards, Library and Studio are the same layout with their own name on the
-keyboard, a scroll cue and their detail below the first screen; the keyboard and
-links keep the home position. On those pages the link for the current page
+keyboard, a clickable spacebar that jumps to the detail and the detail below the
+first screen; the keyboard and links keep the home position. On those pages the link for the current page
 becomes Home, and its letter returns home. The rest open in a new tab. It does
 not replace the docs or the shop. The storefront in `shop/` reads Medusa; `web`
 does not call the Store API.
