@@ -134,8 +134,10 @@ Generated artifacts belong to their product and are never hand-edited:
 
 ## Commands
 
-`pnpm install` installs the JavaScript workspace once. `pnpm check` runs the
-library checks, Biome, rustfmt and clippy, the JavaScript typecheck/test/build
+`pnpm install` installs the JavaScript workspace once. `pnpm dev` (or
+`pnpm dev:all`) starts every server product and the PostgreSQL container, prints
+only the URL table and writes each service log to `.dev-logs/`. `pnpm check` runs
+the library checks, Biome, rustfmt and clippy, the JavaScript typecheck/test/build
 and the Rust tests. The product files name the checks that are specific to that
 product and the cases where the full `pnpm check` is not the right entry point.
 

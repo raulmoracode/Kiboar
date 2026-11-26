@@ -93,12 +93,13 @@ pnpm --filter @kiboar/shop build       # no database needed
 ```
 
 `pnpm dev` (and its alias `pnpm dev:all`) starts every server product and the
-PostgreSQL container that `shop/.env` points at, then prints each one with its
-local URL. The `dev:*` commands start only what a product needs: `dev:shop`
-brings up PostgreSQL, Medusa, the storefront and the POS; `dev:api` stops at
-Medusa. `Ctrl+C` stops the servers and the container it started. The command
-expects the three local env files from the product READMEs; when one is missing
-it says which copy command to run.
+PostgreSQL container that `shop/.env` points at, then prints only the URL table.
+Service output is written to `.dev-logs/<service>.log`; Docker and Colima stay
+quiet unless they fail. The `dev:*` commands start only what a product needs:
+`dev:shop` brings up PostgreSQL, Medusa, the storefront and the POS; `dev:api`
+stops at Medusa. `Ctrl+C` stops the servers and the container it started. The
+command expects the three local env files from the product READMEs; when one is
+missing it says which copy command to run.
 
 The setup, the commands and the scope of each are in
 [`web/README.md`](web/README.md) and [`shop/README.md`](shop/README.md).
