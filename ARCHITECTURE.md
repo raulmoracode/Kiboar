@@ -120,9 +120,14 @@ version drift; Turborepo is the task runner, not the version manager.
 | `pnpm build` | Build docs, Studio, web and shop through Turbo |
 | `pnpm typecheck` | Typecheck core, docs, Studio, web and the storefront |
 | `pnpm test` | Run the core tests |
-| `pnpm dev` | Start the docs, Studio, web and storefront dev servers; the Medusa service needs PostgreSQL, so it is excluded and has its own script |
-| `pnpm dev:web` | Start the web dev server |
-| `pnpm dev:shop` | Start Medusa; needs a `shop/.env` with `DATABASE_URL` and PostgreSQL |
+| `pnpm dev` / `pnpm dev:all` | Start every server product and the PostgreSQL container from `shop/.env`; print every local URL and stop the stack on Ctrl+C |
+| `pnpm dev:web` | Start the web dev server only |
+| `pnpm dev:docs` | Start the docs dev server only |
+| `pnpm dev:shop` | Start PostgreSQL, Medusa, the storefront and the POS |
+| `pnpm dev:api` | Start PostgreSQL and Medusa |
+| `pnpm dev:storefront` | Start PostgreSQL, Medusa and the storefront |
+| `pnpm dev:pos` | Start PostgreSQL, Medusa and the POS |
+| `pnpm dev:studio` | Start the desktop Studio application |
 | `pnpm library` | Run every KiCad library check |
 | `pnpm test:rust` | Run the Rust unit tests |
 | `pnpm check` | Library + JavaScript + Rust checks |
