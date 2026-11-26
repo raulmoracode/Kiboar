@@ -1,4 +1,4 @@
-import { repository as REPOSITORY } from "@kiboar/links";
+import { repository as REPOSITORY, tree } from "@kiboar/links";
 
 export interface OpenBoard {
   id: string;
@@ -9,7 +9,10 @@ export interface OpenBoard {
   cols: number;
   keys: number;
   split: boolean;
+  /** The published board definition file. */
   definition: string;
+  /** The GitHub directory that holds the board files. */
+  files: string;
 }
 
 /**
@@ -28,6 +31,7 @@ export const boards: readonly OpenBoard[] = [
     keys: 61,
     split: false,
     definition: `${REPOSITORY}/blob/main/software/boards/kb60-hhkb/rev1.json`,
+    files: tree("software/boards/kb60-hhkb"),
   },
   {
     id: "macropad-6",
@@ -39,6 +43,7 @@ export const boards: readonly OpenBoard[] = [
     keys: 6,
     split: false,
     definition: `${REPOSITORY}/blob/main/software/boards/macropad-6/rev1.json`,
+    files: tree("software/boards/macropad-6"),
   },
   {
     id: "split-4x6",
@@ -50,5 +55,6 @@ export const boards: readonly OpenBoard[] = [
     keys: 48,
     split: true,
     definition: `${REPOSITORY}/blob/main/software/boards/split-4x6/rev1.json`,
+    files: tree("software/boards/split-4x6"),
   },
 ];
