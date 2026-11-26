@@ -73,15 +73,27 @@ test("reduced motion keeps the jump instant", async ({ page }) => {
   await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
 });
 
-test("a route change starts at the top without animating", async ({ page }) => {
-  await page.goto("/studio");
-  await page.locator('svg a[href="#details"]').click();
+test("moving between detail pages keeps the reader at the details", async ({ page }) => {
+  await page.goto("/keyboards");
   await page.waitForFunction(() => window.scrollY > 100);
 
-  await page
-    .getByRole("link", { name: /Keyboards/ })
-    .first()
-    .click();
-  await expect(page).toHaveURL(/\/keyboards$/);
-  expect(await page.evaluate(() => window.scrollY)).toBe(0);
+  await page.keyboard.press("i");
+  await expect(page).toHaveURL(/\/library$/);
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(100);
+  await expect
+    .poll(() =>
+      page.evaluate(() =>
+        Math.round(document.getElementById("details")?.getBoundingClientRect().top ?? 9999),
+      ),
+    )
+    .toBeLessThan(720);
+});
+
+test("returning home rewinds the detail page before the route changes", async ({ page }) => {
+  await page.goto("/keyboards");
+  await page.waitForFunction(() => window.scrollY > 100);
+
+  await page.keyboard.press("k");
+  await expect(page).toHaveURL(/\/$/);
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
 });
