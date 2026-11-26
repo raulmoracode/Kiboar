@@ -47,5 +47,5 @@ const styles = StyleSheet.create({
     minHeight: 52,
     paddingHorizontal: spacing.md,
   },
-  focused: { borderColor: colors.borderStrong },
+  focused: { borderColor: colors.accent },
 });

@@ -74,12 +74,13 @@ const styles = StyleSheet.create({
   price: { color: colors.text, fontFamily: typography.mono.fontFamily, fontSize: 13 },
   add: {
     alignItems: "center",
-    borderColor: colors.borderStrong,
+    backgroundColor: colors.accentSoft,
+    borderColor: colors.accent,
     borderRadius: radius.pill,
     borderWidth: 1,
     height: 30,
     justifyContent: "center",
     width: 30,
   },
-  addLabel: { color: colors.text, fontFamily: typography.mono.fontFamily, fontSize: 15 },
+  addLabel: { color: colors.accent, fontFamily: typography.mono.fontFamily, fontSize: 15 },
 });
