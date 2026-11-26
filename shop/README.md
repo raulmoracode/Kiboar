@@ -11,9 +11,10 @@ staff that uses the Admin API.
 
 **Status: catalogue and storefront.** The backend and the admin run; the
 catalogue is seeded into PostgreSQL and both the storefront and the POS read
-the published products and their photos from the Store API. The storefront keeps
-a demo bag in the browser. There is no Medusa cart, checkout, account or search
-yet.
+the published products and their photos from the Store API. The admin **Sales**
+page and the POS sales screen read one register with the channel and the POS
+payment method. The storefront keeps a demo bag in the browser. There is no
+Medusa cart, checkout, account or search yet.
 
 ## Requirements
 
@@ -102,18 +103,24 @@ web preview.
 ## POS
 
 `shop/pos` is the mobile till. It reads the catalogue from the Store API with
-the **Kiboar POS** publishable key, uses the Admin API as a staff member for the
-operations that need it, keeps the cart locally and will take payment with a QR
-to a Stripe Checkout Session. See [`pos/README.md`](pos/README.md) for the
-stack, the backend contract and the distribution notes.
+the **Kiboar POS** publishable key, and signs staff in against the Admin API to
+read the sales register and, later, to run the checkout. It keeps the cart
+locally and will take payment with a QR to a Stripe Checkout Session. See
+[`pos/README.md`](pos/README.md) for the stack, the backend contract and the
+distribution notes.
 
 ```bash
 cp shop/pos/.env.template shop/pos/.env.local
 # edit it: EXPO_PUBLIC_POS_PUBLISHABLE_KEY from shop/seed-output.json
+pnpm --filter @kiboar/shop exec medusa user -e staff@example.com -p 'a-strong-password'
 pnpm --filter @kiboar/pos start
 pnpm --filter @kiboar/pos typecheck
 pnpm --filter @kiboar/pos test
 ```
+
+The `medusa user` command creates the admin account the POS signs in with. The
+token is kept in `expo-secure-store` on a device and in memory in the web
+preview.
 
 ## pnpm notes
 
@@ -131,6 +138,16 @@ so the rewrite has to keep their paths consistent. Production CORS must include
 the brand domain.
 
 The routing and the production host are not configured in this repository.
+
+## Sales register
+
+`GET /admin/reports/sales` is the single read used by the admin **Sales** page
+and the POS **Sales register** screen. It returns the orders with `channel`
+(`online`, `pos` or `other`), `channel_name` and `payment_method`
+(`stripe_link`, `cash` or `other`). The seed tags the two sales channels with
+`metadata.kiboar_channel`; the POS checkout must write
+`order.metadata.payment_method` as `cash` or `stripe_link`. When the metadata is
+missing, the register falls back to the Stripe provider id and then to `other`.
 
 ## What is not here
 
