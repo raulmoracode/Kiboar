@@ -152,9 +152,9 @@ export function ProductPage({
 
   return (
     <>
-      <article className="grid gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] lg:items-start">
+      <article className="grid gap-6 sm:gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] lg:items-start">
         <div>
-          <div className="flex aspect-[4/3] w-full items-center justify-center overflow-hidden kiboar-card">
+          <div className="flex aspect-[16/10] w-full items-center justify-center overflow-hidden kiboar-card sm:aspect-[4/3]">
             {image ? (
               <img src={image} alt={product.title} className="h-full w-full object-contain" />
             ) : (
@@ -191,7 +191,7 @@ export function ProductPage({
           <p className="mt-2 font-mono text-[14px] text-zinc-200">{formatPrice(price)}</p>
 
           {product.description ? (
-            <p className="mt-6 max-w-prose text-[13px] leading-relaxed text-zinc-400">
+            <p className="mt-4 max-w-prose text-[13px] leading-relaxed text-zinc-400 sm:mt-6">
               {product.description}
             </p>
           ) : null}
@@ -223,21 +223,23 @@ export function ProductPage({
             type="button"
             disabled={!variant || !price || soldOut}
             onClick={() => variant && onAdd(product, variant)}
-            className="mt-8 h-10 w-full max-w-sm rounded bg-zinc-100 text-[12px] font-medium text-[var(--kiboar-bg)] transition-colors hover:bg-lime-200 disabled:cursor-not-allowed disabled:bg-zinc-700 disabled:text-zinc-500"
+            className="mt-6 h-10 w-full rounded bg-zinc-100 text-[12px] font-medium text-[var(--kiboar-bg)] transition-colors hover:bg-lime-200 disabled:cursor-not-allowed disabled:bg-zinc-700 disabled:text-zinc-500 sm:mt-8 sm:max-w-sm"
           >
             {soldOut ? "Sold out" : "Add to bag"}
           </button>
 
           <KeyboardFilesButton url={filesUrl} />
-
-          <p className="mt-3 text-[10px] leading-relaxed text-zinc-600">
-            Demo bag. Checkout is not connected to Medusa yet.
-          </p>
         </div>
       </article>
 
       {related.length > 0 ? (
-        <section aria-label="More boards" className="mt-16 border-t border-white/[0.06] pt-8">
+        <section
+          aria-label="More boards"
+          className="mt-10 border-t border-white/[0.06] pt-6 sm:mt-16 sm:pt-8"
+        >
+          <h2 className="mb-4 text-[10px] tracking-[0.16em] text-zinc-500 uppercase">
+            More boards
+          </h2>
           <div className="grid gap-3 sm:grid-cols-3">
             {related.map((entry) => (
               <ProductCard key={entry.id} product={entry} onOpen={onOpen} layout="related" />

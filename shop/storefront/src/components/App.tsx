@@ -295,7 +295,7 @@ export default function App() {
         />
 
         {handle ? (
-          <section aria-label="Product" className="mx-auto mt-14 w-full max-w-[1200px]">
+          <section aria-label="Product" className="mx-auto mt-6 w-full max-w-[1200px] sm:mt-14">
             <ProductPage
               key={handle}
               handle={handle}
