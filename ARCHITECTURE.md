@@ -121,9 +121,9 @@ version drift; Turborepo is the task runner, not the version manager.
 | Command | What it does |
 | --- | --- |
 | `pnpm install` | Install the whole JavaScript workspace once |
-| `pnpm build` | Build docs, Studio, web and shop through Turbo |
-| `pnpm typecheck` | Typecheck core, docs, Studio, web and the storefront |
-| `pnpm test` | Run the core tests |
+| `pnpm build` | Build every workspace package with a `build` script through Turbo (docs, Studio, web, shop and the storefront) |
+| `pnpm typecheck` | Typecheck every workspace package with a `typecheck` script (core, docs, Studio, web, shop, storefront and POS) |
+| `pnpm test` | Run every workspace package's tests (core, docs, Studio, web, shop, storefront and POS) |
 | `pnpm dev` / `pnpm dev:all` | Start every server product and the PostgreSQL container from `shop/.env`; print every local URL and stop the stack on Ctrl+C |
 | `pnpm dev:web` | Start the web dev server only |
 | `pnpm dev:docs` | Start the docs dev server only |

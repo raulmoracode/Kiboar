@@ -160,7 +160,6 @@ Neither surface has a release tag or a production deployment yet.
 | Gap | Consequence |
 | --- | --- |
 | Library release is manual | Tagging, building the PCM ZIP and attaching artifacts are manual |
-| No test gate in the Studio release | The tag build packages without running the Rust or frontend tests |
 | No signing or notarisation | Studio builds are unsigned today |
 | No changelog for docs or Studio | Their release notes are written by hand |
 | No web or shop deployment | Both surfaces are built but not hosted; their release path is not automated |
