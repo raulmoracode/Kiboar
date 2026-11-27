@@ -51,4 +51,12 @@ describe("the board catalogue", () => {
   it("lists every registry board", () => {
     expect(registry.boards).toHaveLength(boards.length);
   });
+
+  it("links every board to its storefront product page", () => {
+    expect(boards.map((board) => board.shop)).toEqual([
+      "/shop/?p=kb60-hhkb",
+      "/shop/?p=macropad-6",
+      "/shop/?p=kb-split",
+    ]);
+  });
 });

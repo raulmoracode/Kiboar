@@ -37,15 +37,29 @@ function BoardCard({ board }: { board: OpenBoard }) {
 
       <div className="flex items-baseline justify-between gap-4 p-5">
         <h2 className="min-w-0 truncate text-[15px] font-medium text-zinc-100">{board.name}</h2>
-        <a
-          href={board.files}
-          target="_blank"
-          rel="noreferrer"
-          aria-label={`${board.name} files on GitHub (opens in a new tab)`}
-          className="shrink-0 text-[11px] text-zinc-400 underline decoration-white/15 underline-offset-4 transition-colors hover:text-lime-200"
-        >
-          GitHub
-        </a>
+        <div className="flex shrink-0 items-baseline gap-2">
+          <a
+            href={board.files}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={`${board.name} files on GitHub (opens in a new tab)`}
+            className="text-[11px] text-zinc-400 underline decoration-white/15 underline-offset-4 transition-colors hover:text-lime-200"
+          >
+            GitHub
+          </a>
+          <span aria-hidden="true" className="text-[11px] text-zinc-700">
+            ·
+          </span>
+          <a
+            href={board.shop}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={`Shop ${board.name} (opens in a new tab)`}
+            className="text-[11px] font-medium text-lime-300 transition-colors hover:text-lime-200"
+          >
+            Shop
+          </a>
+        </div>
       </div>
     </article>
   );
