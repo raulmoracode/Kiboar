@@ -319,12 +319,16 @@ export function ProductPage({
             type="button"
             disabled={!variant || !price || soldOut}
             onClick={() => variant && onAdd(product, variant)}
-            className="mt-6 h-10 w-full rounded bg-zinc-100 text-[12px] font-medium text-[var(--kiboar-bg)] transition-colors hover:bg-lime-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-300/70 disabled:cursor-not-allowed disabled:bg-zinc-700 disabled:text-zinc-500 sm:mt-8"
+            className={`mt-6 h-10 w-full rounded text-[12px] font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-300/70 sm:mt-8 ${
+              soldOut
+                ? "cursor-not-allowed border border-white/10 bg-transparent text-zinc-500"
+                : "bg-zinc-100 text-[var(--kiboar-bg)] hover:bg-lime-200 disabled:cursor-not-allowed disabled:bg-zinc-700 disabled:text-zinc-500"
+            }`}
           >
             {soldOut ? "Sold out" : "Add to bag"}
           </button>
 
-          <KeyboardFilesButton url={filesUrl} />
+          <KeyboardFilesButton url={filesUrl} prominent={soldOut} />
           <DownloadFirmwareButton url={firmware} />
         </div>
       </article>

@@ -366,8 +366,40 @@ test("marks a sold-out board in the catalogue", async ({ page }) => {
   await mockShop(page, { products: [soldOut, makeProduct(2)] });
   await page.goto("/");
 
-  await expect(page.locator('a[href="?p=board-1"]').getByText("Sold out")).toBeVisible();
+  const card = page.locator('a[href="?p=board-1"]');
+  const badge = await card.getByText("Sold out").boundingBox();
+  const price = await card.getByText("€100.00").boundingBox();
+  const title = await card.getByRole("heading", { level: 2 }).boundingBox();
+  if (!badge || !price || !title) {
+    throw new Error("The sold-out card should render its title, badge and price.");
+  }
+
+  expect(badge.x).toBeGreaterThan(title.x);
+  expect(badge.x + badge.width).toBeLessThanOrEqual(price.x + 1);
+  expect(Math.abs(badge.y - price.y)).toBeLessThan(10);
   await expect(page.locator('a[href="?p=board-2"]').getByText("Sold out")).toHaveCount(0);
+});
+
+test("moves the primary action to the keyboard files when sold out", async ({ page }) => {
+  const soldOut = makeProduct(1, {
+    keyboard_files_url:
+      "https://github.com/raulmoracode/Kiboar/tree/main/software/boards/kb60-hhkb",
+  });
+  const variant = soldOut.variants?.[0];
+  if (!variant) {
+    throw new Error("The fixture should have a variant.");
+  }
+  soldOut.variants = [{ ...variant, inventory_quantity: 0 }];
+
+  await mockShop(page, { products: [soldOut] });
+  await page.goto("/?p=board-1");
+
+  const add = page.getByRole("button", { name: "Sold out" });
+  const files = page.getByRole("link", { name: /Keyboard files on GitHub/ });
+
+  await expect(add).toBeDisabled();
+  await expect(add).toHaveCSS("background-color", "rgba(0, 0, 0, 0)");
+  await expect(files).toHaveClass(/bg-zinc-100/);
 });
 
 test("shows the footer links", async ({ page }) => {

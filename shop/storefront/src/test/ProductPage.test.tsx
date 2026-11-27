@@ -61,6 +61,24 @@ describe("the product page", () => {
     expect(add.compareDocumentPosition(link) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
 
+  it("moves the primary action to the keyboard files when the board is sold out", async () => {
+    const soldOut = product({ keyboard_files_url: url });
+    const first = soldOut.variants?.[0];
+    if (!first) {
+      throw new Error("The fixture should have a variant.");
+    }
+    soldOut.variants = [{ ...first, inventory_quantity: 0 }];
+    getProduct.mockResolvedValue(soldOut);
+    renderPage();
+
+    const add = await screen.findByRole("button", { name: "Sold out" });
+    const link = screen.getByRole("link", { name: /Keyboard files on GitHub/ });
+
+    expect(add.hasAttribute("disabled")).toBe(true);
+    expect(add.className).toContain("border-white/10");
+    expect(link.className).toContain("bg-zinc-100");
+  });
+
   it("hides the keyboard files button without a URL", async () => {
     getProduct.mockResolvedValue(product(null));
     renderPage();
