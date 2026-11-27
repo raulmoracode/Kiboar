@@ -1,9 +1,12 @@
 import { createContext, type ReactNode, useContext, useState } from "react";
 
+import { type Buyer, EMPTY_BUYER } from "./buyer";
 import { addLine, type CartLine, cartCount, cartTotal, setQuantity } from "./cart";
 
 interface CartContextValue {
   lines: CartLine[];
+  buyer: Buyer;
+  setBuyer: (patch: Partial<Buyer>) => void;
   count: number;
   total: number;
   add: (line: Omit<CartLine, "quantity">) => void;
@@ -15,16 +18,22 @@ const CartContext = createContext<CartContextValue | undefined>(undefined);
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [lines, setLines] = useState<CartLine[]>([]);
+  const [buyer, setBuyerState] = useState<Buyer>(EMPTY_BUYER);
 
   return (
     <CartContext.Provider
       value={{
         lines,
+        buyer,
+        setBuyer: (patch) => setBuyerState((current) => ({ ...current, ...patch })),
         count: cartCount(lines),
         total: cartTotal(lines),
         add: (line) => setLines((current) => addLine(current, line)),
         setQuantity: (id, quantity) => setLines((current) => setQuantity(current, id, quantity)),
-        clear: () => setLines([]),
+        clear: () => {
+          setLines([]);
+          setBuyerState(EMPTY_BUYER);
+        },
       }}
     >
       {children}

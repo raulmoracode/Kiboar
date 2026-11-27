@@ -5,8 +5,10 @@ import {
   capturePaymentWorkflow,
   completeCartWorkflow,
   createCartWorkflow,
+  createOrderFulfillmentWorkflow,
   createPaymentCollectionForCartWorkflow,
   createPaymentSessionsWorkflow,
+  markOrderFulfillmentAsDeliveredWorkflow,
 } from "@medusajs/medusa/core-flows";
 import { z } from "zod";
 
@@ -19,11 +21,15 @@ const schema = z.object({
       }),
     )
     .min(1),
+  buyer: z.object({
+    firstName: z.string().trim().min(1).max(80),
+    lastName: z.string().trim().min(1).max(80),
+    email: z.string().trim().email(),
+  }),
 });
 
 const CASH_PROVIDER = "pp_system_default";
 const PICKUP_OPTION = "Store pickup";
-const POS_EMAIL = "pos@kiboar.local";
 
 /**
  * Completes a cash sale in the POS channel: cart, pickup, system payment,
@@ -36,7 +42,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
   if (!parsed.success) {
     throw new MedusaError(
       MedusaError.Types.INVALID_DATA,
-      "Expected at least one item with variantId and a positive quantity.",
+      "Expected at least one item and the buyer's first name, last name and email.",
     );
   }
 
@@ -63,8 +69,6 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     );
   }
 
-  const countryCode = region.countries?.[0]?.iso_2?.toLowerCase() ?? "es";
-
   const { result: cart } = await createCartWorkflow(req.scope).run({
     input: {
       region_id: region.id,
@@ -73,15 +77,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
         variant_id: item.variantId,
         quantity: item.quantity,
       })),
-      email: POS_EMAIL,
-      shipping_address: {
-        first_name: "Kiboar",
-        last_name: "POS",
-        address_1: "Store",
-        city: "Barcelona",
-        country_code: countryCode,
-        postal_code: "08001",
-      },
+      email: parsed.data.buyer.email,
     },
   });
 
@@ -129,10 +125,41 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     input: { payment_id: payment.id },
   });
 
+  // An in-person cash sale is handed over at the counter: fulfill and deliver
+  // it immediately so it never waits for a shipment.
+  const { data: orderItems } = await query.graph({
+    entity: "order",
+    fields: ["items.id", "items.quantity"],
+    filters: { id: completed.id },
+  });
+  const items = (orderItems as Array<{ items?: Array<{ id: string; quantity: number }> }>)[0]
+    ?.items;
+
+  if (!items?.length) {
+    throw new MedusaError(
+      MedusaError.Types.UNEXPECTED_STATE,
+      "The cash order has no items to fulfill.",
+    );
+  }
+
+  const fulfillment = await createOrderFulfillmentWorkflow(req.scope).run({
+    input: {
+      order_id: completed.id,
+      items: items.map((item) => ({ id: item.id, quantity: item.quantity })),
+    },
+  });
+
+  await markOrderFulfillmentAsDeliveredWorkflow(req.scope).run({
+    input: { orderId: completed.id, fulfillmentId: fulfillment.result.id },
+  });
+
   const order = await orderService.updateOrders(completed.id, {
     metadata: {
       payment_method: "cash",
       pos_sale: true,
+      buyer_first_name: parsed.data.buyer.firstName,
+      buyer_last_name: parsed.data.buyer.lastName,
+      buyer_email: parsed.data.buyer.email,
     },
   });
 

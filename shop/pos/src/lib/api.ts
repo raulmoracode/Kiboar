@@ -1,3 +1,4 @@
+import type { Buyer } from "./buyer";
 import { apiUrl } from "./config";
 import type { CheckoutInput, QrPayment } from "./payments";
 
@@ -33,6 +34,7 @@ export interface CashSale {
 
 export interface CashSaleInput {
   items: { variantId: string; quantity: number }[];
+  buyer: Buyer;
 }
 
 export class MedusaAdminClient {
