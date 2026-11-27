@@ -54,17 +54,19 @@ let anyone build the same board, so the shop never gates the design.
   path; the storefront resolves it against the Store API origin. Do not hardcode
   a board URL or firmware file in the storefront. The local file provider writes
   to `shop/static` (ignored by git); production needs object storage.
-- **The storefront bag is a demo.** It lives in browser memory, does not create
-  a Medusa cart and has no checkout. Do not document it as a working purchase
-  flow.
+- **The storefront bag is a demo.** It is stored in `localStorage` under a
+  versioned key, does not create a Medusa cart and has no checkout. Do not
+  document it as a working purchase flow.
 - **The storefront is separate from `web`.** `shop/storefront` is its own Vite
   app; do not import `web/` or `software/` code into it. Both front ends share
-  `@kiboar/design`, `@kiboar/vite-config` and `@kiboar/tsconfig`, not screens.
+  `@kiboar/design`, `@kiboar/vite-config`, `@kiboar/tsconfig` and
+  `@kiboar/links`, not screens.
 - **The POS is a staff surface.** `shop/pos` reads the catalogue from the Store
   API with a publishable key scoped to the POS sales channel, and uses the Admin
   API for the authenticated operations (login and checkout). It never carries a
-  secret key. Its non-secret configuration uses `EXPO_PUBLIC_*`; credentials are
-  stored in the device keychain.
+  secret key. Its non-secret configuration uses `EXPO_PUBLIC_*`; the staff
+  session token is stored in the device keychain, and the email and password are
+  never persisted.
 - **The POS palette is shared.** Import `kiboarColors` from
   `@kiboar/design/tokens`; do not copy hex values into `shop/pos`. Only POS
   spacing, typography and layout belong in the app's theme file.

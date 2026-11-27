@@ -6,11 +6,12 @@ channel, and uses the **Admin API** as a staff member for the operations that
 need it. It builds a cart, completes cash sales and will take Stripe QR payments
 when the Checkout Session endpoint lands.
 
-**Status: catalogue, auth, register and cash.** The screens, theme, cart state,
-DB-backed catalogue, staff login and sales register exist. The app asks for the
-staff account when it starts and reuses that session everywhere else. Cash creates a real
-Medusa order in the POS channel and captures the payment. The Stripe QR is still
-a placeholder until the checkout endpoint and webhook land.
+**Status: catalogue, auth, register, cash and stock.** The screens, theme, cart
+state, DB-backed catalogue, staff login and sales register exist. The app asks
+for the staff account when it starts and reuses that session everywhere else.
+Cash creates a real Medusa order in the POS channel and captures the payment.
+The Stripe QR is still a placeholder until the checkout endpoint and webhook
+land.
 
 ## Stack
 
@@ -53,17 +54,26 @@ EXPO_PUBLIC_POS_LOCATION_ID=sloc_...
 
 The seed writes the POS publishable key, the POS sales channel ID and the stock
 location ID to `shop/seed-output.json`. The publishable key is not a secret: it
-only scopes Store API reads to the POS sales channel. The Admin API credentials
-are entered by staff and stored with `expo-secure-store`; never put a secret key
-in an `EXPO_PUBLIC_` variable.
+only scopes Store API reads to the POS sales channel. The staff session token is
+stored with `expo-secure-store`; the email and password are entered at sign-in
+and never persisted. Never put a secret key in an `EXPO_PUBLIC_` variable.
 
 ## Sign-in
 
-The till opens on the staff sign-in and nothing else renders until there is a
-session. Once signed in, no other screen asks for the account again: the
-catalogue, the register and the payment screens reuse the stored token. The
-session survives a reload on a device; on the web preview it lasts for the tab.
-**Sign out** lives in Settings, and the guard sends the app back to sign-in.
+The till redirects to the staff sign-in until a session is loaded; signed-in
+users are redirected away from `/login`. Once signed in, no other screen asks
+for the account again: the catalogue, the register and the payment screens reuse
+the stored token. The session survives a reload on a device; on the web preview
+it lasts for the tab. **Sign out** lives in Settings, and the guard sends the app
+back to sign-in.
+
+## Stock
+
+The catalogue requests the computed `+variants.inventory_quantity`. A variant is
+sold out when it manages inventory, does not allow backorder and has no quantity
+left; a `null` quantity (stock not managed) stays available. A sold-out tile
+shows **Sold out**, is disabled and does not add to the cart; the catalogue
+handler also guards the add path.
 
 ## Web preview
 
