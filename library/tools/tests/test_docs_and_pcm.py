@@ -28,6 +28,18 @@ class PcmTests(unittest.TestCase):
         self.assertEqual(root, "${KICAD10_3RD_PARTY}")
         self.assertEqual(identifier, "com_kiboar_library")
 
+    def test_package_files_skips_non_cad_files(self):
+        files = [
+            archive
+            for archive, _ in build_pcm.package_files({"identifier": "com.example"}, "PCM_")
+        ]
+
+        self.assertTrue(any(name.endswith(".kicad_sym") for name in files))
+        self.assertTrue(any(name.endswith(".kicad_mod") for name in files))
+        self.assertTrue(any(name.lower().endswith((".step", ".stp", ".wrl")) for name in files))
+        self.assertFalse(any(name.endswith(".md") for name in files))
+        self.assertFalse(any(name.endswith(".py") for name in files))
+
     def test_human_sizes(self):
         self.assertEqual(model_inventory.human(512), "512 B")
         self.assertEqual(model_inventory.human(2048), "2 KB")
