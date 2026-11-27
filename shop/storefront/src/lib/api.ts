@@ -29,6 +29,7 @@ export interface Product {
   handle: string;
   description: string | null;
   thumbnail: string | null;
+  metadata?: Record<string, unknown> | null;
   images?: ProductImage[];
   variants?: Variant[];
 }
@@ -48,7 +49,7 @@ const BASE_URL = (import.meta.env.VITE_MEDUSA_URL ?? "http://localhost:9000").re
 const PUBLISHABLE_KEY = import.meta.env.VITE_MEDUSA_PUBLISHABLE_KEY ?? "";
 
 const FIELDS =
-  "id,title,handle,description,thumbnail,*images,*variants,*variants.prices,*variants.calculated_price,*variants.inventory_quantity";
+  "id,title,handle,description,thumbnail,metadata,*images,*variants,*variants.prices,*variants.calculated_price,*variants.inventory_quantity";
 
 export const PAGE_SIZE = 12;
 
@@ -172,4 +173,22 @@ export function imageUrl(thumbnail: string | null): string | null {
   }
 
   return thumbnail.startsWith("http") ? thumbnail : `${BASE_URL}${thumbnail}`;
+}
+
+export function keyboardFilesUrl(product: Product): string | null {
+  const value = product.metadata?.keyboard_files_url;
+  if (typeof value !== "string" || !value.trim()) {
+    return null;
+  }
+
+  try {
+    const url = new URL(value.trim());
+    const isGithub = url.hostname === "github.com" || url.hostname === "www.github.com";
+    if (url.protocol !== "https:" || !isGithub) {
+      return null;
+    }
+    return url.toString();
+  } catch {
+    return null;
+  }
 }

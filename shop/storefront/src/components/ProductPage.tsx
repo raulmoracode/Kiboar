@@ -4,11 +4,13 @@ import {
   getProduct,
   imageUrl,
   isVariantSoldOut,
+  keyboardFilesUrl,
   NotConfiguredError,
   type Product,
   type Variant,
   variantPrice,
 } from "../lib/api";
+import { KeyboardFilesButton } from "./KeyboardFilesButton";
 import { ProductCard } from "./ProductCard";
 
 type State =
@@ -146,6 +148,7 @@ export function ProductPage({
     images.push(fallback);
   }
   const image = images[imageIndex] ?? images[0] ?? null;
+  const filesUrl = keyboardFilesUrl(product);
 
   return (
     <>
@@ -224,6 +227,8 @@ export function ProductPage({
           >
             {soldOut ? "Sold out" : "Add to bag"}
           </button>
+
+          <KeyboardFilesButton url={filesUrl} />
 
           <p className="mt-3 text-[10px] leading-relaxed text-zinc-600">
             Demo bag. Checkout is not connected to Medusa yet.
