@@ -37,7 +37,7 @@ export function ProductCard({
         layout === "grid" ? "md:h-[calc((100vh-9rem)/3)]" : ""
       }`}
     >
-      <div className="flex flex-col gap-0.5 px-3 pt-2.5 pb-2 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4 sm:px-4 sm:pt-3.5 sm:pb-3">
+      <div className="flex items-baseline justify-between gap-2 px-3 pt-2.5 pb-2 sm:gap-4 sm:px-4 sm:pt-3.5 sm:pb-3">
         <Title className="min-w-0 truncate text-[13px] text-zinc-100 sm:text-[14px]">
           {product.title}
         </Title>
