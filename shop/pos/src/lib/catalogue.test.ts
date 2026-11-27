@@ -1,4 +1,4 @@
-import { imageUrl, toCatalogueItem, variantPrice } from "./catalogue";
+import { imageUrl, isVariantSoldOut, toCatalogueItem, variantPrice } from "./catalogue";
 import { apiUrl } from "./config";
 
 describe("the POS catalogue", () => {
@@ -23,7 +23,68 @@ describe("the POS catalogue", () => {
       unitAmount: 189,
       currency: "eur",
       thumbnail: "/static/kiboar-60.png",
+      soldOut: false,
     });
+  });
+
+  it("marks a variant with no stock as sold out", () => {
+    const item = toCatalogueItem({
+      id: "prod_1",
+      title: "Kiboar Split",
+      variants: [
+        {
+          id: "var_1",
+          title: "Standard",
+          prices: [{ amount: 219, currency_code: "eur" }],
+          inventory_quantity: 0,
+          manage_inventory: true,
+          allow_backorder: false,
+        },
+      ],
+    });
+
+    expect(item?.soldOut).toBe(true);
+  });
+
+  it("keeps a variant available when it allows backorder or does not manage stock", () => {
+    expect(
+      isVariantSoldOut({
+        id: "var_1",
+        title: "Standard",
+        inventory_quantity: 0,
+        manage_inventory: true,
+        allow_backorder: true,
+      }),
+    ).toBe(false);
+
+    expect(
+      isVariantSoldOut({
+        id: "var_1",
+        title: "Standard",
+        inventory_quantity: 0,
+        manage_inventory: false,
+        allow_backorder: false,
+      }),
+    ).toBe(false);
+
+    expect(
+      isVariantSoldOut({
+        id: "var_1",
+        title: "Standard",
+        inventory_quantity: null,
+        manage_inventory: true,
+      }),
+    ).toBe(false);
+
+    expect(
+      isVariantSoldOut({
+        id: "var_1",
+        title: "Standard",
+        inventory_quantity: 3,
+        manage_inventory: true,
+        allow_backorder: false,
+      }),
+    ).toBe(false);
   });
 
   it("prefers EUR and falls back to the first price", () => {

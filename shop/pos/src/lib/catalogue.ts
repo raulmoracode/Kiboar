@@ -9,6 +9,9 @@ export interface StoreVariant {
   id: string;
   title: string;
   prices?: StorePrice[];
+  inventory_quantity?: number | null;
+  manage_inventory?: boolean | null;
+  allow_backorder?: boolean | null;
 }
 
 export interface StoreProduct {
@@ -27,16 +30,31 @@ export interface CatalogueItem {
   unitAmount: number;
   currency: string;
   thumbnail: string | null;
+  /** The variant cannot be sold: no stock and no backorder allowed. */
+  soldOut: boolean;
 }
 
 export class NotConfiguredError extends Error {}
 
-const FIELDS = "id,title,thumbnail,*variants,*variants.prices";
+const FIELDS = "id,title,thumbnail,*variants,*variants.prices,+variants.inventory_quantity";
 
 export function variantPrice(variant: StoreVariant | undefined): StorePrice | null {
   const prices = variant?.prices ?? [];
 
   return prices.find((price) => price.currency_code.toLowerCase() === "eur") ?? prices[0] ?? null;
+}
+
+/** `inventory_quantity` is null when Medusa does not manage stock for the variant. */
+export function isVariantSoldOut(variant: StoreVariant | undefined): boolean {
+  if (!variant || variant.inventory_quantity == null) {
+    return false;
+  }
+
+  return (
+    variant.manage_inventory === true &&
+    variant.allow_backorder !== true &&
+    variant.inventory_quantity <= 0
+  );
 }
 
 export function toCatalogueItem(product: StoreProduct): CatalogueItem | null {
@@ -54,6 +72,7 @@ export function toCatalogueItem(product: StoreProduct): CatalogueItem | null {
     unitAmount: price.amount,
     currency: price.currency_code,
     thumbnail: product.thumbnail ?? null,
+    soldOut: isVariantSoldOut(variant),
   };
 }
 
