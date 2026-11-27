@@ -104,8 +104,8 @@ storefront origin; the template allows both `http://localhost:3000` and
 web preview.
 
 Each product page shows a **Keyboard files on GitHub** button when the product's
-`metadata.keyboard_files_url` is set. Edit it from the **Keyboard files** card on
-the product detail page in the admin; leave it empty to hide the button.
+`metadata.keyboard_files_url` is set. Edit it from the **Keyboard files URL**
+field in the product's **Edit Product** form; leave it empty to hide the button.
 
 ## POS
 
