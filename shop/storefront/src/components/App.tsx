@@ -298,7 +298,7 @@ export default function App() {
         <StudioBanner />
 
         {handle ? (
-          <section aria-label="Product" className="mx-auto mt-6 w-full max-w-[1200px] sm:mt-14">
+          <section aria-label="Product" className="mx-auto w-full max-w-[1200px]">
             <ProductPage
               key={handle}
               handle={handle}
