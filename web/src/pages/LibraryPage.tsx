@@ -7,7 +7,7 @@ const STATS = [
   ["Symbols", "145"],
   ["Footprints", "173"],
   ["Libraries", "26"],
-  ["3D models", "89"],
+  ["3D models", "129"],
 ] as const;
 
 const CARD_LINK =
