@@ -3,13 +3,14 @@ import type { Product } from "../src/lib/api";
 
 const pageSize = 12;
 
-function makeProduct(index: number): Product {
+function makeProduct(index: number, metadata: Record<string, unknown> | null = null): Product {
   return {
     id: `prod_${index}`,
     title: `Board ${index}`,
     handle: `board-${index}`,
     description: `Board ${index} description.`,
     thumbnail: null,
+    metadata,
     images: [],
     variants: [
       {
@@ -160,4 +161,34 @@ test("disables the add button for a sold-out variant", async ({ page }) => {
 
   await expect(page.getByRole("heading", { level: 1, name: "Board 1", exact: true })).toBeVisible();
   await expect(page.getByRole("button", { name: "Sold out" })).toBeDisabled();
+});
+
+test("links a product to its keyboard files below Add to bag", async ({ page }) => {
+  const url = "https://github.com/raulmoracode/Kiboar/tree/main/software/boards/kb60-hhkb";
+  const withFiles = makeProduct(1, { keyboard_files_url: url });
+
+  await mockShop(page, { products: [withFiles] });
+  await page.goto("/?p=board-1");
+
+  const add = page.getByRole("button", { name: "Add to bag" });
+  const files = page.getByRole("link", { name: /Keyboard files on GitHub/ });
+
+  await expect(add).toBeVisible();
+  await expect(files).toHaveAttribute("href", url);
+  await expect(files).toHaveAttribute("target", "_blank");
+
+  const addBox = await add.boundingBox();
+  const filesBox = await files.boundingBox();
+  if (!addBox || !filesBox) {
+    throw new Error("The add and files controls should both be rendered.");
+  }
+  expect(filesBox.y).toBeGreaterThan(addBox.y);
+});
+
+test("hides the keyboard files button without a link", async ({ page }) => {
+  await mockShop(page);
+  await page.goto("/?p=board-1");
+
+  await expect(page.getByRole("button", { name: "Add to bag" })).toBeVisible();
+  await expect(page.getByRole("link", { name: /Keyboard files on GitHub/ })).toHaveCount(0);
 });

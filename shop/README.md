@@ -103,6 +103,10 @@ storefront origin; the template allows both `http://localhost:3000` and
 `http://localhost:3001` in development, plus `http://localhost:8081` for the POS
 web preview.
 
+Each product page shows a **Keyboard files on GitHub** button when the product's
+`metadata.keyboard_files_url` is set. Edit it from the **Keyboard files** card on
+the product detail page in the admin; leave it empty to hide the button.
+
 ## POS
 
 `shop/pos` is the mobile till. It reads the catalogue from the Store API with

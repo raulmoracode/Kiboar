@@ -29,6 +29,7 @@ const TAX_RATE_NAME = "IVA 21%";
 const TAX_RATE_CODE = "IVA21";
 const TAX_RATE_PERCENT = 21;
 const DEFAULT_CHANNEL_NAME = "Default Sales Channel";
+const KEYBOARD_FILES_KEY = "keyboard_files_url";
 const COLLECTION = { title: "Kiboar boards", handle: "kiboar-boards" } as const;
 
 const PRODUCT_TYPES = ["Keyboard", "Macropad", "Numpad", "Encoder"] as const;
@@ -109,6 +110,8 @@ const products: ProductSeed[] = [
       matrix: "5 × 14",
       hotswap: true,
       form_factor: "60%",
+      [KEYBOARD_FILES_KEY]:
+        "https://github.com/raulmoracode/Kiboar/tree/main/software/boards/kb60-hhkb",
     },
     price: 189,
     image: "1795471428861-kiboar-60.png",
@@ -128,6 +131,8 @@ const products: ProductSeed[] = [
       encoder: true,
       connection: "USB-C",
       form_factor: "Macropad",
+      [KEYBOARD_FILES_KEY]:
+        "https://github.com/raulmoracode/Kiboar/tree/main/software/boards/macropad-6",
     },
     price: 59,
     image: "1795471429050-kiboar-macropad.png",
@@ -158,6 +163,8 @@ const products: ProductSeed[] = [
     metadata: {
       split: true,
       form_factor: "Split",
+      [KEYBOARD_FILES_KEY]:
+        "https://github.com/raulmoracode/Kiboar/tree/main/software/boards/split-4x6",
     },
     price: 219,
     image: "1795471429236-kiboar-split.png",
@@ -514,11 +521,18 @@ export default async function seedKiboar({ container }: ExecArgs) {
     const seed = products.find((entry) => entry.handle === product.handle);
     if (!seed) continue;
 
+    const existingFilesUrl = product.metadata?.[KEYBOARD_FILES_KEY];
+    const metadata = {
+      ...seed.metadata,
+      ...(typeof existingFilesUrl === "string" ? { [KEYBOARD_FILES_KEY]: existingFilesUrl } : {}),
+    };
+
     await updateProductsWorkflow(container).run({
       input: {
         selector: { id: product.id },
         update: {
           ...productTaxonomy(seed),
+          metadata,
           sales_channels: [{ id: onlineChannel.id }, { id: posChannel.id }],
         },
       },

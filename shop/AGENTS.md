@@ -24,7 +24,8 @@ let anyone build the same board, so the shop never gates the design.
   region and VAT, tax-inclusive prices, the sales channels, stock location,
   shipping options, publishable keys, the product taxonomy and the Kiboar
   boards.
-- `src/admin/` — admin customizations, when they exist.
+- `src/admin/` — admin routes and widgets (the Sales register and the product
+  keyboard-files link).
 - `pgadmin/servers.json` — the local pgAdmin connection to the compose database.
 - `storefront/` — the customer-facing Vite app, served under `/shop`.
 - `pos/` — the Expo/React Native POS; it is not part of `medusa build`
@@ -44,6 +45,10 @@ let anyone build the same board, so the shop never gates the design.
   sales channels come from `src/scripts/seed.ts` into PostgreSQL; do not
   reintroduce hardcoded catalogues or photos in the storefront or the POS. The
   seed must stay idempotent and must not run during `medusa build`.
+- **The keyboard files link is product data.** It lives in
+  `metadata.keyboard_files_url`, is edited from the product detail widget and is
+  read by the storefront. Do not hardcode a board URL in the storefront; the
+  button hides when the link is absent or is not an `https://github.com` URL.
 - **The storefront bag is a demo.** It lives in browser memory, does not create
   a Medusa cart and has no checkout. Do not document it as a working purchase
   flow.
