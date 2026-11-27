@@ -55,7 +55,7 @@ function BoardCard({ board }: { board: OpenBoard }) {
             target="_blank"
             rel="noreferrer"
             aria-label={`Shop ${board.name} (opens in a new tab)`}
-            className="text-[11px] font-medium text-lime-300 transition-colors hover:text-lime-200"
+            className="text-[11px] font-medium text-lime-300 underline decoration-lime-300/30 underline-offset-4 transition-colors hover:text-lime-200"
           >
             Shop
           </a>
