@@ -40,7 +40,7 @@ src/main.tsx            React root
 src/App.tsx             the router and keyboard shortcuts
 src/components/         Keyboard, LandingLayout, ProductLinks
 src/data/               boards and products
-src/lib/                shared link helpers
+src/lib/                the plain-click helper
 src/pages/              Home, Keyboards, Library, Studio and 404 pages
 src/styles.css          the shared design entry
 test/                   Vitest unit and accessibility tests, Playwright e2e

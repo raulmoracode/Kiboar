@@ -68,7 +68,7 @@ shop is the Medusa application in `shop/`, and this site points at it.
   to the home page apart from the keyboard word.
 - **The shop is a separate product.** Do not import `shop/` code into `web/`;
   talk to its Store API over HTTP. Both apps share `@kiboar/design`,
-  `@kiboar/vite-config` and `@kiboar/tsconfig`, not screens.
+  `@kiboar/vite-config`, `@kiboar/tsconfig` and `@kiboar/links`, not screens.
 - **Shared code goes to `packages/`.** Do not copy a component or a type into
   `web/` when another product needs it; add it to a shared package instead.
 - **Static output only.** No server adapter, no runtime secret in the bundle.
@@ -81,14 +81,18 @@ shop is the Medusa application in `shop/`, and this site points at it.
 ```bash
 pnpm --filter @kiboar/web dev
 pnpm --filter @kiboar/web typecheck
+pnpm --filter @kiboar/web test
 pnpm --filter @kiboar/web build
+pnpm --filter @kiboar/web test:e2e     # builds and runs Playwright
 ```
 
 ## Before a PR
 
 - `pnpm lint` passes (Biome covers `web/`).
 - `pnpm --filter @kiboar/web typecheck` passes.
+- `pnpm --filter @kiboar/web test` passes.
 - `pnpm --filter @kiboar/web build` passes.
+- `pnpm --filter @kiboar/web test:e2e` passes when the change touches routing or rendering.
 - Paste the real command output in the pull request.
 
 ## Labels
