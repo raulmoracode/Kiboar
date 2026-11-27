@@ -1,7 +1,7 @@
 # Generated schemas
 
 `board.schema.json` and `registry.schema.json` are generated from the Zod
-definitions in `packages/core/src/schema/`. Do not edit them by hand.
+definitions in `software/packages/core/src/schema/`. Do not edit them by hand.
 
 ```bash
 pnpm schema:export
@@ -23,4 +23,7 @@ the cross-field rules that JSON Schema cannot express, which the Zod schema in
 - encoder ids are unique.
 
 A validator that only reads the JSON Schema is a first gate, not the whole
-contract. The application validates with Zod before it writes anything.
+contract. The Zod schemas also refine individual fields, such as the registry
+paths; `z.toJSONSchema` does not encode those refinements. TypeScript consumers
+validate with Zod; Studio's Rust backend validates the registry and the artefact
+before writing.
