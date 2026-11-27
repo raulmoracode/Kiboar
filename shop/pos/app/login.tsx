@@ -13,7 +13,7 @@ import { colors, spacing, typography } from "@/theme/tokens";
 
 export default function Login() {
   const router = useRouter();
-  const { token, ready, signIn, signOut } = useAuth();
+  const { ready, signIn } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -30,7 +30,7 @@ export default function Login() {
     try {
       const nextToken = await new MedusaAdminClient(apiUrl).login(email.trim(), password);
       await signIn(nextToken);
-      router.replace("/orders");
+      router.replace("/");
     } catch {
       setError("Could not sign in.");
     } finally {
@@ -40,18 +40,13 @@ export default function Login() {
 
   return (
     <Screen>
-      <AppBar back backTo="/" />
+      <AppBar />
 
       {!ready ? (
         <Text style={typography.body}>Loading…</Text>
-      ) : token ? (
-        <View style={styles.stack}>
-          <Text style={typography.body}>Signed in.</Text>
-          <Button label="Open sales" onPress={() => router.replace("/orders")} />
-          <Button label="Sign out" variant="ghost" onPress={() => void signOut()} />
-        </View>
       ) : (
         <View style={styles.form}>
+          <Text style={typography.eyebrow}>Staff sign-in</Text>
           <Field
             autoCapitalize="none"
             keyboardType="email-address"
@@ -75,7 +70,6 @@ export default function Login() {
 }
 
 const styles = StyleSheet.create({
-  stack: { gap: spacing.md },
-  form: { gap: spacing.md },
+  form: { gap: spacing.md, marginTop: spacing.lg },
   error: { color: colors.danger, fontFamily: typography.body.fontFamily, fontSize: 13 },
 });

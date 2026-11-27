@@ -1,4 +1,3 @@
-import { useRouter } from "expo-router";
 import { StyleSheet, Text, View } from "react-native";
 
 import { AppBar } from "@/components/AppBar";
@@ -19,8 +18,7 @@ function SettingRow({ label, value }: { label: string; value: string }) {
 }
 
 export default function Settings() {
-  const router = useRouter();
-  const { token } = useAuth();
+  const { token, signOut } = useAuth();
 
   return (
     <Screen>
@@ -33,7 +31,7 @@ export default function Settings() {
         <SettingRow label="Session" value={token ? "Signed in" : "Signed out"} />
       </Card>
 
-      <Button label="Staff account" variant="ghost" onPress={() => router.push("/login")} />
+      <Button label="Sign out" variant="danger" onPress={() => void signOut()} />
     </Screen>
   );
 }

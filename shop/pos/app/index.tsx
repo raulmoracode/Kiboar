@@ -21,7 +21,6 @@ export default function Home() {
         <Button label="Start sale" onPress={() => router.push("/catalogue")} />
         <Button label="Sales register" variant="ghost" onPress={() => router.push("/orders")} />
         <Button label="Settings" variant="ghost" onPress={() => router.push("/settings")} />
-        <Button label="Staff account" variant="ghost" onPress={() => router.push("/login")} />
       </View>
     </Screen>
   );

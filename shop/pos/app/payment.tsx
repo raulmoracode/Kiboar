@@ -28,7 +28,6 @@ export default function Payment() {
 
   async function completeCash() {
     if (!token) {
-      setError("Sign in to record a cash sale.");
       return;
     }
 
@@ -110,17 +109,10 @@ export default function Payment() {
         {error ? <Text style={styles.error}>{error}</Text> : null}
 
         <Button
-          disabled={submitting || !token}
+          disabled={submitting}
           label={submitting ? "Completing…" : "Complete cash sale"}
           onPress={() => void completeCash()}
         />
-
-        {!token ? (
-          <>
-            <Text style={typography.small}>Sign in to record a cash sale.</Text>
-            <Button label="Sign in" variant="ghost" onPress={() => router.push("/login")} />
-          </>
-        ) : null}
 
         <Button label="Change method" variant="ghost" onPress={() => setMethod(null)} />
       </Screen>
