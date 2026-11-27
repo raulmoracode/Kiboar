@@ -1,7 +1,7 @@
 # Generated schemas
 
 `board.schema.json` and `registry.schema.json` are generated from the Zod
-definitions in `packages/core/src/schema/`. Do not edit them by hand.
+definitions in `software/packages/core/src/schema/`. Do not edit them by hand.
 
 ```bash
 pnpm schema:export

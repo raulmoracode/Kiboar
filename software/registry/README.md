@@ -2,14 +2,19 @@
 
 `index.json` is the snapshot Kiboar Studio ships and can update. It declares
 the MCUs, the board definitions and the firmware artefacts the application may
-offer. The application works offline and verifies everything it uses.
+offer. The application works offline and validates the definitions it reads;
+registry and firmware signature verification are still planned.
 
 ## Signatures
 
-- At release, `index.json` is accompanied by `index.json.minisig`. The
-  application carries the public key and refuses an index it cannot verify.
-- Every firmware entry carries its own `sha256` and `signature`. Both are checked
-  before a flash; an artefact that fails either check is never written.
+Signature verification is not wired into the app yet.
+
+- The released index will be accompanied by `index.json.minisig`; the application
+  will carry the public key and refuse an index it cannot verify. There is no
+  `.minisig` and no registry public key in the app today.
+- Every firmware entry will carry its own `sha256` and `signature`. The
+  `kiboar-flash` crate can verify both, but the app currently checks only the
+  SHA-256 of the selected UF2.
 - No firmware artefact exists yet. The array is intentionally empty, and the
   schema and the tests already cover its shape.
 

@@ -21,8 +21,9 @@ other, and nothing in Studio may assume the board was bought.
 - `app/` — `@kiboar/studio`: the React frontend and the Tauri shell.
   - `app/src-tauri/` — Rust shell: USB/HID enumeration, commands and the
     platform boundary.
-- `packages/core/` — `@kiboar/core`: pure TypeScript schema, matrix, VIA
-  protocol and exporters.
+- `packages/core/` — `@kiboar/core`: pure TypeScript schema and validation for
+  the board and registry definitions. VIA and exporters arrive in later
+  milestones.
 - `crates/kiboar-device/` — pure Rust types, bootloader table and HID report
   parser. No Tauri, no USB.
 - `crates/kiboar-flash/` — pure Rust UF2 parsing, digest and signature
