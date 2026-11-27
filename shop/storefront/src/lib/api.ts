@@ -48,8 +48,10 @@ export interface ProductPage {
 const BASE_URL = (import.meta.env.VITE_MEDUSA_URL ?? "http://localhost:9000").replace(/\/$/, "");
 const PUBLISHABLE_KEY = import.meta.env.VITE_MEDUSA_PUBLISHABLE_KEY ?? "";
 
+// `inventory_quantity` is a computed field: Medusa only returns it with `+`,
+// while `*` leaves it null and the sold-out checks never trigger.
 const FIELDS =
-  "id,title,handle,description,thumbnail,metadata,*images,*variants,*variants.prices,*variants.calculated_price,*variants.inventory_quantity";
+  "id,title,handle,description,thumbnail,metadata,*images,*variants,*variants.prices,*variants.calculated_price,+variants.inventory_quantity";
 
 export const PAGE_SIZE = 12;
 
