@@ -207,6 +207,18 @@ test("links a product to its official firmware", async ({ page }) => {
   await expect(page.getByRole("link", { name: /Keyboard files on GitHub/ })).toHaveCount(0);
 });
 
+test("links the shop header to Kiboar Studio", async ({ page }) => {
+  await mockShop(page);
+
+  for (const path of ["/", "/?p=board-1"]) {
+    await page.goto(path);
+
+    const studio = page.getByRole("link", { name: /Kiboar Studio/ });
+    await expect(studio).toBeVisible();
+    await expect(studio).toHaveAttribute("href", "https://kiboar.raulmoracode.com/studio");
+  }
+});
+
 test("shows two catalogue columns on mobile", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await mockShop(page);

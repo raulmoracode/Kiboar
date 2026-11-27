@@ -12,6 +12,7 @@ import { loadBag, saveBag } from "../lib/bagStorage";
 import { Bag, type BagItem } from "./Bag";
 import { Catalogue, type CatalogueState } from "./Catalogue";
 import { ProductPage } from "./ProductPage";
+import { StudioBanner } from "./StudioBanner";
 
 function handleFromUrl(): string | null {
   return new URLSearchParams(window.location.search).get("p");
@@ -294,8 +295,10 @@ export default function App() {
           onOpenBag={() => setBagOpen(true)}
         />
 
+        <StudioBanner />
+
         {handle ? (
-          <section aria-label="Product" className="mx-auto mt-6 w-full max-w-[1200px] sm:mt-14">
+          <section aria-label="Product" className="mx-auto mt-8 w-full max-w-[1200px]">
             <ProductPage
               key={handle}
               handle={handle}
