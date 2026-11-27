@@ -30,6 +30,7 @@ const TAX_RATE_CODE = "IVA21";
 const TAX_RATE_PERCENT = 21;
 const DEFAULT_CHANNEL_NAME = "Default Sales Channel";
 const KEYBOARD_FILES_KEY = "keyboard_files_url";
+const FIRMWARE_KEY = "firmware_url";
 const COLLECTION = { title: "Kiboar boards", handle: "kiboar-boards" } as const;
 
 const PRODUCT_TYPES = ["Keyboard", "Macropad", "Numpad", "Encoder"] as const;
@@ -521,11 +522,17 @@ export default async function seedKiboar({ container }: ExecArgs) {
     const seed = products.find((entry) => entry.handle === product.handle);
     if (!seed) continue;
 
-    const existingFilesUrl = product.metadata?.[KEYBOARD_FILES_KEY];
-    const metadata = {
-      ...seed.metadata,
-      ...(typeof existingFilesUrl === "string" ? { [KEYBOARD_FILES_KEY]: existingFilesUrl } : {}),
-    };
+    const preserved = [KEYBOARD_FILES_KEY, FIRMWARE_KEY].reduce<Record<string, string>>(
+      (acc, key) => {
+        const value = product.metadata?.[key];
+        if (typeof value === "string") {
+          acc[key] = value;
+        }
+        return acc;
+      },
+      {},
+    );
+    const metadata = { ...seed.metadata, ...preserved };
 
     await updateProductsWorkflow(container).run({
       input: {

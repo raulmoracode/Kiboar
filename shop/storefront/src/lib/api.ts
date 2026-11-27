@@ -192,3 +192,22 @@ export function keyboardFilesUrl(product: Product): string | null {
     return null;
   }
 }
+
+export function firmwareUrl(product: Product): string | null {
+  const value = product.metadata?.firmware_url;
+  if (typeof value !== "string" || !value.trim()) {
+    return null;
+  }
+
+  const trimmed = value.trim();
+  if (trimmed.startsWith("/") && !trimmed.includes("..")) {
+    return `${BASE_URL}${trimmed}`;
+  }
+
+  try {
+    const url = new URL(trimmed);
+    return url.protocol === "http:" || url.protocol === "https:" ? url.toString() : null;
+  } catch {
+    return null;
+  }
+}

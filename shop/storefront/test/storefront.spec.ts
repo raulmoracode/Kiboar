@@ -185,11 +185,25 @@ test("links a product to its keyboard files below Add to bag", async ({ page }) 
   expect(filesBox.y).toBeGreaterThan(addBox.y);
 });
 
-test("hides the keyboard files button without a link", async ({ page }) => {
+test("hides the keyboard files and firmware buttons without links", async ({ page }) => {
   await mockShop(page);
   await page.goto("/?p=board-1");
 
   await expect(page.getByRole("button", { name: "Add to bag" })).toBeVisible();
+  await expect(page.getByRole("link", { name: /Keyboard files on GitHub/ })).toHaveCount(0);
+  await expect(page.getByRole("link", { name: /Download official firmware/ })).toHaveCount(0);
+});
+
+test("links a product to its official firmware", async ({ page }) => {
+  const firmware = makeProduct(1, { firmware_url: "/static/1234-firmware.bin" });
+
+  await mockShop(page, { products: [firmware] });
+  await page.goto("/?p=board-1");
+
+  const link = page.getByRole("link", { name: /Download official firmware/ });
+  await expect(link).toHaveAttribute("href", /\/static\/1234-firmware\.bin$/);
+  await expect(link).toHaveAttribute("download", "");
+  await expect(link).toHaveAttribute("target", "_blank");
   await expect(page.getByRole("link", { name: /Keyboard files on GitHub/ })).toHaveCount(0);
 });
 

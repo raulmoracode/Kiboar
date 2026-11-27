@@ -27,7 +27,7 @@ let anyone build the same board, so the shop never gates the design.
 - `src/admin/` — admin routes, widgets and custom fields (the Sales register and
   the product keyboard-files field).
 - `src/workflows/hooks/` — workflow hooks; the product update hook persists the
-  keyboard-files field into `metadata.keyboard_files_url`.
+  keyboard-files and firmware fields into product metadata.
 - `pgadmin/servers.json` — the local pgAdmin connection to the compose database.
 - `storefront/` — the customer-facing Vite app, served under `/shop`.
 - `pos/` — the Expo/React Native POS; it is not part of `medusa build`
@@ -47,10 +47,13 @@ let anyone build the same board, so the shop never gates the design.
   sales channels come from `src/scripts/seed.ts` into PostgreSQL; do not
   reintroduce hardcoded catalogues or photos in the storefront or the POS. The
   seed must stay idempotent and must not run during `medusa build`.
-- **The keyboard files link is product data.** It lives in
-  `metadata.keyboard_files_url`, is edited from the product **Edit Product** form
-  and is read by the storefront. Do not hardcode a board URL in the storefront;
-  the button hides when the link is absent or is not an `https://github.com` URL.
+- **The keyboard files and firmware are product data.** They live in
+  `metadata.keyboard_files_url` and `metadata.firmware_url`, are edited from the
+  product **Edit Product** form and are read by the storefront. The firmware
+  upload uses the Medusa admin upload API and stores the local `/static/<id>`
+  path; the storefront resolves it against the Store API origin. Do not hardcode
+  a board URL or firmware file in the storefront. The local file provider writes
+  to `shop/static` (ignored by git); production needs object storage.
 - **The storefront bag is a demo.** It lives in browser memory, does not create
   a Medusa cart and has no checkout. Do not document it as a working purchase
   flow.

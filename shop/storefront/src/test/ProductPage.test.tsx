@@ -67,5 +67,22 @@ describe("the product page", () => {
 
     expect(await screen.findByRole("button", { name: "Add to bag" })).toBeTruthy();
     expect(screen.queryByRole("link", { name: /Keyboard files on GitHub/ })).toBeNull();
+    expect(screen.queryByRole("link", { name: /Download official firmware/ })).toBeNull();
+  });
+
+  it("shows the firmware download below the keyboard files", async () => {
+    getProduct.mockResolvedValue(
+      product({
+        keyboard_files_url: url,
+        firmware_url: "/static/1234-firmware.bin",
+      }),
+    );
+    renderPage();
+
+    const files = await screen.findByRole("link", { name: /Keyboard files on GitHub/ });
+    const firmware = screen.getByRole("link", { name: /Download official firmware/ });
+
+    expect(firmware.getAttribute("href")).toMatch(/\/static\/1234-firmware\.bin$/);
+    expect(files.compareDocumentPosition(firmware) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
 });

@@ -107,6 +107,12 @@ Each product page shows a **Keyboard files on GitHub** button when the product's
 `metadata.keyboard_files_url` is set. Edit it from the **Keyboard files URL**
 field in the product's **Edit Product** form; leave it empty to hide the button.
 
+The same form has an **Official firmware** upload. The local file provider stores
+the file in `shop/static` (ignored by git) and the relative `/static/<id>` path
+is saved in `metadata.firmware_url`; the storefront shows **Download official
+firmware** when it is set. Production needs an object-storage provider; the local
+provider is for development.
+
 ## POS
 
 `shop/pos` is the mobile till. It reads the catalogue from the Store API with
