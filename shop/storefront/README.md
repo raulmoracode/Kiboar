@@ -20,11 +20,15 @@ the photo, the name, the price, the description and the variants, with an
 `Add to bag` button. When the product metadata has `keyboard_files_url`, a
 `Keyboard files on GitHub` button appears below `Add to bag`; a missing or
 non-GitHub URL hides it. When `firmware_url` is set, a **Download official
-firmware** button appears below the GitHub button. Every page shows a banner under
-the header, **Every Kiboar board can be flashed and remapped with Kiboar
-Studio**, which links to the public `/studio` page. Below the details, a **More
-boards** heading and three random other boards link to their pages. Unknown
-handles render a "not published" state.
+firmware** button appears below the GitHub button. When the product metadata has
+`mcu`, `case`, `keys` or `layout`, a circled lime **i** next to the title opens a
+**Specifications** dialog with those values. Every page shows a banner under the
+header, **Every Kiboar board can be flashed and remapped with Kiboar Studio**,
+which links to the public `/studio` page. Below the details, a **More boards**
+heading and three other boards link to their pages; the pick is seeded by the
+current handle, so the same board always shows the same three. The document title
+and description follow the opened product. Unknown handles render a "not
+published" state.
 
 On phones and tablets the product image uses a 16:10 frame, the buttons take the
 full content width, and **More boards** stays a single vertical list. The buttons
@@ -39,7 +43,12 @@ reload or a shared link. Moving to a path is a routing decision for the host.
 
 The catalogue reads the Store API `count` and loads twelve products at a time;
 `Load more` appends the next page. A failed catalogue or product request offers
-`Try again` without reloading the page.
+`Try again` without reloading the page. A board whose variants are all sold out
+carries a **Sold out** badge next to its name.
+
+The footer links to the shop, the public documentation, the library, the licence,
+GitHub, the Studio source and the keyboard-files readme. Shipping, returns,
+warranty and legal pages are not published yet; they need the owner's copy.
 
 At boot the storefront reads `/store/regions`. If `VITE_REGION_ID` is set, it
 uses that region; otherwise it uses the first published one. The region

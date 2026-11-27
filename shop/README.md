@@ -107,6 +107,10 @@ Each product page shows a **Keyboard files on GitHub** button when the product's
 `metadata.keyboard_files_url` is set. Edit it from the **Keyboard files URL**
 field in the product's **Edit Product** form; leave it empty to hide the button.
 
+Below the product form, a **Specifications** block writes `mcu`, `case`, `keys`
+and `layout` into the product metadata; the storefront shows them in the
+specifications dialog. Leave a field empty to hide it.
+
 The same form has an **Official firmware** upload. The local file provider stores
 the file in `shop/static` (ignored by git) and the relative `/static/<id>` path
 is saved in `metadata.firmware_url`; the storefront shows **Download official

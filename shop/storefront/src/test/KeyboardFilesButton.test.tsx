@@ -18,6 +18,22 @@ describe("the keyboard files button", () => {
     expect(link.getAttribute("rel")).toContain("noreferrer");
   });
 
+  it("keeps the secondary style by default", () => {
+    render(<KeyboardFilesButton url={url} />);
+
+    const link = screen.getByRole("link", { name: /Keyboard files on GitHub/ });
+    expect(link.className).toContain("border-white/15");
+    expect(link.className).not.toContain("bg-zinc-100");
+  });
+
+  it("takes the primary action style when prominent", () => {
+    render(<KeyboardFilesButton url={url} prominent />);
+
+    const link = screen.getByRole("link", { name: /Keyboard files on GitHub/ });
+    expect(link.className).toContain("bg-zinc-100");
+    expect(link.className).not.toContain("border-white/15");
+  });
+
   it("renders nothing without a URL", () => {
     const { container } = render(<KeyboardFilesButton url={null} />);
 

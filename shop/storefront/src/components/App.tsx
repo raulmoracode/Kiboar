@@ -11,6 +11,7 @@ import {
 import { loadBag, saveBag } from "../lib/bagStorage";
 import { Bag, type BagItem } from "./Bag";
 import { Catalogue, type CatalogueState } from "./Catalogue";
+import { Footer } from "./Footer";
 import { ProductPage } from "./ProductPage";
 import { StudioBanner } from "./StudioBanner";
 
@@ -286,56 +287,60 @@ export default function App() {
   const count = items.reduce((total, item) => total + item.quantity, 0);
 
   return (
-    <main className="kiboar-shell">
-      <div className="mx-auto w-full max-w-[1600px] px-6 py-8 sm:px-10">
-        <Header
-          count={count}
-          inProduct={handle !== null}
-          onHome={() => go(null)}
-          onOpenBag={() => setBagOpen(true)}
-        />
+    <>
+      <main className="kiboar-shell">
+        <div className="mx-auto w-full max-w-[1600px] px-6 py-8 sm:px-10">
+          <Header
+            count={count}
+            inProduct={handle !== null}
+            onHome={() => go(null)}
+            onOpenBag={() => setBagOpen(true)}
+          />
 
-        <StudioBanner />
+          <StudioBanner />
 
-        {handle ? (
-          <section aria-label="Product" className="mx-auto w-full max-w-[1200px] lg:mt-8">
-            <ProductPage
-              key={handle}
-              handle={handle}
-              products={state.status === "ready" ? state.products : NO_PRODUCTS}
-              regionId={region?.id}
-              currency={region?.currency_code}
-              onOpen={go}
-              onBack={() => go(null)}
-              onAdd={add}
-            />
-          </section>
-        ) : (
-          <section aria-label="Products">
-            <Catalogue
-              state={state}
-              currency={region?.currency_code}
-              loadingMore={loadingMore}
-              loadMoreError={loadMoreError}
-              onLoadMore={loadMore}
-              onOpen={go}
-              onRetry={() => setReloadToken((current) => current + 1)}
-            />
-          </section>
-        )}
-      </div>
+          {handle ? (
+            <section aria-label="Product" className="mx-auto w-full max-w-[1200px] lg:mt-8">
+              <ProductPage
+                key={handle}
+                handle={handle}
+                products={state.status === "ready" ? state.products : NO_PRODUCTS}
+                regionId={region?.id}
+                currency={region?.currency_code}
+                onOpen={go}
+                onBack={() => go(null)}
+                onAdd={add}
+              />
+            </section>
+          ) : (
+            <section aria-label="Products">
+              <Catalogue
+                state={state}
+                currency={region?.currency_code}
+                loadingMore={loadingMore}
+                loadMoreError={loadMoreError}
+                onLoadMore={loadMore}
+                onOpen={go}
+                onRetry={() => setReloadToken((current) => current + 1)}
+              />
+            </section>
+          )}
+        </div>
 
-      {bagOpen ? (
-        <Bag
-          items={items}
-          onClose={() => setBagOpen(false)}
-          onBrowse={browse}
-          onIncrease={increase}
-          onDecrease={decrease}
-          onRemove={remove}
-          onOpenProduct={openFromBag}
-        />
-      ) : null}
-    </main>
+        {bagOpen ? (
+          <Bag
+            items={items}
+            onClose={() => setBagOpen(false)}
+            onBrowse={browse}
+            onIncrease={increase}
+            onDecrease={decrease}
+            onRemove={remove}
+            onOpenProduct={openFromBag}
+          />
+        ) : null}
+      </main>
+
+      <Footer />
+    </>
   );
 }

@@ -213,7 +213,7 @@ test("links the shop header to Kiboar Studio", async ({ page }) => {
   for (const path of ["/", "/?p=board-1"]) {
     await page.goto(path);
 
-    const studio = page.getByRole("link", { name: /Kiboar Studio/ });
+    const studio = page.getByRole("link", { name: /Every Kiboar board/ });
     await expect(studio).toBeVisible();
     await expect(studio).toHaveAttribute("href", "https://kiboar.raulmoracode.com/studio");
   }
@@ -332,4 +332,124 @@ test("keeps the product actions close on mobile", async ({ page }) => {
   expect(imageBox.height / imageBox.width).toBeLessThan(0.7);
   expect(addBox.y).toBeLessThan(844);
   await expect(page.getByRole("heading", { name: "More boards" })).toBeVisible();
+});
+
+test("opens the specifications dialog from the product title", async ({ page }) => {
+  const withSpecs = makeProduct(1, {
+    mcu: "RP2040 Zero",
+    case: "Aluminium",
+    keys: 61,
+    layout: "HHKB",
+  });
+  await mockShop(page, { products: [withSpecs] });
+  await page.goto("/?p=board-1");
+
+  await page.getByRole("button", { name: "Specifications for Board 1" }).click();
+
+  const dialog = page.getByRole("dialog", { name: "Specifications" });
+  await expect(dialog).toBeVisible();
+  await expect(dialog.getByText("RP2040 Zero")).toBeVisible();
+  await expect(dialog.getByText("61")).toBeVisible();
+
+  await page.keyboard.press("Escape");
+  await expect(dialog).toBeHidden();
+});
+
+test("marks a sold-out board in the catalogue", async ({ page }) => {
+  const soldOut = makeProduct(1);
+  const variant = soldOut.variants?.[0];
+  if (!variant) {
+    throw new Error("The fixture should have a variant.");
+  }
+  soldOut.variants = [{ ...variant, inventory_quantity: 0 }];
+
+  await mockShop(page, { products: [soldOut, makeProduct(2)] });
+  await page.goto("/");
+
+  const card = page.locator('a[href="?p=board-1"]');
+  const badge = await card.getByText("Sold out").boundingBox();
+  const price = await card.getByText("€100.00").boundingBox();
+  const title = await card.getByRole("heading", { level: 2 }).boundingBox();
+  if (!badge || !price || !title) {
+    throw new Error("The sold-out card should render its title, badge and price.");
+  }
+
+  expect(badge.x).toBeGreaterThan(title.x);
+  expect(badge.x + badge.width).toBeLessThanOrEqual(price.x + 1);
+  expect(Math.abs(badge.y - price.y)).toBeLessThan(10);
+  await expect(page.locator('a[href="?p=board-2"]').getByText("Sold out")).toHaveCount(0);
+});
+
+test("moves the primary action to the keyboard files when sold out", async ({ page }) => {
+  const soldOut = makeProduct(1, {
+    keyboard_files_url:
+      "https://github.com/raulmoracode/Kiboar/tree/main/software/boards/kb60-hhkb",
+  });
+  const variant = soldOut.variants?.[0];
+  if (!variant) {
+    throw new Error("The fixture should have a variant.");
+  }
+  soldOut.variants = [{ ...variant, inventory_quantity: 0 }];
+
+  await mockShop(page, { products: [soldOut] });
+  await page.goto("/?p=board-1");
+
+  const add = page.getByRole("button", { name: "Sold out" });
+  const files = page.getByRole("link", { name: /Keyboard files on GitHub/ });
+
+  await expect(add).toBeDisabled();
+  await expect(add).toHaveCSS("background-color", "rgba(0, 0, 0, 0)");
+  await expect(files).toHaveClass(/bg-zinc-100/);
+});
+
+test("shows the footer links", async ({ page }) => {
+  await mockShop(page);
+  await page.goto("/");
+
+  const footer = page.getByRole("contentinfo");
+  await expect(footer).toBeVisible();
+  await expect(footer.getByRole("link", { name: "Documentation" })).toHaveAttribute(
+    "href",
+    "https://kiboar.raulmoracode.com/docs",
+  );
+  await expect(footer.getByRole("link", { name: "Kiboar Studio" })).toHaveAttribute(
+    "href",
+    "https://kiboar.raulmoracode.com/studio",
+  );
+});
+
+test("links the empty bag to Kiboar Studio", async ({ page }) => {
+  await mockShop(page);
+  await page.goto("/");
+  await page.getByRole("button", { name: /Open the bag/ }).click();
+
+  const dialog = page.getByRole("dialog", { name: "Bag" });
+  await expect(dialog).toBeVisible();
+  await expect(dialog.getByRole("link", { name: /Kiboar Studio/ })).toHaveAttribute(
+    "href",
+    "https://kiboar.raulmoracode.com/studio",
+  );
+});
+
+test("puts the product price on the title row", async ({ page }) => {
+  await mockShop(page, { products: [makeProduct(1)] });
+  await page.goto("/?p=board-1");
+
+  const article = page.locator("article");
+  const heading = article.getByRole("heading", { level: 1 });
+  await heading.waitFor();
+  const title = await heading.boundingBox();
+  const price = await article.locator("p").first().boundingBox();
+  if (!title || !price) {
+    throw new Error("The product title and price should be rendered.");
+  }
+
+  expect(price.y).toBeLessThan(title.y + title.height);
+  expect(title.y).toBeLessThan(price.y + price.height);
+
+  const articleBox = await article.boundingBox();
+  if (!articleBox) {
+    throw new Error("The product article should be rendered.");
+  }
+  expect(price.x).toBeGreaterThan(articleBox.x + articleBox.width / 2);
 });
