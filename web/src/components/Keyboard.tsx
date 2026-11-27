@@ -1,4 +1,4 @@
-import type { MouseEvent } from "react";
+import { type MouseEvent, useEffect, useState } from "react";
 import { productForKey } from "../data/products";
 import { isPlainClick } from "../lib/links";
 
@@ -101,8 +101,53 @@ function layout(): Key[] {
 }
 
 const KEYS = layout();
+const WORD_ROW = KEYS.filter((key) => key.y === 2);
+const CROSSFADE_MS = 340;
 
-function Cap({ cap }: { cap: Key }) {
+// The page components remount the keyboard on navigation, so the previous
+// word has to survive outside the component for the incoming one to crossfade.
+let lastWord: string | undefined;
+
+function wordLabels(word: string | undefined): Map<Key, string> {
+  const labels = new Map<Key, string>();
+  if (!word) {
+    return labels;
+  }
+
+  const letters = Array.from(word.replace(/\s+/g, ""));
+  const start = Math.max(0, Math.round((WORD_ROW.length - letters.length) / 2));
+  letters.forEach((letter, index) => {
+    const key = WORD_ROW[start + index];
+    if (key) {
+      labels.set(key, letter);
+    }
+  });
+  return labels;
+}
+
+function prefersReducedMotion(): boolean {
+  return window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
+}
+
+function KeyboardLabel({ cap, label, className }: { cap: Key; label: string; className: string }) {
+  return (
+    <text
+      x={cap.x + cap.w / 2}
+      y={cap.y + 0.52}
+      textAnchor="middle"
+      dominantBaseline="middle"
+      fill="#bef264"
+      fillOpacity={0.9}
+      fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace"
+      fontSize={0.26}
+      className={className}
+    >
+      {label}
+    </text>
+  );
+}
+
+function Cap({ cap, previousLabel }: { cap: Key; previousLabel?: string | undefined }) {
   return (
     <>
       <rect
@@ -117,19 +162,21 @@ function Cap({ cap }: { cap: Key }) {
         strokeOpacity={0.18}
         strokeWidth={0.012}
       />
+      {previousLabel !== undefined ? (
+        <KeyboardLabel
+          key={`out-${previousLabel}`}
+          cap={cap}
+          label={previousLabel}
+          className="kiboar-key-label kiboar-key-label-out"
+        />
+      ) : null}
       {cap.label ? (
-        <text
-          x={cap.x + cap.w / 2}
-          y={cap.y + 0.52}
-          textAnchor="middle"
-          dominantBaseline="middle"
-          fill="#bef264"
-          fillOpacity={0.9}
-          fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace"
-          fontSize={0.26}
-        >
-          {cap.label}
-        </text>
+        <KeyboardLabel
+          key={`in-${cap.label}`}
+          cap={cap}
+          label={cap.label}
+          className="kiboar-key-label kiboar-key-label-in"
+        />
       ) : null}
     </>
   );
@@ -146,19 +193,23 @@ export function Keyboard({
   interactive?: boolean;
   detailsLink?: boolean;
 }) {
-  const wordRow = KEYS.filter((key) => key.y === 2);
-  const customLabels = new Map<Key, string>();
+  const currentLabels = wordLabels(word);
+  const [previousWord, setPreviousWord] = useState<string | undefined>(() =>
+    word && lastWord && lastWord !== word && !prefersReducedMotion() ? lastWord : undefined,
+  );
+  const previousLabels = wordLabels(previousWord);
 
-  if (word) {
-    const letters = Array.from(word.replace(/\s+/g, ""));
-    const start = Math.max(0, Math.round((wordRow.length - letters.length) / 2));
-    letters.forEach((letter, index) => {
-      const key = wordRow[start + index];
-      if (key) {
-        customLabels.set(key, letter);
-      }
-    });
-  }
+  useEffect(() => {
+    lastWord = word;
+  }, [word]);
+
+  useEffect(() => {
+    if (!previousWord) {
+      return;
+    }
+    const timer = window.setTimeout(() => setPreviousWord(undefined), CROSSFADE_MS);
+    return () => window.clearTimeout(timer);
+  }, [previousWord]);
 
   return (
     <svg
@@ -167,7 +218,8 @@ export function Keyboard({
       className="w-full"
     >
       {KEYS.map((key) => {
-        const label = word ? customLabels.get(key) : key.label;
+        const label = currentLabels.get(key) ?? (word ? undefined : key.label);
+        const previousLabel = previousLabels.get(key);
         const product = interactive && label ? productForKey(label) : undefined;
         const cap: Key = label ? { ...key, label } : { x: key.x, y: key.y, w: key.w };
 
@@ -181,7 +233,7 @@ export function Keyboard({
               aria-label="Scroll to the details"
               className="cursor-pointer"
             >
-              <Cap cap={cap} />
+              <Cap cap={cap} previousLabel={previousLabel} />
             </a>
           );
         }
@@ -208,14 +260,14 @@ export function Keyboard({
               aria-label={internal ? product.name : `${product.name} (opens in a new tab)`}
               className="cursor-pointer"
             >
-              <Cap cap={cap} />
+              <Cap cap={cap} previousLabel={previousLabel} />
             </a>
           );
         }
 
         return (
           <g key={`${key.x}-${key.y}`}>
-            <Cap cap={cap} />
+            <Cap cap={cap} previousLabel={previousLabel} />
           </g>
         );
       })}
