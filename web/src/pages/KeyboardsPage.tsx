@@ -37,7 +37,7 @@ function BoardCard({ board }: { board: OpenBoard }) {
 
       <div className="flex items-baseline justify-between gap-4 p-5">
         <h2 className="min-w-0 truncate text-[15px] font-medium text-zinc-100">{board.name}</h2>
-        <div className="flex shrink-0 items-center gap-3">
+        <div className="flex shrink-0 items-baseline gap-2">
           <a
             href={board.files}
             target="_blank"
@@ -47,14 +47,17 @@ function BoardCard({ board }: { board: OpenBoard }) {
           >
             GitHub
           </a>
+          <span aria-hidden="true" className="text-[11px] text-zinc-700">
+            ·
+          </span>
           <a
-            href={board.buy}
+            href={board.shop}
             target="_blank"
             rel="noreferrer"
-            aria-label={`Buy ${board.name} (opens in a new tab)`}
-            className="inline-flex items-center rounded-full bg-lime-300 px-2.5 py-1 text-[11px] font-medium text-zinc-950 transition-colors hover:bg-lime-200"
+            aria-label={`Shop ${board.name} (opens in a new tab)`}
+            className="text-[11px] font-medium text-lime-300 transition-colors hover:text-lime-200"
           >
-            Buy
+            Shop
           </a>
         </div>
       </div>

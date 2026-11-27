@@ -14,7 +14,7 @@ export interface OpenBoard {
   /** The GitHub directory that holds the board files. */
   files: string;
   /** The storefront product page for the assembled board. */
-  buy: string;
+  shop: string;
 }
 
 /**
@@ -34,7 +34,7 @@ export const boards: readonly OpenBoard[] = [
     split: false,
     definition: `${REPOSITORY}/blob/main/software/boards/kb60-hhkb/rev1.json`,
     files: tree("software/boards/kb60-hhkb"),
-    buy: "/shop/?p=kb60-hhkb",
+    shop: "/shop/?p=kb60-hhkb",
   },
   {
     id: "macropad-6",
@@ -47,7 +47,7 @@ export const boards: readonly OpenBoard[] = [
     split: false,
     definition: `${REPOSITORY}/blob/main/software/boards/macropad-6/rev1.json`,
     files: tree("software/boards/macropad-6"),
-    buy: "/shop/?p=macropad-6",
+    shop: "/shop/?p=macropad-6",
   },
   {
     id: "split-4x6",
@@ -61,6 +61,6 @@ export const boards: readonly OpenBoard[] = [
     definition: `${REPOSITORY}/blob/main/software/boards/split-4x6/rev1.json`,
     files: tree("software/boards/split-4x6"),
     // The storefront handle does not follow the board id for every board.
-    buy: "/shop/?p=kb-split",
+    shop: "/shop/?p=kb-split",
   },
 ];

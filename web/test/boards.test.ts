@@ -53,7 +53,7 @@ describe("the board catalogue", () => {
   });
 
   it("links every board to its storefront product page", () => {
-    expect(boards.map((board) => board.buy)).toEqual([
+    expect(boards.map((board) => board.shop)).toEqual([
       "/shop/?p=kb60-hhkb",
       "/shop/?p=macropad-6",
       "/shop/?p=kb-split",

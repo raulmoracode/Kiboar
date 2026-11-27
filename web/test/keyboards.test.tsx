@@ -13,20 +13,20 @@ afterEach(() => {
 });
 
 describe("the keyboard cards", () => {
-  it("links every card to buy and to the published files", () => {
+  it("links every card to the shop and to the published files", () => {
     render(<KeyboardsPage onNavigate={vi.fn()} />);
 
-    const buyLinks = screen.getAllByRole("link", { name: /^Buy / });
-    expect(buyLinks.map((link) => link.getAttribute("href"))).toEqual(
-      boards.map((board) => board.buy),
+    const shopLinks = screen.getAllByRole("link", { name: /^Shop / });
+    expect(shopLinks.map((link) => link.getAttribute("href"))).toEqual(
+      boards.map((board) => board.shop),
     );
-    expect(buyLinks.map((link) => link.getAttribute("aria-label"))).toEqual(
-      boards.map((board) => `Buy ${board.name} (opens in a new tab)`),
+    expect(shopLinks.map((link) => link.getAttribute("aria-label"))).toEqual(
+      boards.map((board) => `Shop ${board.name} (opens in a new tab)`),
     );
 
-    for (const link of buyLinks) {
+    for (const link of shopLinks) {
       expect(link.getAttribute("target")).toBe("_blank");
-      expect(link.textContent?.trim()).toBe("Buy");
+      expect(link.textContent?.trim()).toBe("Shop");
     }
   });
 });
