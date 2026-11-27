@@ -40,15 +40,22 @@ export function ProductCard({
       }`}
     >
       <div className="flex items-baseline justify-between gap-2 px-3 pt-2.5 pb-2 sm:gap-4 sm:px-4 sm:pt-3.5 sm:pb-3">
-        <Title className="min-w-0 truncate text-[13px] text-zinc-100 sm:text-[14px]">
-          {product.title}
-        </Title>
+        <div className="flex min-w-0 items-baseline gap-2">
+          <Title className="line-clamp-2 min-w-0 text-[13px] leading-tight text-zinc-100 sm:line-clamp-1 sm:text-[14px]">
+            {product.title}
+          </Title>
+          {soldOut ? (
+            <span className="shrink-0 rounded border border-red-400/30 bg-red-500/10 px-1.5 py-0.5 text-[9px] tracking-[0.12em] text-red-300 uppercase sm:text-[10px]">
+              Sold out
+            </span>
+          ) : null}
+        </div>
         <p className="shrink-0 font-mono text-[11px] text-zinc-300 sm:text-[12px]">
           {formatPrice(productPrice(product, currency))}
         </p>
       </div>
       <div
-        className={`relative w-full overflow-hidden ${
+        className={`w-full overflow-hidden ${
           layout === "grid" ? "aspect-[4/3] md:aspect-auto md:min-h-0 md:flex-1" : "aspect-[4/3]"
         }`}
       >
@@ -64,11 +71,6 @@ export function ProductCard({
             <span className="text-[10px] tracking-[0.16em] text-zinc-600 uppercase">No photo</span>
           </div>
         )}
-        {soldOut ? (
-          <span className="absolute top-2 right-2 rounded border border-red-400/25 bg-black/75 px-1.5 py-0.5 text-[10px] tracking-[0.16em] text-red-300 uppercase sm:top-3 sm:right-3">
-            Sold out
-          </span>
-        ) : null}
       </div>
     </a>
   );

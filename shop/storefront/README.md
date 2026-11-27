@@ -44,7 +44,7 @@ reload or a shared link. Moving to a path is a routing decision for the host.
 The catalogue reads the Store API `count` and loads twelve products at a time;
 `Load more` appends the next page. A failed catalogue or product request offers
 `Try again` without reloading the page. A board whose variants are all sold out
-carries a **Sold out** badge over its photo.
+carries a **Sold out** badge next to its name.
 
 The footer links to the shop, the public documentation, the library, the licence,
 GitHub, the Studio source and the keyboard-files readme. Shipping, returns,
