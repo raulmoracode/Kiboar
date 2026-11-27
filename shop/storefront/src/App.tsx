@@ -1,4 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
+import { Bag, type BagItem } from "./components/Bag";
+import { Catalogue, type CatalogueState } from "./components/Catalogue";
+import { Footer } from "./components/Footer";
+import { ProductPage } from "./components/ProductPage";
+import { StudioBanner } from "./components/StudioBanner";
 import {
   listProducts,
   listRegions,
@@ -7,13 +12,8 @@ import {
   type Region,
   type Variant,
   variantPrice,
-} from "../lib/api";
-import { loadBag, saveBag } from "../lib/bagStorage";
-import { Bag, type BagItem } from "./Bag";
-import { Catalogue, type CatalogueState } from "./Catalogue";
-import { Footer } from "./Footer";
-import { ProductPage } from "./ProductPage";
-import { StudioBanner } from "./StudioBanner";
+} from "./lib/api";
+import { loadBag, saveBag } from "./lib/bag-storage";
 
 function handleFromUrl(): string | null {
   return new URLSearchParams(window.location.search).get("p");
