@@ -34,7 +34,7 @@ routing each one needs is in [`ARCHITECTURE.md`](ARCHITECTURE.md#deployment).
 Today the only published artefact is the Studio 0.1.0 release; the web, docs and
 shop deployments are not live.
 
-📖 **Documentation:** <https://kiboar.raulmoracode.com/docs> — English and Spanish.
+📖 **Documentation (not live yet):** <https://kiboar.raulmoracode.com/docs> — English and Spanish.
 
 ## Start here
 
@@ -128,7 +128,7 @@ contains its README and starts empty. The board definitions Studio reads stay in
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) — how to contribute and what a pull
   request must include.
 - [`packages/`](packages/README.md) — shared workspace packages: design tokens,
-  the Vite setup and the TypeScript config.
+  the Vite setup, the TypeScript config and the canonical links.
 - [`CHANGELOG.md`](CHANGELOG.md) — changes to the KiCad library and the PCM
   package. The docs site and Studio have independent versions; see
   `ARCHITECTURE.md`.

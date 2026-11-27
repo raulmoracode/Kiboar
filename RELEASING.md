@@ -15,7 +15,9 @@ already automated.
 | KiCad library / PCM | `library/pcm/metadata.json`, `versions[0].version` | `dist/Kiboar-<version>.zip` |
 | Library notes | `CHANGELOG.md` | The release notes |
 | Kiboar Studio | `software/app/package.json` and `software/app/src-tauri/tauri.conf.json`, which must match | Desktop bundles |
-| Documentation | None | Vercel deploy from `main` |
+| Documentation | None (the package version is not a release) | Vercel deploy from `main` |
+| Web | None | Static build from `main`; no host configured yet |
+| Shop | `shop/package.json` and the pinned Medusa version | Medusa build; run with Node and PostgreSQL |
 
 `ARCHITECTURE.md` is the authority for the product boundaries; this file only
 covers cutting a version.
@@ -127,9 +129,21 @@ one exists.
 
 ## Documentation
 
-The site deploys from `main` through Vercel and has no version or tag. A
-documentation change ships when its pull request merges. There is nothing to
-cut.
+The site is configured to deploy from `main` through Vercel; it is not live yet
+and has no release version or tag. A documentation change ships when its pull
+request merges. There is nothing to cut.
+
+## Web and shop
+
+Neither surface has a release tag or a production deployment yet.
+
+- **Web:** `pnpm --filter @kiboar/web build` produces a static `dist/` for the
+  domain root, `/studio`, `/library` and `/keyboards`. The host must fall back
+  to `index.html` for the client-side routes.
+- **Shop:** `pnpm --filter @kiboar/shop build` compiles the Medusa service and
+  the admin without a database. The storefront is a separate static build under
+  `/shop/`; the POS is an Expo app distributed separately. Production needs Node,
+  PostgreSQL and object storage for uploads.
 
 ## Rollback
 
@@ -138,6 +152,8 @@ cut.
 | Library | Publish a patch with the fix. If the ZIP itself is corrupt, replace the asset on the GitHub release and say so in the release notes; deleting a published tag is a last resort |
 | Studio | Mark the release as a pre-release, remove the broken artifacts and publish a patch. Do not reuse the version |
 | Docs | Revert the offending pull request; Vercel redeploys `main` |
+| Web | Revert the offending pull request and redeploy `main` |
+| Shop | Revert the pull request and redeploy the Medusa service and the storefront; the POS ships separately |
 
 ## Not automated
 
@@ -147,6 +163,7 @@ cut.
 | No test gate in the Studio release | The tag build packages without running the Rust or frontend tests |
 | No signing or notarisation | Studio builds are unsigned today |
 | No changelog for docs or Studio | Their release notes are written by hand |
+| No web or shop deployment | Both surfaces are built but not hosted; their release path is not automated |
 | PCM not in the official repository | The library release is a GitHub release only |
 
 Closing those gaps is separate work, each with its own pull request. This file

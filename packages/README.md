@@ -7,6 +7,7 @@ imports another product's source.
 | Package | What it shares |
 | --- | --- |
 | [`@kiboar/design`](design/README.md) | Base CSS, colour tokens, focus styles and the Tailwind entry |
+| [`@kiboar/links`](links/README.md) | The canonical repository, site, docs and release URLs |
 | [`@kiboar/tsconfig`](tsconfig/README.md) | TypeScript compiler options for the React apps |
 | [`@kiboar/vite-config`](vite-config/README.md) | Vite plugins, ports and build defaults |
 
