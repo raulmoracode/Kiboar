@@ -14,7 +14,7 @@ export function ProductLinks({
   const currentPage = current?.toLowerCase();
 
   return (
-    <section className="mt-auto grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-6 lg:grid-cols-6">
+    <section className="mt-auto grid grid-cols-2 gap-2 text-center sm:grid-cols-3 sm:gap-6 lg:grid-cols-6">
       {products.map((product) => {
         const isCurrent = product.name.toLowerCase() === currentPage;
         const name = isCurrent ? HOME.name : product.name;
@@ -28,9 +28,9 @@ export function ProductLinks({
             <span
               key={product.name}
               aria-disabled="true"
-              className="flex cursor-not-allowed items-center gap-2 rounded border border-white/[0.04] px-3 py-2.5 sm:block sm:rounded-none sm:border-0 sm:px-0 sm:py-6"
+              className="flex cursor-not-allowed items-center justify-center gap-2 rounded border border-white/[0.04] px-3 py-2.5 sm:block sm:rounded-none sm:border-0 sm:px-0 sm:py-6"
             >
-              <span className="flex items-center gap-2">
+              <span className="flex items-center justify-center gap-2">
                 <kbd className="inline-flex size-5 items-center justify-center rounded border border-white/5 font-mono text-[10px] text-zinc-700">
                   {product.key}
                 </kbd>
@@ -59,9 +59,9 @@ export function ProductLinks({
                   },
                 }
               : { target: "_blank", rel: "noreferrer" })}
-            className="group flex items-center gap-2 rounded border border-white/[0.06] px-3 py-2.5 transition-colors hover:border-white/25 sm:block sm:rounded-none sm:border-0 sm:px-0 sm:py-6"
+            className="group flex items-center justify-center gap-2 rounded border border-white/[0.06] px-3 py-2.5 transition-colors hover:border-white/25 sm:block sm:rounded-none sm:border-0 sm:px-0 sm:py-6"
           >
-            <span className="flex items-center gap-2">
+            <span className="flex items-center justify-center gap-2">
               <kbd className="inline-flex size-5 items-center justify-center rounded border border-white/15 font-mono text-[10px] text-zinc-400 transition-colors group-hover:border-lime-300/40 group-hover:text-lime-200">
                 {product.key}
               </kbd>
