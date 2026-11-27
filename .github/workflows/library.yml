@@ -1,4 +1,4 @@
-name: CI
+name: Library
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
       - ".node-version"
       - "NOTICE"
       - "LICENSE"
-      - ".github/workflows/ci.yml"
+      - ".github/workflows/library.yml"
   pull_request:
     paths:
       - "library/**"
@@ -19,7 +19,7 @@ on:
       - ".node-version"
       - "NOTICE"
       - "LICENSE"
-      - ".github/workflows/ci.yml"
+      - ".github/workflows/library.yml"
   workflow_dispatch:
 
 permissions:

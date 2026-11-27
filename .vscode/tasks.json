@@ -10,7 +10,7 @@
     },
     {
       "label": "dev",
-      "detail": "Docs, Studio, web and storefront dev servers",
+      "detail": "Every server product and PostgreSQL",
       "type": "shell",
       "command": "pnpm dev",
       "isBackground": true,
