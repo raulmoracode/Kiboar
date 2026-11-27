@@ -26,8 +26,9 @@ useful to someone who never buys an assembled keyboard.
 - `lib-table-files/` — the global library tables for a clone install.
 - `pcm/metadata.json` — PCM package metadata.
 - `tools/` — Python scripts (standard library, except `build_pcm.py --schema`
-  needs `jsonschema` and network access); the tools have a `--check` mode,
-  except `lint.py`, which runs its checks directly.
+  needs `jsonschema` and network access). The CLI tools accept `--check`,
+  except `lint.py`, which runs its checks directly; `kicad_sexpr.py` is a
+  shared helper without a CLI.
 
 ## Install contract
 
