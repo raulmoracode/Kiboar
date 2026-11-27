@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "shop/pos/**"
+      - "packages/**"
       - "pnpm-lock.yaml"
       - "pnpm-workspace.yaml"
       - "package.json"
@@ -15,6 +16,7 @@ on:
   pull_request:
     paths:
       - "shop/pos/**"
+      - "packages/**"
       - "pnpm-lock.yaml"
       - "pnpm-workspace.yaml"
       - "package.json"

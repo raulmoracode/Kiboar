@@ -5,7 +5,8 @@ on:
     branches: [main]
     paths:
       - "packages/**"
-      # The local dev launcher is a root HTML file.
+      # The local dev launcher and its server are root code.
+      - "scripts/**"
       - "dev.html"
       - ".npmrc"
       - "pnpm-lock.yaml"
@@ -18,7 +19,8 @@ on:
   pull_request:
     paths:
       - "packages/**"
-      # The local dev launcher is a root HTML file.
+      # The local dev launcher and its server are root code.
+      - "scripts/**"
       - "dev.html"
       - ".npmrc"
       - "pnpm-lock.yaml"
