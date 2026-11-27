@@ -43,7 +43,7 @@ function BoardCard({ board }: { board: OpenBoard }) {
             target="_blank"
             rel="noreferrer"
             aria-label={`${board.name} files on GitHub (opens in a new tab)`}
-            className="text-[11px] text-zinc-400 underline decoration-white/15 underline-offset-4 transition-colors hover:text-lime-200"
+            className="kiboar-link text-[11px] text-zinc-400"
           >
             GitHub
           </a>
@@ -75,8 +75,6 @@ export function KeyboardsPage({ onNavigate }: { onNavigate: (href: string) => vo
       wide
       autoScroll
     >
-      <h1 className="sr-only">Keyboards</h1>
-
       <section aria-label="Board definitions" className="grid gap-3 md:grid-cols-3">
         {boards.map((board) => (
           <BoardCard key={board.id} board={board} />

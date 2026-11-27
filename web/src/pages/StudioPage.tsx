@@ -3,8 +3,7 @@ import { LandingLayout } from "../components/LandingLayout";
 
 const { dmg: DMG, sums: SUMS, install: INSTALL, script: SCRIPT } = studio;
 
-const LINK =
-  "text-[11px] text-zinc-400 underline decoration-white/15 underline-offset-4 transition-colors hover:text-lime-200";
+const LINK = "kiboar-link text-[11px] text-zinc-400";
 
 const STEPS = ["Detect", "Verify", "Write", "Cancel"] as const;
 
@@ -18,13 +17,9 @@ export function StudioPage({ onNavigate }: { onNavigate: (href: string) => void 
       wide
       autoScroll
     >
-      <h1 className="sr-only">Kiboar Studio</h1>
-
       <div className="grid gap-3 lg:grid-cols-[1.15fr_0.85fr]">
         <section aria-labelledby="studio-download-title" className="flex flex-col kiboar-card p-6">
-          <p className="font-mono text-[10px] tracking-[0.12em] text-zinc-600 uppercase">
-            macOS · 0.1.0
-          </p>
+          <p className="kiboar-eyebrow">macOS · 0.1.0</p>
           <h2
             id="studio-download-title"
             className="mt-3 text-[22px] leading-tight font-medium text-zinc-100"
@@ -50,9 +45,7 @@ export function StudioPage({ onNavigate }: { onNavigate: (href: string) => void 
         </section>
 
         <section aria-labelledby="studio-brew-title" className="flex flex-col kiboar-card p-6">
-          <p className="font-mono text-[10px] tracking-[0.12em] text-zinc-600 uppercase">
-            Homebrew
-          </p>
+          <p className="kiboar-eyebrow">Homebrew</p>
           <h2
             id="studio-brew-title"
             className="mt-3 text-[22px] leading-tight font-medium text-zinc-100"

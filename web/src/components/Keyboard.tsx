@@ -136,7 +136,7 @@ function KeyboardLabel({ cap, label, className }: { cap: Key; label: string; cla
       y={cap.y + 0.52}
       textAnchor="middle"
       dominantBaseline="middle"
-      fill="#bef264"
+      fill="var(--kiboar-accent)"
       fillOpacity={0.9}
       fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace"
       fontSize={0.26}
@@ -187,11 +187,13 @@ export function Keyboard({
   word,
   interactive = true,
   detailsLink = false,
+  label,
 }: {
   onNavigate?: (href: string) => void;
   word?: string;
   interactive?: boolean;
   detailsLink?: boolean;
+  label?: string;
 }) {
   const currentLabels = wordLabels(word);
   const [previousWord, setPreviousWord] = useState<string | undefined>(() =>
@@ -214,7 +216,7 @@ export function Keyboard({
   return (
     <svg
       viewBox="0 0 15 5"
-      aria-label={word ? `${word} keyboard` : "Kiboar keyboard"}
+      aria-label={label ?? (word ? `${word} keyboard` : "Kiboar keyboard")}
       className="w-full"
     >
       {KEYS.map((key) => {
