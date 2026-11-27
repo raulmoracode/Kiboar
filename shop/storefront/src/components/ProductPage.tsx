@@ -1,3 +1,4 @@
+import { site } from "@kiboar/links";
 import { useEffect, useState } from "react";
 import {
   firmwareUrl,
@@ -233,6 +234,23 @@ export function ProductPage({
 
           <KeyboardFilesButton url={filesUrl} />
           <DownloadFirmwareButton url={firmware} />
+
+          <a
+            href={`${site}/studio`}
+            className="group mt-8 flex flex-col gap-3 rounded border border-white/10 p-4 transition-colors hover:border-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-300/60 sm:flex-row sm:items-center sm:justify-between"
+          >
+            <span className="min-w-0">
+              <span className="block text-[10px] tracking-[0.16em] text-zinc-500 uppercase">
+                Kiboar Studio
+              </span>
+              <span className="mt-1 block text-[13px] leading-relaxed text-zinc-300">
+                Flash, configure and remap this board from your desktop.
+              </span>
+            </span>
+            <span className="shrink-0 text-[12px] font-medium text-lime-200 transition-colors group-hover:text-lime-100">
+              Download Kiboar Studio <span aria-hidden="true">→</span>
+            </span>
+          </a>
         </div>
       </article>
 
