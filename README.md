@@ -21,7 +21,7 @@ got it. The web site brings the whole brand together.
 
 | Product | Path | README | What it is |
 | --- | --- | --- | --- |
-| Shop | `shop/` | [`shop/README.md`](shop/README.md) | The commercial surface of the brand: catalogue and storefront; checkout is not connected yet |
+| Shop | `shop/` | [`shop/README.md`](shop/README.md) | The commercial surface of the brand: catalogue, storefront and POS; checkout is not connected yet |
 | Web | `web/` | [`web/README.md`](web/README.md) | The public front door: the brand, the keyboards, the docs, Studio and the shop in one place |
 | KiCad library | `library/` | [`library/README.md`](library/README.md) | The official library Kiboar designs with, published so you can design and build your own board: 145 symbols and 173 footprints in 26 libraries |
 | Kiboar Studio | `software/` | [`software/README.md`](software/README.md) | Manages a Kiboar keyboard: detects, flashes and — after 0.1 — remaps it, bought or self-built |
@@ -121,8 +121,10 @@ contains its README and starts empty. The board definitions Studio reads stay in
   commands, versions and deployment.
 - [`AGENTS.md`](AGENTS.md) — the repository rules. Each product adds its own:
   [`library/AGENTS.md`](library/AGENTS.md),
-  [`docs/AGENTS.md`](docs/AGENTS.md) and
-  [`software/AGENTS.md`](software/AGENTS.md).
+  [`docs/AGENTS.md`](docs/AGENTS.md),
+  [`software/AGENTS.md`](software/AGENTS.md),
+  [`web/AGENTS.md`](web/AGENTS.md) and
+  [`shop/AGENTS.md`](shop/AGENTS.md).
 - [`LABELS.md`](LABELS.md) — the label scheme for issues and pull requests.
 - [`SECURITY.md`](SECURITY.md) — how to report a vulnerability privately.
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) — how to contribute and what a pull
