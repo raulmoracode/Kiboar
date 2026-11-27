@@ -338,10 +338,14 @@ def library_cards(library, footprints, spanish):
             '  <div class="grid gap-4 sm:grid-cols-2">',
             f'    <img loading="lazy" src="/footprints/{library}/{quote(name)}.svg" alt="{cell(name)} footprint" class="w-full rounded-lg border bg-white p-2" />',
         ]
-        if row["models"]:
+        published = [
+            uri.split("/", 1)[1]
+            for uri in row["models"]
+            if uri.startswith("${KIBOAR_3DMODELS}/")
+        ]
+        if published:
             lines.append('    <div class="grid content-start gap-4">')
-            for uri in row["models"]:
-                rel = uri.split("/", 1)[1]
+            for rel in published:
                 raw = f"https://raw.githubusercontent.com/raulmoracode/Kiboar/main/library/3dmodels/{quote(rel)}"
                 lines.append(f'      <kiboar-model compact url="{raw}"></kiboar-model>')
             lines.append("    </div>")

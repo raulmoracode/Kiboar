@@ -8,9 +8,10 @@ there apply here and are not repeated.
 
 The official Kiboar component library in **KiCad 10**: the parts the brand's own
 keyboards are designed with, published so anyone can design and build their own.
-145 symbols, 173 footprints in 26 `.pretty` libraries, and 3D models for all of
-them. Keyswitch footprints and models are being redesigned and are not in this
-version. It ships as a PCM package and as a clone with library tables.
+145 symbols, 173 footprints in 26 `.pretty` libraries, and 129 3D models covering
+124 of the 173 footprints. Keyswitch footprints and models are being redesigned
+and are not in this version. It ships as a PCM package and as a clone with
+library tables.
 
 The library is one product of the brand, not the whole repository. It must stay
 useful to someone who never buys an assembled keyboard.
@@ -24,7 +25,10 @@ useful to someone who never buys an assembled keyboard.
   `${KIBOAR_3DMODELS}`; `3dmodels/README.md` is the generated inventory.
 - `lib-table-files/` — the global library tables for a clone install.
 - `pcm/metadata.json` — PCM package metadata.
-- `tools/` — Python standard-library scripts; each has a `--check` mode.
+- `tools/` — Python scripts (standard library, except `build_pcm.py --schema`
+  needs `jsonschema` and network access). The CLI tools accept `--check`,
+  except `lint.py`, which runs its checks directly; `kicad_sexpr.py` is a
+  shared helper without a CLI.
 
 ## Install contract
 
@@ -64,8 +68,10 @@ If any byte changes, the source was not current: commit the upgraded files.
   otherwise `smd`. Footprints with only `np_thru_hole` pads keep their own
   choice.
 - Model paths must use
-  `${KIBOAR_3DMODELS}/Kiboar_<family>.3dshapes/<name>.step`. Never use an
-  absolute path, `${KIPRJMOD}` or an undefined variable.
+  `${KIBOAR_3DMODELS}/Kiboar_<family>.3dshapes/<name>.step`. The only exception
+  is `${KICAD10_3DMODEL_DIR}` for a stock KiCad model, which the docs generator
+  does not publish. Never use an absolute path, `${KIPRJMOD}` or an undefined
+  variable.
 - Model file names are case-sensitive. `SLLB510100.step` and `.STEP` are not the
   same file on Linux.
 

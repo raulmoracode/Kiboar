@@ -32,14 +32,16 @@ pnpm --filter @kiboar/shop seed
 pnpm --filter @kiboar/shop dev
 ```
 
-`seed` is idempotent: it configures the `Kiboar` store, the Spain region and
-its default 21% VAT rate, tax-inclusive EUR prices, the online and POS sales
-channels, the stock location, the shipping options, one publishable key per
-channel, the product types, collection, category tree and tags, and the six
-Kiboar boards with the photos in `shop/static`. It also removes the unused
-Medusa `Default Sales Channel` when no products, orders or carts reference it.
-It prints the keys and writes them to `shop/seed-output.json`, which is ignored
-by git and is the file the storefront and the POS read during local development.
+`seed` is idempotent: it configures the `Kiboar` store, the Europe region
+covering Spain (`es`) and its default 21% IVA rate, tax-inclusive EUR prices,
+the online and POS sales channels, the stock location, the shipping options, one
+publishable key per channel, the product types, collection, category tree and
+tags, and the six Kiboar boards with the photos in `shop/static`. It also removes
+the unused Medusa `Default Sales Channel` when no products, orders or carts
+reference it. It prints the keys and writes them to `shop/seed-output.json`,
+which is ignored by git. The apps do not read that file at runtime: copy the
+relevant values into `shop/storefront/.env.local` and
+`shop/pos/.env.local`.
 
 ### Local database
 
@@ -65,7 +67,11 @@ taken. Both containers share the compose network, so pgAdmin reaches PostgreSQL
 by the service name and not through the host port.
 
 The API runs at <http://localhost:9000> and the admin dashboard at
-<http://localhost:9000/app>. The first launch asks you to create an admin user.
+<http://localhost:9000/app>. Create the admin user before the first sign-in:
+
+```bash
+pnpm --filter @kiboar/shop exec medusa user -e admin@example.com -p 'a-strong-password'
+```
 
 ## Commands
 
@@ -83,8 +89,9 @@ pnpm --filter @kiboar/shop seed         # creates the region, channels and board
 
 `shop/storefront` is the customer-facing app, served under `/shop`. It is a
 separate app from `web`: both use `@kiboar/design` for the base CSS and
-tokens, `@kiboar/vite-config` for the Vite setup and `@kiboar/tsconfig` for the
-compiler options, but neither imports the other's pages or components.
+tokens, `@kiboar/vite-config` for the Vite setup, `@kiboar/tsconfig` for the
+compiler options and `@kiboar/links` for the canonical URLs, but neither imports
+the other's pages or components.
 
 ```bash
 cp shop/storefront/.env.template shop/storefront/.env.local
@@ -172,8 +179,8 @@ missing, the register falls back to the Stripe provider id and then to `other`.
 ## What is not here
 
 - No online Medusa cart, checkout, customer accounts or search. The storefront
-  bag is local to the browser and is lost on reload. The POS completes cash
-  sales; the Stripe QR is still pending.
+  bag is stored in `localStorage` under a versioned key and survives a reload.
+  The POS completes cash sales; the Stripe QR is still pending.
 - No payment provider beyond the system provider the seed registers, and no
   shipping rates beyond the seeded free store pickup.
 - No deployment configuration. The `/shop` route is a host concern; the

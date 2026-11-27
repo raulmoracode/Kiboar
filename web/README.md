@@ -10,9 +10,13 @@ Studio, Docs and GitHub — and pressing the letter does the same on every page.
 Keyboards, Library and Studio are the same layout with their own name on the
 keyboard, a clickable spacebar that jumps to the detail and the detail below the
 first screen; the keyboard and links keep the home position. On those pages the link for the current page
-becomes Home, and its letter returns home. The rest open in a new tab. It does
-not replace the docs or the shop. The storefront in `shop/` reads Medusa; `web`
-does not call the Store API.
+becomes Home, and its letter returns home. GitHub opens in a new tab; the
+internal pages navigate in place. Shop and Docs are marked unavailable in the
+link list because their deployments are not live, but the keyboard letters and
+shortcuts still open them. It does not replace the docs or the shop. The
+storefront in `shop/` reads Medusa; `web` does not call the Store API. On
+`/keyboards`, each board card links to its GitHub files and to the Shop product
+page (`/shop/?p=<handle>`); the storefront is not deployed yet.
 
 ## Development
 
@@ -36,7 +40,7 @@ src/main.tsx            React root
 src/App.tsx             the router and keyboard shortcuts
 src/components/         Keyboard, LandingLayout, ProductLinks
 src/data/               boards and products
-src/lib/                shared link helpers
+src/lib/                the plain-click helper
 src/pages/              Home, Keyboards, Library, Studio and 404 pages
 src/styles.css          the shared design entry
 test/                   Vitest unit and accessibility tests, Playwright e2e
@@ -53,9 +57,9 @@ TypeScript come from the `catalog` block of `pnpm-workspace.yaml`. There is no
 second lockfile and no nested workspace.
 
 The base CSS and colour tokens come from `@kiboar/design`, the Vite plugins and
-ports from `@kiboar/vite-config`, and the compiler options from
-`@kiboar/tsconfig`, all in `packages/`. React, Vite, Tailwind and TypeScript
-versions come from the catalog. If a component or a type
+ports from `@kiboar/vite-config`, the compiler options from `@kiboar/tsconfig`,
+and the canonical URLs from `@kiboar/links`, all in `packages/`. React, Vite,
+Tailwind and TypeScript versions come from the catalog. If a component or a type
 is needed by both `web` and another product, add it as a shared package instead
 of copying it; a component used by one product stays in that product.
 

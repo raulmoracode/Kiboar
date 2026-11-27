@@ -19,6 +19,8 @@ symbol, footprint or 3D model.
   library tables.
 - The Python tools in `library/tools/`.
 - The documentation site in `docs/`.
+- The public site in `web/`.
+- The shop in `shop/`: the Medusa service, the storefront and the POS.
 - Kiboar Studio, including the Tauri shell, the Rust crates and the HID
   device parsing.
 

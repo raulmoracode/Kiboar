@@ -52,19 +52,22 @@ is MIT, the firmware is built from QMK (GPL-2.0) and published with its source,
 and the hardware is open, so a code shipped in the binary or in the repository
 protects nothing an attacker could not read. Integrity is handled where it can
 actually be enforced: by verifying firmware signatures and digests before
-flashing.
+flashing. The 0.1 build compares the SHA-256 of the selected UF2; signature and
+registry verification are pending.
 
 ### Safety on a blank board
 
 Because there is no stored identity to compare against, the runtime `board_id`
 check cannot protect the first flash. The safety net is procedural:
 
-- the model selector is filtered by the detected MCU;
+- the model selector is intended to be filtered by the detected MCU; the 0.1
+  build lists every registry board, and the filter is pending;
 - hardware revision is a separate field, because pins change between revisions;
-- a mandatory confirmation names the board, the revision and the firmware,
-  including origin and SHA-256;
-- recovery is documented and built into the flasher: re-enter the bootloader and
-  flash again.
+- a mandatory confirmation names the board, the revision and the firmware; the
+  0.1 build shows the file name and a shortened SHA-256, and the full origin and
+  digest are pending;
+- recovery is documented and built into the flasher; the 0.1 failure path offers
+  Retry, and the full recovery screen is pending.
 
 ## Consequences
 
@@ -102,8 +105,9 @@ check cannot protect the first flash. The safety net is procedural:
 - A public board code or QR may be added to the silkscreen later for kits and
   support. It identifies, never authorises.
 - The HID board info report is defined in [protocol.md](../protocol.md) and is
-  implemented by firmware in M2.
+  implemented by firmware in 0.2 Identity.
 - A reserved provisioning flash sector, or a small probe firmware, is considered
   only if wrong-flash incidents justify it. Either would get its own ADR.
 - The confirmation dialogue and the recovery screen are acceptance criteria of
-  M2 and must name the board, the revision and the firmware before writing.
+  the M2 flasher; the 0.1 build implements the confirmation and the Retry path,
+  with the full origin/digest and recovery screen pending.

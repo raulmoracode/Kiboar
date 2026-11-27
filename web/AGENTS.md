@@ -18,13 +18,13 @@ shop is the Medusa application in `shop/`, and this site points at it.
 - `src/pages/LibraryPage.tsx` — the `/library` page: the Library keyboard, the links, the counts, install and scope.
 - `src/pages/KeyboardsPage.tsx` — the `/keyboards` page: the Keyboards keyboard, the links and the open board definitions as cards.
 - `src/pages/NotFoundPage.tsx` — the 404 page: the landing layout with a 404 keyboard; it sets `robots: noindex`.
-- `src/components/Keyboard.tsx` — the drawn keyboard; the six lit keys are real links.
+- `src/components/Keyboard.tsx` — the drawn keyboard; the six lit keys are real links. The page word crossfades when it changes; the transition respects `prefers-reduced-motion`.
 - `src/components/LandingLayout.tsx` — the keyboard-first layout shared by the home page, the 404 and the three product pages; it keeps the keyboard and the links in the home position, makes the spacebar a link to the details and renders the page detail below the first screen.
-- `src/components/ProductLinks.tsx` — the six destination links under the keyboard; the current page becomes Home.
-- `src/data/boards.ts` — the board data mirrored from `software/boards`; update it when a definition changes.
+- `src/components/ProductLinks.tsx` — the six destination slots under the keyboard; the current page becomes Home, and Shop/Docs render as unavailable (`disabled`).
+- `src/data/boards.ts` — the board data mirrored from `software/boards`; update it when a definition changes, including each board's `shop` handle for the storefront link.
 - `src/data/products.ts` — the six destinations, their key and whether they are internal.
 - `src/lib/plain-click.ts` — the plain-click helper shared by the keyboard and the product links.
-- `src/styles.css` — the shared design entry from `@kiboar/design`.
+- `src/styles.css` — the shared design entry from `@kiboar/design` plus the keyboard label crossfade.
 - `test/` — the Vitest unit and accessibility tests plus the Playwright end-to-end spec.
 - `vite.config.ts` — the shared `@kiboar/vite-config` setup and port 3000.
 
@@ -44,16 +44,20 @@ shop is the Medusa application in `shop/`, and this site points at it.
   letter goes home, matching the Home entry underneath. A keyboard that spells a
   word (the product pages and the 404) is inert: its letters are not links.
   External destinations open in a new tab; `internal: true` destinations
-  (Keyboards, Library and Studio) use the local router and the same tab.
+  (Keyboards, Library and Studio) use the local router and the same tab. Shop
+  and Docs are `disabled` in `ProductLinks` but remain reachable from the
+  keyboard letters and shortcuts.
 - **Product pages are the landing layout, with their detail underneath.**
   Keyboards, Library and Studio put their name on the keyboard, keep the product
   links below it and render the page detail after the first screen. The first
   screen is identical to the home page: the keyboard, the links and the
   spacebar detail link must not move them (the detail follows the screen).
   The detail stays honest: Studio links the real release asset; the Keyboards
-  cards use the real definitions in `software/boards`; the hardware files are
-  not published yet; the Library page states the real counts and the keyswitch
-  limitation. Do not add invented screenshots or prices.
+  cards use the real definitions in `software/boards` and link to the intended
+  Shop product page (`/shop/?p=<handle>`), which is not a working checkout until
+  the storefront is deployed; the hardware files are not published yet; the
+  Library page states the library counts. Do not add invented screenshots or
+  prices.
 - **The current page becomes Home.** On a product page, the link for that page is
   replaced by Home and points at `/`; it keeps the slot's keyboard letter. The
   keyboard spells the page name and its letters are not links: only the links
@@ -64,7 +68,7 @@ shop is the Medusa application in `shop/`, and this site points at it.
   to the home page apart from the keyboard word.
 - **The shop is a separate product.** Do not import `shop/` code into `web/`;
   talk to its Store API over HTTP. Both apps share `@kiboar/design`,
-  `@kiboar/vite-config` and `@kiboar/tsconfig`, not screens.
+  `@kiboar/vite-config`, `@kiboar/tsconfig` and `@kiboar/links`, not screens.
 - **Shared code goes to `packages/`.** Do not copy a component or a type into
   `web/` when another product needs it; add it to a shared package instead.
 - **Static output only.** No server adapter, no runtime secret in the bundle.
@@ -77,14 +81,18 @@ shop is the Medusa application in `shop/`, and this site points at it.
 ```bash
 pnpm --filter @kiboar/web dev
 pnpm --filter @kiboar/web typecheck
+pnpm --filter @kiboar/web test
 pnpm --filter @kiboar/web build
+pnpm --filter @kiboar/web test:e2e     # builds and runs Playwright
 ```
 
 ## Before a PR
 
 - `pnpm lint` passes (Biome covers `web/`).
 - `pnpm --filter @kiboar/web typecheck` passes.
+- `pnpm --filter @kiboar/web test` passes.
 - `pnpm --filter @kiboar/web build` passes.
+- `pnpm --filter @kiboar/web test:e2e` passes when the change touches routing or rendering.
 - Paste the real command output in the pull request.
 
 ## Labels

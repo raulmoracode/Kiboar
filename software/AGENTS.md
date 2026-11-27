@@ -21,8 +21,9 @@ other, and nothing in Studio may assume the board was bought.
 - `app/` — `@kiboar/studio`: the React frontend and the Tauri shell.
   - `app/src-tauri/` — Rust shell: USB/HID enumeration, commands and the
     platform boundary.
-- `packages/core/` — `@kiboar/core`: pure TypeScript schema, matrix, VIA
-  protocol and exporters.
+- `packages/core/` — `@kiboar/core`: pure TypeScript schema and validation for
+  the board and registry definitions. VIA and exporters arrive in later
+  milestones.
 - `crates/kiboar-device/` — pure Rust types, bootloader table and HID report
   parser. No Tauri, no USB.
 - `crates/kiboar-flash/` — pure Rust UF2 parsing, digest and signature
@@ -62,8 +63,9 @@ other, and nothing in Studio may assume the board was bought.
 - **JSON Schema is generated.** `schemas/board.schema.json` and
   `schemas/registry.schema.json` come from `@kiboar/core`; run
   `pnpm schema:export`.
-- **M1 is read-only.** Do not add a path that writes to a device without the M2
-  verification, confirmation and recovery design.
+- **M2 is the flasher.** Every write path needs the verification, confirmation
+  and recovery design. The 0.1 flow checks the UF2 SHA-256, requires typed
+  confirmation and offers Retry as the current recovery step.
 - **No telemetry, no cloud, no secrets.** Logs are local and support only.
 - **Update the ADRs when a decision changes.** A protocol change belongs in
   `docs/protocol.md`; an architectural decision belongs in `docs/adr/`.

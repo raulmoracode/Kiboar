@@ -4,6 +4,10 @@
 > `library/`. The workspace decision is unchanged; see `ARCHITECTURE.md` and
 > `library/AGENTS.md`. The paragraph below describes the context at the time of
 > the decision.
+>
+> **Update 2026-11-27:** the workspace now also includes `packages/*`, `web`,
+> `shop`, `shop/storefront` and `shop/pos`. The decision and the task graph are
+> unchanged; see `pnpm-workspace.yaml`.
 
 - Status: Accepted
 - Date: 2026-11-21
