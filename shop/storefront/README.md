@@ -24,9 +24,10 @@ firmware** button appears below the GitHub button. Below the details, a **More
 boards** heading and three random other boards link to their pages. Unknown
 handles render a "not published" state.
 
-On phones the product image uses a 16:10 frame, the buttons take the full content
-width, and **More boards** stays a single vertical list. The catalogue switches
-to two columns with the price under the title.
+On phones and tablets the product image uses a 16:10 frame, the buttons take the
+full content width, and **More boards** stays a single vertical list. From the
+desktop breakpoint the buttons cap at `max-w-sm`. The catalogue switches to two
+columns with the price under the title on phones.
 
 The handle lives in a query string on purpose: the build is static and no host
 rewrite is configured yet, so a real `/products/<handle>` path would break on a

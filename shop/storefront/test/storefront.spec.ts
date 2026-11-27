@@ -226,6 +226,39 @@ test("shows two catalogue columns on mobile", async ({ page }) => {
   expect(third.y).toBeGreaterThan(first.y);
 });
 
+test("keeps the product actions full width on tablet", async ({ page }) => {
+  await page.setViewportSize({ width: 768, height: 1024 });
+  const withFiles = makeProduct(1, {
+    keyboard_files_url:
+      "https://github.com/raulmoracode/Kiboar/tree/main/software/boards/kb60-hhkb",
+    firmware_url: "/static/1234-firmware.bin",
+  });
+  await mockShop(page, { products: [withFiles] });
+  await page.goto("/?p=board-1");
+
+  const details = page.locator("article > div").nth(1);
+  await expect(details).toBeVisible();
+  const detailsBox = await details.boundingBox();
+  if (!detailsBox) {
+    throw new Error("The product details column should be rendered.");
+  }
+
+  const actions = [
+    page.getByRole("button", { name: "Add to bag" }),
+    page.getByRole("link", { name: /Keyboard files on GitHub/ }),
+    page.getByRole("link", { name: /Download official firmware/ }),
+  ];
+
+  for (const action of actions) {
+    await expect(action).toBeVisible();
+    const box = await action.boundingBox();
+    if (!box) {
+      throw new Error("The product action should be rendered.");
+    }
+    expect(Math.abs(box.width - detailsBox.width)).toBeLessThan(2);
+  }
+});
+
 test("keeps the product actions close on mobile", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await mockShop(page);
