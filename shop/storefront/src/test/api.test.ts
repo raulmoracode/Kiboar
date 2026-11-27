@@ -1,5 +1,13 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { firmwareUrl, formatPrice, keyboardFilesUrl, type Product, variantPrice } from "../lib/api";
+
+beforeEach(() => {
+  vi.stubGlobal("navigator", { language: "en-US" });
+});
+
+afterEach(() => {
+  vi.unstubAllGlobals();
+});
 
 const productWithFiles = (value: unknown): Product => ({
   id: "prod_1",
