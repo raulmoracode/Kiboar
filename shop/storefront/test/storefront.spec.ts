@@ -236,6 +236,15 @@ test("shows two catalogue columns on mobile", async ({ page }) => {
   expect(Math.abs(first.y - second.y)).toBeLessThan(2);
   expect(second.x).toBeGreaterThan(first.x);
   expect(third.y).toBeGreaterThan(first.y);
+
+  const title = await cards.first().locator("h2").boundingBox();
+  const price = await cards.first().locator("p").boundingBox();
+  if (!title || !price) {
+    throw new Error("The first catalogue card should render its title and price.");
+  }
+
+  expect(Math.abs(price.y - title.y)).toBeLessThan(4);
+  expect(price.x).toBeGreaterThan(first.x + first.width / 2);
 });
 
 test("keeps the product actions full width on tablet", async ({ page }) => {
