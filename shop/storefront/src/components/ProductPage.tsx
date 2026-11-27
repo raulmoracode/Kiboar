@@ -1,4 +1,3 @@
-import { site } from "@kiboar/links";
 import { useEffect, useState } from "react";
 import {
   firmwareUrl,
@@ -234,19 +233,6 @@ export function ProductPage({
 
           <KeyboardFilesButton url={filesUrl} />
           <DownloadFirmwareButton url={firmware} />
-
-          <p className="mt-6 text-[12px] leading-relaxed text-zinc-500">
-            <a
-              href={`${site}/studio`}
-              className="transition-colors hover:text-zinc-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-300/60"
-            >
-              Control your keyboard with{" "}
-              <span className="font-medium text-lime-300 underline decoration-lime-300/30 underline-offset-2">
-                Kiboar Studio
-              </span>
-              .
-            </a>
-          </p>
         </div>
       </article>
 

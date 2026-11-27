@@ -113,8 +113,8 @@ is saved in `metadata.firmware_url`; the storefront shows **Download official
 firmware** when it is set. Production needs an object-storage provider; the local
 provider is for development.
 
-Each product page also links to **Kiboar Studio** at `/studio`, where the desktop
-app can be downloaded.
+Every storefront page shows a banner under the header that links to **Kiboar
+Studio** at `/studio`, where the desktop app can be downloaded.
 
 ## POS
 

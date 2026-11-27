@@ -70,14 +70,6 @@ describe("the product page", () => {
     expect(screen.queryByRole("link", { name: /Download official firmware/ })).toBeNull();
   });
 
-  it("links to Kiboar Studio from the product page", async () => {
-    getProduct.mockResolvedValue(product(null));
-    renderPage();
-
-    const studio = await screen.findByRole("link", { name: /Kiboar Studio/ });
-    expect(studio.getAttribute("href")).toBe("https://kiboar.raulmoracode.com/studio");
-  });
-
   it("shows the firmware download below the keyboard files", async () => {
     getProduct.mockResolvedValue(
       product({

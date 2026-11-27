@@ -20,10 +20,11 @@ the photo, the name, the price, the description and the variants, with an
 `Add to bag` button. When the product metadata has `keyboard_files_url`, a
 `Keyboard files on GitHub` button appears below `Add to bag`; a missing or
 non-GitHub URL hides it. When `firmware_url` is set, a **Download official
-firmware** button appears below the GitHub button. Below the actions, the line
-**Control your keyboard with Kiboar Studio** links to the public `/studio` page,
-where the desktop app can be downloaded. Below the details, a **More boards** heading and three random other
-boards link to their pages. Unknown handles render a "not published" state.
+firmware** button appears below the GitHub button. Every page shows a banner under
+the header, **Every Kiboar board can be flashed and remapped with Kiboar
+Studio**, which links to the public `/studio` page. Below the details, a **More
+boards** heading and three random other boards link to their pages. Unknown
+handles render a "not published" state.
 
 On phones and tablets the product image uses a 16:10 frame, the buttons take the
 full content width, and **More boards** stays a single vertical list. From the
