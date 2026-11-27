@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "docs/**"
+      - "packages/**"
       - "library/footprints/**"
       - "library/tools/**"
       - "library/3dmodels/**"
@@ -19,6 +20,7 @@ on:
   pull_request:
     paths:
       - "docs/**"
+      - "packages/**"
       - "library/footprints/**"
       - "library/tools/**"
       - "library/3dmodels/**"
