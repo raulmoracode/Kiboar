@@ -101,6 +101,9 @@ stops at Medusa. `Ctrl+C` stops the servers and the container it started. The
 command expects the three local env files from the product READMEs; when one is
 missing it says which copy command to run.
 
+Open `dev.html` in a browser for a local launcher with every URL. It is a
+development file at the repository root, not part of the web build.
+
 The setup, the commands and the scope of each are in
 [`web/README.md`](web/README.md) and [`shop/README.md`](shop/README.md).
 
