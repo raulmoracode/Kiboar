@@ -1,6 +1,6 @@
 @import "@kiboar/design/app.css";
 
-/* The keyboard spells the page name; each new letter dissolves onto its key. */
+/* The keyboard spells the page name; changed letters crossfade in place. */
 @keyframes kiboar-key-label-in {
   from {
     opacity: 0;
@@ -10,12 +10,26 @@
   }
 }
 
-.kiboar-key-label {
-  animation: kiboar-key-label-in 220ms ease-out both;
+@keyframes kiboar-key-label-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.kiboar-key-label-in {
+  animation: kiboar-key-label-in 340ms linear both;
+}
+
+.kiboar-key-label-out {
+  animation: kiboar-key-label-out 340ms linear both;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .kiboar-key-label {
+  .kiboar-key-label-in,
+  .kiboar-key-label-out {
     animation: none;
   }
 }
