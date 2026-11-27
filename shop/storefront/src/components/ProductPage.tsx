@@ -11,9 +11,57 @@ import {
   type Variant,
   variantPrice,
 } from "../lib/api";
+import { productSpecs } from "../lib/specs";
 import { DownloadFirmwareButton } from "./DownloadFirmwareButton";
 import { KeyboardFilesButton } from "./KeyboardFilesButton";
 import { ProductCard } from "./ProductCard";
+import { SpecsDialog } from "./SpecsDialog";
+
+const RELATED_COUNT = 3;
+
+function hashHandle(handle: string): number {
+  let hash = 2166136261;
+  for (let index = 0; index < handle.length; index += 1) {
+    hash ^= handle.charCodeAt(index);
+    hash = Math.imul(hash, 16777619);
+  }
+  return hash >>> 0;
+}
+
+function nextRandom(seed: { value: number }): number {
+  seed.value = (seed.value + 0x6d2b79f5) | 0;
+  let t = seed.value;
+  t = Math.imul(t ^ (t >>> 15), t | 1);
+  t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+  return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+}
+
+function relatedProducts(products: Product[], current: Product): Product[] {
+  const pool = products.filter((product) => product.id !== current.id);
+  const seed = { value: hashHandle(current.handle) };
+
+  for (let index = pool.length - 1; index > 0; index -= 1) {
+    const swap = Math.floor(nextRandom(seed) * (index + 1));
+    const a = pool[index];
+    const b = pool[swap];
+    if (a && b) {
+      pool[index] = b;
+      pool[swap] = a;
+    }
+  }
+
+  return pool.slice(0, RELATED_COUNT);
+}
+
+function InfoIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="size-[18px]">
+      <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.4" />
+      <path d="M12 10.8v5.4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+      <circle cx="12" cy="7.9" r="0.9" fill="currentColor" />
+    </svg>
+  );
+}
 
 type State =
   | { status: "loading" }
@@ -43,6 +91,7 @@ export function ProductPage({
   const [imageIndex, setImageIndex] = useState(0);
   const [related, setRelated] = useState<Product[]>([]);
   const [attempt, setAttempt] = useState(0);
+  const [specsOpen, setSpecsOpen] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -88,18 +137,44 @@ export function ProductPage({
       return;
     }
 
-    const pool = products.filter((product) => product.id !== state.product.id);
-    const picked: Product[] = [];
+    setRelated(relatedProducts(products, state.product));
+  }, [products, state]);
 
-    while (picked.length < 3 && pool.length > 0) {
-      const [product] = pool.splice(Math.floor(Math.random() * pool.length), 1);
-      if (product) {
-        picked.push(product);
+  useEffect(() => {
+    if (state.status !== "ready") {
+      return;
+    }
+
+    const previousTitle = document.title;
+    const description = state.product.description?.trim();
+    const existing = document.head.querySelector<HTMLMetaElement>('meta[name="description"]');
+    const previousDescription = existing?.getAttribute("content") ?? null;
+    const created = !existing && Boolean(description);
+    const meta = existing ?? (created ? document.createElement("meta") : null);
+
+    document.title = `${state.product.title} · Kiboar Shop`;
+
+    if (meta && description) {
+      meta.setAttribute("name", "description");
+      meta.setAttribute("content", description);
+      if (created) {
+        document.head.append(meta);
       }
     }
 
-    setRelated(picked);
-  }, [products, state]);
+    return () => {
+      document.title = previousTitle;
+      if (meta && description) {
+        if (created) {
+          meta.remove();
+        } else if (previousDescription !== null) {
+          meta.setAttribute("content", previousDescription);
+        } else {
+          meta.removeAttribute("content");
+        }
+      }
+    };
+  }, [state]);
 
   if (state.status === "loading") {
     return <p className="text-[13px] text-zinc-500">Loading the board…</p>;
@@ -152,6 +227,7 @@ export function ProductPage({
   const image = images[imageIndex] ?? images[0] ?? null;
   const filesUrl = keyboardFilesUrl(product);
   const firmware = firmwareUrl(product);
+  const specs = productSpecs(product);
 
   return (
     <>
@@ -190,8 +266,25 @@ export function ProductPage({
         </div>
 
         <div className="lg:py-2">
-          <h1 className="text-[22px] leading-tight font-medium text-zinc-100">{product.title}</h1>
-          <p className="mt-2 font-mono text-[14px] text-zinc-200">{formatPrice(price)}</p>
+          <div className="flex items-baseline justify-between gap-3">
+            <div className="flex min-w-0 items-center gap-2">
+              <h1 className="min-w-0 text-[22px] leading-tight font-medium text-zinc-100">
+                {product.title}
+              </h1>
+              {specs.length > 0 ? (
+                <button
+                  type="button"
+                  aria-label={`Specifications for ${product.title}`}
+                  aria-haspopup="dialog"
+                  onClick={() => setSpecsOpen(true)}
+                  className="grid size-7 shrink-0 place-items-center rounded-full text-lime-300 transition-colors hover:text-lime-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-300/70"
+                >
+                  <InfoIcon />
+                </button>
+              ) : null}
+            </div>
+            <p className="shrink-0 font-mono text-[14px] text-zinc-200">{formatPrice(price)}</p>
+          </div>
 
           {product.description ? (
             <p className="mt-4 max-w-prose text-[13px] leading-relaxed text-zinc-400 sm:mt-6">
@@ -250,6 +343,10 @@ export function ProductPage({
             ))}
           </div>
         </section>
+      ) : null}
+
+      {specsOpen ? (
+        <SpecsDialog specs={specs} title={product.title} onClose={() => setSpecsOpen(false)} />
       ) : null}
     </>
   );

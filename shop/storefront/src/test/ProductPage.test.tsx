@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { cleanup, render, screen } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 const { getProduct } = vi.hoisted(() => ({ getProduct: vi.fn() }));
@@ -32,11 +32,11 @@ const product = (metadata: Record<string, unknown> | null): Product => ({
   ],
 });
 
-function renderPage() {
+function renderPage(products: Product[] = []) {
   return render(
     <ProductPage
       handle="kb60-hhkb"
-      products={[]}
+      products={products}
       onOpen={() => {}}
       onBack={() => {}}
       onAdd={() => {}}
@@ -84,5 +84,85 @@ describe("the product page", () => {
 
     expect(firmware.getAttribute("href")).toMatch(/\/static\/1234-firmware\.bin$/);
     expect(files.compareDocumentPosition(firmware) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  });
+});
+
+describe("the product page specifications", () => {
+  const withSpecs = (): Product => ({
+    ...product(null),
+    metadata: { mcu: "RP2040 Zero", case: "Aluminium", keys: 61, layout: "HHKB" },
+  });
+
+  it("hides the info button without specs", async () => {
+    getProduct.mockResolvedValue(product(null));
+    renderPage();
+
+    expect(await screen.findByRole("button", { name: "Add to bag" })).toBeTruthy();
+    expect(screen.queryByRole("button", { name: /^Specifications for / })).toBeNull();
+  });
+
+  it("opens the specifications dialog from the info button", async () => {
+    getProduct.mockResolvedValue(withSpecs());
+    renderPage();
+
+    const trigger = await screen.findByRole("button", {
+      name: "Specifications for Kiboar 60% HHKB",
+    });
+    fireEvent.click(trigger);
+
+    const dialog = screen.getByRole("dialog", { name: "Specifications" });
+    expect(within(dialog).getByText("RP2040 Zero")).toBeTruthy();
+    expect(within(dialog).getByText("61")).toBeTruthy();
+
+    fireEvent.click(within(dialog).getByRole("button", { name: "Close" }));
+    expect(screen.queryByRole("dialog")).toBeNull();
+  });
+
+  it("sets the document title and description, then restores them", async () => {
+    document.title = "Kiboar Shop";
+    getProduct.mockResolvedValue(product(null));
+    const { unmount } = renderPage();
+
+    await screen.findByRole("button", { name: "Add to bag" });
+
+    expect(document.title).toBe("Kiboar 60% HHKB · Kiboar Shop");
+    expect(document.head.querySelector('meta[name="description"]')?.getAttribute("content")).toBe(
+      "A board.",
+    );
+
+    unmount();
+
+    expect(document.title).toBe("Kiboar Shop");
+    expect(document.head.querySelector('meta[name="description"]')).toBeNull();
+  });
+});
+
+describe("the related boards", () => {
+  const other = (id: string): Product => ({
+    ...product(null),
+    id,
+    title: `Board ${id}`,
+    handle: id,
+  });
+
+  it("picks the same boards for the same product", async () => {
+    getProduct.mockResolvedValue(product(null));
+    const products = ["a", "b", "c", "d", "e"].map(other);
+
+    const first = renderPage(products);
+    const section = await screen.findByRole("region", { name: "More boards" });
+    const firstTitles = within(section)
+      .getAllByRole("heading", { level: 3 })
+      .map((heading) => heading.textContent);
+    first.unmount();
+
+    renderPage(products);
+    const again = await screen.findByRole("region", { name: "More boards" });
+    const secondTitles = within(again)
+      .getAllByRole("heading", { level: 3 })
+      .map((heading) => heading.textContent);
+
+    expect(firstTitles).toHaveLength(3);
+    expect(secondTitles).toEqual(firstTitles);
   });
 });
