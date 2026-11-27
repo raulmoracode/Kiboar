@@ -40,7 +40,7 @@ section; historical entries are not rewritten.
 - The fifteen imported symbols stay under CC BY-SA 4.0 with the Design
   Exception; `NOTICE` records them.
 
-## [1.0.0] - 2026-11-13
+## 1.0.0 - 2026-11-13
 
 First release, targeting **KiCad 10**.
 
@@ -109,5 +109,3 @@ First release, targeting **KiCad 10**.
   SnapEDA imports, and the ScottoKeebs models and three footprints are
   **CC BY-NC-SA 4.0**. The MIT licence covers the original work only; see
   [`NOTICE`](NOTICE).
-
-[1.0.0]: https://github.com/raulmoracode/Kiboar/releases/tag/v1.0.0

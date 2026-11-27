@@ -36,9 +36,10 @@ flow, not a runtime.
   points at `<clone>/library`; the library tables, the model paths and the PCM
   builder all use that root. The PCM ZIP keeps `symbols/`, `footprints/` and
   `3dmodels/` at its internal root, so PCM consumers are unaffected.
-- **`docs` and `software` are the JavaScript workspace.** The root
+- **`docs`, `software`, `web` and `shop` are the JavaScript workspace.** The root
   `pnpm-workspace.yaml` includes `docs`, `software/app`, `software/packages/*`,
-  `packages/*`, `web` and `shop`. There is one lockfile at the root.
+  `packages/*`, `web`, `shop`, `shop/storefront` and `shop/pos`. There is one
+  lockfile at the root.
 - **The library is not an npm package.** It is a KiCad asset collection with
   Python tooling. Turborepo does not run its checks; the library has its own CI
   workflow and its own `pnpm library` script at the root.
@@ -59,9 +60,11 @@ flow, not a runtime.
   The three front ends — `web`, the storefront and Studio — use
   `@kiboar/design` for the base CSS and colour tokens, `@kiboar/vite-config`
   for the Vite plugins and ports, and `@kiboar/tsconfig` for their compiler
-  options, from `packages/`. Studio adds its Tauri overrides in its own Vite
-  config. They do not import each other's pages or components, and the
-  storefront talks to the Store API over HTTP.
+  options, from `packages/`. Web, the storefront and the docs site also use
+  `@kiboar/links` for the canonical repository, site and release URLs. Studio
+  adds its Tauri overrides in its own Vite config. They do not import each
+  other's pages or components, and the storefront talks to the Store API over
+  HTTP.
 - **The shop build does not need a database.** `medusa build` compiles the
   server and the admin in CI; only `dev`, `start` and `db:migrate` need
   PostgreSQL.
@@ -87,7 +90,7 @@ the root rules.
 
 ```text
 package.json            root scripts and Turbo
-pnpm-workspace.yaml     docs, software/app, software/packages/*, packages/*, web, shop
+pnpm-workspace.yaml     docs, software/app, software/packages/*, packages/*, web, shop, shop/storefront, shop/pos
 pnpm-lock.yaml          one lockfile
 turbo.json              build, typecheck, test, dev
 .npmrc                  hoisting Medusa needs on pnpm
@@ -98,6 +101,7 @@ software/packages/core/ @kiboar/core
 software/crates/        Rust, outside Turbo
 software/Cargo.toml     Cargo workspace
 packages/design/        @kiboar/design (base CSS and tokens)
+packages/links/         @kiboar/links (canonical repository and site URLs)
 packages/tsconfig/      @kiboar/tsconfig
 packages/vite-config/   @kiboar/vite-config
 web/                    @kiboar/web
@@ -117,9 +121,9 @@ version drift; Turborepo is the task runner, not the version manager.
 | Command | What it does |
 | --- | --- |
 | `pnpm install` | Install the whole JavaScript workspace once |
-| `pnpm build` | Build docs, Studio, web and shop through Turbo |
-| `pnpm typecheck` | Typecheck core, docs, Studio, web and the storefront |
-| `pnpm test` | Run the core tests |
+| `pnpm build` | Build every workspace package with a `build` script through Turbo (docs, Studio, web, shop and the storefront) |
+| `pnpm typecheck` | Typecheck every workspace package with a `typecheck` script (core, docs, Studio, web, shop, storefront and POS) |
+| `pnpm test` | Run every workspace package's tests (core, docs, Studio, web, shop, storefront and POS) |
 | `pnpm dev` / `pnpm dev:all` | Start every server product and the PostgreSQL container from `shop/.env`; print every local URL and stop the stack on Ctrl+C |
 | `pnpm dev:web` | Start the web dev server only |
 | `pnpm dev:docs` | Start the docs dev server only |
@@ -140,12 +144,13 @@ script banner is not wanted.
 
 | Product | Version | Source of truth |
 | --- | --- | --- |
-| KiCad library | `1.x` | `library/pcm/metadata.json` and `CHANGELOG.md` |
+| KiCad library | `1.0.0` | `library/pcm/metadata.json` and `CHANGELOG.md` |
 | Board schema | `kiboar.board/1` | `software/packages/core/src/schema` |
 | Registry | `kiboar.registry/1` | `software/registry/index.json` |
-| Studio | `0.x` | `software/app/package.json` and `software/app/src-tauri/tauri.conf.json` |
-| Web | `0.x` | `web/package.json` |
-| Shop | `0.x` | `shop/package.json` and the pinned Medusa version |
+| Studio | `0.1.0` | `software/app/package.json` and `software/app/src-tauri/tauri.conf.json` |
+| Documentation | `0.1.0` | `docs/package.json`; the site has no release tag and deploys from `main` |
+| Web | not versioned | `web/package.json` has no version; the static build deploys from `main` |
+| Shop | `0.1.0` | `shop/package.json` and the pinned Medusa version |
 | Firmware | `0.x` | Reported by the board over HID; independent of the app |
 
 The products do not share one version number. A library patch does not force a

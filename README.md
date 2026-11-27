@@ -21,11 +21,11 @@ got it. The web site brings the whole brand together.
 
 | Product | Path | README | What it is |
 | --- | --- | --- | --- |
-| Shop | `shop/` | [`shop/README.md`](shop/README.md) | The commercial surface of the brand: catalogue and storefront; checkout is not connected yet |
+| Shop | `shop/` | [`shop/README.md`](shop/README.md) | The commercial surface of the brand: catalogue, storefront and POS; checkout is not connected yet |
 | Web | `web/` | [`web/README.md`](web/README.md) | The public front door: the brand, the keyboards, the docs, Studio and the shop in one place |
 | KiCad library | `library/` | [`library/README.md`](library/README.md) | The official library Kiboar designs with, published so you can design and build your own board: 145 symbols and 173 footprints in 26 libraries |
 | Kiboar Studio | `software/` | [`software/README.md`](software/README.md) | Manages a Kiboar keyboard: detects, flashes and — after 0.1 — remaps it, bought or self-built |
-| Documentation | `docs/` | [`docs/README.md`](docs/README.md) | How to install the library, build a board, flash it and what the licences allow |
+| Documentation | `docs/` | [`docs/README.md`](docs/README.md) | How to install the library, build a board and what the licences allow; Studio and the shop have their own READMEs |
 
 The public surfaces are designed to share one domain: `/` is the web site,
 `/docs` the documentation and `/shop` the Medusa store. The library is published
@@ -34,7 +34,7 @@ routing each one needs is in [`ARCHITECTURE.md`](ARCHITECTURE.md#deployment).
 Today the only published artefact is the Studio 0.1.0 release; the web, docs and
 shop deployments are not live.
 
-📖 **Documentation:** <https://kiboar.raulmoracode.com/docs> — English and Spanish.
+📖 **Documentation (not live yet):** <https://kiboar.raulmoracode.com/docs> — English and Spanish.
 
 ## Start here
 
@@ -121,14 +121,16 @@ contains its README and starts empty. The board definitions Studio reads stay in
   commands, versions and deployment.
 - [`AGENTS.md`](AGENTS.md) — the repository rules. Each product adds its own:
   [`library/AGENTS.md`](library/AGENTS.md),
-  [`docs/AGENTS.md`](docs/AGENTS.md) and
-  [`software/AGENTS.md`](software/AGENTS.md).
+  [`docs/AGENTS.md`](docs/AGENTS.md),
+  [`software/AGENTS.md`](software/AGENTS.md),
+  [`web/AGENTS.md`](web/AGENTS.md) and
+  [`shop/AGENTS.md`](shop/AGENTS.md).
 - [`LABELS.md`](LABELS.md) — the label scheme for issues and pull requests.
 - [`SECURITY.md`](SECURITY.md) — how to report a vulnerability privately.
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) — how to contribute and what a pull
   request must include.
 - [`packages/`](packages/README.md) — shared workspace packages: design tokens,
-  the Vite setup and the TypeScript config.
+  the Vite setup, the TypeScript config and the canonical links.
 - [`CHANGELOG.md`](CHANGELOG.md) — changes to the KiCad library and the PCM
   package. The docs site and Studio have independent versions; see
   `ARCHITECTURE.md`.

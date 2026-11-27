@@ -2,8 +2,9 @@
 
 Kiboar is a keyboard brand: it designs and sells keyboards and publishes the
 library and the board definitions. This repository holds the official KiCad
-library, Kiboar Studio, the public site and the shop. This file covers
-contributions to the KiCad library in `library/`.
+library, Kiboar Studio, the public site and the shop. This file covers the
+repository-wide process and the KiCad library in `library/`; each product's
+`AGENTS.md` adds its own checks.
 
 Contributions arrive as a pull request against `main`, one logical change per
 branch, with an issue that says what and why.
@@ -17,7 +18,8 @@ The products share a pnpm workspace at the root, with shared packages under
 ## Requirements
 
 - KiCad 10.0 or newer, for `kicad-cli`.
-- Python 3.9 or newer. The scripts use only the standard library.
+- Python 3.9 or newer. The scripts use only the standard library, except
+  `build_pcm.py --schema`, which needs the `jsonschema` package.
 
 ## Adding a footprint
 
