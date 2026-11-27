@@ -27,7 +27,7 @@ function InstallCard({
   return (
     <a href={href} target="_blank" rel="noreferrer" className={CARD_LINK}>
       <div>
-        <h2 className="font-mono text-[10px] tracking-[0.12em] text-zinc-600 uppercase">{label}</h2>
+        <h2 className="kiboar-eyebrow">{label}</h2>
         <p className="mt-4 max-w-[320px] text-[13px] leading-relaxed text-zinc-400">{line}</p>
       </div>
       <span className="mt-8 flex items-center justify-between gap-4 border-t border-white/[0.06] pt-3 text-[12px] text-zinc-200">
@@ -53,8 +53,6 @@ export function LibraryPage({ onNavigate }: { onNavigate: (href: string) => void
       wide
       autoScroll
     >
-      <h1 className="sr-only">Library</h1>
-
       <section aria-label="Install the library" className="grid gap-3 md:grid-cols-2">
         <InstallCard
           href={PCM}
@@ -73,9 +71,7 @@ export function LibraryPage({ onNavigate }: { onNavigate: (href: string) => void
       <dl className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-white/[0.06] bg-white/[0.06] sm:grid-cols-4">
         {STATS.map(([label, value]) => (
           <div key={label} className="bg-[var(--kiboar-bg)] p-5">
-            <dt className="font-mono text-[10px] tracking-[0.12em] text-zinc-600 uppercase">
-              {label}
-            </dt>
+            <dt className="kiboar-eyebrow">{label}</dt>
             <dd className="mt-2 font-mono text-[26px] text-[var(--kiboar-accent)]">{value}</dd>
           </div>
         ))}
