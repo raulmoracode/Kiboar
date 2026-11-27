@@ -76,15 +76,18 @@ export default function Catalogue() {
             <ProductTile
               key={item.variantId}
               item={item}
-              onAdd={() =>
+              onAdd={() => {
+                if (item.soldOut) {
+                  return;
+                }
                 cart.add({
                   id: item.variantId,
                   title: item.title,
                   unitAmount: item.unitAmount,
                   currency: item.currency,
                   thumbnail: imageUrl(item.thumbnail),
-                })
-              }
+                });
+              }}
             />
           ))}
         </View>

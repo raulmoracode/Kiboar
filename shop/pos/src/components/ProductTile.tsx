@@ -8,11 +8,17 @@ export function ProductTile({ item, onAdd }: { item: CatalogueItem; onAdd: () =>
 
   return (
     <Pressable
-      accessibilityHint="Adds one to the current sale"
-      accessibilityLabel={`Add ${item.title} to cart`}
+      accessibilityHint={item.soldOut ? undefined : "Adds one to the current sale"}
+      accessibilityLabel={item.soldOut ? `${item.title} is sold out` : `Add ${item.title} to cart`}
       accessibilityRole="button"
-      onPress={onAdd}
-      style={({ pressed }) => [styles.tile, pressed ? styles.pressed : null]}
+      accessibilityState={{ disabled: item.soldOut }}
+      disabled={item.soldOut}
+      onPress={item.soldOut ? undefined : onAdd}
+      style={({ pressed }) => [
+        styles.tile,
+        item.soldOut ? styles.soldOutTile : null,
+        pressed && !item.soldOut ? styles.pressed : null,
+      ]}
     >
       <View style={styles.media}>
         {photo ? (
@@ -32,9 +38,13 @@ export function ProductTile({ item, onAdd }: { item: CatalogueItem; onAdd: () =>
         </Text>
         <View style={styles.footer}>
           <Text style={styles.price}>{formatMoney(item.unitAmount, item.currency)}</Text>
-          <View style={styles.add}>
-            <Text style={styles.addLabel}>+</Text>
-          </View>
+          {item.soldOut ? (
+            <Text style={styles.soldOut}>Sold out</Text>
+          ) : (
+            <View style={styles.add}>
+              <Text style={styles.addLabel}>+</Text>
+            </View>
+          )}
         </View>
       </View>
     </Pressable>
@@ -53,6 +63,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   pressed: { backgroundColor: colors.cardPressed, borderColor: colors.borderStrong },
+  soldOutTile: { opacity: 0.55 },
   media: {
     alignItems: "center",
     aspectRatio: 4 / 3,
@@ -83,4 +94,12 @@ const styles = StyleSheet.create({
     width: 30,
   },
   addLabel: { color: colors.accent, fontFamily: typography.mono.fontFamily, fontSize: 15 },
+  soldOut: {
+    color: colors.danger,
+    fontFamily: typography.body.fontFamily,
+    fontSize: 11,
+    fontWeight: "600",
+    letterSpacing: 0.6,
+    textTransform: "uppercase",
+  },
 });
