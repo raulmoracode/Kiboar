@@ -3,7 +3,6 @@ import path from "node:path";
 
 import type { CreateInventoryLevelInput, ExecArgs } from "@medusajs/framework/types";
 import { ContainerRegistrationKeys, Modules, ProductStatus } from "@medusajs/framework/utils";
-import { createWorkflow, transform, WorkflowResponse } from "@medusajs/framework/workflows-sdk";
 import {
   createApiKeysWorkflow,
   createInventoryLevelsWorkflow,
@@ -17,42 +16,100 @@ import {
   linkSalesChannelsToApiKeyWorkflow,
   linkSalesChannelsToStockLocationWorkflow,
   updateProductsWorkflow,
-  updateStoresStep,
-  updateStoresWorkflow,
 } from "@medusajs/medusa/core-flows";
 
+const STORE_NAME = "Kiboar";
 const ONLINE_CHANNEL = "Kiboar Online";
 const POS_CHANNEL = "Kiboar POS";
 const LOCATION_NAME = "Kiboar Store";
 const REGION_NAME = "Europe";
 const COUNTRY = "es";
 const CURRENCY = "eur";
+const TAX_RATE_NAME = "IVA 21%";
+const TAX_RATE_CODE = "IVA21";
+const TAX_RATE_PERCENT = 21;
+const DEFAULT_CHANNEL_NAME = "Default Sales Channel";
+const COLLECTION = { title: "Kiboar boards", handle: "kiboar-boards" } as const;
 
-const updateStoreCurrencies = createWorkflow(
-  "update-store-currencies",
-  (input: {
-    supported_currencies: { currency_code: string; is_default?: boolean }[];
-    store_id: string;
-  }) => {
-    const normalizedInput = transform({ input }, (data) => ({
-      selector: { id: data.input.store_id },
-      update: {
-        supported_currencies: data.input.supported_currencies.map((currency) => ({
-          currency_code: currency.currency_code,
-          is_default: currency.is_default ?? false,
-        })),
+const PRODUCT_TYPES = ["Keyboard", "Macropad", "Numpad", "Encoder"] as const;
+
+const PRODUCT_TAGS = [
+  "60%",
+  "65%",
+  "HHKB",
+  "Split",
+  "Macropad",
+  "Numpad",
+  "Encoder",
+  "Hotswap",
+  "Aluminium",
+  "USB-C",
+  "Arrows",
+  "Function row",
+  "Media",
+] as const;
+
+interface CategorySeed {
+  name: string;
+  handle: string;
+  rank: number;
+  children?: CategorySeed[];
+}
+
+const CATEGORY_TREE: CategorySeed[] = [
+  {
+    name: "Boards",
+    handle: "boards",
+    rank: 0,
+    children: [
+      {
+        name: "Keyboards",
+        handle: "keyboards",
+        rank: 0,
+        children: [
+          { name: "60%", handle: "keyboards-60", rank: 0 },
+          { name: "65%", handle: "keyboards-65", rank: 1 },
+          { name: "Split", handle: "keyboards-split", rank: 2 },
+        ],
       },
-    }));
-
-    return new WorkflowResponse(updateStoresStep(normalizedInput));
+      { name: "Macropads", handle: "macropads", rank: 1 },
+      { name: "Numpads", handle: "numpads", rank: 2 },
+      { name: "Encoders", handle: "encoders", rank: 3 },
+    ],
   },
-);
+];
 
-const products = [
+interface ProductSeed {
+  handle: string;
+  title: string;
+  description: string;
+  subtitle: string;
+  type: (typeof PRODUCT_TYPES)[number];
+  category: string;
+  tags: (typeof PRODUCT_TAGS)[number][];
+  metadata: Record<string, unknown>;
+  price: number;
+  image: string;
+}
+
+const products: ProductSeed[] = [
   {
     handle: "kb60-hhkb",
     title: "Kiboar 60% HHKB",
     description: "A 60% HHKB layout with the Kiboar hotswap PCB and aluminium case.",
+    subtitle: "60% HHKB · hotswap · aluminium",
+    type: "Keyboard",
+    category: "keyboards-60",
+    tags: ["60%", "HHKB", "Hotswap", "Aluminium"],
+    metadata: {
+      mcu: "RP2040 Zero",
+      case: "Aluminium",
+      keys: 61,
+      layout: "HHKB",
+      matrix: "5 × 14",
+      hotswap: true,
+      form_factor: "60%",
+    },
     price: 189,
     image: "1795471428861-kiboar-60.png",
   },
@@ -60,6 +117,18 @@ const products = [
     handle: "macropad-6",
     title: "Kiboar Macropad 6",
     description: "A six-key macropad with an encoder and a USB-C connection.",
+    subtitle: "6 keys · encoder · USB-C",
+    type: "Macropad",
+    category: "macropads",
+    tags: ["Macropad", "Encoder", "USB-C"],
+    metadata: {
+      mcu: "RP2040 Zero",
+      keys: 6,
+      matrix: "2 × 3",
+      encoder: true,
+      connection: "USB-C",
+      form_factor: "Macropad",
+    },
     price: 59,
     image: "1795471429050-kiboar-macropad.png",
   },
@@ -67,6 +136,14 @@ const products = [
     handle: "kb65",
     title: "Kiboar 65",
     description: "A 65% board with arrows and a compact function row.",
+    subtitle: "65% · arrows · function row",
+    type: "Keyboard",
+    category: "keyboards-65",
+    tags: ["65%", "Arrows", "Function row"],
+    metadata: {
+      features: ["arrows", "function row"],
+      form_factor: "65%",
+    },
     price: 199,
     image: "1795471429421-kiboar-65.png",
   },
@@ -74,6 +151,14 @@ const products = [
     handle: "kb-split",
     title: "Kiboar Split",
     description: "A split board for a wider, more relaxed typing position.",
+    subtitle: "Split · relaxed typing",
+    type: "Keyboard",
+    category: "keyboards-split",
+    tags: ["Split"],
+    metadata: {
+      split: true,
+      form_factor: "Split",
+    },
     price: 219,
     image: "1795471429236-kiboar-split.png",
   },
@@ -81,6 +166,13 @@ const products = [
     handle: "kb-numpad",
     title: "Kiboar Numpad",
     description: "A matching numpad for the Kiboar desk.",
+    subtitle: "Matching numpad",
+    type: "Numpad",
+    category: "numpads",
+    tags: ["Numpad"],
+    metadata: {
+      form_factor: "Numpad",
+    },
     price: 79,
     image: "1795471429610-kiboar-numpad.png",
   },
@@ -88,10 +180,19 @@ const products = [
     handle: "kb-encoder",
     title: "Kiboar Encoder",
     description: "A single encoder macropad for volume, zoom and media.",
+    subtitle: "Single encoder · media control",
+    type: "Encoder",
+    category: "encoders",
+    tags: ["Encoder", "Media"],
+    metadata: {
+      encoder: true,
+      features: ["volume", "zoom", "media"],
+      form_factor: "Encoder",
+    },
     price: 149,
     image: "1795471429809-kiboar-encoder.png",
   },
-] as const;
+];
 
 export default async function seedKiboar({ container }: ExecArgs) {
   const logger = container.resolve(ContainerRegistrationKeys.LOGGER);
@@ -134,18 +235,10 @@ export default async function seedKiboar({ container }: ExecArgs) {
   const onlineChannel = await channelByName(ONLINE_CHANNEL, "online");
   const posChannel = await channelByName(POS_CHANNEL, "pos");
 
-  await updateStoreCurrencies(container).run({
-    input: {
-      store_id: store.id,
-      supported_currencies: [{ currency_code: CURRENCY, is_default: true }],
-    },
-  });
-
-  await updateStoresWorkflow(container).run({
-    input: {
-      selector: { id: store.id },
-      update: { default_sales_channel_id: onlineChannel.id },
-    },
+  await storeService.updateStores(store.id, {
+    name: STORE_NAME,
+    supported_currencies: [{ currency_code: CURRENCY, is_default: true }],
+    default_sales_channel_id: onlineChannel.id,
   });
 
   const [existingRegion] = await regionService.listRegions({ name: REGION_NAME });
@@ -166,12 +259,42 @@ export default async function seedKiboar({ container }: ExecArgs) {
     region = result[0];
   }
 
-  const taxRegions = await taxService.listTaxRegions({ country_code: COUNTRY });
-  if (!taxRegions.length) {
-    await createTaxRegionsWorkflow(container).run({
+  await storeService.updateStores(store.id, { default_region_id: region.id });
+
+  const [existingTaxRegion] = await taxService.listTaxRegions({ country_code: COUNTRY });
+  let taxRegion = existingTaxRegion;
+  if (!taxRegion) {
+    const { result } = await createTaxRegionsWorkflow(container).run({
       input: [{ country_code: COUNTRY, provider_id: "tp_system" }],
     });
+    taxRegion = result[0];
   }
+
+  const taxRates = await taxService.listTaxRates({ tax_region_id: taxRegion.id });
+  if (!taxRates.some((rate) => rate.code === TAX_RATE_CODE)) {
+    await taxService.createTaxRates({
+      tax_region_id: taxRegion.id,
+      name: TAX_RATE_NAME,
+      rate: TAX_RATE_PERCENT,
+      code: TAX_RATE_CODE,
+      is_default: true,
+    });
+  }
+
+  const pricingService = container.resolve(Modules.PRICING);
+  const ensureTaxInclusivePricePreference = async (attribute: string, value: string) => {
+    const [existing] = await pricingService.listPricePreferences({ attribute, value }, { take: 1 });
+    if (existing) {
+      if (!existing.is_tax_inclusive) {
+        await pricingService.updatePricePreferences(existing.id, { is_tax_inclusive: true });
+      }
+      return;
+    }
+    await pricingService.createPricePreferences({ attribute, value, is_tax_inclusive: true });
+  };
+
+  await ensureTaxInclusivePricePreference("currency_code", CURRENCY);
+  await ensureTaxInclusivePricePreference("region_id", region.id);
 
   logger.info("Seeding stock location and fulfillment...");
   const [existingLocation] = await stockLocationService.listStockLocations({ name: LOCATION_NAME });
@@ -194,12 +317,7 @@ export default async function seedKiboar({ container }: ExecArgs) {
     });
   }
 
-  await updateStoresWorkflow(container).run({
-    input: {
-      selector: { id: store.id },
-      update: { default_location_id: stockLocation.id },
-    },
-  });
+  await storeService.updateStores(store.id, { default_location_id: stockLocation.id });
 
   const shippingProfiles = await fulfillmentService.listShippingProfiles({ type: "default" });
   let shippingProfile = shippingProfiles[0];
@@ -281,6 +399,76 @@ export default async function seedKiboar({ container }: ExecArgs) {
   const onlineKey = await keyByTitle("Kiboar Online", onlineChannel.id);
   const posKey = await keyByTitle("Kiboar POS", posChannel.id);
 
+  logger.info("Seeding product taxonomy...");
+  const existingTypes = await productService.listProductTypes({}, { take: 100 });
+  const typeIds = new Map(existingTypes.map((type) => [type.value, type.id]));
+  for (const value of PRODUCT_TYPES) {
+    if (!typeIds.has(value)) {
+      const created = await productService.createProductTypes({ value });
+      typeIds.set(value, created.id);
+    }
+  }
+
+  const existingTags = await productService.listProductTags({}, { take: 100 });
+  const tagIds = new Map(existingTags.map((tag) => [tag.value, tag.id]));
+  for (const value of PRODUCT_TAGS) {
+    if (!tagIds.has(value)) {
+      const created = await productService.createProductTags({ value });
+      tagIds.set(value, created.id);
+    }
+  }
+
+  const [existingCollection] = await productService.listProductCollections(
+    { handle: COLLECTION.handle },
+    { take: 1 },
+  );
+  const collection =
+    existingCollection ??
+    (await productService.createProductCollections({
+      title: COLLECTION.title,
+      handle: COLLECTION.handle,
+    }));
+
+  const categoryIds = new Map<string, string>();
+  const ensureCategory = async (category: CategorySeed, parentId: string | null) => {
+    const [existing] = await productService.listProductCategories(
+      { handle: category.handle },
+      { take: 1 },
+    );
+    const current =
+      existing ??
+      (await productService.createProductCategories({
+        name: category.name,
+        handle: category.handle,
+        rank: category.rank,
+        parent_category_id: parentId,
+        is_active: true,
+      }));
+    categoryIds.set(category.handle, current.id);
+    for (const child of category.children ?? []) {
+      await ensureCategory(child, current.id);
+    }
+  };
+
+  for (const category of CATEGORY_TREE) {
+    await ensureCategory(category, null);
+  }
+
+  const seededId = (ids: Map<string, string>, kind: string, value: string) => {
+    const id = ids.get(value);
+    if (!id) throw new Error(`Seed ${kind} "${value}" was not created.`);
+    return id;
+  };
+
+  const productTaxonomy = (product: ProductSeed) => ({
+    type_id: seededId(typeIds, "type", product.type),
+    collection_id: collection.id,
+    categories: [{ id: seededId(categoryIds, "category", product.category) }],
+    tags: product.tags.map((value) => ({ id: seededId(tagIds, "tag", value) })),
+    subtitle: product.subtitle,
+    metadata: product.metadata,
+  });
+
   logger.info("Seeding products...");
   const existingProducts = await productService.listProducts(
     { handle: products.map((product) => product.handle) },
@@ -293,6 +481,7 @@ export default async function seedKiboar({ container }: ExecArgs) {
     await createProductsWorkflow(container).run({
       input: {
         products: missing.map((product) => ({
+          ...productTaxonomy(product),
           title: product.title,
           handle: product.handle,
           description: product.description,
@@ -321,11 +510,15 @@ export default async function seedKiboar({ container }: ExecArgs) {
     { handle: products.map((product) => product.handle) },
     { take: products.length },
   );
-  if (seededProducts.length) {
+  for (const product of seededProducts) {
+    const seed = products.find((entry) => entry.handle === product.handle);
+    if (!seed) continue;
+
     await updateProductsWorkflow(container).run({
       input: {
-        selector: { id: seededProducts.map((product) => product.id) },
+        selector: { id: product.id },
         update: {
+          ...productTaxonomy(seed),
           sales_channels: [{ id: onlineChannel.id }, { id: posChannel.id }],
         },
       },
@@ -348,6 +541,40 @@ export default async function seedKiboar({ container }: ExecArgs) {
     await createInventoryLevelsWorkflow(container).run({
       input: { inventory_levels: missingLevels },
     });
+  }
+
+  logger.info("Cleaning up the unused default sales channel...");
+  const [defaultChannel] = await salesChannelService.listSalesChannels({
+    name: DEFAULT_CHANNEL_NAME,
+  });
+  if (defaultChannel) {
+    const [currentStore] = await storeService.listStores();
+    const query = container.resolve(ContainerRegistrationKeys.QUERY);
+    const orderService = container.resolve(Modules.ORDER);
+    const cartService = container.resolve(Modules.CART);
+    const { data: productLinks } = await query.graph({
+      entity: "product_sales_channel",
+      fields: ["product_id"],
+      filters: { sales_channel_id: defaultChannel.id },
+    });
+    const [order] = await orderService.listOrders(
+      { sales_channel_id: defaultChannel.id },
+      { take: 1 },
+    );
+    const [cart] = await cartService.listCarts(
+      { sales_channel_id: defaultChannel.id },
+      { take: 1 },
+    );
+
+    if (
+      currentStore.default_sales_channel_id !== defaultChannel.id &&
+      !productLinks.length &&
+      !order &&
+      !cart
+    ) {
+      await salesChannelService.deleteSalesChannels(defaultChannel.id);
+      logger.info(`Removed the unused ${DEFAULT_CHANNEL_NAME}.`);
+    }
   }
 
   const output = {

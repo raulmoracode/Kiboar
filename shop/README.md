@@ -32,11 +32,14 @@ pnpm --filter @kiboar/shop seed
 pnpm --filter @kiboar/shop dev
 ```
 
-`seed` is idempotent: it creates the region, the online and POS sales channels,
-the stock location, the shipping options, one publishable key per channel and
-the six Kiboar boards with the photos in `shop/static`. It prints the keys and
-writes them to `shop/seed-output.json`, which is ignored by git and is the file
-the storefront and the POS read during local development.
+`seed` is idempotent: it configures the `Kiboar` store, the Spain region and
+its default 21% VAT rate, tax-inclusive EUR prices, the online and POS sales
+channels, the stock location, the shipping options, one publishable key per
+channel, the product types, collection, category tree and tags, and the six
+Kiboar boards with the photos in `shop/static`. It also removes the unused
+Medusa `Default Sales Channel` when no products, orders or carts reference it.
+It prints the keys and writes them to `shop/seed-output.json`, which is ignored
+by git and is the file the storefront and the POS read during local development.
 
 ### Local database
 

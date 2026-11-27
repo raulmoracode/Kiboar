@@ -20,8 +20,10 @@ let anyone build the same board, so the shop never gates the design.
 
 - `medusa-config.ts` — database and CORS configuration, read from `.env`.
 - `src/api/` — custom API routes.
-- `src/scripts/` — CLI scripts; `seed.ts` creates the region, sales channels,
-  stock location, shipping options, publishable keys and the Kiboar boards.
+- `src/scripts/` — CLI scripts; `seed.ts` configures the store identity, the
+  region and VAT, tax-inclusive prices, the sales channels, stock location,
+  shipping options, publishable keys, the product taxonomy and the Kiboar
+  boards.
 - `src/admin/` — admin customizations, when they exist.
 - `pgadmin/servers.json` — the local pgAdmin connection to the compose database.
 - `storefront/` — the customer-facing Vite app, served under `/shop`.
