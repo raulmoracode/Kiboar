@@ -16,25 +16,6 @@ import { DownloadFirmwareButton } from "./DownloadFirmwareButton";
 import { KeyboardFilesButton } from "./KeyboardFilesButton";
 import { ProductCard } from "./ProductCard";
 
-function StudioIcon() {
-  return (
-    <svg
-      viewBox="0 0 16 16"
-      fill="none"
-      aria-hidden="true"
-      className="size-3.5 shrink-0 text-lime-300"
-    >
-      <path
-        d="M2 3.25h12v7.25H2zM5.5 13h5M8 10.5V13"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
 type State =
   | { status: "loading" }
   | { status: "error"; message: string }
@@ -254,33 +235,18 @@ export function ProductPage({
           <KeyboardFilesButton url={filesUrl} />
           <DownloadFirmwareButton url={firmware} />
 
-          <section
-            aria-labelledby="studio-heading"
-            className="mt-8 rounded border border-white/10 bg-white/[0.015] p-4"
-          >
-            <div className="flex items-center justify-between gap-3">
-              <h2
-                id="studio-heading"
-                className="flex items-center gap-2 text-[13px] font-medium text-zinc-100"
-              >
-                <StudioIcon />
-                Kiboar Studio
-              </h2>
-              <span className="text-[10px] tracking-[0.16em] text-zinc-600 uppercase">
-                Desktop app
-              </span>
-            </div>
-            <p className="mt-2 text-[12px] leading-relaxed text-zinc-400">
-              Flash, configure and remap this board from your desktop.
-            </p>
+          <p className="mt-6 text-[12px] leading-relaxed text-zinc-500">
             <a
               href={`${site}/studio`}
-              className="mt-4 flex h-10 w-full items-center justify-center gap-2 rounded border border-white/15 text-[12px] font-medium text-zinc-200 transition-colors hover:border-lime-300/60 hover:text-lime-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-300/60"
+              className="transition-colors hover:text-zinc-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-300/60"
             >
-              Download Kiboar Studio
-              <span aria-hidden="true">→</span>
+              Control your keyboard with{" "}
+              <span className="font-medium text-lime-300 underline decoration-lime-300/30 underline-offset-2">
+                Kiboar Studio
+              </span>
+              .
             </a>
-          </section>
+          </p>
         </div>
       </article>
 
