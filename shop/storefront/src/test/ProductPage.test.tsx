@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 const { getProduct } = vi.hoisted(() => ({ getProduct: vi.fn() }));
@@ -143,7 +143,7 @@ describe("the product page specifications", () => {
 
     await screen.findByRole("button", { name: "Add to bag" });
 
-    expect(document.title).toBe("Kiboar 60% HHKB · Kiboar Shop");
+    await waitFor(() => expect(document.title).toBe("Kiboar 60% HHKB · Kiboar Shop"));
     expect(document.head.querySelector('meta[name="description"]')?.getAttribute("content")).toBe(
       "A board.",
     );
