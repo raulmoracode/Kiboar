@@ -102,7 +102,7 @@ function layout(): Key[] {
 
 const KEYS = layout();
 
-function Cap({ cap }: { cap: Key }) {
+function Cap({ cap, labelIndex = 0 }: { cap: Key; labelIndex?: number }) {
   return (
     <>
       <rect
@@ -119,6 +119,7 @@ function Cap({ cap }: { cap: Key }) {
       />
       {cap.label ? (
         <text
+          key={cap.label}
           x={cap.x + cap.w / 2}
           y={cap.y + 0.52}
           textAnchor="middle"
@@ -127,6 +128,8 @@ function Cap({ cap }: { cap: Key }) {
           fillOpacity={0.9}
           fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace"
           fontSize={0.26}
+          className="kiboar-key-label"
+          style={{ animationDelay: `${labelIndex * 12}ms` }}
         >
           {cap.label}
         </text>
@@ -147,7 +150,7 @@ export function Keyboard({
   detailsLink?: boolean;
 }) {
   const wordRow = KEYS.filter((key) => key.y === 2);
-  const customLabels = new Map<Key, string>();
+  const customLabels = new Map<Key, { label: string; index: number }>();
 
   if (word) {
     const letters = Array.from(word.replace(/\s+/g, ""));
@@ -155,7 +158,7 @@ export function Keyboard({
     letters.forEach((letter, index) => {
       const key = wordRow[start + index];
       if (key) {
-        customLabels.set(key, letter);
+        customLabels.set(key, { label: letter, index });
       }
     });
   }
@@ -167,7 +170,9 @@ export function Keyboard({
       className="w-full"
     >
       {KEYS.map((key) => {
-        const label = word ? customLabels.get(key) : key.label;
+        const custom = word ? customLabels.get(key) : undefined;
+        const label = custom?.label ?? (word ? undefined : key.label);
+        const labelIndex = custom?.index ?? Math.round(key.x);
         const product = interactive && label ? productForKey(label) : undefined;
         const cap: Key = label ? { ...key, label } : { x: key.x, y: key.y, w: key.w };
 
@@ -181,7 +186,7 @@ export function Keyboard({
               aria-label="Scroll to the details"
               className="cursor-pointer"
             >
-              <Cap cap={cap} />
+              <Cap cap={cap} labelIndex={labelIndex} />
             </a>
           );
         }
@@ -208,14 +213,14 @@ export function Keyboard({
               aria-label={internal ? product.name : `${product.name} (opens in a new tab)`}
               className="cursor-pointer"
             >
-              <Cap cap={cap} />
+              <Cap cap={cap} labelIndex={labelIndex} />
             </a>
           );
         }
 
         return (
           <g key={`${key.x}-${key.y}`}>
-            <Cap cap={cap} />
+            <Cap cap={cap} labelIndex={labelIndex} />
           </g>
         );
       })}
