@@ -1,4 +1,3 @@
-import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
@@ -25,11 +24,7 @@ const PAYMENT_LABEL = {
   other: "—",
 } as const;
 
-type State =
-  | { status: "signed_out" }
-  | { status: "loading" }
-  | { status: "error" }
-  | { status: "ready"; sales: Sale[] };
+type State = { status: "loading" } | { status: "error" } | { status: "ready"; sales: Sale[] };
 
 function formatDate(value: string): string {
   return new Intl.DateTimeFormat("en", {
@@ -39,18 +34,12 @@ function formatDate(value: string): string {
 }
 
 export default function Orders() {
-  const router = useRouter();
   const { token, ready, signOut } = useAuth();
   const [state, setState] = useState<State>({ status: "loading" });
   const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
-    if (!ready) {
-      return;
-    }
-
-    if (!token) {
-      setState({ status: "signed_out" });
+    if (!ready || !token) {
       return;
     }
 
@@ -79,27 +68,13 @@ export default function Orders() {
     <Screen>
       <AppBar back backTo="/" />
 
-      {state.status === "signed_out" ? (
-        <View style={styles.stack}>
-          <Text style={typography.small}>Staff sign-in required.</Text>
-          <Button label="Sign in" onPress={() => router.push("/login")} />
-        </View>
-      ) : null}
-
       {state.status === "loading" ? <Text style={typography.body}>Loading…</Text> : null}
 
       {state.status === "error" ? (
         <View style={styles.stack}>
           <Text style={typography.small}>Register unavailable.</Text>
           <Button label="Try again" onPress={() => setAttempt((value) => value + 1)} />
-          <Button
-            label="Sign in again"
-            variant="ghost"
-            onPress={() => {
-              void signOut();
-              router.push("/login");
-            }}
-          />
+          <Button label="Sign out" variant="ghost" onPress={() => void signOut()} />
         </View>
       ) : null}
 

@@ -7,7 +7,8 @@ need it. It builds a cart, completes cash sales and will take Stripe QR payments
 when the Checkout Session endpoint lands.
 
 **Status: catalogue, auth, register and cash.** The screens, theme, cart state,
-DB-backed catalogue, staff login and sales register exist. Cash creates a real
+DB-backed catalogue, staff login and sales register exist. The app asks for the
+staff account when it starts and reuses that session everywhere else. Cash creates a real
 Medusa order in the POS channel and captures the payment. The Stripe QR is still
 a placeholder until the checkout endpoint and webhook land.
 
@@ -53,8 +54,16 @@ EXPO_PUBLIC_POS_LOCATION_ID=sloc_...
 The seed writes the POS publishable key, the POS sales channel ID and the stock
 location ID to `shop/seed-output.json`. The publishable key is not a secret: it
 only scopes Store API reads to the POS sales channel. The Admin API credentials
-are entered by staff and will be stored with `expo-secure-store`; never put a
-secret key in an `EXPO_PUBLIC_` variable.
+are entered by staff and stored with `expo-secure-store`; never put a secret key
+in an `EXPO_PUBLIC_` variable.
+
+## Sign-in
+
+The till opens on the staff sign-in and nothing else renders until there is a
+session. Once signed in, no other screen asks for the account again: the
+catalogue, the register and the payment screens reuse the stored token. The
+session survives a reload on a device; on the web preview it lasts for the tab.
+**Sign out** lives in Settings, and the guard sends the app back to sign-in.
 
 ## Web preview
 
