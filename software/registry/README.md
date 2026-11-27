@@ -21,7 +21,9 @@ Signature verification is not wired into the app yet.
 ## Paths
 
 Every `definition` and `path` is relative to `software/` and uses POSIX
-separators. Absolute paths and `..` segments are rejected by the schema.
+separators. The Zod schema rejects absolute paths and `..` segments. The
+exported JSON Schema does not encode that refinement, and Studio's loader joins
+the path without validating it yet; a loader-side check is pending.
 
 ## What the registry is not
 

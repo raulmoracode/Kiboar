@@ -65,16 +65,19 @@ The application rejects a report when:
 
 - it is not 32 payload bytes;
 - the info version is not `1`;
-- the board id is empty, longer than 16 bytes, not a lowercase slug, or has
-  non-zero bytes after its NUL padding;
+- the board id is shorter than 2 bytes, longer than 16 bytes, not a lowercase
+  slug, or has non-zero bytes after its NUL padding;
 - the matrix has zero rows or columns;
 - the reserved byte is not zero;
 - the checksum does not match.
 
+The parser currently reads the hardware revision without enforcing the `1..=99`
+range; a report with `0` or `255` is accepted. Enforcing the range is pending.
+
 A rejected report becomes an `unknown` device with a reason. It never becomes a
 partially trusted board.
 
-## Firmware obligations (M2)
+## Firmware obligations (0.2 Identity)
 
 - Expose the feature report with the exact layout above.
 - Fill `board_id` with the same value as the board definition's `board_id`.
@@ -86,5 +89,6 @@ partially trusted board.
 ## What this report does not do
 
 It does not write anything, carry a keymap, authenticate the board or prove that
-the firmware is official. Firmware authenticity is a signature check on the
-artefact before flashing, not a property of this report.
+the firmware is official. Firmware authenticity will be a signature check on the
+artefact before flashing; until that is wired in, Studio compares the SHA-256 of
+the selected UF2.

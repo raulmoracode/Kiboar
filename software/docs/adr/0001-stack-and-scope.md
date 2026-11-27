@@ -1,5 +1,13 @@
 # ADR-0001: Stack and scope for Kiboar Studio v1
 
+> **Update 2026-11-27:** the shipped 0.1 build differs from this decision in
+> three places: the confirmation uses a native `<dialog>` rather than Radix UI;
+> there is no `tracing`/`tauri-plugin-log` plugin (logs are local support
+> output); and the HID enumeration runs on the main thread on macOS because
+> `IOHIDManager` requires it, while filesystem work uses `spawn_blocking`. The
+> model selector currently lists every registry board; the MCU filter is
+> pending.
+
 - Status: Accepted
 - Date: 2026-11-21
 - Deciders: Kiboar maintainer
