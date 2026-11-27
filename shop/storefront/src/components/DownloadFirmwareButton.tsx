@@ -23,7 +23,7 @@ export function DownloadFirmwareButton({ url }: { url: string | null }) {
       download
       target="_blank"
       rel="noopener noreferrer"
-      className="mt-3 flex h-10 w-full items-center justify-center gap-2 rounded border border-lime-300/40 bg-lime-300/[0.06] text-[12px] font-medium text-lime-100 transition-colors hover:border-lime-300/70 hover:bg-lime-300/[0.12] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-300/60 lg:max-w-sm"
+      className="mt-3 flex h-10 w-full items-center justify-center gap-2 rounded border border-lime-300/40 bg-lime-300/[0.06] text-[12px] font-medium text-lime-100 transition-colors hover:border-lime-300/70 hover:bg-lime-300/[0.12] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-300/60"
     >
       <DownloadIcon />
       Download official firmware
