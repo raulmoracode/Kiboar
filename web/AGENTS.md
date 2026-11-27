@@ -18,13 +18,13 @@ shop is the Medusa application in `shop/`, and this site points at it.
 - `src/pages/LibraryPage.tsx` — the `/library` page: the Library keyboard, the links, the counts, install and scope.
 - `src/pages/KeyboardsPage.tsx` — the `/keyboards` page: the Keyboards keyboard, the links and the open board definitions as cards.
 - `src/pages/NotFoundPage.tsx` — the 404 page: the landing layout with a 404 keyboard; it sets `robots: noindex`.
-- `src/components/Keyboard.tsx` — the drawn keyboard; the six lit keys are real links.
+- `src/components/Keyboard.tsx` — the drawn keyboard; the six lit keys are real links. The page word crossfades when it changes; the transition respects `prefers-reduced-motion`.
 - `src/components/LandingLayout.tsx` — the keyboard-first layout shared by the home page, the 404 and the three product pages; it keeps the keyboard and the links in the home position, makes the spacebar a link to the details and renders the page detail below the first screen.
 - `src/components/ProductLinks.tsx` — the six destination links under the keyboard; the current page becomes Home.
-- `src/data/boards.ts` — the board data mirrored from `software/boards`; update it when a definition changes.
+- `src/data/boards.ts` — the board data mirrored from `software/boards`; update it when a definition changes, including each board's `shop` handle for the storefront link.
 - `src/data/products.ts` — the six destinations, their key and whether they are internal.
 - `src/lib/links.ts` — the plain-click helper shared by the keyboard and the product links.
-- `src/styles.css` — the shared design entry from `@kiboar/design`.
+- `src/styles.css` — the shared design entry from `@kiboar/design` plus the keyboard label crossfade.
 - `test/` — the Vitest unit and accessibility tests plus the Playwright end-to-end spec.
 - `vite.config.ts` — the shared `@kiboar/vite-config` setup and port 3000.
 
@@ -51,9 +51,11 @@ shop is the Medusa application in `shop/`, and this site points at it.
   screen is identical to the home page: the keyboard, the links and the
   spacebar detail link must not move them (the detail follows the screen).
   The detail stays honest: Studio links the real release asset; the Keyboards
-  cards use the real definitions in `software/boards`; the hardware files are
-  not published yet; the Library page states the real counts and the keyswitch
-  limitation. Do not add invented screenshots or prices.
+  cards use the real definitions in `software/boards` and link to the intended
+  Shop product page (`/shop/?p=<handle>`), which is not a working checkout until
+  the storefront is deployed; the hardware files are not published yet; the
+  Library page states the real counts and the keyswitch limitation. Do not add
+  invented screenshots or prices.
 - **The current page becomes Home.** On a product page, the link for that page is
   replaced by Home and points at `/`; it keeps the slot's keyboard letter. The
   keyboard spells the page name and its letters are not links: only the links

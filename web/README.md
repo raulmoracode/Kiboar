@@ -12,7 +12,9 @@ keyboard, a clickable spacebar that jumps to the detail and the detail below the
 first screen; the keyboard and links keep the home position. On those pages the link for the current page
 becomes Home, and its letter returns home. The rest open in a new tab. It does
 not replace the docs or the shop. The storefront in `shop/` reads Medusa; `web`
-does not call the Store API.
+does not call the Store API. On `/keyboards`, each board card links to its GitHub
+files and to the Shop product page (`/shop/?p=<handle>`); the storefront is not
+deployed yet.
 
 ## Development
 
@@ -53,9 +55,9 @@ TypeScript come from the `catalog` block of `pnpm-workspace.yaml`. There is no
 second lockfile and no nested workspace.
 
 The base CSS and colour tokens come from `@kiboar/design`, the Vite plugins and
-ports from `@kiboar/vite-config`, and the compiler options from
-`@kiboar/tsconfig`, all in `packages/`. React, Vite, Tailwind and TypeScript
-versions come from the catalog. If a component or a type
+ports from `@kiboar/vite-config`, the compiler options from `@kiboar/tsconfig`,
+and the canonical URLs from `@kiboar/links`, all in `packages/`. React, Vite,
+Tailwind and TypeScript versions come from the catalog. If a component or a type
 is needed by both `web` and another product, add it as a shared package instead
 of copying it; a component used by one product stays in that product.
 
