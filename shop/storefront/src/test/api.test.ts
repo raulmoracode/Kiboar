@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { formatPrice, keyboardFilesUrl, type Product, variantPrice } from "../lib/api";
+import { firmwareUrl, formatPrice, keyboardFilesUrl, type Product, variantPrice } from "../lib/api";
 
 const productWithFiles = (value: unknown): Product => ({
   id: "prod_1",
@@ -8,6 +8,15 @@ const productWithFiles = (value: unknown): Product => ({
   description: null,
   thumbnail: null,
   metadata: value === undefined ? null : { keyboard_files_url: value },
+});
+
+const productWithFirmware = (value: unknown): Product => ({
+  id: "prod_1",
+  title: "Kiboar 60% HHKB",
+  handle: "kb60-hhkb",
+  description: null,
+  thumbnail: null,
+  metadata: value === undefined ? null : { firmware_url: value },
 });
 
 describe("storefront prices", () => {
@@ -76,5 +85,39 @@ describe("the keyboard files link", () => {
 
   it("rejects a malformed URL", () => {
     expect(keyboardFilesUrl(productWithFiles("not a url"))).toBeNull();
+  });
+});
+
+describe("the official firmware link", () => {
+  it("resolves a stored relative file path against the API", () => {
+    expect(firmwareUrl(productWithFirmware("/static/1234-firmware.bin"))).toMatch(
+      /\/static\/1234-firmware\.bin$/,
+    );
+  });
+
+  it("accepts an absolute http or https file URL", () => {
+    expect(firmwareUrl(productWithFirmware("https://cdn.example.com/fw.bin"))).toBe(
+      "https://cdn.example.com/fw.bin",
+    );
+    expect(firmwareUrl(productWithFirmware("http://localhost:9000/static/fw.bin"))).toBe(
+      "http://localhost:9000/static/fw.bin",
+    );
+  });
+
+  it("ignores a missing or empty file", () => {
+    expect(firmwareUrl(productWithFirmware(undefined))).toBeNull();
+    expect(firmwareUrl(productWithFirmware(""))).toBeNull();
+    expect(firmwareUrl(productWithFirmware("   "))).toBeNull();
+  });
+
+  it("ignores a value that is not a string", () => {
+    expect(firmwareUrl(productWithFirmware(42))).toBeNull();
+  });
+
+  it("rejects an unsafe or malformed URL", () => {
+    expect(firmwareUrl(productWithFirmware("javascript:alert(1)"))).toBeNull();
+    expect(firmwareUrl(productWithFirmware("ftp://example.com/fw.bin"))).toBeNull();
+    expect(firmwareUrl(productWithFirmware("/static/../secret"))).toBeNull();
+    expect(firmwareUrl(productWithFirmware("not a url"))).toBeNull();
   });
 });

@@ -185,11 +185,25 @@ test("links a product to its keyboard files below Add to bag", async ({ page }) 
   expect(filesBox.y).toBeGreaterThan(addBox.y);
 });
 
-test("hides the keyboard files button without a link", async ({ page }) => {
+test("hides the keyboard files and firmware buttons without links", async ({ page }) => {
   await mockShop(page);
   await page.goto("/?p=board-1");
 
   await expect(page.getByRole("button", { name: "Add to bag" })).toBeVisible();
+  await expect(page.getByRole("link", { name: /Keyboard files on GitHub/ })).toHaveCount(0);
+  await expect(page.getByRole("link", { name: /Download official firmware/ })).toHaveCount(0);
+});
+
+test("links a product to its official firmware", async ({ page }) => {
+  const firmware = makeProduct(1, { firmware_url: "/static/1234-firmware.bin" });
+
+  await mockShop(page, { products: [firmware] });
+  await page.goto("/?p=board-1");
+
+  const link = page.getByRole("link", { name: /Download official firmware/ });
+  await expect(link).toHaveAttribute("href", /\/static\/1234-firmware\.bin$/);
+  await expect(link).toHaveAttribute("download", "");
+  await expect(link).toHaveAttribute("target", "_blank");
   await expect(page.getByRole("link", { name: /Keyboard files on GitHub/ })).toHaveCount(0);
 });
 
@@ -210,6 +224,39 @@ test("shows two catalogue columns on mobile", async ({ page }) => {
   expect(Math.abs(first.y - second.y)).toBeLessThan(2);
   expect(second.x).toBeGreaterThan(first.x);
   expect(third.y).toBeGreaterThan(first.y);
+});
+
+test("keeps the product actions full width on tablet", async ({ page }) => {
+  await page.setViewportSize({ width: 768, height: 1024 });
+  const withFiles = makeProduct(1, {
+    keyboard_files_url:
+      "https://github.com/raulmoracode/Kiboar/tree/main/software/boards/kb60-hhkb",
+    firmware_url: "/static/1234-firmware.bin",
+  });
+  await mockShop(page, { products: [withFiles] });
+  await page.goto("/?p=board-1");
+
+  const details = page.locator("article > div").nth(1);
+  await expect(details).toBeVisible();
+  const detailsBox = await details.boundingBox();
+  if (!detailsBox) {
+    throw new Error("The product details column should be rendered.");
+  }
+
+  const actions = [
+    page.getByRole("button", { name: "Add to bag" }),
+    page.getByRole("link", { name: /Keyboard files on GitHub/ }),
+    page.getByRole("link", { name: /Download official firmware/ }),
+  ];
+
+  for (const action of actions) {
+    await expect(action).toBeVisible();
+    const box = await action.boundingBox();
+    if (!box) {
+      throw new Error("The product action should be rendered.");
+    }
+    expect(Math.abs(box.width - detailsBox.width)).toBeLessThan(2);
+  }
 });
 
 test("keeps the product actions close on mobile", async ({ page }) => {

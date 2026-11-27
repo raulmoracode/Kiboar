@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import {
+  firmwareUrl,
   formatPrice,
   getProduct,
   imageUrl,
@@ -10,6 +11,7 @@ import {
   type Variant,
   variantPrice,
 } from "../lib/api";
+import { DownloadFirmwareButton } from "./DownloadFirmwareButton";
 import { KeyboardFilesButton } from "./KeyboardFilesButton";
 import { ProductCard } from "./ProductCard";
 
@@ -149,6 +151,7 @@ export function ProductPage({
   }
   const image = images[imageIndex] ?? images[0] ?? null;
   const filesUrl = keyboardFilesUrl(product);
+  const firmware = firmwareUrl(product);
 
   return (
     <>
@@ -223,12 +226,13 @@ export function ProductPage({
             type="button"
             disabled={!variant || !price || soldOut}
             onClick={() => variant && onAdd(product, variant)}
-            className="mt-6 h-10 w-full rounded bg-zinc-100 text-[12px] font-medium text-[var(--kiboar-bg)] transition-colors hover:bg-lime-200 disabled:cursor-not-allowed disabled:bg-zinc-700 disabled:text-zinc-500 sm:mt-8 sm:max-w-sm"
+            className="mt-6 h-10 w-full rounded bg-zinc-100 text-[12px] font-medium text-[var(--kiboar-bg)] transition-colors hover:bg-lime-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-300/70 disabled:cursor-not-allowed disabled:bg-zinc-700 disabled:text-zinc-500 sm:mt-8 lg:max-w-sm"
           >
             {soldOut ? "Sold out" : "Add to bag"}
           </button>
 
           <KeyboardFilesButton url={filesUrl} />
+          <DownloadFirmwareButton url={firmware} />
         </div>
       </article>
 
