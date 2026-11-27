@@ -1,8 +1,9 @@
 # Kiboar documentation
 
-Documentation for Kiboar: the official KiCad library and how to use it, Kiboar
-Studio and the licences. It covers both paths, buying an assembled keyboard or
-building your own.
+Documentation for Kiboar: the official KiCad library, how to use it and the
+licences. Studio is documented in [`../software/README.md`](../software/README.md)
+and on the web `/studio` page. It covers both paths, buying an assembled
+keyboard or building your own.
 
 The site is intended for <https://kiboar.raulmoracode.com/docs>, built with
 Astro 7 and Fumadocs; it is not deployed yet. English is the default locale at
@@ -64,7 +65,7 @@ their width.
 The table of contents is enabled on every docs page (`tableOfContent` in
 `src/components/docs.tsx`), including the `full` ones. Since the TOC is built
 from Markdown headings, the pages that had none carry a `##` heading: the home
-page uses one heading per library family (`## Switches and keycaps`,
+page uses one heading per library family (`## Switches and buttons`,
 `## Electronics`, …), every generated library page uses one heading per
 component and Contributing uses `## Workflow` / `## Flujo de trabajo`. The home
 headings keep the compact label style through the `kiboar-home` class and the
@@ -91,8 +92,8 @@ follow the library.
 ## Footprint previews
 
 Each component card shows the footprint as an SVG (F.Cu, F.SilkS, F.CrtYd,
-F.Fab) and the STEP model in an interactive viewer. The SVGs are committed
-under `public/footprints/`; regenerate them after changing a footprint:
+F.Fab) and, when present, the STEP model in an interactive viewer. The SVGs are
+committed under `public/footprints/`; regenerate them after changing a footprint:
 
 ```bash
 mkdir -p /tmp/fp

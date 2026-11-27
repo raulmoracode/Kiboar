@@ -2,9 +2,9 @@
 
 Kiboar's official KiCad component library: the parts the Kiboar keyboards are
 designed with, published so you can design and build your own. **145 symbols**
-and **173 footprints** in **26 footprint libraries**, with 129 3D models for the
-parts that have one — controller boards, encoders, connectors, displays, LEDs
-and the small parts around them. Keyswitch footprints and models are being
+and **173 footprints** in **26 footprint libraries**, with 129 3D models covering
+124 of the 173 footprints — controller boards, encoders, connectors, displays,
+LEDs and the small parts around them. Keyswitch footprints and models are being
 redesigned and are not part of this version.
 
 The library is one of the products in the [Kiboar repository](../README.md).
@@ -16,7 +16,8 @@ boundaries: [`../ARCHITECTURE.md`](../ARCHITECTURE.md).
 
 **KiCad 10.0 or newer.** The files use the KiCad 10 format and KiCad 8/9 cannot
 open them. The Python tools use the standard library; `build_pcm.py --schema`
-additionally needs the `jsonschema` package.
+additionally needs the `jsonschema` package and network access to fetch the PCM
+schema.
 
 ## Install
 

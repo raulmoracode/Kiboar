@@ -8,10 +8,10 @@ there apply here and are not repeated.
 
 The official Kiboar component library in **KiCad 10**: the parts the brand's own
 keyboards are designed with, published so anyone can design and build their own.
-145 symbols, 173 footprints in 26 `.pretty` libraries, and 129 3D models for the
-parts that have one. Keyswitch footprints and models are being redesigned and
-are not in this version. It ships as a PCM package and as a clone with library
-tables.
+145 symbols, 173 footprints in 26 `.pretty` libraries, and 129 3D models covering
+124 of the 173 footprints. Keyswitch footprints and models are being redesigned
+and are not in this version. It ships as a PCM package and as a clone with
+library tables.
 
 The library is one product of the brand, not the whole repository. It must stay
 useful to someone who never buys an assembled keyboard.
@@ -26,7 +26,8 @@ useful to someone who never buys an assembled keyboard.
 - `lib-table-files/` — the global library tables for a clone install.
 - `pcm/metadata.json` — PCM package metadata.
 - `tools/` — Python scripts (standard library, except `build_pcm.py --schema`
-  needs `jsonschema`); each has a `--check` mode.
+  needs `jsonschema` and network access); the tools have a `--check` mode,
+  except `lint.py`, which runs its checks directly.
 
 ## Install contract
 

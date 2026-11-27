@@ -6,11 +6,12 @@ there apply here and are not repeated.
 
 ## What this product is
 
-A static documentation site for Kiboar: the official KiCad library and how to
-use it, Kiboar Studio and the licences. It covers both paths, buying an
-assembled keyboard or building your own. Built with Astro 7 and Fumadocs. English
-is served at `/docs` and Spanish at `/es/docs`. It is the `kiboar-docs` package
-in the root pnpm workspace and deploys to Vercel from the `docs` Root Directory.
+A static documentation site for Kiboar: the official KiCad library, how to use
+it and the licences. Studio is documented in its own README and on the web
+`/studio` page. It covers both paths, buying an assembled keyboard or building
+your own. Built with Astro 7 and Fumadocs. English is served at `/docs` and
+Spanish at `/es/docs`. It is the `kiboar-docs` package in the root pnpm workspace
+and is configured to deploy to Vercel from the `docs` Root Directory.
 
 ## Layout
 
