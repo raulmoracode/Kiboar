@@ -99,14 +99,24 @@ satisfy the checker. `react-native-svg` stays at the Expo-compatible 15.16.0.
 
 ```
 POST /admin/pos/cash
-  { items: [{ variantId, quantity }] }
+  { items: [{ variantId, quantity }],
+    buyer: { firstName, lastName, email } }
   → { sale: { id, display_id, total, currency_code, payment_method: "cash" } }
 ```
 
-Cash creates a cart in the POS sales channel, adds the seeded store pickup
-option, creates a system payment session, completes the cart, captures the
-payment and writes `order.metadata.payment_method = "cash"` and
-`pos_sale = true`. The order then appears in the sales register.
+Every sale requires the buyer's first name, last name and email; the payment
+screen does not enable a method until they are valid, and the data survives
+moving between the cart and payment.
+
+Cash creates a cart in the POS sales channel with the buyer's email, adds the
+seeded store pickup option, creates a system payment session, completes the
+cart, captures the payment, fulfills every item and marks the fulfillment
+delivered. The order carries `metadata.payment_method = "cash"`,
+`pos_sale = true` and the buyer fields, so the admin order detail shows it as an
+in-person sale with no shipment to wait for. Medusa still creates an empty
+shipping-address record with the tax country; the POS block labels the sale as
+in-person.
+
 
 The Stripe QR path is the next change:
 

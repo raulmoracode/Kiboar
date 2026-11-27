@@ -4,10 +4,12 @@ import { StyleSheet, Text, View } from "react-native";
 
 import { AppBar } from "@/components/AppBar";
 import { Button } from "@/components/Button";
+import { Field } from "@/components/Field";
 import { QrCode } from "@/components/QrCode";
 import { Screen } from "@/components/Screen";
 import { type CashSale, MedusaAdminClient } from "@/lib/api";
 import { useAuth } from "@/lib/auth-context";
+import { isValidBuyer } from "@/lib/buyer";
 import { useCart } from "@/lib/cart-context";
 import { apiUrl } from "@/lib/config";
 import { formatMoney } from "@/lib/format";
@@ -25,9 +27,10 @@ export default function Payment() {
   const [error, setError] = useState<string | null>(null);
 
   const currency = cart.lines[0]?.currency ?? "EUR";
+  const buyerReady = isValidBuyer(cart.buyer);
 
   async function completeCash() {
-    if (!token) {
+    if (!token || !buyerReady) {
       return;
     }
 
@@ -37,6 +40,7 @@ export default function Payment() {
     try {
       const completed = await new MedusaAdminClient(apiUrl, token).createCashSale({
         items: cart.lines.map((line) => ({ variantId: line.id, quantity: line.quantity })),
+        buyer: cart.buyer,
       });
       cart.clear();
       setSale(completed);
@@ -125,9 +129,38 @@ export default function Payment() {
       <View style={styles.hero}>
         <Text style={[typography.amount, styles.amount]}>{formatMoney(cart.total, currency)}</Text>
       </View>
+      <View style={styles.buyer}>
+        <Text style={typography.eyebrow}>Customer</Text>
+        <Field
+          label="First name"
+          onChangeText={(firstName) => cart.setBuyer({ firstName })}
+          value={cart.buyer.firstName}
+        />
+        <Field
+          label="Last name"
+          onChangeText={(lastName) => cart.setBuyer({ lastName })}
+          value={cart.buyer.lastName}
+        />
+        <Field
+          autoCapitalize="none"
+          keyboardType="email-address"
+          label="Email"
+          onChangeText={(email) => cart.setBuyer({ email })}
+          value={cart.buyer.email}
+        />
+        {!buyerReady ? (
+          <Text style={typography.small}>Add the customer&apos;s name and email to continue.</Text>
+        ) : null}
+      </View>
+
       <View style={styles.methods}>
-        <Button label="Stripe link (QR)" onPress={() => setMethod("qr")} />
-        <Button label="Cash" variant="ghost" onPress={() => setMethod("cash")} />
+        <Button disabled={!buyerReady} label="Stripe link (QR)" onPress={() => setMethod("qr")} />
+        <Button
+          disabled={!buyerReady}
+          label="Cash"
+          variant="ghost"
+          onPress={() => setMethod("cash")}
+        />
       </View>
     </Screen>
   );
@@ -136,6 +169,7 @@ export default function Payment() {
 const styles = StyleSheet.create({
   hero: { alignItems: "center", gap: spacing.md },
   amount: { textAlign: "center" },
+  buyer: { gap: spacing.sm, marginBottom: spacing.lg },
   methods: { gap: spacing.md },
   status: {
     color: colors.accent,

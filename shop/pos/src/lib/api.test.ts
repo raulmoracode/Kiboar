@@ -25,6 +25,7 @@ describe("createCashSale", () => {
     const client = new MedusaAdminClient("http://medusa.test", "token");
     const sale = await client.createCashSale({
       items: [{ variantId: "var_1", quantity: 2 }],
+      buyer: { firstName: "Ada", lastName: "Lovelace", email: "ada@example.com" },
     });
 
     expect(sale).toEqual({
@@ -39,7 +40,10 @@ describe("createCashSale", () => {
       expect.objectContaining({
         method: "POST",
         headers: expect.objectContaining({ authorization: "Bearer token" }),
-        body: JSON.stringify({ items: [{ variantId: "var_1", quantity: 2 }] }),
+        body: JSON.stringify({
+          items: [{ variantId: "var_1", quantity: 2 }],
+          buyer: { firstName: "Ada", lastName: "Lovelace", email: "ada@example.com" },
+        }),
       }),
     );
   });
