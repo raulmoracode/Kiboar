@@ -1,21 +1,17 @@
 @import "@kiboar/design/app.css";
 
-/* The keyboard spells the page name; each new letter drops onto its key. */
+/* The keyboard spells the page name; each new letter dissolves onto its key. */
 @keyframes kiboar-key-label-in {
   from {
     opacity: 0;
-    transform: translateY(-0.12px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
 .kiboar-key-label {
-  animation: kiboar-key-label-in 170ms cubic-bezier(0.22, 1, 0.36, 1) both;
-  transform-box: fill-box;
-  transform-origin: center;
+  animation: kiboar-key-label-in 220ms ease-out both;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -129,7 +129,7 @@ function Cap({ cap, labelIndex = 0 }: { cap: Key; labelIndex?: number }) {
           fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace"
           fontSize={0.26}
           className="kiboar-key-label"
-          style={{ animationDelay: `${labelIndex * 12}ms` }}
+          style={{ animationDelay: `${labelIndex * 16}ms` }}
         >
           {cap.label}
         </text>

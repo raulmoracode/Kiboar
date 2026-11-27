@@ -22,6 +22,6 @@ describe("the keyboard word", () => {
       expect(letter.classList.contains("kiboar-key-label")).toBe(true);
     }
     expect((letters[0] as SVGTextElement).style.animationDelay).toBe("0ms");
-    expect((letters[6] as SVGTextElement).style.animationDelay).toBe("72ms");
+    expect((letters[6] as SVGTextElement).style.animationDelay).toBe("96ms");
   });
 });
