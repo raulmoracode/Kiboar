@@ -1,6 +1,6 @@
 import type { MouseEvent } from "react";
 import { products } from "../data/products";
-import { isPlainClick } from "../lib/links";
+import { isPlainClick } from "../lib/plain-click";
 
 const HOME = { name: "Home", href: "/", line: "Back to the start." };
 
