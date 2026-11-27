@@ -40,6 +40,8 @@ ICON = os.path.join(ROOT, "pcm", "resources", "icon.png")
 TABLES = os.path.join(ROOT, "lib-table-files")
 FIXED_TIME = (1980, 1, 1, 0, 0, 0)
 MODEL_VAR = "${KIBOAR_3DMODELS}/"
+MODEL_EXTENSIONS = {".step", ".stp", ".wrl"}
+CAD_EXTENSIONS = {".kicad_sym", ".kicad_mod"} | MODEL_EXTENSIONS
 FOOTPRINT_PROPERTY = re.compile(r'(\(property "Footprint" ")([^":]+):')
 
 
@@ -71,6 +73,8 @@ def package_files(metadata, prefix):
         for current, _, files in os.walk(base):
             for name in sorted(files):
                 path = os.path.join(current, name)
+                if os.path.splitext(name)[1].lower() not in CAD_EXTENSIONS:
+                    continue
                 archive = os.path.relpath(path, ROOT)
                 if path.endswith(".kicad_mod"):
                     with open(path, encoding="utf-8") as handle:

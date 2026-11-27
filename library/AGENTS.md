@@ -118,7 +118,8 @@ python3 library/tools/gen_courtyard.py --check   # courtyards
 python3 library/tools/normalize_symbols.py --check
 python3 library/tools/model_inventory.py --check
 python3 library/tools/provenance.py --check      # authorship stamps (also inside lint)
-python3 library/tools/build_pcm.py --check --schema
+python3 library/tools/build_pcm.py --check
+# --schema additionally validates against the PCM schema; needs jsonschema and network.
 ```
 
 ## Labels
