@@ -192,3 +192,43 @@ test("hides the keyboard files button without a link", async ({ page }) => {
   await expect(page.getByRole("button", { name: "Add to bag" })).toBeVisible();
   await expect(page.getByRole("link", { name: /Keyboard files on GitHub/ })).toHaveCount(0);
 });
+
+test("shows two catalogue columns on mobile", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await mockShop(page);
+  await page.goto("/");
+
+  const cards = page.locator('a[href^="?p="]');
+  await expect(cards.first()).toBeVisible();
+
+  const boxes = await Promise.all([0, 1, 2].map((index) => cards.nth(index).boundingBox()));
+  const [first, second, third] = boxes;
+  if (!first || !second || !third) {
+    throw new Error("The first three catalogue cards should be rendered.");
+  }
+
+  expect(Math.abs(first.y - second.y)).toBeLessThan(2);
+  expect(second.x).toBeGreaterThan(first.x);
+  expect(third.y).toBeGreaterThan(first.y);
+});
+
+test("keeps the product actions close on mobile", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await mockShop(page);
+  await page.goto("/?p=board-1");
+
+  const image = page.locator("article .kiboar-card").first();
+  const add = page.getByRole("button", { name: "Add to bag" });
+  await expect(image).toBeVisible();
+  await expect(add).toBeVisible();
+
+  const imageBox = await image.boundingBox();
+  const addBox = await add.boundingBox();
+  if (!imageBox || !addBox) {
+    throw new Error("The product image and add button should be rendered.");
+  }
+
+  expect(imageBox.height / imageBox.width).toBeLessThan(0.7);
+  expect(addBox.y).toBeLessThan(844);
+  await expect(page.getByRole("heading", { name: "More boards" })).toBeVisible();
+});
