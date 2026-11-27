@@ -1,6 +1,6 @@
 import { type MouseEvent, useEffect, useState } from "react";
 import { productForKey } from "../data/products";
-import { isPlainClick } from "../lib/links";
+import { isPlainClick } from "../lib/plain-click";
 
 interface KeyDef {
   w: number;

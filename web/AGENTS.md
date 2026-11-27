@@ -23,7 +23,7 @@ shop is the Medusa application in `shop/`, and this site points at it.
 - `src/components/ProductLinks.tsx` — the six destination links under the keyboard; the current page becomes Home.
 - `src/data/boards.ts` — the board data mirrored from `software/boards`; update it when a definition changes.
 - `src/data/products.ts` — the six destinations, their key and whether they are internal.
-- `src/lib/links.ts` — the plain-click helper shared by the keyboard and the product links.
+- `src/lib/plain-click.ts` — the plain-click helper shared by the keyboard and the product links.
 - `src/styles.css` — the shared design entry from `@kiboar/design`.
 - `test/` — the Vitest unit and accessibility tests plus the Playwright end-to-end spec.
 - `vite.config.ts` — the shared `@kiboar/vite-config` setup and port 3000.
