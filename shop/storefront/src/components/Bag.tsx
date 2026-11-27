@@ -1,3 +1,4 @@
+import { site } from "@kiboar/links";
 import { useEffect, useRef } from "react";
 import { formatPrice, imageUrl, type Price } from "../lib/api";
 import { productHref } from "./ProductCard";
@@ -148,6 +149,15 @@ export function Bag({
             >
               Browse boards
             </button>
+            <a
+              href={`${site}/studio`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="kiboar-link text-[11px] text-zinc-400 hover:text-zinc-200"
+            >
+              Control your keyboard with Kiboar Studio
+              <span className="sr-only"> (opens in a new tab)</span>
+            </a>
           </div>
         ) : (
           <>
