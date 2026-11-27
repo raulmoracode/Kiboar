@@ -12,7 +12,8 @@ README). The PCM package rewrites these paths to the installed
 `${KICAD10_3RD_PARTY}` location, so the same footprints work both ways.
 
 File names are matched case-sensitively by KiCad on Linux. `library/tools/lint.py`
-checks that every referenced path resolves with the exact case.
+checks that every `${KIBOAR_3DMODELS}` path resolves with the exact case;
+`${KICAD10_3DMODEL_DIR}` references to KiCad's own models are allowed.
 
 One directory breaks the one-to-one rule on purpose: `Kiboar_Icsocket.3dshapes`
 has no `.pretty` of its own. Its two models are IC sockets used by the

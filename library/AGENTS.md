@@ -64,8 +64,10 @@ If any byte changes, the source was not current: commit the upgraded files.
   otherwise `smd`. Footprints with only `np_thru_hole` pads keep their own
   choice.
 - Model paths must use
-  `${KIBOAR_3DMODELS}/Kiboar_<family>.3dshapes/<name>.step`. Never use an
-  absolute path, `${KIPRJMOD}` or an undefined variable.
+  `${KIBOAR_3DMODELS}/Kiboar_<family>.3dshapes/<name>.step`. The only exception
+  is `${KICAD10_3DMODEL_DIR}` for a stock KiCad model, which the docs generator
+  does not publish. Never use an absolute path, `${KIPRJMOD}` or an undefined
+  variable.
 - Model file names are case-sensitive. `SLLB510100.step` and `.STEP` are not the
   same file on Linux.
 
