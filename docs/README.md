@@ -4,9 +4,9 @@ Documentation for Kiboar: the official KiCad library and how to use it, Kiboar
 Studio and the licences. It covers both paths, buying an assembled keyboard or
 building your own.
 
-The site at <https://kiboar.raulmoracode.com/docs>, built with Astro 7 and
-Fumadocs. English is the default locale at `/docs`; Spanish is served at
-`/es/docs`.
+The site is intended for <https://kiboar.raulmoracode.com/docs>, built with
+Astro 7 and Fumadocs; it is not deployed yet. English is the default locale at
+`/docs`; Spanish is served at `/es/docs`.
 
 The site is one of the products in the [Kiboar repository](../README.md).
 The KiCad library lives in [`../library/`](../library/README.md), Kiboar Studio
