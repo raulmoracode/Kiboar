@@ -14,7 +14,7 @@ or search yet.
 
 ## Product pages
 
-A card links to `?p=<handle>`, for example `/shop/?p=kiboar-60-hhkb`. The page
+A card links to `?p=<handle>`, for example `/shop/?p=kb60-hhkb`. The page
 reads the `handle` from the URL, loads that product from the Store API and shows
 the photo, the name, the price, the description and the variants, with an
 `Add to bag` button. When the product metadata has `keyboard_files_url`, a
@@ -30,10 +30,10 @@ current handle, so the same board always shows the same three. The document titl
 and description follow the opened product. Unknown handles render a "not
 published" state.
 
-On phones and tablets the product image uses a 16:10 frame, the buttons take the
-full content width, and **More boards** stays a single vertical list. The buttons
-keep the full details-column width on desktop. The catalogue switches to two
-columns on phones, keeping the title and the price on one row.
+Below the `sm` breakpoint (phones), the product image uses a 16:10 frame, the
+buttons take the full content width, and **More boards** stays a single vertical
+list. The buttons keep the full details-column width on desktop. The catalogue
+switches to two columns on phones, keeping the title and the price on one row.
 
 The handle lives in a query string on purpose: the build is static and no host
 rewrite is configured yet, so a real `/products/<handle>` path would break on a
@@ -73,12 +73,12 @@ the control that opened it.
 
 ## Stock
 
-The add button shows `Sold out` when the Store API returns
-`inventory_quantity: 0` with `manage_inventory` enabled and no backorder. The
-default Medusa Store API does not expose inventory quantities, so with the
-current backend the field is absent and every published variant stays
-available. A real stock gate needs a store-level availability endpoint or a
-custom field; this app does not invent one.
+The catalogue request asks for the computed `+variants.inventory_quantity`. A
+variant is sold out when it manages inventory, does not allow backorder and has
+no quantity left; a `null` quantity (stock not managed) stays available. A card
+shows a **Sold out** badge when every variant is sold out, and the product page
+disables the add button. The seeded stock is 100 per inventory item, so the local
+catalogue stays available.
 
 ## Photos
 
