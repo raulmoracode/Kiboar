@@ -60,6 +60,10 @@ export function CartSheet() {
 
   useEffect(() => {
     if (!isOpen) {
+      // Leave the value at the closed position so the next open renders
+      // off-screen before the entrance starts; otherwise the panel flashes
+      // open for a frame and then slides in again.
+      progress.setValue(1);
       animatedForOpen.current = false;
       return;
     }
@@ -157,16 +161,16 @@ export function CartSheet() {
           <View style={styles.heading}>
             <Text style={styles.title}>Cart</Text>
             {cart.count > 0 ? <Text style={styles.count}>{cart.count}</Text> : null}
+            <Pressable
+              accessibilityLabel="Close the cart"
+              accessibilityRole="button"
+              hitSlop={8}
+              onPress={closeCart}
+              style={({ pressed }) => [styles.close, pressed ? styles.pressed : null]}
+            >
+              <CloseIcon />
+            </Pressable>
           </View>
-          <Pressable
-            accessibilityLabel="Close the cart"
-            accessibilityRole="button"
-            hitSlop={8}
-            onPress={closeCart}
-            style={({ pressed }) => [styles.close, pressed ? styles.pressed : null]}
-          >
-            <CloseIcon />
-          </Pressable>
         </View>
 
         {cart.lines.length === 0 ? (
@@ -285,7 +289,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingVertical: spacing.md,
   },
-  heading: { alignItems: "baseline", flexDirection: "row", gap: spacing.sm },
+  heading: { alignItems: "center", flexDirection: "row", gap: spacing.sm },
   title: {
     color: colors.text,
     fontFamily: fonts.sans,
