@@ -11,6 +11,8 @@ state, DB-backed catalogue, staff login and sales register exist. The app asks
 for the staff account when it starts and reuses that session everywhere else.
 Staff actions live on the home screen: start a sale, open the Medusa admin,
 open settings or sign out. The sales register stays at `/orders` for deep links.
+The cart is a slide-over panel opened from the home and catalogue screens:
+bottom sheet on phones, right-hand panel on wide screens, with no `/cart` route.
 Cash creates a real Medusa order in the POS channel and captures the payment.
 The Stripe QR is still a placeholder until the checkout endpoint and webhook
 land.

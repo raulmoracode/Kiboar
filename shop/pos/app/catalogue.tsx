@@ -1,4 +1,3 @@
-import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
@@ -17,7 +16,6 @@ type State =
   | { status: "ready"; items: CatalogueItem[] };
 
 export default function Catalogue() {
-  const router = useRouter();
   const cart = useCart();
   const [state, setState] = useState<State>({ status: "loading" });
   const [attempt, setAttempt] = useState(0);
@@ -51,11 +49,7 @@ export default function Catalogue() {
 
   return (
     <Screen>
-      <AppBar
-        back
-        backTo="/"
-        action={<CartButton count={cart.count} onPress={() => router.push("/cart")} />}
-      />
+      <AppBar back backTo="/" action={<CartButton count={cart.count} onPress={cart.openCart} />} />
 
       {state.status === "loading" ? <Text style={typography.body}>Loading…</Text> : null}
 
