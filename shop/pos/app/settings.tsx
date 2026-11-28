@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 
 import { AppBar } from "@/components/AppBar";
-import { Button } from "@/components/Button";
 import { Card } from "@/components/Card";
 import { Screen } from "@/components/Screen";
 import { useAuth } from "@/lib/auth-context";
@@ -18,7 +17,7 @@ function SettingRow({ label, value }: { label: string; value: string }) {
 }
 
 export default function Settings() {
-  const { token, signOut } = useAuth();
+  const { token } = useAuth();
 
   return (
     <Screen>
@@ -30,8 +29,6 @@ export default function Settings() {
         <SettingRow label="Stock location" value={locationId ?? "not set"} />
         <SettingRow label="Session" value={token ? "Signed in" : "Signed out"} />
       </Card>
-
-      <Button label="Sign out" variant="danger" onPress={() => void signOut()} />
     </Screen>
   );
 }

@@ -1,15 +1,18 @@
 import { useRouter } from "expo-router";
-import { StyleSheet, View } from "react-native";
+import { Linking, StyleSheet, View } from "react-native";
 
 import { Button } from "@/components/Button";
 import { CartButton } from "@/components/CartButton";
 import { Screen } from "@/components/Screen";
+import { useAuth } from "@/lib/auth-context";
 import { useCart } from "@/lib/cart-context";
+import { apiUrl } from "@/lib/config";
 import { spacing } from "@/theme/tokens";
 
 export default function Home() {
   const router = useRouter();
   const cart = useCart();
+  const { signOut } = useAuth();
 
   return (
     <Screen>
@@ -19,8 +22,13 @@ export default function Home() {
 
       <View style={styles.actions}>
         <Button label="Start sale" onPress={() => router.push("/catalogue")} />
-        <Button label="Sales register" variant="ghost" onPress={() => router.push("/orders")} />
+        <Button
+          label="Medusa admin"
+          variant="ghost"
+          onPress={() => void Linking.openURL(`${apiUrl}/app`)}
+        />
         <Button label="Settings" variant="ghost" onPress={() => router.push("/settings")} />
+        <Button label="Sign out" variant="danger" onPress={() => void signOut()} />
       </View>
     </Screen>
   );
