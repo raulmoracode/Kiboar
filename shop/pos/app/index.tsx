@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <Screen>
       <View style={styles.top}>
-        <CartButton count={cart.count} onPress={() => router.push("/cart")} />
+        <CartButton count={cart.count} onPress={cart.openCart} />
       </View>
 
       <View style={styles.actions}>

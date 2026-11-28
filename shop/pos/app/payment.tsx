@@ -84,7 +84,7 @@ export default function Payment() {
   if (method === "qr") {
     return (
       <Screen>
-        <AppBar back backTo="/cart" />
+        <AppBar back backTo="/" />
         <View style={styles.hero}>
           <Text style={[typography.amount, styles.amount]}>
             {formatMoney(cart.total, currency)}
@@ -102,7 +102,7 @@ export default function Payment() {
   if (method === "cash") {
     return (
       <Screen>
-        <AppBar back backTo="/cart" />
+        <AppBar back backTo="/" />
         <View style={styles.hero}>
           <Text style={[typography.amount, styles.amount]}>
             {formatMoney(cart.total, currency)}
@@ -125,7 +125,7 @@ export default function Payment() {
 
   return (
     <Screen>
-      <AppBar back backTo="/cart" />
+      <AppBar back backTo="/" />
       <View style={styles.hero}>
         <Text style={[typography.amount, styles.amount]}>{formatMoney(cart.total, currency)}</Text>
       </View>

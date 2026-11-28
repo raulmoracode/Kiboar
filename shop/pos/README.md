@@ -9,6 +9,8 @@ when the Checkout Session endpoint lands.
 **Status: catalogue, auth, register, cash and stock.** The screens, theme, cart
 state, DB-backed catalogue, staff login and sales register exist. The app asks
 for the staff account when it starts and reuses that session everywhere else.
+The cart is a slide-over panel opened from the home and catalogue screens:
+bottom sheet on phones, right-hand panel on wide screens, with no `/cart` route.
 Cash creates a real Medusa order in the POS channel and captures the payment.
 The Stripe QR is still a placeholder until the checkout endpoint and webhook
 land.
