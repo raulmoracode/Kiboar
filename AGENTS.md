@@ -122,8 +122,9 @@ is it.
   time-boxed exception for one package, never a default.
 - The root `.npmrc` hoists four package patterns because Medusa requires them
   at the top level of `node_modules`. Do not remove those entries.
-- Vercel deploys `docs` only. Studio is a desktop application. `web` is a static
-  app with no host configured yet, and `shop` is a Medusa service.
+- Vercel is configured for `docs` only, and the site is not live yet. Studio is a
+  desktop application. `web` is a static app with no host configured yet, and
+  `shop` is a Medusa service.
 
 ### Generated files
 

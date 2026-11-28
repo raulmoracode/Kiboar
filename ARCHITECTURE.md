@@ -11,7 +11,7 @@ flow, not a runtime.
 | Product | Path | Built with | What it is |
 | --- | --- | --- | --- |
 | Shop | `shop/` | Medusa 2, Vite, Expo/React Native, Node, PostgreSQL | The commercial surface: a static storefront, the Medusa service and the POS app; checkout is not connected yet |
-| Web | `web/` | Vite 8, React 19, Tailwind 4 | The public front door that brings the brand together |
+| Web | `web/` | Vite 8, React 19, the Tailwind 4 base from `@kiboar/design` | The public front door that brings the brand together |
 | KiCad library | `library/symbols/`, `library/footprints/`, `library/3dmodels/`, `library/lib-table-files/`, `library/pcm/`, `library/tools/` | KiCad 10, Python standard library | The official library, published so anyone can design and build a board |
 | Kiboar Studio | `software/` | Tauri 2, React, TypeScript, Rust | Manages a Kiboar board: detects, flashes and (after 0.1) remaps it, bought or self-built |
 | Documentation | `docs/` | Astro 7, Fumadocs, React | How to install the library, build a board, flash it and what the licences allow |
@@ -32,9 +32,11 @@ flow, not a runtime.
   board definitions Studio reads stay in `software/boards/`; moving them is a
   separate change. The directory is the published home and starts empty: do not
   claim a keyboard file exists until it is there.
-- **The library lives in `library/`.** For a clone install, `KIBOAR_ROOT`
-  points at `<clone>/library`; the library tables, the model paths and the PCM
-  builder all use that root. The PCM ZIP keeps `symbols/`, `footprints/` and
+- **The library lives in `library/`.** For a clone install, the KiCad path
+  variable `KIBOAR_ROOT` points at `<clone>/library` and `KIBOAR_3DMODELS` at
+  `$KIBOAR_ROOT/3dmodels`; the library tables and model paths reference them.
+  The PCM builder does not read those variables: it resolves paths from the
+  ZIP's own install root. The PCM ZIP keeps `symbols/`, `footprints/` and
   `3dmodels/` at its internal root, so PCM consumers are unaffected.
 - **`docs`, `software`, `web` and `shop` are the JavaScript workspace.** The root
   `pnpm-workspace.yaml` includes `docs`, `software/app`, `software/packages/*`,
@@ -57,10 +59,11 @@ flow, not a runtime.
   (`shop/storefront`), a static Vite app that reads the Store API over HTTP, and
   the POS (`shop/pos`), an Expo/React Native app that uses the Admin API as a
   staff member.
-  The three front ends — `web`, the storefront and Studio — use
-  `@kiboar/design` for the base CSS and colour tokens, `@kiboar/vite-config`
-  for the Vite plugins and ports, and `@kiboar/tsconfig` for their compiler
-  options, from `packages/`. Web, the storefront and the docs site also use
+  The four front ends — `web`, the storefront, the POS and Studio — use
+  `@kiboar/design` for the base CSS and colour tokens. Web, the storefront and
+  Studio also take `@kiboar/vite-config` for the Vite plugins and ports and
+  `@kiboar/tsconfig` for their compiler options, from `packages/`; the POS keeps
+  its Expo configuration. Web, the storefront and the docs site also use
   `@kiboar/links` for the canonical repository, site and release URLs. Studio
   adds its Tauri overrides in its own Vite config. They do not import each
   other's pages or components, and the storefront talks to the Store API over
@@ -148,8 +151,8 @@ script banner is not wanted.
 | Board schema | `kiboar.board/1` | `software/packages/core/src/schema` |
 | Registry | `kiboar.registry/1` | `software/registry/index.json` |
 | Studio | `0.1.0` | `software/app/package.json` and `software/app/src-tauri/tauri.conf.json` |
-| Documentation | `0.1.0` | `docs/package.json`; the site has no release tag and deploys from `main` |
-| Web | not versioned | `web/package.json` has no version; the static build deploys from `main` |
+| Documentation | `0.1.0` | `docs/package.json`; the site has no release tag and is built to deploy from `main`, but it is not live yet |
+| Web | not versioned | `web/package.json` has no version; the static build is meant to deploy from `main`, and no host is configured yet |
 | Shop | `0.1.0` | `shop/package.json` and the pinned Medusa version |
 | Firmware | `0.x` | Reported by the board over HID; independent of the app |
 
@@ -202,7 +205,8 @@ collide.
 ## Licensing
 
 The library is a mixed MIT and CC BY-SA collection, documented in `NOTICE`. The
-documentation and Studio are MIT. Firmware built on QMK keeps QMK's GPL-2.0 and
-is distributed with its source. The boundaries are directory boundaries: a
-third-party licence in the library does not change the licence of `software/`,
-and the app must not copy library assets into its bundle without attribution.
+documentation and Studio are MIT. No firmware source is published in this
+repository yet; when it is, firmware based on QMK must keep GPL-2.0 and ship
+with its source. The boundaries are directory boundaries: a third-party licence
+in the library does not change the licence of `software/`, and the app must not
+copy library assets into its bundle without attribution.
