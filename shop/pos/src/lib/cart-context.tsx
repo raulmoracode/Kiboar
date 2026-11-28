@@ -5,6 +5,9 @@ import { addLine, type CartLine, cartCount, cartTotal, setQuantity } from "./car
 
 interface CartContextValue {
   lines: CartLine[];
+  isOpen: boolean;
+  openCart: () => void;
+  closeCart: () => void;
   buyer: Buyer;
   setBuyer: (patch: Partial<Buyer>) => void;
   count: number;
@@ -18,12 +21,16 @@ const CartContext = createContext<CartContextValue | undefined>(undefined);
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [lines, setLines] = useState<CartLine[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
   const [buyer, setBuyerState] = useState<Buyer>(EMPTY_BUYER);
 
   return (
     <CartContext.Provider
       value={{
         lines,
+        isOpen,
+        openCart: () => setIsOpen(true),
+        closeCart: () => setIsOpen(false),
         buyer,
         setBuyer: (patch) => setBuyerState((current) => ({ ...current, ...patch })),
         count: cartCount(lines),

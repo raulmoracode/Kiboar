@@ -2,6 +2,7 @@ import { Stack, usePathname, useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { CartSheet } from "@/components/CartSheet";
 import { AuthProvider, useAuth } from "@/lib/auth-context";
 import { resolveAuthRedirect } from "@/lib/auth-routing";
 import { CartProvider } from "@/lib/cart-context";
@@ -37,6 +38,7 @@ export default function RootLayout() {
               contentStyle: { backgroundColor: colors.background },
             }}
           />
+          <CartSheet />
         </CartProvider>
       </AuthProvider>
     </SafeAreaProvider>
