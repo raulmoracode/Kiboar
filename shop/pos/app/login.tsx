@@ -46,7 +46,6 @@ export default function Login() {
         <Text style={typography.body}>Loading…</Text>
       ) : (
         <View style={styles.form}>
-          <Text style={typography.eyebrow}>Staff sign-in</Text>
           <Field
             autoCapitalize="none"
             keyboardType="email-address"
