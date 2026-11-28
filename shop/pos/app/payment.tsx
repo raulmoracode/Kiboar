@@ -130,7 +130,6 @@ export default function Payment() {
         <Text style={[typography.amount, styles.amount]}>{formatMoney(cart.total, currency)}</Text>
       </View>
       <View style={styles.buyer}>
-        <Text style={typography.eyebrow}>Customer</Text>
         <Field
           label="First name"
           onChangeText={(firstName) => cart.setBuyer({ firstName })}
@@ -148,9 +147,6 @@ export default function Payment() {
           onChangeText={(email) => cart.setBuyer({ email })}
           value={cart.buyer.email}
         />
-        {!buyerReady ? (
-          <Text style={typography.small}>Add the customer&apos;s name and email to continue.</Text>
-        ) : null}
       </View>
 
       <View style={styles.methods}>
