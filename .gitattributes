@@ -1,0 +1,27 @@
+# Store text with LF; each editor decides its own line endings.
+* text=auto eol=lf
+
+# Images, archives, firmware and release artifacts are binary.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.icns binary
+*.pdf binary
+*.zip binary
+*.dmg binary
+*.bin binary
+*.uf2 binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary
+
+# 3D models are vendor assets; never rewrite their line endings in a diff.
+*.step -text
+*.stp -text
+*.STEP -text
+*.STP -text
+*.wrl -text
