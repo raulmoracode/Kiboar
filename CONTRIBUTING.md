@@ -22,6 +22,13 @@ The products share a pnpm workspace at the root, with shared packages under
 - Python 3.9 or newer. The scripts use only the standard library, except
   `build_pcm.py --schema`, which needs the `jsonschema` package.
 
+## Dev container
+
+`.devcontainer/` describes an optional Linux environment with Node 22, pnpm,
+Rust 1.100, the Tauri build dependencies and Docker. It covers the JavaScript,
+Rust and shop checks; KiCad 10 and `kicad-cli` stay on the host. See
+[`.devcontainer/README.md`](.devcontainer/README.md).
+
 ## Adding a footprint
 
 1. Put the file in the library that matches its family, for example

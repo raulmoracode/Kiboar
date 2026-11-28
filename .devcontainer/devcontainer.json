@@ -1,0 +1,31 @@
+{
+  "name": "Kiboar",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:22",
+  "features": {
+    "ghcr.io/devcontainers/features/rust:1": {
+      "version": "1.100.0",
+      "profile": "minimal"
+    },
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "moby": true
+    }
+  },
+  "hostRequirements": {
+    "cpus": 4,
+    "memory": "8gb",
+    "storage": "32gb"
+  },
+  "onCreateCommand": "sudo apt-get update && sudo apt-get install -y --no-install-recommends libwebkit2gtk-4.1-dev libayatana-appindicator3-dev librsvg2-dev libxdo-dev libssl-dev pkg-config patchelf postgresql-client",
+  "postCreateCommand": "corepack enable && pnpm install",
+  "forwardPorts": [3000, 3001, 4321, 5432, 5433, 8081, 9000],
+  "portsAttributes": {
+    "3000": { "label": "web" },
+    "3001": { "label": "storefront" },
+    "4321": { "label": "docs" },
+    "5432": { "label": "PostgreSQL" },
+    "5433": { "label": "PostgreSQL (shop/.env)" },
+    "8081": { "label": "POS web" },
+    "9000": { "label": "Medusa and admin" }
+  },
+  "remoteUser": "node"
+}
