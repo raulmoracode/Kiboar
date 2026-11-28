@@ -7,7 +7,8 @@ repository-wide process and the KiCad library in `library/`; each product's
 `AGENTS.md` adds its own checks.
 
 Contributions arrive as a pull request against `main`, one logical change per
-branch, with an issue that says what and why.
+branch, with an issue that says what and why. By participating you agree to
+follow the [Code of Conduct](CODE_OF_CONDUCT.md).
 
 The products share a pnpm workspace at the root, with shared packages under
 `packages/`, and are described in [`ARCHITECTURE.md`](ARCHITECTURE.md). Their agent instructions are
